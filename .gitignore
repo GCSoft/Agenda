@@ -1,0 +1,17 @@
+# git ignore file
+Agenda.BusinessProcess/bin/
+Agenda.BusinessProcess/obj/
+Agenda.DataAccess/bin/
+Agenda.DataAccess/obj/
+Agenda.Entity/bin/
+Agenda.Entity/obj/
+Agenda.Web/Agenda.Web.Publish.xml
+Agenda.Web/App.config
+Agenda.Web/DB.config
+Agenda.Web/Web.config
+Agenda.Web/Web.Debug.config
+Agenda.Web/Web.Release.config
+Agenda.Web/bin/
+Agenda.Web/obj/
+SolAgenda.sln
+SolAgenda.suo
