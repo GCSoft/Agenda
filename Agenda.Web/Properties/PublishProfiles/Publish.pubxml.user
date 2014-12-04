@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Ruben\Proyectos\Agenda\Publish</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="App.config">
+      <publishTime>11/27/2014 16:45:50</publishTime>
+    </File>
+    <File Include="Application/WebApp/Private/AppIndex.aspx">
+      <publishTime>12/03/2014 13:14:53</publishTime>
+    </File>
+    <File Include="Application/WebApp/Private/SysApp/sappChangePassword.aspx">
+      <publishTime>12/03/2014 13:17:05</publishTime>
+    </File>
+    <File Include="Application/WebApp/Private/SysApp/sappLogout.aspx">
+      <publishTime>11/27/2014 12:58:27</publishTime>
+    </File>
+    <File Include="Application/WebApp/Private/SysApp/sappNotificacion.aspx">
+      <publishTime>12/03/2014 13:14:33</publishTime>
+    </File>
+    <File Include="Application/WebApp/Private/SysCat/scatMenu.aspx">
+      <publishTime>12/03/2014 13:12:08</publishTime>
+    </File>
+    <File Include="Application/WebApp/Private/SysCat/scatRol.aspx">
+      <publishTime>12/03/2014 13:12:21</publishTime>
+    </File>
+    <File Include="Application/WebApp/Private/SysCat/scatSubMenu.aspx">
+      <publishTime>12/03/2014 13:12:30</publishTime>
+    </File>
+    <File Include="Application/WebApp/Private/SysCat/scatUsuario.aspx">
+      <publishTime>12/03/2014 13:12:38</publishTime>
+    </File>
+    <File Include="Application/WebApp/Public/frmLogin.aspx">
+      <publishTime>12/02/2014 18:38:40</publishTime>
+    </File>
+    <File Include="bin/Agenda.BusinessProcess.dll">
+      <publishTime>12/03/2014 14:58:58</publishTime>
+    </File>
+    <File Include="bin/Agenda.DataAccess.dll">
+      <publishTime>12/03/2014 14:58:58</publishTime>
+    </File>
+    <File Include="bin/Agenda.Entity.dll">
+      <publishTime>12/03/2014 14:58:58</publishTime>
+    </File>
+    <File Include="bin/Agenda.Web.dll">
+      <publishTime>12/03/2014 14:58:59</publishTime>
+    </File>
+    <File Include="bin/AjaxControlToolkit.dll">
+      <publishTime>12/14/2013 08:04:04</publishTime>
+    </File>
+    <File Include="bin/AjaxMin.dll">
+      <publishTime>12/04/2013 13:25:38</publishTime>
+    </File>
+    <File Include="bin/ar/AjaxControlToolkit.resources.dll">
+      <publishTime>12/14/2013 08:04:04</publishTime>
+    </File>
+    <File Include="bin/BHM.BusinessProcess.dll">
+      <publishTime>10/24/2014 17:16:37</publishTime>
+    </File>
+    <File Include="bin/BHM.DataAccess.dll">
+      <publishTime>10/24/2014 17:16:37</publishTime>
+    </File>
+    <File Include="bin/BHM.Entity.dll">
+      <publishTime>10/24/2014 17:16:37</publishTime>
+    </File>
+    <File Include="bin/BHM.Web.dll">
+      <publishTime>10/24/2014 17:17:50</publishTime>
+    </File>
+    <File Include="bin/cs/AjaxControlToolkit.resources.dll">
+      <publishTime>12/14/2013 08:04:04</publishTime>
+    </File>
+    <File Include="bin/de/AjaxControlToolkit.resources.dll">
+      <publishTime>12/14/2013 08:04:04</publishTime>
+    </File>
+    <File Include="bin/de/Microsoft.Data.Edm.resources.dll">
+      <publishTime>12/04/2013 13:25:46</publishTime>
+    </File>
+    <File Include="bin/de/Microsoft.Data.OData.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/de/System.Spatial.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/es/AjaxControlToolkit.resources.dll">
+      <publishTime>12/14/2013 08:04:04</publishTime>
+    </File>
+    <File Include="bin/es/Microsoft.Data.Edm.resources.dll">
+      <publishTime>12/04/2013 13:25:46</publishTime>
+    </File>
+    <File Include="bin/es/Microsoft.Data.OData.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/es/System.Spatial.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/fr/AjaxControlToolkit.resources.dll">
+      <publishTime>12/14/2013 08:04:04</publishTime>
+    </File>
+    <File Include="bin/fr/Microsoft.Data.Edm.resources.dll">
+      <publishTime>12/04/2013 13:25:46</publishTime>
+    </File>
+    <File Include="bin/fr/Microsoft.Data.OData.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/fr/System.Spatial.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/GCUtility.dll">
+      <publishTime>08/06/2014 19:16:22</publishTime>
+    </File>
+    <File Include="bin/he/AjaxControlToolkit.resources.dll">
+      <publishTime>12/14/2013 08:04:06</publishTime>
+    </File>
+    <File Include="bin/hi/AjaxControlToolkit.resources.dll">
+      <publishTime>12/14/2013 08:04:06</publishTime>
+    </File>
+    <File Include="bin/HtmlAgilityPack.dll">
+      <publishTime>12/04/2013 13:25:38</publishTime>
+    </File>
+    <File Include="bin/it/AjaxControlToolkit.resources.dll">
+      <publishTime>12/14/2013 08:04:06</publishTime>
+    </File>
+    <File Include="bin/it/Microsoft.Data.Edm.resources.dll">
+      <publishTime>12/04/2013 13:25:46</publishTime>
+    </File>
+    <File Include="bin/it/Microsoft.Data.OData.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/it/System.Spatial.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/ja/AjaxControlToolkit.resources.dll">
+      <publishTime>12/14/2013 08:04:06</publishTime>
+    </File>
+    <File Include="bin/ja/Microsoft.Data.Edm.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/ja/Microsoft.Data.OData.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/ja/System.Spatial.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/ko/AjaxControlToolkit.resources.dll">
+      <publishTime>12/14/2013 08:04:06</publishTime>
+    </File>
+    <File Include="bin/ko/Microsoft.Data.Edm.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/ko/Microsoft.Data.OData.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/ko/System.Spatial.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Data.Edm.dll">
+      <publishTime>12/04/2013 13:25:46</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Data.OData.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.WindowsAzure.Storage.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/nl/AjaxControlToolkit.resources.dll">
+      <publishTime>12/14/2013 08:04:06</publishTime>
+    </File>
+    <File Include="bin/pl/AjaxControlToolkit.resources.dll">
+      <publishTime>12/14/2013 08:04:06</publishTime>
+    </File>
+    <File Include="bin/pt/AjaxControlToolkit.resources.dll">
+      <publishTime>12/14/2013 08:04:06</publishTime>
+    </File>
+    <File Include="bin/ru/AjaxControlToolkit.resources.dll">
+      <publishTime>12/14/2013 08:04:06</publishTime>
+    </File>
+    <File Include="bin/ru/Microsoft.Data.Edm.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/ru/Microsoft.Data.OData.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/ru/System.Spatial.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/System.Spatial.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/tr-TR/AjaxControlToolkit.resources.dll">
+      <publishTime>12/14/2013 08:04:06</publishTime>
+    </File>
+    <File Include="bin/zh-CHS/AjaxControlToolkit.resources.dll">
+      <publishTime>12/14/2013 08:04:06</publishTime>
+    </File>
+    <File Include="bin/zh-CHT/AjaxControlToolkit.resources.dll">
+      <publishTime>12/14/2013 08:04:06</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/Microsoft.Data.Edm.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/Microsoft.Data.OData.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Spatial.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/Microsoft.Data.Edm.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/Microsoft.Data.OData.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="bin/zh-Hant/System.Spatial.resources.dll">
+      <publishTime>12/04/2013 13:25:48</publishTime>
+    </File>
+    <File Include="DB.config">
+      <publishTime>11/27/2014 16:39:11</publishTime>
+    </File>
+    <File Include="Include/Components/GCSoft/GCUtility.dll">
+      <publishTime>08/06/2014 19:16:22</publishTime>
+    </File>
+    <File Include="Include/Image/Buttons/CloseWindow.png">
+      <publishTime>11/20/2012 10:32:52</publishTime>
+    </File>
+    <File Include="Include/Image/Buttons/Delete.png">
+      <publishTime>03/27/2013 17:21:34</publishTime>
+    </File>
+    <File Include="Include/Image/Buttons/Delete_Over.png">
+      <publishTime>04/01/2013 10:31:24</publishTime>
+    </File>
+    <File Include="Include/Image/Buttons/Edit.png">
+      <publishTime>04/01/2013 17:54:52</publishTime>
+    </File>
+    <File Include="Include/Image/Buttons/Edit_Over.png">
+      <publishTime>04/01/2013 17:55:00</publishTime>
+    </File>
+    <File Include="Include/Image/Buttons/Restore.png">
+      <publishTime>10/27/2013 16:48:28</publishTime>
+    </File>
+    <File Include="Include/Image/Buttons/Restore_Over.png">
+      <publishTime>10/27/2013 16:48:32</publishTime>
+    </File>
+    <File Include="Include/Image/Buttons/Search.png">
+      <publishTime>11/18/2013 00:56:10</publishTime>
+    </File>
+    <File Include="Include/Image/Icon/IconAdm.png">
+      <publishTime>08/03/2012 09:07:54</publishTime>
+    </File>
+    <File Include="Include/Image/Icon/IconDetail.png">
+      <publishTime>08/03/2012 09:07:54</publishTime>
+    </File>
+    <File Include="Include/Image/Icon/IconGeneral.png">
+      <publishTime>08/03/2012 09:07:54</publishTime>
+    </File>
+    <File Include="Include/Image/Icon/IconLens.png">
+      <publishTime>08/03/2012 09:07:54</publishTime>
+    </File>
+    <File Include="Include/Image/Icon/IconNew.png">
+      <publishTime>12/03/2014 13:23:21</publishTime>
+    </File>
+    <File Include="Include/Image/Icon/IconReport.png">
+      <publishTime>08/03/2012 09:07:54</publishTime>
+    </File>
+    <File Include="Include/Image/Icon/IconText.png">
+      <publishTime>08/03/2012 09:07:54</publishTime>
+    </File>
+    <File Include="Include/Image/Icon/IconUser.png">
+      <publishTime>08/03/2012 09:07:54</publishTime>
+    </File>
+    <File Include="Include/Image/Web/Background.png">
+      <publishTime>10/24/2014 12:08:18</publishTime>
+    </File>
+    <File Include="Include/Image/Web/BackgroundGeneral.png">
+      <publishTime>12/02/2014 17:39:34</publishTime>
+    </File>
+    <File Include="Include/Image/Web/BackgroundRoundedCornerLeft.png">
+      <publishTime>12/02/2014 13:36:25</publishTime>
+    </File>
+    <File Include="Include/Image/Web/BackgroundRoundedCornerRight.png">
+      <publishTime>12/02/2014 13:15:44</publishTime>
+    </File>
+    <File Include="Include/Image/Web/Banner.png">
+      <publishTime>04/24/2014 16:57:02</publishTime>
+    </File>
+    <File Include="Include/Image/Web/BannerFill.png">
+      <publishTime>02/01/2013 18:40:08</publishTime>
+    </File>
+    <File Include="Include/Image/Web/BarraTitulo.png">
+      <publishTime>03/22/2013 15:00:46</publishTime>
+    </File>
+    <File Include="Include/Image/Web/Div.png">
+      <publishTime>12/10/2012 22:44:48</publishTime>
+    </File>
+    <File Include="Include/Image/Web/favicon.ico">
+      <publishTime>11/29/2014 20:28:18</publishTime>
+    </File>
+    <File Include="Include/Image/Web/GCSoft.png">
+      <publishTime>09/11/2013 10:24:08</publishTime>
+    </File>
+    <File Include="Include/Image/Web/HeaderBackGround.jpg">
+      <publishTime>08/03/2012 09:07:54</publishTime>
+    </File>
+    <File Include="Include/Image/Web/HeaderMap.png">
+      <publishTime>12/02/2014 12:11:29</publishTime>
+    </File>
+    <File Include="Include/Image/Web/Loading.gif">
+      <publishTime>06/23/2014 11:45:59</publishTime>
+    </File>
+    <File Include="Include/Image/Web/LogoBehaviorMetrics.gif">
+      <publishTime>04/24/2014 14:19:12</publishTime>
+    </File>
+    <File Include="Include/Image/Web/LogoNL.png">
+      <publishTime>08/03/2012 09:07:56</publishTime>
+    </File>
+    <File Include="Include/Image/Web/MenuBackground.jpg">
+      <publishTime>08/03/2012 09:07:56</publishTime>
+    </File>
+    <File Include="Include/Image/Web/SalirOff.png">
+      <publishTime>10/24/2013 00:13:28</publishTime>
+    </File>
+    <File Include="Include/Image/Web/SalirOn.png">
+      <publishTime>10/24/2013 00:13:34</publishTime>
+    </File>
+    <File Include="Include/Javascript/GCSoft/GCSoft.js">
+      <publishTime>10/24/2014 12:16:30</publishTime>
+    </File>
+    <File Include="Include/MasterPage/LoginTemplate.Master">
+      <publishTime>12/02/2014 18:11:46</publishTime>
+    </File>
+    <File Include="Include/MasterPage/NonMenuTemplate.Master">
+      <publishTime>12/03/2014 13:00:48</publishTime>
+    </File>
+    <File Include="Include/MasterPage/PrivateTemplate.Master">
+      <publishTime>12/03/2014 13:11:00</publishTime>
+    </File>
+    <File Include="Include/Style/Control.css">
+      <publishTime>12/03/2014 14:51:14</publishTime>
+    </File>
+    <File Include="Include/Style/MasterPage.css">
+      <publishTime>12/03/2014 14:48:40</publishTime>
+    </File>
+    <File Include="Include/Style/Panel.css">
+      <publishTime>12/03/2014 14:48:24</publishTime>
+    </File>
+    <File Include="Include/Style/PopUp.css">
+      <publishTime>12/03/2014 14:48:15</publishTime>
+    </File>
+    <File Include="Include/Style/Table.css">
+      <publishTime>12/03/2014 14:54:41</publishTime>
+    </File>
+    <File Include="Include/Style/Text.css">
+      <publishTime>12/03/2014 14:53:58</publishTime>
+    </File>
+    <File Include="Include/Style/Wait.css">
+      <publishTime>10/24/2014 10:41:37</publishTime>
+    </File>
+    <File Include="Include/WebUserControls/wucMenu.ascx">
+      <publishTime>12/03/2014 11:41:33</publishTime>
+    </File>
+    <File Include="Index.aspx">
+      <publishTime>11/27/2014 12:58:28</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>12/03/2014 15:00:40</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,137 @@
+﻿/*'---------------------------------------------------------------------------------------------------------------------------------
+' Nombre:   MasterPage
+' Autor:    Ruben.Cobos
+' Fecha:	11-Marzo-2012
+'
+' Descripción:	Hoja de estilos que contiene las configuraciones generales de la aplicación aplicadas en los Master Pages
+'
+'----------------------------------------------------------------------------------------------------------------------------------*/
+
+html, body, form
+{
+	color : #646B6F;
+	font-family :'Lucida Grande',Tahoma,Verdana,Arial,Sans-serif;
+	font-size : 13px;
+	height : 100%;
+	margin : 0px;
+    padding : 0px;
+	width : 100%;
+}
+
+.BackGroundBody
+{
+	background: #fff url(../Image/Web/BackgroundGeneral.png) no-repeat center;
+	color: #2F7B54;
+	background-size: cover;
+	font-family:'Lucida Grande',Tahoma,Verdana,Arial,Sans-serif;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+.MasterIconPage{
+	border: 0px solid #000000;
+	float:left;
+	height:132px;
+    left:270px;
+	position:absolute;
+	text-align:left;
+	top:168px;
+    vertical-align:top;
+	width:249px;
+    z-index:100;
+}
+
+.MasterLogin {
+    background-color:#FFF;
+    border: 1px solid #675C9D;
+	bottom:30px;
+	height:190px;
+	position:fixed;
+    right:28px;
+	width:500px;
+
+}
+
+.MasterLogoNL{
+	border: 0px solid #000000;
+	float:right;
+	height:132px;
+	position:absolute;
+	right:28px;
+	text-align:right;
+	top:30px;
+    vertical-align:top;
+	width:249px;
+    z-index:100;
+}
+
+.MasterHeaderMap{
+	background-repeat:no-repeat;
+    border: 0px solid;
+	height:190px;
+    left:262px;
+    position:absolute;
+    text-align:left;
+    top:0px;
+    vertical-align:top;
+    width:742px;
+}
+
+.MasterMenu {
+	background-color:#FFFFFF;
+    background-repeat:repeat-x;
+	border: 0px solid YELLOW;
+    left:0px;
+	min-height:1400px;
+	top:0px;
+	position:absolute;
+	width:261px;
+}
+
+.MasterPageName{
+	border: 0px solid #000000;
+	float:left;
+	height:20px;
+    left:405px;
+	position:absolute;
+	text-align:left;
+	top:205px;
+    vertical-align:top;
+	width:500px;
+}
+
+.MasterPoweredBy{
+	border:0px solid #000000;
+	bottom:5px;
+	height:50px;
+	left:10px;
+	position:fixed;
+	width:138px;
+	z-index:800;
+}
+
+.MasterRoundedCornerRight{
+	border: 0px solid #000000;
+	float:right;
+	height:132px;
+	position:absolute;
+	right:0px;
+	text-align:right;
+	top:0px;
+    vertical-align:top;
+	width:249px;
+}
+
+.MasterUserName{
+	border: 0px solid #000000;
+	float:left;
+	height:20px;
+    left:400px;
+	position:absolute;
+	text-align:left;
+	top:170px;
+    vertical-align:top;
+	width:500px;
+}

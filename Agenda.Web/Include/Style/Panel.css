@@ -1,0 +1,81 @@
+﻿/*'---------------------------------------------------------------------------------------------------------------------------------
+' Nombre:   Panel
+' Autor:    Ruben.Cobos
+' Fecha:	11-Marzo-2012
+'
+' Descripción:	Hoja de estilos que contiene las configuraciones generales de los paneles de los formularios
+'
+'----------------------------------------------------------------------------------------------------------------------------------*/
+
+.BreakPanel{
+    border-top:solid 1px #8A246C;
+    clear:both;
+    float:left;
+    height:10px;
+    text-align:left;
+    top:20px;
+    padding: 0px;
+    position:relative;
+	width: 100%;
+}
+
+.ButtonPanel{
+    border:solid 0px #8A246C;
+    clear:both;
+    float:left;
+    text-align:left;
+    top:20px;
+    padding: 0px;
+    position:relative;
+	width: 100%;
+}
+
+.FormPanel{
+    border:solid 0px #000000;
+    clear:both;
+    float:left;
+    text-align:left;
+    top:10px;
+    padding: 0px;
+    position:relative;
+	width: 100%;
+}
+
+.FooterPanel{
+    border:solid 0px #000000;
+    clear:both;
+    top:20px;
+    padding: 0px;
+    position:relative;
+	width: 100%;
+}
+
+.GridPanel{
+    border:solid 0px #000000;
+    clear:both;
+    float:left;
+    text-align:left;
+    top:40px;
+    padding: 0px;
+    position:relative;
+	width: 100%;
+}
+
+.TitlePanel{
+	padding: 0px;
+	width: 100%;
+}
+
+.NotificationPanel{
+    clear:both;
+    color:#180A3B;
+	font-family:'Lucida Grande',Tahoma,Verdana,Arial,Sans-serif;
+    font-size:10px;
+    height:20px;
+    padding: 0px;
+    position:relative;
+    text-align:left;
+    top:20px;
+    vertical-align: top;
+	width: 100%;
+}

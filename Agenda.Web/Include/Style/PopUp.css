@@ -1,0 +1,131 @@
+﻿/*'---------------------------------------------------------------------------------------------------------------------------------
+' Nombre:   PopUp
+' Autor:    Ruben.Cobos
+' Fecha:	11-Marzo-2012
+'
+' Descripción:	Hoja de estilos que contiene las configuraciones generales del PopUp de los formularios
+'
+'----------------------------------------------------------------------------------------------------------------------------------*/
+
+.PopUpBlock{
+    background-image: url('../../../../Include/Image/Web/Background.png');
+	left: 0px;
+	height: 100%;
+	position:fixed;
+	top: 0px;
+	width: 100%;
+	z-index:900;
+}
+
+.PopUpContent{
+	background-color:#FFFFFF;
+	border:1px solid #4B4878;
+	margin:0px auto;
+	position:relative;
+	z-index:901;
+}
+
+.PopUpHeader{
+	background-color:#65B449;
+	cursor:move;
+	height:30px;
+	text-align:center;
+	vertical-align:middle;
+	width:100%;
+}
+
+.PopUpBody{ 
+	border:0px solid red;
+	clear: both;
+    margin: 0 auto; 
+	text-align:center;
+    top:12px;
+    position:relative;
+	vertical-align:middle;
+	width:98%;
+}
+
+.PopUpTextMessage{
+	border:0px solid red;
+	color:Red;
+	display:block;
+	font-family:'Lucida Grande',Tahoma,Verdana,Arial,Sans-serif;
+	font-size:9px;
+}
+
+.PopUpHeaderCloseImage{
+   cursor:pointer;
+   width:14px;
+   z-index:902;
+}
+
+.PopUpHeaderTitle{
+    color:#FFFFFF;
+    font-family:'Lucida Grande',Tahoma,Verdana,Arial,Sans-serif;
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* Tabla Header */
+.PopUpHeaderTable{
+    border:0;
+	padding: 0px;
+	width: 100%;
+}
+
+.PopUpHeaderTable .Espacio{
+	width: 10px;
+}
+
+.PopUpHeaderTable .Etiqueta{
+	text-align: left;
+    width: 100%;
+}
+
+PopUpHeaderTable .Cierre{
+	cursor:pointer;
+    vertical-align: middle;
+    width: 10px;
+}
+
+/* Tabla Body */
+.PopUpBodyTable{
+    border-spacing: 5px;
+	padding: 0px;
+	width: 100%;
+}
+
+.PopUpBodyTable .Etiqueta{
+	border:0px solid #4B4878;
+	color:#4B4878;
+	font-family:'Lucida Grande',Tahoma,Verdana,Arial,Sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	text-align:left;
+	width:160px;
+}
+
+.PopUpBodyTable .Contenedor{
+	background-color: #ededed;
+	color:#4B4878;
+	font-family:'Lucida Grande',Tahoma,Verdana,Arial,Sans-serif;
+	font-size:12px;
+	font-weight:bold;
+	text-align:center;
+}
+
+.PopUpBodyTable .Espacio{
+	width: 5px;
+}
+
+.PopUpBodyTable .Campo{
+	text-align: left;
+    height: 24px;
+    width: 100%;
+}
+
+.PopUpBodyTable .Botones{
+	text-align: right;
+    height: 24px;
+    width: 100%;
+}

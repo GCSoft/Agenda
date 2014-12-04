@@ -1,0 +1,31 @@
+﻿/*'---------------------------------------------------------------------------------------------------------------------------------
+' Nombre:   Text
+' Autor:    Ruben.Cobos
+' Fecha:    01-Marzo-2012
+'
+' Descripción:	Hoja de estilos que contiene las configuraciones generales de los textos de la aplicación
+'
+'----------------------------------------------------------------------------------------------------------------------------------*/
+
+.ExitText{
+	font-size: 13px;
+    font-weight:bold;
+    color:White;
+    font-family : 'Lucida Grande',Tahoma,Verdana,Arial,Sans-serif;
+    text-decoration: none;
+}
+
+.PageNameText{
+	font-size: 14px;
+    font-weight:bold;
+    color:White;
+    font-family : 'Lucida Grande',Tahoma,Verdana,Arial,Sans-serif;
+    text-decoration: none;
+}
+
+.UserNameText{
+	font-size: 13px;
+    color:#646B6F;
+    font-family : 'Lucida Grande',Tahoma,Verdana,Arial,Sans-serif;
+}
+
