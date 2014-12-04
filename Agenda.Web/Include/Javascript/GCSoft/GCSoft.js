@@ -41,10 +41,16 @@ function validateLogin() {
 
     var RegExPattern = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
 
+    // Estado inicial
+    document.getElementById('cntLoginBody_txtEmail').style.border = '1px solid #5E8291';
+    document.getElementById('cntLoginBody_txtPassword').style.border = '1px solid #5E8291';
+    oSpan.innerHTML = '';
+
     // Campos vacíos
     if (txtEmail == '') {
         oSpan.innerHTML = 'Correo requerido';
         oSpan.style.display = "block";
+        document.getElementById('cntLoginBody_txtEmail').style.border = '1px solid #e80c4d';
         focusControl('cntLoginBody_txtEmail');
         return false;
     }
@@ -52,6 +58,7 @@ function validateLogin() {
     if (txtPassword == '') {
         oSpan.innerHTML = 'Password requerido';
         oSpan.style.display = "block";
+        document.getElementById('cntLoginBody_txtPassword').style.border = '1px solid #e80c4d';
         focusControl('cntLoginBody_txtPassword');
         return false;
     }
@@ -60,6 +67,7 @@ function validateLogin() {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(txtEmail) == false) {
         oSpan.innerHTML = 'Formato de correo incorrecto';
         oSpan.style.display = "block";
+        document.getElementById('cntLoginBody_txtEmail').style.border = '1px solid #e80c4d';
         focusControl('cntLoginBody_txtEmail');
         return false;
     }
@@ -72,10 +80,16 @@ function validateRecoveryPassword() {
     var txtEmail = document.getElementById('cntLoginBody_txtEmail').value.trim();
     var oSpan = document.getElementById('spanMessage');
 
+    // Estado inicial
+    document.getElementById('cntLoginBody_txtEmail').style.border = '1px solid #5E8291';
+    document.getElementById('cntLoginBody_txtPassword').style.border = '1px solid #5E8291';
+    oSpan.innerHTML = '';
+
     // Campo vacío
     if (txtEmail == '') {
         oSpan.innerHTML = 'Correo requerido';
         oSpan.style.display = "block";
+        document.getElementById('cntLoginBody_txtEmail').style.border = '1px solid #e80c4d';
         focusControl('cntLoginBody_txtEmail');
         return false;
     }
@@ -84,6 +98,7 @@ function validateRecoveryPassword() {
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(txtEmail) == false) {
         oSpan.innerHTML = 'Formato de correo incorrecto';
         oSpan.style.display = "block";
+        document.getElementById('cntLoginBody_txtEmail').style.border = '1px solid #e80c4d';
         focusControl('cntLoginBody_txtEmail');
         return false;
     }
