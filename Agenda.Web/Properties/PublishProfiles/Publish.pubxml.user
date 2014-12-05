@@ -15,8 +15,11 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Application/WebApp/Private/AppIndex.aspx">
       <publishTime>12/03/2014 13:14:53</publishTime>
     </File>
+    <File Include="Application/WebApp/Private/Evento/eveCalendario.aspx">
+      <publishTime>12/05/2014 16:19:37</publishTime>
+    </File>
     <File Include="Application/WebApp/Private/SysApp/sappChangePassword.aspx">
-      <publishTime>12/03/2014 13:17:05</publishTime>
+      <publishTime>12/05/2014 16:20:20</publishTime>
     </File>
     <File Include="Application/WebApp/Private/SysApp/sappLogout.aspx">
       <publishTime>11/27/2014 12:58:27</publishTime>
@@ -25,31 +28,31 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/03/2014 13:14:33</publishTime>
     </File>
     <File Include="Application/WebApp/Private/SysCat/scatMenu.aspx">
-      <publishTime>12/03/2014 13:12:08</publishTime>
+      <publishTime>12/05/2014 16:20:13</publishTime>
     </File>
     <File Include="Application/WebApp/Private/SysCat/scatRol.aspx">
-      <publishTime>12/03/2014 13:12:21</publishTime>
+      <publishTime>12/05/2014 16:20:07</publishTime>
     </File>
     <File Include="Application/WebApp/Private/SysCat/scatSubMenu.aspx">
-      <publishTime>12/03/2014 13:12:30</publishTime>
+      <publishTime>12/05/2014 16:19:59</publishTime>
     </File>
     <File Include="Application/WebApp/Private/SysCat/scatUsuario.aspx">
-      <publishTime>12/03/2014 13:12:38</publishTime>
+      <publishTime>12/05/2014 16:19:51</publishTime>
     </File>
     <File Include="Application/WebApp/Public/frmLogin.aspx">
       <publishTime>12/02/2014 18:38:40</publishTime>
     </File>
     <File Include="bin/Agenda.BusinessProcess.dll">
-      <publishTime>12/03/2014 14:58:58</publishTime>
+      <publishTime>12/05/2014 16:51:41</publishTime>
     </File>
     <File Include="bin/Agenda.DataAccess.dll">
-      <publishTime>12/03/2014 14:58:58</publishTime>
+      <publishTime>12/05/2014 16:51:41</publishTime>
     </File>
     <File Include="bin/Agenda.Entity.dll">
-      <publishTime>12/03/2014 14:58:58</publishTime>
+      <publishTime>12/05/2014 16:51:40</publishTime>
     </File>
     <File Include="bin/Agenda.Web.dll">
-      <publishTime>12/03/2014 14:58:59</publishTime>
+      <publishTime>12/05/2014 16:51:42</publishTime>
     </File>
     <File Include="bin/AjaxControlToolkit.dll">
       <publishTime>12/14/2013 08:04:04</publishTime>
@@ -220,7 +223,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/04/2013 13:25:48</publishTime>
     </File>
     <File Include="DB.config">
-      <publishTime>11/27/2014 16:39:11</publishTime>
+      <publishTime>12/05/2014 15:39:13</publishTime>
     </File>
     <File Include="Include/Components/GCSoft/GCUtility.dll">
       <publishTime>08/06/2014 19:16:22</publishTime>
@@ -253,22 +256,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/03/2012 09:07:54</publishTime>
     </File>
     <File Include="Include/Image/Icon/IconDetail.png">
-      <publishTime>08/03/2012 09:07:54</publishTime>
+      <publishTime>12/05/2014 16:02:31</publishTime>
     </File>
     <File Include="Include/Image/Icon/IconGeneral.png">
-      <publishTime>08/03/2012 09:07:54</publishTime>
+      <publishTime>12/05/2014 16:01:42</publishTime>
     </File>
     <File Include="Include/Image/Icon/IconLens.png">
-      <publishTime>08/03/2012 09:07:54</publishTime>
+      <publishTime>12/05/2014 16:03:40</publishTime>
     </File>
     <File Include="Include/Image/Icon/IconNew.png">
       <publishTime>12/03/2014 13:23:21</publishTime>
     </File>
     <File Include="Include/Image/Icon/IconReport.png">
-      <publishTime>08/03/2012 09:07:54</publishTime>
+      <publishTime>12/05/2014 16:04:47</publishTime>
     </File>
     <File Include="Include/Image/Icon/IconText.png">
-      <publishTime>08/03/2012 09:07:54</publishTime>
+      <publishTime>12/05/2014 16:07:32</publishTime>
     </File>
     <File Include="Include/Image/Icon/IconUser.png">
       <publishTime>08/03/2012 09:07:54</publishTime>
@@ -328,7 +331,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/24/2013 00:13:34</publishTime>
     </File>
     <File Include="Include/Javascript/GCSoft/GCSoft.js">
-      <publishTime>10/24/2014 12:16:30</publishTime>
+      <publishTime>12/04/2014 11:18:10</publishTime>
     </File>
     <File Include="Include/MasterPage/LoginTemplate.Master">
       <publishTime>12/02/2014 18:11:46</publishTime>
@@ -337,7 +340,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/03/2014 13:00:48</publishTime>
     </File>
     <File Include="Include/MasterPage/PrivateTemplate.Master">
-      <publishTime>12/03/2014 13:11:00</publishTime>
+      <publishTime>12/05/2014 16:18:03</publishTime>
     </File>
     <File Include="Include/Style/Control.css">
       <publishTime>12/03/2014 14:51:14</publishTime>
@@ -360,6 +363,27 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Include/Style/Wait.css">
       <publishTime>10/24/2014 10:41:37</publishTime>
     </File>
+    <File Include="Include/WebUserControls/FullCalendar/Script/fullcalendar.min.js">
+      <publishTime>11/26/2014 00:10:08</publishTime>
+    </File>
+    <File Include="Include/WebUserControls/FullCalendar/Script/jquery.min.js">
+      <publishTime>11/26/2014 00:10:08</publishTime>
+    </File>
+    <File Include="Include/WebUserControls/FullCalendar/Script/lang-all.js">
+      <publishTime>12/05/2014 12:17:19</publishTime>
+    </File>
+    <File Include="Include/WebUserControls/FullCalendar/Script/moment.min.js">
+      <publishTime>11/26/2014 00:10:08</publishTime>
+    </File>
+    <File Include="Include/WebUserControls/FullCalendar/Style/fullcalendar.css">
+      <publishTime>12/05/2014 13:51:56</publishTime>
+    </File>
+    <File Include="Include/WebUserControls/FullCalendar/Style/fullcalendar.print.css">
+      <publishTime>11/26/2014 00:10:08</publishTime>
+    </File>
+    <File Include="Include/WebUserControls/FullCalendar/wucFullCalendar.ascx">
+      <publishTime>12/05/2014 16:24:14</publishTime>
+    </File>
     <File Include="Include/WebUserControls/wucMenu.ascx">
       <publishTime>12/03/2014 11:41:33</publishTime>
     </File>
@@ -367,7 +391,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/27/2014 12:58:28</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/03/2014 15:00:40</publishTime>
+      <publishTime>12/05/2014 16:52:10</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Application\WebApp\Private\AppIndex.aspx" />
+    <Content Include="Application\WebApp\Private\Evento\eveCalendario.aspx" />
     <Content Include="Application\WebApp\Private\SysApp\sappChangePassword.aspx" />
     <Content Include="Application\WebApp\Private\SysApp\sappLogout.aspx" />
     <Content Include="Application\WebApp\Private\SysApp\sappNotificacion.aspx" />
@@ -111,6 +112,13 @@
     <Content Include="Include\Style\Table.css" />
     <Content Include="Include\Style\Text.css" />
     <Content Include="Include\Style\Wait.css" />
+    <Content Include="Include\WebUserControls\FullCalendar\Script\fullcalendar.min.js" />
+    <Content Include="Include\WebUserControls\FullCalendar\Script\jquery.min.js" />
+    <Content Include="Include\WebUserControls\FullCalendar\Script\lang-all.js" />
+    <Content Include="Include\WebUserControls\FullCalendar\Script\moment.min.js" />
+    <Content Include="Include\WebUserControls\FullCalendar\Style\fullcalendar.css" />
+    <Content Include="Include\WebUserControls\FullCalendar\Style\fullcalendar.print.css" />
+    <Content Include="Include\WebUserControls\FullCalendar\wucFullCalendar.ascx" />
     <Content Include="Include\WebUserControls\wucMenu.ascx" />
     <Content Include="Index.aspx" />
     <Content Include="Web.config" />
@@ -122,6 +130,13 @@
     </Compile>
     <Compile Include="Application\WebApp\Private\AppIndex.aspx.designer.cs">
       <DependentUpon>AppIndex.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveCalendario.aspx.cs">
+      <DependentUpon>eveCalendario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveCalendario.aspx.designer.cs">
+      <DependentUpon>eveCalendario.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\WebApp\Private\SysApp\sappChangePassword.aspx.cs">
       <DependentUpon>sappChangePassword.aspx</DependentUpon>
@@ -199,6 +214,13 @@
     </Compile>
     <Compile Include="Include\MasterPage\PrivateTemplate.Master.designer.cs">
       <DependentUpon>PrivateTemplate.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Include\WebUserControls\FullCalendar\wucFullCalendar.ascx.cs">
+      <DependentUpon>wucFullCalendar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Include\WebUserControls\FullCalendar\wucFullCalendar.ascx.designer.cs">
+      <DependentUpon>wucFullCalendar.ascx</DependentUpon>
     </Compile>
     <Compile Include="Include\WebUserControls\wucMenu.ascx.cs">
       <DependentUpon>wucMenu.ascx</DependentUpon>

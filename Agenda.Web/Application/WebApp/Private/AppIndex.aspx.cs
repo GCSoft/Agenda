@@ -14,7 +14,6 @@ using System.Web.UI.WebControls;
 
 // Referencias manuales
 using GCUtility.Function;
-using GCUtility.Security;
 using Agenda.BusinessProcess.Object;
 using Agenda.BusinessProcess.Page;
 using Agenda.Entity.Object;
@@ -25,8 +24,6 @@ namespace Agenda.Web.Application.WebApp.Private
     {
 
         // Utilerías
-        GCCommon gcCommon = new GCCommon();
-        GCEncryption gcEncryption = new GCEncryption();
         GCJavascript gcJavascript = new GCJavascript();
 
        
@@ -47,9 +44,11 @@ namespace Agenda.Web.Application.WebApp.Private
                 // Canalizar al usuario por rol
                 switch (oENTSession.RolId){
 				    case 1: // System Administrator
+                        this.Response.Redirect("Evento/eveCalendario.aspx", false);
 					    break;
 
 				    default:
+                        this.Response.Redirect("Evento/eveCalendario.aspx", false);
 					    break;
 			    }
 

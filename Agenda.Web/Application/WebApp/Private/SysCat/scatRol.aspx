@@ -39,6 +39,7 @@
     </asp:Panel>
     
     <asp:Panel ID="pnlBreak" runat="server" CssClass="BreakPanel">
+        <%--Empty Content--%>
     </asp:Panel>
 
     <asp:Panel ID="pnlBotones" runat="server" CssClass="ButtonPanel">
@@ -160,9 +161,7 @@
         <asp:dragpanelextender id="dragPanelPopUp" runat="server" targetcontrolid="pnlPopUpContent" draghandleid="pnlPopUpHeader"> </asp:dragpanelextender>
     </asp:Panel>
 
-    <asp:Panel ID="pnlFooter" runat="server" CssClass="FooterPanel">
-        <%--Empty Content--%>
-    </asp:Panel>
+    <br /><br />
 
     <asp:HiddenField ID="hddRol" runat="server" Value="" />
     <asp:HiddenField ID="hddSort" runat="server" Value="Nombre" />
