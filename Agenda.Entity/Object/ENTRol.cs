@@ -106,7 +106,7 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
-        ///   <name>ENTUsuario.DataTableSubMenu</name>
+        ///   <name>ENTRol.DataTableSubMenu</name>
         ///   <create>21-Octubre-2013</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>

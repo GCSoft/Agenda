@@ -521,7 +521,5 @@ namespace Agenda.Web.Application.WebApp.Private.SysCat
             }
         }
 
-
-
     }
 }

@@ -42,6 +42,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Instaladores\AjaxControlToolkit 4.0\AjaxControlToolkit.dll</HintPath>
     </Reference>
+    <Reference Include="CKEditor.NET, Version=3.6.4.0, Culture=neutral, PublicKeyToken=e379cdf2f8354999, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Include\Components\CKEditor\CKEditor.NET.dll</HintPath>
+    </Reference>
     <Reference Include="GCUtility, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Include\Components\GCSoft\GCUtility.dll</HintPath>
@@ -67,6 +71,8 @@
   <ItemGroup>
     <Content Include="Application\WebApp\Private\AppIndex.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveCalendario.aspx" />
+    <Content Include="Application\WebApp\Private\Evento\eveInvitacion.aspx" />
+    <Content Include="Application\WebApp\Private\Evento\eveListadoEventos.aspx" />
     <Content Include="Application\WebApp\Private\SysApp\sappChangePassword.aspx" />
     <Content Include="Application\WebApp\Private\SysApp\sappLogout.aspx" />
     <Content Include="Application\WebApp\Private\SysApp\sappNotificacion.aspx" />
@@ -75,8 +81,275 @@
     <Content Include="Application\WebApp\Private\SysCat\scatSubMenu.aspx" />
     <Content Include="Application\WebApp\Private\SysCat\scatUsuario.aspx" />
     <Content Include="Application\WebApp\Public\frmLogin.aspx" />
+    <Content Include="Include\Components\CKEditor\CKEditor.NET.dll" />
+    <Content Include="Include\Components\CKEditor\Core\adapters\jquery.js" />
+    <Content Include="Include\Components\CKEditor\Core\build-config.js" />
+    <Content Include="Include\Components\CKEditor\Core\ckeditor.js" />
+    <Content Include="Include\Components\CKEditor\Core\config.js" />
+    <Content Include="Include\Components\CKEditor\Core\contents.css" />
+    <Content Include="Include\Components\CKEditor\Core\lang\af.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\ar.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\bg.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\bn.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\bs.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\ca.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\cs.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\cy.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\da.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\de.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\el.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\en-au.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\en-ca.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\en-gb.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\en.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\eo.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\es.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\et.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\eu.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\fa.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\fi.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\fo.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\fr-ca.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\fr.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\gl.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\gu.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\he.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\hi.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\hr.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\hu.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\id.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\is.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\it.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\ja.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\ka.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\km.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\ko.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\ku.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\lt.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\lv.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\mk.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\mn.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\ms.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\nb.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\nl.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\no.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\pl.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\pt-br.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\pt.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\ro.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\ru.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\si.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\sk.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\sl.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\sq.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\sr-latn.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\sr.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\sv.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\th.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\tr.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\ug.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\uk.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\vi.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\zh-cn.js" />
+    <Content Include="Include\Components\CKEditor\Core\lang\zh.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\ar.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\bg.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\ca.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\cs.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\cy.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\da.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\de.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\el.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\en-gb.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\en.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\eo.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\es.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\et.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\fa.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\fi.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\fr-ca.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\fr.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\gl.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\gu.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\he.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\hi.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\hr.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\hu.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\id.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\it.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\ja.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\km.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\ko.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\ku.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\lt.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\lv.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\mk.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\mn.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\nb.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\nl.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\no.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\pl.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\pt-br.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\pt.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\ro.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\ru.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\si.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\sk.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\sl.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\sq.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\sr-latn.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\sr.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\sv.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\th.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\tr.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\ug.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\uk.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\vi.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\zh.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\about\dialogs\about.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\dialog\dialogDefinition.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\fakeobjects\images\spacer.gif" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\icons.png" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\icons_hidpi.png" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\image\dialogs\image.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\image\images\noimage.png" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\link\dialogs\anchor.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\link\dialogs\link.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\link\images\anchor.png" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\magicline\images\hidpi\icon.png" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\magicline\images\icon.png" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\pastefromword\filter\default.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\scayt\dialogs\options.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\ar.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\bg.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\ca.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\cs.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\cy.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\de.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\el.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\en-gb.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\en.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\eo.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\es.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\et.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\fa.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\fi.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\fr-ca.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\fr.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\gl.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\he.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\hr.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\hu.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\id.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\it.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\ja.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\km.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\ku.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\lv.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\nb.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\nl.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\no.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\pl.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\pt-br.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\pt.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\ru.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\si.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\sk.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\sl.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\sq.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\sv.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\th.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\tr.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\ug.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\uk.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\vi.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\zh-cn.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\zh.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\table\dialogs\table.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\wsc\dialogs\tmp.html" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\wsc\dialogs\wsc_ie.js" />
+    <Content Include="Include\Components\CKEditor\Core\samples\ajax.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\api.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\appendto.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\assets\inlineall\logo.png" />
+    <Content Include="Include\Components\CKEditor\Core\samples\assets\outputxhtml\outputxhtml.css" />
+    <Content Include="Include\Components\CKEditor\Core\samples\assets\sample.css" />
+    <Content Include="Include\Components\CKEditor\Core\samples\assets\sample.jpg" />
+    <Content Include="Include\Components\CKEditor\Core\samples\assets\uilanguages\languages.js" />
+    <Content Include="Include\Components\CKEditor\Core\samples\datafiltering.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\divreplace.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\index.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\inlineall.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\inlinebycode.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\inlinetextarea.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\jquery.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\plugins\dialog\assets\my_dialog.js" />
+    <Content Include="Include\Components\CKEditor\Core\samples\plugins\dialog\dialog.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\plugins\enterkey\enterkey.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.swf" />
+    <Content Include="Include\Components\CKEditor\Core\samples\plugins\htmlwriter\assets\outputforflash\swfobject.js" />
+    <Content Include="Include\Components\CKEditor\Core\samples\plugins\htmlwriter\outputforflash.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\plugins\htmlwriter\outputhtml.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\plugins\magicline\magicline.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\plugins\toolbar\toolbar.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\plugins\wysiwygarea\fullpage.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\readonly.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\replacebyclass.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\replacebycode.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\sample.css" />
+    <Content Include="Include\Components\CKEditor\Core\samples\sample.js" />
+    <Content Include="Include\Components\CKEditor\Core\samples\tabindex.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\uicolor.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\uilanguages.html" />
+    <Content Include="Include\Components\CKEditor\Core\samples\xhtmlstyle.html" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\dialog.css" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\dialog_ie.css" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\dialog_ie7.css" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\dialog_ie8.css" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\dialog_iequirks.css" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\dialog_opera.css" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\editor.css" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\editor_gecko.css" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\editor_ie.css" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\editor_ie7.css" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\editor_ie8.css" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\editor_iequirks.css" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\icons.png" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\icons_hidpi.png" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\images\arrow.png" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\images\close.png" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\images\hidpi\close.png" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\images\hidpi\lock-open.png" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\images\hidpi\lock.png" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\images\hidpi\refresh.png" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\images\lock-open.png" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\images\lock.png" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\images\refresh.png" />
+    <Content Include="Include\Components\CKEditor\Core\styles.js" />
     <Content Include="Include\Components\GCSoft\GCUtility.dll" />
     <Content Include="Include\Components\GCSoft\GCUtility.xml" />
+    <Content Include="Include\Image\Buttons\Calendar.png" />
+    <Content Include="Include\Image\File\FileIcon_Excel.png" />
+    <Content Include="Include\Image\File\FileIcon_Foto.png" />
+    <Content Include="Include\Image\File\FileIcon_Pdf.png" />
+    <Content Include="Include\Image\File\FileIcon_PowerPoint.png" />
+    <Content Include="Include\Image\File\FileIcon_Unknown.png" />
+    <Content Include="Include\Image\File\FileIcon_Word.png" />
     <Content Include="Include\Image\Icon\IconAdm.png" />
     <Content Include="Include\Image\Icon\IconDetail.png" />
     <Content Include="Include\Image\Icon\IconGeneral.png" />
@@ -119,7 +392,9 @@
     <Content Include="Include\WebUserControls\FullCalendar\Style\fullcalendar.css" />
     <Content Include="Include\WebUserControls\FullCalendar\Style\fullcalendar.print.css" />
     <Content Include="Include\WebUserControls\FullCalendar\wucFullCalendar.ascx" />
+    <Content Include="Include\WebUserControls\wucCalendar.ascx" />
     <Content Include="Include\WebUserControls\wucMenu.ascx" />
+    <Content Include="Include\WebUserControls\wucTimer.ascx" />
     <Content Include="Index.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -137,6 +412,20 @@
     </Compile>
     <Compile Include="Application\WebApp\Private\Evento\eveCalendario.aspx.designer.cs">
       <DependentUpon>eveCalendario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveInvitacion.aspx.cs">
+      <DependentUpon>eveInvitacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveInvitacion.aspx.designer.cs">
+      <DependentUpon>eveInvitacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveListadoEventos.aspx.cs">
+      <DependentUpon>eveListadoEventos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveListadoEventos.aspx.designer.cs">
+      <DependentUpon>eveListadoEventos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\WebApp\Private\SysApp\sappChangePassword.aspx.cs">
       <DependentUpon>sappChangePassword.aspx</DependentUpon>
@@ -222,12 +511,26 @@
     <Compile Include="Include\WebUserControls\FullCalendar\wucFullCalendar.ascx.designer.cs">
       <DependentUpon>wucFullCalendar.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Include\WebUserControls\wucCalendar.ascx.cs">
+      <DependentUpon>wucCalendar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Include\WebUserControls\wucCalendar.ascx.designer.cs">
+      <DependentUpon>wucCalendar.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Include\WebUserControls\wucMenu.ascx.cs">
       <DependentUpon>wucMenu.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Include\WebUserControls\wucMenu.ascx.designer.cs">
       <DependentUpon>wucMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Include\WebUserControls\wucTimer.ascx.cs">
+      <DependentUpon>wucTimer.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Include\WebUserControls\wucTimer.ascx.designer.cs">
+      <DependentUpon>wucTimer.ascx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -240,10 +543,23 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
-    <Content Include="DB.config" />
+    <Content Include="DB.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Include\MasterPage\LoginTemplate.Master" />
     <Content Include="Include\MasterPage\PrivateTemplate.Master" />
     <Content Include="Include\MasterPage\NonMenuTemplate.Master" />
+    <Content Include="Include\Components\CKEditor\Core\CHANGES.md" />
+    <Content Include="Include\Components\CKEditor\Core\LICENSE.md" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\scayt\LICENSE.md" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\scayt\README.md" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\wsc\LICENSE.md" />
+    <Content Include="Include\Components\CKEditor\Core\plugins\wsc\README.md" />
+    <Content Include="Include\Components\CKEditor\Core\README.md" />
+    <Content Include="Include\Components\CKEditor\Core\samples\assets\posteddata.php" />
+    <Content Include="Include\Components\CKEditor\Core\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
+    <Content Include="Include\Components\CKEditor\Core\samples\sample_posteddata.php" />
+    <Content Include="Include\Components\CKEditor\Core\skins\moono\readme.md" />
     <None Include="Properties\PublishProfiles\Publish.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -45,9 +45,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BPBase.cs" />
+    <Compile Include="Object\BPCategoria.cs" />
+    <Compile Include="Object\BPColonia.cs" />
+    <Compile Include="Object\BPEstado.cs" />
+    <Compile Include="Object\BPEstatusInvitacion.cs" />
+    <Compile Include="Object\BPLugarEvento.cs" />
     <Compile Include="Object\BPMenu.cs" />
+    <Compile Include="Object\BPMunicipio.cs" />
+    <Compile Include="Object\BPPais.cs" />
+    <Compile Include="Object\BPPrioridad.cs" />
     <Compile Include="Object\BPRol.cs" />
     <Compile Include="Object\BPSubMenu.cs" />
+    <Compile Include="Object\BPTipoEvento.cs" />
     <Compile Include="Object\BPUsuario.cs" />
     <Compile Include="Page\BPPage.cs">
       <SubType>ASPXCodeBehind</SubType>

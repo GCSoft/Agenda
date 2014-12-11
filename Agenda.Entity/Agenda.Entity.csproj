@@ -40,11 +40,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ENTBase.cs" />
+    <Compile Include="Object\ENTCategoria.cs" />
+    <Compile Include="Object\ENTColonia.cs" />
+    <Compile Include="Object\ENTEstado.cs" />
+    <Compile Include="Object\ENTEstatusInvitacion.cs" />
+    <Compile Include="Object\ENTLugarEvento.cs" />
     <Compile Include="Object\ENTMenu.cs" />
+    <Compile Include="Object\ENTMunicipio.cs" />
+    <Compile Include="Object\ENTPais.cs" />
+    <Compile Include="Object\ENTPrioridad.cs" />
     <Compile Include="Object\ENTResponse.cs" />
     <Compile Include="Object\ENTRol.cs" />
     <Compile Include="Object\ENTSession.cs" />
     <Compile Include="Object\ENTSubMenu.cs" />
+    <Compile Include="Object\ENTTipoEvento.cs" />
     <Compile Include="Object\ENTUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

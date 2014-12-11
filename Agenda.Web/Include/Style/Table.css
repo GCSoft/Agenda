@@ -50,7 +50,7 @@
 }
 
 .FormTable .Espacio{
-	width: 20px;
+	width: 10px;
 }
 
 .FormTable .Especial{
@@ -64,7 +64,7 @@
 	background-color: #fff;
     height: 24px;
 	text-align: left;
-	width: 180px;
+	width: 150px;
 }
 
 .FormTable .Observaciones{

@@ -49,6 +49,78 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.Label lblPageName;
         
         /// <summary>
+        /// pnlFormulario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlFormulario;
+        
+        /// <summary>
+        /// ddlEstatusInvitacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlEstatusInvitacion;
+        
+        /// <summary>
+        /// lblRegistrada control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRegistrada;
+        
+        /// <summary>
+        /// lblComentada control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblComentada;
+        
+        /// <summary>
+        /// lblDeclinada control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDeclinada;
+        
+        /// <summary>
+        /// lblAprobada control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAprobada;
+        
+        /// <summary>
+        /// lblCancelada control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCancelada;
+        
+        /// <summary>
+        /// pnlBreak control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlBreak;
+        
+        /// <summary>
         /// wucFullCalendar control.
         /// </summary>
         /// <remarks>

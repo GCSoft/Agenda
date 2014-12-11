@@ -92,5 +92,4 @@
 </script>
 
 
-
-<div id="calendar" style="margin: 0 auto; max-width:100%;"></div>
+<div id="calendar" style="margin:0 auto; max-width:100%;"></div>
