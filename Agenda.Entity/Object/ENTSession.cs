@@ -28,6 +28,7 @@ namespace Agenda.Entity.Object
         private Boolean     _TokenGenerado;
         private String      _Email;
         private String      _Nombre;
+        private String      _Titulo;
         private DataTable   _DataTableMenu;
         private DataTable   _DataTableSubMenu;
         private object      _Entity;
@@ -43,6 +44,7 @@ namespace Agenda.Entity.Object
             _TokenGenerado = false;
             _Email = "";
             _Nombre = "";
+            _Titulo = "";
             _DataTableMenu = null;
             _DataTableSubMenu = null;
             _Entity = null;
@@ -110,6 +112,18 @@ namespace Agenda.Entity.Object
         {
             get { return _Nombre; }
             set { _Nombre = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTSession.Titulo</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el título que tiene el usuario</summary>
+        public String Titulo
+        {
+            get { return _Titulo; }
+            set { _Titulo = value; }
         }
 
         ///<remarks>

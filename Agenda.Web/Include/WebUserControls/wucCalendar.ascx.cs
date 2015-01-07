@@ -12,6 +12,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+// Referencias manuales
+using System.Globalization;
+
 namespace Agenda.Web.Include.WebUserControls
 {
     public partial class wucCalendar : System.Web.UI.UserControl
@@ -46,6 +49,17 @@ namespace Agenda.Web.Include.WebUserControls
         }
 
         ///<remarks>
+        ///   <name>wucCalendar.DisplayUTCDate</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/asigna la fecha desplegada en el control en formato universal</summary>
+        public String DisplayUTCDate
+        {
+            get { return this.txtCanvas.Text.Split(new Char[] { '/' })[2] + "-" + this.txtCanvas.Text.Split(new Char[] { '/' })[1] + "-" + this.txtCanvas.Text.Split(new Char[] { '/' })[0]; }
+        }
+
+        ///<remarks>
         ///   <name>wucCalendar.EndDate</name>
         ///   <create>21-Octubre-2013</create>
         ///   <author>Ruben.Cobos</author>
@@ -58,14 +72,39 @@ namespace Agenda.Web.Include.WebUserControls
 
 
 
-        // Metodos privados
+        // Metodos públicos
+
+        ///<remarks>
+        ///   <name>wucCalendar.IsValidDate</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Determina si la fecha contenida en el control es válida</summary>
+        ///<param name="dtDate">Fecha a establecer el calendario</param>
+        public Boolean IsValidDate(){
+            CultureInfo MyCulture = CultureInfo.CreateSpecificCulture("es-MX");
+            DateTimeStyles MyStyle = DateTimeStyles.None;
+
+            Boolean Response = false;
+            DateTime TestDate;
+
+            try
+            {
+                Response = DateTime.TryParse(this.txtCanvas.Text, MyCulture, MyStyle, out TestDate);
+
+            }catch(Exception){
+                Response = false;
+            }
+
+            return Response;
+        }
 
         ///<remarks>
         ///   <name>wucCalendar.SetDate</name>
         ///   <create>09-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
-        ///<summary>Estable el calendario en una hora determinada</summary>
+        ///<summary>Estable el control en una fecha determinada</summary>
         ///<param name="dtDate">Fecha a establecer el calendario</param>
         public void SetDate( DateTime dtDate ){
             this.ceManager.SelectedDate = dtDate;

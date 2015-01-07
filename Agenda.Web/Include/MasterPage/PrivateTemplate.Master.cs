@@ -37,7 +37,7 @@ namespace Agenda.Web.Include.MasterPage
 
 				// Nombre de usuario
 				oENTSession = (ENTSession)this.Session["oENTSession"];
-				this.lblUserName.Text = oENTSession.Nombre;
+				this.lblUserName.Text = oENTSession.Titulo + " " + oENTSession.Nombre;
 
 			}catch (Exception){
 				// Do Nothing

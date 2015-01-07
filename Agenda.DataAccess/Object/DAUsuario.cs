@@ -54,6 +54,10 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTUsuario.RolId;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("TituloId", SqlDbType.Int);
+            sqlPar.Value = oENTUsuario.TituloId;
+            sqlCom.Parameters.Add(sqlPar);
+
             sqlPar = new SqlParameter("ApellidoMaterno", SqlDbType.VarChar);
             sqlPar.Value = oENTUsuario.ApellidoMaterno;
             sqlCom.Parameters.Add(sqlPar);
@@ -76,6 +80,10 @@ namespace Agenda.DataAccess.Object
 
             sqlPar = new SqlParameter("Password", SqlDbType.VarChar);
             sqlPar.Value = oENTUsuario.Password;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Puesto", SqlDbType.VarChar);
+            sqlPar.Value = oENTUsuario.Puesto;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("Activo", SqlDbType.TinyInt);
@@ -338,6 +346,10 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTUsuario.RolId;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("TituloId", SqlDbType.Int);
+            sqlPar.Value = oENTUsuario.TituloId;
+            sqlCom.Parameters.Add(sqlPar);
+
             sqlPar = new SqlParameter("ApellidoMaterno", SqlDbType.VarChar);
             sqlPar.Value = oENTUsuario.ApellidoMaterno;
             sqlCom.Parameters.Add(sqlPar);
@@ -356,6 +368,10 @@ namespace Agenda.DataAccess.Object
 
             sqlPar = new SqlParameter("Nombre", SqlDbType.VarChar);
             sqlPar.Value = oENTUsuario.Nombre;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Puesto", SqlDbType.VarChar);
+            sqlPar.Value = oENTUsuario.Puesto;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("Activo", SqlDbType.TinyInt);

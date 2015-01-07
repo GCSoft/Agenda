@@ -221,6 +221,7 @@ namespace Agenda.BusinessProcess.Object
                 oENTSession.RolId = int.Parse(oENTResponse.DataSetResponse.Tables[1].Rows[0]["RolId"].ToString());
                 oENTSession.Email = oENTUsuario.Email;
                 oENTSession.Nombre = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Nombre"].ToString();
+                oENTSession.Titulo = oENTResponse.DataSetResponse.Tables[1].Rows[0]["TituloNombre"].ToString();
                 oENTSession.DataTableSubMenu = oENTResponse.DataSetResponse.Tables[2];
                 oENTSession.DataTableMenu = oENTResponse.DataSetResponse.Tables[3];
 

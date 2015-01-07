@@ -265,15 +265,6 @@ namespace Agenda.Web.Application.WebApp.Private.SysCat {
         protected global::System.Web.UI.WebControls.Label lblPopUpMessage;
         
         /// <summary>
-        /// dragPanelPopUp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.DragPanelExtender dragPanelPopUp;
-        
-        /// <summary>
         /// hddRol control.
         /// </summary>
         /// <remarks>

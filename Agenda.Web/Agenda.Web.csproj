@@ -71,8 +71,17 @@
   <ItemGroup>
     <Content Include="Application\WebApp\Private\AppIndex.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveCalendario.aspx" />
-    <Content Include="Application\WebApp\Private\Evento\eveInvitacion.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveListadoEventos.aspx" />
+    <Content Include="Application\WebApp\Private\Invitacion\invAprobar.aspx" />
+    <Content Include="Application\WebApp\Private\Invitacion\invContacto.aspx" />
+    <Content Include="Application\WebApp\Private\Invitacion\invDatosEvento.aspx" />
+    <Content Include="Application\WebApp\Private\Invitacion\invDatosGenerales.aspx" />
+    <Content Include="Application\WebApp\Private\Invitacion\invDetalleInvitacion.aspx" />
+    <Content Include="Application\WebApp\Private\Invitacion\invDocumentos.aspx" />
+    <Content Include="Application\WebApp\Private\Invitacion\invFuncionarios.aspx" />
+    <Content Include="Application\WebApp\Private\Invitacion\invInvitacion.aspx" />
+    <Content Include="Application\WebApp\Private\Invitacion\invListado.aspx" />
+    <Content Include="Application\WebApp\Private\Invitacion\invRechazar.aspx" />
     <Content Include="Application\WebApp\Private\SysApp\sappChangePassword.aspx" />
     <Content Include="Application\WebApp\Private\SysApp\sappLogout.aspx" />
     <Content Include="Application\WebApp\Private\SysApp\sappNotificacion.aspx" />
@@ -87,128 +96,9 @@
     <Content Include="Include\Components\CKEditor\Core\ckeditor.js" />
     <Content Include="Include\Components\CKEditor\Core\config.js" />
     <Content Include="Include\Components\CKEditor\Core\contents.css" />
-    <Content Include="Include\Components\CKEditor\Core\lang\af.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\ar.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\bg.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\bn.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\bs.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\ca.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\cs.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\cy.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\da.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\de.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\el.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\en-au.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\en-ca.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\en-gb.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\en.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\eo.js" />
     <Content Include="Include\Components\CKEditor\Core\lang\es.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\et.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\eu.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\fa.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\fi.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\fo.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\fr-ca.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\fr.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\gl.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\gu.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\he.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\hi.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\hr.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\hu.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\id.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\is.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\it.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\ja.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\ka.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\km.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\ko.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\ku.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\lt.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\lv.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\mk.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\mn.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\ms.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\nb.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\nl.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\no.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\pl.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\pt-br.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\pt.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\ro.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\ru.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\si.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\sk.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\sl.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\sq.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\sr-latn.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\sr.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\sv.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\th.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\tr.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\ug.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\uk.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\vi.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\zh-cn.js" />
-    <Content Include="Include\Components\CKEditor\Core\lang\zh.js" />
     <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\a11yhelp.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\ar.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\bg.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\ca.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\cs.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\cy.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\da.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\de.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\el.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\en-gb.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\en.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\eo.js" />
     <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\es.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\et.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\fa.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\fi.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\fr-ca.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\fr.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\gl.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\gu.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\he.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\hi.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\hr.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\hu.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\id.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\it.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\ja.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\km.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\ko.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\ku.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\lt.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\lv.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\mk.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\mn.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\nb.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\nl.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\no.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\pl.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\pt-br.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\pt.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\ro.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\ru.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\si.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\sk.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\sl.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\sq.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\sr-latn.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\sr.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\sv.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\th.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\tr.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\ug.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\uk.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\vi.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\zh.js" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\a11yhelp\dialogs\lang\_translationstatus.txt" />
     <Content Include="Include\Components\CKEditor\Core\plugins\about\dialogs\about.js" />
     <Content Include="Include\Components\CKEditor\Core\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
     <Content Include="Include\Components\CKEditor\Core\plugins\about\dialogs\logo_ckeditor.png" />
@@ -283,40 +173,6 @@
     <Content Include="Include\Components\CKEditor\Core\plugins\wsc\dialogs\wsc.css" />
     <Content Include="Include\Components\CKEditor\Core\plugins\wsc\dialogs\wsc.js" />
     <Content Include="Include\Components\CKEditor\Core\plugins\wsc\dialogs\wsc_ie.js" />
-    <Content Include="Include\Components\CKEditor\Core\samples\ajax.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\api.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\appendto.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\assets\inlineall\logo.png" />
-    <Content Include="Include\Components\CKEditor\Core\samples\assets\outputxhtml\outputxhtml.css" />
-    <Content Include="Include\Components\CKEditor\Core\samples\assets\sample.css" />
-    <Content Include="Include\Components\CKEditor\Core\samples\assets\sample.jpg" />
-    <Content Include="Include\Components\CKEditor\Core\samples\assets\uilanguages\languages.js" />
-    <Content Include="Include\Components\CKEditor\Core\samples\datafiltering.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\divreplace.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\index.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\inlineall.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\inlinebycode.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\inlinetextarea.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\jquery.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\plugins\dialog\assets\my_dialog.js" />
-    <Content Include="Include\Components\CKEditor\Core\samples\plugins\dialog\dialog.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\plugins\enterkey\enterkey.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.swf" />
-    <Content Include="Include\Components\CKEditor\Core\samples\plugins\htmlwriter\assets\outputforflash\swfobject.js" />
-    <Content Include="Include\Components\CKEditor\Core\samples\plugins\htmlwriter\outputforflash.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\plugins\htmlwriter\outputhtml.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\plugins\magicline\magicline.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\plugins\toolbar\toolbar.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\plugins\wysiwygarea\fullpage.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\readonly.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\replacebyclass.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\replacebycode.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\sample.css" />
-    <Content Include="Include\Components\CKEditor\Core\samples\sample.js" />
-    <Content Include="Include\Components\CKEditor\Core\samples\tabindex.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\uicolor.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\uilanguages.html" />
-    <Content Include="Include\Components\CKEditor\Core\samples\xhtmlstyle.html" />
     <Content Include="Include\Components\CKEditor\Core\skins\moono\dialog.css" />
     <Content Include="Include\Components\CKEditor\Core\skins\moono\dialog_ie.css" />
     <Content Include="Include\Components\CKEditor\Core\skins\moono\dialog_ie7.css" />
@@ -413,19 +269,82 @@
     <Compile Include="Application\WebApp\Private\Evento\eveCalendario.aspx.designer.cs">
       <DependentUpon>eveCalendario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Application\WebApp\Private\Evento\eveInvitacion.aspx.cs">
-      <DependentUpon>eveInvitacion.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Application\WebApp\Private\Evento\eveInvitacion.aspx.designer.cs">
-      <DependentUpon>eveInvitacion.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Application\WebApp\Private\Evento\eveListadoEventos.aspx.cs">
       <DependentUpon>eveListadoEventos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Application\WebApp\Private\Evento\eveListadoEventos.aspx.designer.cs">
       <DependentUpon>eveListadoEventos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invAprobar.aspx.cs">
+      <DependentUpon>invAprobar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invAprobar.aspx.designer.cs">
+      <DependentUpon>invAprobar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invContacto.aspx.cs">
+      <DependentUpon>invContacto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invContacto.aspx.designer.cs">
+      <DependentUpon>invContacto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invDatosEvento.aspx.cs">
+      <DependentUpon>invDatosEvento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invDatosEvento.aspx.designer.cs">
+      <DependentUpon>invDatosEvento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invDatosGenerales.aspx.cs">
+      <DependentUpon>invDatosGenerales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invDatosGenerales.aspx.designer.cs">
+      <DependentUpon>invDatosGenerales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invDetalleInvitacion.aspx.cs">
+      <DependentUpon>invDetalleInvitacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invDetalleInvitacion.aspx.designer.cs">
+      <DependentUpon>invDetalleInvitacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invDocumentos.aspx.cs">
+      <DependentUpon>invDocumentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invDocumentos.aspx.designer.cs">
+      <DependentUpon>invDocumentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invFuncionarios.aspx.cs">
+      <DependentUpon>invFuncionarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invFuncionarios.aspx.designer.cs">
+      <DependentUpon>invFuncionarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invInvitacion.aspx.cs">
+      <DependentUpon>invInvitacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invInvitacion.aspx.designer.cs">
+      <DependentUpon>invInvitacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invListado.aspx.cs">
+      <DependentUpon>invListado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invListado.aspx.designer.cs">
+      <DependentUpon>invListado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invRechazar.aspx.cs">
+      <DependentUpon>invRechazar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invRechazar.aspx.designer.cs">
+      <DependentUpon>invRechazar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\WebApp\Private\SysApp\sappChangePassword.aspx.cs">
       <DependentUpon>sappChangePassword.aspx</DependentUpon>
@@ -549,17 +468,6 @@
     <Content Include="Include\MasterPage\LoginTemplate.Master" />
     <Content Include="Include\MasterPage\PrivateTemplate.Master" />
     <Content Include="Include\MasterPage\NonMenuTemplate.Master" />
-    <Content Include="Include\Components\CKEditor\Core\CHANGES.md" />
-    <Content Include="Include\Components\CKEditor\Core\LICENSE.md" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\scayt\LICENSE.md" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\scayt\README.md" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\wsc\LICENSE.md" />
-    <Content Include="Include\Components\CKEditor\Core\plugins\wsc\README.md" />
-    <Content Include="Include\Components\CKEditor\Core\README.md" />
-    <Content Include="Include\Components\CKEditor\Core\samples\assets\posteddata.php" />
-    <Content Include="Include\Components\CKEditor\Core\samples\plugins\htmlwriter\assets\outputforflash\outputforflash.fla" />
-    <Content Include="Include\Components\CKEditor\Core\samples\sample_posteddata.php" />
-    <Content Include="Include\Components\CKEditor\Core\skins\moono\readme.md" />
     <None Include="Properties\PublishProfiles\Publish.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -578,7 +486,9 @@
       <Name>Agenda.Entity</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Application\WebApp\Private\Catalogo\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -592,7 +502,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>9503</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:54218/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

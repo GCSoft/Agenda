@@ -20,14 +20,15 @@
 .PopUpContent{
 	background-color:#FFFFFF;
 	border:1px solid #4B4878;
-	margin:0px auto;
-	position:relative;
+    clear:both;
+	position:absolute;
+    left: 50%;
+    top: 50%;
 	z-index:901;
 }
 
 .PopUpHeader{
 	background-color:#65B449;
-	cursor:move;
 	height:30px;
 	text-align:center;
 	vertical-align:middle;
@@ -127,5 +128,12 @@ PopUpHeaderTable .Cierre{
 .PopUpBodyTable .Botones{
 	text-align: right;
     height: 24px;
+    width: 100%;
+}
+
+.PopUpBodyTable .Mensajes{
+	text-align:left;
+    height: 24px;
+    vertical-align:top;
     width: 100%;
 }

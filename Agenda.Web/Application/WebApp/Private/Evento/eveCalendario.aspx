@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="cntPrivateTemplateBody" runat="server">
 
     <asp:Panel ID="pnlIconPage" runat="server" CssClass="MasterIconPage">
-        <img id="imgIconPage" alt="Nuevo León" runat="server" src="~/Include/Image/Icon/IconGeneral.png" />
+        <img id="imgIconPage" alt="Nuevo León" runat="server" src="~/Include/Image/Icon/IconAdm.png" />
     </asp:Panel>
 
     <asp:Panel ID="pnlPageName" runat="server" CssClass="MasterPageName">

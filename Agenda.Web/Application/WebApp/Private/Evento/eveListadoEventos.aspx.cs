@@ -25,11 +25,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
     public partial class eveListadoEventos : BPPage
     {
        
-        // Utilerías
+         // Utilerías
         GCCommon gcCommon = new GCCommon();
         GCEncryption gcEncryption = new GCEncryption();
         GCJavascript gcJavascript = new GCJavascript();
-
 
 
         // Rutinas del programador
@@ -68,8 +67,55 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             }
         }
 
+        void SelectEventos(){
+            try
+            {
 
+                // Estado inicial
+                this.gvEvento.DataSource = null;
+                this.gvEvento.DataBind();
 
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
+
+        void SelectPrioridad(){
+            ENTResponse oENTResponse = new ENTResponse();
+            ENTPrioridad oENTPrioridad = new ENTPrioridad();
+
+            BPPrioridad oBPPrioridad = new BPPrioridad();
+
+            try
+            {
+
+                // Formulario
+                oENTPrioridad.PrioridadId = 0;
+                oENTPrioridad.Nombre = "";
+                oENTPrioridad.Activo = 1;
+
+                // Transacción
+                oENTResponse = oBPPrioridad.SelectPrioridad(oENTPrioridad);
+
+                // Validaciones
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                // Llenado de combo
+                this.ddlPrioridad.DataTextField = "Nombre";
+                this.ddlPrioridad.DataValueField = "PrioridadId";
+                this.ddlPrioridad.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                this.ddlPrioridad.DataBind();
+
+                // Agregar Item de selección
+                this.ddlPrioridad.Items.Insert(0, new ListItem("[Todas]", "0"));
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
+
+        
         // Eventos de la página
 
         protected void Page_Load(object sender, EventArgs e){
@@ -81,10 +127,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Llenado de controles
                 SelectEstatusInvitacion();
-
-                // Estado inicial de la pantalla
-                this.gvEvento.DataSource = null;
-                this.DataBind();
+                SelectPrioridad();
+                SelectEventos();
 
                 // Foco
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.ddlEstatusInvitacion.ClientID + "');", true);
@@ -93,7 +137,18 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusInvitacion.ClientID + "');", true);
             }
         }
-        
+
+        protected void ddlEstatusInvitacion_SelectedIndexChanged(object sender, EventArgs e){
+            try
+            {
+
+                
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusInvitacion.ClientID + "');", true);
+            }
+        }
+
         protected void gvEvento_RowDataBound(object sender, GridViewRowEventArgs e){
             ImageButton imgEdit = null;
             ImageButton imgPopUp = null;

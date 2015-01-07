@@ -20,6 +20,7 @@ namespace Agenda.Entity.Object
         private String  _Nombre;
         private String  _Descripcion;
         private String  _FechaCreacion;
+        private Int16   _Operativo;
         private Int32   _Rank;
 
 
@@ -31,6 +32,7 @@ namespace Agenda.Entity.Object
             _Nombre = "";
             _Descripcion = "";
             _FechaCreacion = "";
+            _Operativo = 2;
             _Rank = 0;
         }
 
@@ -83,6 +85,18 @@ namespace Agenda.Entity.Object
         {
             get { return _FechaCreacion; }
             set { _FechaCreacion = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEstatusInvitacion.Operativo</name>
+        ///   <create>23-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un valor que determina si el registro solicitado es necesario para el flujo operativo</summary>
+        public Int16 Operativo
+        {
+            get { return _Operativo; }
+            set { _Operativo = value; }
         }
 
         ///<remarks>

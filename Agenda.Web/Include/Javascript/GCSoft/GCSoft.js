@@ -16,6 +16,8 @@ String.prototype.trim = function () { return this.replace(/^\s+|\s+$/g, '') }
 function focusControl(sIDControl) {
     var oControl = document.getElementById(sIDControl);
 
+    if (oControl == null) { return; }
+
     oControl.focus();
     if (oControl.type == 'text' || oControl.type == 'password') { oControl.select(); }
 

@@ -617,6 +617,13 @@
     line-height: 18px;
 }
 
+.Label_Detalle_Invitacion
+{
+	color: #ff6600;
+	font-size: 15px;
+	font-weight: bold;
+}
+
 /*LINKBUTTON*/
 .LinkButton_Regular{
 	color: #675C9D;

@@ -25,6 +25,7 @@ namespace Agenda.BusinessProcess
 
         private Int16   _SessionTimeout;
         private String  _ApplicationURL;
+        private String  _ApplicationURLInvitation;
         private String  _ConnectionApplication;
 
         // Constructor
@@ -32,6 +33,7 @@ namespace Agenda.BusinessProcess
         {
             _SessionTimeout = Int16.Parse(ConfigurationManager.AppSettings["Application.SessionTimeout"].ToString());
             _ApplicationURL =  ConfigurationManager.AppSettings["Application.URL"].ToString();
+            _ApplicationURLInvitation = ConfigurationManager.AppSettings["Application.URLInvitation"].ToString();
             _ConnectionApplication = ConfigurationManager.ConnectionStrings["Application.DBCnn"].ToString();
         }
 
@@ -44,10 +46,21 @@ namespace Agenda.BusinessProcess
         ///   <create>21-Octubre-2013</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
-        ///<summary>Obtiene la URL de la publicación aplicaciónn</summary>
+        ///<summary>Obtiene la URL de la publicación aplicación</summary>
         public String ApplicationURL
         {
             get { return _ApplicationURL; }
+        }
+
+        ///<remarks>
+        ///   <name>BPBase.ApplicationURLInvitation</name>
+        ///   <create>21-Octubre-2013</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene la URL de la aplicación diseñada para recibir parámetros de invitaciones</summary>
+        public String ApplicationURLInvitation
+        {
+            get { return _ApplicationURLInvitation; }
         }
 
         ///<remarks>

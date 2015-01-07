@@ -21,6 +21,7 @@ namespace Agenda.Entity.Object
 
         private Int32   _UsuarioId;
         private Int32   _RolId;
+        private Int32   _TituloId;
         private String  _FechaCreacion;
         private String  _Nombre;
         private String  _ApellidoPaterno;
@@ -29,6 +30,7 @@ namespace Agenda.Entity.Object
         private String  _Email;
         private String  _Password;
         private String  _PasswordAnterior;
+        private String  _Puesto;
         private Int16   _Activo;
 
 
@@ -39,6 +41,7 @@ namespace Agenda.Entity.Object
         {
             _UsuarioId = 0;
             _RolId = 0;
+            _TituloId = 0;
             _FechaCreacion = "";
             _Nombre = "";
             _ApellidoPaterno = "";
@@ -47,6 +50,7 @@ namespace Agenda.Entity.Object
             _Email = "";
             _Password = "";
             _PasswordAnterior = "";
+            _Puesto = "";
             _Activo = 0;
         }
 
@@ -76,6 +80,18 @@ namespace Agenda.Entity.Object
         {
             get { return _RolId; }
             set { _RolId = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTUsuario.TituloId</name>
+        ///   <create>18-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el identificador único del título que tiene el Usuario</summary>
+        public Int32 TituloId
+        {
+            get { return _TituloId; }
+            set { _TituloId = value; }
         }
 
         ///<remarks>
@@ -172,6 +188,18 @@ namespace Agenda.Entity.Object
         {
             get { return _PasswordAnterior; }
             set { _PasswordAnterior = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTUsuario.Password</name>
+        ///   <create>18-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el puesto del usuario</summary>
+        public String Puesto
+        {
+            get { return _Puesto; }
+            set { _Puesto = value; }
         }
 
         ///<remarks>

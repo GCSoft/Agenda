@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="cntPrivateTemplateBody" runat="server">
 
     <asp:Panel ID="pnlIconPage" runat="server" CssClass="MasterIconPage">
-        <img id="imgIconPage" alt="Nuevo León" runat="server" src="~/Include/Image/Icon/IconGeneral.png" />
+        <img id="imgIconPage" alt="Nuevo León" runat="server" src="~/Include/Image/Icon/IconAdm.png" />
     </asp:Panel>
 
     <asp:Panel ID="pnlPageName" runat="server" CssClass="MasterPageName">
@@ -15,7 +15,7 @@
     <asp:Panel ID="pnlTitulo" runat="server" CssClass="TitlePanel">
         <table class="HeaderTable">
             <tr>
-                <td class="Titulo"><asp:Label ID="lblSubTitulo" runat="server" Text="Listado de eventos de forma tabular en los que esta usted vinculado."></asp:Label></td>
+                <td class="Titulo"><asp:Label ID="lblSubTitulo" runat="server" Text="Ajuste los filtros para poder visualizar el listado de eventos en los que esta usted vinculado."></asp:Label></td>
             </tr>
         </table>
     </asp:Panel>
@@ -26,6 +26,12 @@
 				<td class="Etiqueta">Estatus</td>
 				<td class="Espacio"></td>
 				<td class="Campo"><asp:DropDownList ID="ddlEstatusInvitacion" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
+                <td></td>
+			</tr>
+            <tr>
+				<td class="Etiqueta">Prioridad</td>
+				<td class="Espacio"></td>
+				<td class="Campo"><asp:DropDownList ID="ddlPrioridad" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
                 <td></td>
 			</tr>
         </table>
@@ -61,10 +67,10 @@
                 </table>
             </EmptyDataTemplate>
             <Columns>
-                <asp:BoundField HeaderText="Categoría"    ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="150px" DataField="Nombre"      SortExpression="Nombre"></asp:BoundField>
-                <asp:BoundField HeaderText="Estatus"            ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Estatus"     SortExpression="Estatus"></asp:BoundField>
-                <asp:BoundField HeaderText="Rank"               ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Rank"        SortExpression="Rank"></asp:BoundField>
-                <asp:BoundField HeaderText="Descripción"        ItemStyle-HorizontalAlign="Left"                            DataField="Descripcion" SortExpression="Descripcion"></asp:BoundField>
+                <asp:BoundField HeaderText="Categoría"      ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="150px" DataField="Nombre"      SortExpression="Nombre"></asp:BoundField>
+                <asp:BoundField HeaderText="Estatus"        ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Estatus"     SortExpression="Estatus"></asp:BoundField>
+                <asp:BoundField HeaderText="Rank"           ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Rank"        SortExpression="Rank"></asp:BoundField>
+                <asp:BoundField HeaderText="Descripción"    ItemStyle-HorizontalAlign="Left"                            DataField="Descripcion" SortExpression="Descripcion"></asp:BoundField>
                 <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
                     <ItemTemplate>
                         <asp:ImageButton ID="imgEdit" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Editar" ImageUrl="~/Include/Image/Buttons/Edit.png" runat="server" />
@@ -83,5 +89,5 @@
 
     <asp:HiddenField ID="hddEvento" runat="server" Value="" />
     <asp:HiddenField ID="hddSort" runat="server" Value="Nombre" />
-
+    
 </asp:Content>

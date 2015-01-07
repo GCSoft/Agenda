@@ -55,6 +55,10 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTEstatusInvitacion.Nombre;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("Operativo", SqlDbType.TinyInt);
+            sqlPar.Value = oENTEstatusInvitacion.Operativo;
+            sqlCom.Parameters.Add(sqlPar);
+
             // Inicializaciones
             oENTResponse.DataSetResponse = new DataSet();
             sqlDA = new SqlDataAdapter(sqlCom);

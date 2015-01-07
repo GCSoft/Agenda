@@ -229,6 +229,24 @@ namespace Agenda.Web.Application.WebApp.Private.SysCat {
         protected global::System.Web.UI.WebControls.DropDownList ddlPopUpRol;
         
         /// <summary>
+        /// ddlPopUpTitulo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPopUpTitulo;
+        
+        /// <summary>
+        /// txtPopUpPuesto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpPuesto;
+        
+        /// <summary>
         /// txtPopUpEmail control.
         /// </summary>
         /// <remarks>
@@ -299,15 +317,6 @@ namespace Agenda.Web.Application.WebApp.Private.SysCat {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblPopUpMessage;
-        
-        /// <summary>
-        /// dragPanelPopUp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.DragPanelExtender dragPanelPopUp;
         
         /// <summary>
         /// hddUsuario control.

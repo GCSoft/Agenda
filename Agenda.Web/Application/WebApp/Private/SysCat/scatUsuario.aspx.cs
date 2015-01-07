@@ -68,11 +68,13 @@ namespace Agenda.Web.Application.WebApp.Private.SysCat
 
                 // Formulario
                 oENTUsuario.RolId = Int32.Parse(this.ddlPopUpRol.SelectedValue);
+                oENTUsuario.TituloId = Int32.Parse(this.ddlPopUpTitulo.SelectedValue);
                 oENTUsuario.ApellidoMaterno = this.txtPopUpApellidoMaterno.Text.Trim();
                 oENTUsuario.ApellidoPaterno = this.txtPopUpApellidoPaterno.Text.Trim();
                 oENTUsuario.Descripcion = this.txtPopUpDescripcion.Text.Trim();
                 oENTUsuario.Email = this.txtPopUpEmail.Text.Trim();
                 oENTUsuario.Nombre = this.txtPopUpNombre.Text.Trim();
+                oENTUsuario.Puesto = this.txtPopUpPuesto.Text.Trim();
                 oENTUsuario.Activo = Int16.Parse(this.ddlPopUpStatus.SelectedValue);
 
                 // Transacción
@@ -211,6 +213,39 @@ namespace Agenda.Web.Application.WebApp.Private.SysCat
             }
         }
 
+        void SelectTitulo_PopUp(){
+            ENTTitulo oENTTitulo = new ENTTitulo();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            BPTitulo oBPTitulo = new BPTitulo();
+
+            try
+            {
+
+                // Formulario
+                oENTTitulo.Activo = Int16.Parse(this.ddlStatus.SelectedItem.Value);
+
+                // Transacción
+                oENTResponse = oBPTitulo.SelectTitulo(oENTTitulo);
+
+                // Validaciones
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                // Llenado de combo
+                this.ddlPopUpTitulo.DataTextField = "Nombre";
+                this.ddlPopUpTitulo.DataValueField = "TituloId";
+                this.ddlPopUpTitulo.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                this.ddlPopUpTitulo.DataBind();
+
+                // Agregar Item de selección
+                this.ddlPopUpTitulo.Items.Insert(0, new ListItem("[Seleccione]", "0"));
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
+
         void SelectUsuario(){
             ENTSession oENTSession;
             ENTUsuario oENTUsuario = new ENTUsuario();
@@ -282,6 +317,8 @@ namespace Agenda.Web.Application.WebApp.Private.SysCat
 
                 // Llenado de formulario
                 this.ddlPopUpRol.SelectedValue = oENTResponse.DataSetResponse.Tables[1].Rows[0]["RolId"].ToString();
+                this.ddlPopUpTitulo.SelectedValue = oENTResponse.DataSetResponse.Tables[1].Rows[0]["TituloId"].ToString();
+                this.txtPopUpPuesto.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Puesto"].ToString();
                 this.txtPopUpEmail.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Email"].ToString();
                 this.txtPopUpNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Nombre"].ToString();
                 this.txtPopUpApellidoPaterno.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ApellidoPaterno"].ToString();
@@ -306,11 +343,13 @@ namespace Agenda.Web.Application.WebApp.Private.SysCat
                 // Formulario
                 oENTUsuario.UsuarioId = UsuarioId;
                 oENTUsuario.RolId = Int32.Parse(this.ddlPopUpRol.SelectedValue);
+                oENTUsuario.TituloId = Int32.Parse(this.ddlPopUpTitulo.SelectedValue);
                 oENTUsuario.ApellidoMaterno = this.txtPopUpApellidoMaterno.Text.Trim();
                 oENTUsuario.ApellidoPaterno = this.txtPopUpApellidoPaterno.Text.Trim();
                 oENTUsuario.Descripcion = this.txtPopUpDescripcion.Text.Trim();
                 oENTUsuario.Email = this.txtPopUpEmail.Text.Trim();
                 oENTUsuario.Nombre = this.txtPopUpNombre.Text.Trim();
+                oENTUsuario.Puesto = this.txtPopUpPuesto.Text.Trim();
                 oENTUsuario.Activo = Int16.Parse(this.ddlPopUpStatus.SelectedValue);
 
                 // Transacción
@@ -386,6 +425,8 @@ namespace Agenda.Web.Application.WebApp.Private.SysCat
 
                 // Limpiar formulario
                 this.ddlPopUpRol.SelectedIndex = 0;
+                this.ddlPopUpTitulo.SelectedIndex = 0;
+                this.txtPopUpPuesto.Text = "";
                 this.txtPopUpEmail.Text = "";
                 this.txtPopUpNombre.Text = "";
                 this.txtPopUpApellidoPaterno.Text = "";
@@ -448,6 +489,9 @@ namespace Agenda.Web.Application.WebApp.Private.SysCat
                 // Rol
                 if (this.ddlPopUpRol.SelectedIndex == 0) { throw new Exception("* El campo [Rol] es requerido"); }
 
+                // Título
+                if (this.ddlPopUpTitulo.SelectedIndex == 0) { throw new Exception("* El campo [Título] es requerido"); }
+
                 // Email
                 if (this.txtPopUpEmail.Text.Trim() == "") { throw new Exception("* El campo [Email] es requerido"); }
 
@@ -482,6 +526,7 @@ namespace Agenda.Web.Application.WebApp.Private.SysCat
                 SelectStatus_PopUp();
                 SelectRol();
                 SelectRol_PopUp();
+                SelectTitulo_PopUp();
                 SelectUsuario();
 
                 // Estado inicial del formulario

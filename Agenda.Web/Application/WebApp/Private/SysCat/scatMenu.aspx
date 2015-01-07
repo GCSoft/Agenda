@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Include/MasterPage/PrivateTemplate.Master" AutoEventWireup="true" CodeBehind="scatMenu.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.SysCat.scatMenu" %>
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cntPrivateTemplateHeader" runat="server">
 </asp:Content>
@@ -89,7 +88,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPopUp" runat="server" CssClass="PopUpBlock">
-        <asp:Panel ID="pnlPopUpContent" runat="server" CssClass="PopUpContent" Style="height:250px; top:200px; width:420px;">
+        <asp:Panel ID="pnlPopUpContent" runat="server" CssClass="PopUpContent" style="margin-top:-135px; margin-left:-210px;" Height="270px" Width="420px">
             <asp:Panel ID="pnlPopUpHeader" runat="server" CssClass="PopUpHeader">
                 <table class="PopUpHeaderTable">
                     <tr>
@@ -127,14 +126,13 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3">
+                        <td class="Mensajes" colspan="3">
                             <asp:Label ID="lblPopUpMessage" runat="server" CssClass="PopUpTextMessage"></asp:Label>
                         </td>
                     </tr>
                 </table>
             </asp:Panel>
         </asp:Panel>
-        <asp:DragPanelExtender ID="dragPanelPopUp" runat="server" TargetControlID="pnlPopUpContent" DragHandleID="pnlPopUpHeader"></asp:DragPanelExtender>
     </asp:Panel>
 
     <br /><br />

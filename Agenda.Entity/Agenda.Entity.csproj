@@ -42,8 +42,13 @@
     <Compile Include="ENTBase.cs" />
     <Compile Include="Object\ENTCategoria.cs" />
     <Compile Include="Object\ENTColonia.cs" />
+    <Compile Include="Object\ENTConducto.cs" />
+    <Compile Include="Object\ENTDocumento.cs" />
     <Compile Include="Object\ENTEstado.cs" />
     <Compile Include="Object\ENTEstatusInvitacion.cs" />
+    <Compile Include="Object\ENTInvitacion.cs" />
+    <Compile Include="Object\ENTInvitacionContacto.cs" />
+    <Compile Include="Object\ENTInvitacionFuncionario.cs" />
     <Compile Include="Object\ENTLugarEvento.cs" />
     <Compile Include="Object\ENTMenu.cs" />
     <Compile Include="Object\ENTMunicipio.cs" />
@@ -51,9 +56,11 @@
     <Compile Include="Object\ENTPrioridad.cs" />
     <Compile Include="Object\ENTResponse.cs" />
     <Compile Include="Object\ENTRol.cs" />
+    <Compile Include="Object\ENTSecretario.cs" />
     <Compile Include="Object\ENTSession.cs" />
     <Compile Include="Object\ENTSubMenu.cs" />
     <Compile Include="Object\ENTTipoEvento.cs" />
+    <Compile Include="Object\ENTTitulo.cs" />
     <Compile Include="Object\ENTUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
