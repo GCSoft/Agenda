@@ -172,7 +172,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 // Precarga del formulario
                 this.txtNombreEvento.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
                 this.wucCalendar.SetDate( DateTime.Parse( oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFecha"].ToString() ) );
-                this.wucTimer.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoHora"].ToString();
+                this.wucTimer.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoHoraEstandar"].ToString();
 
             }catch (Exception ex){
                 throw (ex);

@@ -251,6 +251,49 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
             }
         }
 
+        void UpdateInvitacion_DatosGenerales(){
+            ENTInvitacion oENTInvitacion = new ENTInvitacion();
+            ENTResponse oENTResponse = new ENTResponse();
+            ENTSession oENTSession = new ENTSession();
+
+            BPInvitacion oBPInvitacion = new BPInvitacion();
+
+            try
+            {
+
+                // Validaciones
+                if (this.ddlCategoria.SelectedIndex == 0) { throw (new Exception("Es necesario seleccionar un Tipo de cita")); }
+                if (this.ddlConducto.SelectedIndex == 0) { throw (new Exception("Es necesario seleccionar un Conducto")); }
+                if (this.ddlPrioridad.SelectedIndex == 0) { throw (new Exception("Es necesario seleccionar una Prioridad")); }
+                if (this.hddSecretarioRamoId.Value.Trim() == "" || this.hddSecretarioRamoId.Value.Trim() == "0") { throw (new Exception("Es necesario seleccionar un Secretario Ramo")); }
+                if (this.hddResponsableId.Value.Trim() == "" || this.hddResponsableId.Value.Trim() == "0") { throw (new Exception("Es necesario seleccionar un Responsable")); }
+
+                // Datos de sesión
+                oENTSession = (ENTSession)this.Session["oENTSession"];
+                oENTInvitacion.UsuarioId = oENTSession.UsuarioId;
+
+                // Formulario
+                oENTInvitacion.InvitacionId = Int32.Parse( this.hddInvitacionId.Value );
+                oENTInvitacion.CategoriaId = Int32.Parse(this.ddlCategoria.SelectedItem.Value);
+                oENTInvitacion.ConductoId = Int32.Parse(this.ddlConducto.SelectedItem.Value);
+                oENTInvitacion.PrioridadId = Int32.Parse(this.ddlPrioridad.SelectedItem.Value);
+                oENTInvitacion.SecretarioId_Ramo = Int32.Parse(this.hddSecretarioRamoId.Value);
+                oENTInvitacion.SecretarioId_Responsable = Int32.Parse(this.hddResponsableId.Value);
+                oENTInvitacion.SecretarioId_Representante = (this.hddRepresentanteId.Value.Trim() == "" || this.hddRepresentanteId.Value.Trim() == "0" ? 0 : Int32.Parse(this.hddRepresentanteId.Value));
+                oENTInvitacion.InvitacionObservaciones = this.ckeObservaciones.Text.Trim();
+
+                // Transacción
+                oENTResponse = oBPInvitacion.UpdateInvitacion_DatosGenerales(oENTInvitacion);
+
+                // Validaciones
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
+
 
 
         // Eventos de la página
@@ -299,6 +342,9 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
 			try
             {
+
+                // Actualizar los datos generales
+                UpdateInvitacion_DatosGenerales();
 
 				// Regresar
                 sKey = this.hddInvitacionId.Value + "|" + this.SenderId.Value;

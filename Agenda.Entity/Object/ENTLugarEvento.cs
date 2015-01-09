@@ -17,7 +17,11 @@ namespace Agenda.Entity.Object
     {
 
         private Int32   _LugarEventoId;
+        private Int32   _ColoniaId;
         private String  _Nombre;
+        private String  _Calle;
+        private String  _NumeroExterior;
+        private String  _NumeroInterior;
         private String  _Descripcion;
         private String  _FechaCreacion;
         private Int16   _Activo;
@@ -29,7 +33,11 @@ namespace Agenda.Entity.Object
         public ENTLugarEvento()
         {
             _LugarEventoId = 0;
+            _ColoniaId = 0;
             _Nombre = "";
+            _Calle = "";
+            _NumeroExterior = "";
+            _NumeroInterior = "";
             _Descripcion = "";
             _FechaCreacion = "";
             _Activo = 2;
@@ -52,6 +60,18 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
+        ///   <name>ENTLugarEvento.ColoniaId</name>
+        ///   <create>08-Enero-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el identificador único de la Colonia en donde se ubica el Lugar del Evento</summary>
+        public Int32 ColoniaId
+        {
+            get { return _ColoniaId; }
+            set { _ColoniaId = value; }
+        }
+
+        ///<remarks>
         ///   <name>ENTLugarEvento.Nombre</name>
         ///   <create>09-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
@@ -61,6 +81,42 @@ namespace Agenda.Entity.Object
         {
             get { return _Nombre; }
             set { _Nombre = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTLugarEvento.Calle</name>
+        ///   <create>09-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el nombre de la calle donde se ubica el Lugar del Evento</summary>
+        public String Calle
+        {
+            get { return _Calle; }
+            set { _Calle = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTLugarEvento.NumeroExterior</name>
+        ///   <create>09-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el número exterior sobre la calle donde se ubica el Lugar del Evento</summary>
+        public String NumeroExterior
+        {
+            get { return _NumeroExterior; }
+            set { _NumeroExterior = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTLugarEvento.NumeroInterior</name>
+        ///   <create>09-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el número interior sobre la calle donde se ubica el Lugar del Evento</summary>
+        public String NumeroInterior
+        {
+            get { return _NumeroInterior; }
+            set { _NumeroInterior = value; }
         }
 
         ///<remarks>

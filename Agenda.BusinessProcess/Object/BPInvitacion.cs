@@ -461,6 +461,38 @@ namespace Agenda.BusinessProcess.Object
         }
 
         ///<remarks>
+        ///   <name>BPInvitacion.UpdateInvitacion_DatosGenerales</name>
+        ///   <create>07-Enero-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Actualiza la sección de datos generales de una invitación existente</summary>
+        ///<param name="oENTInvitacion">Entidad de Invitacion con los parámetros necesarios para realizar la transacción</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse UpdateInvitacion_DatosGenerales(ENTInvitacion oENTInvitacion){
+            DAInvitacion oDAInvitacion = new DAInvitacion();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            try
+            {
+
+                // Transacción en base de datos
+                oENTResponse = oDAInvitacion.UpdateInvitacion_DatosGenerales(oENTInvitacion, this.ConnectionApplication, 0);
+
+                // Validación de error en consulta
+                if (oENTResponse.GeneratesException) { return oENTResponse; }
+
+                // Validación de mensajes de la BD
+                oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
+
+            }catch (Exception ex){
+                oENTResponse.ExceptionRaised(ex.Message);
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
         ///   <name>BPInvitacion.UpdateInvitacionComentario</name>
         ///   <create>30-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>

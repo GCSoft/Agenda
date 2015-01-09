@@ -61,7 +61,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 // Obtener sesión
                 oENTSession = (ENTSession)Session["oENTSession"];
 
-                // Si es Funcionario y esta asociado en la invitación podrá eliminar comentarios únicamente sus comentarios siempre y cuando no esté la invitación en estatus finales:
+                // Si es LugarEvento y esta asociado en la invitación podrá eliminar comentarios únicamente sus comentarios siempre y cuando no esté la invitación en estatus finales:
                 // 1 - Cancelada
                 // 2 - Declinada
                 // 6 - Aprobada
@@ -229,7 +229,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                     this.lblObservacionesGeneralesDetalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["InvitacionObservaciones"].ToString();
                 }
 
-                // Funcionarios
+                // LugarEventos
                 this.gvFuncionario.DataSource = oENTResponse.DataSetResponse.Tables[2];
                 this.gvFuncionario.DataBind();
 
@@ -340,7 +340,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                         this.AprobarPanel.Visible = true;
 						break;
 
-					case 3:	// Funcionario
+					case 3:	// LugarEvento
 						this.DatosGeneralesPanel.Visible = false;
                         this.DatosEventoPanel.Visible = false;
                         this.ContactoPanel.Visible = false;
@@ -374,7 +374,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 			try
             {
 
-                // Si es Administrador o funcionario puede agregar comentarios
+                // Si es Administrador o LugarEvento puede agregar comentarios
 				if ( RolId == 1 || RolId == 2 || RolId == 3 ) {
 
                     this.lnkAgregarComentario.Visible = true;
@@ -659,7 +659,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 // Llave encriptada
                 sKey = this.hddInvitacionId.Value + "|" + this.SenderId.Value;
                 sKey = gcEncryption.EncryptString(sKey, true);
-                this.Response.Redirect("invFuncionario.aspx?key=" + sKey, false);
+                this.Response.Redirect("invLugarEvento.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);

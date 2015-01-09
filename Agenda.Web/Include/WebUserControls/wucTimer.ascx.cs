@@ -130,7 +130,7 @@ namespace Agenda.Web.Include.WebUserControls
             if (this.IsPostBack) { return; }
 
             // Hora demo
-            this.txtCanvas.Text = "10:00 a.m.";
+            if (this.txtCanvas.Text == "") { this.txtCanvas.Text = "10:00 a.m."; }
 
 		}
 

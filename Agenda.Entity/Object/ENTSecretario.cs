@@ -17,7 +17,9 @@ namespace Agenda.Entity.Object
     {
 
         private Int32   _SecretarioId;
+        private Int32   _TituloId;
         private String  _Nombre;
+        private String  _Puesto;
         private String  _Descripcion;
         private String  _FechaCreacion;
         private Int16   _Activo;
@@ -29,7 +31,9 @@ namespace Agenda.Entity.Object
         public ENTSecretario()
         {
             _SecretarioId = 0;
+            _TituloId = 0;
             _Nombre = "";
+            _Puesto = "";
             _Descripcion = "";
             _FechaCreacion = "";
             _Activo = 2;
@@ -52,6 +56,18 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
+        ///   <name>ENTSecretario.TituloId</name>
+        ///   <create>18-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el identificador único del título que tiene el Secretario</summary>
+        public Int32 TituloId
+        {
+            get { return _TituloId; }
+            set { _TituloId = value; }
+        }
+
+        ///<remarks>
         ///   <name>ENTSecretario.Nombre</name>
         ///   <create>18-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
@@ -61,6 +77,18 @@ namespace Agenda.Entity.Object
         {
             get { return _Nombre; }
             set { _Nombre = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTSecretario.Puesto</name>
+        ///   <create>18-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el puesto que tiene el Secretario</summary>
+        public String Puesto
+        {
+            get { return _Puesto; }
+            set { _Puesto = value; }
         }
 
         ///<remarks>

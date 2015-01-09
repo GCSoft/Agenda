@@ -554,41 +554,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
             }
         }
 
-        void SelectMunicipio(){
-            ENTResponse oENTResponse = new ENTResponse();
-            ENTMunicipio oENTMunicipio = new ENTMunicipio();
-
-            BPMunicipio oBPMunicipio = new BPMunicipio();
-
-            try
-            {
-
-                // Formulario
-                oENTMunicipio.EstadoId = 19; //Nuevo León
-                oENTMunicipio.MunicipioId = 0;
-                oENTMunicipio.Nombre = "";
-                oENTMunicipio.Activo = 1;
-
-                // Transacción
-                oENTResponse = oBPMunicipio.SelectMunicipio(oENTMunicipio);
-
-                // Validaciones
-                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
-
-                // Llenado de combo de municipio
-                this.ddlMunicipio.DataTextField = "Nombre";
-                this.ddlMunicipio.DataValueField = "MunicipioId";
-                this.ddlMunicipio.DataSource = oENTResponse.DataSetResponse.Tables[1];
-                this.ddlMunicipio.DataBind();
-
-                // Configurar el context key del autosuggest de colonia
-                autosuggestColonia.ContextKey = this.ddlMunicipio.SelectedItem.Value;
-
-            }catch (Exception ex){
-                throw (ex);
-            }
-        }
+        
 
         void SelectPrioridad(){
             ENTResponse oENTResponse = new ENTResponse();
@@ -729,7 +695,6 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 // Llenado de controles
                 SelectCategoria();
                 SelectConducto();
-                SelectMunicipio();
                 SelectPrioridad();
 
                 // Estado inicial
