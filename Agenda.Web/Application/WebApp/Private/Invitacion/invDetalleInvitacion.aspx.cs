@@ -229,7 +229,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                     this.lblObservacionesGeneralesDetalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["InvitacionObservaciones"].ToString();
                 }
 
-                // LugarEventos
+                // Funcionarios
                 this.gvFuncionario.DataSource = oENTResponse.DataSetResponse.Tables[2];
                 this.gvFuncionario.DataBind();
 
@@ -310,7 +310,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 this.ContactoPanel.Visible = false;
                 this.FuncionarioPanel.Visible = false;
                 this.AdjuntarPanel.Visible = false;
-                this.VistaPrevia.Visible = false;
+                this.Historial.Visible = false;
                 this.RechazarPanel.Visible = false;
                 this.AprobarPanel.Visible = false;
 
@@ -335,18 +335,18 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                         this.ContactoPanel.Visible = true;
                         this.FuncionarioPanel.Visible = true;
                         this.AdjuntarPanel.Visible = true;
-                        this.VistaPrevia.Visible = true;
+                        this.Historial.Visible = true;
                         this.RechazarPanel.Visible = true;
                         this.AprobarPanel.Visible = true;
 						break;
 
-					case 3:	// LugarEvento
+					case 3:	// Funcionario
 						this.DatosGeneralesPanel.Visible = false;
                         this.DatosEventoPanel.Visible = false;
                         this.ContactoPanel.Visible = false;
                         this.FuncionarioPanel.Visible = false;
                         this.AdjuntarPanel.Visible = true;
-                        this.VistaPrevia.Visible = true;
+                        this.Historial.Visible = false;
                         this.RechazarPanel.Visible = false;
                         this.AprobarPanel.Visible = false;
 						break;
@@ -357,7 +357,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                         this.ContactoPanel.Visible = false;
                         this.FuncionarioPanel.Visible = false;
                         this.AdjuntarPanel.Visible = false;
-                        this.VistaPrevia.Visible = false;
+                        this.Historial.Visible = false;
                         this.RechazarPanel.Visible = false;
                         this.AprobarPanel.Visible = false;
 						break;
@@ -659,7 +659,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 // Llave encriptada
                 sKey = this.hddInvitacionId.Value + "|" + this.SenderId.Value;
                 sKey = gcEncryption.EncryptString(sKey, true);
-                this.Response.Redirect("invLugarEvento.aspx?key=" + sKey, false);
+                this.Response.Redirect("invFuncionarios.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
@@ -676,22 +676,6 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 sKey = this.hddInvitacionId.Value + "|" + this.SenderId.Value;
                 sKey = gcEncryption.EncryptString(sKey, true);
                 this.Response.Redirect("invDocumentos.aspx?key=" + sKey, false);
-
-            }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
-            }
-		}
-
-        protected void VistaPreviaButton_Click(object sender, ImageClickEventArgs e){
-			String sKey = "";
-
-            try
-            {
-
-                // Llave encriptada
-                sKey = this.hddInvitacionId.Value + "|" + this.SenderId.Value;
-                sKey = gcEncryption.EncryptString(sKey, true);
-                this.Response.Redirect("invVistaPrevia.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
@@ -724,6 +708,22 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 sKey = this.hddInvitacionId.Value + "|" + this.SenderId.Value;
                 sKey = gcEncryption.EncryptString(sKey, true);
                 this.Response.Redirect("invAprobar.aspx?key=" + sKey, false);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+            }
+		}
+
+        protected void HistorialButton_Click(object sender, ImageClickEventArgs e){
+			String sKey = "";
+
+            try
+            {
+
+                // Llave encriptada
+                sKey = this.hddInvitacionId.Value + "|" + this.SenderId.Value;
+                sKey = gcEncryption.EncryptString(sKey, true);
+                this.Response.Redirect("invHistorial.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);

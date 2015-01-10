@@ -67,9 +67,20 @@
 				<td class="VinetaObligatorio">*</td>
 				<td class="Campo">
 
-                    <script type = "text/javascript"> function LugarEventoSelected(sender, e) { $get("<%=hddLugarEventoId.ClientID %>").value = e.get_value(); } </script>
+                    <script type = "text/javascript">
+
+                        function LugarEventoSelected(sender, e) {
+
+                            // Valor seleccionado
+                            $get("<%=hddLugarEventoId.ClientID %>").value = e.get_value();
+
+                            // Provocar PostBack
+                            __doPostBack("<%= hddLugarEventoId.ClientID %>", "");
+                        }
+
+                    </script>
 					<asp:TextBox ID="txtLugarEvento" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
-					<asp:HiddenField ID="hddLugarEventoId" runat="server" />
+					<asp:HiddenField ID="hddLugarEventoId" runat="server" OnValueChanged="hddLugarEventoId_ValueChanged" />
 					<asp:AutoCompleteExtender
 						ID="autosuggestLugarEvento" 
 						runat="server"
@@ -92,59 +103,36 @@
 			</tr>
             <tr>
 				<td class="Etiqueta">Municipio</td>
-				<td class="VinetaObligatorio">*</td>
-				<td class="Campo"><asp:DropDownList ID="ddlMunicipio" runat="server" CssClass="DropDownList_General" Width="405px" AutoPostBack="true" OnSelectedIndexChanged="ddlMunicipio_SelectedIndexChanged" ></asp:DropDownList></td>
+				<td class="Espacio"></td>
+				<td class="Campo"><asp:TextBox ID="txtMunicipio" runat="server" CssClass="Textbox_Disabled" Enabled="false" Width="400px"></asp:TextBox></td>
                 <td></td>
 			</tr>
             <tr>
 				<td class="Etiqueta">Colonia</td>
-				<td class="VinetaObligatorio">*</td>
-				<td class="Campo">
-
-                    <script type = "text/javascript"> function ColoniaSelected(sender, e) { $get("<%=hddColoniaId.ClientID %>").value = e.get_value(); } </script>
-					<asp:TextBox ID="txtColonia" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
-					<asp:HiddenField ID="hddColoniaId" runat="server" />
-					<asp:AutoCompleteExtender
-						ID="autosuggestColonia" 
-						runat="server"
-						TargetControlID="txtColonia"
-						ServiceMethod="WSColonia"
-                        ServicePath=""
-						CompletionInterval="100"
-                        DelimiterCharacters=""
-                        Enabled="True"
-						EnableCaching="False"
-						MinimumPrefixLength="2"
-						OnClientItemSelected="ColoniaSelected"
-						CompletionListCssClass="Autocomplete_CompletionListElement"
-						CompletionListItemCssClass="Autocomplete_ListItem"
-						CompletionListHighlightedItemCssClass="Autocomplete_HighLightedListItem"
-                        UseContextKey="true"
-                    />
-
-				</td>
+				<td class="Espacio"></td>
+				<td class="Campo"><asp:TextBox ID="txtColonia" runat="server" CssClass="Textbox_Disabled" Enabled="false" Width="400px"></asp:TextBox></td>
                 <td></td>
 			</tr>
             <tr>
 				<td class="Etiqueta">Calle</td>
-				<td class="VinetaObligatorio">*</td>
-				<td class="Campo"><asp:TextBox ID="txtCalle" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
+				<td class="Espacio"></td>
+				<td class="Campo"><asp:TextBox ID="txtCalle" runat="server" CssClass="Textbox_Disabled" Enabled="false" Width="400px"></asp:TextBox></td>
                 <td></td>
 			</tr>
             <tr>
 				<td class="Etiqueta">Numero Exterior</td>
 				<td class="Espacio"></td>
 				<td class="Etiqueta">
-                    <asp:TextBox ID="txtNumeroExterior" runat="server" CssClass="Textbox_General" MaxLength="50" Width="130px"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="txtNumeroExterior" runat="server" CssClass="Textbox_Disabled" Enabled="false" Width="130px"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     Numero Interior&nbsp;&nbsp;
-                    <asp:TextBox ID="txtNumeroInterior" runat="server" CssClass="Textbox_General" MaxLength="50" Width="130px"></asp:TextBox>
+                    <asp:TextBox ID="txtNumeroInterior" runat="server" CssClass="Textbox_Disabled" Enabled="false" Width="130px"></asp:TextBox>
 				</td>
                 <td></td>
 			</tr>
         </table>
         <table border="0" style="width:100%">
 			<tr>
-				<td class="Etiqueta">Observaciones</td>
+				<td class="Etiqueta">Detalle de evento</td>
                 <td class="Espacio"></td>
 				<td class="Campo"></td>
 				<td></td>

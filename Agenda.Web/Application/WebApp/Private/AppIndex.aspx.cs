@@ -44,11 +44,19 @@ namespace Agenda.Web.Application.WebApp.Private
                 // Canalizar al usuario por rol
                 switch (oENTSession.RolId){
 				    case 1: // System Administrator
-                        this.Response.Redirect("Evento/eveCalendario.aspx", false);
+                        // Do Nothing
 					    break;
 
-				    default:
+                    case 2: // Administrador
+                        this.Response.Redirect("Invitacion/invInvitacion.aspx", false);
+                        break;
+
+                    case 3: // Funcionario
                         this.Response.Redirect("Evento/eveCalendario.aspx", false);
+                        break;
+
+				    default:
+                        // Do Nothing
 					    break;
 			    }
 

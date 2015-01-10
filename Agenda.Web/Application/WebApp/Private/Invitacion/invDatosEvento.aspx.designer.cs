@@ -148,13 +148,13 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         protected global::AjaxControlToolkit.AutoCompleteExtender autosuggestLugarEvento;
         
         /// <summary>
-        /// ddlMunicipio control.
+        /// txtMunicipio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMunicipio;
+        protected global::System.Web.UI.WebControls.TextBox txtMunicipio;
         
         /// <summary>
         /// txtColonia control.
@@ -164,24 +164,6 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtColonia;
-        
-        /// <summary>
-        /// hddColoniaId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hddColoniaId;
-        
-        /// <summary>
-        /// autosuggestColonia control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.AutoCompleteExtender autosuggestColonia;
         
         /// <summary>
         /// txtCalle control.

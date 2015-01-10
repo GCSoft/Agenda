@@ -48,11 +48,6 @@
             Adjuntar documentos
         </asp:Panel>
 
-        <asp:Panel ID="VistaPrevia" CssClass="IconoPanel" runat="server" Visible="true">
-            <asp:ImageButton ID="VistaPreviaButton" ImageUrl="~/Include/Image/Icon/SubMenuVistaPrevia.png" runat="server" OnClick="VistaPreviaButton_Click"></asp:ImageButton><br />
-            Vista previa
-        </asp:Panel>
-
         <asp:Panel ID="RechazarPanel" CssClass="IconoPanel" runat="server" Visible="true">
             <asp:ImageButton ID="RechazarButton" ImageUrl="~/Include/Image/Icon/SubMenuRechazo.png" runat="server" OnClick="RechazarButton_Click"></asp:ImageButton><br />
             Rechazar invitación
@@ -61,6 +56,11 @@
         <asp:Panel ID="AprobarPanel" CssClass="IconoPanel" runat="server" Visible="true">
             <asp:ImageButton ID="AprobarButton" ImageUrl="~/Include/Image/Icon/SubMenuAprobar.png" runat="server" OnClick="AprobarButton_Click"></asp:ImageButton><br />
             Aprobar invitación
+        </asp:Panel>
+
+        <asp:Panel ID="Historial" CssClass="IconoPanel" runat="server" Visible="true">
+            <asp:ImageButton ID="HistorialButton" ImageUrl="~/Include/Image/Icon/SubMenuHistorial.png" runat="server" OnClick="HistorialButton_Click"></asp:ImageButton><br />
+            Historial de cambios
         </asp:Panel>
 
     </asp:Panel>

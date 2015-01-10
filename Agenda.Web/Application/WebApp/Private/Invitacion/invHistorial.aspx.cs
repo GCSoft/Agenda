@@ -1,5 +1,5 @@
 ﻿/*---------------------------------------------------------------------------------------------------------------------------------
-' Nombre:	invDocumentos
+' Nombre:	invHistorial
 ' Autor:	Ruben.Cobos
 ' Fecha:	22-Diciembre-2014
 '----------------------------------------------------------------------------------------------------------------------------------*/
@@ -21,9 +21,9 @@ using System.Data;
 
 namespace Agenda.Web.Application.WebApp.Private.Invitacion
 {
-    public partial class invDocumentos : System.Web.UI.Page
+    public partial class invHistorial : System.Web.UI.Page
     {
-        
+       
         // Utilerías
         GCCommon gcCommon = new GCCommon();
         GCEncryption gcEncryption = new GCEncryption();
@@ -68,54 +68,12 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
                 if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
 
-                // Carátula compacta
-                this.lblEventoNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
-                this.lblEventoFechaHora.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHora"].ToString();
-
-                //// Documentos
-                //this.gvDocumento.DataSource = oENTResponse.DataSetResponse.Tables[4];
-                //this.gvDocumento.DataBind();
+                
 
             }catch (Exception ex){
                 throw (ex);
             }
         }
-
-        void SelectTipoDocumento(){
-            //ENTResponse oENTResponse = new ENTResponse();
-            //ENTTipoDocumento oENTTipoDocumento = new ENTTipoDocumento();
-
-            //BPTipoDocumento oBPTipoDocumento = new BPTipoDocumento();
-
-            //try
-            //{
-
-            //    // Formulario
-            //    oENTTipoDocumento.TipoDocumentoId = 0;
-            //    oENTTipoDocumento.Nombre = "";
-            //    oENTTipoDocumento.Activo = 1;
-
-            //    // Transacción
-            //    oENTResponse = oBPTipoDocumento.SelectTipoDocumento(oENTTipoDocumento);
-
-            //    // Validaciones
-            //    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-            //    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
-
-            //    // Llenado de combo
-            //    this.ddlTipoDocumento.DataTextField = "Nombre";
-            //    this.ddlTipoDocumento.DataValueField = "TipoDocumentoId";
-            //    this.ddlTipoDocumento.DataSource = oENTResponse.DataSetResponse.Tables[1];
-            //    this.ddlTipoDocumento.DataBind();
-
-            //    // Agregar Item de selección
-            //    this.ddlTipoDocumento.Items.Insert(0, new ListItem("[Seleccione]", "0"));
-
-            //}catch (Exception ex){
-            //    throw (ex);
-            //}
-        }
-
 
 
         // Eventos de la página
@@ -142,29 +100,17 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 this.SenderId.Value = Key.ToString().Split(new Char[] { '|' })[1];
 
                 // Llenado de controles
-                SelectTipoDocumento();
 
 				// Carátula
                 SelectInvitacion();
-
-                // Foco
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlTipoDocumento.ClientID + "'); }", true);
+				
+                //// Foco
+                //ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlFuncionario.ClientID + "'); }", true);
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlTipoDocumento.ClientID + "'); }", true);
+				//ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlFuncionario.ClientID + "'); }", true);
             }
         }
-
-        protected void btnAgregar_Click(object sender, EventArgs e){
-            try
-            {
-                
-                //InsertDocumento();
-
-            }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlTipoDocumento.ClientID + "'); }", true);
-            }
-		}
 
         protected void btnRegresar_Click(object sender, EventArgs e){
 			String sKey = "";
@@ -178,7 +124,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 this.Response.Redirect("invDetalleInvitacion.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlTipoDocumento.ClientID + "'); }", true);
+				//ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlFuncionario.ClientID + "'); }", true);
             }
 		}
 

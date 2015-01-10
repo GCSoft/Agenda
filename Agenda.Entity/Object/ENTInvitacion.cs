@@ -30,6 +30,7 @@ namespace Agenda.Entity.Object
         private Int32   _SecretarioId_Representante;
         private Int32   _SecretarioId_Responsable;
         private Int32   _UsuarioId;
+        private Int32   _UsuarioId_Temp;
         private String  _EventoDetalle;
         private String  _EventoNombre;
         private String  _InvitacionObservaciones;
@@ -65,6 +66,7 @@ namespace Agenda.Entity.Object
             _SecretarioId_Representante = 0;
             _SecretarioId_Responsable = 0;
             _UsuarioId = 0;
+            _UsuarioId_Temp = 0;
             _EventoDetalle = "";
             _EventoNombre = "";
             _InvitacionObservaciones = "";
@@ -251,6 +253,18 @@ namespace Agenda.Entity.Object
         {
             get { return _UsuarioId; }
             set { _UsuarioId = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTInvitacion.UsuarioId_Temp</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el identificador único del usuario para una transacción alterna</summary>
+        public Int32 UsuarioId_Temp
+        {
+            get { return _UsuarioId_Temp; }
+            set { _UsuarioId_Temp = value; }
         }
 
         ///<remarks>

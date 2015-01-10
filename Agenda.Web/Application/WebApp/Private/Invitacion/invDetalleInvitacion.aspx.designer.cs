@@ -166,24 +166,6 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         protected global::System.Web.UI.WebControls.ImageButton AdjuntarButton;
         
         /// <summary>
-        /// VistaPrevia control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel VistaPrevia;
-        
-        /// <summary>
-        /// VistaPreviaButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton VistaPreviaButton;
-        
-        /// <summary>
         /// RechazarPanel control.
         /// </summary>
         /// <remarks>
@@ -218,6 +200,24 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton AprobarButton;
+        
+        /// <summary>
+        /// Historial control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Historial;
+        
+        /// <summary>
+        /// HistorialButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton HistorialButton;
         
         /// <summary>
         /// pnlCanvas control.

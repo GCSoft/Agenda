@@ -28,54 +28,6 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
         [System.Web.Script.Services.ScriptMethod()]
 		[System.Web.Services.WebMethod]
-		public static List<string> WSColonia(string prefixText, int count, string contextKey){
-			BPColonia oBPColonia = new BPColonia();
-			ENTColonia oENTColonia = new ENTColonia();
-			ENTResponse oENTResponse = new ENTResponse();
-
-			List<String> ServiceResponse = new List<String>();
-			String Item;
-
-			// Errores conocidos:
-			//		* El control toma el foco con el metodo JS Focus() sólo si es llamado con la función JS pageLoad() 
-			//		* No se pudo encapsular en un WUC
-			//		* Si se selecciona un nombre válido, enseguida se borra y se pone uno inválido, el control almacena el ID del nombre válido, se implemento el siguiente Script en la transacción
-			//			If Not Exists ( Select 1 From Colonia Where ColoniaId = @ColoniaId And ( Nombre + ' ' + ApellidoPaterno  + ' ' +  IsNull(ApellidoMaterno, '') = @NombreTemporal ) )
-			//				Begin
-			//					Set @ColoniaId = 0
-			//				End
-
-			try
-			{
-
-				// Formulario
-                oENTColonia.ColoniaId = 0;
-                oENTColonia.MunicipioId = Int32.Parse(contextKey);
-				oENTColonia.Nombre = prefixText;
-                oENTColonia.Activo = 1;
-
-				// Transacción
-				oENTResponse = oBPColonia.SelectColonia(oENTColonia);
-
-				// Validaciones
-                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-
-				// Configuración de arreglo de respuesta
-				foreach (DataRow rowColonia in oENTResponse.DataSetResponse.Tables[1].Rows){
-					Item = AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(rowColonia["Nombre"].ToString(), rowColonia["ColoniaId"].ToString());
-					ServiceResponse.Add(Item);
-				}
-
-			}catch (Exception){
-				// Do Nothing
-			}
-
-			// Regresar listado de Colonias
-			return ServiceResponse;
-		}
-
-        [System.Web.Script.Services.ScriptMethod()]
-		[System.Web.Services.WebMethod]
 		public static List<string> WSLugarEvento(string prefixText, int count){
 			BPLugarEvento oBPLugarEvento = new BPLugarEvento();
 			ENTLugarEvento oENTLugarEvento = new ENTLugarEvento();
@@ -120,6 +72,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 			// Regresar listado de LugarEventos
 			return ServiceResponse;
 		}
+
 
         // Utilerías
         GCCommon gcCommon = new GCCommon();
@@ -174,10 +127,97 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 this.wucCalendar.SetDate( DateTime.Parse( oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFecha"].ToString() ) );
                 this.wucTimer.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoHoraEstandar"].ToString();
 
+                this.txtLugarEvento.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["LugarEventoNombre"].ToString();
+                this.hddLugarEventoId.Value = oENTResponse.DataSetResponse.Tables[1].Rows[0]["LugarEventoId"].ToString();
+
+                this.txtMunicipio.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["MunicipioNombre"].ToString();
+                this.txtColonia.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ColoniaNombre"].ToString();
+                this.txtCalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Calle"].ToString();
+                this.txtNumeroExterior.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["NumeroExterior"].ToString();
+                this.txtNumeroInterior.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["NumeroInterior"].ToString();
+                this.ckeObservaciones.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoDetalle"].ToString();
+
             }catch (Exception ex){
                 throw (ex);
             }
         }
+
+        void SelectLugarEvento(){
+            ENTLugarEvento oENTLugarEvento = new ENTLugarEvento();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            BPLugarEvento oBPLugarEvento = new BPLugarEvento();
+
+            try
+            {
+
+                // Formulario
+                oENTLugarEvento.LugarEventoId = Int32.Parse(this.hddLugarEventoId.Value);
+                oENTLugarEvento.Nombre = "";
+                oENTLugarEvento.Activo = 1;
+
+                // Transacción
+                oENTResponse = oBPLugarEvento.SelectLugarEvento(oENTLugarEvento);
+
+                // Validaciones
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                // Llenado de controles
+                this.txtMunicipio.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["MunicipioNombre"].ToString();
+                this.txtColonia.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ColoniaNombre"].ToString();
+                this.txtCalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Calle"].ToString();
+                this.txtNumeroExterior.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["NumeroExterior"].ToString();
+                this.txtNumeroInterior.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["NumeroInterior"].ToString();
+
+                // Foco
+                this.ckeObservaciones.Focus();
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
+
+        void UpdateInvitacion_DatosEvento(){
+            ENTInvitacion oENTInvitacion = new ENTInvitacion();
+            ENTResponse oENTResponse = new ENTResponse();
+            ENTSession oENTSession = new ENTSession();
+
+            BPInvitacion oBPInvitacion = new BPInvitacion();
+
+            try
+            {
+
+                // Validaciones
+                if (this.txtNombreEvento.Text.Trim() == "") { throw new Exception("El campo [Nombre del evento] es requerido"); }
+                if (!this.wucCalendar.IsValidDate()) { throw new Exception("El campo [Fecha del evento] es requerido"); }
+                if (!this.wucTimer.IsValidTime()) { throw new Exception("El campo [Hora del evento] es requerido"); }
+                if (this.hddLugarEventoId.Value.Trim() == "" || this.hddLugarEventoId.Value.Trim() == "0") { throw (new Exception("Es necesario seleccionar un Lugar del Evento")); }
+
+                // Datos de sesión
+                oENTSession = (ENTSession)this.Session["oENTSession"];
+                oENTInvitacion.UsuarioId = oENTSession.UsuarioId;
+
+                // Formulario
+                oENTInvitacion.InvitacionId = Int32.Parse(this.hddInvitacionId.Value);
+                oENTInvitacion.EventoNombre = this.txtNombreEvento.Text.Trim();
+                oENTInvitacion.FechaEvento = this.wucCalendar.DisplayUTCDate;
+                oENTInvitacion.HoraEvento = this.wucTimer.DisplayUTCTime;
+                oENTInvitacion.LugarEventoId = Int32.Parse(this.hddLugarEventoId.Value);
+                oENTInvitacion.EventoDetalle = this.ckeObservaciones.Text.Trim();
+
+                // Transacción
+                oENTResponse = oBPInvitacion.UpdateInvitacion_DatosEvento(oENTInvitacion);
+
+                // Validaciones
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
+
 
 
         // Eventos de la página
@@ -203,8 +243,6 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 				// Obtener Sender
                 this.SenderId.Value = Key.ToString().Split(new Char[] { '|' })[1];
 
-                // Llenado de controles
-
 				// Carátula
                 SelectInvitacion();
 
@@ -224,7 +262,10 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 			try
             {
 
-				// Regresar
+                // Actualizar los datos del evento
+                UpdateInvitacion_DatosEvento();
+
+                // Regresar
                 sKey = this.hddInvitacionId.Value + "|" + this.SenderId.Value;
 				sKey = gcEncryption.EncryptString(sKey, true);
                 this.Response.Redirect("invDetalleInvitacion.aspx?key=" + sKey, false);
@@ -250,24 +291,20 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
             }
 		}
 
-        protected void ddlMunicipio_SelectedIndexChanged(object sender, EventArgs e){
+
+        // Eventos del autosuggest
+
+        protected void hddLugarEventoId_ValueChanged(object sender, EventArgs e){
             try
             {
 
-				// Limpiado de controles
-                this.txtColonia.Text = "";
-                this.hddColoniaId.Value = "";
-
-                // Configurar el context key del autosuggest de colonia
-                autosuggestColonia.ContextKey = this.ddlMunicipio.SelectedItem.Value;
-
-				// Foco
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtColonia.ClientID + "'); }", true);
+                SelectLugarEvento();
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtColonia.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtLugarEvento.ClientID + "'); }", true);
             }
         }
+
 
     }
 }

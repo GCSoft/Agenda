@@ -69,7 +69,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 SelectSecretario();
 
                 // Mensaje de usuario
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Menú creado con éxito!'); focusControl('" + this.txtNombre.ClientID + "');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Secretario creado con éxito!'); focusControl('" + this.txtNombre.ClientID + "');", true);
 
             }catch (Exception ex){
                 throw (ex);
@@ -323,14 +323,14 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 switch (SecretarioPopUpType)
                 {
                     case PopUpTypes.Insert:
-                        this.lblPopUpTitle.Text = "Nuevo Menú";
-                        this.btnPopUpCommand.Text = "Crear Menú";
+                        this.lblPopUpTitle.Text = "Nuevo Secretario";
+                        this.btnPopUpCommand.Text = "Crear Secretario";
 
                         break;
 
                     case PopUpTypes.Update:
-                        this.lblPopUpTitle.Text = "Edición de Menú";
-                        this.btnPopUpCommand.Text = "Actualizar Menú";
+                        this.lblPopUpTitle.Text = "Edición de Secretario";
+                        this.btnPopUpCommand.Text = "Actualizar Secretario";
                         SelectSecretario_ForEdit(idItem);
                         break;
 
@@ -439,11 +439,11 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 NombreSecretario = this.gvSecretario.DataKeys[e.Row.RowIndex]["TituloNombre"].ToString();
 
                 // Tooltip Edición
-                sTootlTip = "Editar Menú [" + NombreSecretario + "]";
+                sTootlTip = "Editar Secretario [" + NombreSecretario + "]";
                 imgEdit.Attributes.Add("title", sTootlTip);
 
                 // Tooltip PopUp
-                sTootlTip = (Activo == "1" ? "Eliminar" : "Reactivar") + " Menú [" + NombreSecretario + "]";
+                sTootlTip = (Activo == "1" ? "Eliminar" : "Reactivar") + " Secretario [" + NombreSecretario + "]";
                 imgDelete.Attributes.Add("title", sTootlTip);
 
                 // Imagen del botón [imgDelete]

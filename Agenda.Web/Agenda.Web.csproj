@@ -81,6 +81,7 @@
     <Content Include="Application\WebApp\Private\Invitacion\invDetalleInvitacion.aspx" />
     <Content Include="Application\WebApp\Private\Invitacion\invDocumentos.aspx" />
     <Content Include="Application\WebApp\Private\Invitacion\invFuncionarios.aspx" />
+    <Content Include="Application\WebApp\Private\Invitacion\invHistorial.aspx" />
     <Content Include="Application\WebApp\Private\Invitacion\invInvitacion.aspx" />
     <Content Include="Application\WebApp\Private\Invitacion\invListado.aspx" />
     <Content Include="Application\WebApp\Private\Invitacion\invRechazar.aspx" />
@@ -224,6 +225,14 @@
     <Content Include="Include\Image\Buttons\Restore.png" />
     <Content Include="Include\Image\Buttons\Restore_Over.png" />
     <Content Include="Include\Image\Buttons\Search.png" />
+    <Content Include="Include\Image\Icon\SubMenuAdjuntarDocumento.png" />
+    <Content Include="Include\Image\Icon\SubMenuAprobar.png" />
+    <Content Include="Include\Image\Icon\SubMenuAsociarFuncionario.png" />
+    <Content Include="Include\Image\Icon\SubMenuContacto.png" />
+    <Content Include="Include\Image\Icon\SubMenuDatosEvento.png" />
+    <Content Include="Include\Image\Icon\SubMenuDatosGenerales.png" />
+    <Content Include="Include\Image\Icon\SubMenuRechazo.png" />
+    <Content Include="Include\Image\Icon\SubMenuHistorial.png" />
     <Content Include="Include\Image\Web\Background.png" />
     <Content Include="Include\Image\Web\BackgroundGeneral.png" />
     <Content Include="Include\Image\Web\BackgroundRoundedCornerRight.png" />
@@ -340,6 +349,13 @@
     </Compile>
     <Compile Include="Application\WebApp\Private\Invitacion\invFuncionarios.aspx.designer.cs">
       <DependentUpon>invFuncionarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invHistorial.aspx.cs">
+      <DependentUpon>invHistorial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Invitacion\invHistorial.aspx.designer.cs">
+      <DependentUpon>invHistorial.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\WebApp\Private\Invitacion\invInvitacion.aspx.cs">
       <DependentUpon>invInvitacion.aspx</DependentUpon>

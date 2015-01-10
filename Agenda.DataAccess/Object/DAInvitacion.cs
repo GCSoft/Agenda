@@ -150,6 +150,72 @@ namespace Agenda.DataAccess.Object
         }
 
         ///<remarks>
+        ///   <name>DAInvitacion.DeleteInvitacionFuncionario</name>
+        ///   <create>09-Enero-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Elimina lógicamente un funcionario para una invitación existente</summary>
+        ///<param name="oENTInvitacion">Entidad de Invitacion con los parámetros necesarios para realizar la transacción</param>
+        ///<param name="sConnection">Cadena de conexión a la base de datos</param>
+        ///<param name="iAlternateDBTimeout">Valor en milisegundos del Timeout en la consulta a la base de datos. 0 si se desea el Timeout por default</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse DeleteInvitacionFuncionario(ENTInvitacion oENTInvitacion, String sConnection, Int32 iAlternateDBTimeout){
+            SqlConnection sqlCnn = new SqlConnection(sConnection);
+            SqlCommand sqlCom;
+            SqlParameter sqlPar;
+            SqlDataAdapter sqlDA;
+
+            ENTResponse oENTResponse = new ENTResponse();
+
+            // Configuración de objetos
+            sqlCom = new SqlCommand("uspInvitacionFuncionario_Del", sqlCnn);
+            sqlCom.CommandType = CommandType.StoredProcedure;
+
+            // Timeout alternativo en caso de ser solicitado
+            if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
+
+            // Parametros
+            sqlPar = new SqlParameter("InvitacionId", SqlDbType.Int);
+            sqlPar.Value = oENTInvitacion.InvitacionId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
+            sqlPar.Value = oENTInvitacion.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("UsuarioId_Nuevo", SqlDbType.Int);
+            sqlPar.Value = oENTInvitacion.UsuarioId_Temp;
+            sqlCom.Parameters.Add(sqlPar);
+
+            // Inicializaciones
+            oENTResponse.DataSetResponse = new DataSet();
+            sqlDA = new SqlDataAdapter(sqlCom);
+
+            // Transacción
+            try
+            {
+
+                sqlCnn.Open();
+                sqlDA.Fill(oENTResponse.DataSetResponse);
+                sqlCnn.Close();
+
+            }catch (SqlException sqlEx){
+
+                oENTResponse.ExceptionRaised(sqlEx.Message);
+            }catch (Exception ex){
+
+                oENTResponse.ExceptionRaised(ex.Message);
+            }finally{
+
+                if (sqlCnn.State == ConnectionState.Open) { sqlCnn.Close(); }
+                sqlCnn.Dispose();
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
         ///   <name>DAInvitacion.InsertInvitacion</name>
         ///   <create>22-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
@@ -177,10 +243,6 @@ namespace Agenda.DataAccess.Object
             // Parametros
             sqlPar = new SqlParameter("CategoriaId", SqlDbType.Int);
             sqlPar.Value = oENTInvitacion.CategoriaId;
-            sqlCom.Parameters.Add(sqlPar);
-
-            sqlPar = new SqlParameter("ColoniaId", SqlDbType.Int);
-            sqlPar.Value = oENTInvitacion.ColoniaId;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("ConductoId", SqlDbType.Int);
@@ -225,18 +287,6 @@ namespace Agenda.DataAccess.Object
 
             sqlPar = new SqlParameter("InvitacionObservaciones", SqlDbType.VarChar);
             sqlPar.Value = oENTInvitacion.InvitacionObservaciones;
-            sqlCom.Parameters.Add(sqlPar);
-
-            sqlPar = new SqlParameter("Calle", SqlDbType.VarChar);
-            sqlPar.Value = oENTInvitacion.Calle;
-            sqlCom.Parameters.Add(sqlPar);
-
-            sqlPar = new SqlParameter("NumeroExterior", SqlDbType.VarChar);
-            sqlPar.Value = oENTInvitacion.NumeroExterior;
-            sqlCom.Parameters.Add(sqlPar);
-
-            sqlPar = new SqlParameter("NumeroInterior", SqlDbType.VarChar);
-            sqlPar.Value = oENTInvitacion.NumeroInterior;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("FechaEvento", SqlDbType.Date);
@@ -429,6 +479,72 @@ namespace Agenda.DataAccess.Object
 
             sqlPar = new SqlParameter("Comentario", SqlDbType.VarChar);
             sqlPar.Value = oENTInvitacion.Comentario;
+            sqlCom.Parameters.Add(sqlPar);
+
+            // Inicializaciones
+            oENTResponse.DataSetResponse = new DataSet();
+            sqlDA = new SqlDataAdapter(sqlCom);
+
+            // Transacción
+            try
+            {
+
+                sqlCnn.Open();
+                sqlDA.Fill(oENTResponse.DataSetResponse);
+                sqlCnn.Close();
+
+            }catch (SqlException sqlEx){
+
+                oENTResponse.ExceptionRaised(sqlEx.Message);
+            }catch (Exception ex){
+
+                oENTResponse.ExceptionRaised(ex.Message);
+            }finally{
+
+                if (sqlCnn.State == ConnectionState.Open) { sqlCnn.Close(); }
+                sqlCnn.Dispose();
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
+        ///   <name>DAInvitacion.InsertInvitacionFuncionario</name>
+        ///   <create>09-Enero-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Asocia un nuevo funcionario para una invitación existente</summary>
+        ///<param name="oENTInvitacion">Entidad de Invitacion con los parámetros necesarios para realizar la transacción</param>
+        ///<param name="sConnection">Cadena de conexión a la base de datos</param>
+        ///<param name="iAlternateDBTimeout">Valor en milisegundos del Timeout en la consulta a la base de datos. 0 si se desea el Timeout por default</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse InsertInvitacionFuncionario(ENTInvitacion oENTInvitacion, String sConnection, Int32 iAlternateDBTimeout){
+            SqlConnection sqlCnn = new SqlConnection(sConnection);
+            SqlCommand sqlCom;
+            SqlParameter sqlPar;
+            SqlDataAdapter sqlDA;
+
+            ENTResponse oENTResponse = new ENTResponse();
+
+            // Configuración de objetos
+            sqlCom = new SqlCommand("uspInvitacionFuncionario_Ins", sqlCnn);
+            sqlCom.CommandType = CommandType.StoredProcedure;
+
+            // Timeout alternativo en caso de ser solicitado
+            if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
+
+            // Parametros
+            sqlPar = new SqlParameter("InvitacionId", SqlDbType.Int);
+            sqlPar.Value = oENTInvitacion.InvitacionId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
+            sqlPar.Value = oENTInvitacion.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("UsuarioId_Nuevo", SqlDbType.Int);
+            sqlPar.Value = oENTInvitacion.UsuarioId_Temp;
             sqlCom.Parameters.Add(sqlPar);
 
             // Inicializaciones
@@ -705,6 +821,88 @@ namespace Agenda.DataAccess.Object
 
             sqlPar = new SqlParameter("Activo", SqlDbType.TinyInt);
             sqlPar.Value = oENTInvitacion.Activo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            // Inicializaciones
+            oENTResponse.DataSetResponse = new DataSet();
+            sqlDA = new SqlDataAdapter(sqlCom);
+
+            // Transacción
+            try
+            {
+
+                sqlCnn.Open();
+                sqlDA.Fill(oENTResponse.DataSetResponse);
+                sqlCnn.Close();
+
+            }catch (SqlException sqlEx){
+
+                oENTResponse.ExceptionRaised(sqlEx.Message);
+            }catch (Exception ex){
+
+                oENTResponse.ExceptionRaised(ex.Message);
+            }finally{
+
+                if (sqlCnn.State == ConnectionState.Open) { sqlCnn.Close(); }
+                sqlCnn.Dispose();
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
+        ///   <name>DAInvitacion.UpdateInvitacion_DatosEvento</name>
+        ///   <create>09-Enero-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Actualiza la sección de datos del Evento de una invitación existente</summary>
+        ///<param name="oENTInvitacion">Entidad de Invitacion con los parámetros necesarios para realizar la transacción</param>
+        ///<param name="sConnection">Cadena de conexión a la base de datos</param>
+        ///<param name="iAlternateDBTimeout">Valor en milisegundos del Timeout en la consulta a la base de datos. 0 si se desea el Timeout por default</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse UpdateInvitacion_DatosEvento(ENTInvitacion oENTInvitacion, String sConnection, Int32 iAlternateDBTimeout){
+            SqlConnection sqlCnn = new SqlConnection(sConnection);
+            SqlCommand sqlCom;
+            SqlParameter sqlPar;
+            SqlDataAdapter sqlDA;
+
+            ENTResponse oENTResponse = new ENTResponse();
+
+            // Configuración de objetos
+            sqlCom = new SqlCommand("uspInvitacion_Upd_DatosEvento", sqlCnn);
+            sqlCom.CommandType = CommandType.StoredProcedure;
+
+            // Timeout alternativo en caso de ser solicitado
+            if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
+
+            // Parametros
+            sqlPar = new SqlParameter("InvitacionId", SqlDbType.Int);
+            sqlPar.Value = oENTInvitacion.InvitacionId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
+            sqlPar.Value = oENTInvitacion.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("LugarEventoId", SqlDbType.Int);
+            sqlPar.Value = oENTInvitacion.LugarEventoId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoNombre", SqlDbType.VarChar);
+            sqlPar.Value = oENTInvitacion.EventoNombre;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("FechaEvento", SqlDbType.Date);
+            sqlPar.Value = oENTInvitacion.FechaEvento;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("HoraEvento", SqlDbType.Time);
+            sqlPar.Value = oENTInvitacion.HoraEvento;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoDetalle", SqlDbType.VarChar);
+            sqlPar.Value = oENTInvitacion.EventoDetalle;
             sqlCom.Parameters.Add(sqlPar);
 
             // Inicializaciones

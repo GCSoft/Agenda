@@ -29,54 +29,6 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
         [System.Web.Script.Services.ScriptMethod()]
 		[System.Web.Services.WebMethod]
-		public static List<string> WSColonia(string prefixText, int count, string contextKey){
-			BPColonia oBPColonia = new BPColonia();
-			ENTColonia oENTColonia = new ENTColonia();
-			ENTResponse oENTResponse = new ENTResponse();
-
-			List<String> ServiceResponse = new List<String>();
-			String Item;
-
-			// Errores conocidos:
-			//		* El control toma el foco con el metodo JS Focus() sólo si es llamado con la función JS pageLoad() 
-			//		* No se pudo encapsular en un WUC
-			//		* Si se selecciona un nombre válido, enseguida se borra y se pone uno inválido, el control almacena el ID del nombre válido, se implemento el siguiente Script en la transacción
-			//			If Not Exists ( Select 1 From Colonia Where ColoniaId = @ColoniaId And ( Nombre + ' ' + ApellidoPaterno  + ' ' +  IsNull(ApellidoMaterno, '') = @NombreTemporal ) )
-			//				Begin
-			//					Set @ColoniaId = 0
-			//				End
-
-			try
-			{
-
-				// Formulario
-                oENTColonia.ColoniaId = 0;
-                oENTColonia.MunicipioId = Int32.Parse(contextKey);
-				oENTColonia.Nombre = prefixText;
-                oENTColonia.Activo = 1;
-
-				// Transacción
-				oENTResponse = oBPColonia.SelectColonia(oENTColonia);
-
-				// Validaciones
-                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-
-				// Configuración de arreglo de respuesta
-				foreach (DataRow rowColonia in oENTResponse.DataSetResponse.Tables[1].Rows){
-					Item = AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(rowColonia["Nombre"].ToString(), rowColonia["ColoniaId"].ToString());
-					ServiceResponse.Add(Item);
-				}
-
-			}catch (Exception){
-				// Do Nothing
-			}
-
-			// Regresar listado de Colonias
-			return ServiceResponse;
-		}
-
-        [System.Web.Script.Services.ScriptMethod()]
-		[System.Web.Services.WebMethod]
 		public static List<string> WSFuncionario(string prefixText, int count){
 			BPUsuario oBPUsuario = new BPUsuario();
 			ENTUsuario oENTUsuario = new ENTUsuario();
@@ -273,10 +225,6 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                     oENTInvitacion.FechaEvento = this.wucCalendar.DisplayUTCDate;
                     oENTInvitacion.HoraEvento = this.wucTimer.DisplayUTCTime;
                     oENTInvitacion.LugarEventoId = Int32.Parse( this.hddLugarEventoId.Value );
-                    oENTInvitacion.ColoniaId =  Int32.Parse( this.hddColoniaId.Value );
-                    oENTInvitacion.Calle = this.txtCalle.Text.Trim();
-                    oENTInvitacion.NumeroExterior = this.txtNumeroExterior.Text.Trim();
-                    oENTInvitacion.NumeroInterior = this.txtNumeroInterior.Text.Trim();
                     oENTInvitacion.EventoDetalle = this.ckeDetalleEvento.Text.Trim();
                 #endregion
 
@@ -343,9 +291,6 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
             DataTable tblFuncionario;
             DataRow rowFuncionario;
 
-            String JSScript = "";
-            String Key = "";
-
             try
             {
 
@@ -370,10 +315,6 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                     oENTInvitacion.FechaEvento = this.wucCalendar.DisplayUTCDate;
                     oENTInvitacion.HoraEvento = this.wucTimer.DisplayUTCTime;
                     oENTInvitacion.LugarEventoId = Int32.Parse( this.hddLugarEventoId.Value );
-                    oENTInvitacion.ColoniaId =  Int32.Parse( this.hddColoniaId.Value );
-                    oENTInvitacion.Calle = this.txtCalle.Text.Trim();
-                    oENTInvitacion.NumeroExterior = this.txtNumeroExterior.Text.Trim();
-                    oENTInvitacion.NumeroInterior = this.txtNumeroInterior.Text.Trim();
                     oENTInvitacion.EventoDetalle = this.ckeDetalleEvento.Text.Trim();
                 #endregion
 
@@ -450,11 +391,8 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 this.txtLugarEvento.Text = "";
                 this.hddLugarEventoId.Value = "";
 
-                this.ddlMunicipio.SelectedIndex = 0;
-
+                this.txtMunicipio.Text = "";
                 this.txtColonia.Text = "";
-                this.hddColoniaId.Value = "";
-
                 this.txtCalle.Text = "";
                 this.txtNumeroExterior.Text = "";
                 this.txtNumeroInterior.Text = "";
@@ -554,7 +492,41 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
             }
         }
 
-        
+        void SelectLugarEvento(){
+            ENTLugarEvento oENTLugarEvento = new ENTLugarEvento();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            BPLugarEvento oBPLugarEvento = new BPLugarEvento();
+
+            try
+            {
+
+                // Formulario
+                oENTLugarEvento.LugarEventoId = Int32.Parse(this.hddLugarEventoId.Value);
+                oENTLugarEvento.Nombre = "";
+                oENTLugarEvento.Activo = 1;
+
+                // Transacción
+                oENTResponse = oBPLugarEvento.SelectLugarEvento(oENTLugarEvento);
+
+                // Validaciones
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                // Llenado de controles
+                this.txtMunicipio.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["MunicipioNombre"].ToString();
+                this.txtColonia.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ColoniaNombre"].ToString();
+                this.txtCalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Calle"].ToString();
+                this.txtNumeroExterior.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["NumeroExterior"].ToString();
+                this.txtNumeroInterior.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["NumeroInterior"].ToString();
+
+                // Foco
+                this.ckeDetalleEvento.Focus();
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
 
         void SelectPrioridad(){
             ENTResponse oENTResponse = new ENTResponse();
@@ -642,16 +614,6 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 if( this.hddLugarEventoId.Value.Trim() == "" || this.hddLugarEventoId.Value.Trim() == "0" ){
                     this.tabInvitacion.ActiveTabIndex = 1;
                     throw (new Exception("Es necesario seleccionar un Lugar del Evento"));
-                }
-
-                if( this.hddColoniaId.Value.Trim() == "" || this.hddColoniaId.Value.Trim() == "0" ){
-                    this.tabInvitacion.ActiveTabIndex = 1;
-                    throw (new Exception("Es necesario seleccionar una Colonia"));
-                }
-                
-                if( this.txtCalle.Text.Trim() == "" ){
-                    this.tabInvitacion.ActiveTabIndex = 1;
-                    throw (new Exception("Es necesario ingresar una Calle"));
                 }
 
                 // TAB - Contacto
@@ -753,24 +715,16 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
 
 
-        // Eventos de panel - Ubicación
+        // Eventos de panel - Datos del evento
 
-        protected void ddlMunicipio_SelectedIndexChanged(object sender, EventArgs e){
+        protected void hddLugarEventoId_ValueChanged(object sender, EventArgs e){
             try
             {
 
-				// Limpiado de controles
-                this.txtColonia.Text = "";
-                this.hddColoniaId.Value = "";
-
-                // Configurar el context key del autosuggest de colonia
-                autosuggestColonia.ContextKey = this.ddlMunicipio.SelectedItem.Value;
-
-				// Foco
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtColonia.ClientID + "'); }", true);
+                SelectLugarEvento();
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtColonia.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtLugarEvento.ClientID + "'); }", true);
             }
         }
 

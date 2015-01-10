@@ -60,8 +60,8 @@
                 <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
                     <tr class="Grid_Header">
                         <td style="width: 250px;">Nombre</td>
-                        <td style="width: 150px;">Título</td>
-                        <td style="width: 150px;">Puesto</td>
+                        <td style="width: 80px;">Título</td>
+                        <td style="width: 250px;">Puesto</td>
                         <td style="width: 100px;">Estatus</td>
                         <td>Descripción</td>
                     </tr>
@@ -72,8 +72,8 @@
             </EmptyDataTemplate>
             <Columns>
                 <asp:BoundField HeaderText="Nombre"         ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="250px" DataField="Nombre"                          SortExpression="Nombre"></asp:BoundField>
-                <asp:BoundField HeaderText="Título"         ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="150px" DataField="TituloNombre"                    SortExpression="TituloNombre"></asp:BoundField>
-                <asp:BoundField HeaderText="Puesto"         ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="150px" DataField="Puesto"                          SortExpression="Puesto"></asp:BoundField>
+                <asp:BoundField HeaderText="Título"         ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="80px" DataField="TituloNombre"                    SortExpression="TituloNombre"></asp:BoundField>
+                <asp:BoundField HeaderText="Puesto"         ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="250px" DataField="Puesto"                          SortExpression="Puesto"></asp:BoundField>
                 <asp:BoundField HeaderText="Estatus"        ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Estatus"                         SortExpression="Estatus"></asp:BoundField>
                 <asp:BoundField HeaderText="Descripción"    ItemStyle-HorizontalAlign="Left"                            DataField="Descripcion" HtmlEncode="false"  SortExpression="Descripcion"></asp:BoundField>
                 <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
@@ -91,7 +91,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPopUp" runat="server" CssClass="PopUpBlock">
-        <asp:Panel ID="pnlPopUpContent" runat="server" CssClass="PopUpContent" style="margin-top:-270px; margin-left:-310px;" Height="540px" Width="620px">
+        <asp:Panel ID="pnlPopUpContent" runat="server" CssClass="PopUpContent" style="margin-top:-240px; margin-left:-310px;" Height="480px" Width="620px">
             <asp:Panel ID="pnlPopUpHeader" runat="server" CssClass="PopUpHeader">
                 <table class="PopUpHeaderTable">
                     <tr>
