@@ -112,13 +112,13 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoDocumento;
         
         /// <summary>
-        /// fupInvitacion control.
+        /// fupDocumento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fupInvitacion;
+        protected global::System.Web.UI.WebControls.FileUpload fupDocumento;
         
         /// <summary>
         /// ckeDescripcion control.
@@ -166,6 +166,24 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         protected global::System.Web.UI.WebControls.Button btnRegresar;
         
         /// <summary>
+        /// pnlGrid control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlGrid;
+        
+        /// <summary>
+        /// gvDocumento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvDocumento;
+        
+        /// <summary>
         /// hddInvitacionId control.
         /// </summary>
         /// <remarks>
@@ -182,5 +200,14 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField SenderId;
+        
+        /// <summary>
+        /// hddSort control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hddSort;
     }
 }

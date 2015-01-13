@@ -18,6 +18,7 @@ using GCUtility.Security;
 using Agenda.Entity.Object;
 using Agenda.BusinessProcess.Object;
 using System.Data;
+using System.IO;
 
 namespace Agenda.Web.Application.WebApp.Private.Invitacion
 {
@@ -28,6 +29,10 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
         GCCommon gcCommon = new GCCommon();
         GCEncryption gcEncryption = new GCEncryption();
         GCJavascript gcJavascript = new GCJavascript();
+
+
+        // Variables publicas
+        ENTSession oCurrentSession;
 
 
         // Funciones del programador
@@ -48,6 +53,109 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
 
         // Rutinas el programador
+
+        void DeleteDocumento(Int32 DocumentoId){
+			ENTDocumento oENTDocumento = new ENTDocumento();
+			ENTResponse oENTResponse = new ENTResponse();
+            ENTSession oENTSession;
+
+			BPDocumento oBPDocumento = new BPDocumento();
+
+			try
+			{
+
+                // Obtener Sesion
+                oENTSession = (ENTSession)this.Session["oENTSession"];
+                oENTDocumento.UsuarioId = oENTSession.UsuarioId;
+
+				// Formulario
+				oENTDocumento.DocumentoId = DocumentoId;
+
+				// Consultar información del archivo
+				oENTResponse = oBPDocumento.SelectDocumento_Path(oENTDocumento);
+
+				// Errores y Warnings
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+				// Eliminar físicamente el archivo
+                if (File.Exists(oENTResponse.DataSetResponse.Tables[1].Rows[0]["Ruta"].ToString())) { File.Delete(oENTResponse.DataSetResponse.Tables[1].Rows[0]["Ruta"].ToString()); }
+
+				// Eliminar la referencia del archivo en la base de datos
+				oENTResponse = oBPDocumento.DeleteDocumento(oENTDocumento);
+
+				// Errores y Warnings
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+				// Estado inicial del formulario
+				this.ckeDescripcion.Text = "";
+
+				// Refrescar el formulario
+                SelectInvitacion();
+
+				// Foco
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlTipoDocumento.ClientID + "'); }", true);
+
+			}catch ( IOException ioEx){
+
+				throw (ioEx);
+			}catch (Exception ex){
+
+				throw (ex);
+			}
+		}
+
+        void InsertDocumento(){
+            ENTDocumento oENTDocumento = new ENTDocumento();
+            ENTResponse oENTResponse = new ENTResponse();
+            ENTSession oENTSession;
+
+            BPDocumento oBPDocumento = new BPDocumento();
+
+            try
+            {
+
+                // Validaciones
+                if (this.ddlTipoDocumento.SelectedIndex == 0) { throw (new Exception("Es necesario seleccionar un tipo de documento")); }
+                if (this.fupDocumento.PostedFile == null) { throw (new Exception("Es necesario seleccionar un documento")); }
+				if (!this.fupDocumento.HasFile) { throw (new Exception("Es necesario seleccionar un documento")); }
+				if (this.fupDocumento.PostedFile.ContentLength == 0) { throw (new Exception("Es necesario seleccionar un documento")); }
+				
+				 // Obtener Sesion
+				oENTSession = (ENTSession)this.Session["oENTSession"];
+
+				// Formulario
+				oENTDocumento.InvitacionId = Int32.Parse( this.hddInvitacionId.Value );
+				oENTDocumento.EventoId = 0;
+				oENTDocumento.ModuloId = 1; // Invitación
+				oENTDocumento.TipoDocumentoId = Int32.Parse(this.ddlTipoDocumento.SelectedItem.Value);
+				oENTDocumento.UsuarioId = oENTSession.UsuarioId;
+				oENTDocumento.Extension = Path.GetExtension(this.fupDocumento.PostedFile.FileName);
+				oENTDocumento.Nombre = this.fupDocumento.FileName;
+				oENTDocumento.Descripcion = "";
+                oENTDocumento.Ruta = oBPDocumento.UploadFile(this.fupDocumento.PostedFile, this.hddInvitacionId.Value, BPDocumento.RepositoryTypes.Invitacion);
+
+				// Transacción
+				oENTResponse = oBPDocumento.InsertDocumento(oENTDocumento);
+
+				// Validaciones
+				if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+				if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                // Estado inicial del formulario
+                this.ckeDescripcion.Text = "";
+
+                // Refrescar el formulario
+                SelectInvitacion();
+
+                // Foco
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlTipoDocumento.ClientID + "'); }", true);
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
 
         void SelectInvitacion(){
             ENTResponse oENTResponse = new ENTResponse();
@@ -72,9 +180,9 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 this.lblEventoNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
                 this.lblEventoFechaHora.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHora"].ToString();
 
-                //// Documentos
-                //this.gvDocumento.DataSource = oENTResponse.DataSetResponse.Tables[4];
-                //this.gvDocumento.DataBind();
+                // Documentos
+                this.gvDocumento.DataSource = oENTResponse.DataSetResponse.Tables[4];
+                this.gvDocumento.DataBind();
 
             }catch (Exception ex){
                 throw (ex);
@@ -82,38 +190,38 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
         }
 
         void SelectTipoDocumento(){
-            //ENTResponse oENTResponse = new ENTResponse();
-            //ENTTipoDocumento oENTTipoDocumento = new ENTTipoDocumento();
+            ENTResponse oENTResponse = new ENTResponse();
+            ENTTipoDocumento oENTTipoDocumento = new ENTTipoDocumento();
 
-            //BPTipoDocumento oBPTipoDocumento = new BPTipoDocumento();
+            BPTipoDocumento oBPTipoDocumento = new BPTipoDocumento();
 
-            //try
-            //{
+            try
+            {
 
-            //    // Formulario
-            //    oENTTipoDocumento.TipoDocumentoId = 0;
-            //    oENTTipoDocumento.Nombre = "";
-            //    oENTTipoDocumento.Activo = 1;
+                // Formulario
+                oENTTipoDocumento.TipoDocumentoId = 0;
+                oENTTipoDocumento.Nombre = "";
+                oENTTipoDocumento.Activo = 1;
 
-            //    // Transacción
-            //    oENTResponse = oBPTipoDocumento.SelectTipoDocumento(oENTTipoDocumento);
+                // Transacción
+                oENTResponse = oBPTipoDocumento.SelectTipoDocumento(oENTTipoDocumento);
 
-            //    // Validaciones
-            //    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-            //    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+                // Validaciones
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
 
-            //    // Llenado de combo
-            //    this.ddlTipoDocumento.DataTextField = "Nombre";
-            //    this.ddlTipoDocumento.DataValueField = "TipoDocumentoId";
-            //    this.ddlTipoDocumento.DataSource = oENTResponse.DataSetResponse.Tables[1];
-            //    this.ddlTipoDocumento.DataBind();
+                // Llenado de combo
+                this.ddlTipoDocumento.DataTextField = "Nombre";
+                this.ddlTipoDocumento.DataValueField = "TipoDocumentoId";
+                this.ddlTipoDocumento.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                this.ddlTipoDocumento.DataBind();
 
-            //    // Agregar Item de selección
-            //    this.ddlTipoDocumento.Items.Insert(0, new ListItem("[Seleccione]", "0"));
+                // Agregar Item de selección
+                this.ddlTipoDocumento.Items.Insert(0, new ListItem("[Seleccione]", "0"));
 
-            //}catch (Exception ex){
-            //    throw (ex);
-            //}
+            }catch (Exception ex){
+                throw (ex);
+            }
         }
 
 
@@ -159,7 +267,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
             try
             {
                 
-                //InsertDocumento();
+                InsertDocumento();
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlTipoDocumento.ClientID + "'); }", true);
@@ -180,6 +288,128 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlTipoDocumento.ClientID + "'); }", true);
             }
+		}
+
+        protected void gvDocumento_RowCommand(object sender, GridViewCommandEventArgs e){
+			String CommandName = "";
+			String DocumentoId = "";
+			String sKey = "";
+
+			Int32 iRow = 0;
+
+            try
+            {
+                // Opción seleccionada
+                CommandName = e.CommandName.ToString();
+
+                // Se dispara el evento RowCommand en el ordenamiento
+                if (CommandName == "Sort") { return; }
+
+                // Fila
+                iRow = Convert.ToInt32(e.CommandArgument.ToString());
+
+                // DataKeys
+                DocumentoId = gvDocumento.DataKeys[iRow]["DocumentoId"].ToString();
+
+                // Acción
+                switch (CommandName){
+                    case "Visualizar":
+
+						sKey = gcEncryption.EncryptString(DocumentoId, true);
+                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "window.open('" + ResolveUrl("~/Include/Handler/Documento.ashx") + "?key=" + sKey + "');", true);
+                        break;
+
+                    case "Borrar":
+                        DeleteDocumento(Int32.Parse(DocumentoId));
+                        break;
+                }
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+            }
+		}
+
+		protected void gvDocumento_RowDataBound(object sender, GridViewRowEventArgs e){
+			ImageButton imgView = null;
+			ImageButton imgDelete = null;
+
+			String DocumentoId = "";
+            String ModuloId = "";
+            String UsuarioId = "";
+			String NombreDocumento = "";
+			String Icono = "";
+
+			String sImagesAttributes = "";
+			String sToolTip = "";
+
+			try
+			{
+				
+				// Validación de que sea fila 
+				if (e.Row.RowType != DataControlRowType.DataRow) { 
+                    
+                    // Usuario que consulta
+                    oCurrentSession = (ENTSession)this.Session["oENTSession"];
+                    return;
+                }
+
+				// Obtener objetos
+				imgView = (ImageButton)e.Row.FindControl("imgView");
+				imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+
+				// Datakeys
+				DocumentoId = this.gvDocumento.DataKeys[e.Row.RowIndex]["DocumentoId"].ToString();
+                ModuloId = this.gvDocumento.DataKeys[e.Row.RowIndex]["ModuloId"].ToString();
+                UsuarioId = this.gvDocumento.DataKeys[e.Row.RowIndex]["UsuarioId"].ToString();
+				Icono = this.gvDocumento.DataKeys[e.Row.RowIndex]["Icono"].ToString();
+				NombreDocumento = this.gvDocumento.DataKeys[e.Row.RowIndex]["NombreDocumento"].ToString();
+
+				// Configuración del Icono
+				sToolTip = "Visualizar [" + NombreDocumento + "]";
+                imgView.Attributes.Add("title", sToolTip);
+				imgView.Attributes.Add("style", "cursor:hand;");
+				imgView.ImageUrl = "~/Include/Image/File/" + Icono;
+
+				// Seguridad
+				if( UsuarioId != oCurrentSession.UsuarioId.ToString() ){
+
+					imgDelete.Visible = false;
+
+					// Atributos Over y Out
+					e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over'; ");
+					e.Row.Attributes.Add("onmouseout", "this.className='" + ((e.Row.RowIndex % 2) != 0 ? "Grid_Row_Alternating" : "Grid_Row") + "'; ");
+
+				}else{
+
+					// Tooltip
+					sToolTip = "Eliminar [" + NombreDocumento + "]";
+                    imgView.Attributes.Add("title", sToolTip);
+					imgDelete.Attributes.Add("style", "cursor:hand;");
+
+					// Atributos Over
+					sImagesAttributes = "document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+					e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over'; " + sImagesAttributes);
+
+					// Atributos Out
+					sImagesAttributes = "document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+					e.Row.Attributes.Add("onmouseout", "this.className='" + ((e.Row.RowIndex % 2) != 0 ? "Grid_Row_Alternating" : "Grid_Row") + "'; " + sImagesAttributes);
+
+				}
+
+			}catch (Exception ex){
+				throw (ex);
+			}
+		}
+
+		protected void gvDocumento_Sorting(object sender, GridViewSortEventArgs e){
+			try
+			{
+
+				gcCommon.SortGridView(ref this.gvDocumento, ref this.hddSort, e.SortExpression);
+
+			}catch (Exception ex){
+				ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+			}
 		}
 
     }

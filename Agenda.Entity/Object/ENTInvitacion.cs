@@ -36,6 +36,7 @@ namespace Agenda.Entity.Object
         private String  _InvitacionObservaciones;
         private String  _Calle;
         private String  _Comentario;
+        private String  _MotivoRechazo;
         private String  _NumeroExterior;
         private String  _NumeroInterior;
         private String  _FechaEvento;
@@ -72,6 +73,7 @@ namespace Agenda.Entity.Object
             _InvitacionObservaciones = "";
             _Calle = "";
             _Comentario = "";
+            _MotivoRechazo = "";
             _NumeroExterior = "";
             _NumeroInterior = "";
             _FechaEvento = "";
@@ -325,6 +327,18 @@ namespace Agenda.Entity.Object
         {
             get { return _Comentario; }
             set { _Comentario = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTInvitacion.MotivoRechazo</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el motivo de rechazo de una invitación en particular</summary>
+        public String MotivoRechazo
+        {
+            get { return _MotivoRechazo; }
+            set { _MotivoRechazo = value; }
         }
 
         ///<remarks>

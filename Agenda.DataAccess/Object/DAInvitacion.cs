@@ -1024,6 +1024,72 @@ namespace Agenda.DataAccess.Object
         }
 
         ///<remarks>
+        ///   <name>DAInvitacion.UpdateInvitacion_Declinar</name>
+        ///   <create>12-Enero-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Actualiza el estatus de una invitación existente a declinada</summary>
+        ///<param name="oENTInvitacion">Entidad de Invitacion con los parámetros necesarios para realizar la transacción</param>
+        ///<param name="sConnection">Cadena de conexión a la base de datos</param>
+        ///<param name="iAlternateDBTimeout">Valor en milisegundos del Timeout en la consulta a la base de datos. 0 si se desea el Timeout por default</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse UpdateInvitacion_Declinar(ENTInvitacion oENTInvitacion, String sConnection, Int32 iAlternateDBTimeout){
+            SqlConnection sqlCnn = new SqlConnection(sConnection);
+            SqlCommand sqlCom;
+            SqlParameter sqlPar;
+            SqlDataAdapter sqlDA;
+
+            ENTResponse oENTResponse = new ENTResponse();
+
+            // Configuración de objetos
+            sqlCom = new SqlCommand("uspInvitacion_Upd_Declinar", sqlCnn);
+            sqlCom.CommandType = CommandType.StoredProcedure;
+
+            // Timeout alternativo en caso de ser solicitado
+            if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
+
+            // Parametros
+            sqlPar = new SqlParameter("InvitacionId", SqlDbType.Int);
+            sqlPar.Value = oENTInvitacion.InvitacionId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
+            sqlPar.Value = oENTInvitacion.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("MotivoRechazo", SqlDbType.VarChar);
+            sqlPar.Value = oENTInvitacion.MotivoRechazo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            // Inicializaciones
+            oENTResponse.DataSetResponse = new DataSet();
+            sqlDA = new SqlDataAdapter(sqlCom);
+
+            // Transacción
+            try
+            {
+
+                sqlCnn.Open();
+                sqlDA.Fill(oENTResponse.DataSetResponse);
+                sqlCnn.Close();
+
+            }catch (SqlException sqlEx){
+
+                oENTResponse.ExceptionRaised(sqlEx.Message);
+            }catch (Exception ex){
+
+                oENTResponse.ExceptionRaised(ex.Message);
+            }finally{
+
+                if (sqlCnn.State == ConnectionState.Open) { sqlCnn.Close(); }
+                sqlCnn.Dispose();
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
         ///   <name>DAInvitacion.UpdateInvitacionComentario</name>
         ///   <create>30-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>

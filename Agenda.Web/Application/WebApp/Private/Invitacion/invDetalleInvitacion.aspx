@@ -45,12 +45,12 @@
 
         <asp:Panel ID="AdjuntarPanel" CssClass="IconoPanel" runat="server" Visible="true">
             <asp:ImageButton ID="AdjuntarButton" ImageUrl="~/Include/Image/Icon/SubMenuAdjuntarDocumento.png" runat="server" OnClick="AdjuntarButton_Click"></asp:ImageButton><br />
-            Adjuntar documentos
+            Anexar documentos
         </asp:Panel>
 
         <asp:Panel ID="RechazarPanel" CssClass="IconoPanel" runat="server" Visible="true">
             <asp:ImageButton ID="RechazarButton" ImageUrl="~/Include/Image/Icon/SubMenuRechazo.png" runat="server" OnClick="RechazarButton_Click"></asp:ImageButton><br />
-            Rechazar invitación
+            Declinar invitación
         </asp:Panel>
 
         <asp:Panel ID="AprobarPanel" CssClass="IconoPanel" runat="server" Visible="true">
@@ -131,6 +131,11 @@
 				    <td class="Nombre"><asp:Label ID="lblObservacionesGenerales" runat="server" Text="Observaciones Generales"></asp:Label></td>
 				    <td class="Espacio"></td>
 				    <td class="Etiqueta" colspan="5"><asp:Label ID="lblObservacionesGeneralesDetalle" runat="server"></asp:Label></td>
+			    </tr>
+                <tr>
+				    <td class="Nombre"><asp:Label ID="lblMotivoRechazo" runat="server" Text="Motivo de Rechazo"></asp:Label></td>
+				    <td class="Espacio"></td>
+				    <td class="Etiqueta" colspan="5"><asp:Label ID="lblMotivoRechazoDetalle" runat="server"></asp:Label></td>
 			    </tr>
 			    <tr style="height:10px;"><td colspan="7"></td></tr>
             </table>

@@ -46,9 +46,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Include\Components\CKEditor\CKEditor.NET.dll</HintPath>
     </Reference>
-    <Reference Include="GCUtility, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GCUtility, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Include\Components\GCSoft\GCUtility.dll</HintPath>
+      <HintPath>..\..\..\Proyectos\BHM\Solution\BHM.Web\Include\Components\GCSoft\GCUtility.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
@@ -434,6 +434,9 @@
     <Compile Include="Application\WebApp\Public\frmLogin.aspx.designer.cs">
       <DependentUpon>frmLogin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Include\Handler\Documento.ashx.cs">
+      <DependentUpon>Documento.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Include\MasterPage\LoginTemplate.Master.cs">
       <DependentUpon>LoginTemplate.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -500,6 +503,7 @@
     <Content Include="Include\MasterPage\LoginTemplate.Master" />
     <Content Include="Include\MasterPage\PrivateTemplate.Master" />
     <Content Include="Include\MasterPage\NonMenuTemplate.Master" />
+    <Content Include="Include\Handler\Documento.ashx" />
     <None Include="Properties\PublishProfiles\Publish.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

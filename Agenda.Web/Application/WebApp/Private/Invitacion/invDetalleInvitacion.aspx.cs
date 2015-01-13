@@ -229,6 +229,17 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                     this.lblObservacionesGeneralesDetalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["InvitacionObservaciones"].ToString();
                 }
 
+                if ( oENTResponse.DataSetResponse.Tables[1].Rows[0]["EstatusInvitacionId"].ToString().Trim() != "2" ){ // Declinada
+
+                    this.lblMotivoRechazo.Visible = false;
+                    this.lblMotivoRechazoDetalle.Visible = false;
+                }else{
+
+                    this.lblMotivoRechazo.Visible = true;
+                    this.lblMotivoRechazoDetalle.Visible = true;
+                    this.lblMotivoRechazoDetalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["MotivoRechazo"].ToString();
+                }
+
                 // Funcionarios
                 this.gvFuncionario.DataSource = oENTResponse.DataSetResponse.Tables[2];
                 this.gvFuncionario.DataBind();
@@ -509,7 +520,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
             DataRowView DataRow;
 
 			String DocumentoId = "";
-			String sKey = "";
+			String Key = "";
 
             try
             {
@@ -524,16 +535,16 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
 				// Id del documento
 				DocumentoId = DataRow["DocumentoId"].ToString();
-				sKey = gcEncryption.EncryptString(DocumentoId, true);
+				Key = gcEncryption.EncryptString(DocumentoId, true);
 
                 // Configurar imagen
 				DocumentoLabel.Text = DataRow["NombreDocumentoCorto"].ToString();
 
-				DocumentoImage.ImageUrl = "~/Include/Image/Icon/" + DataRow["Icono"].ToString();
+                DocumentoImage.ImageUrl = "~/Include/Image/File/" + DataRow["Icono"].ToString();
 				DocumentoImage.ToolTip = DataRow["NombreDocumento"].ToString();
                 DocumentoImage.Attributes.Add("onmouseover", "this.style.cursor='pointer'");
                 DocumentoImage.Attributes.Add("onmouseout", "this.style.cursor='auto'");
-				DocumentoImage.Attributes.Add("onclick", "window.open('" + System.Configuration.ConfigurationManager.AppSettings["Application.Url.Handler"].ToString() + "ObtenerRepositorio.ashx?key=" + sKey + "');");
+                DocumentoImage.Attributes.Add("onclick", "window.open('" + ResolveUrl("~/Include/Handler/Documento.ashx") + "?key=" + Key + "');");
 
             }catch (Exception ex){
                 throw (ex);

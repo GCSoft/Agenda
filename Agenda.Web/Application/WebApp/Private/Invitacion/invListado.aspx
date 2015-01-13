@@ -74,9 +74,9 @@
                     <tr class="Grid_Header">
                         <td style="width: 120px;">Estatus</td>
                         <td style="width: 100px;">Categoría</td>
-                        <td style="width: 100px;">Prioridad</td>
+                        <td style="width: 90px;">Prioridad</td>
                         <td style="width: 200px;">Lugar del Invitacion</td>
-                        <td style="width: 110px;">Fecha y Hora</td>
+                        <td style="width: 120px;">Fecha y Hora</td>
                         <td style="width: 200px;">Nombre de Evento</td>
                         <td>Detalle de Evento</td>
                     </tr>
@@ -88,9 +88,9 @@
             <Columns>
                 <asp:BoundField HeaderText="Estatus"            ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="120px" DataField="EstatusInvitacionNombre"             SortExpression="EstatusInvitacionNombre"></asp:BoundField>
                 <asp:BoundField HeaderText="Categoría"          ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="CategoriaNombre"                     SortExpression="CategoriaNombre"></asp:BoundField>
-                <asp:BoundField HeaderText="Prioridad"          ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="PrioridadNombre"                     SortExpression="PrioridadNombre"></asp:BoundField>
+                <asp:BoundField HeaderText="Prioridad"          ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="90px"  DataField="PrioridadNombre"                     SortExpression="PrioridadNombre"></asp:BoundField>
                 <asp:BoundField HeaderText="Lugar del Evento"   ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="200px" DataField="LugarEvento"                         SortExpression="LugarEvento"></asp:BoundField>
-                <asp:BoundField HeaderText="Fecha y Hora"       ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="110px"  DataField="EventoFechaHora"                     SortExpression="EventoFechaHora"></asp:BoundField>
+                <asp:BoundField HeaderText="Fecha y Hora"       ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="120px" DataField="EventoFechaHora"                     SortExpression="EventoFechaHora"></asp:BoundField>
                 <asp:BoundField HeaderText="Nombre de Evento"   ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="200px" DataField="EventoNombre"                        SortExpression="EventoNombre"></asp:BoundField>
                 <asp:BoundField HeaderText="Detalle de Evento"  ItemStyle-HorizontalAlign="Left"                            DataField="EventoDetalle" HtmlEncode="false"    SortExpression="EventoDetalle"></asp:BoundField>
                 <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">

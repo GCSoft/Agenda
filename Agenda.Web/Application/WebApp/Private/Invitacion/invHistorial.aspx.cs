@@ -1,5 +1,5 @@
 ﻿/*---------------------------------------------------------------------------------------------------------------------------------
-' Nombre:	invHistorial
+' Nombre:	invInvitacionSeguimiento
 ' Autor:	Ruben.Cobos
 ' Fecha:	22-Diciembre-2014
 '----------------------------------------------------------------------------------------------------------------------------------*/
@@ -21,7 +21,7 @@ using System.Data;
 
 namespace Agenda.Web.Application.WebApp.Private.Invitacion
 {
-    public partial class invHistorial : System.Web.UI.Page
+    public partial class invInvitacionSeguimiento : System.Web.UI.Page
     {
        
         // Utilerías
@@ -68,7 +68,13 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
                 if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
 
-                
+                // Carátula compacta
+                this.lblEventoNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
+                this.lblEventoFechaHora.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHora"].ToString();
+
+                // Documentos
+                this.gvInvitacionSeguimiento.DataSource = oENTResponse.DataSetResponse.Tables[7];
+                this.gvInvitacionSeguimiento.DataBind();
 
             }catch (Exception ex){
                 throw (ex);
@@ -126,6 +132,35 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
             }catch (Exception ex){
 				//ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlFuncionario.ClientID + "'); }", true);
             }
+		}
+
+        protected void gvInvitacionSeguimiento_RowDataBound(object sender, GridViewRowEventArgs e){
+			try
+			{
+
+                // Validación de que sea fila
+                if (e.Row.RowType != DataControlRowType.DataRow) { return; }
+
+                // Atributos Over
+                e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over'; ");
+
+                // Atributos Out
+                e.Row.Attributes.Add("onmouseout", "this.className='" + ((e.Row.RowIndex % 2) != 0 ? "Grid_Row_Alternating" : "Grid_Row") + "'; ");
+
+			}catch (Exception ex){
+				throw (ex);
+			}
+		}
+
+		protected void gvInvitacionSeguimiento_Sorting(object sender, GridViewSortEventArgs e){
+			try
+			{
+
+				gcCommon.SortGridView(ref this.gvInvitacionSeguimiento, ref this.hddSort, e.SortExpression, true);
+
+			}catch (Exception ex){
+				ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+			}
 		}
 
     }

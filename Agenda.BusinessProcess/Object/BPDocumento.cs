@@ -63,7 +63,17 @@ namespace Agenda.BusinessProcess.Object
 				if (!Directory.Exists(Path)) { Directory.CreateDirectory(Path); }
 
 				// Validar la existencia del archivo
-				if (File.Exists(Path + FileName)) { throw( new Exception("Ya existe éste archivo asociado al expediente")); }
+				if (File.Exists(Path + FileName)) { 
+
+                    switch(RepositoryType){
+					    case RepositoryTypes.Invitacion:
+                            throw (new Exception("Ya existe éste archivo asociado a la invitación"));
+
+                        case RepositoryTypes.Evento:
+                            throw (new Exception("Ya existe éste archivo asociado al evento"));
+				    }
+
+                }
 
 				// Cargar el archivo
 				PostedFile.SaveAs(Path + FileName);
@@ -103,7 +113,7 @@ namespace Agenda.BusinessProcess.Object
 				if (oENTResponse.GeneratesException) { return oENTResponse; }
 
 				// Validación de mensajes de la BD
-				oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["sResponse"].ToString();
+				oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
 				if (oENTResponse.MessageDB != "") { return oENTResponse; }
 
 			}catch (Exception ex){
@@ -135,7 +145,7 @@ namespace Agenda.BusinessProcess.Object
 				if (oENTResponse.GeneratesException) { return oENTResponse; }
 
 				// Validación de mensajes de la BD
-				oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["sResponse"].ToString();
+				oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
 				if (oENTResponse.MessageDB != "") { return oENTResponse; }
 
 			}catch (Exception ex){
@@ -167,7 +177,7 @@ namespace Agenda.BusinessProcess.Object
 				if (oENTResponse.GeneratesException) { return oENTResponse; }
 
 				// Validación de mensajes de la BD
-				oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["sResponse"].ToString();
+				oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
 				if (oENTResponse.MessageDB != "") { return oENTResponse; }
 
 			}catch (Exception ex){

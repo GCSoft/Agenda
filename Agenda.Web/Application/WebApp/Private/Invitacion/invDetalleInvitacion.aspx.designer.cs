@@ -355,6 +355,24 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         protected global::System.Web.UI.WebControls.Label lblObservacionesGeneralesDetalle;
         
         /// <summary>
+        /// lblMotivoRechazo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMotivoRechazo;
+        
+        /// <summary>
+        /// lblMotivoRechazoDetalle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMotivoRechazoDetalle;
+        
+        /// <summary>
         /// pnlFuncionariosSection control.
         /// </summary>
         /// <remarks>

@@ -45,9 +45,9 @@
                         <td></td>
 			        </tr>
                     <tr>
-						<td class="Etiqueta">Adjuntar invitación</td>
+						<td class="Etiqueta">Adjuntar documento</td>
 				        <td class="VinetaObligatorio">*</td>
-				        <td class="Campo"><asp:FileUpload ID="fupInvitacion" runat="server" Width="600px" /></td>
+				        <td class="Campo"><asp:FileUpload ID="fupDocumento" runat="server" Width="600px" /></td>
                         <td></td>
 					</tr>
 					<tr><td class="Etiqueta" colspan="4" style="text-align:left;">Descripción</td></tr>
@@ -55,7 +55,6 @@
 						<td colspan="4"><CKEditor:CKEditorControl ID="ckeDescripcion" runat="server" BasePath="~/Include/Components/CKEditor/Core/" Height="90px"></CKEditor:CKEditorControl></td>
 					</tr>
                 </table>
-
             </asp:Panel>
 	
 			<asp:Panel ID="pnlBreak" runat="server" CssClass="BreakPanel">
@@ -67,10 +66,50 @@
                 <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="Button_General" width="125px" onclick="btnRegresar_Click" />
             </asp:Panel>
 
+            <asp:Panel ID="pnlGrid" runat="server" CssClass="GridPanel">
+                <asp:GridView ID="gvDocumento" runat="server" AllowPaging="false" AllowSorting="true"  AutoGenerateColumns="False" Width="100%"
+					DataKeyNames="DocumentoId,ModuloId,UsuarioId,NombreDocumento,Icono"
+					OnRowCommand="gvDocumento_RowCommand" 
+					OnRowDataBound="gvDocumento_RowDataBound" 
+					OnSorting="gvDocumento_Sorting">
+					<AlternatingRowStyle CssClass="Grid_Row_Alternating" />
+					<HeaderStyle CssClass="Grid_Header" />
+					<RowStyle CssClass="Grid_Row" />
+					<EmptyDataTemplate>
+						<table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
+							<tr class="Grid_Header">
+								<td style="width:200px;">Nombre</td>
+								<td>Descripción</td>
+							</tr>
+							<tr class="Grid_Row">
+								<td colspan="2">No se encontraron Documentos asociados a la invitación</td>
+							</tr>
+						</table>
+					</EmptyDataTemplate>
+					<Columns>
+						<asp:BoundField HeaderText="Nombre"			ItemStyle-HorizontalAlign="Left"	ItemStyle-Width="200px"	DataField="NombreDocumento"						SortExpression="NombreDocumento"></asp:BoundField>
+						<asp:BoundField HeaderText="Descripción"	ItemStyle-HorizontalAlign="Left"							DataField="Descripcion"		HtmlEncode="false"	SortExpression="Descripcion"></asp:BoundField>
+						<asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
+							<ItemTemplate>
+								<asp:ImageButton ID="imgView" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Visualizar" runat="server" />
+							</ItemTemplate>
+						</asp:TemplateField>
+						<asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
+							<ItemTemplate>
+								<asp:ImageButton ID="imgDelete" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Borrar" ImageUrl="~/Include/Image/Buttons/Delete.png" runat="server" />
+							</ItemTemplate>
+						</asp:TemplateField>
+					</Columns>
+				</asp:GridView>
+            </asp:Panel>
+
+            <br /><br />
+
             <asp:HiddenField ID="hddInvitacionId" runat="server" Value="0" />
-            <asp:HiddenField ID="SenderId" runat="server" Value="0"  />
+            <asp:HiddenField ID="SenderId" runat="server" Value="0" />
+            <asp:HiddenField ID="hddSort" runat="server" Value="NombreDocumento" />
 	
-		</ContentTemplate                                       >
+		</ContentTemplate>
 		<Triggers>
 			<asp:PostBackTrigger ControlID="btnAgregar" />
 		</Triggers>
