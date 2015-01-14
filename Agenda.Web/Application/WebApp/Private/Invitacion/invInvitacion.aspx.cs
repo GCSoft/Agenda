@@ -223,7 +223,8 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 #region TAB - Datos del evento
                     oENTInvitacion.EventoNombre = this.txtNombreEvento.Text.Trim();
                     oENTInvitacion.FechaEvento = this.wucCalendar.DisplayUTCDate;
-                    oENTInvitacion.HoraEvento = this.wucTimer.DisplayUTCTime;
+                    oENTInvitacion.HoraEventoInicio = this.wucTimerDesde.DisplayUTCTime;
+                    oENTInvitacion.HoraEventoFin = this.wucTimerHasta.DisplayUTCTime;
                     oENTInvitacion.LugarEventoId = Int32.Parse( this.hddLugarEventoId.Value );
                     oENTInvitacion.EventoDetalle = this.ckeDetalleEvento.Text.Trim();
                 #endregion
@@ -273,7 +274,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 Key = gcEncryption.EncryptString(Key, true);
 
                 // Mensaje a desplegar y script
-                JSScript = "function pageLoad(){ if( confirm('Se registro la invitación exitosamente. ¿Desea ir al detalle para continuar con la captura?') ) { window.location.href('eveDetalleInvitacion.aspx?key=" + Key + "'); } }";
+                JSScript = "function pageLoad(){ if( confirm('Se registro la invitación exitosamente. ¿Desea ir al detalle para continuar con la captura?') ) { window.location.href('invDetalleInvitacion.aspx?key=" + Key + "'); } }";
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), JSScript, true);
 
             }catch (Exception ex){
@@ -313,7 +314,8 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 #region TAB - Datos del evento
                     oENTInvitacion.EventoNombre = this.txtNombreEvento.Text.Trim();
                     oENTInvitacion.FechaEvento = this.wucCalendar.DisplayUTCDate;
-                    oENTInvitacion.HoraEvento = this.wucTimer.DisplayUTCTime;
+                    oENTInvitacion.HoraEventoInicio = this.wucTimerDesde.DisplayUTCTime;
+                    oENTInvitacion.HoraEventoFin = this.wucTimerHasta.DisplayUTCTime;
                     oENTInvitacion.LugarEventoId = Int32.Parse( this.hddLugarEventoId.Value );
                     oENTInvitacion.EventoDetalle = this.ckeDetalleEvento.Text.Trim();
                 #endregion
@@ -346,6 +348,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 #endregion
 
                 // Estatus
+                oENTInvitacion.MotivoRechazo = this.ckePopUpMotivoRechazo.Text.Trim();
                 oENTInvitacion.EstatusInvitacionId = 2; // Declinada
                 
                 // Transacción
@@ -386,7 +389,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 // TAB - Datos del evento
                 this.txtNombreEvento.Text = "";
                 this.wucCalendar.SetDate(DateTime.Now);
-                this.wucTimer.DisplayTime = "10:00 a.m.";
+                this.wucTimerDesde.DisplayTime = "10:00 a.m.";
 
                 this.txtLugarEvento.Text = "";
                 this.hddLugarEventoId.Value = "";
@@ -606,9 +609,14 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                     throw new Exception("El campo [Fecha del evento] es requerido");
                 }
 
-                if ( !this.wucTimer.IsValidTime() ) {
+                if ( !this.wucTimerDesde.IsValidTime() ) {
                     this.tabInvitacion.ActiveTabIndex = 1;
-                    throw new Exception("El campo [Hora del evento] es requerido");
+                    throw new Exception("El campo [Hora de inicio del evento] es requerido");
+                }
+
+                if ( !this.wucTimerHasta.IsValidTime() ) {
+                    this.tabInvitacion.ActiveTabIndex = 1;
+                    throw new Exception("El campo [Hora de finalización del evento] es requerido");
                 }
 
                 if( this.hddLugarEventoId.Value.Trim() == "" || this.hddLugarEventoId.Value.Trim() == "0" ){
@@ -662,6 +670,8 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 // Estado inicial
                 this.gvFuncionario.DataSource = null;
                 this.gvFuncionario.DataBind();
+                this.wucCalendar.Width = 176;
+                this.pnlPopUp.Visible = false;
 
                 // Foco
                 this.tabInvitacion.ActiveTabIndex = 0;
@@ -690,8 +700,17 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 // Validar el formulario
                 ValidarFormulario(TransactionTypes.Declinar);
 
-                // Transacción
-                InsertInvitacion_Declinar();
+                // Acciones comunes
+                this.pnlPopUp.Visible = true;
+                this.lblPopUpMessage.Text = "";
+                this.ckePopUpMotivoRechazo.Text = "";
+
+                // Personalizar PopUp
+                this.lblPopUpTitle.Text = "Motivo de Rechazo";
+                this.btnPopUpCommand.Text = "Declinar";
+
+                // Foco
+                this.ckePopUpMotivoRechazo.Focus();
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); }", true);
@@ -769,6 +788,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 rowFuncionario["Nombre"] = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Nombre"].ToString();
                 rowFuncionario["NombreCompletoTitulo"] = oENTResponse.DataSetResponse.Tables[1].Rows[0]["NombreCompletoTitulo"].ToString();
                 rowFuncionario["Puesto"] = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Puesto"].ToString();
+                rowFuncionario["Correo"] = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Email"].ToString();
                 tblFuncionario.Rows.Add(rowFuncionario);
 
                 // Actualizar Grid
@@ -887,6 +907,41 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtFuncionario.ClientID + "'); }", true);
             }
         }
+
+
+        // Eventos del PopUp
+
+         protected void btnPopUpCommand_Click(object sender, EventArgs e){
+            try
+            {
+
+                // Validaciones
+                if ( this.ckePopUpMotivoRechazo.Text == "" ) { throw( new Exception("Es necesario ingresar un motivo de rechazo") ); }
+
+                // Transacción
+                InsertInvitacion_Declinar();
+
+                // Ocultar el panel
+                this.pnlPopUp.Visible = false;
+
+            }catch (Exception ex){
+                this.lblPopUpMessage.Text = ex.Message;
+                this.ckePopUpMotivoRechazo.Focus();
+            }
+        }
+
+        protected void imgCloseWindow_Click(object sender, ImageClickEventArgs e){
+            try
+            {
+
+                // Ocultar el panel
+                this.pnlPopUp.Visible = false;
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+            }
+        }
+
 
     }
 }

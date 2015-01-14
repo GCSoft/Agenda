@@ -238,13 +238,22 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         protected global::Agenda.Web.Include.WebUserControls.wucCalendar wucCalendar;
         
         /// <summary>
-        /// wucTimer control.
+        /// wucTimerDesde control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Agenda.Web.Include.WebUserControls.wucTimer wucTimer;
+        protected global::Agenda.Web.Include.WebUserControls.wucTimer wucTimerDesde;
+        
+        /// <summary>
+        /// wucTimerHasta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Agenda.Web.Include.WebUserControls.wucTimer wucTimerHasta;
         
         /// <summary>
         /// txtLugarEvento control.
@@ -488,6 +497,87 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelar;
+        
+        /// <summary>
+        /// pnlPopUp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp;
+        
+        /// <summary>
+        /// pnlPopUpContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUpContent;
+        
+        /// <summary>
+        /// pnlPopUpHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUpHeader;
+        
+        /// <summary>
+        /// lblPopUpTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPopUpTitle;
+        
+        /// <summary>
+        /// imgCloseWindow control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgCloseWindow;
+        
+        /// <summary>
+        /// pnlPopUpBody control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUpBody;
+        
+        /// <summary>
+        /// ckePopUpMotivoRechazo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::CKEditor.NET.CKEditorControl ckePopUpMotivoRechazo;
+        
+        /// <summary>
+        /// btnPopUpCommand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPopUpCommand;
+        
+        /// <summary>
+        /// lblPopUpMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPopUpMessage;
         
         /// <summary>
         /// hddSort control.

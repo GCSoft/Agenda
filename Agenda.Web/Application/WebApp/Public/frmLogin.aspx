@@ -49,5 +49,6 @@
     </asp:Panel>
 
     <asp:HiddenField ID="hddEncryption" runat="server" Value="1"></asp:HiddenField>
+    <asp:HiddenField ID="hddToken" runat="server" Value=""></asp:HiddenField>
 
 </asp:Content>

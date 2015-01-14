@@ -33,9 +33,45 @@ namespace Agenda.Web.Application.WebApp.Public
         GCJavascript gcJavascript = new GCJavascript();
 
 
+
+        // Funciones del programador
+
+        String GetRedirectPage(){
+            String Response = "../Private/AppIndex.aspx";
+            String Key = "";
+
+            try
+            {
+
+                if (this.hddToken.Value != ""){
+
+                    // Desencriptar
+                    Key = this.hddToken.Value;
+                    Key = gcEncryption.DecryptString(Key, false);
+
+                    // Validación
+                    Key = Int32.Parse(Key).ToString();
+
+                    // Empaquetar
+                    Key = Key + "|2";
+                    Key = gcEncryption.EncryptString(Key, true);
+
+                    // Redireccionamiento
+                    Response = "../Private/Invitacion/invDetalleInvitacion.aspx?key=" + Key;
+                }
+
+
+            }catch (Exception){
+                //Do Nothing
+            }
+
+            return Response;
+        }
+
+
         // Rutinas del programador
 
-        private void CookiesGetConfiguration(){
+        void CookiesGetConfiguration(){
             try
             {
 
@@ -55,7 +91,7 @@ namespace Agenda.Web.Application.WebApp.Public
             }
         }
 
-        private void CookiesSetConfiguration(){
+        void CookiesSetConfiguration(){
             try
             {
 
@@ -76,7 +112,7 @@ namespace Agenda.Web.Application.WebApp.Public
             }
         }
 
-        private void LoginUser(){
+        void LoginUser(){
             BPUsuario oBPUsuario = new BPUsuario();
 
             ENTUsuario oENTUsuario = new ENTUsuario();
@@ -98,14 +134,16 @@ namespace Agenda.Web.Application.WebApp.Public
 
                 // Usuario válido
                 CookiesSetConfiguration();
-                this.Response.Redirect("../Private/AppIndex.aspx", false);
+
+                // Redireccionar
+                this.Response.Redirect(GetRedirectPage(), false);
 
             }catch (Exception ex){
                 throw (ex);
             }
         }
 
-        private void RecoveryPassword(){
+        void RecoveryPassword(){
             BPUsuario oBPUsuario = new BPUsuario();
 
             ENTUsuario oENTUsuario = new ENTUsuario();
@@ -144,6 +182,9 @@ namespace Agenda.Web.Application.WebApp.Public
 
                 // Variable de sesión incial. Previene Sys.Webforms.PageRequestManagerServerErrorException
                 this.Session.Add("oENTSession", new ENTSession());
+
+                // Obtener Token de invitación
+                if (this.Request.QueryString["key"] != null) { this.hddToken.Value = this.Request.QueryString["key"].ToString(); }
 
                 // Configuraciones personalizadas guardadas en las Cookies
                 CookiesGetConfiguration();

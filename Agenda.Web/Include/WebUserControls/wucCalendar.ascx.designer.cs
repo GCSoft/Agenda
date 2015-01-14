@@ -47,5 +47,14 @@ namespace Agenda.Web.Include.WebUserControls {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.CalendarExtender ceManager;
+        
+        /// <summary>
+        /// hddCanvasWidth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hddCanvasWidth;
     }
 }

@@ -125,7 +125,8 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 // Precarga del formulario
                 this.txtNombreEvento.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
                 this.wucCalendar.SetDate( DateTime.Parse( oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFecha"].ToString() ) );
-                this.wucTimer.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoHoraEstandar"].ToString();
+                this.wucTimerDesde.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoHoraInicioEstandar"].ToString();
+                this.wucTimerHasta.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoHoraFinEstandar"].ToString();
 
                 this.txtLugarEvento.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["LugarEventoNombre"].ToString();
                 this.hddLugarEventoId.Value = oENTResponse.DataSetResponse.Tables[1].Rows[0]["LugarEventoId"].ToString();
@@ -191,7 +192,8 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 // Validaciones
                 if (this.txtNombreEvento.Text.Trim() == "") { throw new Exception("El campo [Nombre del evento] es requerido"); }
                 if (!this.wucCalendar.IsValidDate()) { throw new Exception("El campo [Fecha del evento] es requerido"); }
-                if (!this.wucTimer.IsValidTime()) { throw new Exception("El campo [Hora del evento] es requerido"); }
+                if (!this.wucTimerDesde.IsValidTime()) { throw new Exception("El campo [Hora de inicio del evento] es requerido"); }
+                if (!this.wucTimerHasta.IsValidTime()) { throw new Exception("El campo [Hora de finalización del evento] es requerido"); }
                 if (this.hddLugarEventoId.Value.Trim() == "" || this.hddLugarEventoId.Value.Trim() == "0") { throw (new Exception("Es necesario seleccionar un Lugar del Evento")); }
 
                 // Datos de sesión
@@ -202,7 +204,8 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 oENTInvitacion.InvitacionId = Int32.Parse(this.hddInvitacionId.Value);
                 oENTInvitacion.EventoNombre = this.txtNombreEvento.Text.Trim();
                 oENTInvitacion.FechaEvento = this.wucCalendar.DisplayUTCDate;
-                oENTInvitacion.HoraEvento = this.wucTimer.DisplayUTCTime;
+                oENTInvitacion.HoraEventoInicio = this.wucTimerDesde.DisplayUTCTime;
+                oENTInvitacion.HoraEventoFin = this.wucTimerHasta.DisplayUTCTime;
                 oENTInvitacion.LugarEventoId = Int32.Parse(this.hddLugarEventoId.Value);
                 oENTInvitacion.EventoDetalle = this.ckeObservaciones.Text.Trim();
 
@@ -242,6 +245,9 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
 				// Obtener Sender
                 this.SenderId.Value = Key.ToString().Split(new Char[] { '|' })[1];
+
+                // Estado inicial
+                this.wucCalendar.Width = 176;
 
 				// Carátula
                 SelectInvitacion();

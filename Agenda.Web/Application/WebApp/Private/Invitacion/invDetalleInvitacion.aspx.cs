@@ -356,7 +356,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                         this.DatosEventoPanel.Visible = false;
                         this.ContactoPanel.Visible = false;
                         this.FuncionarioPanel.Visible = false;
-                        this.AdjuntarPanel.Visible = true;
+                        this.AdjuntarPanel.Visible = false;
                         this.Historial.Visible = false;
                         this.RechazarPanel.Visible = false;
                         this.AprobarPanel.Visible = false;
@@ -846,6 +846,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
             }
 		}
+
 
     }
 }

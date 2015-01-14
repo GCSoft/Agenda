@@ -18,3 +18,4 @@
     InvalidValueMessage="Formato de fecha inválido" 
 />
 <asp:CalendarExtender ID="ceManager" runat="server" Format="dd/MM/yyyy" TargetControlID="txtCanvas" CssClass="Calendar_General" />
+<asp:HiddenField ID="hddCanvasWidth" runat="server" Value="211" />

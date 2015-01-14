@@ -42,7 +42,8 @@ namespace Agenda.Entity.Object
         private String  _FechaEvento;
         private String  _FechaFin;
         private String  _FechaInicio;
-        private String  _HoraEvento;
+        private String  _HoraEventoInicio;
+        private String  _HoraEventoFin;
         private Int16   _Activo;
         private Int16   _Nivel;
         private ENTInvitacionContacto       _Contacto;
@@ -79,7 +80,8 @@ namespace Agenda.Entity.Object
             _FechaEvento = "";
             _FechaFin = "";
             _FechaInicio = "";
-            _HoraEvento = "";
+            _HoraEventoInicio = "";
+            _HoraEventoFin = "";
             _Activo = 2;
             _Nivel = 0;
             _Contacto = new ENTInvitacionContacto();
@@ -402,15 +404,27 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
-        ///   <name>ENTInvitacion.HoraEvento</name>
+        ///   <name>ENTInvitacion.HoraEventoInicio</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
-        ///<summary>Obtiene/Asigna la hora en la que se realizará el evento</summary>
-        public String HoraEvento
+        ///<summary>Obtiene/Asigna la hora inicial en la que se realizará el evento</summary>
+        public String HoraEventoInicio
         {
-            get { return _HoraEvento; }
-            set { _HoraEvento = value; }
+            get { return _HoraEventoInicio; }
+            set { _HoraEventoInicio = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTInvitacion.HoraEventoFin</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna la hora final en la que se realizará el evento</summary>
+        public String HoraEventoFin
+        {
+            get { return _HoraEventoFin; }
+            set { _HoraEventoFin = value; }
         }
 
         ///<remarks>

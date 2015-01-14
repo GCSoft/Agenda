@@ -112,13 +112,22 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         protected global::Agenda.Web.Include.WebUserControls.wucCalendar wucCalendar;
         
         /// <summary>
-        /// wucTimer control.
+        /// wucTimerDesde control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Agenda.Web.Include.WebUserControls.wucTimer wucTimer;
+        protected global::Agenda.Web.Include.WebUserControls.wucTimer wucTimerDesde;
+        
+        /// <summary>
+        /// wucTimerHasta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Agenda.Web.Include.WebUserControls.wucTimer wucTimerHasta;
         
         /// <summary>
         /// txtLugarEvento control.

@@ -72,26 +72,22 @@
 			    <tr>
 				    <td class="Especial">Nombre de evento</td>
 				    <td class="Espacio"></td>
-				    <td class="Campo"><asp:Label ID="lblEventoNombre" CssClass="Label_Detalle_Invitacion" runat="server" Text="0"></asp:Label></td>
-				    <td colspan="4"></td>
+				    <td class="Campo" colspan="5"><asp:Label ID="lblEventoNombre" CssClass="Label_Detalle_Invitacion" runat="server" Text="0"></asp:Label></td>
 			    </tr>
 			    <tr>
 				    <td class="Especial">Fecha de evento</td>
 				    <td class="Espacio"></td>
-				    <td class="Campo"><asp:Label ID="lblEventoFechaHora" CssClass="Label_Detalle_Invitacion" runat="server" Text="0"></asp:Label></td>
-				    <td colspan="4"></td>
+				    <td class="Campo" colspan="5"><asp:Label ID="lblEventoFechaHora" CssClass="Label_Detalle_Invitacion" runat="server" Text="0"></asp:Label></td>
 			    </tr>
 			    <tr>
 				    <td class="Especial">Estatus</td>
 				    <td class="Espacio"></td>
-				    <td class="Campo"><asp:Label ID="lblEstatusInvitacionNombre" CssClass="Label_Detalle_Invitacion" runat="server" Text="0"></asp:Label></td>
-				    <td colspan="4"></td>
+				    <td class="Campo" colspan="5"><asp:Label ID="lblEstatusInvitacionNombre" CssClass="Label_Detalle_Invitacion" runat="server" Text="0"></asp:Label></td>
 			    </tr>
                 <tr>
 				    <td class="Especial">Tipo de Cita</td>
 				    <td class="Espacio"></td>
-				    <td class="Campo"><asp:Label ID="lblCategoriaNombre" CssClass="Label_Detalle_Invitacion" runat="server" Text="0"></asp:Label></td>
-				    <td colspan="4"></td>
+				    <td class="Campo" colspan="5"><asp:Label ID="lblCategoriaNombre" CssClass="Label_Detalle_Invitacion" runat="server" Text="0"></asp:Label></td>
 			    </tr>
                 <tr>
 				    <td class="Nombre">Conducto</td>

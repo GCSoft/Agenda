@@ -35,8 +35,7 @@
             <tr>
 				<td class="Etiqueta">Fecha de evento</td>
 				<td class="Espacio"></td>
-				<td class="Campo"><asp:Label ID="lblEventoFechaHora" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
-                <td></td>
+				<td class="Campo" colspan="2"><asp:Label ID="lblEventoFechaHora" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
 			</tr>
             <tr>
 				<td class="Etiqueta">Nombre del evento</td>
@@ -54,7 +53,8 @@
                                 <wuc:wucCalendar ID="wucCalendar" runat="server" />
                             </td>
                             <td style="text-align:left; width:300px;">
-                                <wuc:wucTimer ID="wucTimer" runat="server" />
+                                <wuc:wucTimer ID="wucTimerDesde" runat="server" />&nbsp;&nbsp;a&nbsp;&nbsp;
+                                <wuc:wucTimer ID="wucTimerHasta" runat="server" />
                             </td>
                             <td></td>
                         </tr>

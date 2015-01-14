@@ -171,9 +171,9 @@
                                             <wuc:wucCalendar ID="wucCalendar" runat="server" />
                                         </td>
                                         <td style="text-align:left; width:300px;">
-                                            <wuc:wucTimer ID="wucTimer" runat="server" />
+                                            <wuc:wucTimer ID="wucTimerDesde" runat="server" />&nbsp;&nbsp;&nbsp;a&nbsp;&nbsp;&nbsp;
+                                            <wuc:wucTimer ID="wucTimerHasta" runat="server" />
                                         </td>
-                                        <td></td>
                                     </tr>
                                 </table>
 				            </td>
@@ -364,15 +364,17 @@
                                                 <tr class="Grid_Header_PopUp">
                                                     <td style="width:300px;">Puesto</td>
                                                     <td>Funcionario</td>
+                                                    <td style="width:200px;">Correo</td>
                                                 </tr>
                                                 <tr class="Grid_Row">
-                                                    <td colspan="2">No se han asociado funcionarios a la invitación</td>
+                                                    <td colspan="3">No se han asociado funcionarios a la invitación</td>
                                                 </tr>
                                             </table>
                                         </EmptyDataTemplate>
                                         <Columns>
                                             <asp:BoundField HeaderText="Puesto"         ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="300px" DataField="Puesto"                  SortExpression="Puesto"></asp:BoundField>
                                             <asp:BoundField HeaderText="Funcionario"    ItemStyle-HorizontalAlign="Left"                            DataField="NombreCompletoTitulo"    SortExpression="NombreCompletoTitulo"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Correo"         ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="200px" DataField="Correo"                  SortExpression="Correo"></asp:BoundField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
                                                 <ItemTemplate>
                                                     <asp:ImageButton ID="imgDelete" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Eliminar" ImageUrl="~/Include/Image/Buttons/Delete.png" runat="server" />
@@ -395,9 +397,43 @@
 
     <asp:Panel ID="pnlBotones" runat="server" CssClass="ButtonPanel">
         <asp:Button ID="btnRegistrar" runat="server" Text="Registrar" CssClass="Button_General" Width="125px" OnClick="btnRegistrar_Click" />&nbsp;
-        <asp:Button ID="btnDeclinar" runat="server" Text="Declinar" CssClass="Button_General" Width="125px" OnClick="btnDeclinar_Click" OnClientClick="return confirm('Esta opción registra la invitación como declinada, ¿Seguro que desea continuar?');" />&nbsp;
+        <asp:Button ID="btnDeclinar" runat="server" Text="Declinar" CssClass="Button_General" Width="125px" OnClick="btnDeclinar_Click" />&nbsp;
         <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="Button_General" Width="125px" OnClick="btnCancelar_Click" OnClientClick="return confirm('Esta opción borrará todos los campos capturados, ¿Seguro que desea continuar?');" />
     </asp:Panel> 
+
+    <asp:Panel ID="pnlPopUp" runat="server" CssClass="PopUpBlock">
+        <asp:Panel ID="pnlPopUpContent" runat="server" CssClass="PopUpContent" style="margin-top:-195px; margin-left:-400px;" Height="390px" Width="800px">
+            <asp:Panel ID="pnlPopUpHeader" runat="server" CssClass="PopUpHeader">
+                <table class="PopUpHeaderTable">
+                    <tr>
+                        <td class="Espacio"></td>
+                        <td class="Etiqueta"><asp:Label ID="lblPopUpTitle" runat="server" CssClass="PopUpHeaderTitle"></asp:Label></td>
+                        <td class="Cierre"><asp:ImageButton ID="imgCloseWindow" runat="server" ImageUrl="~/Include/Image/Buttons/CloseWindow.png" ToolTip="Cerrar Ventana" OnClick="imgCloseWindow_Click"></asp:ImageButton></td>
+                        <td class="Espacio"></td>
+                    </tr>
+                </table>
+            </asp:Panel>
+            <asp:Panel ID="pnlPopUpBody" runat="server" CssClass="PopUpBody">
+                <table class="PopUpBodyTable">
+                    <tr>
+                        <td>
+                            <CKEditor:CKEditorControl ID="ckePopUpMotivoRechazo" BasePath="~/Include/Components/CKEditor/Core/" runat="server"></CKEditor:CKEditorControl>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Botones">
+                            <asp:Button ID="btnPopUpCommand" runat="server" Text="" CssClass="Button_General" Width="125px" OnClick="btnPopUpCommand_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="lblPopUpMessage" runat="server" CssClass="PopUpTextMessage"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+        </asp:Panel>
+    </asp:Panel>
 
     <br /><br />
     

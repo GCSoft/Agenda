@@ -70,6 +70,21 @@ namespace Agenda.Web.Include.WebUserControls
             get { return GetDate(DateTypes.EndDate); }
         }
 
+        ///<remarks>
+        ///   <name>wucCalendar.Width</name>
+        ///   <create>13-Enero-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Determina el ancho del contenedor del calendario</summary>
+        public Int32 Width
+        {
+            set
+            {
+                this.hddCanvasWidth.Value = value.ToString();
+                this.txtCanvas.Width = value;
+            }
+        }
+
 
 
         // Metodos públicos
@@ -153,6 +168,7 @@ namespace Agenda.Web.Include.WebUserControls
             
             // Mantener estado
             if (this.txtCanvas.Text != "") { this.ceManager.SelectedDate = DateTime.Parse(this.txtCanvas.Text); }
+            this.txtCanvas.Width = Int32.Parse(this.hddCanvasWidth.Value);
 
             // Validaciones
             if (this.IsPostBack) { return; }
