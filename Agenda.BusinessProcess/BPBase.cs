@@ -27,6 +27,7 @@ namespace Agenda.BusinessProcess
         private String  _ApplicationURL;
         private String  _ApplicationURLInvitation;
         private String  _ConnectionApplication;
+        private String  _MailLogo;
 
         // Constructor
         public BPBase()
@@ -35,6 +36,7 @@ namespace Agenda.BusinessProcess
             _ApplicationURL =  ConfigurationManager.AppSettings["Application.URL"].ToString();
             _ApplicationURLInvitation = ConfigurationManager.AppSettings["Application.URLInvitation"].ToString();
             _ConnectionApplication = ConfigurationManager.ConnectionStrings["Application.DBCnn"].ToString();
+            _MailLogo = ConfigurationManager.AppSettings["Application.Mail.Logo"].ToString();
         }
 
 
@@ -72,6 +74,17 @@ namespace Agenda.BusinessProcess
         public String ConnectionApplication
         {
             get { return _ConnectionApplication; }
+        }
+
+        ///<remarks>
+        ///   <name>BPBase.MailLogo</name>
+        ///   <create>14-Enero-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene la dirección de la imagen que se utliza en los correos</summary>
+        public String MailLogo
+        {
+            get { return _MailLogo; }
         }
 
         ///<remarks>

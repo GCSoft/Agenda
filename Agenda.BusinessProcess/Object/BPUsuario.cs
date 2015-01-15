@@ -69,76 +69,56 @@ namespace Agenda.BusinessProcess.Object
                 if (oENTResponse.MessageDB != "") { return oENTResponse; }
 
                 // Configuración del correo
-                sHTMLMessage = "" +
-                "<html>" +
+                sHTMLMessage = "<html>" +
                    "<head>" +
                       "<title>Agenda - Bienvenido al sistema</title>" +
                    "</head>" +
                    "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
-                      "<div style='clear:both; height:90%; text-align:center; width:100%;'>" +
-                         "<div style='height:80%; clear: both; margin:0px auto; position:relative; top:10%; width:90%;'>" +
-                            "<table border='0px;' cellpadding='0' cellspacing='0' style='height:100%; width:100%;'>" +
-                               "<tr>" +
-                                  "<td colspan='2' valign='middle' style='color:#549CC6; font-family:Arial; font-size:12px; font-weight:bold; text-align:left;'>Agenda - Bienvenido al sistema</td>" +
-                               "</tr>" +
-                               "<tr><td colspan='3'><div style='border-bottom:1px solid #549CC6;'></div></td></tr>" +
-                               "<tr style='height:10px'><td colspan='3'></td></tr>" +
-                               "<tr>" +
-                                  "<td colspan='2' valign='top' style='font-family:Arial; font-size:12px;'>" +
-                                     "El equipo de sistemas le da la bienvenida al sistema de Agenda. Los datos de acceso a la aplicación son los siguientes<br><br>" +
-                                     "<table border='0px' cellpadding='0' cellspacing ='0' class='Text' style='height:100%; width:100%'>" +
-                                        "<tr style='height:10px'><td></td></tr>" +
-                                        "<tr>" +
-                                           "<td style='text-align:left;'>" +
-                                                 "<b>Usuario:</b>&nbsp;" + oENTUsuario.Email +
-                                           "</td>" +
-                                        "</tr>" +
-                                        "<tr>" +
-                                           "<td style='text-align:left;'>" +
-                                                 "<b>Password:</b>&nbsp;" + Password +
-                                           "</td>" +
-                                        "</tr>" +
-                                        "<tr>" +
-                                           "<td style='font-family:Arial; font-size:12px; text-align:left;'>" +
-                                                 "<br>Puede acceder al sistema haciendo click <a href='" + this.ApplicationURL + "'>aqui</a>" +
-                                           "</td>" +
-                                        "</tr>" +
-                                        "<tr>" +
-                                           "<td style='text-align:left;'>" +
-                                              "<br><br>NOTA: Es recomendable que cambie su contraseña desde el menú Administración/Cambio de Contraseña." +
-                                           "</td>" +
-                                        "</tr>" +
-                                        "<tr>" +
-                                           "<td style='font-family:Arial; font-size:12px; text-align:left;'>" +
-                                              "<br><br><br>Gracias por utilizar nuestros servicios informáticos" +
-                                           "</td>" +
-                                        "</tr>" +
-                                        "<tr>" +
-                                           "<td style='font-family:Arial; font-size:9px; text-align:center;'>" +
-                                              "<br><br>Powered By GCSoft" +
-                                           "</td>" +
-                                        "</tr>" +
-                                     "</table>" +
-                                  "</td>" +
-                               "</tr>" +
-                               "<tr style='height:20px'><td colspan='3'></td></tr>" +
-                               "<tr style='height:20px'><td colspan='3'></td></tr>" +
-                               "<tr style='height:1px'><td colspan='3' style='background:#000063 repeat-x;'></td></tr>" +
-                               "<tr style='height:60px; vertical-align:top;'>" +
-                                  "<td colspan='2' style='font-family:Arial; font-size:10px; color: #180A3B; text-align:justify; vertical-align:middle;'>" +
-                                     "Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.<br/><br/>Nota: Los acentos y caracteres especiales fueron omitidos para su correcta lectura en cualquier medio electronico.<br/>" +
-                                  "</td>" +
-                                  "<td></td>" +
-                               "</tr>" +
-                               "<tr><td colspan='3'></td></tr>" +
-                            "</table>" +
+                      "<div style='clear:both; height:80%; text-align:center; width:100%;'>" +
+                         "<div style='clear:both; height:70%; margin:0px auto; position:relative; top:10%; width:90%;'>" +
+							"<table style='color:#339933; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+								"<tr style='height:20%;' valign='middle'>" +
+									"<td style='font-weight:bold;'>" +
+										"Bienvenido al sistema<br /><br />" +
+										"<div style='border-bottom:1px solid #339933;'></div>" +
+									"</td>" +
+								"</tr>" +
+								"<tr style='height:80%;' valign='top'>" +
+									"<td>" +
+										"El equipo de sistemas le da la bienvenida a la plataforma de Agenda. Los datos de acceso a la aplicaci&oacute;n son los siguientes<br /><br /><br />" +
+                                        "<font style='font-size:15px; font-weight:bold;'>Usuario:</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style='color:#000000; font-weight:bold;'>" + oENTUsuario.Email + "</font><br />" +
+										"<font style='font-size:15px; font-weight:bold;'>Contrase&ntilde;a:</font>&nbsp;<font style='color:#000000; font-weight:bold;'>" + Password + "</font><br /><br /><br />" +
+										"Puede acceder al sistema haciendo click <a href='" + this.ApplicationURL + "' style='color:#000000; font-weight:bold;'>aqui</a><br /><br /><br />" +
+										"NOTA: Es recomendable que cambie su contrase&ntilde;a desde el men&uacute; Administraci&oacute;n/Cambio de Contrase&ntilde;a.<br /><br /><br /><br /><br />" +
+                                        "Gracias por utilizar nuestros servicios inform&aacute;ticos<br /><br />" +s
+									"</td>" +
+								"</tr>" +
+							"</table>" +
                          "</div>" +
                       "</div>" +
+					  "<div style='background:#339933; clear:both; height:20%; text-align:left; width:100%;'>" +
+						"<div style='height:5%;'></div>" +
+                        "<div style='height:90%;'>" +
+                            "<table style='color:#FFFFFF; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                "<tr style='height:100%;' valign='middle'>" +
+                                    "<td style='text-align:center; float:left; width:20%;'>" +
+                                        "<img src='" + this.MailLogo + "' height='120px' width='92px' />" +
+                                    "</td>" +
+                                    "<td style='text-align:justify; float:left; vertical-align: middle; width:70%;'>" +
+                                        "<div style='text-align:center; width:90%;'><font style='font-family:Arial; font-size:9px;'>Powered By GCSoft</font><br /><br /></div>" +
+                                        "<font style='font-family:Arial; font-size:10px;'>Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.</font><br />" +
+                                    "</td>" +
+                                    "<td></td>" +
+                                "</tr>" +
+                            "</table>" +
+                        "</div>" +
+						"<div style='height:5%;'></div>" +
+					  "</div>" +
                    "</body>" +
                 "</html>";
 
                 // Enviar correo
-                gcMail.Send("Agenda - Bienvenido al sistema", oENTUsuario.Email, "Agenda - Bienvenido al sistema", sHTMLMessage);
+                gcMail.Send("Agenda - Bienvenido al sistema", oENTUsuario.Email, "Bienvenido al sistema", sHTMLMessage);
 
             }catch (Exception ex){
                 oENTResponse.ExceptionRaised(ex.Message);
@@ -280,70 +260,54 @@ namespace Agenda.BusinessProcess.Object
 
                 // Configuración del correo
                 sHTMLMessage = "" +
-                   "<html>" +
-                   "<head>" +
-                      "<title>Agenda - Recuperación de contraseña</title>" +
+                    "<head>" +
+                      "<title>Agenda - Recuperaci&oacute;n de contrase&ntilde;a</title>" +
                    "</head>" +
                    "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
-                      "<div style='clear:both; height:90%; text-align:center; width:100%;'>" +
-                         "<div style='height:80%; clear: both; margin:0px auto; position:relative; top:10%; width:90%;'>" +
-                            "<table border='0px;' cellpadding='0' cellspacing='0' style='height:100%; width:100%;'>" +
-                               "<tr>" +
-                                  "<td colspan='2' valign='middle' style='color:#549CC6; font-family:Arial; font-size:12px; font-weight:bold; text-align:left;'>Agenda - Recuperación de contraseña</td>" +
-                               "</tr>" +
-                                     "<tr><td colspan='3'><div style='border-bottom:1px solid #549CC6;'></div></td></tr>" +
-                               "<tr style='height:10px'><td colspan='3'></td></tr>" +
-                               "<tr>" +
-                                  "<td colspan='2' valign='top' style='font-family:Arial; font-size:12px;'>" +
-                                     "Usted ha solicitado información de usuario al sistema Agenda. Los datos de acceso a la aplicación son los siguientes<br><br>" +
-                                     "<table border='0px' cellpadding='0' cellspacing ='0' class='Text' style='height:100%; width:100%'>" +
-                                        "<tr style='height:10px'><td></td></tr>" +
-                                        "<tr>" +
-                                           "<td style='text-align:left;'>" +
-                                                 "<b>Usuario:</b>&nbsp;" + oENTUsuario.Email +
-                                           "</td>" +
-                                        "</tr>" +
-                                        "<tr>" +
-                                           "<td style='text-align:left;'>" +
-                                                 "<b>Password:</b>&nbsp;" + Password +
-                                           "</td>" +
-                                        "</tr>" +
-                                        "<tr>" +
-                                           "<td style='font-family:Arial; font-size:12px; text-align:left;'>" +
-                                                 "<br>Puede acceder al sistema haciendo click <a href='" + this.ApplicationURL + "'>aqui</a>" +
-                                           "</td>" +
-                                        "</tr>" +
-                                        "<tr>" +
-                                           "<td style='font-family:Arial; font-size:12px; text-align:left;'>" +
-                                              "<br><br><br>Gracias por utilizar nuestros servicios informáticos" +
-                                           "</td>" +
-                                        "</tr>" +
-                                        "<tr>" +
-                                           "<td style='font-family:Arial; font-size:9px; text-align:center;'>" +
-                                              "<br><br>Powered By GCSoft" +
-                                           "</td>" +
-                                        "</tr>" +
-                                     "</table>" +
-                                  "</td>" +
-                               "</tr>" +
-                               "<tr style='height:20px'><td colspan='3'></td></tr>" +
-                               "<tr style='height:20px'><td colspan='3'></td></tr>" +
-                               "<tr style='height:1px'><td colspan='3' style='background:#000063 repeat-x;'></td></tr>" +
-                               "<tr style='height:60px; vertical-align:top;'>" +
-                                  "<td colspan='2' style='font-family:Arial; font-size:10px; color: #180A3B; text-align:justify; vertical-align:middle;'>" +
-                                     "Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.<br/><br/>Nota: Los acentos y caracteres especiales fueron omitidos para su correcta lectura en cualquier medio electronico.<br/>" +
-                                  "</td>" +
-                                  "<td></td>" +
-                               "</tr>" +
-                                     "<tr><td colspan='3'></td></tr>" +
+                      "<div style='clear:both; height:80%; text-align:center; width:100%;'>" +
+                         "<div style='clear:both; height:70%; margin:0px auto; position:relative; top:10%; width:90%;'>" +
+                            "<table style='color:#339933; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                "<tr style='height:20%;' valign='middle'>" +
+                                    "<td style='font-weight:bold;'>" +
+                                        "Recuperaci&oacute;n de contrase&ntilde;a<br /><br />" +
+                                        "<div style='border-bottom:1px solid #339933;'></div>" +
+                                    "</td>" +
+                                "</tr>" +
+                                "<tr style='height:80%;' valign='top'>" +
+                                    "<td>" +
+                                        "Usted ha solicitado la recuperaci&oacute;n de informaci&oacute;n de su usuario al sistema de Agenda. Los datos de acceso a la aplicaci&oacute;n son los siguientes:<br /><br /><br />" +
+                                        "<font style='font-size:15px; font-weight:bold;'>Usuario:</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style='color:#000000; font-weight:bold;'>" + oENTUsuario.Email + "</font><br />" +
+                                        "<font style='font-size:15px; font-weight:bold;'>Contrase&ntilde;a:</font>&nbsp;<font style='color:#000000; font-weight:bold;'>" + Password + "</font><br /><br /><br />" +
+                                        "Puede acceder al sistema haciendo click <a href='" + this.ApplicationURL + "' style='color:#000000; font-weight:bold;'>aqui</a><br /><br /><br />" +
+                                        "Gracias por utilizar nuestros servicios inform&aacute;ticos<br /><br />" +
+                                    "</td>" +
+                                "</tr>" +
                             "</table>" +
                          "</div>" +
+                      "</div>" +
+                      "<div style='background:#339933; clear:both; height:20%; text-align:left; width:100%;'>" +
+                        "<div style='height:5%;'></div>" +
+                        "<div style='height:90%;'>" +
+                            "<table style='color:#FFFFFF; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                "<tr style='height:100%;' valign='middle'>" +
+                                    "<td style='text-align:center; float:left; width:20%;'>" +
+                                        "<img src='" + this.MailLogo + "' height='120px' width='92px' />" +
+                                    "</td>" +
+                                    "<td style='text-align:justify; float:left; vertical-align: middle; width:70%;'>" +
+                                        "<div style='text-align:center; width:90%;'><font style='font-family:Arial; font-size:9px;'>Powered By GCSoft</font><br /><br /></div>" +
+                                        "<font style='font-family:Arial; font-size:10px;'>Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.</font><br />" +
+                                    "</td>" +
+                                    "<td></td>" +
+                                "</tr>" +
+                            "</table>" +
+                        "</div>" +
+                        "<div style='height:5%;'></div>" +
                       "</div>" +
                    "</body>" +
                 "</html>";
 
                 // Enviar correo
-                gcMail.Send("Agenda - Recuperación de contraseña", oENTUsuario.Email, "Agenda - Recuperación de contraseña", sHTMLMessage);
+                gcMail.Send("Agenda - Recuperación de contraseña", oENTUsuario.Email, "Recuperación de contraseña", sHTMLMessage);
 
             }catch (Exception ex){
                 oENTResponse.ExceptionRaised(ex.Message);

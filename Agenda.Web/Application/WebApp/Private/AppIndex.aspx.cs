@@ -52,7 +52,7 @@ namespace Agenda.Web.Application.WebApp.Private
                         break;
 
                     case 3: // Funcionario
-                        this.Response.Redirect("Evento/eveCalendario.aspx", false);
+                        this.Response.Redirect("Invitacion/invListado.aspx", false);
                         break;
 
 				    default:
