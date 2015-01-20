@@ -490,6 +490,15 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         protected global::System.Web.UI.WebControls.LinkButton lnkAgregarComentario;
         
         /// <summary>
+        /// lnkEditarComentario control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkEditarComentario;
+        
+        /// <summary>
         /// ComentarioTituloLabel control.
         /// </summary>
         /// <remarks>
@@ -596,6 +605,69 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlPopUpBody;
+        
+        /// <summary>
+        /// rblRespuestaEvaluacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblRespuestaEvaluacion;
+        
+        /// <summary>
+        /// txtPopUpNombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpNombre;
+        
+        /// <summary>
+        /// txtPopUpCargo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpCargo;
+        
+        /// <summary>
+        /// txtPopUpTelefonoOficina control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpTelefonoOficina;
+        
+        /// <summary>
+        /// txtPopUpTelefonoCelular control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpTelefonoCelular;
+        
+        /// <summary>
+        /// txtPopUpTelefonoParticular control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpTelefonoParticular;
+        
+        /// <summary>
+        /// txtPopUpTelefonoOtro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpTelefonoOtro;
         
         /// <summary>
         /// ckePopUpComentario control.

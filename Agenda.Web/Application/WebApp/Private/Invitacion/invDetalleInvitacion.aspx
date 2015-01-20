@@ -256,8 +256,9 @@
             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                     <td style="text-align:left;">
-                        <asp:Label ID="lblComentariosSection" CssClass="Label_Detalle_Invitacion" runat="server" Text="Comentarios"></asp:Label>&nbsp;&nbsp;
-                        <asp:LinkButton ID="lnkAgregarComentario" runat="server" CssClass="LinkButton_Regular" Text="Agregar comentario" OnClick="lnkAgregarComentario_Click" Visible="false"></asp:LinkButton>
+                        <asp:Label ID="lblComentariosSection" CssClass="Label_Detalle_Invitacion" runat="server" Text="Evaluaciones"></asp:Label>&nbsp;&nbsp;
+                        <asp:LinkButton ID="lnkAgregarComentario" runat="server" CssClass="LinkButton_Regular" Text="Emitir Evaluación" OnClick="lnkAgregarComentario_Click" Visible="false"></asp:LinkButton>
+                        <asp:LinkButton ID="lnkEditarComentario" runat="server" CssClass="LinkButton_Regular" Text="Editar Evaluación" OnClick="lnkEditarComentario_Click" Visible="false" ></asp:LinkButton>
                     </td>
                 </tr>
                 <tr>
@@ -270,7 +271,7 @@
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <tr>
-                                        <td class="Numero">
+                                        <td class="Numero_<%# DataBinder.Eval(Container.DataItem, "RespuestaEvaluacionId") %>">
 							                <%# DataBinder.Eval(Container.DataItem, "iRow") %>
 						                </td>
                                         <td>
@@ -281,18 +282,12 @@
                                                         <asp:HiddenField ID="hddUsuarioId_Comentario" runat="server" Value='<%# DataBinder.Eval(Container.DataItem, "UsuarioId")%>' />
 									                </td>
                                                     <td class="Fecha">
-										                <%# DataBinder.Eval(Container.DataItem, "Fecha")%>
+										                <%# DataBinder.Eval(Container.DataItem, "FechaModificacion")%>
 									                </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="Texto" colspan="2">
-										                <%# DataBinder.Eval(Container.DataItem, "Comentario")%>
-									                </td>
-                                                </tr>
-								                <tr>
-                                                    <td colspan="2" style="text-align:right;">
-                                                        <asp:LinkButton ID="lnkEditarComentario" runat="server" CssClass="LinkButton_Regular" Text="Editar" CommandArgument='<%#Eval("InvitacionComentarioId")%>' OnCommand="lnkEditarComentario_Click" Visible="false" ></asp:LinkButton>&nbsp;&nbsp;
-										                <asp:LinkButton ID="lnkEliminarComentario" runat="server" CssClass="LinkButton_Regular" Text="Eiminar" CommandArgument='<%#Eval("InvitacionComentarioId")%>' OnCommand="lnkEliminarComentario_Click" Visible="false" OnClientClick="return confirm('¿Seguro que desea eliminar este comentario?');" ></asp:LinkButton>
+										                <%# DataBinder.Eval(Container.DataItem, "ComentarioFull")%>
 									                </td>
                                                 </tr>
                                             </table>
@@ -322,7 +317,7 @@
     </asp:Panel>
     
     <asp:Panel ID="pnlPopUp" runat="server" CssClass="PopUpBlock">
-        <asp:Panel ID="pnlPopUpContent" runat="server" CssClass="PopUpContent" style="margin-top:-195px; margin-left:-400px;" Height="390px" Width="800px">
+        <asp:Panel ID="pnlPopUpContent" runat="server" CssClass="PopUpContent" style="margin-top:-250px; margin-left:-400px;" Height="500px" Width="800px">
             <asp:Panel ID="pnlPopUpHeader" runat="server" CssClass="PopUpHeader">
                 <table class="PopUpHeaderTable">
                     <tr>
@@ -336,13 +331,63 @@
             <asp:Panel ID="pnlPopUpBody" runat="server" CssClass="PopUpBody">
                 <table class="PopUpBodyTable">
                     <tr>
+                        <td class="Etiqueta">¿Es conveniente que atienda el C. Gobernador?</td>
+                    </tr>
+                    <tr>
+                        <td class="Contenedor">
+                            <asp:RadioButtonList ID="rblRespuestaEvaluacion" runat="server" RepeatDirection="Horizontal" style="cursor:pointer;" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="rblRespuestaEvaluacion_SelectedIndexChanged">
+					        </asp:RadioButtonList>
+                        </td>
+                    </tr>
+                    <tr style="height:10px;"><td></td></tr>
+                    <tr>
+                        <td class="Etiqueta">En caso de ser "NO", proponga un funcionario que pueda representar al títular del Ejecutivo</td>
+                    </tr>
+                    <tr>
+                        <td class="Contenedor">
+                            <table style="border:0px; padding:0px; width:100%;">
+                                <tr>
+                                    <td style="text-align:left; width:80px;">
+                                        Nombre:
+                                    </td>
+                                    <td style="text-align:left;">
+                                        <asp:TextBox ID="txtPopUpNombre" runat="server" CssClass="Textbox_Disabled" Enabled="false" MaxLength="1000" Width="90%"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">
+                                        Cargo:
+                                    </td>
+                                    <td style="text-align:left;">
+                                        <asp:TextBox ID="txtPopUpCargo" runat="server" CssClass="Textbox_Disabled" Enabled="false" MaxLength="1000" Width="90%"></asp:TextBox>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">
+                                        Tel. Oficina:
+                                    </td>
+                                    <td style="text-align:left;">
+                                        <asp:TextBox ID="txtPopUpTelefonoOficina" runat="server" CssClass="Textbox_Disabled" Enabled="false" MaxLength="50" Width="15%"></asp:TextBox>&nbsp;&nbsp;
+                                        Celular:&nbsp;<asp:TextBox ID="txtPopUpTelefonoCelular" runat="server" CssClass="Textbox_Disabled" Enabled="false" MaxLength="50" Width="15%"></asp:TextBox>&nbsp;&nbsp;&nbsp;
+                                        Particular:&nbsp;<asp:TextBox ID="txtPopUpTelefonoParticular" runat="server" CssClass="Textbox_Disabled" Enabled="false" MaxLength="50" Width="15%"></asp:TextBox>&nbsp;&nbsp;&nbsp;
+                                        Otro:&nbsp;<asp:TextBox ID="txtPopUpTelefonoOtro" runat="server" CssClass="Textbox_Disabled" Enabled="false" MaxLength="50" Width="15%"></asp:TextBox>&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr style="height:10px;"><td></td></tr>
+                    <tr>
+                        <td class="Etiqueta">Comentarios:</td>
+                    </tr>
+                    <tr>
                         <td>
-                            <CKEditor:CKEditorControl ID="ckePopUpComentario" BasePath="~/Include/Components/CKEditor/Core/" runat="server"></CKEditor:CKEditorControl>
+                            <CKEditor:CKEditorControl ID="ckePopUpComentario" BasePath="~/Include/Components/CKEditor/Core/" runat="server" Height="90px"></CKEditor:CKEditorControl>
                         </td>
                     </tr>
                     <tr>
                         <td class="Botones">
-                            <asp:Button ID="btnPopUpCommand" runat="server" Text="" CssClass="Button_General" Width="125px" OnClick="btnPopUpCommand_Click" />
+                            <asp:Button ID="btnPopUpCommand" runat="server" Text="" CssClass="Button_General" Width="175px" OnClick="btnPopUpCommand_Click" />
                         </td>
                     </tr>
                     <tr>

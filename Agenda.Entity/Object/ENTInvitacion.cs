@@ -26,6 +26,7 @@ namespace Agenda.Entity.Object
         private Int32   _LugarEventoId;
         private Int32   _ModuloId;
         private Int32   _PrioridadId;
+        private Int32   _RespuestaEvaluacionId;
         private Int32   _SecretarioId_Ramo;
         private Int32   _SecretarioId_Representante;
         private Int32   _SecretarioId_Responsable;
@@ -39,6 +40,12 @@ namespace Agenda.Entity.Object
         private String  _MotivoRechazo;
         private String  _NumeroExterior;
         private String  _NumeroInterior;
+        private String  _RepresentanteNombre;
+        private String  _RepresentanteCargo;
+        private String  _RepresentanteTelefonoOficina;
+        private String  _RepresentanteTelefonoMovil;
+        private String  _RepresentanteTelefonoParticular;
+        private String  _RepresentanteTelefonoOtro;
         private String  _FechaEvento;
         private String  _FechaFin;
         private String  _FechaInicio;
@@ -46,6 +53,7 @@ namespace Agenda.Entity.Object
         private String  _HoraEventoFin;
         private Int16   _Activo;
         private Int16   _Nivel;
+        private Int16   _Notificacion;
         private ENTInvitacionContacto       _Contacto;
         private ENTInvitacionFuncionario    _Funcionario;
 
@@ -64,6 +72,7 @@ namespace Agenda.Entity.Object
             _LugarEventoId = 0;
             _ModuloId = 0;
             _PrioridadId = 0;
+            _RespuestaEvaluacionId = 0;
             _SecretarioId_Ramo = 0;
             _SecretarioId_Representante = 0;
             _SecretarioId_Responsable = 0;
@@ -77,6 +86,12 @@ namespace Agenda.Entity.Object
             _MotivoRechazo = "";
             _NumeroExterior = "";
             _NumeroInterior = "";
+            _RepresentanteNombre = "";
+            _RepresentanteCargo = "";
+            _RepresentanteTelefonoOficina = "";
+            _RepresentanteTelefonoMovil = "";
+            _RepresentanteTelefonoParticular = "";
+            _RepresentanteTelefonoOtro = "";
             _FechaEvento = "";
             _FechaFin = "";
             _FechaInicio = "";
@@ -84,6 +99,7 @@ namespace Agenda.Entity.Object
             _HoraEventoFin = "";
             _Activo = 2;
             _Nivel = 0;
+            _Notificacion = 0;
             _Contacto = new ENTInvitacionContacto();
             _Funcionario = new ENTInvitacionFuncionario();
         }
@@ -209,6 +225,18 @@ namespace Agenda.Entity.Object
         {
             get { return _PrioridadId; }
             set { _PrioridadId = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTInvitacion.RespuestaEvaluacionId</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el identificador único de la respuesta de evaluación del evento</summary>
+        public Int32 RespuestaEvaluacionId
+        {
+            get { return _RespuestaEvaluacionId; }
+            set { _RespuestaEvaluacionId = value; }
         }
 
         ///<remarks>
@@ -356,6 +384,78 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
+        ///   <name>ENTInvitacion.RepresentanteNombre</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el nombre del representante del gobernador propuesto en una evaluación de una invitación por parte d eun funcionario</summary>
+        public String RepresentanteNombre
+        {
+            get { return _RepresentanteNombre; }
+            set { _RepresentanteNombre = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTInvitacion.RepresentanteCargo</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el cargo del representante del gobernador propuesto en una evaluación de una invitación por parte d eun funcionario</summary>
+        public String RepresentanteCargo
+        {
+            get { return _RepresentanteCargo; }
+            set { _RepresentanteCargo = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTInvitacion.RepresentanteTelefonoOficina</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el teléfono de oficina del representante del gobernador propuesto en una evaluación de una invitación por parte d eun funcionario</summary>
+        public String RepresentanteTelefonoOficina
+        {
+            get { return _RepresentanteTelefonoOficina; }
+            set { _RepresentanteTelefonoOficina = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTInvitacion.RepresentanteTelefonoMovil</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el teléfono movil del representante del gobernador propuesto en una evaluación de una invitación por parte d eun funcionario</summary>
+        public String RepresentanteTelefonoMovil
+        {
+            get { return _RepresentanteTelefonoMovil; }
+            set { _RepresentanteTelefonoMovil = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTInvitacion.RepresentanteTelefonoParticular</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el teléfono particular del representante del gobernador propuesto en una evaluación de una invitación por parte d eun funcionario</summary>
+        public String RepresentanteTelefonoParticular
+        {
+            get { return _RepresentanteTelefonoParticular; }
+            set { _RepresentanteTelefonoParticular = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTInvitacion.RepresentanteTelefonoOtro</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna otro teléfono del representante del gobernador propuesto en una evaluación de una invitación por parte d eun funcionario</summary>
+        public String RepresentanteTelefonoOtro
+        {
+            get { return _RepresentanteTelefonoOtro; }
+            set { _RepresentanteTelefonoOtro = value; }
+        }
+
+        ///<remarks>
         ///   <name>ENTInvitacion.NumeroInterior</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
@@ -449,6 +549,18 @@ namespace Agenda.Entity.Object
         {
             get { return _Nivel; }
             set { _Nivel = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTInvitacion.Notificacion</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el tipo de notificación por correo cuando se aprueba una invitación. 1-> Logística, 2-> Dirección de Protocolo, 3-> Ambos y 4-> Ninguno</summary>
+        public Int16 Notificacion
+        {
+            get { return _Notificacion; }
+            set { _Notificacion = value; }
         }
 
         ///<remarks>

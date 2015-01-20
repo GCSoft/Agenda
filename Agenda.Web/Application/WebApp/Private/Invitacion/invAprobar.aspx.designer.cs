@@ -94,6 +94,15 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         protected global::System.Web.UI.WebControls.Label lblEventoFechaHora;
         
         /// <summary>
+        /// rblNotificacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblNotificacion;
+        
+        /// <summary>
         /// ckeComentarios control.
         /// </summary>
         /// <remarks>

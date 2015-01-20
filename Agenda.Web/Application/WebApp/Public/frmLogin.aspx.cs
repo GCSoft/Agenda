@@ -39,6 +39,7 @@ namespace Agenda.Web.Application.WebApp.Public
         String GetRedirectPage(){
             String Response = "../Private/AppIndex.aspx";
             String Key = "";
+            String Sender = "";
 
             try
             {
@@ -49,6 +50,10 @@ namespace Agenda.Web.Application.WebApp.Public
                     Key = this.hddToken.Value;
                     Key = gcEncryption.DecryptString(Key, false);
 
+                    // Separar Sender de la llave
+                    Sender = Key.ToString().Split(new Char[] { '|' })[0];
+                    Key = Key.ToString().Split(new Char[] { '|' })[1];
+
                     // Validación
                     Key = Int32.Parse(Key).ToString();
 
@@ -57,7 +62,15 @@ namespace Agenda.Web.Application.WebApp.Public
                     Key = gcEncryption.EncryptString(Key, true);
 
                     // Redireccionamiento
-                    Response = "../Private/Invitacion/invDetalleInvitacion.aspx?key=" + Key;
+                    switch (Sender){
+                        case "1":
+                            Response = "../Private/Invitacion/invDetalleInvitacion.aspx?key=" + Key;
+                            break;
+
+                        case "2":
+                            Response = "../Private/Evento/eveDetalleEvento.aspx?key=" + Key;
+                            break;
+                    }
                 }
 
 

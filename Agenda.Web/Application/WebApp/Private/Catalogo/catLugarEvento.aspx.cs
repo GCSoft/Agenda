@@ -368,6 +368,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 this.txtPopUpNumeroExterior.Text = "";
                 this.txtPopUpNumeroInterior.Text = "";
                 this.ddlPopUpStatus.SelectedIndex = 0;
+                this.ckePopUpDescripcion.Text = "";
 
                 // Estado incial de controles
                 this.pnlPopUp.Visible = false;
@@ -452,7 +453,8 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 SelectMunicipio();
 
                 // Estado inicial del formulario
-                SelectLugarEvento();
+                this.gvLugarEvento.DataSource = null;
+                this.gvLugarEvento.DataBind();
                 ClearPopUpPanel();
 
                 // Foco

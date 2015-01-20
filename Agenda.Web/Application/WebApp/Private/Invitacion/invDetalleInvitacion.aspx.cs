@@ -52,7 +52,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 		
         // Rutinas del programador
 
-        void CheckDeleteLinkComentario(){
+        void CheckLinkComentario(DataTable tblFuncionarios, DataTable tblComentario){
             ENTSession oENTSession = new ENTSession();
 
             try
@@ -61,89 +61,35 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 // Obtener sesión
                 oENTSession = (ENTSession)Session["oENTSession"];
 
-                // Si es LugarEvento y esta asociado en la invitación podrá eliminar comentarios únicamente sus comentarios siempre y cuando no esté la invitación en estatus finales:
-                // 1 - Cancelada
-                // 2 - Declinada
-                // 6 - Aprobada
-                if ( oENTSession.RolId == 3 )
+                // Sólo si es funcionario podrá interactuar con las evaluaciones
+                if (oENTSession.RolId == 3 )
                 {
 
-                    if ( Int32.Parse(this.hddEstatusInvitacionId.Value) != 1 && Int32.Parse(this.hddEstatusInvitacionId.Value) != 2 && Int32.Parse(this.hddEstatusInvitacionId.Value) != 6 )
+                    // Si el funcionario está asociado a la invitación la podrá evaluar
+                    if (tblFuncionarios.Select("UsuarioId=" + oENTSession.UsuarioId.ToString()).Length > 0)
                     {
 
-                        foreach (RepeaterItem repItem in repComentarios.Items)
+                        // El usuario sólo podrá editar la evaluación que haya emitido
+                        if (tblComentario.Select("UsuarioId=" + oENTSession.UsuarioId.ToString()).Length == 0)
                         {
-
-                            HiddenField oHiddenField = (HiddenField)repItem.FindControl("hddUsuarioId_Comentario");
-                            if ( oHiddenField.Value == oENTSession.UsuarioId.ToString() )
-                            {
-
-                                LinkButton oLinkButton = (LinkButton)repItem.FindControl("lnkEliminarComentario");
-                                oLinkButton.Visible = true;
-
-                                oLinkButton = (LinkButton)repItem.FindControl("lnkEditarComentario");
-                                oLinkButton.Visible = true;
-                            }
-
+                            this.hddInvitacionComentarioId.Value = "0";
+                            this.lnkAgregarComentario.Visible = true;
+                            this.lnkEditarComentario.Visible = false;
+                        }
+                        else
+                        {
+                            this.hddInvitacionComentarioId.Value = tblComentario.Select("UsuarioId=" + oENTSession.UsuarioId.ToString())[0]["InvitacionComentarioId"].ToString();
+                            this.lnkAgregarComentario.Visible = false;
+                            this.lnkEditarComentario.Visible = true;
                         }
 
                     }
-                }
-
-                // Si es Administrador puede  editar y eliminar comentarios siempre y cuando no esté la invitación en estatus finales:
-                // 1 - Cancelada
-                // 2 - Declinada
-                // 6 - Aprobada
-                if ( oENTSession.RolId == 1 || oENTSession.RolId == 2 )
-                {
-                    if ( Int32.Parse(this.hddEstatusInvitacionId.Value) != 1 && Int32.Parse(this.hddEstatusInvitacionId.Value) != 2 && Int32.Parse(this.hddEstatusInvitacionId.Value) != 6 )
-                    {
-
-                        foreach (RepeaterItem repItem in repComentarios.Items)
-                        {
-
-                            LinkButton oLinkButton = (LinkButton)repItem.FindControl("lnkEliminarComentario");
-                            oLinkButton.Visible = true;
-
-                            oLinkButton = (LinkButton)repItem.FindControl("lnkEditarComentario");
-                            oLinkButton.Visible = true;
-                        }
-
-                    }
+                    
                 }
 
             }catch(Exception ex){
                 throw(ex);
             }
-		}
-
-        void DeleteInvitacionComentario(Int32 InvitacionComentarioId) {
-			BPInvitacion oBPInvitacion = new BPInvitacion();
-
-			ENTInvitacion oENTInvitacion = new ENTInvitacion();
-			ENTResponse oENTResponse = new ENTResponse();
-            ENTSession oENTSession = new ENTSession();
-
-			try
-			{
-
-				// Datos de sesión
-                oENTSession = (ENTSession)Session["oENTSession"];
-				
-				// Formulario
-                oENTInvitacion.InvitacionComentarioId = InvitacionComentarioId;
-                oENTInvitacion.UsuarioId = oENTSession.UsuarioId;
-
-				// Transacción
-                oENTResponse = oBPInvitacion.DeleteInvitacionComentario(oENTInvitacion);
-
-				// Errores y Warnings
-                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
-
-			}catch (Exception ex){
-				throw (ex);
-			}
 		}
 
         void InsertInvitacionComentario() {
@@ -156,16 +102,25 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 			try
 			{
 
-				// Validaciones
-				if (this.ckePopUpComentario.Text.Trim() == "") { throw (new Exception("Es necesario ingresar un comentario")); }
-
 				// Datos de sesión
                 oENTSession = (ENTSession)Session["oENTSession"];
+
+                // Validaciones
+                if ( this.rblRespuestaEvaluacion.SelectedValue == "2" ){
+                    if (this.txtPopUpNombre.Text.Trim() == "") { throw new Exception("Es necesario ingresar el nombre de un funcionario que pueda representar al títular del Ejecutivo"); }
+                }
 				
 				// Formulario
 				oENTInvitacion.InvitacionId = Int32.Parse(this.hddInvitacionId.Value);
                 oENTInvitacion.ModuloId = 1; // Invitación
                 oENTInvitacion.UsuarioId = oENTSession.UsuarioId;
+                oENTInvitacion.RespuestaEvaluacionId = Int32.Parse( this.rblRespuestaEvaluacion.SelectedValue );
+                oENTInvitacion.RepresentanteNombre = this.txtPopUpNombre.Text.Trim();
+                oENTInvitacion.RepresentanteCargo = this.txtPopUpCargo.Text.Trim();
+                oENTInvitacion.RepresentanteTelefonoOficina = this.txtPopUpTelefonoOficina.Text.Trim();
+                oENTInvitacion.RepresentanteTelefonoMovil = this.txtPopUpTelefonoCelular.Text.Trim();
+                oENTInvitacion.RepresentanteTelefonoParticular = this.txtPopUpTelefonoParticular.Text.Trim();
+                oENTInvitacion.RepresentanteTelefonoOtro = this.txtPopUpTelefonoOtro.Text.Trim();
 				oENTInvitacion.Comentario = this.ckePopUpComentario.Text.Trim();
 
 				// Transacción
@@ -259,10 +214,10 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 					this.dlstDocumentoList.DataBind();
 				}
 
-                // Comentarios
+                // Evaluaciones (Comentarios)
                 if (oENTResponse.DataSetResponse.Tables[5].Rows.Count == 0){
 
-					this.SinComentariosLabel.Text = "<br /><br />No hay comentarios para esta invitación";
+					this.SinComentariosLabel.Text = "<br /><br />No hay evaluaciones emitidas para esta invitación";
 					this.repComentarios.DataSource = null;
 					this.repComentarios.DataBind();
 					this.ComentarioTituloLabel.Text = "";
@@ -271,11 +226,11 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 					this.SinComentariosLabel.Text = "";
                     this.repComentarios.DataSource = oENTResponse.DataSetResponse.Tables[5];
 					this.repComentarios.DataBind();
-                    this.ComentarioTituloLabel.Text = oENTResponse.DataSetResponse.Tables[5].Rows.Count.ToString() + " comentarios";
-
-					CheckDeleteLinkComentario();
+                    this.ComentarioTituloLabel.Text = oENTResponse.DataSetResponse.Tables[5].Rows.Count.ToString() + " evaluaciones";
 
 				}
+
+                CheckLinkComentario(oENTResponse.DataSetResponse.Tables[2], oENTResponse.DataSetResponse.Tables[5]);
 
             }catch (Exception ex){
                 throw (ex);
@@ -305,12 +260,105 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
 
                 // Vaciado de datos
+                this.rblRespuestaEvaluacion.SelectedValue = oENTResponse.DataSetResponse.Tables[1].Rows[0]["RespuestaEvaluacionId"].ToString();
                 this.ckePopUpComentario.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Comentario"].ToString();
+
+                // Estado del formulario
+                switch( this.rblRespuestaEvaluacion.SelectedValue ){
+                    case "2": // No
+
+                        this.txtPopUpNombre.Enabled = true;
+                        this.txtPopUpCargo.Enabled = true;
+                        this.txtPopUpTelefonoOtro.Enabled = true;
+                        this.txtPopUpTelefonoOficina.Enabled = true;
+                        this.txtPopUpTelefonoCelular.Enabled = true;
+                        this.txtPopUpTelefonoParticular.Enabled = true;
+
+                        this.txtPopUpNombre.CssClass = "Textbox_General";
+                        this.txtPopUpCargo.CssClass = "Textbox_General";
+                        this.txtPopUpTelefonoOtro.CssClass = "Textbox_General";
+                        this.txtPopUpTelefonoOficina.CssClass = "Textbox_General";
+                        this.txtPopUpTelefonoCelular.CssClass = "Textbox_General";
+                        this.txtPopUpTelefonoParticular.CssClass = "Textbox_General";
+
+                        this.txtPopUpNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["RepNombre"].ToString();
+                        this.txtPopUpCargo.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["RepCargo"].ToString();
+                        this.txtPopUpTelefonoOficina.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["RepTelOficina"].ToString();
+                        this.txtPopUpTelefonoCelular.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["RepTelMovil"].ToString();
+                        this.txtPopUpTelefonoParticular.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["RepTelParticular"].ToString();
+                        this.txtPopUpTelefonoOtro.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["RepTelOtro"].ToString();
+
+                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUpNombre.ClientID + "'); }", true);
+
+                        break;
+
+                    default:
+
+                        this.txtPopUpNombre.Text = "";
+                        this.txtPopUpCargo.Text = "";
+                        this.txtPopUpTelefonoOtro.Text = "";
+                        this.txtPopUpTelefonoOficina.Text = "";
+                        this.txtPopUpTelefonoCelular.Text = "";
+                        this.txtPopUpTelefonoParticular.Text = "";
+
+                        this.txtPopUpNombre.Enabled = false;
+                        this.txtPopUpCargo.Enabled = false;
+                        this.txtPopUpTelefonoOtro.Enabled = false;
+                        this.txtPopUpTelefonoOficina.Enabled = false;
+                        this.txtPopUpTelefonoCelular.Enabled = false;
+                        this.txtPopUpTelefonoParticular.Enabled = false;
+
+                        this.txtPopUpNombre.CssClass = "Textbox_Disabled";
+                        this.txtPopUpCargo.CssClass = "Textbox_Disabled";
+                        this.txtPopUpTelefonoOtro.CssClass = "Textbox_Disabled";
+                        this.txtPopUpTelefonoOficina.CssClass = "Textbox_Disabled";
+                        this.txtPopUpTelefonoCelular.CssClass = "Textbox_Disabled";
+                        this.txtPopUpTelefonoParticular.CssClass = "Textbox_Disabled";
+
+                        this.ckePopUpComentario.Focus();
+
+                        break;
+                }
 
 			}catch (Exception ex){
 				throw (ex);
 			}
 		}
+
+        void SelectRespuestaEvaluacion_PopUp(){
+            ENTRespuestaEvaluacion oENTRespuestaEvaluacion = new ENTRespuestaEvaluacion();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            BPRespuestaEvaluacion oBPRespuestaEvaluacion = new BPRespuestaEvaluacion();
+
+            try
+            {
+
+                // Formulario
+                oENTRespuestaEvaluacion.RespuestaEvaluacionId = 0;
+                oENTRespuestaEvaluacion.Nombre = "";
+                oENTRespuestaEvaluacion.Activo = 1;
+
+                // Transacción
+                oENTResponse = oBPRespuestaEvaluacion.SelectRespuestaEvaluacion(oENTRespuestaEvaluacion);
+
+                // Validaciones
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                // Llenado de combo
+                this.rblRespuestaEvaluacion.DataTextField = "Nombre";
+                this.rblRespuestaEvaluacion.DataValueField = "RespuestaEvaluacionId";
+                this.rblRespuestaEvaluacion.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                this.rblRespuestaEvaluacion.DataBind();
+
+                // Preseleccionar la primer opción
+                this.rblRespuestaEvaluacion.SelectedIndex = 0;
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
 
         void SetErrorPage(){
 			try
@@ -385,13 +433,6 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 			try
             {
 
-                // Si es Administrador o LugarEvento puede agregar comentarios
-				if ( RolId == 1 || RolId == 2 || RolId == 3 ) {
-
-                    this.lnkAgregarComentario.Visible = true;
-
-				}
-
 				// La invitación no se podrá operar en los siguientes Estatus:
                 // 1 - Cancelada
                 // 2 - Declinada
@@ -406,6 +447,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                     this.RechazarPanel.Visible = false;
                     this.AprobarPanel.Visible = false;
                     this.lnkAgregarComentario.Visible = false;
+                    this.lnkEditarComentario.Visible = false;
 
 				}
 
@@ -425,15 +467,26 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 			{
 
 				// Validaciones
-				if (this.ckePopUpComentario.Text.Trim() == "") { throw (new Exception("Es necesario ingresar un comentario")); }
+                if ( this.rblRespuestaEvaluacion.SelectedValue == "2" ){
+                    if (this.txtPopUpNombre.Text.Trim() == "") { throw new Exception("Es necesario ingresar el nombre de un funcionario que pueda representar al títular del Ejecutivo"); }
+                }
 
 				// Datos de sesión
                 oENTSession = (ENTSession)Session["oENTSession"];
 				
 				// Formulario
                 oENTInvitacion.InvitacionComentarioId = Int32.Parse(this.hddInvitacionComentarioId.Value);
+                oENTInvitacion.InvitacionId = Int32.Parse(this.hddInvitacionId.Value);
+                oENTInvitacion.ModuloId = 1; // Invitación
                 oENTInvitacion.UsuarioId = oENTSession.UsuarioId;
-				oENTInvitacion.Comentario = this.ckePopUpComentario.Text.Trim();
+                oENTInvitacion.RespuestaEvaluacionId = Int32.Parse(this.rblRespuestaEvaluacion.SelectedValue);
+                oENTInvitacion.RepresentanteNombre = this.txtPopUpNombre.Text.Trim();
+                oENTInvitacion.RepresentanteCargo = this.txtPopUpCargo.Text.Trim();
+                oENTInvitacion.RepresentanteTelefonoOficina = this.txtPopUpTelefonoOficina.Text.Trim();
+                oENTInvitacion.RepresentanteTelefonoMovil = this.txtPopUpTelefonoCelular.Text.Trim();
+                oENTInvitacion.RepresentanteTelefonoParticular = this.txtPopUpTelefonoParticular.Text.Trim();
+                oENTInvitacion.RepresentanteTelefonoOtro = this.txtPopUpTelefonoOtro.Text.Trim();
+                oENTInvitacion.Comentario = this.ckePopUpComentario.Text.Trim();
 
 				// Transacción
                 oENTResponse = oBPInvitacion.UpdateInvitacionComentario(oENTInvitacion);
@@ -490,6 +543,9 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                         this.Response.Redirect("~/Application/WebApp/Private/SysApp/sappNotificacion.aspx", false);
                         return;
                 }
+
+                // Carga de controles
+                SelectRespuestaEvaluacion_PopUp();
 
                 // Consultar detalle de la invitación
                 SelectInvitacion();
@@ -794,58 +850,99 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 this.pnlPopUp.Visible = true;
                 this.lblPopUpMessage.Text = "";
                 this.ckePopUpComentario.Text = "";
-                this.hddInvitacionComentarioId.Value = "0";
 
                 // Personalizar PopUp
-                this.lblPopUpTitle.Text = "Nuevo Comentario";
-                this.btnPopUpCommand.Text = "Emitir Comentario";
+                this.lblPopUpTitle.Text = "Evaluación";
+                this.btnPopUpCommand.Text = "Emitir Evaluación";
 
                 // Foco
-                this.ckePopUpComentario.Focus();
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.rblRespuestaEvaluacion.ClientID + "'); }", true);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
             }
         }
 
-        protected void lnkEditarComentario_Click(object sender, CommandEventArgs  e){
+        protected void lnkEditarComentario_Click(object sender, EventArgs e){
             try
             {
 
                 // Acciones comunes
                 this.pnlPopUp.Visible = true;
                 this.lblPopUpMessage.Text = "";
-                this.hddInvitacionComentarioId.Value = e.CommandArgument.ToString();
+                this.ckePopUpComentario.Text = "";
 
                 // Personalizar PopUp
-                this.lblPopUpTitle.Text = "Editar Comentario";
-                this.btnPopUpCommand.Text = "Ajustar Comentario";
+                this.lblPopUpTitle.Text = "Evaluación";
+                this.btnPopUpCommand.Text = "Actualizar Evaluación";
 
                 // Consulta de detalle de comentario
                 SelectInvitacionComentario_Edit();
 
-                // Foco
-                this.ckePopUpComentario.Focus();
-
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
             }
-		}
+        }
 
-        protected void lnkEliminarComentario_Click(object sender, CommandEventArgs  e){
+        protected void rblRespuestaEvaluacion_SelectedIndexChanged(object sender, EventArgs e){
             try
             {
 
-                // Eliminar el comentario
-                DeleteInvitacionComentario(Int32.Parse(e.CommandArgument.ToString()));
+                // Determinar opción seleccionada
+                switch( this.rblRespuestaEvaluacion.SelectedValue ){
+                    case "2": // No
 
-                // Actualizar detalle
-                SelectInvitacion();
+                        this.txtPopUpNombre.Enabled = true;
+                        this.txtPopUpCargo.Enabled = true;
+                        this.txtPopUpTelefonoOtro.Enabled = true;
+                        this.txtPopUpTelefonoOficina.Enabled = true;
+                        this.txtPopUpTelefonoCelular.Enabled = true;
+                        this.txtPopUpTelefonoParticular.Enabled = true;
+
+                        this.txtPopUpNombre.CssClass = "Textbox_General";
+                        this.txtPopUpCargo.CssClass = "Textbox_General";
+                        this.txtPopUpTelefonoOtro.CssClass = "Textbox_General";
+                        this.txtPopUpTelefonoOficina.CssClass = "Textbox_General";
+                        this.txtPopUpTelefonoCelular.CssClass = "Textbox_General";
+                        this.txtPopUpTelefonoParticular.CssClass = "Textbox_General";
+
+                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUpNombre.ClientID + "'); }", true);
+
+                        break;
+
+                    default:
+
+                        this.txtPopUpNombre.Text = "";
+                        this.txtPopUpCargo.Text = "";
+                        this.txtPopUpTelefonoOtro.Text = "";
+                        this.txtPopUpTelefonoOficina.Text = "";
+                        this.txtPopUpTelefonoCelular.Text = "";
+                        this.txtPopUpTelefonoParticular.Text = "";
+
+                        this.txtPopUpNombre.Enabled = false;
+                        this.txtPopUpCargo.Enabled = false;
+                        this.txtPopUpTelefonoOtro.Enabled = false;
+                        this.txtPopUpTelefonoOficina.Enabled = false;
+                        this.txtPopUpTelefonoCelular.Enabled = false;
+                        this.txtPopUpTelefonoParticular.Enabled = false;
+
+                        this.txtPopUpNombre.CssClass = "Textbox_Disabled";
+                        this.txtPopUpCargo.CssClass = "Textbox_Disabled";
+                        this.txtPopUpTelefonoOtro.CssClass = "Textbox_Disabled";
+                        this.txtPopUpTelefonoOficina.CssClass = "Textbox_Disabled";
+                        this.txtPopUpTelefonoCelular.CssClass = "Textbox_Disabled";
+                        this.txtPopUpTelefonoParticular.CssClass = "Textbox_Disabled";
+
+                        this.ckePopUpComentario.Focus();
+
+                        break;
+                }
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+                this.lblPopUpMessage.Text = ex.Message;
+                this.ckePopUpComentario.Focus();
             }
-		}
+        }
 
 
     }

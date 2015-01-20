@@ -198,6 +198,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
             DataTable tblFuncionario;
             DataRow rowFuncionario;
 
+            String MessageDB = "";
             String JSScript = "";
             String Key = "";
 
@@ -264,7 +265,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
                 // Validaciones
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+                if (oENTResponse.MessageDB != "") { MessageDB = "alert('" + oENTResponse.MessageDB + "'); "; }
 
                 // Transacción exitosa
                 LimpiaFormulario();
@@ -274,7 +275,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 Key = gcEncryption.EncryptString(Key, true);
 
                 // Mensaje a desplegar y script
-                JSScript = "function pageLoad(){ if( confirm('Se registro la invitación exitosamente. ¿Desea ir al detalle para continuar con la captura?') ) { window.location.href('invDetalleInvitacion.aspx?key=" + Key + "'); } }";
+                JSScript = "function pageLoad(){ " + MessageDB + " if( confirm('Se registro la invitación exitosamente. ¿Desea ir al detalle para continuar con la captura?') ) { window.location.href('invDetalleInvitacion.aspx?key=" + Key + "'); } }";
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), JSScript, true);
 
             }catch (Exception ex){
@@ -291,6 +292,8 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
             DataTable tblFuncionario;
             DataRow rowFuncionario;
+
+            String MessageDB = "";
 
             try
             {
@@ -356,10 +359,14 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
                 // Validaciones
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+                if (oENTResponse.MessageDB != "") { MessageDB = "function pageLoad(){ alert('" + oENTResponse.MessageDB + "'); }"; }
 
                 // Transacción exitosa
                 LimpiaFormulario();
+
+                // Mensaje a desplegar y script
+                if ( MessageDB == "" ) { MessageDB = "function pageLoad(){ alert('Invitación registrada con éxito como declinada'); }"; }
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), MessageDB, true);
 
             }catch (Exception ex){
                 throw (ex);

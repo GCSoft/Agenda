@@ -3,6 +3,22 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cntPrivateTemplateBody" runat="server">
 
+    <asp:Panel ID="pnlIconPage" runat="server" CssClass="MasterIconPage">
+        <img id="imgIconPage" alt="Nuevo León" runat="server" src="~/Include/Image/Icon/IconGeneral.png" />
+    </asp:Panel>
+
+    <asp:Panel ID="pnlPageName" runat="server" CssClass="MasterPageName">
+        <asp:Label ID="lblPageName" runat="server" CssClass="PageNameText" Text="Invitación - Historial de cambios"></asp:Label>
+    </asp:Panel>
+
+    <asp:Panel ID="pnlTitulo" runat="server" CssClass="TitlePanel">
+        <table class="HeaderTable">
+            <tr>
+                <td class="Titulo"><asp:Label ID="lblSubTitulo" runat="server" Text="Se presentan los cambios realizados a la invitación."></asp:Label></td>
+            </tr>
+        </table>
+    </asp:Panel>
+
     <asp:Panel ID="pnlFormulario" runat="server" CssClass="FormPanel">
         <table class="FormTable">
             <tr>
@@ -56,7 +72,7 @@
 				<asp:BoundField HeaderText="Tipo"           ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="90px" DataField="TipoTransaccionNombre"                       SortExpression="TipoTransaccionNombre"></asp:BoundField>
 				<asp:BoundField HeaderText="Usuario"        ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="170px" DataField="UsuarioNombre"                               SortExpression="UsuarioNombre"></asp:BoundField>
                 <asp:BoundField HeaderText="Detalle"        ItemStyle-HorizontalAlign="Left"							DataField="Comentarios"             HtmlEncode="false"  SortExpression="Comentarios"></asp:BoundField>
-                <asp:BoundField HeaderText="Descripción"    ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="200px" DataField="Antes"                   HtmlEncode="false"  SortExpression="Antes"></asp:BoundField>
+                <asp:BoundField HeaderText="Antes"          ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="200px" DataField="Antes"                   HtmlEncode="false"  SortExpression="Antes"></asp:BoundField>
                 <asp:BoundField HeaderText="Después"        ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="200px" DataField="Despues"                 HtmlEncode="false"  SortExpression="Despues"></asp:BoundField>
 			</Columns>
 		</asp:GridView>

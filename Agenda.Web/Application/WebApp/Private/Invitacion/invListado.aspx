@@ -83,7 +83,7 @@
                         <td>Detalle de Evento</td>
                     </tr>
                     <tr class="Grid_Row">
-                        <td colspan="7">No se encontraron Invitaciones registrados</td>
+                        <td colspan="9">No se encontraron Invitaciones registradas</td>
                     </tr>
                 </table>
             </EmptyDataTemplate>

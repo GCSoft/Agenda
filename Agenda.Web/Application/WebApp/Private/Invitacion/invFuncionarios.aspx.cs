@@ -112,9 +112,6 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
             try
             {
 
-                // Validaciones
-                if (this.hddFuncionarioId.Value.Trim() == "" || this.hddFuncionarioId.Value.Trim() == "0") { throw (new Exception("Es necesario seleccionar un Funcionario")); }
-
                 // Datos de sesión
                 oENTSession = (ENTSession)this.Session["oENTSession"];
                 oENTInvitacion.UsuarioId = oENTSession.UsuarioId;
@@ -181,7 +178,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 this.hddFuncionarioId.Value = "";
 
                 // Foco
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtFuncionario.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('Funcionario asociado con éxito'); focusControl('" + this.txtFuncionario.ClientID + "'); }", true);
 
             }catch (Exception ex){
                 throw (ex);

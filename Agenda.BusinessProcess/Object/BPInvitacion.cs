@@ -25,38 +25,6 @@ namespace Agenda.BusinessProcess.Object
     {
 
         ///<remarks>
-        ///   <name>BPInvitacion.DeleteInvitacionComentario</name>
-        ///   <create>30-Diciembre-2014</create>
-        ///   <author>Ruben.Cobos</author>
-        ///</remarks>
-        ///<summary>Elimina lógicamente un comentario existente en una invitación</summary>
-        ///<param name="oENTInvitacion">Entidad de Invitacion con los parámetros necesarios para realizar la transacción</param>
-        ///<returns>Una entidad de respuesta</returns>
-        public ENTResponse DeleteInvitacionComentario(ENTInvitacion oENTInvitacion){
-            DAInvitacion oDAInvitacion = new DAInvitacion();
-            ENTResponse oENTResponse = new ENTResponse();
-
-            try
-            {
-
-                // Transacción en base de datos
-                oENTResponse = oDAInvitacion.DeleteInvitacionComentario(oENTInvitacion, this.ConnectionApplication, 0);
-
-                // Validación de error en consulta
-                if (oENTResponse.GeneratesException) { return oENTResponse; }
-
-                // Validación de mensajes de la BD
-                oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
-
-            }catch (Exception ex){
-                oENTResponse.ExceptionRaised(ex.Message);
-            }
-
-            // Resultado
-            return oENTResponse;
-        }
-
-        ///<remarks>
         ///   <name>BPInvitacion.DeleteInvitacionContacto</name>
         ///   <create>07-Enero-2015</create>
         ///   <author>Ruben.Cobos</author>
@@ -153,7 +121,7 @@ namespace Agenda.BusinessProcess.Object
                 if (oENTResponse.MessageDB != "") { return oENTResponse; }
 
                 // Validaciones de invitación
-                if (oENTResponse.DataSetResponse.Tables[2].Rows.Count == 0) { oENTResponse.MessageDB = "No se detectaron direcciones de correo electrónico para el envío de la notificación, la invitación se creó de todas formas "; }
+                if (oENTResponse.DataSetResponse.Tables[2].Rows.Count == 0) { oENTResponse.MessageDB = "No se detectaron direcciones de correo electrónico para el envío de la notificación, la invitación se " + (oENTInvitacion.EstatusInvitacionId == 2 ? "declinó" : "creó") + " de todas formas "; }
                 if (oENTResponse.MessageDB != "") { return oENTResponse; }    
 
                 // Obtener el listado de direcciones a donde se enviará la notificación
@@ -166,60 +134,53 @@ namespace Agenda.BusinessProcess.Object
 
                         // Configuración del correo
                         HTMLMessage = "" +
-                           "<html>" +
-                           "<head>" +
-                              "<title>Agenda - Invitación declianada</title>" +
-                           "</head>" +
-                           "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
-                              "<div style='clear:both; height:90%; text-align:center; width:100%;'>" +
-                                 "<div style='height:80%; clear: both; margin:0px auto; position:relative; top:10%; width:90%;'>" +
-                                    "<table border='0px;' cellpadding='0' cellspacing='0' style='height:100%; width:100%;'>" +
-                                       "<tr>" +
-                                          "<td colspan='2' valign='middle' style='color:#549CC6; font-family:Arial; font-size:12px; font-weight:bold; text-align:left;'>Agenda - Invitacion declinada</td>" +
-                                       "</tr>" +
-                                             "<tr><td colspan='3'><div style='border-bottom:1px solid #549CC6;'></div></td></tr>" +
-                                       "<tr style='height:10px'><td colspan='3'></td></tr>" +
-                                       "<tr>" +
-                                          "<td colspan='2' valign='top' style='font-family:Arial; font-size:12px;'>" +
-                                             "Se le notifica que la solicitud de invitación al evento ha sido declinada, el  motivo ha sido el siguiente:<br><br>" +
-                                             "<table border='0px' cellpadding='0' cellspacing ='0' class='Text' style='height:100%; width:100%'>" +
-                                                "<tr style='height:10px'><td></td></tr>" +
-                                                "<tr>" +
-                                                   "<td style='font-family:Arial; font-size:12px; text-align:left;'>" +
-                                                         "<br>Motivo" +
-                                                   "</td>" +
-                                                "</tr>" +
-                                                "<tr>" +
-                                                   "<td style='font-family:Arial; font-size:12px; text-align:left;'>" +
-                                                      "<br><br><br>Gracias por utilizar nuestros servicios informáticos" +
-                                                   "</td>" +
-                                                "</tr>" +
-                                                "<tr>" +
-                                                   "<td style='font-family:Arial; font-size:9px; text-align:center;'>" +
-                                                      "<br><br>Powered By GCSoft" +
-                                                   "</td>" +
-                                                "</tr>" +
-                                             "</table>" +
-                                          "</td>" +
-                                       "</tr>" +
-                                       "<tr style='height:20px'><td colspan='3'></td></tr>" +
-                                       "<tr style='height:20px'><td colspan='3'></td></tr>" +
-                                       "<tr style='height:1px'><td colspan='3' style='background:#000063 repeat-x;'></td></tr>" +
-                                       "<tr style='height:60px; vertical-align:top;'>" +
-                                          "<td colspan='2' style='font-family:Arial; font-size:10px; color: #180A3B; text-align:justify; vertical-align:middle;'>" +
-                                             "Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.<br/><br/>Nota: Los acentos y caracteres especiales fueron omitidos para su correcta lectura en cualquier medio electronico.<br/>" +
-                                          "</td>" +
-                                          "<td></td>" +
-                                       "</tr>" +
-                                             "<tr><td colspan='3'></td></tr>" +
-                                    "</table>" +
-                                 "</div>" +
-                              "</div>" +
-                           "</body>" +
-                        "</html>";
+                            "<html>" +
+                               "<head>" +
+                                  "<title>Agenda - Invitaci&oacute;n declinada</title>" +
+                               "</head>" +
+                               "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
+                                  "<div style='clear:both; height:80%; text-align:center; width:100%;'>" +
+                                     "<div style='clear:both; height:70%; margin:0px auto; position:relative; top:10%; width:90%;'>" +
+                                        "<table style='color:#339933; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:20%;' valign='middle'>" +
+                                                "<td style='font-weight:bold;'>" +
+                                                    "Invitaci&oacute;n declinada<br /><br />" +
+                                                    "<div style='border-bottom:1px solid #339933;'></div>" +
+                                                "</td>" +
+                                            "</tr>" +
+                                            "<tr style='height:80%;' valign='top'>" +
+                                                "<td>" +
+                                                    "La coordinaci&oacute;n de relaciones p&uacute;blicas le notifica que la invitaci&oacute;n al evento <font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTInvitacion.EventoNombre + "</font> ha sido rechazada.<br /><br /><br />" +
+                                                    ( oENTInvitacion.MotivoRechazo.Trim() == "" ? "" : "El motivo de rechazo fue el siguiente:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTInvitacion.MotivoRechazo.Trim() + "</font>" ) +
+                                                    "<br /><br /><br /><br /><br />Gracias por utilizar nuestros servicios inform&aacute;ticos.<br /><br />" +
+                                                "</td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                     "</div>" +
+                                  "</div>" +
+                                  "<div style='background:#339933; clear:both; height:20%; text-align:left; width:100%;'>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "<div style='height:90%;'>" +
+                                        "<table style='color:#FFFFFF; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:100%;' valign='middle'>" +
+                                                "<td style='text-align:center; float:left; width:20%;'>" +
+                                                    "<img src='" + this.MailLogo + "' height='120px' width='92px' />" +
+                                                "</td>" +
+                                                "<td style='text-align:justify; float:left; vertical-align: middle; width:70%;'>" +
+                                                    "<div style='text-align:center; width:90%;'><font style='font-family:Arial; font-size:9px;'>Powered By GCSoft</font><br /><br /></div>" +
+                                                    "<font style='font-family:Arial; font-size:10px;'>Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.</font><br />" +
+                                                "</td>" +
+                                                "<td></td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                    "</div>" +
+                                    "<div style='height:5%;'></div>" +
+                                  "</div>" +
+                               "</body>" +
+                            "</html>";
 
                         // Enviar correo
-                        gcMail.Send("Agenda - Invitación creada", Contactos, "Agenda - Invitación creada", HTMLMessage);
+                        gcMail.Send("Agenda - Invitación declinada", Contactos, "Invitación declinada", HTMLMessage);
 
                     #endregion
 
@@ -228,65 +189,58 @@ namespace Agenda.BusinessProcess.Object
                     #region Registrada
 
                         // Llave encriptada
-                        Key = oENTResponse.DataSetResponse.Tables[1].Rows[0]["InvitacionId"].ToString();
+                        Key = "1|" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["InvitacionId"].ToString();
                         Key = gcEncryption.EncryptString(Key, false);
 
                         // Configuración del correo
                         HTMLMessage = "" +
-                           "<html>" +
-                           "<head>" +
-                              "<title>Agenda - Invitación creada</title>" +
-                           "</head>" +
-                           "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
-                              "<div style='clear:both; height:90%; text-align:center; width:100%;'>" +
-                                 "<div style='height:80%; clear: both; margin:0px auto; position:relative; top:10%; width:90%;'>" +
-                                    "<table border='0px;' cellpadding='0' cellspacing='0' style='height:100%; width:100%;'>" +
-                                       "<tr>" +
-                                          "<td colspan='2' valign='middle' style='color:#549CC6; font-family:Arial; font-size:12px; font-weight:bold; text-align:left;'>Agenda - Invitacion creada</td>" +
-                                       "</tr>" +
-                                             "<tr><td colspan='3'><div style='border-bottom:1px solid #549CC6;'></div></td></tr>" +
-                                       "<tr style='height:10px'><td colspan='3'></td></tr>" +
-                                       "<tr>" +
-                                          "<td colspan='2' valign='top' style='font-family:Arial; font-size:12px;'>" +
-                                             "Usted ha sido asociado en una nueva invitación<br><br>" +
-                                             "<table border='0px' cellpadding='0' cellspacing ='0' class='Text' style='height:100%; width:100%'>" +
-                                                "<tr style='height:10px'><td></td></tr>" +
-                                                "<tr>" +
-                                                   "<td style='font-family:Arial; font-size:12px; text-align:left;'>" +
-                                                         "<br>Puede acceder al sistema haciendo click <a href='" + this.ApplicationURLInvitation + "?key=" + Key + "'>aqui</a>" +
-                                                   "</td>" +
-                                                "</tr>" +
-                                                "<tr>" +
-                                                   "<td style='font-family:Arial; font-size:12px; text-align:left;'>" +
-                                                      "<br><br><br>Gracias por utilizar nuestros servicios informáticos" +
-                                                   "</td>" +
-                                                "</tr>" +
-                                                "<tr>" +
-                                                   "<td style='font-family:Arial; font-size:9px; text-align:center;'>" +
-                                                      "<br><br>Powered By GCSoft" +
-                                                   "</td>" +
-                                                "</tr>" +
-                                             "</table>" +
-                                          "</td>" +
-                                       "</tr>" +
-                                       "<tr style='height:20px'><td colspan='3'></td></tr>" +
-                                       "<tr style='height:20px'><td colspan='3'></td></tr>" +
-                                       "<tr style='height:1px'><td colspan='3' style='background:#000063 repeat-x;'></td></tr>" +
-                                       "<tr style='height:60px; vertical-align:top;'>" +
-                                          "<td colspan='2' style='font-family:Arial; font-size:10px; color: #180A3B; text-align:justify; vertical-align:middle;'>" +
-                                             "Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.<br/><br/>Nota: Los acentos y caracteres especiales fueron omitidos para su correcta lectura en cualquier medio electronico.<br/>" +
-                                          "</td>" +
-                                          "<td></td>" +
-                                       "</tr>" +
-                                             "<tr><td colspan='3'></td></tr>" +
-                                    "</table>" +
-                                 "</div>" +
-                              "</div>" +
-                           "</body>" +
-                        "</html>";
+                            "<html>" +
+                               "<head>" +
+                                  "<title>Agenda - Valoraci&oacute;n de evento</title>" +
+                               "</head>" +
+                               "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
+                                  "<div style='clear:both; height:80%; text-align:center; width:100%;'>" +
+                                     "<div style='clear:both; height:70%; margin:0px auto; position:relative; top:10%; width:90%;'>" +
+							            "<table style='color:#339933; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+								            "<tr style='height:20%;' valign='middle'>" +
+									            "<td style='font-weight:bold;'>" +
+										            "Valoraci&oacute;n de evento<br /><br />" +
+										            "<div style='border-bottom:1px solid #339933;'></div>" +
+									            "</td>" +
+								            "</tr>" +
+								            "<tr style='height:80%;' valign='top'>" +
+									            "<td>" +
+                                                    "La coordinaci&oacute;n de relaciones p&uacute;blicas le notifica que ha sido asociado a la invitaci&oacute;n del evento <font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTInvitacion.EventoNombre + "</font> para su valoraci&oacute;n.<br /><br /><br />" +
+										            "Puede acceder al detalle de dicho evento haciendo click <a href='" + this.ApplicationURLInvitation + "?key=" + Key + "'>aqui</a><br /><br /><br /><br /><br />" +
+                                                    "Gracias por utilizar nuestros servicios inform&aacute;ticos.<br /><br />" +
+									            "</td>" +
+								            "</tr>" +
+							            "</table>" +
+                                     "</div>" +
+                                  "</div>" +
+                                  "<div style='background:#339933; clear:both; height:20%; text-align:left; width:100%;'>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "<div style='height:90%;'>" +
+                                        "<table style='color:#FFFFFF; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:100%;' valign='middle'>" +
+                                                "<td style='text-align:center; float:left; width:20%;'>" +
+                                                    "<img src='" + this.MailLogo + "' height='120px' width='92px' />" +
+                                                "</td>" +
+                                                "<td style='text-align:justify; float:left; vertical-align: middle; width:70%;'>" +
+                                                    "<div style='text-align:center; width:90%;'><font style='font-family:Arial; font-size:9px;'>Powered By GCSoft</font><br /><br /></div>" +
+                                                    "<font style='font-family:Arial; font-size:10px;'>Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.</font><br />" +
+                                                "</td>" +
+                                                "<td></td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                    "</div>" +
+                                    "<div style='height:5%;'></div>" +
+                                  "</div>" +
+                               "</body>" +
+                            "</html>";
 
                         // Enviar correo
-                        gcMail.Send("Agenda - Invitación creada", Contactos, "Agenda - Invitación creada", HTMLMessage);
+                        gcMail.Send("Agenda - Valoración de evento", Contactos, "Valoración de evento", HTMLMessage);
 
                     #endregion
 
@@ -380,6 +334,7 @@ namespace Agenda.BusinessProcess.Object
             GCEncryption gcEncryption = new GCEncryption();
 
             String Contactos = "";
+            String EventoNombre = "";
             String HTMLMessage = "";
             String Key = "";
 
@@ -402,69 +357,63 @@ namespace Agenda.BusinessProcess.Object
 
                 // Correo
                 Contactos = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Email"].ToString();
+                EventoNombre = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
 
                 #region Enviar correo
 
                     // Llave encriptada
-                    Key = oENTInvitacion.InvitacionId.ToString() + "|2";
-                    Key = gcEncryption.EncryptString(Key, true);
+                    Key = "1|" + oENTInvitacion.InvitacionId.ToString();
+                    Key = gcEncryption.EncryptString(Key, false);
 
                     // Configuración del correo
                     HTMLMessage = "" +
-                       "<html>" +
-                       "<head>" +
-                          "<title>Agenda - Invitación creada</title>" +
-                       "</head>" +
-                       "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
-                          "<div style='clear:both; height:90%; text-align:center; width:100%;'>" +
-                             "<div style='height:80%; clear: both; margin:0px auto; position:relative; top:10%; width:90%;'>" +
-                                "<table border='0px;' cellpadding='0' cellspacing='0' style='height:100%; width:100%;'>" +
-                                   "<tr>" +
-                                      "<td colspan='2' valign='middle' style='color:#549CC6; font-family:Arial; font-size:12px; font-weight:bold; text-align:left;'>Agenda - Invitacion creada</td>" +
-                                   "</tr>" +
-                                         "<tr><td colspan='3'><div style='border-bottom:1px solid #549CC6;'></div></td></tr>" +
-                                   "<tr style='height:10px'><td colspan='3'></td></tr>" +
-                                   "<tr>" +
-                                      "<td colspan='2' valign='top' style='font-family:Arial; font-size:12px;'>" +
-                                         "Usted ha sido asociado en una nueva invitación<br><br>" +
-                                         "<table border='0px' cellpadding='0' cellspacing ='0' class='Text' style='height:100%; width:100%'>" +
-                                            "<tr style='height:10px'><td></td></tr>" +
-                                            "<tr>" +
-                                               "<td style='font-family:Arial; font-size:12px; text-align:left;'>" +
-                                                     "<br>Puede acceder al sistema haciendo click <a href='" + this.ApplicationURLInvitation + "key=" + Key + "'>aqui</a>" +
-                                               "</td>" +
+                            "<html>" +
+                               "<head>" +
+                                  "<title>Agenda - Valoraci&oacute;n de evento</title>" +
+                               "</head>" +
+                               "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
+                                  "<div style='clear:both; height:80%; text-align:center; width:100%;'>" +
+                                     "<div style='clear:both; height:70%; margin:0px auto; position:relative; top:10%; width:90%;'>" +
+                                        "<table style='color:#339933; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:20%;' valign='middle'>" +
+                                                "<td style='font-weight:bold;'>" +
+                                                    "Valoraci&oacute;n de evento<br /><br />" +
+                                                    "<div style='border-bottom:1px solid #339933;'></div>" +
+                                                "</td>" +
                                             "</tr>" +
-                                            "<tr>" +
-                                               "<td style='font-family:Arial; font-size:12px; text-align:left;'>" +
-                                                  "<br><br><br>Gracias por utilizar nuestros servicios informáticos" +
-                                               "</td>" +
+                                            "<tr style='height:80%;' valign='top'>" +
+                                                "<td>" +
+                                                    "La coordinaci&oacute;n de relaciones p&uacute;blicas le notifica que ha sido asociado a la invitaci&oacute;n del evento <font style='color:#000000; font-style: italic; font-weight:bold;'>" + EventoNombre + "</font> para su valoraci&oacute;n.<br /><br /><br />" +
+                                                    "Puede acceder al detalle de dicho evento haciendo click <a href='" + this.ApplicationURLInvitation + "?key=" + Key + "'>aqui</a><br /><br /><br /><br /><br />" +
+                                                    "Gracias por utilizar nuestros servicios inform&aacute;ticos.<br /><br />" +
+                                                "</td>" +
                                             "</tr>" +
-                                            "<tr>" +
-                                               "<td style='font-family:Arial; font-size:9px; text-align:center;'>" +
-                                                  "<br><br>Powered By GCSoft" +
-                                               "</td>" +
+                                        "</table>" +
+                                     "</div>" +
+                                  "</div>" +
+                                  "<div style='background:#339933; clear:both; height:20%; text-align:left; width:100%;'>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "<div style='height:90%;'>" +
+                                        "<table style='color:#FFFFFF; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:100%;' valign='middle'>" +
+                                                "<td style='text-align:center; float:left; width:20%;'>" +
+                                                    "<img src='" + this.MailLogo + "' height='120px' width='92px' />" +
+                                                "</td>" +
+                                                "<td style='text-align:justify; float:left; vertical-align: middle; width:70%;'>" +
+                                                    "<div style='text-align:center; width:90%;'><font style='font-family:Arial; font-size:9px;'>Powered By GCSoft</font><br /><br /></div>" +
+                                                    "<font style='font-family:Arial; font-size:10px;'>Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.</font><br />" +
+                                                "</td>" +
+                                                "<td></td>" +
                                             "</tr>" +
-                                         "</table>" +
-                                      "</td>" +
-                                   "</tr>" +
-                                   "<tr style='height:20px'><td colspan='3'></td></tr>" +
-                                   "<tr style='height:20px'><td colspan='3'></td></tr>" +
-                                   "<tr style='height:1px'><td colspan='3' style='background:#000063 repeat-x;'></td></tr>" +
-                                   "<tr style='height:60px; vertical-align:top;'>" +
-                                      "<td colspan='2' style='font-family:Arial; font-size:10px; color: #180A3B; text-align:justify; vertical-align:middle;'>" +
-                                         "Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.<br/><br/>Nota: Los acentos y caracteres especiales fueron omitidos para su correcta lectura en cualquier medio electronico.<br/>" +
-                                      "</td>" +
-                                      "<td></td>" +
-                                   "</tr>" +
-                                         "<tr><td colspan='3'></td></tr>" +
-                                "</table>" +
-                             "</div>" +
-                          "</div>" +
-                       "</body>" +
-                    "</html>";
+                                        "</table>" +
+                                    "</div>" +
+                                    "<div style='height:5%;'></div>" +
+                                  "</div>" +
+                               "</body>" +
+                            "</html>";
 
                     // Enviar correo
-                    gcMail.Send("Agenda - Invitación creada", Contactos, "Agenda - Invitación creada", HTMLMessage);
+                    gcMail.Send("Agenda - Valoración de evento", Contactos, "Valoración de evento", HTMLMessage);
 
                 #endregion
 
@@ -654,7 +603,8 @@ namespace Agenda.BusinessProcess.Object
             String Contactos = "";
             String HTMLMessage = "";
             String EventoNombre = "";
-            String Comentarios = "";
+            String Fecha = "";
+            String Key = "";
 
             try
             {
@@ -669,75 +619,104 @@ namespace Agenda.BusinessProcess.Object
                 oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
                 if (oENTResponse.MessageDB != "") { return oENTResponse; }
 
+                // Validación de envío de correo
+                if ( oENTInvitacion.Notificacion == 4 ){ return oENTResponse; }
+
                 // Validaciones de invitación
-                if (oENTResponse.DataSetResponse.Tables[2].Rows.Count == 0) { oENTResponse.MessageDB = "No se detectaron direcciones de correo electrónico para el envío de la notificación, la invitación se aprobó de todas formas "; }
-                if (oENTResponse.MessageDB != "") { return oENTResponse; }    
+                if ( oENTResponse.DataSetResponse.Tables[2].Rows.Count == 0 && oENTResponse.DataSetResponse.Tables[3].Rows.Count == 0 ) { oENTResponse.MessageDB = "No se detectaron direcciones de correo electrónico para el envío de la notificación, la invitación se aprobó de todas formas "; }
+                if ( oENTResponse.MessageDB != "" ) { return oENTResponse; }
 
                 // Obtener el listado de direcciones a donde se enviará la notificación
-                foreach( DataRow rowContacto in oENTResponse.DataSetResponse.Tables[2].Rows ){ Contactos = ( Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString() ); }
+                switch( oENTInvitacion.Notificacion ){
+                    case 1: // Logística
+
+                        foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[2].Rows) {
+                            Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
+                        }
+
+                        break;
+
+                    case 2: // Dirección de protocolo
+
+                        foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[3].Rows) {
+                            Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
+                        }
+
+                        break;
+
+                    case 3: // Ambos
+
+                        foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[2].Rows) {
+                            Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
+                        }
+                        foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[3].Rows) {
+                            Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
+                        }
+
+                        break;
+                }
 
                 // Nombre del evento y motivo de rechazo
                 EventoNombre = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
-                Comentarios = oENTInvitacion.Comentario;
+                Fecha = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHora"].ToString();
+
+                // Llave encriptada
+                Key = "2|" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoId"].ToString();
+                Key = gcEncryption.EncryptString(Key, false);
 
                 #region Correo
 
                     // Configuración del correo
                     HTMLMessage = "" +
-                       "<html>" +
-                       "<head>" +
-                          "<title>Agenda - Nuevo evento agendado</title>" +
-                       "</head>" +
-                       "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
-                          "<div style='clear:both; height:90%; text-align:center; width:100%;'>" +
-                             "<div style='height:80%; clear: both; margin:0px auto; position:relative; top:10%; width:90%;'>" +
-                                "<table border='0px;' cellpadding='0' cellspacing='0' style='height:100%; width:100%;'>" +
-                                   "<tr>" +
-                                      "<td colspan='2' valign='middle' style='color:#549CC6; font-family:Arial; font-size:12px; font-weight:bold; text-align:left;'>Agenda - Invitacion declinada</td>" +
-                                   "</tr>" +
-                                         "<tr><td colspan='3'><div style='border-bottom:1px solid #549CC6;'></div></td></tr>" +
-                                   "<tr style='height:10px'><td colspan='3'></td></tr>" +
-                                   "<tr>" +
-                                      "<td colspan='2' valign='top' style='font-family:Arial; font-size:12px;'>" +
-                                         "Se le notifica que se agregó el evento '" + EventoNombre + "' a la agenda.<br><br>" +
-                                         "<table border='0px' cellpadding='0' cellspacing ='0' class='Text' style='height:100%; width:100%'>" +
-                                            "<tr style='height:10px'><td></td></tr>" +
-                                            "<tr>" +
-                                               "<td style='font-family:Arial; font-size:12px; text-align:left;'>" +
-                                                     "<br>" + Comentarios +
-                                               "</td>" +
-                                            "</tr>" +
-                                            "<tr>" +
-                                               "<td style='font-family:Arial; font-size:12px; text-align:left;'>" +
-                                                  "<br><br><br>Gracias por utilizar nuestros servicios informáticos" +
-                                               "</td>" +
-                                            "</tr>" +
-                                            "<tr>" +
-                                               "<td style='font-family:Arial; font-size:9px; text-align:center;'>" +
-                                                  "<br><br>Powered By GCSoft" +
-                                               "</td>" +
-                                            "</tr>" +
-                                         "</table>" +
-                                      "</td>" +
-                                   "</tr>" +
-                                   "<tr style='height:20px'><td colspan='3'></td></tr>" +
-                                   "<tr style='height:20px'><td colspan='3'></td></tr>" +
-                                   "<tr style='height:1px'><td colspan='3' style='background:#000063 repeat-x;'></td></tr>" +
-                                   "<tr style='height:60px; vertical-align:top;'>" +
-                                      "<td colspan='2' style='font-family:Arial; font-size:10px; color: #180A3B; text-align:justify; vertical-align:middle;'>" +
-                                         "Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.<br/><br/>Nota: Los acentos y caracteres especiales fueron omitidos para su correcta lectura en cualquier medio electronico.<br/>" +
-                                      "</td>" +
-                                      "<td></td>" +
-                                   "</tr>" +
-                                         "<tr><td colspan='3'></td></tr>" +
-                                "</table>" +
-                             "</div>" +
-                          "</div>" +
-                       "</body>" +
-                    "</html>";
+                        "<html>" +
+                            "<head>" +
+                                "<title>Agenda - Evento agendado</title>" +
+                            "</head>" +
+                            "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
+                                "<div style='clear:both; height:80%; text-align:center; width:100%;'>" +
+                                    "<div style='clear:both; height:70%; margin:0px auto; position:relative; top:10%; width:90%;'>" +
+                                    "<table style='color:#339933; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                        "<tr style='height:20%;' valign='middle'>" +
+                                            "<td style='font-weight:bold;'>" +
+                                                "Evento agendado<br /><br />" +
+                                                "<div style='border-bottom:1px solid #339933;'></div>" +
+                                            "</td>" +
+                                        "</tr>" +
+                                        "<tr style='height:80%;' valign='top'>" +
+                                            "<td>" +
+                                                "La coordinaci&oacute;n de relaciones p&uacute;blicas le notifica que la invitaci&oacute;n al evento <font style='color:#000000; font-style: italic; font-weight:bold;'>" + EventoNombre + "</font> ha sido agendada para el Gobernador con fecha de <font style='color:#000000; font-style: italic; font-weight:bold;'>" + Fecha + "</font>.<br /><br /><br />" +
+                                                ( oENTInvitacion.Comentario.Trim() == "" ? "" : "Notas adicionales:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTInvitacion.Comentario.Trim() + "</font>" ) +
+                                                "<br /><br /><br /><br /><br />Puede acceder al detalle de dicho evento haciendo click <a href='" + this.ApplicationURLInvitation + "?key=" + Key + "'>aqui</a><br /><br /><br /><br /><br />" +
+                                                "Gracias por utilizar nuestros servicios inform&aacute;ticos.<br /><br />" +
+                                            "</td>" +
+                                        "</tr>" +
+                                    "</table>" +
+                                    "</div>" +
+                                "</div>" +
+                                "<div style='background:#339933; clear:both; height:20%; text-align:left; width:100%;'>" +
+                                "<div style='height:5%;'></div>" +
+                                "<div style='height:90%;'>" +
+                                    "<table style='color:#FFFFFF; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                        "<tr style='height:100%;' valign='middle'>" +
+                                            "<td style='text-align:center; float:left; width:20%;'>" +
+                                                "<img src='" + this.MailLogo + "' height='120px' width='92px' />" +
+                                            "</td>" +
+                                            "<td style='text-align:justify; float:left; vertical-align: middle; width:70%;'>" +
+                                                "<div style='text-align:center; width:90%;'><font style='font-family:Arial; font-size:9px;'>Powered By GCSoft</font><br /><br /></div>" +
+                                                "<font style='font-family:Arial; font-size:10px;'>Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.</font><br />" +
+                                            "</td>" +
+                                            "<td></td>" +
+                                        "</tr>" +
+                                    "</table>" +
+                                "</div>" +
+                                "<div style='height:5%;'></div>" +
+                                "</div>" +
+                            "</body>" +
+                        "</html>";
+                    
 
                     // Enviar correo
-                    gcMail.Send("Agenda - Nuevo evento agendado", Contactos, "Agenda - Nuevo evento agendado", HTMLMessage);
+                    gcMail.Send("Agenda - Evento agendado", Contactos, "Evento agendado", HTMLMessage);
 
                 #endregion
 
@@ -791,66 +770,59 @@ namespace Agenda.BusinessProcess.Object
 
                 // Nombre del evento y motivo de rechazo
                 EventoNombre = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
-                MotivoRechazo = oENTResponse.DataSetResponse.Tables[1].Rows[0]["MotivoRechazo"].ToString();
+                MotivoRechazo = oENTResponse.DataSetResponse.Tables[1].Rows[0]["MotivoRechazo"].ToString().Trim();
 
                 #region Correo
 
                     // Configuración del correo
                     HTMLMessage = "" +
-                       "<html>" +
-                       "<head>" +
-                          "<title>Agenda - Invitación declinada</title>" +
-                       "</head>" +
-                       "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
-                          "<div style='clear:both; height:90%; text-align:center; width:100%;'>" +
-                             "<div style='height:80%; clear: both; margin:0px auto; position:relative; top:10%; width:90%;'>" +
-                                "<table border='0px;' cellpadding='0' cellspacing='0' style='height:100%; width:100%;'>" +
-                                   "<tr>" +
-                                      "<td colspan='2' valign='middle' style='color:#549CC6; font-family:Arial; font-size:12px; font-weight:bold; text-align:left;'>Agenda - Invitacion declinada</td>" +
-                                   "</tr>" +
-                                         "<tr><td colspan='3'><div style='border-bottom:1px solid #549CC6;'></div></td></tr>" +
-                                   "<tr style='height:10px'><td colspan='3'></td></tr>" +
-                                   "<tr>" +
-                                      "<td colspan='2' valign='top' style='font-family:Arial; font-size:12px;'>" +
-                                         "Se le notifica que la solicitud de invitación al evento '" + EventoNombre + "'ha sido declinada, el motivo ha sido el siguiente:<br><br>" +
-                                         "<table border='0px' cellpadding='0' cellspacing ='0' class='Text' style='height:100%; width:100%'>" +
-                                            "<tr style='height:10px'><td></td></tr>" +
-                                            "<tr>" +
-                                               "<td style='font-family:Arial; font-size:12px; text-align:left;'>" +
-                                                     "<br>" + MotivoRechazo +
-                                               "</td>" +
+                            "<html>" +
+                               "<head>" +
+                                  "<title>Agenda - Invitaci&oacute;n declinada</title>" +
+                               "</head>" +
+                               "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
+                                  "<div style='clear:both; height:80%; text-align:center; width:100%;'>" +
+                                     "<div style='clear:both; height:70%; margin:0px auto; position:relative; top:10%; width:90%;'>" +
+                                        "<table style='color:#339933; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:20%;' valign='middle'>" +
+                                                "<td style='font-weight:bold;'>" +
+                                                    "Invitaci&oacute;n declinada<br /><br />" +
+                                                    "<div style='border-bottom:1px solid #339933;'></div>" +
+                                                "</td>" +
                                             "</tr>" +
-                                            "<tr>" +
-                                               "<td style='font-family:Arial; font-size:12px; text-align:left;'>" +
-                                                  "<br><br><br>Gracias por utilizar nuestros servicios informáticos" +
-                                               "</td>" +
+                                            "<tr style='height:80%;' valign='top'>" +
+                                                "<td>" +
+                                                    "La coordinaci&oacute;n de relaciones p&uacute;blicas le notifica que la invitaci&oacute;n al evento <font style='color:#000000; font-style: italic; font-weight:bold;'>" + EventoNombre + "</font> ha sido rechazada.<br /><br /><br />" +
+                                                    ( MotivoRechazo == "" ? "" : "El motivo de rechazo fue el siguiente:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" +MotivoRechazo + "</font>" ) +
+                                                    "<br /><br /><br /><br /><br />Gracias por utilizar nuestros servicios inform&aacute;ticos.<br /><br />" +
+                                                "</td>" +
                                             "</tr>" +
-                                            "<tr>" +
-                                               "<td style='font-family:Arial; font-size:9px; text-align:center;'>" +
-                                                  "<br><br>Powered By GCSoft" +
-                                               "</td>" +
+                                        "</table>" +
+                                     "</div>" +
+                                  "</div>" +
+                                  "<div style='background:#339933; clear:both; height:20%; text-align:left; width:100%;'>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "<div style='height:90%;'>" +
+                                        "<table style='color:#FFFFFF; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:100%;' valign='middle'>" +
+                                                "<td style='text-align:center; float:left; width:20%;'>" +
+                                                    "<img src='" + this.MailLogo + "' height='120px' width='92px' />" +
+                                                "</td>" +
+                                                "<td style='text-align:justify; float:left; vertical-align: middle; width:70%;'>" +
+                                                    "<div style='text-align:center; width:90%;'><font style='font-family:Arial; font-size:9px;'>Powered By GCSoft</font><br /><br /></div>" +
+                                                    "<font style='font-family:Arial; font-size:10px;'>Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.</font><br />" +
+                                                "</td>" +
+                                                "<td></td>" +
                                             "</tr>" +
-                                         "</table>" +
-                                      "</td>" +
-                                   "</tr>" +
-                                   "<tr style='height:20px'><td colspan='3'></td></tr>" +
-                                   "<tr style='height:20px'><td colspan='3'></td></tr>" +
-                                   "<tr style='height:1px'><td colspan='3' style='background:#000063 repeat-x;'></td></tr>" +
-                                   "<tr style='height:60px; vertical-align:top;'>" +
-                                      "<td colspan='2' style='font-family:Arial; font-size:10px; color: #180A3B; text-align:justify; vertical-align:middle;'>" +
-                                         "Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.<br/><br/>Nota: Los acentos y caracteres especiales fueron omitidos para su correcta lectura en cualquier medio electronico.<br/>" +
-                                      "</td>" +
-                                      "<td></td>" +
-                                   "</tr>" +
-                                         "<tr><td colspan='3'></td></tr>" +
-                                "</table>" +
-                             "</div>" +
-                          "</div>" +
-                       "</body>" +
-                    "</html>";
+                                        "</table>" +
+                                    "</div>" +
+                                    "<div style='height:5%;'></div>" +
+                                  "</div>" +
+                               "</body>" +
+                            "</html>";
 
-                    // Enviar correo
-                    gcMail.Send("Agenda - Invitación declinada", Contactos, "Agenda - Invitación declinada", HTMLMessage);
+                        // Enviar correo
+                        gcMail.Send("Agenda - Invitación declinada", Contactos, "Invitación declinada", HTMLMessage);
 
                 #endregion
 

@@ -184,6 +184,15 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         protected global::System.Web.UI.WebControls.TextBox txtRepresentante;
         
         /// <summary>
+        /// btnDescartarRepresentante control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDescartarRepresentante;
+        
+        /// <summary>
         /// hddRepresentanteId control.
         /// </summary>
         /// <remarks>

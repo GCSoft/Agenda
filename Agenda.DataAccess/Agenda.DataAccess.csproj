@@ -52,6 +52,7 @@
     <Compile Include="Object\DAMunicipio.cs" />
     <Compile Include="Object\DAPais.cs" />
     <Compile Include="Object\DAPrioridad.cs" />
+    <Compile Include="Object\DARespuestaEvaluacion.cs" />
     <Compile Include="Object\DARol.cs" />
     <Compile Include="Object\DASecretario.cs" />
     <Compile Include="Object\DASubMenu.cs" />

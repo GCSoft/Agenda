@@ -211,6 +211,11 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
                 this.ckeObservaciones.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["InvitacionObservaciones"].ToString();
 
+                // Validación de secretario representante
+                if (oENTResponse.DataSetResponse.Tables[1].Rows[0]["SecretarioId_Representante"].ToString() != "0"){
+                    this.btnDescartarRepresentante.Visible = true;
+                }
+
             }catch (Exception ex){
                 throw (ex);
             }
@@ -355,6 +360,19 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlCategoria.ClientID + "'); }", true);
             }
 		}
+
+        protected void btnDescartarRepresentante_Click(object sender, EventArgs e){
+            try
+            {
+
+                // Limpiar Autosuggest
+                this.txtRepresentante.Text = "";
+                this.hddRepresentanteId.Value = "";
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlCategoria.ClientID + "'); }", true);
+            }
+        }
 
         protected void btnRegresar_Click(object sender, EventArgs e){
 			String sKey = "";

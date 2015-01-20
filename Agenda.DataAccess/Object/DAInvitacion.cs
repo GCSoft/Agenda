@@ -22,68 +22,6 @@ namespace Agenda.DataAccess.Object
     {
 
         ///<remarks>
-        ///   <name>DAInvitacion.DeleteInvitacionComentario</name>
-        ///   <create>30-Diciembre-2014</create>
-        ///   <author>Ruben.Cobos</author>
-        ///</remarks>
-        ///<summary>Elimina lógicamente un comentario existente en una invitación</summary>
-        ///<param name="oENTInvitacion">Entidad de Invitacion con los parámetros necesarios para realizar la transacción</param>
-        ///<param name="sConnection">Cadena de conexión a la base de datos</param>
-        ///<param name="iAlternateDBTimeout">Valor en milisegundos del Timeout en la consulta a la base de datos. 0 si se desea el Timeout por default</param>
-        ///<returns>Una entidad de respuesta</returns>
-        public ENTResponse DeleteInvitacionComentario(ENTInvitacion oENTInvitacion, String sConnection, Int32 iAlternateDBTimeout){
-            SqlConnection sqlCnn = new SqlConnection(sConnection);
-            SqlCommand sqlCom;
-            SqlParameter sqlPar;
-            SqlDataAdapter sqlDA;
-
-            ENTResponse oENTResponse = new ENTResponse();
-
-            // Configuración de objetos
-            sqlCom = new SqlCommand("uspInvitacionComentario_Del", sqlCnn);
-            sqlCom.CommandType = CommandType.StoredProcedure;
-
-            // Timeout alternativo en caso de ser solicitado
-            if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
-
-            // Parametros
-            sqlPar = new SqlParameter("InvitacionComentarioId", SqlDbType.Int);
-            sqlPar.Value = oENTInvitacion.InvitacionComentarioId;
-            sqlCom.Parameters.Add(sqlPar);
-
-            sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
-            sqlPar.Value = oENTInvitacion.UsuarioId;
-            sqlCom.Parameters.Add(sqlPar);
-
-            // Inicializaciones
-            oENTResponse.DataSetResponse = new DataSet();
-            sqlDA = new SqlDataAdapter(sqlCom);
-
-            // Transacción
-            try
-            {
-
-                sqlCnn.Open();
-                sqlDA.Fill(oENTResponse.DataSetResponse);
-                sqlCnn.Close();
-
-            }catch (SqlException sqlEx){
-
-                oENTResponse.ExceptionRaised(sqlEx.Message);
-            }catch (Exception ex){
-
-                oENTResponse.ExceptionRaised(ex.Message);
-            }finally{
-
-                if (sqlCnn.State == ConnectionState.Open) { sqlCnn.Close(); }
-                sqlCnn.Dispose();
-            }
-
-            // Resultado
-            return oENTResponse;
-        }
-
-        ///<remarks>
         ///   <name>DAInvitacion.DeleteInvitacionContacto</name>
         ///   <create>07-Enero-2015</create>
         ///   <author>Ruben.Cobos</author>
@@ -483,6 +421,34 @@ namespace Agenda.DataAccess.Object
 
             sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
             sqlPar.Value = oENTInvitacion.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("RespuestaEvaluacionId", SqlDbType.Int);
+            sqlPar.Value = oENTInvitacion.RespuestaEvaluacionId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("RepNombre", SqlDbType.VarChar);
+            sqlPar.Value = oENTInvitacion.RepresentanteNombre;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("RepCargo", SqlDbType.VarChar);
+            sqlPar.Value = oENTInvitacion.RepresentanteCargo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("RepTelOficina", SqlDbType.VarChar);
+            sqlPar.Value = oENTInvitacion.RepresentanteTelefonoOficina;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("RepTelMovil", SqlDbType.VarChar);
+            sqlPar.Value = oENTInvitacion.RepresentanteTelefonoMovil;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("RepTelParticular", SqlDbType.VarChar);
+            sqlPar.Value = oENTInvitacion.RepresentanteTelefonoParticular;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("RepTelOtro", SqlDbType.VarChar);
+            sqlPar.Value = oENTInvitacion.RepresentanteTelefonoOtro;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("Comentario", SqlDbType.VarChar);
@@ -1197,8 +1163,44 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTInvitacion.InvitacionComentarioId;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("InvitacionId", SqlDbType.Int);
+            sqlPar.Value = oENTInvitacion.InvitacionId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ModuloId", SqlDbType.Int);
+            sqlPar.Value = oENTInvitacion.ModuloId;
+            sqlCom.Parameters.Add(sqlPar);
+
             sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
             sqlPar.Value = oENTInvitacion.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("RespuestaEvaluacionId", SqlDbType.Int);
+            sqlPar.Value = oENTInvitacion.RespuestaEvaluacionId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("RepNombre", SqlDbType.VarChar);
+            sqlPar.Value = oENTInvitacion.RepresentanteNombre;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("RepCargo", SqlDbType.VarChar);
+            sqlPar.Value = oENTInvitacion.RepresentanteCargo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("RepTelOficina", SqlDbType.VarChar);
+            sqlPar.Value = oENTInvitacion.RepresentanteTelefonoOficina;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("RepTelMovil", SqlDbType.VarChar);
+            sqlPar.Value = oENTInvitacion.RepresentanteTelefonoMovil;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("RepTelParticular", SqlDbType.VarChar);
+            sqlPar.Value = oENTInvitacion.RepresentanteTelefonoParticular;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("RepTelOtro", SqlDbType.VarChar);
+            sqlPar.Value = oENTInvitacion.RepresentanteTelefonoOtro;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("Comentario", SqlDbType.VarChar);

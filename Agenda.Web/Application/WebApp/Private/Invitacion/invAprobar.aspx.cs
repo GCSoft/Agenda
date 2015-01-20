@@ -72,6 +72,12 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 this.lblEventoNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
                 this.lblEventoFechaHora.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHora"].ToString();
 
+                // Validación de envío de correos
+                if (oENTResponse.DataSetResponse.Tables[1].Rows[0]["SecretarioId_Representante"].ToString() != "0"){
+                    this.rblNotificacion.SelectedValue = "4"; // Ninguno
+                    this.rblNotificacion.Enabled = false;
+                }
+
             }catch (Exception ex){
                 throw (ex);
             }
@@ -97,6 +103,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 // Formulario
                 oENTInvitacion.InvitacionId = Int32.Parse(this.hddInvitacionId.Value);
                 oENTInvitacion.Comentario = this.ckeComentarios.Text.Trim();
+                oENTInvitacion.Notificacion = Int16.Parse(this.rblNotificacion.SelectedValue);
 
                 // Transacción
                 oENTResponse = oBPInvitacion.UpdateInvitacion_Aprobar(oENTInvitacion);

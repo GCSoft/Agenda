@@ -57,6 +57,7 @@
     <Compile Include="Object\BPMunicipio.cs" />
     <Compile Include="Object\BPPais.cs" />
     <Compile Include="Object\BPPrioridad.cs" />
+    <Compile Include="Object\BPRespuestaEvaluacion.cs" />
     <Compile Include="Object\BPRol.cs" />
     <Compile Include="Object\BPSecretario.cs" />
     <Compile Include="Object\BPSubMenu.cs" />

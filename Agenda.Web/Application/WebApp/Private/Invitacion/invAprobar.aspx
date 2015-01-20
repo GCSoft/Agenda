@@ -34,6 +34,18 @@
 				<td class="Espacio"></td>
 				<td class="Campo" colspan="2"><asp:Label ID="lblEventoFechaHora" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
 			</tr>
+            <tr>
+				<td class="Etiqueta">Notificación</td>
+				<td class="Espacio"></td>
+				<td class="Campo" colspan="2">
+                    <asp:RadioButtonList ID="rblNotificacion" runat="server" RepeatDirection="Horizontal">
+						<asp:ListItem Text="Logística" Value="1" Selected="True"></asp:ListItem>
+						<asp:ListItem Text="Dirección de Protocolo" Value="2"></asp:ListItem>
+                        <asp:ListItem Text="Ambos" Value="3"></asp:ListItem>
+                        <asp:ListItem Text="Ninguno" Value="4"></asp:ListItem>
+					</asp:RadioButtonList>
+				</td>
+			</tr>
 			<tr><td class="Etiqueta" colspan="4" style="text-align:left;">Comentarios</td></tr>
 			<tr>
 				<td colspan="4"><CKEditor:CKEditorControl ID="ckeComentarios" runat="server" BasePath="~/Include/Components/CKEditor/Core/" Height="90px"></CKEditor:CKEditorControl></td>

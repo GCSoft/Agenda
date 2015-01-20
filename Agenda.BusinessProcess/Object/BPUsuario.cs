@@ -69,7 +69,8 @@ namespace Agenda.BusinessProcess.Object
                 if (oENTResponse.MessageDB != "") { return oENTResponse; }
 
                 // Configuración del correo
-                sHTMLMessage = "<html>" +
+                sHTMLMessage = "" +
+                "<html>" +
                    "<head>" +
                       "<title>Agenda - Bienvenido al sistema</title>" +
                    "</head>" +
@@ -85,12 +86,12 @@ namespace Agenda.BusinessProcess.Object
 								"</tr>" +
 								"<tr style='height:80%;' valign='top'>" +
 									"<td>" +
-										"El equipo de sistemas le da la bienvenida a la plataforma de Agenda. Los datos de acceso a la aplicaci&oacute;n son los siguientes<br /><br /><br />" +
+                                        "La coordinaci&oacute;n de relaciones p&uacute;blicas le da la bienvenida a la plataforma de Agenda. Los datos de acceso a la aplicaci&oacute;n son los siguientes<br /><br /><br />" +
                                         "<font style='font-size:15px; font-weight:bold;'>Usuario:</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style='color:#000000; font-weight:bold;'>" + oENTUsuario.Email + "</font><br />" +
 										"<font style='font-size:15px; font-weight:bold;'>Contrase&ntilde;a:</font>&nbsp;<font style='color:#000000; font-weight:bold;'>" + Password + "</font><br /><br /><br />" +
 										"Puede acceder al sistema haciendo click <a href='" + this.ApplicationURL + "' style='color:#000000; font-weight:bold;'>aqui</a><br /><br /><br />" +
 										"NOTA: Es recomendable que cambie su contrase&ntilde;a desde el men&uacute; Administraci&oacute;n/Cambio de Contrase&ntilde;a.<br /><br /><br /><br /><br />" +
-                                        "Gracias por utilizar nuestros servicios inform&aacute;ticos<br /><br />" +s
+                                        "Gracias por utilizar nuestros servicios inform&aacute;ticos.<br /><br />" +
 									"</td>" +
 								"</tr>" +
 							"</table>" +
@@ -279,7 +280,7 @@ namespace Agenda.BusinessProcess.Object
                                         "<font style='font-size:15px; font-weight:bold;'>Usuario:</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font style='color:#000000; font-weight:bold;'>" + oENTUsuario.Email + "</font><br />" +
                                         "<font style='font-size:15px; font-weight:bold;'>Contrase&ntilde;a:</font>&nbsp;<font style='color:#000000; font-weight:bold;'>" + Password + "</font><br /><br /><br />" +
                                         "Puede acceder al sistema haciendo click <a href='" + this.ApplicationURL + "' style='color:#000000; font-weight:bold;'>aqui</a><br /><br /><br />" +
-                                        "Gracias por utilizar nuestros servicios inform&aacute;ticos<br /><br />" +
+                                        "Gracias por utilizar nuestros servicios inform&aacute;ticos.<br /><br />" +
                                     "</td>" +
                                 "</tr>" +
                             "</table>" +

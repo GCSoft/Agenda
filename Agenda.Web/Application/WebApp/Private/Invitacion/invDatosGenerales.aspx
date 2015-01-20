@@ -110,7 +110,17 @@
 				<td class="Espacio"></td>
 				<td class="Campo">
                     <script type = "text/javascript"> function RepresentanteSelected(sender, e) { $get("<%=hddRepresentanteId.ClientID %>").value = e.get_value(); } </script>
-					<asp:TextBox ID="txtRepresentante" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="501px"></asp:TextBox>
+                    <table style="border:0px; padding:0px; width:100%;">
+                        <tr>
+                            <td style="text-align:left; width:520px;">
+                                <asp:TextBox ID="txtRepresentante" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="501px"></asp:TextBox>
+                            </td>
+                            <td style="text-align:left; width:30px;">
+                                <asp:Button ID="btnDescartarRepresentante" runat="server" Text="X" CssClass="Button_Special" ToolTip="Descartar representante" Visible="false" Width="25px" OnClick="btnDescartarRepresentante_Click" />
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
 					<asp:HiddenField ID="hddRepresentanteId" runat="server" />
 					<asp:AutoCompleteExtender
 						ID="autosuggestRepresentante" 

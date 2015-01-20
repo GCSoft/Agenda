@@ -156,9 +156,27 @@
 	text-align: left;
 }
 
-.ComentarioInvitacionTable .Numero
+.ComentarioInvitacionTable .Numero_1
 {
-	background-color: #c0c0c0;
+	background-color: #65B449;
+	color: #fff;
+	font-size: 30px;
+	font-weight: normal;
+	width: 75px;
+}
+
+.ComentarioInvitacionTable .Numero_2
+{
+	background-color: #ea3030;
+	color: #fff;
+	font-size: 30px;
+	font-weight: normal;
+	width: 75px;
+}
+
+.ComentarioInvitacionTable .Numero_3
+{
+	background-color: #ff6600;
 	color: #fff;
 	font-size: 30px;
 	font-weight: normal;
