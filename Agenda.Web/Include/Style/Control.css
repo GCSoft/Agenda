@@ -137,18 +137,11 @@
 .Button_General{
   	font-family:'Lucida Grande',Tahoma,Verdana,Arial,Sans-serif;
 	font-size: 11px;
-	color: #675C9D;
+	color:#675C9D;
 	cursor:pointer;
-	background-color: #FFF;
-	border-top-width: 1px;
-	border-right-width: 1px;
-	border-bottom-width: 1px;
-	border-left-width: 1px;
-	border-top-style: solid;
-	border-top-color: #675C9D;
-	border-right-color: #675C9D;
-	border-bottom-color: #675C9D;
-	border-left-color: #675C9D;
+	background-color:#EFEFEF;
+	border:1px solid #675C9D;
+    cursor:pointer;
 	margin-top: 4px;
 	font-weight: bold;
 	margin-bottom: 4px;
@@ -666,7 +659,7 @@
 }
 
 .Tabcontainer_General .ajax__tab_header .ajax__tab_outer{
-    background-color:#675C9D;
+    background-color:#9d9999;
     border:solid 1px #675C9D;
     border-bottom-color: #ffffff;
     padding-left: 10px;
@@ -687,8 +680,8 @@
 }
 
 .Tabcontainer_General .ajax__tab_active .ajax__tab_outer{
-    border-bottom-color: #ffffff;
-    background-color: #8A246D;
+    border-bottom-color: #675C9D;
+    background-color: #65B449;
 }
 
 .Tabcontainer_General .ajax__tab_active .ajax__tab_inner{
@@ -699,7 +692,7 @@
 .Tabcontainer_General .ajax__tab_body{
     background-color: #fff;
     border: solid 1px #675C9D;
-    border-top-color: #ffffff;
+    border-top-color: #675C9D;
     border-top-width: 0;
 }
 

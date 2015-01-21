@@ -37,7 +37,7 @@ html, body, form
     left:270px;
 	position:absolute;
 	text-align:left;
-	top:168px;
+	top:60px;
     vertical-align:top;
 	width:249px;
     z-index:100;
@@ -59,24 +59,37 @@ html, body, form
 	float:right;
 	height:132px;
 	position:absolute;
-	right:28px;
+	right:32px;
 	text-align:right;
-	top:30px;
+	top:25px;
     vertical-align:top;
 	width:249px;
+    z-index:100;
+}
+
+.MasterLogoNL_Private{
+	border: 0px solid #000000;
+	float:right;
+	height:84px;
+	position:absolute;
+	right:30px;
+	text-align:right;
+	top:15px;
+    vertical-align:top;
+	width:672px;
     z-index:100;
 }
 
 .MasterHeaderMap{
 	background-repeat:no-repeat;
     border: 0px solid;
-	height:190px;
+	height:100px;
     left:262px;
     position:absolute;
     text-align:left;
     top:0px;
     vertical-align:top;
-    width:742px;
+    width:391px;
 }
 
 .MasterMenu {
@@ -94,10 +107,10 @@ html, body, form
 	border: 0px solid #000000;
 	float:left;
 	height:20px;
-    left:405px;
+    left:400px;
 	position:absolute;
 	text-align:left;
-	top:205px;
+	top:95px;
     vertical-align:top;
 	width:500px;
 }
@@ -128,10 +141,10 @@ html, body, form
 	border: 0px solid #000000;
 	float:left;
 	height:20px;
-    left:400px;
+    left:290px;
 	position:absolute;
 	text-align:left;
-	top:170px;
+	top:15px;
     vertical-align:top;
 	width:500px;
 }

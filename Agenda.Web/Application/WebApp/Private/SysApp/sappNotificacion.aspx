@@ -4,7 +4,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="cntNonMenuTemplateBody" runat="server">
 
     <asp:Panel ID="pnlIconPage" runat="server" CssClass="MasterIconPage">
-        <img id="imgIconPage" alt="Nuevo León" runat="server" src="~/Include/Image/Icon/IconDetail.png" />
+        <img id="imgIconPage" alt="Nuevo León" runat="server" src="~/Include/Image/Icon/IconAdm.png" />
     </asp:Panel>
 
     <asp:Panel ID="pnlPageName" runat="server" CssClass="MasterPageName">

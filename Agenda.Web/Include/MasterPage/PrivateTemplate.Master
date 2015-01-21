@@ -54,19 +54,19 @@
 				        <td style="background-color:#FFFFFF; vertical-align:top;">
 
                            <table style="border-spacing:0px; padding:0px; width:100%;">
-                                <tr style="height:275px;">
+                                <tr>
 				                    <td style="vertical-align:top;">
 
                                         <table style="border-spacing:0px; padding:0px; width:100%;">
-			                                <tr style="height:190px;">
-                                                <td style="width:50px;"></td>
+			                                <tr style="height:80px;">
+                                                <td style="width:28px;"></td>
 				                                <td></td>
                                                 <td style="width:28px;"></td>
 			                                </tr>
                                             <tr style="height:38px;">
                                                 <td></td>
-				                                <td style="background-color:#8A246D; text-align:left;">
-                                                    <img id="imgHeaderBackGround" alt="HeaderBackGround" runat="server" src="~/Include/Image/Web/HeaderBackGround.jpg" />
+				                                <td style="background-color:#336600; text-align:left;">
+                                                    <img id="imgHeaderBackGround" alt="HeaderBackGround" runat="server" src="~/Include/Image/Web/HeaderBackGround.png" />
 				                                </td>
                                                 <td></td>
 			                                </tr>
@@ -75,13 +75,16 @@
 			                                </tr>
                                             <tr style="height:21px;">
                                                 <td></td>
-				                                <td style="background-color:#675C9D; text-align:right; vertical-align:top;">
-                                                    <asp:LinkButton ID="lnkSalir" runat="server" CssClass="ExitText" Text="Salir" OnClick="lnkSalir_Click"></asp:LinkButton>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				                                <td style="background-color:#65B449; text-align:right; vertical-align:top;">
+                                                    <asp:LinkButton ID="lnkSalir" runat="server" CssClass="ExitText" Text="Salir" OnClick="lnkSalir_Click"></asp:LinkButton>&nbsp;&nbsp;
 				                                </td>
                                                 <td></td>
 			                                </tr>
+                                            <tr style="height:10px;">
+                                                <td colspan="3"></td>
+			                                </tr>
 		                                </table>
-                                
+
 				                    </td>
 			                    </tr>
                                 <tr>
@@ -105,12 +108,8 @@
 			        </tr>
 		        </table>
 
-                <asp:Panel ID="pnlMap" runat="server" CssClass="MasterHeaderMap" BackImageUrl="~/Include/Image/Web/HeaderMap.png">
-            
-                </asp:Panel>
-
-                <asp:Panel ID="pnlLogoNL" runat="server" CssClass="MasterLogoNL">
-                    <img id="imgLogoNL" alt="Nuevo León" runat="server" src="~/Include/Image/Web/LogoNL.png" />
+                <asp:Panel ID="pnlLogoNL" runat="server" CssClass="MasterLogoNL_Private">
+                    <img id="imgLogoNL" alt="Nuevo León" runat="server" src="~/Include/Image/Web/LogoNL_Recortado.png" />
                 </asp:Panel>
 
                 <asp:Panel ID="pnlRoundedCornerRight" runat="server" CssClass="MasterRoundedCornerRight">
@@ -120,7 +119,7 @@
                 <asp:Panel ID="pnlUserName" runat="server" CssClass="MasterUserName">
                     <table border="0" style="width:100%">
 				        <tr>
-					        <td style="color:#000;">Bienvenido:&nbsp;<asp:Label ID="lblUserName" runat="server" CssClass="UserNameText" Text="Rubén Cobos Hernández"></asp:Label></td>
+					        <td style="color:#000; font-family : 'Lucida Grande',Tahoma,Verdana,Arial,Sans-serif; font-size:19px; font-weight:bold;">Bienvenido:&nbsp;<asp:Label ID="lblUserName" runat="server" CssClass="UserNameText" Text="Rubén Cobos Hernández"></asp:Label></td>
 				        </tr>
 			        </table>
                 </asp:Panel>
