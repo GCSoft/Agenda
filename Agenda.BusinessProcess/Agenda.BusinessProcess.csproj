@@ -50,7 +50,9 @@
     <Compile Include="Object\BPConducto.cs" />
     <Compile Include="Object\BPDocumento.cs" />
     <Compile Include="Object\BPEstado.cs" />
+    <Compile Include="Object\BPEstatusEvento.cs" />
     <Compile Include="Object\BPEstatusInvitacion.cs" />
+    <Compile Include="Object\BPEvento.cs" />
     <Compile Include="Object\BPInvitacion.cs" />
     <Compile Include="Object\BPLugarEvento.cs" />
     <Compile Include="Object\BPMenu.cs" />

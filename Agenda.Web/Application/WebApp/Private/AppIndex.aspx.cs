@@ -48,11 +48,16 @@ namespace Agenda.Web.Application.WebApp.Private
 					    break;
 
                     case 2: // Administrador
-                        this.Response.Redirect("Invitacion/invInvitacion.aspx", false);
+                        this.Response.Redirect("Evento/eveCalendario.aspx", false);
                         break;
 
                     case 3: // Funcionario
                         this.Response.Redirect("Invitacion/invListado.aspx", false);
+                        break;
+
+                    case 4: // Logística
+                    case 5: // Dirección de Protocolo
+                        this.Response.Redirect("Evento/eveCalendario.aspx", false);
                         break;
 
 				    default:

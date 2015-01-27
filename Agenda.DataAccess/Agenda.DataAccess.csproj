@@ -45,7 +45,9 @@
     <Compile Include="Object\DAConducto.cs" />
     <Compile Include="Object\DADocumento.cs" />
     <Compile Include="Object\DAEstado.cs" />
+    <Compile Include="Object\DAEstatusEvento.cs" />
     <Compile Include="Object\DAEstatusInvitacion.cs" />
+    <Compile Include="Object\DAEvento.cs" />
     <Compile Include="Object\DAInvitacion.cs" />
     <Compile Include="Object\DALugarEvento.cs" />
     <Compile Include="Object\DAMenu.cs" />

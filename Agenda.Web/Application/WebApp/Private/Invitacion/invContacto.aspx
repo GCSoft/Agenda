@@ -150,7 +150,9 @@
         </asp:Panel>
     </asp:Panel>
 
-    <br /><br />
+    <asp:Panel ID="pnlFooter" runat="server" CssClass="FooterPanel">
+        <%--Empty Content--%>
+    </asp:Panel>
 
     <asp:HiddenField ID="hddInvitacionContactoId" runat="server" Value="0" />
     <asp:HiddenField ID="hddInvitacionId" runat="server" Value="0" />

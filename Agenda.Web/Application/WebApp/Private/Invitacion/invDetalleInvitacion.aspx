@@ -307,14 +307,6 @@
         </asp:Panel>
 
     </asp:Panel>
-
-    <asp:Panel ID="pnlBreak" runat="server" CssClass="BreakPanel">
-        <%--Empty Content--%>
-    </asp:Panel>
-
-    <asp:Panel ID="pnlBotones" runat="server" CssClass="ButtonPanel">
-        <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="Button_General" width="125px" onclick="btnRegresar_Click" />
-    </asp:Panel>
     
     <asp:Panel ID="pnlPopUp" runat="server" CssClass="PopUpBlock">
         <asp:Panel ID="pnlPopUpContent" runat="server" CssClass="PopUpContent" style="margin-top:-250px; margin-left:-400px;" Height="500px" Width="800px">
@@ -400,7 +392,17 @@
         </asp:Panel>
     </asp:Panel>
 
-    <br /><br />
+    <asp:Panel ID="pnlBreak" runat="server" CssClass="BreakPanel">
+        <%--Empty Content--%>
+    </asp:Panel>
+
+    <asp:Panel ID="pnlBotones" runat="server" CssClass="ButtonPanel">
+        <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="Button_General" width="125px" onclick="btnRegresar_Click" />
+    </asp:Panel>
+
+    <asp:Panel ID="pnlFooter" runat="server" CssClass="FooterPanel">
+        <%--Empty Content--%>
+    </asp:Panel>
     
     <asp:HiddenField ID="hddInvitacionId" runat="server" Value="0" />
     <asp:HiddenField ID="hddEstatusInvitacionId" runat="server" Value="0" />

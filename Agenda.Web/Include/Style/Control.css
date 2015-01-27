@@ -307,6 +307,20 @@
 	top:-2px;
 }
 
+/*CHECKBOX Grande*/
+.CheckBox_Big {
+	transform:scale(2,2);
+   -ms-transform:scale(2,2); /* IE 9 */
+   -moz-transform:scale(2,2); /* Firefox */
+   -webkit-transform:scale(2,2); /* Safari and Chrome */
+   -o-transform:scale(2,2); /* Opera */
+
+   padding:2px;
+   top:5px; 
+   position: relative;
+   cursor: pointer;
+}
+
 /*CHECKBOXLIST*/
 .CheckBoxList_Regular{
 	border: 1px solid #C1C1C1;

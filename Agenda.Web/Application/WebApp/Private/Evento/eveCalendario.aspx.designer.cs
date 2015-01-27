@@ -49,6 +49,24 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.Label lblPageName;
         
         /// <summary>
+        /// pnlTitulo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlTitulo;
+        
+        /// <summary>
+        /// lblSubTitulo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSubTitulo;
+        
+        /// <summary>
         /// pnlFormulario control.
         /// </summary>
         /// <remarks>
@@ -58,58 +76,112 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.Panel pnlFormulario;
         
         /// <summary>
-        /// ddlEstatusInvitacion control.
+        /// ddlPrioridad control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlEstatusInvitacion;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPrioridad;
         
         /// <summary>
-        /// lblRegistrada control.
+        /// ddlDependencia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRegistrada;
+        protected global::System.Web.UI.WebControls.DropDownList ddlDependencia;
         
         /// <summary>
-        /// lblComentada control.
+        /// NuevosEventosPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblComentada;
+        protected global::System.Web.UI.WebControls.Panel NuevosEventosPanel;
         
         /// <summary>
-        /// lblDeclinada control.
+        /// chkNuevo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDeclinada;
+        protected global::System.Web.UI.WebControls.CheckBox chkNuevo;
         
         /// <summary>
-        /// lblAprobada control.
+        /// EnProcesoPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAprobada;
+        protected global::System.Web.UI.WebControls.Panel EnProcesoPanel;
         
         /// <summary>
-        /// lblCancelada control.
+        /// chkProceso control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCancelada;
+        protected global::System.Web.UI.WebControls.CheckBox chkProceso;
+        
+        /// <summary>
+        /// ExpiradoPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ExpiradoPanel;
+        
+        /// <summary>
+        /// chkExpirado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkExpirado;
+        
+        /// <summary>
+        /// CanceladoPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel CanceladoPanel;
+        
+        /// <summary>
+        /// chkCancelar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkCancelar;
+        
+        /// <summary>
+        /// RepresentadoPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel RepresentadoPanel;
+        
+        /// <summary>
+        /// chkRepresentado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkRepresentado;
         
         /// <summary>
         /// pnlBreak control.
@@ -128,5 +200,32 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Agenda.Web.Include.WebUserControls.FullCalendar.wucFullCalendar wucFullCalendar;
+        
+        /// <summary>
+        /// pnlFooter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlFooter;
+        
+        /// <summary>
+        /// hddCurrentMonth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hddCurrentMonth;
+        
+        /// <summary>
+        /// hddCurrentYear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hddCurrentYear;
     }
 }

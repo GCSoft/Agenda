@@ -30,44 +30,181 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         GCJavascript gcJavascript = new GCJavascript();
 
 
-        // Rutinas del programador
+        // Rutinas de recuperación de formulario
 
-        void SelectEstatusInvitacion(){
-            ENTResponse oENTResponse = new ENTResponse();
-            ENTEstatusInvitacion oENTEstatusInvitacion = new ENTEstatusInvitacion();
-
-            BPEstatusInvitacion oBPEstatusInvitacion = new BPEstatusInvitacion();
-
+        void CreateCalendar(){
             try
             {
 
-                // Formulario
-                oENTEstatusInvitacion.EstatusInvitacionId = 0;
-                oENTEstatusInvitacion.Nombre = "";
+                // Parámetros del calendario
+                this.wucFullCalendar.PrioridadId = Int32.Parse(this.ddlPrioridad.SelectedItem.Value);
+                this.wucFullCalendar.Dependencia = Int16.Parse(this.ddlDependencia.SelectedItem.Value);
+                this.wucFullCalendar.EventoNuevos = Int16.Parse((this.chkNuevo.Checked ? "1" : "0"));
+                this.wucFullCalendar.EventoProceso = Int16.Parse((this.chkProceso.Checked ? "1" : "0"));
+                this.wucFullCalendar.EventoExpirado = Int16.Parse((this.chkExpirado.Checked ? "1" : "0"));
+                this.wucFullCalendar.EventoCancelado = Int16.Parse((this.chkCancelar.Checked ? "1" : "0"));
+                this.wucFullCalendar.EventoRepresentado = Int16.Parse((this.chkRepresentado.Checked ? "1" : "0"));
+                this.wucFullCalendar.MesActual = Int32.Parse(this.hddCurrentMonth.Value);
+                this.wucFullCalendar.AnioActual = Int32.Parse(this.hddCurrentYear.Value);
 
-                // Transacción
-                oENTResponse = oBPEstatusInvitacion.SelectEstatusInvitacion(oENTEstatusInvitacion);
-
-                // Validaciones
-                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
-
-                // Llenado de combo
-                this.ddlEstatusInvitacion.DataTextField = "Nombre";
-                this.ddlEstatusInvitacion.DataValueField = "EstatusInvitacionId";
-                this.ddlEstatusInvitacion.DataSource = oENTResponse.DataSetResponse.Tables[1];
-                this.ddlEstatusInvitacion.DataBind();
-
-                // Agregar Item de selección
-                this.ddlEstatusInvitacion.Items.Insert(0, new ListItem("[Todos]", "0"));
+                // Construir calendario
+                this.wucFullCalendar.ConstruirCalendario();
 
             }catch (Exception ex){
                 throw (ex);
             }
         }
 
+        void DefaultForm(){
+            try
+            {
+
+                // Valores default
+                this.ddlPrioridad.SelectedValue = "0";
+                this.ddlDependencia.SelectedValue = "0";
+                this.chkNuevo.Checked = true;
+                this.chkProceso.Checked = true;
+                this.chkExpirado.Checked = true;
+                this.chkCancelar.Checked = true;
+                this.chkRepresentado.Checked = true;
+                this.hddCurrentMonth.Value = DateTime.Now.Month.ToString();
+                this.hddCurrentYear.Value = DateTime.Now.Year.ToString();
+
+                // Crear el calendario
+                CreateCalendar();
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
+
+		void RecoveryForm(){
+			ENTSession oENTSession = new ENTSession();
+            ENTFiltroCalendario oENTFiltroCalendario;
+
+            try
+            {
+
+				// Obtener la sesion
+				oENTSession = (ENTSession)this.Session["oENTSession"];
+
+				// Validaciones
+                if (oENTSession.Entity == null) { DefaultForm();  return; }
+                if (oENTSession.Entity.GetType().Name != "ENTFiltroCalendario") { DefaultForm(); return; }
+
+                // Obtener Formulario
+                oENTFiltroCalendario = (ENTFiltroCalendario)oENTSession.Entity;
+
+				// Vaciar formulario
+                this.ddlPrioridad.SelectedValue = oENTFiltroCalendario.PrioridadId.ToString();
+                this.ddlDependencia.SelectedValue = oENTFiltroCalendario.Dependencia.ToString();
+                this.chkNuevo.Checked = (oENTFiltroCalendario.EventoNuevos == 1 ? true: false);
+                this.chkProceso.Checked = (oENTFiltroCalendario.EventoProceso == 1 ? true : false);
+                this.chkExpirado.Checked = (oENTFiltroCalendario.EventoExpirado == 1 ? true : false);
+                this.chkCancelar.Checked = (oENTFiltroCalendario.EventoCancelado == 1 ? true : false);
+                this.chkRepresentado.Checked = (oENTFiltroCalendario.EventoRepresentado == 1 ? true : false);
+                this.hddCurrentMonth.Value = oENTFiltroCalendario.MesActual.ToString();
+                this.hddCurrentYear.Value = oENTFiltroCalendario.AnioActual.ToString();
+
+                // Crear el calendario
+                CreateCalendar();
+
+            }catch (Exception ex){
+				ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('No fue posible recuperar el formulario: " + gcJavascript.ClearText(ex.Message) + "');", true);
+            }
+		}
+
+		void SaveForm(){
+			ENTSession oENTSession = new ENTSession();
+            ENTFiltroCalendario oENTFiltroCalendario = new ENTFiltroCalendario();
+
+            try
+            {
+
+                // Formulario
+                oENTFiltroCalendario.PrioridadId = Int32.Parse(this.ddlPrioridad.SelectedItem.Value);
+                oENTFiltroCalendario.Dependencia = Int16.Parse(this.ddlDependencia.SelectedItem.Value);
+                oENTFiltroCalendario.EventoNuevos = Int16.Parse( ( this.chkNuevo.Checked ? "1" : "0" ) );
+                oENTFiltroCalendario.EventoProceso = Int16.Parse((this.chkProceso.Checked ? "1" : "0"));
+                oENTFiltroCalendario.EventoExpirado = Int16.Parse((this.chkExpirado.Checked ? "1" : "0"));
+                oENTFiltroCalendario.EventoCancelado = Int16.Parse((this.chkCancelar.Checked ? "1" : "0"));
+                oENTFiltroCalendario.EventoRepresentado = Int16.Parse((this.chkRepresentado.Checked ? "1" : "0"));
+
+                oENTFiltroCalendario.MesActual = Int32.Parse(this.hddCurrentMonth.Value);
+                oENTFiltroCalendario.AnioActual = Int32.Parse(this.hddCurrentYear.Value);
+                
+
+				// Obtener la sesion
+				oENTSession = (ENTSession)this.Session["oENTSession"];
+
+                // Guardar el formulario en la sesión
+                oENTSession.Entity = oENTFiltroCalendario;
+				this.Session["oENTSession"] = oENTSession;
+
+                // Refrescar la página
+                Response.Redirect("eveCalendario.aspx", false);
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+		}
+
+
+
+        // Rutinas del programador
+
+        void SelectDependencia(){
+            try
+            {
+
+                this.ddlDependencia.Items.Insert(0, new ListItem("Dirección de Protocolo", "2"));
+                this.ddlDependencia.Items.Insert(0, new ListItem("Logística", "1"));
+                this.ddlDependencia.Items.Insert(0, new ListItem("[Todas]", "0"));
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
         
-        // Eventos de la página
+        void SelectPrioridad(){
+            ENTResponse oENTResponse = new ENTResponse();
+            ENTPrioridad oENTPrioridad = new ENTPrioridad();
+
+            BPPrioridad oBPPrioridad = new BPPrioridad();
+
+            try
+            {
+
+                // Formulario
+                oENTPrioridad.PrioridadId = 0;
+                oENTPrioridad.Nombre = "";
+                oENTPrioridad.Activo = 1;
+
+                // Transacción
+                oENTResponse = oBPPrioridad.SelectPrioridad(oENTPrioridad);
+
+                // Validaciones
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                // Llenado de combo
+                this.ddlPrioridad.DataTextField = "Nombre";
+                this.ddlPrioridad.DataValueField = "PrioridadId";
+                this.ddlPrioridad.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                this.ddlPrioridad.DataBind();
+
+                // Agregar Item de selección
+                this.ddlPrioridad.Items.Insert(0, new ListItem("[Todas]", "0"));
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
+
+
+
+        
+        // Eventos de la página ( por orden de aparición)
 
         protected void Page_Load(object sender, EventArgs e){
             try
@@ -76,28 +213,114 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Validaciones
                 if (this.IsPostBack) { return; }
 
-                // Llenado de controles
-                SelectEstatusInvitacion();
+                // Inicialización
+                SelectDependencia();
+                SelectPrioridad();
+                RecoveryForm();
 
                 // Foco
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.ddlEstatusInvitacion.ClientID + "');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.ddlPrioridad.ClientID + "');", true);
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusInvitacion.ClientID + "');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlPrioridad.ClientID + "');", true);
             }
         }
 
-        protected void ddlEstatusInvitacion_SelectedIndexChanged(object sender, EventArgs e){
+        protected void ddlPrioridad_SelectedIndexChanged(object sender, EventArgs e){
             try
             {
 
-                
+                SaveForm();
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusInvitacion.ClientID + "');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlPrioridad.ClientID + "');", true);
+            }
+        }
+
+        protected void ddlDependencia_SelectedIndexChanged(object sender, EventArgs e){
+            try
+            {
+
+                SaveForm();
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlPrioridad.ClientID + "');", true);
+            }
+        }
+
+        protected void chkNuevo_CheckedChanged(object sender, EventArgs e){
+            try
+            {
+
+                SaveForm();
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlPrioridad.ClientID + "');", true);
+            }
+        }
+
+        protected void chkProceso_CheckedChanged(object sender, EventArgs e){
+            try
+            {
+
+                SaveForm();
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlPrioridad.ClientID + "');", true);
+            }
+        }
+
+        protected void chkExpirado_CheckedChanged(object sender, EventArgs e){
+            try
+            {
+
+                SaveForm();
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlPrioridad.ClientID + "');", true);
+            }
+        }
+
+        protected void chkCancelar_CheckedChanged(object sender, EventArgs e){
+            try
+            {
+
+                SaveForm();
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlPrioridad.ClientID + "');", true);
+            }
+        }
+
+        protected void chkRepresentado_CheckedChanged(object sender, EventArgs e){
+            try
+            {
+
+                SaveForm();
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlPrioridad.ClientID + "');", true);
             }
         }
 
 
+        // Eventos del WUC
+
+        protected void wucFullCalendar_ChangeMonth(){
+            try
+            {
+
+                // Actualización  Mes y Año
+                this.hddCurrentMonth.Value = this.wucFullCalendar.MesActual.ToString();
+                this.hddCurrentYear.Value = this.wucFullCalendar.AnioActual.ToString();
+
+                // Cargar eventos
+                SaveForm();
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlPrioridad.ClientID + "');", true);
+            }
+        }
+        
     }
 }

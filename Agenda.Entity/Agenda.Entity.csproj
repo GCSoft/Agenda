@@ -45,7 +45,10 @@
     <Compile Include="Object\ENTConducto.cs" />
     <Compile Include="Object\ENTDocumento.cs" />
     <Compile Include="Object\ENTEstado.cs" />
+    <Compile Include="Object\ENTEstatusEvento.cs" />
     <Compile Include="Object\ENTEstatusInvitacion.cs" />
+    <Compile Include="Object\ENTEvento.cs" />
+    <Compile Include="Object\ENTFiltroCalendario.cs" />
     <Compile Include="Object\ENTInvitacion.cs" />
     <Compile Include="Object\ENTInvitacionContacto.cs" />
     <Compile Include="Object\ENTInvitacionFuncionario.cs" />

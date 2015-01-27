@@ -42,11 +42,8 @@
 }
 
 .FooterPanel{
-    border:solid 0px #000000;
     clear:both;
-    top:20px;
-    padding: 0px;
-    position:relative;
+    height:100px;
 	width: 100%;
 }
 
@@ -78,6 +75,16 @@
     top:20px;
     vertical-align: top;
 	width: 100%;
+}
+
+/*FILTROS DEL CALENDARIO*/
+.FiltroPanel{
+    color: #737373;
+	font-size: 12px;
+	height:16px;
+	margin-right:15px;
+	margin-top: 5px;
+	width:125px;
 }
 
 /*SUB MENU EN DETALLE*/

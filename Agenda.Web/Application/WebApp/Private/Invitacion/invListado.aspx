@@ -106,7 +106,9 @@
         </asp:GridView>
     </asp:Panel>
 
-    <br /><br />
+    <asp:Panel ID="pnlFooter" runat="server" CssClass="FooterPanel">
+        <%--Empty Content--%>
+    </asp:Panel>
 
     <asp:HiddenField ID="hddInvitacion" runat="server" Value="" />
     <asp:HiddenField ID="hddSort" runat="server" Value="EventoFechaHora" />

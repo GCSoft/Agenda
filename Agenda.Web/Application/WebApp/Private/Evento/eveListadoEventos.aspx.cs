@@ -31,48 +31,150 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         GCJavascript gcJavascript = new GCJavascript();
 
 
-        // Rutinas del programador
+        // Funciones del programador
 
-        void SelectEstatusInvitacion(){
-            ENTResponse oENTResponse = new ENTResponse();
-            ENTEstatusInvitacion oENTEstatusInvitacion = new ENTEstatusInvitacion();
-
-            BPEstatusInvitacion oBPEstatusInvitacion = new BPEstatusInvitacion();
+        String GetUTCBeginDate(){
+            DateTime tempDate = DateTime.Now;
+            String UTCCurrentDate = "";
 
             try
             {
 
-                // Formulario
-                oENTEstatusInvitacion.EstatusInvitacionId = 0;
-                oENTEstatusInvitacion.Nombre = "";
+                // Inicio de mes
+                tempDate = tempDate.AddDays( (DateTime.Now.Day - 1) * -1);
 
-                // Transacción
-                oENTResponse = oBPEstatusInvitacion.SelectEstatusInvitacion(oENTEstatusInvitacion);
+                // Año
+                UTCCurrentDate = tempDate.Year.ToString() + "-";
 
-                // Validaciones
-                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+                // Mes
+                UTCCurrentDate = UTCCurrentDate + ( tempDate.Month > 9 ? tempDate.Month.ToString() : "0" + tempDate.Month.ToString() ) + "-";
 
-                // Llenado de combo
-                this.ddlEstatusInvitacion.DataTextField = "Nombre";
-                this.ddlEstatusInvitacion.DataValueField = "EstatusInvitacionId";
-                this.ddlEstatusInvitacion.DataSource = oENTResponse.DataSetResponse.Tables[1];
-                this.ddlEstatusInvitacion.DataBind();
+                // Día
+                UTCCurrentDate = UTCCurrentDate + ( tempDate.Day > 9 ? tempDate.Day.ToString() : "0" + tempDate.Day.ToString() );
 
-                // Agregar Item de selección
-                this.ddlEstatusInvitacion.Items.Insert(0, new ListItem("[Todos]", "0"));
+            }catch(Exception ex){
+                throw(ex);
+            }
+
+            return UTCCurrentDate;
+        }
+
+        String GetUTCEndDate(){
+            DateTime tempDate = DateTime.Now;
+            String UTCCurrentDate = "";
+
+            try
+            {
+
+                // Inicio de mes
+                tempDate = tempDate.AddDays( (DateTime.Now.Day - 1) * -1);
+                tempDate = tempDate.AddMonths(1);
+
+                // Año
+                UTCCurrentDate = tempDate.Year.ToString() + "-";
+
+                // Mes
+                UTCCurrentDate = UTCCurrentDate + ( tempDate.Month > 9 ? tempDate.Month.ToString() : "0" + tempDate.Month.ToString() ) + "-";
+
+                // Día
+                UTCCurrentDate = UTCCurrentDate + ( tempDate.Day > 9 ? tempDate.Day.ToString() : "0" + tempDate.Day.ToString() );
+
+            }catch(Exception ex){
+                throw(ex);
+            }
+
+            return UTCCurrentDate;
+        }
+
+
+
+        // Rutinas del programador
+
+        void SelectDependencia(){
+            try
+            {
+
+                this.ddlDependencia.Items.Insert(0, new ListItem("Dirección de Protocolo", "2"));
+                this.ddlDependencia.Items.Insert(0, new ListItem("Logística", "1"));
+                this.ddlDependencia.Items.Insert(0, new ListItem("[Todas]", "0"));
 
             }catch (Exception ex){
                 throw (ex);
             }
         }
 
-        void SelectEventos(){
+        void SelectEstatusEvento(){
+            ENTResponse oENTResponse = new ENTResponse();
+            ENTEstatusEvento oENTEstatusEvento = new ENTEstatusEvento();
+
+            BPEstatusEvento oBPEstatusEvento = new BPEstatusEvento();
+
             try
             {
 
-                // Estado inicial
-                this.gvEvento.DataSource = null;
+                // Formulario
+                oENTEstatusEvento.EstatusEventoId = 0;
+                oENTEstatusEvento.Nombre = "";
+
+                // Transacción
+                oENTResponse = oBPEstatusEvento.SelectEstatusEvento(oENTEstatusEvento);
+
+                // Validaciones
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                // Llenado de combo
+                this.ddlEstatusEvento.DataTextField = "Nombre";
+                this.ddlEstatusEvento.DataValueField = "EstatusEventoId";
+                this.ddlEstatusEvento.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                this.ddlEstatusEvento.DataBind();
+
+                // Agregar Item de selección
+                this.ddlEstatusEvento.Items.Insert(0, new ListItem("[Todos]", "0"));
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
+
+        void SelectEventos(Boolean CheckDate){
+            ENTResponse oENTResponse = new ENTResponse();
+            ENTEvento oENTEvento = new ENTEvento();
+            ENTSession oENTSession = new ENTSession();
+
+            BPEvento oBPEvento = new BPEvento();
+
+            try
+            {
+
+                // Validaciones
+                if (CheckDate){
+                    if (!this.wucBeginDate.IsValidDate()) { throw new Exception("El campo [Fecha Inicial] es requerido"); }
+                    if (!this.wucEndDate.IsValidDate()) { throw new Exception("El campo [Fecha Inicial] es requerido"); }
+                }
+
+                // Datos de sesión
+                oENTSession = (ENTSession)this.Session["oENTSession"];
+
+                // Formulario
+                oENTEvento.EventoId = 0;
+                oENTEvento.UsuarioId = oENTSession.UsuarioId;
+                oENTEvento.EstatusEventoId = Int32.Parse( this.ddlEstatusEvento.SelectedItem.Value );
+                oENTEvento.PrioridadId = Int32.Parse(this.ddlPrioridad.SelectedItem.Value);
+                oENTEvento.FechaInicio = ( CheckDate ? this.wucBeginDate.DisplayUTCDate : GetUTCBeginDate() );
+                oENTEvento.FechaFin = ( CheckDate ? this.wucEndDate.DisplayUTCDate : GetUTCEndDate() );
+                oENTEvento.Nivel = 1;
+                oENTEvento.Dependencia = Int16.Parse(this.ddlDependencia.SelectedItem.Value);
+
+                // Transacción
+                oENTResponse = oBPEvento.SelectEvento(oENTEvento);
+
+                // Validaciones
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                // Listado de Eventoes
+                this.gvEvento.DataSource = oENTResponse.DataSetResponse.Tables[1];
                 this.gvEvento.DataBind();
 
             }catch (Exception ex){
@@ -119,6 +221,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         // Eventos de la página
 
         protected void Page_Load(object sender, EventArgs e){
+            DateTime tempDate = DateTime.Now;
+
             try
             {
 
@@ -126,36 +230,94 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 if (this.IsPostBack) { return; }
 
                 // Llenado de controles
-                SelectEstatusInvitacion();
+                SelectEstatusEvento();
                 SelectPrioridad();
-                SelectEventos();
+                SelectDependencia();
+
+                // Por default preseleccionado todo el mes
+                tempDate = tempDate.AddDays((DateTime.Now.Day - 1) * -1);
+                this.wucBeginDate.SetDate(tempDate);
+
+                tempDate = tempDate.AddMonths(1);
+                tempDate = tempDate.AddDays(-1);
+                this.wucEndDate.SetDate(tempDate);
+
+                // Consulta
+                SelectEventos(false);
 
                 // Foco
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.ddlEstatusInvitacion.ClientID + "');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlEstatusEvento.ClientID + "'); }", true);
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusInvitacion.ClientID + "');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusEvento.ClientID + "'); }", true);
             }
         }
 
-        protected void ddlEstatusInvitacion_SelectedIndexChanged(object sender, EventArgs e){
+        protected void btnBuscar_Click(object sender, EventArgs e){
+            try
+            {
+
+                SelectEventos(true);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusEvento.ClientID + "'); }", true);
+            }
+        }
+
+        protected void ddlEstatusEvento_SelectedIndexChanged(object sender, EventArgs e){
             try
             {
 
                 
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusInvitacion.ClientID + "');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusEvento.ClientID + "'); }", true);
+            }
+        }
+
+        protected void gvEvento_RowCommand(object sender, GridViewCommandEventArgs e){
+            Int32 EventoId = 0;
+            Int32 intRow = 0;
+
+            String strCommand = "";
+            String Key = "";
+
+            try
+            {
+
+                // Opción seleccionada
+                strCommand = e.CommandName.ToString();
+
+                // Se dispara el Evento RowCommand en el ordenamiento
+                if (strCommand == "Sort") { return; }
+
+                // Fila
+                intRow = Int32.Parse(e.CommandArgument.ToString());
+
+                // Datakeys
+                EventoId = Int32.Parse(this.gvEvento.DataKeys[intRow]["EventoId"].ToString());
+
+                // Acción
+                switch (strCommand){
+                    case "Editar":
+
+                        // Llave encriptada
+                        Key = EventoId.ToString() + "|3";
+                        Key = gcEncryption.EncryptString(Key, true);
+                        this.Response.Redirect("eveDetalleEvento.aspx?key=" + Key, false);
+                        break;
+                }
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusEvento.ClientID + "'); }", true);
             }
         }
 
         protected void gvEvento_RowDataBound(object sender, GridViewRowEventArgs e){
             ImageButton imgEdit = null;
-            ImageButton imgPopUp = null;
 
             String EventoId = "";
-            String NombreEvento = "";
-            String Activo = "";
+            String EventoNombre = "";
 
             String sImagesAttributes = "";
             String sTootlTip = "";
@@ -168,80 +330,25 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Obtener imagenes
                 imgEdit = (ImageButton)e.Row.FindControl("imgEdit");
-                imgPopUp = (ImageButton)e.Row.FindControl("imgPopUp");
 
                 // Datakeys
                 EventoId = this.gvEvento.DataKeys[e.Row.RowIndex]["EventoId"].ToString();
-                Activo = this.gvEvento.DataKeys[e.Row.RowIndex]["Activo"].ToString();
-                NombreEvento = this.gvEvento.DataKeys[e.Row.RowIndex]["Nombre"].ToString();
+                EventoNombre = this.gvEvento.DataKeys[e.Row.RowIndex]["EventoNombre"].ToString();
 
                 // Tooltip Edición
-                sTootlTip = "Editar Menú [" + NombreEvento + "]";
+                sTootlTip = "Detalle de invitación [" + EventoNombre + "]";
                 imgEdit.Attributes.Add("title", sTootlTip);
-
-                // Tooltip PopUp
-                sTootlTip = (Activo == "1" ? "Eliminar" : "Reactivar") + " Menú [" + NombreEvento + "]";
-                imgPopUp.Attributes.Add("title", sTootlTip);
-
-                // Imagen del botón [imgPopUp]
-                imgPopUp.ImageUrl = "../../../../Include/Image/Buttons/" + (Activo == "1" ? "Delete" : "Restore") + ".png";
 
                 // Atributos Over
                 sImagesAttributes = " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit_Over.png';";
-                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgPopUp.ClientID + "').src='../../../../Include/Image/Buttons/" + (Activo == "1" ? "Delete" : "Restore") + "_Over.png';";
-
-                // Puntero y Sombra en fila Over
                 e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over'; " + sImagesAttributes);
 
                 // Atributos Out
                 sImagesAttributes = " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
-                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgPopUp.ClientID + "').src='../../../../Include/Image/Buttons/" + (Activo == "1" ? "Delete" : "Restore") + ".png';";
-
-                // Puntero y Sombra en fila Out
                 e.Row.Attributes.Add("onmouseout", "this.className='" + ((e.Row.RowIndex % 2) != 0 ? "Grid_Row_Alternating" : "Grid_Row") + "'; " + sImagesAttributes);
 
             }catch (Exception ex){
                 throw (ex);
-            }
-        }
-
-        protected void gvEvento_RowCommand(object sender, GridViewCommandEventArgs e){
-            Int32 EventoId = 0;
-
-            String strCommand = "";
-            Int32 intRow = 0;
-
-            try
-            {
-
-                // Opción seleccionada
-                strCommand = e.CommandName.ToString();
-
-                // Se dispara el evento RowCommand en el ordenamiento
-                if (strCommand == "Sort") { return; }
-
-                // Fila
-                intRow = Int32.Parse(e.CommandArgument.ToString());
-
-                // Datakeys
-                EventoId = Int32.Parse(this.gvEvento.DataKeys[intRow]["EventoId"].ToString());
-
-                // Reajuste de Command
-                if (strCommand == "PopUp") { strCommand = (this.gvEvento.DataKeys[intRow]["Activo"].ToString() == "0" ? "Reactivar" : "Eliminar"); }
-
-                // Acción
-                switch (strCommand)
-                {
-                    case "Editar":
-                        break;
-                    case "Eliminar":
-                        break;
-                    case "Reactivar":
-                        break;
-                }
-
-            }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusInvitacion.ClientID + "');", true);
             }
         }
 
@@ -252,7 +359,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 gcCommon.SortGridView(ref this.gvEvento, ref this.hddSort, e.SortExpression);
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusInvitacion.ClientID + "');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusEvento.ClientID + "'); }", true);
             }
 
         }

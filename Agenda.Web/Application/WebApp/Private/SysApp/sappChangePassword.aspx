@@ -166,6 +166,8 @@
         * La nueva contraseña deberá tener un mínimo de 8 caracteres de los cuales por lo menos uno deberá ser numérico y por lo menos debe de contener una mayúscula. No deberá contener espacios en blanco.
     </asp:Panel>
 
-    <br /><br />
+    <asp:Panel ID="pnlFooter" runat="server" CssClass="FooterPanel">
+        <%--Empty Content--%>
+    </asp:Panel>
 
 </asp:Content>

@@ -37,7 +37,7 @@
             <ContentTemplate>
                 
                 <table style="border-spacing:0px; padding:0px; width:100%;">
-			        <tr style="min-height:1400px;">
+			        <tr>
 				        <td style="background-color:#65B449; min-width:260px; vertical-align:top; width:260px;">
 
                             <asp:Panel ID="pnlMenu" runat="server" CssClass="MasterMenu" BackImageUrl="~/Include/Image/Web/MenuBackground.jpg">
@@ -48,19 +48,19 @@
 				        <td style="background-color:#FFFFFF; vertical-align:top;">
 
                            <table style="border-spacing:0px; padding:0px; width:100%;">
-                                <tr style="height:290px;">
+                                <tr>
 				                    <td style="vertical-align:top;">
 
                                         <table style="border-spacing:0px; padding:0px; width:100%;">
-			                                <tr style="height:190px;">
-                                                <td style="width:50px;"></td>
+			                                <tr style="height:80px;">
+                                                <td style="width:28px;"></td>
 				                                <td></td>
                                                 <td style="width:28px;"></td>
 			                                </tr>
                                             <tr style="height:38px;">
                                                 <td></td>
-				                                <td style="background-color:#8A246D; text-align:left;">
-                                                    <img id="imgHeaderBackGround" alt="HeaderBackGround" runat="server" src="~/Include/Image/Web/HeaderBackGround.jpg" />
+				                                <td style="background-color:#336600; text-align:left;">
+                                                    <img id="imgHeaderBackGround" alt="HeaderBackGround" runat="server" src="~/Include/Image/Web/HeaderBackGround.png" />
 				                                </td>
                                                 <td></td>
 			                                </tr>
@@ -69,12 +69,16 @@
 			                                </tr>
                                             <tr style="height:21px;">
                                                 <td></td>
-				                                <td style="background-color:#675C9D; text-align:right; vertical-align:top;">
+				                                <td style="background-color:#65B449; text-align:right; vertical-align:top;">
+                                                    
 				                                </td>
                                                 <td></td>
 			                                </tr>
+                                            <tr style="height:10px;">
+                                                <td colspan="3"></td>
+			                                </tr>
 		                                </table>
-                                
+
 				                    </td>
 			                    </tr>
                                 <tr>
@@ -98,12 +102,8 @@
 			        </tr>
 		        </table>
 
-                <asp:Panel ID="pnlMap" runat="server" CssClass="MasterHeaderMap" BackImageUrl="~/Include/Image/Web/HeaderMap.png">
-            
-                </asp:Panel>
-
-                <asp:Panel ID="pnlLogoNL" runat="server" CssClass="MasterLogoNL">
-                    <img id="imgLogoNL" alt="Nuevo León" runat="server" src="~/Include/Image/Web/LogoNL.png" />
+                <asp:Panel ID="pnlLogoNL" runat="server" CssClass="MasterLogoNL_Private">
+                    <img id="imgLogoNL" alt="Nuevo León" runat="server" src="~/Include/Image/Web/LogoNL_Recortado.png" />
                 </asp:Panel>
 
                 <asp:Panel ID="pnlRoundedCornerRight" runat="server" CssClass="MasterRoundedCornerRight">
@@ -114,8 +114,8 @@
                     <img id="imgIconPage" alt="Nuevo León" runat="server" src="~/Include/Image/Icon/IconUser.png" />
                 </asp:Panel>
 
-                <asp:Panel ID="pnlPoweredBy" runat="server" CssClass="MasterPoweredBy">
-                    <img id="imgPoweredBy" alt="GCSoft" runat="server" src="~/Include/Image/Web/GCSoft.png" />
+                <asp:Panel ID="pnlEscudoNL" runat="server" CssClass="MasterEscudoNL">
+                    <img id="imgEscudoNL" alt="Escudo NL" runat="server" src="~/Include/Image/Web/EscudoNL.png" height="120" width="92" />
                 </asp:Panel>
 
                 <asp:UpdateProgress runat="server" ID="uprMaster" AssociatedUpdatePanelID="updMaster">

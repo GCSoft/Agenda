@@ -49,13 +49,13 @@ body .fc { /* extra precedence to overcome jqui */
 }
 
 .fc-unthemed .fc-today {
-	background: #8A246D; /*RCH: Sombra en el día Hoy */
+	background: #65B449; /*RCH: Sombra en el día Hoy */
     opacity: .6;
 	filter: alpha(opacity=60);
 }
 
 .fc-highlight { /*RCH: Sombra en la celda cuando haces DragAndDrop */
-	background: #65B449;
+	background: #8A246D;
 	opacity: .6;
 	filter: alpha(opacity=60); /* for IE */
 }
@@ -1005,3 +1005,5 @@ be a descendant of the grid when it is being dragged.
 .fc-time-grid-event .fc-resizer:after {
 	content: "=";
 }
+
+

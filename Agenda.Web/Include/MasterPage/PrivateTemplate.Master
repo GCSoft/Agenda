@@ -43,7 +43,7 @@
             <ContentTemplate>
                 
                 <table style="border-spacing:0px; padding:0px; width:100%;">
-			        <tr style="min-height:1400px; ">
+			        <tr>
 				        <td style="background-color:#65B449; min-width:260px; vertical-align:top; width:260px;">
 
                             <asp:Panel ID="pnlMenu" runat="server" CssClass="MasterMenu" BackImageUrl="~/Include/Image/Web/MenuBackground.jpg">
@@ -124,8 +124,8 @@
 			        </table>
                 </asp:Panel>
 
-                <asp:Panel ID="pnlPoweredBy" runat="server" CssClass="MasterPoweredBy">
-                    <img id="imgPoweredBy" alt="GCSoft" runat="server" src="~/Include/Image/Web/GCSoft.png" />
+                <asp:Panel ID="pnlEscudoNL" runat="server" CssClass="MasterEscudoNL">
+                    <img id="imgEscudoNL" alt="Escudo NL" runat="server" src="~/Include/Image/Web/EscudoNL.png" height="120" width="92" />
                 </asp:Panel>
 
                 <asp:UpdateProgress runat="server" ID="uprMaster" AssociatedUpdatePanelID="updMaster">

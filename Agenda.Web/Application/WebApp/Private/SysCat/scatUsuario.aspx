@@ -173,7 +173,9 @@
         </asp:Panel>
     </asp:Panel>
 
-    <br /><br />
+    <asp:Panel ID="pnlFooter" runat="server" CssClass="FooterPanel">
+        <%--Empty Content--%>
+    </asp:Panel>
 
     <asp:HiddenField ID="hddUsuario" runat="server" Value="" />
     <asp:HiddenField ID="hddSort" runat="server" Value="sArea" />

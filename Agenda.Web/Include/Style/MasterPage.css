@@ -43,6 +43,16 @@ html, body, form
     z-index:100;
 }
 
+.MasterEscudoNL{
+	border:0px solid #000000;
+	bottom:10px;
+	height:120px;
+	left:10px;
+	position:fixed;
+	width:92px;
+	z-index:800;
+}
+
 .MasterLogin {
     background-color:#FFF;
     border: 1px solid #675C9D;
@@ -93,11 +103,11 @@ html, body, form
 }
 
 .MasterMenu {
-	background-color:#FFFFFF;
+	background-color:#65B449;
     background-repeat:repeat-x;
-	border: 0px solid YELLOW;
+	border: 1px solid #65B449;
+    height:100%;
     left:0px;
-	min-height:1400px;
 	top:0px;
 	position:absolute;
 	width:261px;

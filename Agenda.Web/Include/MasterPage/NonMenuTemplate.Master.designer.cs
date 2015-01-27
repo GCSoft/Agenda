@@ -76,15 +76,6 @@ namespace Agenda.Web.Include.MasterPage {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder cntNonMenuTemplateBody;
         
         /// <summary>
-        /// pnlMap control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlMap;
-        
-        /// <summary>
         /// pnlLogoNL control.
         /// </summary>
         /// <remarks>
@@ -139,22 +130,22 @@ namespace Agenda.Web.Include.MasterPage {
         protected global::System.Web.UI.HtmlControls.HtmlImage imgIconPage;
         
         /// <summary>
-        /// pnlPoweredBy control.
+        /// pnlEscudoNL control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlPoweredBy;
+        protected global::System.Web.UI.WebControls.Panel pnlEscudoNL;
         
         /// <summary>
-        /// imgPoweredBy control.
+        /// imgEscudoNL control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage imgPoweredBy;
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgEscudoNL;
         
         /// <summary>
         /// uprMaster control.

@@ -1039,6 +1039,10 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTInvitacion.Comentario;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("Notificacion", SqlDbType.TinyInt);
+            sqlPar.Value = oENTInvitacion.Notificacion;
+            sqlCom.Parameters.Add(sqlPar);
+
             // Inicializaciones
             oENTResponse.DataSetResponse = new DataSet();
             sqlDA = new SqlDataAdapter(sqlCom);
