@@ -112,6 +112,24 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.ImageButton DatosEventoButton;
         
         /// <summary>
+        /// InformacionComplementariaPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel InformacionComplementariaPanel;
+        
+        /// <summary>
+        /// InformacionComplementariaButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton InformacionComplementariaButton;
+        
+        /// <summary>
         /// ContactoPanel control.
         /// </summary>
         /// <remarks>
@@ -164,6 +182,24 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton RechazarButton;
+        
+        /// <summary>
+        /// CuadernilloPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel CuadernilloPanel;
+        
+        /// <summary>
+        /// CuadernilloButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton CuadernilloButton;
         
         /// <summary>
         /// Historial control.

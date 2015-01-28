@@ -138,10 +138,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 this.DatosGeneralesPanel.Visible = false;
                 this.DatosEventoPanel.Visible = false;
+                this.InformacionComplementariaPanel.Visible = false;
                 this.ContactoPanel.Visible = false;
                 this.AdjuntarPanel.Visible = false;
                 this.Historial.Visible = false;
                 this.RechazarPanel.Visible = false;
+                this.CuadernilloPanel.Visible = false;
 
             }catch (Exception){
 				// Do Nothing
@@ -159,29 +161,35 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     case 2:	// Administrador
                         this.DatosGeneralesPanel.Visible = true;
                         this.DatosEventoPanel.Visible = true;
+                        this.InformacionComplementariaPanel.Visible = true;
                         this.ContactoPanel.Visible = true;
                         this.AdjuntarPanel.Visible = true;
-                        this.Historial.Visible = true;
                         this.RechazarPanel.Visible = true;
+                        this.CuadernilloPanel.Visible = true;
+                        this.Historial.Visible = true;
 						break;
 
                     case 4:	// Logística
                     case 5:	// Dirección de Protocolo
 						this.DatosGeneralesPanel.Visible = true;
                         this.DatosEventoPanel.Visible = true;
+                        this.InformacionComplementariaPanel.Visible = true;
                         this.ContactoPanel.Visible = true;
                         this.AdjuntarPanel.Visible = true;
+                        this.RechazarPanel.Visible = true;
+                        this.CuadernilloPanel.Visible = true;
                         this.Historial.Visible = true;
-                        this.RechazarPanel.Visible = true;;
 						break;
 
 					default:
                         this.DatosGeneralesPanel.Visible = false;
                         this.DatosEventoPanel.Visible = false;
+                        this.InformacionComplementariaPanel.Visible = false;
                         this.ContactoPanel.Visible = false;
                         this.AdjuntarPanel.Visible = false;
-                        this.Historial.Visible = false;
                         this.RechazarPanel.Visible = false;
+                        this.CuadernilloPanel.Visible = false;
+                        this.Historial.Visible = false;
 						break;
 
 				}
@@ -204,6 +212,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                     this.DatosGeneralesPanel.Visible = false;
                     this.DatosEventoPanel.Visible = false;
+                    this.InformacionComplementariaPanel.Visible = false;
                     this.ContactoPanel.Visible = false;
                     this.AdjuntarPanel.Visible = false;
                     this.RechazarPanel.Visible = false;
@@ -362,7 +371,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Llave encriptada
                 sKey = this.hddEventoId.Value + "|" + this.SenderId.Value;
                 sKey = gcEncryption.EncryptString(sKey, true);
-                this.Response.Redirect("invDatosGenerales.aspx?key=" + sKey, false);
+                this.Response.Redirect("eveDatosGenerales.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
@@ -378,7 +387,23 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Llave encriptada
                 sKey = this.hddEventoId.Value + "|" + this.SenderId.Value;
                 sKey = gcEncryption.EncryptString(sKey, true);
-                this.Response.Redirect("invDatosEvento.aspx?key=" + sKey, false);
+                this.Response.Redirect("eveDatosEvento.aspx?key=" + sKey, false);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+            }
+		}
+
+        protected void InformacionComplementariaButton_Click(object sender, ImageClickEventArgs e){
+            String sKey = "";
+
+            try
+            {
+
+                // Llave encriptada
+                sKey = this.hddEventoId.Value + "|" + this.SenderId.Value;
+                sKey = gcEncryption.EncryptString(sKey, true);
+                this.Response.Redirect("eveConfiguracionEvento.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
@@ -418,6 +443,22 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 		}
 
         protected void RechazarButton_Click(object sender, ImageClickEventArgs e){
+			String sKey = "";
+
+            try
+            {
+
+                // Llave encriptada
+                sKey = this.hddEventoId.Value + "|" + this.SenderId.Value;
+                sKey = gcEncryption.EncryptString(sKey, true);
+                this.Response.Redirect("invRechazar.aspx?key=" + sKey, false);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+            }
+		}
+
+        protected void CuadernilloButton_Click(object sender, ImageClickEventArgs e){
 			String sKey = "";
 
             try

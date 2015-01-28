@@ -27,40 +27,57 @@ namespace Agenda.Entity.Object
         private Int32   _EventoComentarioId;
         private Int32   _EventoContactoId;
         private Int32   _LugarEventoId;
+        private Int32   _MedioComunicacionId;
+        private Int32   _MedioTrasladoId;
         private Int32   _ModuloId;
         private Int32   _PrioridadId;
         private Int32   _RespuestaEvaluacionId;
         private Int32   _SecretarioId_Ramo;
         private Int32   _SecretarioId_Representante;
         private Int32   _SecretarioId_Responsable;
+        private Int32   _TipoVestimentaId;
         private Int32   _UsuarioId;
         private Int32   _UsuarioId_Temp;
+        private String  _AccionRealizar;
         private String  _EventoDetalle;
         private String  _EventoNombre;
         private String  _EventoObservaciones;
         private String  _Calle;
+        private String  _CaracteristicasInvitados;
         private String  _Comentario;
+        private String  _LugarArribo;
+        private String  _Menu;
         private String  _MotivoRechazo;
         private String  _NumeroExterior;
         private String  _NumeroInterior;
+        private String  _PronosticoClima;
         private String  _RepresentanteNombre;
         private String  _RepresentanteCargo;
         private String  _RepresentanteTelefonoOficina;
         private String  _RepresentanteTelefonoMovil;
         private String  _RepresentanteTelefonoParticular;
         private String  _RepresentanteTelefonoOtro;
+        private String  _TemperaturaMaxima;
+        private String  _TemperaturaMinima;
+        private String  _TipoMontaje;
         private String  _FechaEvento;
         private String  _FechaFin;
         private String  _FechaInicio;
         private String  _HoraEventoInicio;
         private String  _HoraEventoFin;
         private Int16   _Activo;
+        private Int32   _Aforo;
         private Int32   _Anio;
         private Int16   _Dependencia;
         private Int32   _Mes;
+        private Int16   _Esposa;
+        private Int16   _EsposaSi;
+        private Int16   _EsposaNo;
+        private Int16   _EsposaConfirma;
         private Int16   _Nivel;
         private Int16   _Notificacion;
         private DataTable   _DataTableEstatusEvento;
+        private ENTInvitacionContacto _Contacto;
 
 
         //Constructor
@@ -75,40 +92,57 @@ namespace Agenda.Entity.Object
             _EventoComentarioId = 0;
             _EventoContactoId = 0;
             _LugarEventoId = 0;
+            _MedioComunicacionId = 0;
+            _MedioTrasladoId = 0;
             _ModuloId = 0;
             _PrioridadId = 0;
             _RespuestaEvaluacionId = 0;
             _SecretarioId_Ramo = 0;
             _SecretarioId_Representante = 0;
             _SecretarioId_Responsable = 0;
+            _TipoVestimentaId = 0;
             _UsuarioId = 0;
             _UsuarioId_Temp = 0;
+            _AccionRealizar = "";
             _EventoDetalle = "";
             _EventoNombre = "";
             _EventoObservaciones = "";
             _Calle = "";
+            _CaracteristicasInvitados = "";
             _Comentario = "";
+            _LugarArribo = "";
+            _Menu = "";
             _MotivoRechazo = "";
             _NumeroExterior = "";
             _NumeroInterior = "";
+            _PronosticoClima = "";
             _RepresentanteNombre = "";
             _RepresentanteCargo = "";
             _RepresentanteTelefonoOficina = "";
             _RepresentanteTelefonoMovil = "";
             _RepresentanteTelefonoParticular = "";
             _RepresentanteTelefonoOtro = "";
+            _TemperaturaMaxima = "";
+            _TemperaturaMinima = "";
+            _TipoMontaje = "";
             _FechaEvento = "";
             _FechaFin = "";
             _FechaInicio = "";
             _HoraEventoInicio = "";
             _HoraEventoFin = "";
             _Activo = 2;
+            _Aforo = 0;
             _Anio = 0;
             _Dependencia = 0;
             _Mes = 0;
+            _Esposa = 0;
+            _EsposaSi = 0;
+            _EsposaNo = 0;
+            _EsposaConfirma = 0;
             _Nivel = 0;
             _Notificacion = 0;
             _DataTableEstatusEvento = null;
+            _Contacto = new ENTInvitacionContacto();
         }
 
 
@@ -211,6 +245,30 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
+        ///   <name>ENTEvento.MedioComunicacionId</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el identificador único del medio de comunicación del evento</summary>
+        public Int32 MedioComunicacionId
+        {
+            get { return _MedioComunicacionId; }
+            set { _MedioComunicacionId = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.MedioTrasladoId</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el identificador único del medio de traslado al evento</summary>
+        public Int32 MedioTrasladoId
+        {
+            get { return _MedioTrasladoId; }
+            set { _MedioTrasladoId = value; }
+        }
+
+        ///<remarks>
         ///   <name>ENTEvento.ModuloId</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
@@ -283,6 +341,18 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
+        ///   <name>ENTEvento.TipoVestimentaId</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el identificador único del tipo de vestimenta al que hay que acudir al evento</summary>
+        public Int32 TipoVestimentaId
+        {
+            get { return _TipoVestimentaId; }
+            set { _TipoVestimentaId = value; }
+        }
+
+        ///<remarks>
         ///   <name>ENTEvento.UsuarioId</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
@@ -304,6 +374,18 @@ namespace Agenda.Entity.Object
         {
             get { return _UsuarioId_Temp; }
             set { _UsuarioId_Temp = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.AccionRealizar</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna la acción a realizar en el evento</summary>
+        public String AccionRealizar
+        {
+            get { return _AccionRealizar; }
+            set { _AccionRealizar = value; }
         }
 
         ///<remarks>
@@ -355,6 +437,18 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
+        ///   <name>ENTEvento.CaracteristicasInvitados</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna las caracteristicas de los invitados al evento</summary>
+        public String CaracteristicasInvitados
+        {
+            get { return _CaracteristicasInvitados; }
+            set { _CaracteristicasInvitados = value; }
+        }
+
+        ///<remarks>
         ///   <name>ENTEvento.Comentario</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
@@ -364,6 +458,30 @@ namespace Agenda.Entity.Object
         {
             get { return _Comentario; }
             set { _Comentario = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.LugarArribo</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el lugar de arribo al evento</summary>
+        public String LugarArribo
+        {
+            get { return _LugarArribo; }
+            set { _LugarArribo = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.Menu</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el menú a servir en el evento</summary>
+        public String Menu
+        {
+            get { return _Menu; }
+            set { _Menu = value; }
         }
 
         ///<remarks>
@@ -388,6 +506,30 @@ namespace Agenda.Entity.Object
         {
             get { return _NumeroExterior; }
             set { _NumeroExterior = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.PronosticoClima</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna pronóstico del clima que se espera el día del evento</summary>
+        public String PronosticoClima
+        {
+            get { return _PronosticoClima; }
+            set { _PronosticoClima = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.NumeroInterior</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el número interior del predio en donde se realizará el evento</summary>
+        public String NumeroInterior
+        {
+            get { return _NumeroInterior; }
+            set { _NumeroInterior = value; }
         }
 
         ///<remarks>
@@ -463,15 +605,39 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
-        ///   <name>ENTEvento.NumeroInterior</name>
+        ///   <name>ENTEvento.TemperaturaMaxima</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
-        ///<summary>Obtiene/Asigna el número interior del predio en donde se realizará el evento</summary>
-        public String NumeroInterior
+        ///<summary>Obtiene/Asigna pronóstico de la temperatura máxima del clima que se espera el día del evento</summary>
+        public String TemperaturaMaxima
         {
-            get { return _NumeroInterior; }
-            set { _NumeroInterior = value; }
+            get { return _TemperaturaMaxima; }
+            set { _TemperaturaMaxima = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.TemperaturaMinima</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna pronóstico de la temperatura mínima del clima que se espera el día del evento</summary>
+        public String TemperaturaMinima
+        {
+            get { return _TemperaturaMinima; }
+            set { _TemperaturaMinima = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.TipoMontaje</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el tipo de montaje en el evento</summary>
+        public String TipoMontaje
+        {
+            get { return _TipoMontaje; }
+            set { _TipoMontaje = value; }
         }
 
         ///<remarks>
@@ -547,6 +713,18 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
+        ///   <name>ENTEvento.Aforo</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el aforo esperado en el evento</summary>
+        public Int32 Aforo
+        {
+            get { return _Aforo; }
+            set { _Aforo = value; }
+        }
+
+        ///<remarks>
         ///   <name>ENTEvento.Anio</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
@@ -583,6 +761,54 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
+        ///   <name>ENTEvento.Esposa</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un valor que determina si la esposa del gobernador fue invitada</summary>
+        public Int16 Esposa
+        {
+            get { return _Esposa; }
+            set { _Esposa = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.EsposaSi</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un valor que determina si la esposa del gobernador acudirá al evento</summary>
+        public Int16 EsposaSi
+        {
+            get { return _EsposaSi; }
+            set { _EsposaSi = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.EsposaNo</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un valor que determina si la esposa del gobernador no acudirá al evento</summary>
+        public Int16 EsposaNo
+        {
+            get { return _EsposaNo; }
+            set { _EsposaNo = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.EsposaConfirma</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un valor que determina si la esposa del gobernador está pendiente por confirmar si acudirá o no al evento</summary>
+        public Int16 EsposaConfirma
+        {
+            get { return _EsposaConfirma; }
+            set { _EsposaConfirma = value; }
+        }
+
+        ///<remarks>
         ///   <name>ENTEvento.Nivel</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
@@ -616,6 +842,18 @@ namespace Agenda.Entity.Object
         {
             get { return _DataTableEstatusEvento; }
             set { _DataTableEstatusEvento = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.Contacto</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna la información del contacto del Evento</summary>
+        public ENTInvitacionContacto Contacto
+        {
+            get { return _Contacto; }
+            set { _Contacto = value; }
         }
 
     }

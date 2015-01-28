@@ -32,9 +32,14 @@
             Datos del evento
         </asp:Panel>
 
+        <asp:Panel ID="InformacionComplementariaPanel" CssClass="IconoPanel" runat="server" Visible="true">
+            <asp:ImageButton ID="InformacionComplementariaButton" ImageUrl="~/Include/Image/Icon/SubMenuInformacionComplementaria.png" runat="server" OnClick="InformacionComplementariaButton_Click"></asp:ImageButton><br />
+            Información complementaria
+        </asp:Panel>
+
         <asp:Panel ID="ContactoPanel" CssClass="IconoPanel" runat="server" Visible="true">
             <asp:ImageButton ID="ContactoButton" ImageUrl="~/Include/Image/Icon/SubMenuContacto.png" runat="server" OnClick="ContactoButton_Click"></asp:ImageButton><br />
-            Contactos de la invitación
+            Contactos del evento
         </asp:Panel>
 
         <asp:Panel ID="AdjuntarPanel" CssClass="IconoPanel" runat="server" Visible="true">
@@ -44,7 +49,12 @@
 
         <asp:Panel ID="RechazarPanel" CssClass="IconoPanel" runat="server" Visible="true">
             <asp:ImageButton ID="RechazarButton" ImageUrl="~/Include/Image/Icon/SubMenuRechazo.png" runat="server" OnClick="RechazarButton_Click"></asp:ImageButton><br />
-            Declinar invitación
+            Cancelar evento
+        </asp:Panel>
+
+        <asp:Panel ID="CuadernilloPanel" CssClass="IconoPanel" runat="server" Visible="true">
+            <asp:ImageButton ID="CuadernilloButton" ImageUrl="~/Include/Image/Icon/SubMenuGenerarCuadernillo.png" runat="server" OnClick="CuadernilloButton_Click"></asp:ImageButton><br />
+            Generar cuadernillo
         </asp:Panel>
 
         <asp:Panel ID="Historial" CssClass="IconoPanel" runat="server" Visible="true">

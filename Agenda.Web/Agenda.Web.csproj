@@ -73,6 +73,8 @@
     <Content Include="Application\WebApp\Private\Catalogo\catLugarEvento.aspx" />
     <Content Include="Application\WebApp\Private\Catalogo\catSecretario.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveCalendario.aspx" />
+    <Content Include="Application\WebApp\Private\Evento\eveDatosEvento.aspx" />
+    <Content Include="Application\WebApp\Private\Evento\eveDatosGenerales.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveDetalleEvento.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveListadoEventos.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveNuevoEvento.aspx" />
@@ -236,6 +238,8 @@
     <Content Include="Include\Image\Icon\SubMenuContacto.png" />
     <Content Include="Include\Image\Icon\SubMenuDatosEvento.png" />
     <Content Include="Include\Image\Icon\SubMenuDatosGenerales.png" />
+    <Content Include="Include\Image\Icon\SubMenuGenerarCuadernillo.png" />
+    <Content Include="Include\Image\Icon\SubMenuInformacionComplementaria.png" />
     <Content Include="Include\Image\Icon\SubMenuRechazo.png" />
     <Content Include="Include\Image\Icon\SubMenuHistorial.png" />
     <Content Include="Include\Image\Web\Background.png" />
@@ -303,6 +307,20 @@
     </Compile>
     <Compile Include="Application\WebApp\Private\Evento\eveCalendario.aspx.designer.cs">
       <DependentUpon>eveCalendario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveDatosEvento.aspx.cs">
+      <DependentUpon>eveDatosEvento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveDatosEvento.aspx.designer.cs">
+      <DependentUpon>eveDatosEvento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveDatosGenerales.aspx.cs">
+      <DependentUpon>eveDatosGenerales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveDatosGenerales.aspx.designer.cs">
+      <DependentUpon>eveDatosGenerales.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\WebApp\Private\Evento\eveDetalleEvento.aspx.cs">
       <DependentUpon>eveDetalleEvento.aspx</DependentUpon>
