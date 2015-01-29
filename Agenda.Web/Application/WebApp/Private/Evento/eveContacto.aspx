@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Include/MasterPage/PrivateTemplate.Master" AutoEventWireup="true" CodeBehind="invContacto.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Invitacion.invContacto" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Include/MasterPage/PrivateTemplate.Master" AutoEventWireup="true" CodeBehind="eveContacto.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Evento.eveContacto" %>
 <%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cntPrivateTemplateHeader" runat="server">
@@ -53,7 +53,7 @@
 
     <asp:Panel ID="pnlGrid" runat="server" CssClass="GridPanel">
         <asp:GridView ID="gvContacto" runat="server" AllowPaging="false" AllowSorting="true" AutoGenerateColumns="False" Width="100%"
-			DataKeyNames="InvitacionContactoId,Nombre" 
+			DataKeyNames="EventoContactoId,Nombre" 
             OnRowCommand="gvContacto_RowCommand"
 			OnRowDataBound="gvContacto_RowDataBound"
             OnSorting="gvContacto_Sorting">
@@ -159,8 +159,8 @@
         <%--Empty Content--%>
     </asp:Panel>
 
-    <asp:HiddenField ID="hddInvitacionContactoId" runat="server" Value="0" />
-    <asp:HiddenField ID="hddInvitacionId" runat="server" Value="0" />
+    <asp:HiddenField ID="hddEventoContactoId" runat="server" Value="0" />
+    <asp:HiddenField ID="hddEventoId" runat="server" Value="0" />
     <asp:HiddenField ID="hddSort" runat="server" Value="Nombre"  />
     <asp:HiddenField ID="SenderId" runat="server" Value="0"  />
 

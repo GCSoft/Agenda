@@ -103,15 +103,6 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoVestimenta;
         
         /// <summary>
-        /// ddlMedioTraslado control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMedioTraslado;
-        
-        /// <summary>
         /// ddlMedioComunicacion control.
         /// </summary>
         /// <remarks>
@@ -119,6 +110,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlMedioComunicacion;
+        
+        /// <summary>
+        /// chklMedioTraslado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList chklMedioTraslado;
         
         /// <summary>
         /// txtPronostico control.
@@ -148,15 +148,6 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.TextBox txtTemperaturaMaxima;
         
         /// <summary>
-        /// txtLugarArribo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLugarArribo;
-        
-        /// <summary>
         /// txtAforo control.
         /// </summary>
         /// <remarks>
@@ -173,6 +164,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTipoMontaje;
+        
+        /// <summary>
+        /// txtLugarArribo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtLugarArribo;
         
         /// <summary>
         /// chkEsposaInvitada control.

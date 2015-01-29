@@ -53,6 +53,7 @@
     <Compile Include="Object\ENTInvitacionContacto.cs" />
     <Compile Include="Object\ENTInvitacionFuncionario.cs" />
     <Compile Include="Object\ENTLugarEvento.cs" />
+    <Compile Include="Object\ENTMedioComunicacion.cs" />
     <Compile Include="Object\ENTMenu.cs" />
     <Compile Include="Object\ENTMunicipio.cs" />
     <Compile Include="Object\ENTPais.cs" />
@@ -64,9 +65,11 @@
     <Compile Include="Object\ENTSubMenu.cs" />
     <Compile Include="Object\ENTTipoDocumento.cs" />
     <Compile Include="Object\ENTTipoEvento.cs" />
+    <Compile Include="Object\ENTTipoVestimenta.cs" />
     <Compile Include="Object\ENTTitulo.cs" />
     <Compile Include="Object\ENTUsuario.cs" />
-    <Compile Include="Object\RespuestaEvaluacion.cs" />
+    <Compile Include="Object\ENTMedioTraslado.cs" />
+    <Compile Include="Object\ENTRespuestaEvaluacion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

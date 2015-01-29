@@ -1,5 +1,5 @@
 ﻿/*---------------------------------------------------------------------------------------------------------------------------------
-' Nombre:	invHistorial
+' Nombre:	eveHistorial
 ' Autor:	Ruben.Cobos
 ' Fecha:	22-Diciembre-2014
 '----------------------------------------------------------------------------------------------------------------------------------*/
@@ -19,11 +19,12 @@ using Agenda.Entity.Object;
 using Agenda.BusinessProcess.Object;
 using System.Data;
 
-namespace Agenda.Web.Application.WebApp.Private.Invitacion
+namespace Agenda.Web.Application.WebApp.Private.Evento
 {
-    public partial class invHistorial : System.Web.UI.Page
+    public partial class eveHistorial : System.Web.UI.Page
     {
-       
+        
+
         // Utilerías
         GCCommon gcCommon = new GCCommon();
         GCEncryption gcEncryption = new GCEncryption();
@@ -49,20 +50,20 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
         // Rutinas el programador
 
-        void SelectInvitacion(){
+        void SelectEvento(){
             ENTResponse oENTResponse = new ENTResponse();
-            ENTInvitacion oENTInvitacion = new ENTInvitacion();
+            ENTEvento oENTEvento = new ENTEvento();
 
-            BPInvitacion oBPInvitacion = new BPInvitacion();
+            BPEvento oBPEvento = new BPEvento();
 
             try
             {
 
                 // Formulario
-                oENTInvitacion.InvitacionId = Int32.Parse(this.hddInvitacionId.Value);
+                oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
 
                 // Transacción
-                oENTResponse = oBPInvitacion.SelectInvitacion_Detalle(oENTInvitacion);
+                oENTResponse = oBPEvento.SelectEvento_Detalle(oENTEvento);
 
                 // Validaciones
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
@@ -73,8 +74,8 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 this.lblEventoFechaHora.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHora"].ToString();
 
                 // Documentos
-                this.gvInvitacionSeguimiento.DataSource = oENTResponse.DataSetResponse.Tables[7];
-                this.gvInvitacionSeguimiento.DataBind();
+                this.gvEventoSeguimiento.DataSource = oENTResponse.DataSetResponse.Tables[5];
+                this.gvEventoSeguimiento.DataBind();
 
             }catch (Exception ex){
                 throw (ex);
@@ -99,14 +100,14 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 				if (Key == "") { this.Response.Redirect("~/Application/WebApp/Private/SysApp/sappNotificacion.aspx", false); return; }
 				if (Key.ToString().Split(new Char[] { '|' }).Length != 2) { this.Response.Redirect("~/Application/WebApp/Private/SysApp/sappNotificacion.aspx", false); return; }
 
-                // Obtener InvitacionId
-                this.hddInvitacionId.Value = Key.ToString().Split(new Char[] { '|' })[0];
+                // Obtener EventoId
+                this.hddEventoId.Value = Key.ToString().Split(new Char[] { '|' })[0];
 
 				// Obtener Sender
                 this.SenderId.Value = Key.ToString().Split(new Char[] { '|' })[1];
 
 				// Carátula
-                SelectInvitacion();
+                SelectEvento();
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
@@ -120,16 +121,16 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
             {
 
 				// Llave encriptada
-                sKey = this.hddInvitacionId.Value + "|" + this.SenderId.Value;
+                sKey = this.hddEventoId.Value + "|" + this.SenderId.Value;
 				sKey = gcEncryption.EncryptString(sKey, true);
-                this.Response.Redirect("invDetalleInvitacion.aspx?key=" + sKey, false);
+                this.Response.Redirect("eveDetalleEvento.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
             }
 		}
 
-        protected void gvInvitacionSeguimiento_RowDataBound(object sender, GridViewRowEventArgs e){
+        protected void gvEventoSeguimiento_RowDataBound(object sender, GridViewRowEventArgs e){
 			try
 			{
 
@@ -147,16 +148,17 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 			}
 		}
 
-		protected void gvInvitacionSeguimiento_Sorting(object sender, GridViewSortEventArgs e){
+		protected void gvEventoSeguimiento_Sorting(object sender, GridViewSortEventArgs e){
 			try
 			{
 
-				gcCommon.SortGridView(ref this.gvInvitacionSeguimiento, ref this.hddSort, e.SortExpression, true);
+				gcCommon.SortGridView(ref this.gvEventoSeguimiento, ref this.hddSort, e.SortExpression, true);
 
 			}catch (Exception ex){
 				ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
 			}
 		}
+
 
     }
 }

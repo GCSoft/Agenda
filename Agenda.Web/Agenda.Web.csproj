@@ -73,9 +73,13 @@
     <Content Include="Application\WebApp\Private\Catalogo\catLugarEvento.aspx" />
     <Content Include="Application\WebApp\Private\Catalogo\catSecretario.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveCalendario.aspx" />
+    <Content Include="Application\WebApp\Private\Evento\eveConfiguracionEvento.aspx" />
+    <Content Include="Application\WebApp\Private\Evento\eveContacto.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveDatosEvento.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveDatosGenerales.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveDetalleEvento.aspx" />
+    <Content Include="Application\WebApp\Private\Evento\eveDocumentos.aspx" />
+    <Content Include="Application\WebApp\Private\Evento\eveHistorial.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveListadoEventos.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveNuevoEvento.aspx" />
     <Content Include="Application\WebApp\Private\Invitacion\invAprobar.aspx" />
@@ -308,6 +312,20 @@
     <Compile Include="Application\WebApp\Private\Evento\eveCalendario.aspx.designer.cs">
       <DependentUpon>eveCalendario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveConfiguracionEvento.aspx.cs">
+      <DependentUpon>eveConfiguracionEvento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveConfiguracionEvento.aspx.designer.cs">
+      <DependentUpon>eveConfiguracionEvento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveContacto.aspx.cs">
+      <DependentUpon>eveContacto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveContacto.aspx.designer.cs">
+      <DependentUpon>eveContacto.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Application\WebApp\Private\Evento\eveDatosEvento.aspx.cs">
       <DependentUpon>eveDatosEvento.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -328,6 +346,20 @@
     </Compile>
     <Compile Include="Application\WebApp\Private\Evento\eveDetalleEvento.aspx.designer.cs">
       <DependentUpon>eveDetalleEvento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveDocumentos.aspx.cs">
+      <DependentUpon>eveDocumentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveDocumentos.aspx.designer.cs">
+      <DependentUpon>eveDocumentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveHistorial.aspx.cs">
+      <DependentUpon>eveHistorial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveHistorial.aspx.designer.cs">
+      <DependentUpon>eveHistorial.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\WebApp\Private\Evento\eveListadoEventos.aspx.cs">
       <DependentUpon>eveListadoEventos.aspx</DependentUpon>

@@ -55,6 +55,8 @@
     <Compile Include="Object\BPEvento.cs" />
     <Compile Include="Object\BPInvitacion.cs" />
     <Compile Include="Object\BPLugarEvento.cs" />
+    <Compile Include="Object\BPMedioComunicacion.cs" />
+    <Compile Include="Object\BPMedioTraslado.cs" />
     <Compile Include="Object\BPMenu.cs" />
     <Compile Include="Object\BPMunicipio.cs" />
     <Compile Include="Object\BPPais.cs" />
@@ -65,6 +67,7 @@
     <Compile Include="Object\BPSubMenu.cs" />
     <Compile Include="Object\BPTipoDocumento.cs" />
     <Compile Include="Object\BPTipoEvento.cs" />
+    <Compile Include="Object\BPTipoVestimenta.cs" />
     <Compile Include="Object\BPTitulo.cs" />
     <Compile Include="Object\BPUsuario.cs" />
     <Compile Include="Page\BPPage.cs">

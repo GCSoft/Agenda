@@ -114,7 +114,6 @@ namespace Agenda.BusinessProcess.Object
 
 				// Validación de mensajes de la BD
 				oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
-				if (oENTResponse.MessageDB != "") { return oENTResponse; }
 
 			}catch (Exception ex){
 				oENTResponse.ExceptionRaised(ex.Message);
@@ -146,7 +145,6 @@ namespace Agenda.BusinessProcess.Object
 
 				// Validación de mensajes de la BD
 				oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
-				if (oENTResponse.MessageDB != "") { return oENTResponse; }
 
 			}catch (Exception ex){
 				oENTResponse.ExceptionRaised(ex.Message);
@@ -178,7 +176,6 @@ namespace Agenda.BusinessProcess.Object
 
 				// Validación de mensajes de la BD
 				oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
-				if (oENTResponse.MessageDB != "") { return oENTResponse; }
 
 			}catch (Exception ex){
 				oENTResponse.ExceptionRaised(ex.Message);

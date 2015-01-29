@@ -1,5 +1,5 @@
 ﻿/*---------------------------------------------------------------------------------------------------------------------------------
-' Nombre:	invDetalleEvento
+' Nombre:	eveDetalleEvento
 ' Autor:	Ruben.Cobos
 ' Fecha:	22-Diciembre-2014
 '----------------------------------------------------------------------------------------------------------------------------------*/
@@ -419,7 +419,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Llave encriptada
                 sKey = this.hddEventoId.Value + "|" + this.SenderId.Value;
                 sKey = gcEncryption.EncryptString(sKey, true);
-                this.Response.Redirect("invContacto.aspx?key=" + sKey, false);
+                this.Response.Redirect("eveContacto.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
@@ -435,7 +435,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Llave encriptada
                 sKey = this.hddEventoId.Value + "|" + this.SenderId.Value;
                 sKey = gcEncryption.EncryptString(sKey, true);
-                this.Response.Redirect("invDocumentos.aspx?key=" + sKey, false);
+                this.Response.Redirect("eveDocumentos.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
@@ -483,7 +483,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Llave encriptada
                 sKey = this.hddEventoId.Value + "|" + this.SenderId.Value;
                 sKey = gcEncryption.EncryptString(sKey, true);
-                this.Response.Redirect("invHistorial.aspx?key=" + sKey, false);
+                this.Response.Redirect("eveHistorial.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);

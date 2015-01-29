@@ -105,13 +105,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
 
                 // Llenado de combo
-                this.ddlMedioTraslado.DataTextField = "Nombre";
-                this.ddlMedioTraslado.DataValueField = "MedioTrasladoId";
-                this.ddlMedioTraslado.DataSource = oENTResponse.DataSetResponse.Tables[1];
-                this.ddlMedioTraslado.DataBind();
-
-                // Agregar Item de selección
-                this.ddlMedioTraslado.Items.Insert(0, new ListItem("[Seleccione]", "0"));
+                this.chklMedioTraslado.DataTextField = "Nombre";
+                this.chklMedioTraslado.DataValueField = "MedioTrasladoId";
+                this.chklMedioTraslado.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                this.chklMedioTraslado.DataBind();
 
             }catch (Exception ex){
                 throw (ex);
@@ -177,36 +174,45 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.lblEventoFechaHora.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHora"].ToString();
                 
                 // Precarga del formulario
-                this.ddlTipoVestimenta.SelectedValue = oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoVestimentaId"].ToString();
-                this.ddlMedioTraslado.SelectedValue = oENTResponse.DataSetResponse.Tables[6].Rows[0]["MedioTrasladoId"].ToString();
-                this.ddlMedioComunicacion.SelectedValue = oENTResponse.DataSetResponse.Tables[6].Rows[0]["MedioComunicacionId"].ToString();
+                if ( oENTResponse.DataSetResponse.Tables[6].Rows.Count > 0 ){
 
-                this.txtPronostico.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["PronosticoClima"].ToString();
-                this.txtTemperaturaMinima.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["TemperaturaMinima"].ToString();
-                this.txtTemperaturaMaxima.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["TemperaturaMaxima"].ToString();
-                this.txtLugarArribo.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["LugarArribo"].ToString();
-                this.txtAforo.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["Aforo"].ToString();
-                this.txtTipoMontaje.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoMontaje"].ToString();
+                    this.ddlTipoVestimenta.SelectedValue = oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoVestimentaId"].ToString();
+                    this.ddlMedioComunicacion.SelectedValue = oENTResponse.DataSetResponse.Tables[6].Rows[0]["MedioComunicacionId"].ToString();
 
-                if ( oENTResponse.DataSetResponse.Tables[6].Rows[0]["Esposa"].ToString() == "1" ){
+                    for (int k = 0; k < this.chklMedioTraslado.Items.Count; k++) {
+					    if( oENTResponse.DataSetResponse.Tables[7].Select("MedioTrasladoId=" + this.chklMedioTraslado.Items[k].Value).Length > 0 ){
+                            this.chklMedioTraslado.Items[k].Selected = true;
+					    }
+				    }
 
-                    this.chkEsposaInvitada.Checked = true;
-                    this.rblConfirmacionEsposa.Enabled = true;
+                    this.txtPronostico.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["PronosticoClima"].ToString();
+                    this.txtTemperaturaMinima.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["TemperaturaMinima"].ToString();
+                    this.txtTemperaturaMaxima.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["TemperaturaMaxima"].ToString();
+                    this.txtLugarArribo.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["LugarArribo"].ToString();
+                    this.txtAforo.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["Aforo"].ToString();
+                    this.txtTipoMontaje.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoMontaje"].ToString();
 
-                    if (oENTResponse.DataSetResponse.Tables[6].Rows[0]["EsposaSi"].ToString() == "1") { this.rblConfirmacionEsposa.SelectedValue = "1"; }
-                    if (oENTResponse.DataSetResponse.Tables[6].Rows[0]["EsposaNo"].ToString() == "1") { this.rblConfirmacionEsposa.SelectedValue = "2"; }
-                    if (oENTResponse.DataSetResponse.Tables[6].Rows[0]["EsposaConfirma"].ToString() == "1") { this.rblConfirmacionEsposa.SelectedValue = "3"; }
+                    if ( oENTResponse.DataSetResponse.Tables[6].Rows[0]["Esposa"].ToString() == "1" ){
+
+                        this.chkEsposaInvitada.Checked = true;
+                        this.rblConfirmacionEsposa.Enabled = true;
+
+                        if (oENTResponse.DataSetResponse.Tables[6].Rows[0]["EsposaSi"].ToString() == "1") { this.rblConfirmacionEsposa.SelectedValue = "1"; }
+                        if (oENTResponse.DataSetResponse.Tables[6].Rows[0]["EsposaNo"].ToString() == "1") { this.rblConfirmacionEsposa.SelectedValue = "2"; }
+                        if (oENTResponse.DataSetResponse.Tables[6].Rows[0]["EsposaConfirma"].ToString() == "1") { this.rblConfirmacionEsposa.SelectedValue = "3"; }
                     
-                }else{
+                    }else{
 
-                    this.chkEsposaInvitada.Checked = false;
-                    this.rblConfirmacionEsposa.Enabled = false;
-                    this.rblConfirmacionEsposa.ClearSelection();
+                        this.chkEsposaInvitada.Checked = false;
+                        this.rblConfirmacionEsposa.Enabled = false;
+                        this.rblConfirmacionEsposa.ClearSelection();
+                    }
+
+                    this.txtAccionRealizar.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["AccionRealizar"].ToString();
+                    this.txtCaracteristicasInvitados.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["CaracteristicasInvitados"].ToString();
+                    this.ckeMenu.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["Menu"].ToString();
+
                 }
-
-                this.txtAccionRealizar.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["AccionRealizar"].ToString();
-                this.txtCaracteristicasInvitados.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["CaracteristicasInvitados"].ToString();
-                this.ckeMenu.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["Menu"].ToString();
 
             }catch (Exception ex){
                 throw (ex);
@@ -221,16 +227,29 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             BPEvento oBPEvento = new BPEvento();
 
             Int32 ValidateNumber;
+            DataRow rowMedioTraslado;
 
             try
             {
 
+                // Medios de traslado seleccionados
+                oENTEvento.DataTableMedioTraslado = new DataTable("DataTableMedioTraslado");
+                oENTEvento.DataTableMedioTraslado.Columns.Add("MedioTrasladoId", typeof(Int32));
+                for (int k = 0; k < this.chklMedioTraslado.Items.Count; k++) {
+					if(this.chklMedioTraslado.Items[k].Selected){
+                        rowMedioTraslado = oENTEvento.DataTableMedioTraslado.NewRow();
+                        rowMedioTraslado["MedioTrasladoId"] = this.chklMedioTraslado.Items[k].Value;
+                        oENTEvento.DataTableMedioTraslado.Rows.Add(rowMedioTraslado);
+					}
+				}
+
                 // Validaciones
-                if (this.ddlTipoVestimenta.SelectedIndex == 0) { throw (new Exception("Es necesario seleccionar un Tipo de cita")); }
-                if (this.ddlMedioTraslado.SelectedIndex == 0) { throw (new Exception("Es necesario seleccionar un MedioTraslado")); }
-                if (this.ddlMedioComunicacion.SelectedIndex == 0) { throw (new Exception("Es necesario seleccionar una MedioComunicacion")); }
+                if (this.ddlTipoVestimenta.SelectedIndex == 0) { throw (new Exception("Es necesario seleccionar un Tipo de vestimenta")); }
+                if (this.ddlMedioComunicacion.SelectedIndex == 0) { throw (new Exception("Es necesario seleccionar una medio de comunicacion")); }
+                if (oENTEvento.DataTableMedioTraslado.Rows.Count == 0) { throw (new Exception("Es necesario seleccionar un medio de traslado")); }
                 
-                if ( Int32.TryParse(this.txtAforo.Text, out ValidateNumber) == false) { throw (new Exception("Es necesario seleccionar un Secretario Ramo")); }
+                if ( Int32.TryParse(this.txtAforo.Text, out ValidateNumber) == false) { throw (new Exception("La cantidad en Aforo debe de ser numérica")); }
+
 
                 // Datos de sesión
                 oENTSession = (ENTSession)this.Session["oENTSession"];
@@ -239,14 +258,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Formulario
                 oENTEvento.EventoId = Int32.Parse( this.hddEventoId.Value );
                 oENTEvento.TipoVestimentaId = Int32.Parse(this.ddlTipoVestimenta.SelectedItem.Value);
-                oENTEvento.MedioTrasladoId = Int32.Parse(this.ddlMedioTraslado.SelectedItem.Value);
                 oENTEvento.MedioComunicacionId = Int32.Parse(this.ddlMedioComunicacion.SelectedItem.Value);
                 oENTEvento.PronosticoClima = this.txtPronostico.Text.Trim();
                 oENTEvento.TemperaturaMinima = this.txtTemperaturaMinima.Text.Trim();
                 oENTEvento.TemperaturaMaxima = this.txtTemperaturaMaxima.Text.Trim();
-                oENTEvento.LugarArribo = this.txtLugarArribo.Text.Trim();
-                oENTEvento.Aforo = Int32.Parse( this.txtAforo.Text.Trim() );
+                oENTEvento.Aforo = Int32.Parse(this.txtAforo.Text.Trim());
                 oENTEvento.TipoMontaje = this.txtTipoMontaje.Text.Trim();
+                oENTEvento.LugarArribo = this.txtLugarArribo.Text.Trim();
                 oENTEvento.Esposa = Int16.Parse( ( this.chkEsposaInvitada.Checked ? 1 : 0 ).ToString() );
                 oENTEvento.EsposaSi = Int16.Parse( ( this.rblConfirmacionEsposa.SelectedValue == "1" ? 1 : 0 ).ToString() );
                 oENTEvento.EsposaNo = Int16.Parse((this.rblConfirmacionEsposa.SelectedValue == "2" ? 1 : 0).ToString());
@@ -256,7 +274,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 oENTEvento.Menu = this.ckeMenu.Text.Trim();
 
                 // Transacción
-                //oENTResponse = oBPEvento.UpdateEvento_DatosGenerales(oENTEvento);
+                oENTResponse = oBPEvento.UpdateEvento_Configuracion(oENTEvento);
 
                 // Validaciones
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
@@ -352,6 +370,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 if( this.chkEsposaInvitada.Checked ){
 
                     this.rblConfirmacionEsposa.Enabled = true;
+                    this.rblConfirmacionEsposa.Items[0].Selected = true;
                 }else{
 
                     this.rblConfirmacionEsposa.Enabled = false;

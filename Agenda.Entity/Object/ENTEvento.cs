@@ -77,6 +77,7 @@ namespace Agenda.Entity.Object
         private Int16   _Nivel;
         private Int16   _Notificacion;
         private DataTable   _DataTableEstatusEvento;
+        private DataTable   _DataTableMedioTraslado;
         private ENTInvitacionContacto _Contacto;
 
 
@@ -142,6 +143,7 @@ namespace Agenda.Entity.Object
             _Nivel = 0;
             _Notificacion = 0;
             _DataTableEstatusEvento = null;
+            _DataTableMedioTraslado = null;
             _Contacto = new ENTInvitacionContacto();
         }
 
@@ -842,6 +844,18 @@ namespace Agenda.Entity.Object
         {
             get { return _DataTableEstatusEvento; }
             set { _DataTableEstatusEvento = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.DataTableMedioTraslado</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un DataTable el cual contiene los ID's de los medio sd etraslado seleccionadosr</summary>
+        public DataTable DataTableMedioTraslado
+        {
+            get { return _DataTableMedioTraslado; }
+            set { _DataTableMedioTraslado = value; }
         }
 
         ///<remarks>

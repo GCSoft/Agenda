@@ -26,13 +26,18 @@
             <tr>
 				<td class="Etiqueta">Nombre de evento</td>
 				<td class="Espacio"></td>
-				<td class="Campo"><asp:Label ID="lblEventoNombre" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
-                <td></td>
+				<td class="Campo" colspan="2"><asp:Label ID="lblEventoNombre" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
 			</tr>
             <tr>
 				<td class="Etiqueta">Fecha de evento</td>
 				<td class="Espacio"></td>
 				<td class="Campo" colspan="2"><asp:Label ID="lblEventoFechaHora" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
+			</tr>
+            <tr>
+				<td class="Etiqueta"></td>
+				<td class="Espacio"></td>
+				<td class="Campo" colspan="2"></td>
+                <td></td>
 			</tr>
 			<tr><td class="Etiqueta" colspan="4" style="text-align:left;">Motivo de rechazo</td></tr>
 			<tr>

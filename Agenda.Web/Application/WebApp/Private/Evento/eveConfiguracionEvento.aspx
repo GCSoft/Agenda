@@ -11,13 +11,13 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPageName" runat="server" CssClass="MasterPageName">
-        <asp:Label ID="lblPageName" runat="server" CssClass="PageNameText" Text="Datos generales de Invitación"></asp:Label>
+        <asp:Label ID="lblPageName" runat="server" CssClass="PageNameText" Text="Información complementaria del evento"></asp:Label>
     </asp:Panel>
 
     <asp:Panel ID="pnlTitulo" runat="server" CssClass="TitlePanel">
         <table class="HeaderTable">
             <tr>
-                <td class="Titulo"><asp:Label ID="lblSubTitulo" runat="server" Text="Edite la información de los datos generales de la invitación."></asp:Label></td>
+                <td class="Titulo"><asp:Label ID="lblSubTitulo" runat="server" Text="Edite la información complementaria del evento."></asp:Label></td>
             </tr>
         </table>
     </asp:Panel>
@@ -41,15 +41,15 @@
                 <td></td>
 			</tr>
             <tr>
-				<td class="Etiqueta">Medio de traslado</td>
-				<td class="VinetaObligatorio">*</td>
-				<td class="Campo"><asp:DropDownList ID="ddlMedioTraslado" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
-                <td></td>
-			</tr>
-            <tr>
 				<td class="Etiqueta">Medios de comunicación</td>
 				<td class="VinetaObligatorio">*</td>
 				<td class="Campo"><asp:DropDownList ID="ddlMedioComunicacion" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
+                <td></td>
+			</tr>
+            <tr>
+				<td class="Etiqueta">Medio de traslado</td>
+				<td class="VinetaObligatorio">*</td>
+				<td class="Campo"><asp:CheckBoxList ID="chklMedioTraslado" runat="server" CssClass="CheckBox_Regular" RepeatDirection="Horizontal" ></asp:CheckBoxList></td>
                 <td></td>
 			</tr>
             <tr>
@@ -62,22 +62,16 @@
 				<td class="Etiqueta">Temp. mínima</td>
 				<td class="Espacio"></td>
 				<td class="Campo">
-                    <asp:TextBox ID="txtTemperaturaMinima" runat="server" CssClass="Textbox_General" MaxLength="10" Width="130px"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:TextBox ID="txtTemperaturaMinima" runat="server" CssClass="Textbox_General" MaxLength="10" Width="130px"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     Máxima&nbsp;&nbsp;
                     <asp:TextBox ID="txtTemperaturaMaxima" runat="server" CssClass="Textbox_General" MaxLength="10" Width="130px"></asp:TextBox>
 				</td>
                 <td></td>
 			</tr>
             <tr>
-				<td class="Etiqueta">Lugar de arribo</td>
-				<td class="Espacio"></td>
-				<td class="Campo"><asp:TextBox ID="txtLugarArribo" runat="server" CssClass="Textbox_General" MaxLength="200" Width="400px"></asp:TextBox></td>
-                <td></td>
-			</tr>
-            <tr>
 				<td class="Etiqueta">Aforo</td>
 				<td class="Espacio"></td>
-				<td class="Campo"><asp:TextBox ID="txtAforo" runat="server" CssClass="Textbox_General" MaxLength="5" Width="400px"></asp:TextBox></td>
+				<td class="Campo"><asp:TextBox ID="txtAforo" runat="server" CssClass="Textbox_General" MaxLength="5" Text="0" Width="130px"></asp:TextBox></td>
                 <td></td>
 			</tr>
             <tr>
@@ -87,18 +81,33 @@
                 <td></td>
 			</tr>
             <tr>
-				<td class="Etiqueta">Esposa invitada</td>
+				<td class="Etiqueta">Lugar de arribo</td>
 				<td class="Espacio"></td>
-				<td class="Campo">
-                    <asp:CheckBox ID="chkEsposaInvitada" runat="server" CssClass="CheckBox_Regular" Checked="true" Text="Nuevo" AutoPostBack="True" OnCheckedChanged="chkEsposaInvitada_CheckedChanged" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    Confirmación&nbsp;&nbsp;
-                    <asp:RadioButtonList ID="rblConfirmacionEsposa" runat="server" RepeatDirection="Horizontal" Enabled ="false">
-						<asp:ListItem Text="Si" Value="1"></asp:ListItem>
-						<asp:ListItem Text="No" Value="2"></asp:ListItem>
-                        <asp:ListItem Text="Pendiente" Value="3"></asp:ListItem>
-					</asp:RadioButtonList>
-				</td>
+				<td class="Campo"><asp:TextBox ID="txtLugarArribo" runat="server" CssClass="Textbox_General" MaxLength="200" Width="400px"></asp:TextBox></td>
                 <td></td>
+			</tr>
+            <tr>
+				<td class="Etiqueta">Esposa</td>
+				<td class="Espacio"></td>
+				<td class="Campo" colspan="2">
+                    <table style="border:0px; border-spacing:0px; width:100%;">
+                        <tr>
+                            <td style="text-align:left; width:150px;">
+                                <asp:CheckBox ID="chkEsposaInvitada" runat="server" CssClass="CheckBox_Regular" Text="Invitada" AutoPostBack="True" OnCheckedChanged="chkEsposaInvitada_CheckedChanged" />
+                            </td>
+                            <td style="text-align:left; width:70px;">
+                                Confirmación:
+                            </td>
+                            <td style="text-align:left;">
+                                <asp:RadioButtonList ID="rblConfirmacionEsposa" runat="server" RepeatDirection="Horizontal" Enabled ="false">
+						            <asp:ListItem Text="Si" Value="1"></asp:ListItem>
+						            <asp:ListItem Text="No" Value="2"></asp:ListItem>
+                                    <asp:ListItem Text="Pendiente" Value="3"></asp:ListItem>
+					            </asp:RadioButtonList>
+                            </td>
+                        </tr>
+                    </table>
+				</td>
 			</tr>
             <tr>
 				<td class="Etiqueta">Acción a realizar</td>

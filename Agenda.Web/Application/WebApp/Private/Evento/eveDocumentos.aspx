@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Include/MasterPage/PrivateTemplate.Master" AutoEventWireup="true" CodeBehind="invDocumentos.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Invitacion.invDocumentos" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Include/MasterPage/PrivateTemplate.Master" AutoEventWireup="true" CodeBehind="eveDocumentos.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Evento.eveDocumentos" %>
 <%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cntPrivateTemplateHeader" runat="server">
@@ -13,13 +13,13 @@
             </asp:Panel>
 
             <asp:Panel ID="pnlPageName" runat="server" CssClass="MasterPageName">
-                <asp:Label ID="lblPageName" runat="server" CssClass="PageNameText" Text="Documentos adjuntos a la invitación"></asp:Label>
+                <asp:Label ID="lblPageName" runat="server" CssClass="PageNameText" Text="Documentos adjuntos al evento"></asp:Label>
             </asp:Panel>
 
             <asp:Panel ID="pnlTitulo" runat="server" CssClass="TitlePanel">
                 <table class="HeaderTable">
                     <tr>
-                        <td class="Titulo"><asp:Label ID="lblSubTitulo" runat="server" Text="Adjunte nuevos documentos a la invitación."></asp:Label></td>
+                        <td class="Titulo"><asp:Label ID="lblSubTitulo" runat="server" Text="Administre los documentos adjuntos al evento."></asp:Label></td>
                     </tr>
                 </table>
             </asp:Panel>
@@ -80,7 +80,7 @@
 								<td>Descripción</td>
 							</tr>
 							<tr class="Grid_Row">
-								<td colspan="2">No se encontraron Documentos asociados a la invitación</td>
+								<td colspan="2">No se encontraron Documentos asociados a el evento</td>
 							</tr>
 						</table>
 					</EmptyDataTemplate>
@@ -105,7 +105,7 @@
                 <%--Empty Content--%>
             </asp:Panel>
 
-            <asp:HiddenField ID="hddInvitacionId" runat="server" Value="0" />
+            <asp:HiddenField ID="hddEventoId" runat="server" Value="0" />
             <asp:HiddenField ID="SenderId" runat="server" Value="0" />
             <asp:HiddenField ID="hddSort" runat="server" Value="NombreDocumento" />
 	

@@ -50,6 +50,8 @@
     <Compile Include="Object\DAEvento.cs" />
     <Compile Include="Object\DAInvitacion.cs" />
     <Compile Include="Object\DALugarEvento.cs" />
+    <Compile Include="Object\DAMedioComunicacion.cs" />
+    <Compile Include="Object\DAMedioTraslado.cs" />
     <Compile Include="Object\DAMenu.cs" />
     <Compile Include="Object\DAMunicipio.cs" />
     <Compile Include="Object\DAPais.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="Object\DASubMenu.cs" />
     <Compile Include="Object\DATipoDocumento.cs" />
     <Compile Include="Object\DATipoEvento.cs" />
+    <Compile Include="Object\DATipoVestimenta.cs" />
     <Compile Include="Object\DATitulo.cs" />
     <Compile Include="Object\DAUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

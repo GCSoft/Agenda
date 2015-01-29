@@ -25,6 +25,70 @@ namespace Agenda.BusinessProcess.Object
     {
 
         ///<remarks>
+        ///   <name>BPEvento.DeleteEventoContacto</name>
+        ///   <create>07-Enero-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Elimina lógicamente un contacto asociado a un evento</summary>
+        ///<param name="oENTEvento">Entidad de Evento con los parámetros necesarios para realizar la transacción</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse DeleteEventoContacto(ENTEvento oENTEvento){
+            DAEvento oDAEvento = new DAEvento();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            try
+            {
+
+                // Transacción en base de datos
+                oENTResponse = oDAEvento.DeleteEventoContacto(oENTEvento, this.ConnectionApplication, 0);
+
+                // Validación de error en consulta
+                if (oENTResponse.GeneratesException) { return oENTResponse; }
+
+                // Validación de mensajes de la BD
+                oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
+
+            }catch (Exception ex){
+                oENTResponse.ExceptionRaised(ex.Message);
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
+        ///   <name>BPEvento.InsertEventoContacto</name>
+        ///   <create>07-Enero-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Asocia un nuevo contacto a un evento</summary>
+        ///<param name="oENTEvento">Entidad de Evento con los parámetros necesarios para realizar la transacción</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse InsertEventoContacto(ENTEvento oENTEvento){
+            DAEvento oDAEvento = new DAEvento();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            try
+            {
+
+                // Transacción en base de datos
+                oENTResponse = oDAEvento.InsertEventoContacto(oENTEvento, this.ConnectionApplication, 0);
+
+                // Validación de error en consulta
+                if (oENTResponse.GeneratesException) { return oENTResponse; }
+
+                // Validación de mensajes de la BD
+                oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
+
+            }catch (Exception ex){
+                oENTResponse.ExceptionRaised(ex.Message);
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
         ///   <name>BPEvento.SelectEvento</name>
         ///   <create>22-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
@@ -105,6 +169,38 @@ namespace Agenda.BusinessProcess.Object
 
                 // Transacción en base de datos
                 oENTResponse = oDAEvento.SelectEvento_Detalle(oENTEvento, this.ConnectionApplication, 0);
+
+                // Validación de error en consulta
+                if (oENTResponse.GeneratesException) { return oENTResponse; }
+
+                // Validación de mensajes de la BD
+                oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
+
+            }catch (Exception ex){
+                oENTResponse.ExceptionRaised(ex.Message);
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
+        ///   <name>BPEvento.SelectEventoContacto</name>
+        ///   <create>07-Enero-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene un listado de contactos asociados a una invitación en particular en base a los parámetros proporcionados</summary>
+        ///<param name="oENTEvento">Entidad de Evento con los parámetros necesarios para consultar la información</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse SelectEventoContacto(ENTEvento oENTEvento){
+            DAEvento oDAEvento = new DAEvento();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            try
+            {
+
+                // Transacción en base de datos
+                oENTResponse = oDAEvento.SelectEventoContacto(oENTEvento, this.ConnectionApplication, 0);
 
                 // Validación de error en consulta
                 if (oENTResponse.GeneratesException) { return oENTResponse; }
@@ -227,6 +323,38 @@ namespace Agenda.BusinessProcess.Object
         }
 
         ///<remarks>
+        ///   <name>BPEvento.UpdateEvento_Configuracion</name>
+        ///   <create>28-Enero-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Actualiza la sección de configuración de un evento existente</summary>
+        ///<param name="oENTEvento">Entidad de Evento con los parámetros necesarios para realizar la transacción</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse UpdateEvento_Configuracion(ENTEvento oENTEvento){
+            DAEvento oDAEvento = new DAEvento();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            try
+            {
+
+                // Transacción en base de datos
+                oENTResponse = oDAEvento.UpdateEvento_Configuracion(oENTEvento, this.ConnectionApplication, 0);
+
+                // Validación de error en consulta
+                if (oENTResponse.GeneratesException) { return oENTResponse; }
+
+                // Validación de mensajes de la BD
+                oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
+
+            }catch (Exception ex){
+                oENTResponse.ExceptionRaised(ex.Message);
+            }
+
+            // Resultado
+            return oENTResponse;
+        }        
+
+        ///<remarks>
         ///   <name>BPEvento.UpdateEvento_DatosEvento</name>
         ///   <create>09-Enero-2015</create>
         ///   <author>Ruben.Cobos</author>
@@ -295,7 +423,7 @@ namespace Agenda.BusinessProcess.Object
         ///   <create>07-Enero-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
-        ///<summary>Actualiza la información de un contacto asociado a la invitación</summary>
+        ///<summary>Actualiza la información de un contacto asociado a un evento</summary>
         ///<param name="oENTEvento">Entidad de Evento con los parámetros necesarios para realizar la transacción</param>
         ///<returns>Una entidad de respuesta</returns>
         public ENTResponse UpdateEventoContacto(ENTEvento oENTEvento){

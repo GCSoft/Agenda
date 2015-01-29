@@ -27,8 +27,7 @@
             <tr>
 				<td class="Etiqueta">Nombre de evento</td>
 				<td class="Espacio"></td>
-				<td class="Campo"><asp:Label ID="lblEventoNombre" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
-                <td></td>
+				<td class="Campo" colspan="2"><asp:Label ID="lblEventoNombre" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
 			</tr>
             <tr>
 				<td class="Etiqueta">Fecha de evento</td>

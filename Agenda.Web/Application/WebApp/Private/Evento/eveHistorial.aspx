@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Include/MasterPage/PrivateTemplate.Master" AutoEventWireup="true" CodeBehind="invHistorial.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Invitacion.invHistorial" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Include/MasterPage/PrivateTemplate.Master" AutoEventWireup="true" CodeBehind="eveHistorial.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Evento.eveHistorial" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="cntPrivateTemplateHeader" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cntPrivateTemplateBody" runat="server">
@@ -8,13 +8,13 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPageName" runat="server" CssClass="MasterPageName">
-        <asp:Label ID="lblPageName" runat="server" CssClass="PageNameText" Text="Invitación - Historial de cambios"></asp:Label>
+        <asp:Label ID="lblPageName" runat="server" CssClass="PageNameText" Text="Historial de cambios"></asp:Label>
     </asp:Panel>
 
     <asp:Panel ID="pnlTitulo" runat="server" CssClass="TitlePanel">
         <table class="HeaderTable">
             <tr>
-                <td class="Titulo"><asp:Label ID="lblSubTitulo" runat="server" Text="Se presentan los cambios realizados a la invitación."></asp:Label></td>
+                <td class="Titulo"><asp:Label ID="lblSubTitulo" runat="server" Text="Se presentan los cambios realizados al evento."></asp:Label></td>
             </tr>
         </table>
     </asp:Panel>
@@ -25,7 +25,6 @@
 				<td class="Etiqueta">Nombre de evento</td>
 				<td class="Espacio"></td>
 				<td class="Campo" colspan="2"><asp:Label ID="lblEventoNombre" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
-                <td></td>
 			</tr>
             <tr>
 				<td class="Etiqueta">Fecha de evento</td>
@@ -39,6 +38,7 @@
                 <td></td>
 			</tr>
         </table>
+
     </asp:Panel>
 
     <asp:Panel ID="pnlBreak" runat="server" CssClass="BreakPanel">
@@ -50,10 +50,10 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlGrid" runat="server" CssClass="GridPanel">
-        <asp:GridView ID="gvInvitacionSeguimiento" runat="server" AllowPaging="false" AllowSorting="true"  AutoGenerateColumns="False" Width="100%"
-			DataKeyNames="InvitacionSeguimientoId,UsuarioId,RowNumber"
-			OnRowDataBound="gvInvitacionSeguimiento_RowDataBound" 
-			OnSorting="gvInvitacionSeguimiento_Sorting">
+        <asp:GridView ID="gvEventoSeguimiento" runat="server" AllowPaging="false" AllowSorting="true"  AutoGenerateColumns="False" Width="100%"
+			DataKeyNames="EventoSeguimientoId,UsuarioId,RowNumber"
+			OnRowDataBound="gvEventoSeguimiento_RowDataBound" 
+			OnSorting="gvEventoSeguimiento_Sorting">
 			<AlternatingRowStyle CssClass="Grid_Row_Alternating" />
 			<HeaderStyle CssClass="Grid_Header" />
 			<RowStyle CssClass="Grid_Row" />
@@ -87,8 +87,9 @@
         <%--Empty Content--%>
     </asp:Panel>
 
-    <asp:HiddenField ID="hddInvitacionId" runat="server" Value="0" />
+    <asp:HiddenField ID="hddEventoId" runat="server" Value="0" />
     <asp:HiddenField ID="SenderId" runat="server" Value="0"  />
     <asp:HiddenField ID="hddSort" runat="server" Value="RowNumber" />
 
 </asp:Content>
+

@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Agenda.Web.Application.WebApp.Private.Invitacion {
+namespace Agenda.Web.Application.WebApp.Private.Evento {
     
     
-    public partial class invHistorial {
+    public partial class eveHistorial {
         
         /// <summary>
         /// pnlIconPage control.
@@ -130,13 +130,13 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         protected global::System.Web.UI.WebControls.Panel pnlGrid;
         
         /// <summary>
-        /// gvInvitacionSeguimiento control.
+        /// gvEventoSeguimiento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvInvitacionSeguimiento;
+        protected global::System.Web.UI.WebControls.GridView gvEventoSeguimiento;
         
         /// <summary>
         /// pnlFooter control.
@@ -148,13 +148,13 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         protected global::System.Web.UI.WebControls.Panel pnlFooter;
         
         /// <summary>
-        /// hddInvitacionId control.
+        /// hddEventoId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hddInvitacionId;
+        protected global::System.Web.UI.WebControls.HiddenField hddEventoId;
         
         /// <summary>
         /// SenderId control.
