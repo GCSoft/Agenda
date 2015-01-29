@@ -219,6 +219,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
 				}
 
+                // Si el evento está cancelado o representado no se podrá generar el cuadernillo
+                // 4 - Cancelado
+                // 5 - Representado
+				if ( Int32.Parse(this.hddEstatusEventoId.Value) == 4 || Int32.Parse(this.hddEstatusEventoId.Value) == 5 ){
+
+                    this.CuadernilloPanel.Visible = false;
+
+				}
+
             }catch (Exception ex){
 				throw(ex);
             }
@@ -451,7 +460,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Llave encriptada
                 sKey = this.hddEventoId.Value + "|" + this.SenderId.Value;
                 sKey = gcEncryption.EncryptString(sKey, true);
-                this.Response.Redirect("invRechazar.aspx?key=" + sKey, false);
+                this.Response.Redirect("eveCancelar.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
@@ -459,15 +468,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 		}
 
         protected void CuadernilloButton_Click(object sender, ImageClickEventArgs e){
-			String sKey = "";
-
             try
             {
 
-                // Llave encriptada
-                sKey = this.hddEventoId.Value + "|" + this.SenderId.Value;
-                sKey = gcEncryption.EncryptString(sKey, true);
-                this.Response.Redirect("invRechazar.aspx?key=" + sKey, false);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('TODO: Se manda llamar componente de generación de cuadernillos');", true);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);

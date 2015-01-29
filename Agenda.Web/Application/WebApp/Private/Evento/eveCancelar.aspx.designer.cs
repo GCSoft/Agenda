@@ -10,7 +10,7 @@
 namespace Agenda.Web.Application.WebApp.Private.Evento {
     
     
-    public partial class eveCalendario {
+    public partial class eveCancelar {
         
         /// <summary>
         /// pnlIconPage control.
@@ -76,121 +76,31 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.Panel pnlFormulario;
         
         /// <summary>
-        /// ddlPrioridad control.
+        /// lblEventoNombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPrioridad;
+        protected global::System.Web.UI.WebControls.Label lblEventoNombre;
         
         /// <summary>
-        /// ddlDependencia control.
+        /// lblEventoFechaHora control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDependencia;
+        protected global::System.Web.UI.WebControls.Label lblEventoFechaHora;
         
         /// <summary>
-        /// NuevosEventosPanel control.
+        /// ckeMotivoRechazo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel NuevosEventosPanel;
-        
-        /// <summary>
-        /// chkNuevo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkNuevo;
-        
-        /// <summary>
-        /// EnProcesoPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel EnProcesoPanel;
-        
-        /// <summary>
-        /// chkProceso control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkProceso;
-        
-        /// <summary>
-        /// ExpiradoPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel ExpiradoPanel;
-        
-        /// <summary>
-        /// chkExpirado control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkExpirado;
-        
-        /// <summary>
-        /// CanceladoPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel CanceladoPanel;
-        
-        /// <summary>
-        /// chkCancelar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkCancelar;
-        
-        /// <summary>
-        /// RepresentadoPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel RepresentadoPanel;
-        
-        /// <summary>
-        /// chkRepresentado control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkRepresentado;
-        
-        /// <summary>
-        /// imgImprimir control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgImprimir;
+        protected global::CKEditor.NET.CKEditorControl ckeMotivoRechazo;
         
         /// <summary>
         /// pnlBreak control.
@@ -202,13 +112,31 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.Panel pnlBreak;
         
         /// <summary>
-        /// wucFullCalendar control.
+        /// pnlBotones control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Agenda.Web.Include.WebUserControls.FullCalendar.wucFullCalendar wucFullCalendar;
+        protected global::System.Web.UI.WebControls.Panel pnlBotones;
+        
+        /// <summary>
+        /// btnDeclinar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDeclinar;
+        
+        /// <summary>
+        /// btnRegresar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegresar;
         
         /// <summary>
         /// pnlFooter control.
@@ -220,21 +148,21 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.Panel pnlFooter;
         
         /// <summary>
-        /// hddCurrentMonth control.
+        /// hddEventoId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hddCurrentMonth;
+        protected global::System.Web.UI.WebControls.HiddenField hddEventoId;
         
         /// <summary>
-        /// hddCurrentYear control.
+        /// SenderId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hddCurrentYear;
+        protected global::System.Web.UI.WebControls.HiddenField SenderId;
     }
 }

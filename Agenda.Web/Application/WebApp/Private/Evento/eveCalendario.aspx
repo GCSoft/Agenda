@@ -39,35 +39,38 @@
                 <td colspan="4">
                      <table style="width:100%">
                         <tr>
-                            <td style="text-align:center; width:20%">
+                            <td style="text-align:center; width:17%">
                                 <asp:Panel ID="NuevosEventosPanel" CssClass="FiltroPanel" runat="server" Visible="true">
                                     <div style='background-color:#348dff; border:1px solid #675C9D; float:left; height:16px; width:16px;'></div>
                                     <div style='float:left; '><asp:CheckBox ID="chkNuevo" runat="server" CssClass="CheckBox_Regular" Checked="true" Text="Nuevo" AutoPostBack="True" OnCheckedChanged="chkNuevo_CheckedChanged" /></div>
                                 </asp:Panel>
                             </td>
-                            <td style="text-align:center; width:20%">
+                            <td style="text-align:center; width:17%">
                                 <asp:Panel ID="EnProcesoPanel" CssClass="FiltroPanel" runat="server" Visible="true">
                                     <div style='background-color:#65B449; border:1px solid #675C9D; float:left; height:16px; width:16px;'></div>
                                     <div style='float:left; '><asp:CheckBox ID="chkProceso" runat="server" CssClass="CheckBox_Regular" Checked="true" Text="En Proceso" AutoPostBack="True" OnCheckedChanged="chkProceso_CheckedChanged" /></div>
                                 </asp:Panel>
                             </td>
-                            <td style="text-align:center; width:20%">
+                            <td style="text-align:center; width:17%">
                                 <asp:Panel ID="ExpiradoPanel" CssClass="FiltroPanel" runat="server" Visible="true">
                                     <div style='background-color:#ff9933; border:1px solid #675C9D; float:left; height:16px; width:16px;'></div>
                                     <div style='float:left; '><asp:CheckBox ID="chkExpirado" runat="server" CssClass="CheckBox_Regular" Checked="true" Text="Expirado" AutoPostBack="True" OnCheckedChanged="chkExpirado_CheckedChanged" /></div>
                                 </asp:Panel>
                             </td>
-                            <td style="text-align:center; width:20%">
+                            <td style="text-align:center; width:17%">
                                 <asp:Panel ID="CanceladoPanel" CssClass="FiltroPanel" runat="server" Visible="true">
                                     <div style='background-color:red; border:1px solid #675C9D; float:left; height:16px; width:16px;'></div>
                                     <div style='float:left; '><asp:CheckBox ID="chkCancelar" runat="server" CssClass="CheckBox_Regular" Checked="true" Text="Cancelado" AutoPostBack="True" OnCheckedChanged="chkCancelar_CheckedChanged" /></div>
                                 </asp:Panel>
                             </td>
-                            <td style="text-align:center; width:20%">
+                            <td style="text-align:center; width:17%">
                                 <asp:Panel ID="RepresentadoPanel" CssClass="FiltroPanel" runat="server" Visible="true">
                                     <div style='background-color:#666666; border:1px solid #675C9D; float:left; height:16px; width:16px;'></div>
                                     <div style='float:left;'><asp:CheckBox ID="chkRepresentado" runat="server" CssClass="CheckBox_Regular" Checked="true" Text="Representado" AutoPostBack="True" OnCheckedChanged="chkRepresentado_CheckedChanged" /></div>
                                 </asp:Panel>
+                            </td>
+                            <td style="text-align:right; width:15%">
+                                <asp:ImageButton ID="imgImprimir" runat="server" OnClientClick="window.open('eveCalendarioCompleto.aspx', 'FullCalendarWindow', 'menubar=1,resizable=1,width=1024,height=800'); return false;" ImageUrl="~/Include/Image/Icon/Print.png" />
                             </td>
                         </tr>
                     </table>

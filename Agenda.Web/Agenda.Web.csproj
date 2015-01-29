@@ -73,6 +73,8 @@
     <Content Include="Application\WebApp\Private\Catalogo\catLugarEvento.aspx" />
     <Content Include="Application\WebApp\Private\Catalogo\catSecretario.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveCalendario.aspx" />
+    <Content Include="Application\WebApp\Private\Evento\eveCalendarioCompleto.aspx" />
+    <Content Include="Application\WebApp\Private\Evento\eveCancelar.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveConfiguracionEvento.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveContacto.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveDatosEvento.aspx" />
@@ -236,6 +238,7 @@
     <Content Include="Include\Image\Buttons\Restore.png" />
     <Content Include="Include\Image\Buttons\Restore_Over.png" />
     <Content Include="Include\Image\Buttons\Search.png" />
+    <Content Include="Include\Image\Icon\Print.png" />
     <Content Include="Include\Image\Icon\SubMenuAdjuntarDocumento.png" />
     <Content Include="Include\Image\Icon\SubMenuAprobar.png" />
     <Content Include="Include\Image\Icon\SubMenuAsociarFuncionario.png" />
@@ -311,6 +314,20 @@
     </Compile>
     <Compile Include="Application\WebApp\Private\Evento\eveCalendario.aspx.designer.cs">
       <DependentUpon>eveCalendario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveCalendarioCompleto.aspx.cs">
+      <DependentUpon>eveCalendarioCompleto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveCalendarioCompleto.aspx.designer.cs">
+      <DependentUpon>eveCalendarioCompleto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveCancelar.aspx.cs">
+      <DependentUpon>eveCancelar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveCancelar.aspx.designer.cs">
+      <DependentUpon>eveCancelar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\WebApp\Private\Evento\eveConfiguracionEvento.aspx.cs">
       <DependentUpon>eveConfiguracionEvento.aspx</DependentUpon>
