@@ -32,6 +32,24 @@
     <asp:Panel ID="pnlFormulario" runat="server" CssClass="FormPanel">
         <table class="FormTable">
             <tr>
+				<td class="Etiqueta">Estado</td>
+				<td class="Espacio"></td>
+				<td class="Campo"><asp:DropDownList ID="ddlEstado" runat="server" CssClass="DropDownList_General" Width="216px" AutoPostBack="true" OnSelectedIndexChanged="ddlEstado_SelectedIndexChanged"></asp:DropDownList></td>
+                <td></td>
+			</tr>
+            <tr>
+				<td class="Etiqueta">Municipio</td>
+				<td class="Espacio"></td>
+				<td class="Campo"><asp:DropDownList ID="ddlMunicipio" runat="server" CssClass="DropDownList_General" Width="216px" AutoPostBack="true" OnSelectedIndexChanged="ddlMunicipio_SelectedIndexChanged"></asp:DropDownList></td>
+                <td></td>
+			</tr>
+            <tr>
+				<td class="Etiqueta">Colonia</td>
+				<td class="Espacio"></td>
+				<td class="Campo"><asp:DropDownList ID="ddlColonia" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
+                <td></td>
+			</tr>
+            <tr>
 				<td class="Etiqueta">Nombre</td>
 				<td class="Espacio"></td>
 				<td class="Campo"><asp:TextBox ID="txtNombre" runat="server" CssClass="Textbox_General" Width="210px"></asp:TextBox></td>
@@ -68,6 +86,7 @@
                 <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
                     <tr class="Grid_Header">
                         <td style="width: 150px;">Nombre</td>
+                        <td style="width: 110px;">Estado</td>
                         <td style="width: 110px;">Municipio</td>
                         <td style="width: 150px;">Colonia</td>
                         <td style="width: 110px;">Calle</td>
@@ -77,12 +96,13 @@
                         <td>Descripción</td>
                     </tr>
                     <tr class="Grid_Row">
-                        <td colspan="8">No se encontraron Lugares de Evento registrados en el sistema</td>
+                        <td colspan="9">No se encontraron Lugares de Evento registrados en el sistema</td>
                     </tr>
                 </table>
             </EmptyDataTemplate>
             <Columns>
                 <asp:BoundField HeaderText="Nombre"         ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="150px" DataField="Nombre"                                  SortExpression="Nombre"></asp:BoundField>
+                <asp:BoundField HeaderText="Estado"         ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="110px" DataField="EstadoNombre"                            SortExpression="EstadoNombre"></asp:BoundField>
                 <asp:BoundField HeaderText="Municipio"      ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="110px" DataField="MunicipioNombre"                         SortExpression="MunicipioNombre"></asp:BoundField>
                 <asp:BoundField HeaderText="Colonia"        ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="150px" DataField="ColoniaNombre"                           SortExpression="ColoniaNombre"></asp:BoundField>
                 <asp:BoundField HeaderText="Calle"          ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="110px" DataField="Calle"                                   SortExpression="Calle"></asp:BoundField>
@@ -105,7 +125,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPopUp" runat="server" CssClass="PopUpBlock">
-        <asp:Panel ID="pnlPopUpContent" runat="server" CssClass="PopUpContent" style="margin-top:-270px; margin-left:-310px;" Height="540px" Width="620px">
+        <asp:Panel ID="pnlPopUpContent" runat="server" CssClass="PopUpContent" style="margin-top:-285px; margin-left:-310px;" Height="570px" Width="620px">
             <asp:Panel ID="pnlPopUpHeader" runat="server" CssClass="PopUpHeader">
                 <table class="PopUpHeaderTable">
                     <tr>
@@ -123,15 +143,20 @@
                         <td class="Campo"><asp:TextBox ID="txtPopUpNombre" runat="server" CssClass="Textbox_General" MaxLength="100" Width="400px"></asp:TextBox></td>
                     </tr>
                     <tr>
+                        <td class="Etiqueta">Estado</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo"><asp:DropDownList ID="ddlPopUpEstado" runat="server" CssClass="DropDownList_General" Width="405px" AutoPostBack="true" OnSelectedIndexChanged="ddlPopUpEstado_SelectedIndexChanged"></asp:DropDownList></td>
+                    </tr>
+                    <tr>
                         <td class="Etiqueta">Municipio</td>
-                        <td class="Espacio"></td>
+                        <td class="VinetaObligatorio">*</td>
                         <td class="Campo"><asp:DropDownList ID="ddlPopUpMunicipio" runat="server" CssClass="DropDownList_General" Width="405px" AutoPostBack="true" OnSelectedIndexChanged="ddlPopUpMunicipio_SelectedIndexChanged"></asp:DropDownList></td>
                     </tr>
                     <tr>
                         <td class="Etiqueta">Colonia</td>
                         <td class="VinetaObligatorio">*</td>
                         <td class="Campo">
-							<asp:TextBox ID="txtPopUpColonia" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
+							<asp:TextBox ID="txtPopUpColonia" runat="server" CssClass="Textbox_General_Disabled" MaxLength="1000" Width="400px" Enabled="false"></asp:TextBox>
 							<asp:HiddenField ID="hddPopUpColoniaId" runat="server" />
 							<asp:AutoCompleteExtender
 								ID="autosuggestColonia" 

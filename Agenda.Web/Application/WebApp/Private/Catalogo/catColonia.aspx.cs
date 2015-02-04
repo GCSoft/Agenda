@@ -63,7 +63,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 // Transacción exitosa
                 ClearPopUpPanel();
 
-                // Actualizar grid
+                // Grid vacío
                 SelectColonia();
 
                 // Mensaje de usuario
@@ -103,7 +103,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 this.ddlEstado.DataBind();
 
                 // Elemento extra
-                this.ddlPopUpStatus.Items.Insert(0, new ListItem("[Seleccione]", "0"));
+                this.ddlEstado.Items.Insert(0, new ListItem("[Todos]", "0"));
 
             }catch (Exception ex){
                 throw (ex);
@@ -186,8 +186,8 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
 
                 // Formulario
                 oENTColonia.ColoniaId = 0;
-                oENTColonia.EstadoId = 0;
-                oENTColonia.MunicipioId = 0;
+                oENTColonia.EstadoId = Int32.Parse(this.ddlEstado.SelectedItem.Value);
+                oENTColonia.MunicipioId = Int32.Parse(this.ddlMunicipio.SelectedItem.Value);
                 oENTColonia.Nombre = this.txtNombre.Text;
                 oENTColonia.Activo = Int16.Parse(this.ddlStatus.SelectedItem.Value);
 
@@ -266,21 +266,29 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 oENTMunicipio.Nombre = "";
                 oENTMunicipio.Activo = 1;
 
-                // Transacción
-                oENTResponse = oBPMunicipio.SelectMunicipio(oENTMunicipio);
+                // Debido al número de municipio sólo se carga el combo cuando se selecciona un estado
+                if( oENTMunicipio.EstadoId == 0 ){
 
-                // Validaciones
-                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+                    this.ddlMunicipio.Items.Clear();
+                }else{
 
-                // Llenado de combo de municipio
-                this.ddlMunicipio.DataTextField = "Nombre";
-                this.ddlMunicipio.DataValueField = "MunicipioId";
-                this.ddlMunicipio.DataSource = oENTResponse.DataSetResponse.Tables[1];
-                this.ddlMunicipio.DataBind();
+                    // Transacción
+                    oENTResponse = oBPMunicipio.SelectMunicipio(oENTMunicipio);
+
+                    // Validaciones
+                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                    // Llenado de combo de municipio
+                    this.ddlMunicipio.DataTextField = "Nombre";
+                    this.ddlMunicipio.DataValueField = "MunicipioId";
+                    this.ddlMunicipio.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                    this.ddlMunicipio.DataBind();
+
+                }
 
                 // Elemento extra
-                this.ddlMunicipio.Items.Insert(0, new ListItem("[Seleccione]", "0"));
+                this.ddlMunicipio.Items.Insert(0, new ListItem("[Todos]", "0"));
 
             }catch (Exception ex){
                 throw (ex);
@@ -302,18 +310,26 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 oENTMunicipio.Nombre = "";
                 oENTMunicipio.Activo = 1;
 
-                // Transacción
-                oENTResponse = oBPMunicipio.SelectMunicipio(oENTMunicipio);
+                // Debido al número de municipio sólo se carga el combo cuando se selecciona un estado
+                if( oENTMunicipio.EstadoId == 0 ){
 
-                // Validaciones
-                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+                    this.ddlPopUpMunicipio.Items.Clear();
+                }else{
 
-                // Llenado de combo de municipio
-                this.ddlPopUpMunicipio.DataTextField = "Nombre";
-                this.ddlPopUpMunicipio.DataValueField = "MunicipioId";
-                this.ddlPopUpMunicipio.DataSource = oENTResponse.DataSetResponse.Tables[1];
-                this.ddlPopUpMunicipio.DataBind();
+                    // Transacción
+                    oENTResponse = oBPMunicipio.SelectMunicipio(oENTMunicipio);
+
+                    // Validaciones
+                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                    // Llenado de combo de municipio
+                    this.ddlPopUpMunicipio.DataTextField = "Nombre";
+                    this.ddlPopUpMunicipio.DataValueField = "MunicipioId";
+                    this.ddlPopUpMunicipio.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                    this.ddlPopUpMunicipio.DataBind();
+
+                }
 
                 // Elemento extra
                 this.ddlPopUpMunicipio.Items.Insert(0, new ListItem("[Seleccione]", "0"));
@@ -410,7 +426,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 // Limpiar formulario
                 this.ddlPopUpEstado.SelectedIndex = 0;
                 this.ddlPopUpMunicipio.Items.Clear();
-                this.ddlMunicipio.Items.Insert(0, new ListItem("[Seleccione]", "0"));
+                this.ddlPopUpMunicipio.Items.Insert(0, new ListItem("[Seleccione]", "0"));
 
 
                 this.txtPopUpNombre.Text = "";
@@ -530,6 +546,21 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstado.ClientID + "');", true);
+            }
+        }
+
+        protected void ddlEstado_SelectedIndexChanged(object sender, EventArgs e){
+            try
+            {
+
+				// Actualizar municipios
+                SelectMunicipio();
+
+				// Foco
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlMunicipio.ClientID + "'); }", true);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlMunicipio.ClientID + "'); }", true);
             }
         }
 

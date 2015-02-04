@@ -28,7 +28,7 @@
             <tr>
 				<td class="Etiqueta">Estado</td>
 				<td class="Espacio"></td>
-				<td class="Campo"><asp:DropDownList ID="ddlEstado" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
+				<td class="Campo"><asp:DropDownList ID="ddlEstado" runat="server" CssClass="DropDownList_General" Width="216px" AutoPostBack="true" OnSelectedIndexChanged="ddlEstado_SelectedIndexChanged"></asp:DropDownList></td>
                 <td></td>
 			</tr>
             <tr>
@@ -105,7 +105,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPopUp" runat="server" CssClass="PopUpBlock">
-        <asp:Panel ID="pnlPopUpContent" runat="server" CssClass="PopUpContent" style="margin-top:-270px; margin-left:-310px;" Height="540px" Width="620px">
+        <asp:Panel ID="pnlPopUpContent" runat="server" CssClass="PopUpContent" style="margin-top:-240px; margin-left:-310px;" Height="480px" Width="620px">
             <asp:Panel ID="pnlPopUpHeader" runat="server" CssClass="PopUpHeader">
                 <table class="PopUpHeaderTable">
                     <tr>
@@ -119,12 +119,12 @@
                 <table class="PopUpBodyTable">
                     <tr>
                         <td class="Etiqueta">Estado</td>
-                        <td class="Espacio"></td>
+                        <td class="VinetaObligatorio">*</td>
                         <td class="Campo"><asp:DropDownList ID="ddlPopUpEstado" runat="server" CssClass="DropDownList_General" Width="405px" AutoPostBack="true" OnSelectedIndexChanged="ddlPopUpEstado_SelectedIndexChanged"></asp:DropDownList></td>
                     </tr>
                     <tr>
                         <td class="Etiqueta">Municipio</td>
-                        <td class="Espacio"></td>
+                        <td class="VinetaObligatorio">*</td>
                         <td class="Campo"><asp:DropDownList ID="ddlPopUpMunicipio" runat="server" CssClass="DropDownList_General" Width="405px" ></asp:DropDownList></td>
                     </tr>
                     <tr>

@@ -17,6 +17,8 @@ namespace Agenda.Entity.Object
     {
 
         private Int32   _LugarEventoId;
+        private Int32   _EstadoId;
+        private Int32   _MunicipioId;
         private Int32   _ColoniaId;
         private String  _Nombre;
         private String  _Calle;
@@ -33,6 +35,8 @@ namespace Agenda.Entity.Object
         public ENTLugarEvento()
         {
             _LugarEventoId = 0;
+            _EstadoId = 0;
+            _MunicipioId = 0;
             _ColoniaId = 0;
             _Nombre = "";
             _Calle = "";
@@ -57,6 +61,30 @@ namespace Agenda.Entity.Object
         {
             get { return _LugarEventoId; }
             set { _LugarEventoId = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTLugarEvento.EstadoId</name>
+        ///   <create>08-Enero-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el identificador único del Estado en donde se ubica el Lugar del Evento</summary>
+        public Int32 EstadoId
+        {
+            get { return _EstadoId; }
+            set { _EstadoId = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTLugarEvento.MunicipioId</name>
+        ///   <create>08-Enero-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el identificador único del Municipio en donde se ubica el Lugar del Evento</summary>
+        public Int32 MunicipioId
+        {
+            get { return _MunicipioId; }
+            set { _MunicipioId = value; }
         }
 
         ///<remarks>

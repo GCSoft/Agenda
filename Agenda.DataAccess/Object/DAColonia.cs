@@ -266,7 +266,7 @@ namespace Agenda.DataAccess.Object
             ENTResponse oENTResponse = new ENTResponse();
 
             // Configuración de objetos
-            sqlCom = new SqlCommand("uspColonia_Upd", sqlCnn);
+            sqlCom = new SqlCommand("uspColonia_Upd_Estatus", sqlCnn);
             sqlCom.CommandType = CommandType.StoredProcedure;
 
             // Timeout alternativo en caso de ser solicitado

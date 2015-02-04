@@ -137,6 +137,18 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTLugarEvento.LugarEventoId;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("EstadoId", SqlDbType.Int);
+            sqlPar.Value = oENTLugarEvento.EstadoId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("MunicipioId", SqlDbType.Int);
+            sqlPar.Value = oENTLugarEvento.MunicipioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ColoniaId", SqlDbType.Int);
+            sqlPar.Value = oENTLugarEvento.ColoniaId;
+            sqlCom.Parameters.Add(sqlPar);
+
             sqlPar = new SqlParameter("Nombre", SqlDbType.VarChar);
             sqlPar.Value = oENTLugarEvento.Nombre;
             sqlCom.Parameters.Add(sqlPar);
