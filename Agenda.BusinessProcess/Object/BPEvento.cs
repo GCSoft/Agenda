@@ -57,6 +57,38 @@ namespace Agenda.BusinessProcess.Object
         }
 
         ///<remarks>
+        ///   <name>BPEvento.InsertEvento</name>
+        ///   <create>07-Enero-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Crea un nuevo Evento</summary>
+        ///<param name="oENTEvento">Entidad de Evento con los parámetros necesarios para realizar la transacción</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse InsertEvento(ENTEvento oENTEvento){
+            DAEvento oDAEvento = new DAEvento();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            try
+            {
+
+                // Transacción en base de datos
+                oENTResponse = oDAEvento.InsertEvento(oENTEvento, this.ConnectionApplication, 0);
+
+                // Validación de error en consulta
+                if (oENTResponse.GeneratesException) { return oENTResponse; }
+
+                // Validación de mensajes de la BD
+                oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
+
+            }catch (Exception ex){
+                oENTResponse.ExceptionRaised(ex.Message);
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
         ///   <name>BPEvento.InsertEventoContacto</name>
         ///   <create>07-Enero-2014</create>
         ///   <author>Ruben.Cobos</author>
@@ -343,6 +375,38 @@ namespace Agenda.BusinessProcess.Object
             // Resultado
             return oENTResponse;
         }        
+
+        ///<remarks>
+        ///   <name>BPEvento.UpdateEvento_EliminarRepresentante</name>
+        ///   <create>09-Enero-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Elimina la representación de un evento existente</summary>
+        ///<param name="oENTEvento">Entidad de Evento con los parámetros necesarios para realizar la transacción</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse UpdateEvento_EliminarRepresentante(ENTEvento oENTEvento){
+            DAEvento oDAEvento = new DAEvento();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            try
+            {
+
+                // Transacción en base de datos
+                oENTResponse = oDAEvento.UpdateEvento_EliminarRepresentante(oENTEvento, this.ConnectionApplication, 0);
+
+                // Validación de error en consulta
+                if (oENTResponse.GeneratesException) { return oENTResponse; }
+
+                // Validación de mensajes de la BD
+                oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
+
+            }catch (Exception ex){
+                oENTResponse.ExceptionRaised(ex.Message);
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
 
         ///<remarks>
         ///   <name>BPEvento.UpdateEventoContacto</name>

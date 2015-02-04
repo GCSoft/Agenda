@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Application\WebApp\Private\AppIndex.aspx" />
+    <Content Include="Application\WebApp\Private\Catalogo\catColonia.aspx" />
     <Content Include="Application\WebApp\Private\Catalogo\catLugarEvento.aspx" />
     <Content Include="Application\WebApp\Private\Catalogo\catSecretario.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveCalendario.aspx" />
@@ -245,10 +246,12 @@
     <Content Include="Include\Image\Icon\SubMenuContacto.png" />
     <Content Include="Include\Image\Icon\SubMenuDatosEvento.png" />
     <Content Include="Include\Image\Icon\SubMenuDatosGenerales.png" />
+    <Content Include="Include\Image\Icon\SubMenuEliminarRepresentante.png" />
     <Content Include="Include\Image\Icon\SubMenuGenerarCuadernillo.png" />
     <Content Include="Include\Image\Icon\SubMenuInformacionComplementaria.png" />
     <Content Include="Include\Image\Icon\SubMenuRechazo.png" />
     <Content Include="Include\Image\Icon\SubMenuHistorial.png" />
+    <Content Include="Include\Image\Icon\SubMenuValoracion.png" />
     <Content Include="Include\Image\Web\Background.png" />
     <Content Include="Include\Image\Web\BackgroundGeneral.png" />
     <Content Include="Include\Image\Web\BackgroundRoundedCornerRight.png" />
@@ -293,6 +296,13 @@
     </Compile>
     <Compile Include="Application\WebApp\Private\AppIndex.aspx.designer.cs">
       <DependentUpon>AppIndex.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Catalogo\catColonia.aspx.cs">
+      <DependentUpon>catColonia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Catalogo\catColonia.aspx.designer.cs">
+      <DependentUpon>catColonia.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\WebApp\Private\Catalogo\catLugarEvento.aspx.cs">
       <DependentUpon>catLugarEvento.aspx</DependentUpon>

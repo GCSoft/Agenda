@@ -17,7 +17,8 @@ namespace Agenda.Entity.Object
     {
 
         private Int32   _ColoniaId;
-        private Int32 _MunicipioId;
+        private Int32   _EstadoId;
+        private Int32   _MunicipioId;
         private String  _Nombre;
         private String  _Descripcion;
         private String  _FechaCreacion;
@@ -30,6 +31,7 @@ namespace Agenda.Entity.Object
         public ENTColonia()
         {
             _ColoniaId = 0;
+            _EstadoId = 0;
             _MunicipioId = 0;
             _Nombre = "";
             _Descripcion = "";
@@ -51,6 +53,18 @@ namespace Agenda.Entity.Object
         {
             get { return _ColoniaId; }
             set { _ColoniaId = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTColonia.EstadoId</name>
+        ///   <create>09-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el identificador único del Estado</summary>
+        public Int32 EstadoId
+        {
+            get { return _EstadoId; }
+            set { _EstadoId = value; }
         }
 
         ///<remarks>

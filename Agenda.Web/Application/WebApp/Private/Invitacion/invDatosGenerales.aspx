@@ -156,7 +156,7 @@
 			</tr>
 			<tr>
 				<td colspan="4" style="text-align:left; vertical-align:bottom;">
-					<CKEditor:CKEditorControl ID="ckeObservaciones" BasePath="~/Include/Components/CKEditor/Core" runat="server" Height="96px" ContentsCss="~/Include/Components/CKEditor/Core/contents.css" TemplatesFiles="~/Include/Components/CKEditor/Core/plugins/templates/templates/default.js" Width=""></CKEditor:CKEditorControl>
+					<CKEditor:CKEditorControl ID="ckeObservaciones" runat="server" BasePath="~/Include/Components/CKEditor/Core/" Height="96px"></CKEditor:CKEditorControl>
 				</td>
 			</tr>
 		</table>

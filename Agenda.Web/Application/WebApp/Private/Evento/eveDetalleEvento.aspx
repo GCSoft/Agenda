@@ -21,6 +21,11 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlSubMenu" runat="server">
+
+        <asp:Panel ID="EliminarRepresentantePanel" CssClass="IconoPanel" runat="server" Visible="true">
+            <asp:ImageButton ID="EliminarRepresentanteButton" ImageUrl="~/Include/Image/Icon/SubMenuEliminarRepresentante.png" runat="server" OnClick="EliminarRepresentanteButton_Click" OnClientClick="return confirm('¿Seguro que desea eliminar la representación al evento?');" ></asp:ImageButton><br />
+            Eliminar representante
+        </asp:Panel>
         
         <asp:Panel ID="DatosGeneralesPanel" CssClass="IconoPanel" runat="server" Visible="true">
             <asp:ImageButton ID="InformacionGeneralButton" ImageUrl="~/Include/Image/Icon/SubMenuDatosGenerales.png" runat="server" OnClick="InformacionGeneralButton_Click"></asp:ImageButton><br />
@@ -232,6 +237,7 @@
     <asp:HiddenField ID="hddEventoId" runat="server" Value="0" />
     <asp:HiddenField ID="hddEstatusEventoId" runat="server" Value="0" />
     <asp:HiddenField ID="hddSort" runat="server" Value="Nombre" />
+    <asp:HiddenField ID="Expired" runat="server" Value="0" />
     <asp:HiddenField ID="Sender" runat="server" Value=""  />
 	<asp:HiddenField ID="SenderId" runat="server" Value="0"  />
 

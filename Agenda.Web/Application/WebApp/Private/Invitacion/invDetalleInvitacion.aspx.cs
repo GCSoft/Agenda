@@ -52,7 +52,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 		
         // Rutinas del programador
 
-        void CheckLinkComentario(DataTable tblFuncionarios, DataTable tblComentario){
+        void CheckValoracion(DataTable tblFuncionarios, DataTable tblComentario){
             ENTSession oENTSession = new ENTSession();
 
             try
@@ -73,14 +73,12 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                         if (tblComentario.Select("UsuarioId=" + oENTSession.UsuarioId.ToString()).Length == 0)
                         {
                             this.hddInvitacionComentarioId.Value = "0";
-                            this.lnkAgregarComentario.Visible = true;
-                            this.lnkEditarComentario.Visible = false;
+                            this.lblValoracion.Text = "Valorar invitación";
                         }
                         else
                         {
                             this.hddInvitacionComentarioId.Value = tblComentario.Select("UsuarioId=" + oENTSession.UsuarioId.ToString())[0]["InvitacionComentarioId"].ToString();
-                            this.lnkAgregarComentario.Visible = false;
-                            this.lnkEditarComentario.Visible = true;
+                            this.lblValoracion.Text = "Editar valoración";
                         }
 
                     }
@@ -230,7 +228,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
 				}
 
-                CheckLinkComentario(oENTResponse.DataSetResponse.Tables[2], oENTResponse.DataSetResponse.Tables[5]);
+                CheckValoracion(oENTResponse.DataSetResponse.Tables[2], oENTResponse.DataSetResponse.Tables[5]);
 
             }catch (Exception ex){
                 throw (ex);
@@ -389,6 +387,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
 					case 1:	// System Administrator
                     case 2:	// Administrador
+                        this.ValoracionPanel.Visible = false;
                         this.DatosGeneralesPanel.Visible = true;
                         this.DatosEventoPanel.Visible = true;
                         this.ContactoPanel.Visible = true;
@@ -400,6 +399,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 						break;
 
 					case 3:	// Funcionario
+                        this.ValoracionPanel.Visible = true;
 						this.DatosGeneralesPanel.Visible = false;
                         this.DatosEventoPanel.Visible = false;
                         this.ContactoPanel.Visible = false;
@@ -411,6 +411,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 						break;
 
 					default:
+                        this.ValoracionPanel.Visible = false;
                         this.DatosGeneralesPanel.Visible = false;
                         this.DatosEventoPanel.Visible = false;
                         this.ContactoPanel.Visible = false;
@@ -439,6 +440,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 // 6 - Aprobada
 				if ( Int32.Parse(this.hddEstatusInvitacionId.Value) == 1 || Int32.Parse(this.hddEstatusInvitacionId.Value) == 2 || Int32.Parse(this.hddEstatusInvitacionId.Value) == 6 ){
 
+                    this.ValoracionPanel.Visible = false;
                     this.DatosGeneralesPanel.Visible = false;
                     this.DatosEventoPanel.Visible = false;
                     this.ContactoPanel.Visible = false;
@@ -446,9 +448,6 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                     this.AdjuntarPanel.Visible = false;
                     this.RechazarPanel.Visible = false;
                     this.AprobarPanel.Visible = false;
-                    this.lnkAgregarComentario.Visible = false;
-                    this.lnkEditarComentario.Visible = false;
-
 				}
 
             }catch (Exception ex){
@@ -669,6 +668,37 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
         // Opciones de Menu (en orden de aparación)
 
+        protected void ValoracionButton_Click(object sender, ImageClickEventArgs e){
+            try
+            {
+
+                // Acciones comunes
+                this.pnlPopUp.Visible = true;
+                this.lblPopUpMessage.Text = "";
+                this.ckePopUpComentario.Text = "";
+
+                // Tipo de transacción
+                if ( this.hddInvitacionComentarioId.Value == "" || this.hddInvitacionComentarioId.Value == "0" ){
+
+                    this.lblPopUpTitle.Text = "Evaluación";
+                    this.btnPopUpCommand.Text = "Emitir Evaluación";
+                    
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.rblRespuestaEvaluacion.ClientID + "'); }", true);
+
+                }else{
+                    
+                    this.lblPopUpTitle.Text = "Evaluación";
+                    this.btnPopUpCommand.Text = "Actualizar Evaluación";
+
+                    // Consulta de detalle de comentario
+                    SelectInvitacionComentario_Edit();
+                }
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+            }
+		}
+
 		protected void InformacionGeneralButton_Click(object sender, ImageClickEventArgs e){
             String sKey = "";
 
@@ -836,48 +866,6 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
                 // Ocultar el panel
                 this.pnlPopUp.Visible = false;
-
-            }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
-            }
-        }
-
-        protected void lnkAgregarComentario_Click(object sender, EventArgs e){
-            try
-            {
-
-                // Acciones comunes
-                this.pnlPopUp.Visible = true;
-                this.lblPopUpMessage.Text = "";
-                this.ckePopUpComentario.Text = "";
-
-                // Personalizar PopUp
-                this.lblPopUpTitle.Text = "Evaluación";
-                this.btnPopUpCommand.Text = "Emitir Evaluación";
-
-                // Foco
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.rblRespuestaEvaluacion.ClientID + "'); }", true);
-
-            }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
-            }
-        }
-
-        protected void lnkEditarComentario_Click(object sender, EventArgs e){
-            try
-            {
-
-                // Acciones comunes
-                this.pnlPopUp.Visible = true;
-                this.lblPopUpMessage.Text = "";
-                this.ckePopUpComentario.Text = "";
-
-                // Personalizar PopUp
-                this.lblPopUpTitle.Text = "Evaluación";
-                this.btnPopUpCommand.Text = "Actualizar Evaluación";
-
-                // Consulta de detalle de comentario
-                SelectInvitacionComentario_Edit();
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);

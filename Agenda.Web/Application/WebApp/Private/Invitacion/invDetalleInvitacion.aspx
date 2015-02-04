@@ -22,6 +22,11 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlSubMenu" runat="server">
+
+        <asp:Panel ID="ValoracionPanel" CssClass="IconoPanel" runat="server" Visible="true">
+            <asp:ImageButton ID="ValoracionButton" ImageUrl="~/Include/Image/Icon/SubMenuValoracion.png" runat="server" OnClick="ValoracionButton_Click"></asp:ImageButton><br />
+            <asp:Label ID="lblValoracion" runat="server" Text="Valoración"></asp:Label>
+        </asp:Panel>
         
         <asp:Panel ID="DatosGeneralesPanel" CssClass="IconoPanel" runat="server" Visible="true">
             <asp:ImageButton ID="InformacionGeneralButton" ImageUrl="~/Include/Image/Icon/SubMenuDatosGenerales.png" runat="server" OnClick="InformacionGeneralButton_Click"></asp:ImageButton><br />
@@ -256,9 +261,7 @@
             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                     <td style="text-align:left;">
-                        <asp:Label ID="lblComentariosSection" CssClass="Label_Detalle_Invitacion" runat="server" Text="Evaluaciones"></asp:Label>&nbsp;&nbsp;
-                        <asp:LinkButton ID="lnkAgregarComentario" runat="server" CssClass="LinkButton_Regular" Text="Emitir Evaluación" OnClick="lnkAgregarComentario_Click" Visible="false"></asp:LinkButton>
-                        <asp:LinkButton ID="lnkEditarComentario" runat="server" CssClass="LinkButton_Regular" Text="Editar Evaluación" OnClick="lnkEditarComentario_Click" Visible="false" ></asp:LinkButton>
+                        <asp:Label ID="lblComentariosSection" CssClass="Label_Detalle_Invitacion" runat="server" Text="Evaluaciones"></asp:Label>
                     </td>
                 </tr>
                 <tr>
@@ -374,7 +377,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <CKEditor:CKEditorControl ID="ckePopUpComentario" BasePath="~/Include/Components/CKEditor/Core/" runat="server" Height="90px"></CKEditor:CKEditorControl>
+                            <CKEditor:CKEditorControl ID="ckePopUpComentario" runat="server" BasePath="~/Include/Components/CKEditor/Core/" Height="90px"></CKEditor:CKEditorControl>
                         </td>
                     </tr>
                     <tr>

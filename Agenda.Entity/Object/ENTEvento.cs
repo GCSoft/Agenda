@@ -74,8 +74,10 @@ namespace Agenda.Entity.Object
         private Int16   _EsposaSi;
         private Int16   _EsposaNo;
         private Int16   _EsposaConfirma;
+        private Int16   _Logistica;
         private Int16   _Nivel;
         private Int16   _Notificacion;
+        private Int16   _Protocolo;
         private DataTable   _DataTableEstatusEvento;
         private DataTable   _DataTableMedioTraslado;
         private ENTInvitacionContacto _Contacto;
@@ -140,8 +142,10 @@ namespace Agenda.Entity.Object
             _EsposaSi = 0;
             _EsposaNo = 0;
             _EsposaConfirma = 0;
+            _Logistica = 0;
             _Nivel = 0;
             _Notificacion = 0;
+            _Protocolo = 0;
             _DataTableEstatusEvento = null;
             _DataTableMedioTraslado = null;
             _Contacto = new ENTInvitacionContacto();
@@ -811,6 +815,18 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
+        ///   <name>ENTEvento.Logistica</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un valor que determina si el evento fue creado por logística</summary>
+        public Int16 Logistica
+        {
+            get { return _Logistica; }
+            set { _Logistica = value; }
+        }
+
+        ///<remarks>
         ///   <name>ENTEvento.Nivel</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
@@ -832,6 +848,18 @@ namespace Agenda.Entity.Object
         {
             get { return _Notificacion; }
             set { _Notificacion = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.Protocolo</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un valor que determina si el evento fue creado por la dirección de protocolo</summary>
+        public Int16 Protocolo
+        {
+            get { return _Protocolo; }
+            set { _Protocolo = value; }
         }
 
         ///<remarks>

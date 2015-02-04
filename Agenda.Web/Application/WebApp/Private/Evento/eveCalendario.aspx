@@ -70,7 +70,7 @@
                                 </asp:Panel>
                             </td>
                             <td style="text-align:right; width:15%">
-                                <asp:ImageButton ID="imgImprimir" runat="server" OnClientClick="window.open('eveCalendarioCompleto.aspx', 'FullCalendarWindow', 'menubar=1,resizable=1,width=1024,height=800'); return false;" ImageUrl="~/Include/Image/Icon/Print.png" />
+                                <asp:ImageButton ID="imgImprimir" runat="server" ImageUrl="~/Include/Image/Icon/Print.png" />
                             </td>
                         </tr>
                     </table>

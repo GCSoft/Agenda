@@ -173,7 +173,7 @@
                     </tr>
                     <tr>
 				        <td colspan="3">
-                            <CKEditor:CKEditorControl ID="ckePopUpDescripcion" BasePath="~/Include/Components/CKEditor/Core" runat="server" Height="130px" ContentsCss="~/Include/Components/CKEditor/Core/contents.css" TemplatesFiles="~/Include/Components/CKEditor/Core/plugins/templates/templates/default.js" Width=""></CKEditor:CKEditorControl>
+                            <CKEditor:CKEditorControl ID="ckePopUpDescripcion" runat="server" BasePath="~/Include/Components/CKEditor/Core/" Height="130px"></CKEditor:CKEditorControl>
 				        </td>
 			        </tr>
                     <tr>

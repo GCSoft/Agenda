@@ -56,6 +56,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         }
 
         void DefaultForm(){
+            ENTSession oENTSession = new ENTSession();
+            ENTFiltroCalendario oENTFiltroCalendario = new ENTFiltroCalendario();
+
             try
             {
 
@@ -69,6 +72,25 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.chkRepresentado.Checked = true;
                 this.hddCurrentMonth.Value = DateTime.Now.Month.ToString();
                 this.hddCurrentYear.Value = DateTime.Now.Year.ToString();
+
+                // Obtener la sesion
+                oENTSession = (ENTSession)this.Session["oENTSession"];
+
+                // Configurar sesión
+                oENTFiltroCalendario.PrioridadId = Int32.Parse(this.ddlPrioridad.SelectedItem.Value);
+                oENTFiltroCalendario.Dependencia = Int16.Parse(this.ddlDependencia.SelectedItem.Value);
+                oENTFiltroCalendario.EventoNuevos = Int16.Parse((this.chkNuevo.Checked ? "1" : "0"));
+                oENTFiltroCalendario.EventoProceso = Int16.Parse((this.chkProceso.Checked ? "1" : "0"));
+                oENTFiltroCalendario.EventoExpirado = Int16.Parse((this.chkExpirado.Checked ? "1" : "0"));
+                oENTFiltroCalendario.EventoCancelado = Int16.Parse((this.chkCancelar.Checked ? "1" : "0"));
+                oENTFiltroCalendario.EventoRepresentado = Int16.Parse((this.chkRepresentado.Checked ? "1" : "0"));
+
+                oENTFiltroCalendario.MesActual = Int32.Parse(this.hddCurrentMonth.Value);
+                oENTFiltroCalendario.AnioActual = Int32.Parse(this.hddCurrentYear.Value);
+
+                // Guardar el formulario en la sesión
+                oENTSession.Entity = oENTFiltroCalendario;
+                this.Session["oENTSession"] = oENTSession;
 
                 // Crear el calendario
                 CreateCalendar();
@@ -207,6 +229,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         // Eventos de la página ( por orden de aparición)
 
         protected void Page_Load(object sender, EventArgs e){
+            String Key = "";
+
             try
             {
 
@@ -217,6 +241,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 SelectDependencia();
                 SelectPrioridad();
                 RecoveryForm();
+
+                // Atributos de controles
+                Key = gcEncryption.EncryptString("1", true);
+                this.imgImprimir.Attributes.Add("onclick", "window.open('eveCalendarioCompleto.aspx?key=" + Key + "', 'FullCalendarWindow', 'menubar=1,resizable=1,width=1024,height=800'); return false;");
 
                 // Foco
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.ddlPrioridad.ClientID + "');", true);

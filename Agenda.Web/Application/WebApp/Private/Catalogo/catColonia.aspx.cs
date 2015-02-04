@@ -1,5 +1,5 @@
 ﻿/*---------------------------------------------------------------------------------------------------------------------------------
-' Nombre:	scatLugarEvento
+' Nombre:	catColonia
 ' Autor:	Ruben.Cobos
 ' Fecha:	08-Enero-2015
 '----------------------------------------------------------------------------------------------------------------------------------*/
@@ -22,10 +22,9 @@ using System.Data;
 
 namespace Agenda.Web.Application.WebApp.Private.Catalogo
 {
-    public partial class catLugarEvento : BPPage
+    public partial class catColonia : BPPage
     {
         
-
         // Utilerías
         GCCommon gcCommon = new GCCommon();
         GCEncryption gcEncryption = new GCEncryption();
@@ -35,82 +34,27 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
         // Enumeraciones
         enum PopUpTypes { Delete, Insert, Reactivate, Update }
 
-        
-        // Servicios
-
-        [System.Web.Script.Services.ScriptMethod()]
-		[System.Web.Services.WebMethod]
-		public static List<string> WSColonia(string prefixText, int count, string contextKey){
-			BPColonia oBPColonia = new BPColonia();
-			ENTColonia oENTColonia = new ENTColonia();
-			ENTResponse oENTResponse = new ENTResponse();
-
-			List<String> ServiceResponse = new List<String>();
-			String Item;
-
-			// Errores conocidos:
-			//		* El control toma el foco con el metodo JS Focus() sólo si es llamado con la función JS pageLoad() 
-			//		* No se pudo encapsular en un WUC
-			//		* Si se selecciona un nombre válido, enseguida se borra y se pone uno inválido, el control almacena el ID del nombre válido, se implemento el siguiente Script en la transacción
-			//			If Not Exists ( Select 1 From Colonia Where ColoniaId = @ColoniaId And ( Nombre + ' ' + ApellidoPaterno  + ' ' +  IsNull(ApellidoMaterno, '') = @NombreTemporal ) )
-			//				Begin
-			//					Set @ColoniaId = 0
-			//				End
-
-			try
-			{
-
-				// Formulario
-                oENTColonia.ColoniaId = 0;
-                oENTColonia.EstadoId = 0;
-                oENTColonia.MunicipioId = Int32.Parse(contextKey);
-				oENTColonia.Nombre = prefixText;
-                oENTColonia.Activo = 1;
-
-				// Transacción
-				oENTResponse = oBPColonia.SelectColonia(oENTColonia);
-
-				// Validaciones
-                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-
-				// Configuración de arreglo de respuesta
-				foreach (DataRow rowColonia in oENTResponse.DataSetResponse.Tables[1].Rows){
-					Item = AjaxControlToolkit.AutoCompleteExtender.CreateAutoCompleteItem(rowColonia["Nombre"].ToString(), rowColonia["ColoniaId"].ToString());
-					ServiceResponse.Add(Item);
-				}
-
-			}catch (Exception){
-				// Do Nothing
-			}
-
-			// Regresar listado de Colonias
-			return ServiceResponse;
-		}
-
 
         // Rutinas del programador
 
-        void InsertLugarEvento(){
-            ENTLugarEvento oENTLugarEvento = new ENTLugarEvento();
+        void InsertColonia(){
+            ENTColonia oENTColonia = new ENTColonia();
             ENTResponse oENTResponse = new ENTResponse();
 
-            BPLugarEvento oBPLugarEvento = new BPLugarEvento();
+            BPColonia oBPColonia = new BPColonia();
 
             try
             {
 
                 // Formulario
-                oENTLugarEvento.Nombre = this.txtPopUpNombre.Text.Trim();
-                oENTLugarEvento.ColoniaId = Int32.Parse(this.hddPopUpColoniaId.Value);
-                oENTLugarEvento.Calle = this.txtPopUpCalle.Text.Trim();
-                oENTLugarEvento.NumeroExterior = this.txtPopUpNumeroExterior.Text.Trim();
-                oENTLugarEvento.NumeroInterior = this.txtPopUpNumeroInterior.Text.Trim();
-                oENTLugarEvento.Activo = Int16.Parse(this.ddlPopUpStatus.SelectedValue);
-                oENTLugarEvento.Descripcion = this.ckePopUpDescripcion.Text.Trim();
-                oENTLugarEvento.Rank = 1;
+                oENTColonia.MunicipioId = Int32.Parse(this.ddlPopUpMunicipio.SelectedValue);
+                oENTColonia.Nombre = this.txtPopUpNombre.Text.Trim();
+                oENTColonia.Activo = Int16.Parse(this.ddlPopUpStatus.SelectedValue);
+                oENTColonia.Descripcion = this.ckePopUpDescripcion.Text.Trim();
+                oENTColonia.Rank = 1;
 
                 // Transacción
-                oENTResponse = oBPLugarEvento.InsertLugarEvento(oENTLugarEvento);
+                oENTResponse = oBPColonia.InsertColonia(oENTColonia);
 
                 // Validaciones
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
@@ -120,10 +64,82 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 ClearPopUpPanel();
 
                 // Actualizar grid
-                SelectLugarEvento();
+                SelectColonia();
 
                 // Mensaje de usuario
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Lugar de Evento creado con éxito!'); focusControl('" + this.txtNombre.ClientID + "');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Colonia creada con éxito!'); focusControl('" + this.txtNombre.ClientID + "');", true);
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
+
+        void SelectEstado(){
+            ENTResponse oENTResponse = new ENTResponse();
+            ENTEstado oENTEstado = new ENTEstado();
+
+            BPEstado oBPEstado = new BPEstado();
+
+            try
+            {
+
+                // Formulario
+                oENTEstado.PaisId = 0;
+                oENTEstado.EstadoId = 0;
+                oENTEstado.Nombre = "";
+                oENTEstado.Activo = 1;
+
+                // Transacción
+                oENTResponse = oBPEstado.SelectEstado(oENTEstado);
+
+                // Validaciones
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                // Llenado de combo de Estado
+                this.ddlEstado.DataTextField = "Nombre";
+                this.ddlEstado.DataValueField = "EstadoId";
+                this.ddlEstado.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                this.ddlEstado.DataBind();
+
+                // Elemento extra
+                this.ddlPopUpStatus.Items.Insert(0, new ListItem("[Seleccione]", "0"));
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
+
+        void SelectEstado_PopUp(){
+            ENTResponse oENTResponse = new ENTResponse();
+            ENTEstado oENTEstado = new ENTEstado();
+
+            BPEstado oBPEstado = new BPEstado();
+
+            try
+            {
+
+                // Formulario
+                oENTEstado.PaisId = 0;
+                oENTEstado.EstadoId = 0;
+                oENTEstado.Nombre = "";
+                oENTEstado.Activo = 1;
+
+                // Transacción
+                oENTResponse = oBPEstado.SelectEstado(oENTEstado);
+
+                // Validaciones
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                // Llenado de combo de Estado
+                this.ddlPopUpEstado.DataTextField = "Nombre";
+                this.ddlPopUpEstado.DataValueField = "EstadoId";
+                this.ddlPopUpEstado.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                this.ddlPopUpEstado.DataBind();
+
+                // Elemento extra
+                this.ddlPopUpEstado.Items.Insert(0, new ListItem("[Seleccione]", "0"));
 
             }catch (Exception ex){
                 throw (ex);
@@ -158,23 +174,25 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
             }
         }
 
-        void SelectLugarEvento(){
-            ENTLugarEvento oENTLugarEvento = new ENTLugarEvento();
+        void SelectColonia(){
+            ENTColonia oENTColonia = new ENTColonia();
             ENTResponse oENTResponse = new ENTResponse();
 
-            BPLugarEvento oBPLugarEvento = new BPLugarEvento();
+            BPColonia oBPColonia = new BPColonia();
             String MessageDB = "";
 
             try
             {
 
                 // Formulario
-                oENTLugarEvento.LugarEventoId = 0;
-                oENTLugarEvento.Nombre = this.txtNombre.Text;
-                oENTLugarEvento.Activo = Int16.Parse(this.ddlStatus.SelectedItem.Value);
+                oENTColonia.ColoniaId = 0;
+                oENTColonia.EstadoId = 0;
+                oENTColonia.MunicipioId = 0;
+                oENTColonia.Nombre = this.txtNombre.Text;
+                oENTColonia.Activo = Int16.Parse(this.ddlStatus.SelectedItem.Value);
 
                 // Transacción
-                oENTResponse = oBPLugarEvento.SelectLugarEvento(oENTLugarEvento);
+                oENTResponse = oBPColonia.SelectColonia(oENTColonia);
 
                 // Validaciones
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
@@ -183,8 +201,8 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 if (oENTResponse.MessageDB != "") { MessageDB = "alert('" + gcJavascript.ClearText(oENTResponse.MessageDB) + "');"; }
 
                 // Llenado de controles
-                this.gvLugarEvento.DataSource = oENTResponse.DataSetResponse.Tables[1];
-                this.gvLugarEvento.DataBind();
+                this.gvColonia.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                this.gvColonia.DataBind();
 
                 // Mensaje al usuario
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), MessageDB, true);
@@ -194,22 +212,24 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
             }
         }
 
-        void SelectLugarEvento_ForEdit(Int32 LugarEventoId){
-            ENTLugarEvento oENTLugarEvento = new ENTLugarEvento();
+        void SelectColonia_ForEdit(Int32 ColoniaId){
+            ENTColonia oENTColonia = new ENTColonia();
             ENTResponse oENTResponse = new ENTResponse();
 
-            BPLugarEvento oBPLugarEvento = new BPLugarEvento();
+            BPColonia oBPColonia = new BPColonia();
 
             try
             {
 
                 // Formulario
-                oENTLugarEvento.LugarEventoId = LugarEventoId;
-                oENTLugarEvento.Nombre = "";
-                oENTLugarEvento.Activo = 2;
+                oENTColonia.ColoniaId = ColoniaId;
+                oENTColonia.EstadoId = 0;
+                oENTColonia.MunicipioId = 0;
+                oENTColonia.Nombre = "";
+                oENTColonia.Activo = 2;
 
                 // Transacción
-                oENTResponse = oBPLugarEvento.SelectLugarEvento(oENTLugarEvento);
+                oENTResponse = oBPColonia.SelectColonia(oENTColonia);
 
                 // Validaciones
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
@@ -218,20 +238,13 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 this.lblPopUpMessage.Text = oENTResponse.MessageDB;
 
                 // Llenado de formulario
-                this.txtPopUpNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Nombre"].ToString();
+                this.ddlPopUpEstado.SelectedValue = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EstadoId"].ToString();
+                SelectMunicipio_PopUp();
+
                 this.ddlPopUpMunicipio.SelectedValue = oENTResponse.DataSetResponse.Tables[1].Rows[0]["MunicipioId"].ToString();
-                this.txtPopUpColonia.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ColoniaNombre"].ToString();
-                this.txtPopUpCalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Calle"].ToString();
-                this.txtPopUpNumeroExterior.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["NumeroExterior"].ToString();
-                this.txtPopUpNumeroInterior.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["NumeroInterior"].ToString();
+                this.txtPopUpNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Nombre"].ToString();
                 this.ddlPopUpStatus.SelectedValue = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Activo"].ToString();
                 this.ckePopUpDescripcion.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Descripcion"].ToString();
-
-                // Campos ocultos
-                this.hddPopUpColoniaId.Value = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ColoniaId"].ToString();
-
-                // Configurar el context key del autosuggest de colonia
-                autosuggestColonia.ContextKey = this.ddlPopUpMunicipio.SelectedItem.Value;
 
             }catch (Exception ex){
                 throw (ex);
@@ -248,7 +261,43 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
             {
 
                 // Formulario
-                oENTMunicipio.EstadoId = 19; //Nuevo León
+                oENTMunicipio.EstadoId = Int32.Parse( this.ddlEstado.SelectedValue );
+                oENTMunicipio.MunicipioId = 0;
+                oENTMunicipio.Nombre = "";
+                oENTMunicipio.Activo = 1;
+
+                // Transacción
+                oENTResponse = oBPMunicipio.SelectMunicipio(oENTMunicipio);
+
+                // Validaciones
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                // Llenado de combo de municipio
+                this.ddlMunicipio.DataTextField = "Nombre";
+                this.ddlMunicipio.DataValueField = "MunicipioId";
+                this.ddlMunicipio.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                this.ddlMunicipio.DataBind();
+
+                // Elemento extra
+                this.ddlMunicipio.Items.Insert(0, new ListItem("[Seleccione]", "0"));
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
+
+        void SelectMunicipio_PopUp(){
+            ENTResponse oENTResponse = new ENTResponse();
+            ENTMunicipio oENTMunicipio = new ENTMunicipio();
+
+            BPMunicipio oBPMunicipio = new BPMunicipio();
+
+            try
+            {
+
+                // Formulario
+                oENTMunicipio.EstadoId = Int32.Parse(this.ddlPopUpEstado.SelectedValue);
                 oENTMunicipio.MunicipioId = 0;
                 oENTMunicipio.Nombre = "";
                 oENTMunicipio.Activo = 1;
@@ -266,36 +315,33 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 this.ddlPopUpMunicipio.DataSource = oENTResponse.DataSetResponse.Tables[1];
                 this.ddlPopUpMunicipio.DataBind();
 
-                // Configurar el context key del autosuggest de colonia
-                autosuggestColonia.ContextKey = this.ddlPopUpMunicipio.SelectedItem.Value;
+                // Elemento extra
+                this.ddlPopUpMunicipio.Items.Insert(0, new ListItem("[Seleccione]", "0"));
 
             }catch (Exception ex){
                 throw (ex);
             }
         }
 
-        void UpdateLugarEvento(Int32 LugarEventoId){
-            ENTLugarEvento oENTLugarEvento = new ENTLugarEvento();
+        void UpdateColonia(Int32 ColoniaId){
+            ENTColonia oENTColonia = new ENTColonia();
             ENTResponse oENTResponse = new ENTResponse();
 
-            BPLugarEvento oBPLugarEvento = new BPLugarEvento();
+            BPColonia oBPColonia = new BPColonia();
 
             try
             {
 
                 // Formulario
-                oENTLugarEvento.LugarEventoId = LugarEventoId;
-                oENTLugarEvento.Nombre = this.txtPopUpNombre.Text.Trim();
-                oENTLugarEvento.ColoniaId = Int32.Parse(this.hddPopUpColoniaId.Value);
-                oENTLugarEvento.Calle = this.txtPopUpCalle.Text.Trim();
-                oENTLugarEvento.NumeroExterior = this.txtPopUpNumeroExterior.Text.Trim();
-                oENTLugarEvento.NumeroInterior = this.txtPopUpNumeroInterior.Text.Trim();
-                oENTLugarEvento.Activo = Int16.Parse(this.ddlPopUpStatus.SelectedValue);
-                oENTLugarEvento.Descripcion = this.ckePopUpDescripcion.Text.Trim();
-                oENTLugarEvento.Rank = 1;
+                oENTColonia.ColoniaId = ColoniaId;
+                oENTColonia.MunicipioId = Int32.Parse(this.ddlPopUpMunicipio.SelectedValue);
+                oENTColonia.Nombre = this.txtPopUpNombre.Text.Trim();
+                oENTColonia.Activo = Int16.Parse(this.ddlPopUpStatus.SelectedValue);
+                oENTColonia.Descripcion = this.ckePopUpDescripcion.Text.Trim();
+                oENTColonia.Rank = 1;
 
                 // Transacción
-                oENTResponse = oBPLugarEvento.UpdateLugarEvento(oENTLugarEvento);
+                oENTResponse = oBPColonia.UpdateColonia(oENTColonia);
 
                 // Validaciones
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
@@ -305,48 +351,48 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 ClearPopUpPanel();
 
                 // Actualizar grid
-                SelectLugarEvento();
+                SelectColonia();
 
                 // Mensaje de usuario
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Lugar de Evento actualizado con éxito!'); focusControl('" + this.txtNombre.ClientID + "');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Colonia actualizada con éxito!'); focusControl('" + this.txtNombre.ClientID + "');", true);
 
             }catch (Exception ex){
                 throw (ex);
             }
         }
 
-        void UpdateLugarEvento_Estatus(Int32 LugarEventoId, PopUpTypes PopUpType){
-            ENTLugarEvento oENTLugarEvento = new ENTLugarEvento();
+        void UpdateColonia_Estatus(Int32 ColoniaId, PopUpTypes PopUpType){
+            ENTColonia oENTColonia = new ENTColonia();
             ENTResponse oENTResponse = new ENTResponse();
 
-            BPLugarEvento oBPLugarEvento = new BPLugarEvento();
+            BPColonia oBPColonia = new BPColonia();
 
             try
             {
 
                 // Formulario
-                oENTLugarEvento.LugarEventoId = LugarEventoId;
+                oENTColonia.ColoniaId = ColoniaId;
                 switch (PopUpType)
                 {
                     case PopUpTypes.Delete:
-                        oENTLugarEvento.Activo = 0;
+                        oENTColonia.Activo = 0;
                         break;
                     case PopUpTypes.Reactivate:
-                        oENTLugarEvento.Activo = 1;
+                        oENTColonia.Activo = 1;
                         break;
                     default:
                         throw new Exception("Opción inválida");
                 }
 
                 // Transacción
-                oENTResponse = oBPLugarEvento.UpdateLugarEvento_Estatus(oENTLugarEvento);
+                oENTResponse = oBPColonia.UpdateColonia_Estatus(oENTColonia);
 
                 // Validaciones
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
                 if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
 
                 // Actualizar datos
-                SelectLugarEvento();
+                SelectColonia();
 
             }catch (Exception ex){
                 throw (ex);
@@ -362,12 +408,12 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
             {
 
                 // Limpiar formulario
+                this.ddlPopUpEstado.SelectedIndex = 0;
+                this.ddlPopUpMunicipio.Items.Clear();
+                this.ddlMunicipio.Items.Insert(0, new ListItem("[Seleccione]", "0"));
+
+
                 this.txtPopUpNombre.Text = "";
-                this.ddlPopUpMunicipio.SelectedIndex = 0;
-                this.txtPopUpColonia.Text = "";
-                this.txtPopUpCalle.Text = "";
-                this.txtPopUpNumeroExterior.Text = "";
-                this.txtPopUpNumeroInterior.Text = "";
                 this.ddlPopUpStatus.SelectedIndex = 0;
                 this.ckePopUpDescripcion.Text = "";
 
@@ -376,11 +422,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 this.lblPopUpTitle.Text = "";
                 this.btnPopUpCommand.Text = "";
                 this.lblPopUpMessage.Text = "";
-                this.hddLugarEvento.Value = "";
-                this.hddPopUpColoniaId.Value = "";
-
-                // Configurar el context key del autosuggest de colonia
-                autosuggestColonia.ContextKey = this.ddlPopUpMunicipio.SelectedItem.Value;
+                this.hddColonia.Value = "";
 
             }catch (Exception ex){
                 throw (ex);
@@ -393,21 +435,21 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
 
                 // Acciones comunes
                 this.pnlPopUp.Visible = true;
-                this.hddLugarEvento.Value = idItem.ToString();
+                this.hddColonia.Value = idItem.ToString();
 
                 // Detalle de acción
                 switch (PopUpType)
                 {
                     case PopUpTypes.Insert:
-                        this.lblPopUpTitle.Text = "Nuevo Lugar de Evento";
-                        this.btnPopUpCommand.Text = "Crear Lugar de Evento";
+                        this.lblPopUpTitle.Text = "Nuevo Colonia";
+                        this.btnPopUpCommand.Text = "Crear Colonia";
 
                         break;
 
                     case PopUpTypes.Update:
-                        this.lblPopUpTitle.Text = "Edición de Lugar de Evento";
-                        this.btnPopUpCommand.Text = "Actualizar Lugar de Evento";
-                        SelectLugarEvento_ForEdit(idItem);
+                        this.lblPopUpTitle.Text = "Edición de Colonia";
+                        this.btnPopUpCommand.Text = "Actualizar Colonia";
+                        SelectColonia_ForEdit(idItem);
                         break;
 
                     default:
@@ -415,7 +457,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 }
 
                 // Foco
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUpNombre.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlPopUpEstado.ClientID + "'); }", true);
 
             }catch (Exception ex){
                 throw (ex);
@@ -426,10 +468,8 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
             try
             {
 
+                if (this.ddlPopUpMunicipio.SelectedIndex == 0) { throw new Exception("* El campo [Municipio] es requerido"); }
                 if (this.txtPopUpNombre.Text.Trim() == "") { throw new Exception("* El campo [Nombre] es requerido"); }
-                if (this.hddPopUpColoniaId.Value.Trim() == "" || this.hddPopUpColoniaId.Value.Trim() == "0") { throw new Exception("* Es necesario seleccionar una colonia"); }
-                if (this.txtPopUpCalle.Text.Trim() == "") { throw new Exception("* El campo [Calle] es requerido"); }
-                if (this.txtPopUpNumeroExterior.Text.Trim() == "") { throw new Exception("* El campo [Número Exterior] es requerido"); }
                 if (this.ddlPopUpStatus.SelectedIndex == 0) { throw new Exception("* El campo [Estatus] es requerido"); }
 
             }catch (Exception ex){
@@ -449,20 +489,23 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 if (this.IsPostBack) { return; }
 
                 // Llenado de controles
+                SelectEstado();
+                SelectEstado_PopUp();
                 SelectEstatus();
                 SelectEstatus_PopUp();
                 SelectMunicipio();
+                SelectMunicipio_PopUp();
 
                 // Estado inicial del formulario
-                this.gvLugarEvento.DataSource = null;
-                this.gvLugarEvento.DataBind();
+                this.gvColonia.DataSource = null;
+                this.gvColonia.DataBind();
                 ClearPopUpPanel();
 
                 // Foco
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.txtNombre.ClientID + "');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.ddlEstado.ClientID + "');", true);
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtNombre.ClientID + "');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstado.ClientID + "');", true);
             }
         }
 
@@ -471,10 +514,10 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
             {
 
                 // Filtrar información
-                SelectLugarEvento();
+                SelectColonia();
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtNombre.ClientID + "');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstado.ClientID + "');", true);
             }
         }
 
@@ -486,16 +529,16 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 SetPanel(PopUpTypes.Insert);
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtNombre.ClientID + "');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstado.ClientID + "');", true);
             }
         }
 
-        protected void gvLugarEvento_RowDataBound(object sender, GridViewRowEventArgs e){
+        protected void gvColonia_RowDataBound(object sender, GridViewRowEventArgs e){
             ImageButton imgEdit = null;
             ImageButton imgDelete = null;
 
-            String LugarEventoId = "";
-            String NombreLugarEvento = "";
+            String ColoniaId = "";
+            String NombreColonia = "";
             String Activo = "";
 
             String sImagesAttributes = "";
@@ -512,16 +555,16 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
 
                 // Datakeys
-                LugarEventoId = this.gvLugarEvento.DataKeys[e.Row.RowIndex]["LugarEventoId"].ToString();
-                Activo = this.gvLugarEvento.DataKeys[e.Row.RowIndex]["Activo"].ToString();
-                NombreLugarEvento = this.gvLugarEvento.DataKeys[e.Row.RowIndex]["Nombre"].ToString();
+                ColoniaId = this.gvColonia.DataKeys[e.Row.RowIndex]["ColoniaId"].ToString();
+                Activo = this.gvColonia.DataKeys[e.Row.RowIndex]["Activo"].ToString();
+                NombreColonia = this.gvColonia.DataKeys[e.Row.RowIndex]["Nombre"].ToString();
 
                 // Tooltip Edición
-                sTootlTip = "Editar LugarEvento [" + NombreLugarEvento + "]";
+                sTootlTip = "Editar Colonia [" + NombreColonia + "]";
                 imgEdit.Attributes.Add("title", sTootlTip);
 
                 // Tooltip PopUp
-                sTootlTip = (Activo == "1" ? "Eliminar" : "Reactivar") + " LugarEvento [" + NombreLugarEvento + "]";
+                sTootlTip = (Activo == "1" ? "Eliminar" : "Reactivar") + " Colonia [" + NombreColonia + "]";
                 imgDelete.Attributes.Add("title", sTootlTip);
 
                 // Imagen del botón [imgDelete]
@@ -546,8 +589,8 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
             }
         }
 
-        protected void gvLugarEvento_RowCommand(object sender, GridViewCommandEventArgs e){
-            Int32 LugarEventoId = 0;
+        protected void gvColonia_RowCommand(object sender, GridViewCommandEventArgs e){
+            Int32 ColoniaId = 0;
 
             String strCommand = "";
             Int32 intRow = 0;
@@ -565,38 +608,38 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 intRow = Int32.Parse(e.CommandArgument.ToString());
 
                 // Datakeys
-                LugarEventoId = Int32.Parse(this.gvLugarEvento.DataKeys[intRow]["LugarEventoId"].ToString());
+                ColoniaId = Int32.Parse(this.gvColonia.DataKeys[intRow]["ColoniaId"].ToString());
 
                 // Reajuste de Command
-                if (strCommand == "PopUp") { strCommand = (this.gvLugarEvento.DataKeys[intRow]["Activo"].ToString() == "0" ? "Reactivar" : "Eliminar"); }
+                if (strCommand == "PopUp") { strCommand = (this.gvColonia.DataKeys[intRow]["Activo"].ToString() == "0" ? "Reactivar" : "Eliminar"); }
 
                 // Acción
                 switch (strCommand)
                 {
                     case "Editar":
-                        SetPanel(PopUpTypes.Update, LugarEventoId);
+                        SetPanel(PopUpTypes.Update, ColoniaId);
                         break;
                     case "Eliminar":
-                        UpdateLugarEvento_Estatus(LugarEventoId, PopUpTypes.Delete);
+                        UpdateColonia_Estatus(ColoniaId, PopUpTypes.Delete);
                         break;
                     case "Reactivar":
-                        UpdateLugarEvento_Estatus(LugarEventoId, PopUpTypes.Reactivate);
+                        UpdateColonia_Estatus(ColoniaId, PopUpTypes.Reactivate);
                         break;
                 }
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtNombre.ClientID + "');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstado.ClientID + "');", true);
             }
         }
 
-        protected void gvLugarEvento_Sorting(object sender, GridViewSortEventArgs e){
+        protected void gvColonia_Sorting(object sender, GridViewSortEventArgs e){
             try
             {
 
-                gcCommon.SortGridView(ref this.gvLugarEvento, ref this.hddSort, e.SortExpression);
+                gcCommon.SortGridView(ref this.gvColonia, ref this.hddSort, e.SortExpression);
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtNombre.ClientID + "');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstado.ClientID + "');", true);
             }
 
         }
@@ -613,36 +656,32 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 ValidatePopUpForm();
 
                 // Determinar acción
-                if (this.hddLugarEvento.Value == "0"){
+                if (this.hddColonia.Value == "0"){
 
-                    InsertLugarEvento();
+                    InsertColonia();
                 }else{
 
-                    UpdateLugarEvento(Int32.Parse(this.hddLugarEvento.Value));
+                    UpdateColonia(Int32.Parse(this.hddColonia.Value));
                 }
 
             }catch (Exception ex){
                 this.lblPopUpMessage.Text = ex.Message;
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUpNombre.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlPopUpEstado.ClientID + "'); }", true);
             }
         }
 
-        protected void ddlPopUpMunicipio_SelectedIndexChanged(object sender, EventArgs e){
+        protected void ddlPopUpEstado_SelectedIndexChanged(object sender, EventArgs e){
             try
             {
 
-				// Limpiado de controles
-                this.txtPopUpColonia.Text = "";
-                this.hddPopUpColoniaId.Value = "";
-
-                // Configurar el context key del autosuggest de colonia
-                autosuggestColonia.ContextKey = this.ddlPopUpMunicipio.SelectedItem.Value;
+				// Actualizar municipios
+                SelectMunicipio_PopUp();
 
 				// Foco
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUpColonia.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlPopUpMunicipio.ClientID + "'); }", true);
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtPopUpColonia.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlPopUpEstado.ClientID + "'); }", true);
             }
         }
 
@@ -654,7 +693,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 ClearPopUpPanel();
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtNombre.ClientID + "');", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstado.ClientID + "');", true);
             }
         }
 

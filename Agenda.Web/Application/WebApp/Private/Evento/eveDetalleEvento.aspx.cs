@@ -72,6 +72,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Campos ocultos
                 this.hddEstatusEventoId.Value = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EstatusEventoId"].ToString();
+                this.Expired.Value = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Expired"].ToString();
 
                 // Formulario
                 this.lblDependenciaNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Dependencia"].ToString();
@@ -159,6 +160,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
 					case 1:	// System Administrator
                     case 2:	// Administrador
+                        this.EliminarRepresentantePanel.Visible = true;
                         this.DatosGeneralesPanel.Visible = true;
                         this.DatosEventoPanel.Visible = true;
                         this.InformacionComplementariaPanel.Visible = true;
@@ -171,6 +173,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                     case 4:	// Logística
                     case 5:	// Dirección de Protocolo
+                        this.EliminarRepresentantePanel.Visible = true;
 						this.DatosGeneralesPanel.Visible = true;
                         this.DatosEventoPanel.Visible = true;
                         this.InformacionComplementariaPanel.Visible = true;
@@ -182,6 +185,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 						break;
 
 					default:
+                        this.EliminarRepresentantePanel.Visible = false;
                         this.DatosGeneralesPanel.Visible = false;
                         this.DatosEventoPanel.Visible = false;
                         this.InformacionComplementariaPanel.Visible = false;
@@ -228,10 +232,54 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
 				}
 
+                // Si el evento no está representado no se podrá eliminar al respresentante
+                // 5 - Representado
+				if ( Int32.Parse(this.hddEstatusEventoId.Value) != 5 ){
+
+                    this.EliminarRepresentantePanel.Visible = false;
+
+				}
+
+                // Independientemente del estatus, si ya expiró ocultar opciones no contempladas
+				if ( this.Expired.Value == "1" ){
+
+                    this.EliminarRepresentantePanel.Visible = false;
+
+				}
+
             }catch (Exception ex){
 				throw(ex);
             }
 		}
+
+        void UpdateEvento_EliminarRepresentante(){
+            ENTEvento oENTEvento = new ENTEvento();
+            ENTResponse oENTResponse = new ENTResponse();
+            ENTSession oENTSession = new ENTSession();
+
+            BPEvento oBPEvento = new BPEvento();
+
+            try
+            {
+
+                // Datos de sesión
+                oENTSession = (ENTSession)this.Session["oENTSession"];
+                oENTEvento.UsuarioId = oENTSession.UsuarioId;
+
+                // Formulario
+                oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
+
+                // Transacción
+                oENTResponse = oBPEvento.UpdateEvento_EliminarRepresentante(oENTEvento);
+
+                // Validaciones
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
 
 
 
@@ -370,6 +418,30 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
 
         // Opciones de Menu (en orden de aparación)
+
+        protected void EliminarRepresentanteButton_Click(object sender, ImageClickEventArgs e){
+            ENTSession oENTSession = new ENTSession();
+
+            try
+            {
+
+                // Eliminar el representante
+                UpdateEvento_EliminarRepresentante();
+
+                // Consultar detalle de El Evento
+                SelectEvento();
+
+                // Obtener sesión
+                oENTSession = (ENTSession)Session["oENTSession"];
+
+                // Seguridad
+                SetPermisosGenerales(oENTSession.RolId);
+                SetPermisosParticulares(oENTSession.RolId, oENTSession.UsuarioId);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+            }
+		}
 
 		protected void InformacionGeneralButton_Click(object sender, ImageClickEventArgs e){
             String sKey = "";

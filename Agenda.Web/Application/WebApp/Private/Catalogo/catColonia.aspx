@@ -1,7 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Include/MasterPage/PrivateTemplate.Master" AutoEventWireup="true" CodeBehind="catSecretario.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Catalogo.catSecretario" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Include/MasterPage/PrivateTemplate.Master" AutoEventWireup="true" CodeBehind="catColonia.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Catalogo.catColonia" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cntPrivateTemplateHeader" runat="server">
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cntPrivateTemplateBody" runat="server">
 
@@ -10,19 +12,31 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPageName" runat="server" CssClass="MasterPageName">
-        <asp:Label ID="lblPageName" runat="server" CssClass="PageNameText" Text="Catálogo - Secretarios"></asp:Label>
+        <asp:Label ID="lblPageName" runat="server" CssClass="PageNameText" Text="Catálogo - Colonias"></asp:Label>
     </asp:Panel>
 
     <asp:Panel ID="pnlTitulo" runat="server" CssClass="TitlePanel">
         <table class="HeaderTable">
             <tr>
-                <td class="Titulo"><asp:Label ID="lblSubTitulo" runat="server" Text="Pantalla de administración del catálogo de Secretarios. "></asp:Label></td>
+                <td class="Titulo"><asp:Label ID="lblSubTitulo" runat="server" Text="Pantalla de administración del catálogo de Colonias. "></asp:Label></td>
             </tr>
         </table>
     </asp:Panel>
 
     <asp:Panel ID="pnlFormulario" runat="server" CssClass="FormPanel">
         <table class="FormTable">
+            <tr>
+				<td class="Etiqueta">Estado</td>
+				<td class="Espacio"></td>
+				<td class="Campo"><asp:DropDownList ID="ddlEstado" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
+                <td></td>
+			</tr>
+            <tr>
+				<td class="Etiqueta">Municipio</td>
+				<td class="Espacio"></td>
+				<td class="Campo"><asp:DropDownList ID="ddlMunicipio" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
+                <td></td>
+			</tr>
             <tr>
 				<td class="Etiqueta">Nombre</td>
 				<td class="Espacio"></td>
@@ -48,34 +62,34 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlGrid" runat="server" CssClass="GridPanel">
-        <asp:GridView ID="gvSecretario" runat="server" AllowPaging="false" AllowSorting="true" AutoGenerateColumns="False" Width="100%"
-            DataKeyNames="SecretarioId,Activo,TituloNombre"
-            OnRowDataBound="gvSecretario_RowDataBound"
-            OnRowCommand="gvSecretario_RowCommand"
-            OnSorting="gvSecretario_Sorting">
+        <asp:GridView ID="gvColonia" runat="server" AllowPaging="false" AllowSorting="true" AutoGenerateColumns="False" Width="100%"
+            DataKeyNames="ColoniaId,Activo,Nombre"
+            OnRowDataBound="gvColonia_RowDataBound"
+            OnRowCommand="gvColonia_RowCommand"
+            OnSorting="gvColonia_Sorting">
             <AlternatingRowStyle CssClass="Grid_Row_Alternating" />
             <HeaderStyle CssClass="Grid_Header" />
             <RowStyle CssClass="Grid_Row" />
             <EmptyDataTemplate>
                 <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
                     <tr class="Grid_Header">
-                        <td style="width: 250px;">Nombre</td>
-                        <td style="width: 80px;">Título</td>
-                        <td style="width: 250px;">Puesto</td>
+                        <td style="width: 150px;">Estado</td>
+                        <td style="width: 150px;">Municipio</td>
+                        <td style="width: 200px;">Colonia</td>
                         <td style="width: 100px;">Estatus</td>
                         <td>Descripción</td>
                     </tr>
                     <tr class="Grid_Row">
-                        <td colspan="5">No se encontraron Secretarios registrados en el sistema</td>
+                        <td colspan="5">No se encontraron Colonias registrados en el sistema</td>
                     </tr>
                 </table>
             </EmptyDataTemplate>
             <Columns>
-                <asp:BoundField HeaderText="Nombre"         ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="250px" DataField="Nombre"                          SortExpression="Nombre"></asp:BoundField>
-                <asp:BoundField HeaderText="Título"         ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="80px" DataField="TituloNombre"                    SortExpression="TituloNombre"></asp:BoundField>
-                <asp:BoundField HeaderText="Puesto"         ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="250px" DataField="Puesto"                          SortExpression="Puesto"></asp:BoundField>
-                <asp:BoundField HeaderText="Estatus"        ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Estatus"                         SortExpression="Estatus"></asp:BoundField>
-                <asp:BoundField HeaderText="Descripción"    ItemStyle-HorizontalAlign="Left"                            DataField="Descripcion" HtmlEncode="false"  SortExpression="Descripcion"></asp:BoundField>
+                <asp:BoundField HeaderText="Estado"         ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="150px" DataField="EstadoNombre"                            SortExpression="EstadoNombre"></asp:BoundField>
+                <asp:BoundField HeaderText="Municipio"      ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="150px" DataField="MunicipioNombre"                         SortExpression="MunicipioNombre"></asp:BoundField>
+                <asp:BoundField HeaderText="Colonia"        ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="200px" DataField="Nombre"                                  SortExpression="Nombre"></asp:BoundField>
+                <asp:BoundField HeaderText="Estatus"        ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Estatus"                                 SortExpression="Estatus"></asp:BoundField>
+                <asp:BoundField HeaderText="Descripción"    ItemStyle-HorizontalAlign="Left"                            DataField="Descripcion"         HtmlEncode="false"  SortExpression="Descripcion"></asp:BoundField>
                 <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
                     <ItemTemplate>
                         <asp:ImageButton ID="imgEdit" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Editar" ImageUrl="~/Include/Image/Buttons/Edit.png" runat="server" />
@@ -91,7 +105,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPopUp" runat="server" CssClass="PopUpBlock">
-        <asp:Panel ID="pnlPopUpContent" runat="server" CssClass="PopUpContent" style="margin-top:-240px; margin-left:-310px;" Height="480px" Width="620px">
+        <asp:Panel ID="pnlPopUpContent" runat="server" CssClass="PopUpContent" style="margin-top:-270px; margin-left:-310px;" Height="540px" Width="620px">
             <asp:Panel ID="pnlPopUpHeader" runat="server" CssClass="PopUpHeader">
                 <table class="PopUpHeaderTable">
                     <tr>
@@ -104,19 +118,19 @@
             <asp:Panel ID="pnlPopUpBody" runat="server" CssClass="PopUpBody">
                 <table class="PopUpBodyTable">
                     <tr>
+                        <td class="Etiqueta">Estado</td>
+                        <td class="Espacio"></td>
+                        <td class="Campo"><asp:DropDownList ID="ddlPopUpEstado" runat="server" CssClass="DropDownList_General" Width="405px" AutoPostBack="true" OnSelectedIndexChanged="ddlPopUpEstado_SelectedIndexChanged"></asp:DropDownList></td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Municipio</td>
+                        <td class="Espacio"></td>
+                        <td class="Campo"><asp:DropDownList ID="ddlPopUpMunicipio" runat="server" CssClass="DropDownList_General" Width="405px" ></asp:DropDownList></td>
+                    </tr>
+                    <tr>
                         <td class="Etiqueta">Nombre</td>
                         <td class="VinetaObligatorio">*</td>
-                        <td class="Campo"><asp:TextBox ID="txtPopUpNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
-                    </tr>
-                    <tr>
-                        <td class="Etiqueta">Título</td>
-                        <td class="VinetaObligatorio">*</td>
-                        <td class="Campo"><asp:DropDownList ID="ddlPopUpTitulo" runat="server" CssClass="DropDownList_General" Width="405px"></asp:DropDownList></td>
-                    </tr>
-                    <tr>
-                        <td class="Etiqueta">Puesto</td>
-                        <td class="VinetaObligatorio">*</td>
-                        <td class="Campo"><asp:TextBox ID="txtPopUpPuesto" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
+                        <td class="Campo"><asp:TextBox ID="txtPopUpNombre" runat="server" CssClass="Textbox_General" MaxLength="100" Width="400px"></asp:TextBox></td>
                     </tr>
                     <tr>
                         <td class="Etiqueta">Estatus</td>
@@ -130,11 +144,11 @@
 			        </tr>
                     <tr>
                         <td class="Botones" colspan="3">
-                            <asp:Button ID="btnPopUpCommand" runat="server" Text="" CssClass="Button_General" Width="125px" OnClick="btnPopUpCommand_Click" />
+                            <asp:Button ID="btnPopUpCommand" runat="server" Text="" CssClass="Button_General" Width="175px" OnClick="btnPopUpCommand_Click" />
                         </td>
                     </tr>
                     <tr>
-                        <td class="Mensajes" colspan="3">
+                        <td colspan="3">
                             <asp:Label ID="lblPopUpMessage" runat="server" CssClass="PopUpTextMessage"></asp:Label>
                         </td>
                     </tr>
@@ -147,7 +161,7 @@
         <%--Empty Content--%>
     </asp:Panel>
 
-    <asp:HiddenField ID="hddSecretario" runat="server" Value="" />
+    <asp:HiddenField ID="hddColonia" runat="server" Value="" />
     <asp:HiddenField ID="hddSort" runat="server" Value="Nombre" />
 
 </asp:Content>

@@ -76,6 +76,24 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.Panel pnlSubMenu;
         
         /// <summary>
+        /// EliminarRepresentantePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel EliminarRepresentantePanel;
+        
+        /// <summary>
+        /// EliminarRepresentanteButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton EliminarRepresentanteButton;
+        
+        /// <summary>
         /// DatosGeneralesPanel control.
         /// </summary>
         /// <remarks>
@@ -506,6 +524,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hddSort;
+        
+        /// <summary>
+        /// Expired control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField Expired;
         
         /// <summary>
         /// Sender control.
