@@ -58,6 +58,17 @@
 	width: 100%;
 }
 
+.PaginadoPanel{
+    border:solid 0px #000000;
+    clear:both;
+    float:left;
+    text-align:right;
+    top:20px;
+    padding: 0px;
+    position:relative;
+	width: 100%;
+}
+
 .TitlePanel{
 	padding: 0px;
 	width: 100%;

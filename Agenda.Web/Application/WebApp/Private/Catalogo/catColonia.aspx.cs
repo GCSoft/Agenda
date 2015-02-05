@@ -64,7 +64,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 ClearPopUpPanel();
 
                 // Grid vacío
-                SelectColonia();
+                SelectColonia_Paginado();
 
                 // Mensaje de usuario
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Colonia creada con éxito!'); focusControl('" + this.txtNombre.ClientID + "');", true);
@@ -174,7 +174,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
             }
         }
 
-        void SelectColonia(){
+        void SelectColonia_Paginado(){
             ENTColonia oENTColonia = new ENTColonia();
             ENTResponse oENTResponse = new ENTResponse();
 
@@ -191,8 +191,12 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 oENTColonia.Nombre = this.txtNombre.Text;
                 oENTColonia.Activo = Int16.Parse(this.ddlStatus.SelectedItem.Value);
 
+                // Paginación
+                oENTColonia.Paginacion.Page = Int32.Parse( this.lblPage.Text );
+                oENTColonia.Paginacion.PageSize = Int32.Parse( this.lblPageSize.Text );
+
                 // Transacción
-                oENTResponse = oBPColonia.SelectColonia(oENTColonia);
+                oENTResponse = oBPColonia.SelectColonia_Paginado(oENTColonia);
 
                 // Validaciones
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
@@ -201,6 +205,15 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 if (oENTResponse.MessageDB != "") { MessageDB = "alert('" + gcJavascript.ClearText(oENTResponse.MessageDB) + "');"; }
 
                 // Llenado de controles
+                if (oENTResponse.DataSetResponse.Tables[1].Rows.Count == 0) {
+
+                    this.pnlPaginado.Visible = false;
+                }else{
+
+                    this.pnlPaginado.Visible = true;
+                    this.lblPages.Text = Math.Ceiling( Double.Parse( ( oENTResponse.DataSetResponse.Tables[1].Rows.Count / this.PageSize ).ToString() ) ).ToString();
+                }
+
                 this.gvColonia.DataSource = oENTResponse.DataSetResponse.Tables[1];
                 this.gvColonia.DataBind();
 
@@ -208,6 +221,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), MessageDB, true);
 
             }catch (Exception ex){
+                this.pnlPaginado.Visible = false;
                 throw (ex);
             }
         }
@@ -367,7 +381,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 ClearPopUpPanel();
 
                 // Actualizar grid
-                SelectColonia();
+                SelectColonia_Paginado();
 
                 // Mensaje de usuario
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Colonia actualizada con éxito!'); focusControl('" + this.txtNombre.ClientID + "');", true);
@@ -408,7 +422,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
 
                 // Actualizar datos
-                SelectColonia();
+                SelectColonia_Paginado();
 
             }catch (Exception ex){
                 throw (ex);
@@ -504,6 +518,11 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 // Validaciones
                 if (this.IsPostBack) { return; }
 
+                // Configuración de paginado
+                this.lblPageSize.Text   = this.PageSize.ToString();
+                this.gvColonia.PageSize = this.PageSize;
+                this.pnlPaginado.Visible = false;
+
                 // Llenado de controles
                 SelectEstado();
                 SelectEstado_PopUp();
@@ -513,8 +532,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 SelectMunicipio_PopUp();
 
                 // Estado inicial del formulario
-                this.gvColonia.DataSource = null;
-                this.gvColonia.DataBind();
+                SelectColonia_Paginado();
                 ClearPopUpPanel();
 
                 // Foco
@@ -530,7 +548,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
             {
 
                 // Filtrar información
-                SelectColonia();
+                SelectColonia_Paginado();
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstado.ClientID + "');", true);
@@ -727,6 +745,42 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstado.ClientID + "');", true);
             }
         }
+
+
+        // Eventos del paginado
+
+        protected void GridView_SelectPage(object sender, CommandEventArgs e){
+            try
+            {
+
+                switch( e.CommandName ){
+
+                    case "FirstPage":
+                        this.lblPage.Text = "1";
+                        break;
+
+                    case "LastPage":
+                        this.lblPage.Text = Int32.Parse ( "0" + this.lblPages.Text ).ToString();
+                        break;
+
+                    case "NextPage":
+                        this.lblPage.Text = (Int32.Parse( "0" + this.lblPage.Text ) + 1).ToString();
+                        if ( Int32.Parse( this.lblPage.Text ) > Int32.Parse( this.lblPages.Text ) ) { this.lblPage.Text = this.lblPages.Text; }
+                            break;
+
+                    case "PreviousPage":
+                        this.lblPage.Text = ( Int32.Parse("0" + this.lblPage.Text ) - 1).ToString();
+                        if ( this.lblPage.Text == "0" ) { this.lblPage.Text = "1"; }
+                        break;
+                }
+
+                SelectColonia_Paginado();
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstado.ClientID + "');", true);
+            }
+        }
+
 
     }
 }
