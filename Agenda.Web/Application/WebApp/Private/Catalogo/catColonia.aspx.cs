@@ -64,7 +64,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 ClearPopUpPanel();
 
                 // Grid vacío
-                SelectColonia_Paginado();
+                SelectColonia_Paginado( true );
 
                 // Mensaje de usuario
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Colonia creada con éxito!'); focusControl('" + this.txtNombre.ClientID + "');", true);
@@ -174,7 +174,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
             }
         }
 
-        void SelectColonia_Paginado(){
+        void SelectColonia_Paginado( Boolean Restart ){
             ENTColonia oENTColonia = new ENTColonia();
             ENTResponse oENTResponse = new ENTResponse();
 
@@ -183,6 +183,9 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
 
             try
             {
+
+                // Si se reinicia la consulta posicionarse en la página 1
+                if ( Restart ) { this.lblPage.Text = "1"; }
 
                 // Formulario
                 oENTColonia.ColoniaId = 0;
@@ -211,7 +214,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 }else{
 
                     this.pnlPaginado.Visible = true;
-                    this.lblPages.Text = Math.Ceiling( Double.Parse( ( oENTResponse.DataSetResponse.Tables[1].Rows.Count / this.PageSize ).ToString() ) ).ToString();
+                    this.lblPages.Text = Math.Ceiling( Double.Parse( oENTResponse.DataSetResponse.Tables[2].Rows[0]["TotalRows"].ToString() ) / Double.Parse( this.PageSize.ToString() ) ).ToString();
                 }
 
                 this.gvColonia.DataSource = oENTResponse.DataSetResponse.Tables[1];
@@ -381,7 +384,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 ClearPopUpPanel();
 
                 // Actualizar grid
-                SelectColonia_Paginado();
+                SelectColonia_Paginado(false);
 
                 // Mensaje de usuario
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Colonia actualizada con éxito!'); focusControl('" + this.txtNombre.ClientID + "');", true);
@@ -422,7 +425,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
 
                 // Actualizar datos
-                SelectColonia_Paginado();
+                SelectColonia_Paginado(false);
 
             }catch (Exception ex){
                 throw (ex);
@@ -520,7 +523,6 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
 
                 // Configuración de paginado
                 this.lblPageSize.Text   = this.PageSize.ToString();
-                this.gvColonia.PageSize = this.PageSize;
                 this.pnlPaginado.Visible = false;
 
                 // Llenado de controles
@@ -532,7 +534,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 SelectMunicipio_PopUp();
 
                 // Estado inicial del formulario
-                SelectColonia_Paginado();
+                SelectColonia_Paginado( true );
                 ClearPopUpPanel();
 
                 // Foco
@@ -548,7 +550,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
             {
 
                 // Filtrar información
-                SelectColonia_Paginado();
+                SelectColonia_Paginado( true );
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstado.ClientID + "');", true);
@@ -766,7 +768,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                     case "NextPage":
                         this.lblPage.Text = (Int32.Parse( "0" + this.lblPage.Text ) + 1).ToString();
                         if ( Int32.Parse( this.lblPage.Text ) > Int32.Parse( this.lblPages.Text ) ) { this.lblPage.Text = this.lblPages.Text; }
-                            break;
+                        break;
 
                     case "PreviousPage":
                         this.lblPage.Text = ( Int32.Parse("0" + this.lblPage.Text ) - 1).ToString();
@@ -774,7 +776,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                         break;
                 }
 
-                SelectColonia_Paginado();
+                SelectColonia_Paginado( false );
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstado.ClientID + "');", true);

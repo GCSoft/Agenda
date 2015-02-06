@@ -87,6 +87,38 @@ namespace Agenda.BusinessProcess.Object
         }
 
         ///<remarks>
+        ///   <name>BPLugarEvento.SelectLugarEvento_Paginado</name>
+        ///   <create>09-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Consulta el catálogo de Lugares de Evento de forma paginada</summary>
+        ///<param name="oENTLugarEvento">Entidad de Lugar de Evento con los filtros necesarios para la consulta</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse SelectLugarEvento_Paginado(ENTLugarEvento oENTLugarEvento){
+            DALugarEvento oDALugarEvento = new DALugarEvento();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            try
+            {
+
+                // Transacción en base de datos
+                oENTResponse = oDALugarEvento.SelectLugarEvento_Paginado(oENTLugarEvento, this.ConnectionApplication, 0);
+
+                // Validación de error en consulta
+                if (oENTResponse.GeneratesException) { return oENTResponse; }
+
+                // Validación de mensajes de la BD
+                oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
+
+            }catch (Exception ex){
+                oENTResponse.ExceptionRaised(ex.Message);
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
         ///   <name>BPLugarEvento.UpdateLugarEvento</name>
         ///   <create>08-Enero-2015</create>
         ///   <author>Ruben.Cobos</author>

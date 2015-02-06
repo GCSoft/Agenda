@@ -220,17 +220,15 @@
 /* Tabla Paginado */
 .PaginadoTable{
 	border-spacing: 5px;
-    color:#65B449;
+    color:#336600;
 	font-size:12px;
-    font-weight:bold;
 	padding: 0px;
 	width: 100%;
 }
 
 .PaginadoText{
 	border-spacing: 5px;
-    color:#65B449;
+    color:#336600;
 	font-size:12px;
-    font-weight:bold;
 	padding: 0px;
 }

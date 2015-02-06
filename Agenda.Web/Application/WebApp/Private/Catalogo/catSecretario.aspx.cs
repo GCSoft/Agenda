@@ -66,7 +66,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 ClearPopUpPanel();
 
                 // Actualizar grid
-                SelectSecretario();
+                SelectSecretario_Paginado( true );
 
                 // Mensaje de usuario
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Secretario creado con éxito!'); focusControl('" + this.txtNombre.ClientID + "');", true);
@@ -104,7 +104,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
             }
         }
 
-        void SelectSecretario(){
+        void SelectSecretario_Paginado( Boolean Restart ){
             ENTSecretario oENTSecretario = new ENTSecretario();
             ENTResponse oENTResponse = new ENTResponse();
 
@@ -114,12 +114,19 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
             try
             {
 
+                // Si se reinicia la consulta posicionarse en la página 1
+                if ( Restart ) { this.lblPage.Text = "1"; }
+
                 // Formulario
                 oENTSecretario.Nombre = this.txtNombre.Text;
                 oENTSecretario.Activo = Int16.Parse(this.ddlStatus.SelectedItem.Value);
 
+                // Paginación
+                oENTSecretario.Paginacion.Page = Int32.Parse( this.lblPage.Text );
+                oENTSecretario.Paginacion.PageSize = Int32.Parse( this.lblPageSize.Text );
+
                 // Transacción
-                oENTResponse = oBPSecretario.SelectSecretario(oENTSecretario);
+                oENTResponse = oBPSecretario.SelectSecretario_Paginado(oENTSecretario);
 
                 // Validaciones
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
@@ -128,6 +135,15 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 if (oENTResponse.MessageDB != "") { MessageDB = "alert('" + gcJavascript.ClearText(oENTResponse.MessageDB) + "');"; }
 
                 // Llenado de controles
+                if (oENTResponse.DataSetResponse.Tables[1].Rows.Count == 0) {
+
+                    this.pnlPaginado.Visible = false;
+                }else{
+
+                    this.pnlPaginado.Visible = true;
+                    this.lblPages.Text = Math.Ceiling( Double.Parse( oENTResponse.DataSetResponse.Tables[2].Rows[0]["TotalRows"].ToString() ) / Double.Parse( this.PageSize.ToString() ) ).ToString();
+                }
+
                 this.gvSecretario.DataSource = oENTResponse.DataSetResponse.Tables[1];
                 this.gvSecretario.DataBind();
 
@@ -236,7 +252,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 ClearPopUpPanel();
 
                 // Actualizar grid
-                SelectSecretario();
+                SelectSecretario_Paginado( false );
 
                 // Mensaje de usuario
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Información actualizada con éxito!'); focusControl('" + this.txtNombre.ClientID + "');", true);
@@ -277,7 +293,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
 
                 // Actualizar datos
-                SelectSecretario();
+                SelectSecretario_Paginado( false );
 
             }catch (Exception ex){
                 throw (ex);
@@ -371,13 +387,17 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 // Validaciones
                 if (this.IsPostBack) { return; }
 
+                // Configuración de paginado
+                this.lblPageSize.Text = this.PageSize.ToString();
+                this.pnlPaginado.Visible = false;
+
                 // Llenado de controles
                 SelectEstatus_PopUp();
                 SelectEstatus();
                 SelectTitulo_PopUp();
 
                 // Estado inicial del formulario
-                SelectSecretario();
+                SelectSecretario_Paginado( true );
                 ClearPopUpPanel();
 
                 // Foco
@@ -393,7 +413,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
             {
 
                 // Filtrar información
-                SelectSecretario();
+                SelectSecretario_Paginado( true );
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtNombre.ClientID + "');", true);
@@ -555,6 +575,41 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
 
                 // Cancelar transacción
                 ClearPopUpPanel();
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtNombre.ClientID + "');", true);
+            }
+        }
+
+
+        // Eventos del paginado
+
+        protected void GridView_SelectPage(object sender, CommandEventArgs e){
+            try
+            {
+
+                switch( e.CommandName ){
+
+                    case "FirstPage":
+                        this.lblPage.Text = "1";
+                        break;
+
+                    case "LastPage":
+                        this.lblPage.Text = Int32.Parse ( "0" + this.lblPages.Text ).ToString();
+                        break;
+
+                    case "NextPage":
+                        this.lblPage.Text = (Int32.Parse( "0" + this.lblPage.Text ) + 1).ToString();
+                        if ( Int32.Parse( this.lblPage.Text ) > Int32.Parse( this.lblPages.Text ) ) { this.lblPage.Text = this.lblPages.Text; }
+                        break;
+
+                    case "PreviousPage":
+                        this.lblPage.Text = ( Int32.Parse("0" + this.lblPage.Text ) - 1).ToString();
+                        if ( this.lblPage.Text == "0" ) { this.lblPage.Text = "1"; }
+                        break;
+                }
+
+                SelectSecretario_Paginado( false );
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtNombre.ClientID + "');", true);

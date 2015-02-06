@@ -28,6 +28,7 @@ namespace Agenda.Entity.Object
         private String  _FechaCreacion;
         private Int16   _Activo;
         private Int32   _Rank;
+        private ENTPaginacion   _Paginacion;
 
 
         //Constructor
@@ -46,6 +47,7 @@ namespace Agenda.Entity.Object
             _FechaCreacion = "";
             _Activo = 2;
             _Rank = 0;
+            _Paginacion = new ENTPaginacion();
         }
 
 
@@ -193,6 +195,18 @@ namespace Agenda.Entity.Object
         {
             get { return _Rank; }
             set { _Rank = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTLugarEvento.Paginacion</name>
+        ///   <create>04-Febrero-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna la configuración de paginación</summary>
+        public ENTPaginacion Paginacion
+        {
+            get { return _Paginacion; }
+            set { _Paginacion = value; }
         }
 
     }

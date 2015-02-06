@@ -51,7 +51,7 @@ namespace Agenda.Entity.Object
         ///<summary>Obtiene/Asigna el tamaño de la página</summary>
         public Int32 PageSize
         {
-            get { return PageSize; }
+            get { return _PageSize; }
             set { _PageSize = value; }
         }
 

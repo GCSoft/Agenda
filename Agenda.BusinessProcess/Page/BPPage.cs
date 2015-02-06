@@ -31,8 +31,6 @@ namespace Agenda.BusinessProcess.Page
     public class BPPage : System.Web.UI.Page
     {
 
-        private Int32 _PageSize;
-
 
         // Asignación de evento PreLoad
 
@@ -86,9 +84,6 @@ namespace Agenda.BusinessProcess.Page
             // Deshabilitar caché
             this.Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
 
-            // Configuraciones
-            _PageSize = Int32.Parse(ConfigurationManager.AppSettings["Application.Grid.PagingSize"].ToString());
-
         }
 
 
@@ -103,7 +98,7 @@ namespace Agenda.BusinessProcess.Page
         ///<summary>Obtiene el tamaño configurado para la configuración del paginado de unGridView</summary>
         public Int32 PageSize
         {
-            get { return _PageSize; }
+            get { return Int32.Parse( ConfigurationManager.AppSettings["Application.Grid.PagingSize"].ToString() ); }
         }
 
     }

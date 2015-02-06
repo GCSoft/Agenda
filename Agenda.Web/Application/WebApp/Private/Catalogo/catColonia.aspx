@@ -109,21 +109,21 @@
             <tr>
                 <td style="text-align:left; vertical-align:bottom;">
                     Registros por Página
-                    <asp:Label ID="lblPageSize" runat="server"></asp:Label>
+                    <asp:Label ID="lblPageSize" runat="server" Font-Bold="true"></asp:Label>
                 </td>
                 <td style="text-align:right; vertical-align:bottom;">
                     Página
-                    <asp:Label ID="lblPage" runat="server" Text="1"></asp:Label>
+                    <asp:Label ID="lblPage" runat="server" Font-Bold="true" Text="1"></asp:Label>
                     de
-                    <asp:Label ID="lblPages" runat="server" Text="1"></asp:Label>
+                    <asp:Label ID="lblPages" runat="server" Font-Bold="true" Text="1"></asp:Label>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" style="height:20px; text-align:right; vertical-align:bottom;">
-                    <asp:LinkButton ID="lnkFirstPage"       CssClass="PaginadoText"   CommandName="FirstPage"     OnCommand="GridView_SelectPage" runat="server" Text="Primera"></asp:LinkButton>&nbsp;|&nbsp;
-                    <asp:LinkButton ID="lnkPreviousPage"    CssClass="PaginadoText"   CommandName="PreviousPage"  OnCommand="GridView_SelectPage" runat="server" Text="Anterior"></asp:LinkButton>&nbsp;|&nbsp;
-                    <asp:LinkButton ID="lnkNextPage"        CssClass="PaginadoText"   CommandName="NextPage"      OnCommand="GridView_SelectPage" runat="server" Text="Siguiente"></asp:LinkButton>&nbsp;|&nbsp;
-                    <asp:LinkButton ID="lnkLastPage"        CssClass="PaginadoText"   CommandName="LastPage"      OnCommand="GridView_SelectPage" runat="server" Text="Última"></asp:LinkButton>
+                    <asp:LinkButton ID="lnkFirstPage"       CssClass="PaginadoText"   CommandName="FirstPage"     OnCommand="GridView_SelectPage" runat="server" Font-Bold="true" Text="Primera"></asp:LinkButton>&nbsp;|&nbsp;
+                    <asp:LinkButton ID="lnkPreviousPage"    CssClass="PaginadoText"   CommandName="PreviousPage"  OnCommand="GridView_SelectPage" runat="server" Font-Bold="true" Text="Anterior"></asp:LinkButton>&nbsp;|&nbsp;
+                    <asp:LinkButton ID="lnkNextPage"        CssClass="PaginadoText"   CommandName="NextPage"      OnCommand="GridView_SelectPage" runat="server" Font-Bold="true" Text="Siguiente"></asp:LinkButton>&nbsp;|&nbsp;
+                    <asp:LinkButton ID="lnkLastPage"        CssClass="PaginadoText"   CommandName="LastPage"      OnCommand="GridView_SelectPage" runat="server" Font-Bold="true" Text="Última"></asp:LinkButton>
                 </td>
             </tr>
         </table>

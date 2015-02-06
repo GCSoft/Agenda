@@ -87,6 +87,38 @@ namespace Agenda.BusinessProcess.Object
         }
 
         ///<remarks>
+        ///   <name>BPSecretario.SelectSecretario_Paginado</name>
+        ///   <create>18-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Consulta el catálogo de Secretarios de forma paginada</summary>
+        ///<param name="oENTSecretario">Entidad de Secretario con los filtros necesarios para la consulta</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse SelectSecretario_Paginado(ENTSecretario oENTSecretario){
+            DASecretario oDASecretario = new DASecretario();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            try
+            {
+
+                // Transacción en base de datos
+                oENTResponse = oDASecretario.SelectSecretario_Paginado(oENTSecretario, this.ConnectionApplication, 0);
+
+                // Validación de error en consulta
+                if (oENTResponse.GeneratesException) { return oENTResponse; }
+
+                // Validación de mensajes de la BD
+                oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
+
+            }catch (Exception ex){
+                oENTResponse.ExceptionRaised(ex.Message);
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
         ///   <name>BPSecretario.UpdateSecretario</name>
         ///   <create>08-Enero-2015</create>
         ///   <author>Ruben.Cobos</author>

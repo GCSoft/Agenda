@@ -120,7 +120,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 ClearPopUpPanel();
 
                 // Actualizar grid
-                SelectLugarEvento();
+                SelectLugarEvento_Paginado( true );
 
                 // Mensaje de usuario
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Lugar de Evento creado con éxito!'); focusControl('" + this.txtNombre.ClientID + "');", true);
@@ -275,7 +275,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
             }
         }
 
-        void SelectLugarEvento(){
+        void SelectLugarEvento_Paginado( Boolean Restart ){
             ENTLugarEvento oENTLugarEvento = new ENTLugarEvento();
             ENTResponse oENTResponse = new ENTResponse();
 
@@ -285,6 +285,9 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
             try
             {
 
+                // Si se reinicia la consulta posicionarse en la página 1
+                if (Restart) { this.lblPage.Text = "1"; }
+
                 // Formulario
                 oENTLugarEvento.LugarEventoId = 0;
                 oENTLugarEvento.EstadoId = Int32.Parse( this.ddlEstado.SelectedItem.Value );
@@ -293,8 +296,12 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 oENTLugarEvento.Nombre = this.txtNombre.Text;
                 oENTLugarEvento.Activo = Int16.Parse(this.ddlStatus.SelectedItem.Value);
 
+                // Paginación
+                oENTLugarEvento.Paginacion.Page = Int32.Parse(this.lblPage.Text);
+                oENTLugarEvento.Paginacion.PageSize = Int32.Parse(this.lblPageSize.Text);
+
                 // Transacción
-                oENTResponse = oBPLugarEvento.SelectLugarEvento(oENTLugarEvento);
+                oENTResponse = oBPLugarEvento.SelectLugarEvento_Paginado(oENTLugarEvento);
 
                 // Validaciones
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
@@ -303,6 +310,15 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 if (oENTResponse.MessageDB != "") { MessageDB = "alert('" + gcJavascript.ClearText(oENTResponse.MessageDB) + "');"; }
 
                 // Llenado de controles
+                if (oENTResponse.DataSetResponse.Tables[1].Rows.Count == 0) {
+
+                    this.pnlPaginado.Visible = false;
+                }else{
+
+                    this.pnlPaginado.Visible = true;
+                    this.lblPages.Text = Math.Ceiling( Double.Parse( oENTResponse.DataSetResponse.Tables[2].Rows[0]["TotalRows"].ToString() ) / Double.Parse( this.PageSize.ToString() ) ).ToString();
+                }
+
                 this.gvLugarEvento.DataSource = oENTResponse.DataSetResponse.Tables[1];
                 this.gvLugarEvento.DataBind();
 
@@ -477,7 +493,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 ClearPopUpPanel();
 
                 // Actualizar grid
-                SelectLugarEvento();
+                SelectLugarEvento_Paginado(false);
 
                 // Mensaje de usuario
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Lugar de Evento actualizado con éxito!'); focusControl('" + this.txtNombre.ClientID + "');", true);
@@ -518,7 +534,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
 
                 // Actualizar datos
-                SelectLugarEvento();
+                SelectLugarEvento_Paginado(false);
 
             }catch (Exception ex){
                 throw (ex);
@@ -625,6 +641,10 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 // Validaciones
                 if (this.IsPostBack) { return; }
 
+                // Configuración de paginado
+                this.lblPageSize.Text = this.PageSize.ToString();
+                this.pnlPaginado.Visible = false;
+
                 // Llenado de controles
                 SelectEstado();
                 SelectEstado_PopUp();
@@ -636,7 +656,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
 
                 // Estado inicial del formulario
                 ClearPopUpPanel();
-                SelectLugarEvento();
+                SelectLugarEvento_Paginado(true);
 
                 // Foco
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.ddlEstado.ClientID + "');", true);
@@ -651,7 +671,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
             {
 
                 // Filtrar información
-                SelectLugarEvento();
+                SelectLugarEvento_Paginado( true );
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstado.ClientID + "');", true);
@@ -905,6 +925,40 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtNombre.ClientID + "');", true);
+            }
+        }
+
+        // Eventos del paginado
+
+        protected void GridView_SelectPage(object sender, CommandEventArgs e){
+            try
+            {
+
+                switch( e.CommandName ){
+
+                    case "FirstPage":
+                        this.lblPage.Text = "1";
+                        break;
+
+                    case "LastPage":
+                        this.lblPage.Text = Int32.Parse ( "0" + this.lblPages.Text ).ToString();
+                        break;
+
+                    case "NextPage":
+                        this.lblPage.Text = (Int32.Parse( "0" + this.lblPage.Text ) + 1).ToString();
+                        if ( Int32.Parse( this.lblPage.Text ) > Int32.Parse( this.lblPages.Text ) ) { this.lblPage.Text = this.lblPages.Text; }
+                        break;
+
+                    case "PreviousPage":
+                        this.lblPage.Text = ( Int32.Parse("0" + this.lblPage.Text ) - 1).ToString();
+                        if ( this.lblPage.Text == "0" ) { this.lblPage.Text = "1"; }
+                        break;
+                }
+
+                SelectLugarEvento_Paginado(false);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstado.ClientID + "');", true);
             }
         }
 
