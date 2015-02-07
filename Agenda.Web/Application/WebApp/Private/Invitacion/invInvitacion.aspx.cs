@@ -575,6 +575,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
         void ValidarFormulario(TransactionTypes TransactionType){
             DataTable tblFuncionario;
+            String ErrorDetailHour = "";
 
             try
             {
@@ -616,14 +617,14 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                     throw new Exception("El campo [Fecha del evento] es requerido");
                 }
 
-                if ( !this.wucTimerDesde.IsValidTime() ) {
+                if ( !this.wucTimerDesde.IsValidTime(ref ErrorDetailHour) ) {
                     this.tabInvitacion.ActiveTabIndex = 1;
-                    throw new Exception("El campo [Hora de inicio del evento] es requerido");
+                    throw new Exception("El campo [Hora de inicio del evento] es requerido: " + ErrorDetailHour);
                 }
 
-                if ( !this.wucTimerHasta.IsValidTime() ) {
+                if ( !this.wucTimerHasta.IsValidTime(ref ErrorDetailHour) ) {
                     this.tabInvitacion.ActiveTabIndex = 1;
-                    throw new Exception("El campo [Hora de finalización del evento] es requerido");
+                    throw new Exception("El campo [Hora de finalización del evento] es requerido: " + ErrorDetailHour);
                 }
 
                 if( this.hddLugarEventoId.Value.Trim() == "" || this.hddLugarEventoId.Value.Trim() == "0" ){

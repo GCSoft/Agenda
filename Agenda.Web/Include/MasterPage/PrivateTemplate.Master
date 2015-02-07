@@ -38,7 +38,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:ToolkitScriptManager ID="smngPrivate" runat="server"></asp:ToolkitScriptManager>
+        <asp:ScriptManager ID="smngPrivateTemplate" runat="server" EnablePageMethods="True"></asp:ScriptManager>
         <asp:UpdatePanel ID="updMaster" runat="server">
             <ContentTemplate>
                 

@@ -37,7 +37,7 @@ namespace Agenda.BusinessProcess.Object
 		///<param name="RepositoryType">Tipo de repositorio (Expediente o Solicitud)</param>
 		///<returns>La ruta completa del directorio creado</returns>
 		public String UploadFile( HttpPostedFile PostedFile,  String Seed, RepositoryTypes RepositoryType){
-			String Path;
+            String Path;
 			String FileName;
 
 			try{
@@ -45,14 +45,25 @@ namespace Agenda.BusinessProcess.Object
 				// Nombre del archivo físico
 				FileName = PostedFile.FileName;
 
+                // Obtener la ruta física del contenedor de archivos
+                if ( ConfigurationManager.AppSettings["Application.Repository.Virtual"].ToString() == "0" ){
+
+                    Path = ConfigurationManager.AppSettings["Application.Repository"].ToString();
+                }else{
+
+                    Path = HttpContext.Current.Server.MapPath ( ConfigurationManager.AppSettings["Application.Repository"].ToString() );
+                }
+
+
 				// Armar el path
 				switch(RepositoryType){
 					case RepositoryTypes.Invitacion:
-						Path = ConfigurationManager.AppSettings["Application.Repository"].ToString() + "I" + Seed + Convert.ToChar(92);
+
+                        Path = Path + "I" + Seed + Convert.ToChar(92);
 						break;
 
                     case RepositoryTypes.Evento:
-						Path = ConfigurationManager.AppSettings["Application.Repository"].ToString() + "E" + Seed + Convert.ToChar(92);
+                        Path = Path + "E" + Seed + Convert.ToChar(92);
 						break;
 
 					default:

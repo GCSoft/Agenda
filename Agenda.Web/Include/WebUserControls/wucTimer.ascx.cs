@@ -53,7 +53,7 @@ namespace Agenda.Web.Include.WebUserControls
         ///</remarks>
         ///<summary>Determina si la hora contenida en el control es válida</summary>
         ///<param name="dtDate">Fecha a establecer el calendario</param>
-        public Boolean IsValidTime(){
+        public Boolean IsValidTime( ref String ErrorDetail){
             Boolean Response = false;
 
             String CurrentTime;
@@ -66,7 +66,7 @@ namespace Agenda.Web.Include.WebUserControls
                 CurrentTime = this.txtCanvas.Text;
 
                 // Validaciones
-                if( CurrentTime.Length != 10 ){ throw(new Exception("Longitud inválida")); }
+                if( CurrentTime.Length != 8 ){ throw(new Exception("Longitud inválida")); }
 
                 TempNumber = Int32.Parse(CurrentTime.Substring(0, 2));
                 if ( TempNumber > 12 || TempNumber < 0 ) { throw (new Exception("Hora inválida")); }
@@ -74,14 +74,15 @@ namespace Agenda.Web.Include.WebUserControls
                 TempNumber = Int32.Parse(CurrentTime.Substring(3, 2));
                 if ( TempNumber > 59 || TempNumber < 0 ) { throw (new Exception("Minuto inválido")); }
 
-                if ( CurrentTime.Substring(2, 1) != ":" ) { throw (new Exception("Separador inválido")); }
-                if ( CurrentTime.Substring(5, 1) != " " ) { throw (new Exception("Separador inválido")); }
-                if ( CurrentTime.Substring(6, 4) != "a.m." && CurrentTime.Substring(6, 4) != "p.m." ) { throw (new Exception("Identificador inválido")); }
+                if ( CurrentTime.Substring(2, 1) != ":" ) { throw (new Exception("Separador inválido 1")); }
+                if ( CurrentTime.Substring(5, 1) != " " ) { throw (new Exception("Separador inválido 2")); }
+                if ( CurrentTime.Substring(6, 2) != "AM" && CurrentTime.Substring(6, 2) != "PM" ) { throw (new Exception("Identificador inválido")); }
 
                 // Hora válida
                 Response = true;
 
-            }catch(Exception){
+            }catch(Exception ex){
+                ErrorDetail = ex.Message;
                 Response = false;
             }
 
@@ -98,7 +99,7 @@ namespace Agenda.Web.Include.WebUserControls
 			try{
 
 				// Obtener la hora
-				if (Input.Substring(6, 4) == "a.m."){
+				if (Input.Substring(6, 2) == "AM"){
 
 					sTime = Input.Substring(0, 2);
 				}else {
@@ -123,14 +124,11 @@ namespace Agenda.Web.Include.WebUserControls
 
 		protected void Page_Load(object sender, EventArgs e){
 
-            // Deshabilitar la validación no-intrusiva por el manejo de JQuery
-            Page.UnobtrusiveValidationMode = System.Web.UI.UnobtrusiveValidationMode.None;
-
             // Validaciones
             if (this.IsPostBack) { return; }
 
             // Hora demo
-            if (this.txtCanvas.Text == "") { this.txtCanvas.Text = "10:00 a.m."; }
+            if (this.txtCanvas.Text == "") { this.txtCanvas.Text = "10:00 AM"; }
 
 		}
 

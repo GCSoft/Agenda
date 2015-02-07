@@ -162,9 +162,6 @@ namespace Agenda.Web.Include.WebUserControls
         // Eventos del control
 
         protected void Page_Load(object sender, EventArgs e){
-
-            // Deshabilitar la validación no-intrusiva por el manejo de JQuery
-            Page.UnobtrusiveValidationMode = System.Web.UI.UnobtrusiveValidationMode.None;
             
             // Mantener estado
             if (this.txtCanvas.Text != "") { this.ceManager.SelectedDate = DateTime.Parse(this.txtCanvas.Text); }

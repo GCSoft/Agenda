@@ -186,14 +186,16 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
             BPInvitacion oBPInvitacion = new BPInvitacion();
 
+            String ErrorDetailHour = "";
+
             try
             {
 
                 // Validaciones
                 if (this.txtNombreEvento.Text.Trim() == "") { throw new Exception("El campo [Nombre del evento] es requerido"); }
                 if (!this.wucCalendar.IsValidDate()) { throw new Exception("El campo [Fecha del evento] es requerido"); }
-                if (!this.wucTimerDesde.IsValidTime()) { throw new Exception("El campo [Hora de inicio del evento] es requerido"); }
-                if (!this.wucTimerHasta.IsValidTime()) { throw new Exception("El campo [Hora de finalización del evento] es requerido"); }
+                if (!this.wucTimerDesde.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora de inicio del evento] es requerido: " + ErrorDetailHour); }
+                if (!this.wucTimerHasta.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora de finalización del evento] es requerido: " + ErrorDetailHour); }
                 if (this.hddLugarEventoId.Value.Trim() == "" || this.hddLugarEventoId.Value.Trim() == "0") { throw (new Exception("Es necesario seleccionar un Lugar del Evento")); }
 
                 // Datos de sesión

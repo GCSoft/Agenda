@@ -31,13 +31,13 @@ namespace Agenda.Web.Include.MasterPage {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// smngLogin control.
+        /// smngLoginTemplate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.ToolkitScriptManager smngLogin;
+        protected global::System.Web.UI.ScriptManager smngLoginTemplate;
         
         /// <summary>
         /// updMaster control.

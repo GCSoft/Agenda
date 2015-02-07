@@ -1,8 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="wucTimer.ascx.cs" Inherits="Agenda.Web.Include.WebUserControls.wucTimer" %>
-<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:TextBox runat="server" ID="txtCanvas" CssClass="Timer_Canvas" ValidationGroup="MKE"></asp:TextBox>
-<asp:MaskedEditExtender ID="mskeeManager" runat="server"
+<ajaxToolkit:MaskedEditExtender ID="mskeeManager" runat="server"
+    AutoComplete="true"
 	TargetControlID="txtCanvas" 
 	Mask="99:99"
 	MessageValidatorTip="true"
@@ -13,8 +14,9 @@
 	OnFocusCssClass="Timer_Focus_Canvas"
 	OnFocusCssNegative="Timer_Error_Canvas"
 	OnInvalidCssClass ="Timer_Error_Canvas"
+    CultureName="en-US"
 />
-<asp:MaskedEditValidator ID="mskevManager" runat="server" CssClass="Timer_Error_Messages"
+<ajaxToolkit:MaskedEditValidator ID="mskevManager" runat="server" CssClass="Timer_Error_Messages"
 	ControlExtender="mskeeManager"
 	ControlToValidate="txtCanvas"
 	IsValidEmpty="False"
