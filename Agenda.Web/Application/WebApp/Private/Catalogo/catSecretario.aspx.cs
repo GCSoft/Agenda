@@ -52,6 +52,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 oENTSecretario.Nombre = this.txtPopUpNombre.Text.Trim();
                 oENTSecretario.Descripcion = this.ckePopUpDescripcion.Text.Trim();
                 oENTSecretario.Puesto = this.txtPopUpPuesto.Text.Trim();
+                oENTSecretario.Correo = this.txtPopUpCorreo.Text.Trim();
                 oENTSecretario.Activo = Int16.Parse(this.ddlPopUpStatus.SelectedValue);
                 oENTSecretario.Rank = 1;
 
@@ -182,6 +183,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 this.txtPopUpNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Nombre"].ToString();
                 this.ddlPopUpTitulo.SelectedValue = oENTResponse.DataSetResponse.Tables[1].Rows[0]["TituloId"].ToString();
                 this.txtPopUpPuesto.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Puesto"].ToString();
+                this.txtPopUpCorreo.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Correo"].ToString();
                 this.ddlPopUpStatus.SelectedValue = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Activo"].ToString();
                 this.ckePopUpDescripcion.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Descripcion"].ToString();
 
@@ -238,6 +240,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 oENTSecretario.Nombre = this.txtPopUpNombre.Text.Trim();
                 oENTSecretario.Descripcion = this.ckePopUpDescripcion.Text.Trim();
                 oENTSecretario.Puesto = this.txtPopUpPuesto.Text.Trim();
+                oENTSecretario.Correo = this.txtPopUpCorreo.Text.Trim();
                 oENTSecretario.Activo = Int16.Parse(this.ddlPopUpStatus.SelectedValue);
                 oENTSecretario.Rank = 1;
 

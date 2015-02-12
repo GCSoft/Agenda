@@ -91,12 +91,33 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         // Rutinas del programador
 
         void SelectDependencia(){
+            ENTSession oENTSession = new ENTSession();
+
             try
             {
 
-                this.ddlDependencia.Items.Insert(0, new ListItem("Dirección de Protocolo", "2"));
-                this.ddlDependencia.Items.Insert(0, new ListItem("Logística", "1"));
-                this.ddlDependencia.Items.Insert(0, new ListItem("[Todas]", "0"));
+                // Datos de sesión
+                oENTSession = (ENTSession)this.Session["oENTSession"];
+
+                // Opciones por Rol
+                switch( oENTSession.RolId ){
+                    case 4: // Logística
+
+                        this.ddlDependencia.Items.Insert(0, new ListItem("Logística", "1"));
+                        break;
+
+                    case 5: // Dirección de Protocolo
+
+                        this.ddlDependencia.Items.Insert(0, new ListItem("Dirección de Protocolo", "2"));
+                        break;
+
+                    default:
+
+                        this.ddlDependencia.Items.Insert(0, new ListItem("Dirección de Protocolo", "2"));
+                        this.ddlDependencia.Items.Insert(0, new ListItem("Logística", "1"));
+                        this.ddlDependencia.Items.Insert(0, new ListItem("[Todas]", "0"));
+                        break;
+                }
 
             }catch (Exception ex){
                 throw (ex);
@@ -106,11 +127,16 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         void SelectEstatusEvento(){
             ENTResponse oENTResponse = new ENTResponse();
             ENTEstatusEvento oENTEstatusEvento = new ENTEstatusEvento();
+            ENTSession oENTSession = new ENTSession();
 
             BPEstatusEvento oBPEstatusEvento = new BPEstatusEvento();
 
             try
             {
+
+                // Datos de sesión
+                oENTSession = (ENTSession)this.Session["oENTSession"];
+                oENTEstatusEvento.RolId = oENTSession.RolId;
 
                 // Formulario
                 oENTEstatusEvento.EstatusEventoId = 0;

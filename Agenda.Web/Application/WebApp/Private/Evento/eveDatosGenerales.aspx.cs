@@ -205,8 +205,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 if( oENTResponse.DataSetResponse.Tables[1].Rows[0]["SecretarioId_Representante"].ToString() != "0" ){
 
-                    this.txtRepresentante.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["SecretarioResponsable"].ToString();
-                    this.hddRepresentanteId.Value = oENTResponse.DataSetResponse.Tables[1].Rows[0]["SecretarioId_Responsable"].ToString();
+                    this.txtRepresentante.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["SecretarioRepresentante"].ToString();
+                    this.hddRepresentanteId.Value = oENTResponse.DataSetResponse.Tables[1].Rows[0]["SecretarioId_Representante"].ToString();
                 }
 
                 this.ckeObservaciones.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoObservaciones"].ToString();

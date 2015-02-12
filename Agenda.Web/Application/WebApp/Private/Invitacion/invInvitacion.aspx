@@ -52,7 +52,7 @@
 			            </tr>
                         <tr>
 				            <td class="Etiqueta">Secretario ramo</td>
-				            <td class="VinetaObligatorio">*</td>
+				            <td class="Espacio"></td>
 				            <td class="Campo">
                                 <script type = "text/javascript"> function SecretarioRamoSelected(sender, e) { $get("<%=hddSecretarioRamoId.ClientID %>").value = e.get_value(); } </script>
 								<asp:TextBox ID="txtSecretarioRamo" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="501px"></asp:TextBox>
@@ -78,7 +78,7 @@
 			            </tr>
                         <tr>
 				            <td class="Etiqueta">Responsable</td>
-				            <td class="VinetaObligatorio">*</td>
+				            <td class="Espacio"></td>
 				            <td class="Campo">
                                 <script type = "text/javascript"> function ResponsableSelected(sender, e) { $get("<%=hddResponsableId.ClientID %>").value = e.get_value(); } </script>
 								<asp:TextBox ID="txtResponsable" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="501px"></asp:TextBox>
@@ -104,7 +104,7 @@
 			            </tr>
                         <tr>
 				            <td class="Etiqueta">Representante</td>
-				            <td class="VinetaObligatorio"></td>
+				            <td class="Espacio"></td>
 				            <td class="Campo">
                                 <script type = "text/javascript"> function RepresentanteSelected(sender, e) { $get("<%=hddRepresentanteId.ClientID %>").value = e.get_value(); } </script>
 								<asp:TextBox ID="txtRepresentante" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="501px"></asp:TextBox>

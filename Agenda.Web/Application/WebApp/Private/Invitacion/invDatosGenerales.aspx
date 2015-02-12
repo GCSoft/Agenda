@@ -54,10 +54,22 @@
 			</tr>
             <tr>
 				<td class="Etiqueta">Secretario ramo</td>
-				<td class="VinetaObligatorio">*</td>
+				<td class="Espacio"></td>
 				<td class="Campo">
                     <script type = "text/javascript"> function SecretarioRamoSelected(sender, e) { $get("<%=hddSecretarioRamoId.ClientID %>").value = e.get_value(); } </script>
-					<asp:TextBox ID="txtSecretarioRamo" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="501px"></asp:TextBox>
+
+                    <table style="border:0px; padding:0px; width:100%;">
+                        <tr>
+                            <td style="text-align:left; width:520px;">
+                                <asp:TextBox ID="txtSecretarioRamo" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="501px"></asp:TextBox>
+                            </td>
+                            <td style="text-align:left; width:30px;">
+                                <asp:Button ID="btnDescartarSecretarioRamo" runat="server" Text="X" CssClass="Button_Special" ToolTip="Descartar secretario ramo" Visible="false" Width="25px" OnClick="btnDescartarSecretarioRamo_Click" />
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+
 					<asp:HiddenField ID="hddSecretarioRamoId" runat="server" />
 					<asp:AutoCompleteExtender
 						ID="autosuggestSecretarioRamo" 
@@ -80,10 +92,23 @@
 			</tr>
             <tr>
 				<td class="Etiqueta">Responsable</td>
-				<td class="VinetaObligatorio">*</td>
+				<td class="Espacio"></td>
 				<td class="Campo">
                     <script type = "text/javascript"> function ResponsableSelected(sender, e) { $get("<%=hddResponsableId.ClientID %>").value = e.get_value(); } </script>
-					<asp:TextBox ID="txtResponsable" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="501px"></asp:TextBox>
+					
+
+                    <table style="border:0px; padding:0px; width:100%;">
+                        <tr>
+                            <td style="text-align:left; width:520px;">
+                                <asp:TextBox ID="txtResponsable" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="501px"></asp:TextBox>
+                            </td>
+                            <td style="text-align:left; width:30px;">
+                                <asp:Button ID="btnDescartarResponsable" runat="server" Text="X" CssClass="Button_Special" ToolTip="Descartar responsable" Visible="false" Width="25px" OnClick="btnDescartarResponsable_Click" />
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+
 					<asp:HiddenField ID="hddResponsableId" runat="server" />
 					<asp:AutoCompleteExtender
 						ID="autosuggestResponsable" 

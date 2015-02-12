@@ -619,58 +619,22 @@ namespace Agenda.BusinessProcess.Object
                 oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
                 if (oENTResponse.MessageDB != "") { return oENTResponse; }
 
-                // Validación de envío de correo
-                if ( oENTInvitacion.Notificacion == 4 ){ return oENTResponse; }
-
-                // Validaciones de invitación
-                if ( oENTResponse.DataSetResponse.Tables[2].Rows.Count == 0 && oENTResponse.DataSetResponse.Tables[3].Rows.Count == 0 ) { oENTResponse.MessageDB = "No se detectaron direcciones de correo electrónico para el envío de la notificación, la invitación se aprobó de todas formas "; }
-                if ( oENTResponse.MessageDB != "" ) { return oENTResponse; }
-
-                // Obtener el listado de direcciones a donde se enviará la notificación
-                switch( oENTInvitacion.Notificacion ){
-                    case 1: // Logística
-
-                        foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[2].Rows) {
-                            Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
-                        }
-
-                        break;
-
-                    case 2: // Dirección de protocolo
-
-                        foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[3].Rows) {
-                            Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
-                        }
-
-                        break;
-
-                    case 3: // Ambos
-
-                        foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[2].Rows) {
-                            Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
-                        }
-                        foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[3].Rows) {
-                            Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
-                        }
-
-                        break;
-                }
-
-                // Nombre del evento y motivo de rechazo
+                // Nombre del evento
                 EventoNombre = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
                 Fecha = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHora"].ToString();
 
-                // Llave encriptada
-                Key = "2|" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoId"].ToString();
-                Key = gcEncryption.EncryptString(Key, false);
+                // Obtener el listado de direcciones a donde se enviará la notificación y enviar correo
+                if( oENTResponse.DataSetResponse.Tables[4].Rows.Count > 0 ){
 
-                #region Correo
+                    Contactos = oENTResponse.DataSetResponse.Tables[4].Rows[0]["CorreoRepresentado"].ToString();
+
+                    #region Correo
 
                     // Configuración del correo
                     HTMLMessage = "" +
                         "<html>" +
                             "<head>" +
-                                "<title>Agenda - Evento agendado</title>" +
+                                "<title>Agenda - Representación de Evento</title>" +
                             "</head>" +
                             "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
                                 "<div style='clear:both; height:80%; text-align:center; width:100%;'>" +
@@ -678,15 +642,14 @@ namespace Agenda.BusinessProcess.Object
                                     "<table style='color:#339933; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
                                         "<tr style='height:20%;' valign='middle'>" +
                                             "<td style='font-weight:bold;'>" +
-                                                "Evento agendado<br /><br />" +
+                                                "Representación de Evento<br /><br />" +
                                                 "<div style='border-bottom:1px solid #339933;'></div>" +
                                             "</td>" +
                                         "</tr>" +
                                         "<tr style='height:80%;' valign='top'>" +
                                             "<td>" +
-                                                "La coordinaci&oacute;n de relaciones p&uacute;blicas le notifica que la invitaci&oacute;n al evento <font style='color:#000000; font-style: italic; font-weight:bold;'>" + EventoNombre + "</font> ha sido agendada para el Gobernador con fecha de <font style='color:#000000; font-style: italic; font-weight:bold;'>" + Fecha + "</font>.<br /><br /><br />" +
-                                                ( oENTInvitacion.Comentario.Trim() == "" ? "" : "Notas adicionales:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTInvitacion.Comentario.Trim() + "</font>" ) +
-                                                "<br /><br /><br /><br /><br />Puede acceder al detalle de dicho evento haciendo click <a href='" + this.ApplicationURLInvitation + "?key=" + Key + "'>aqui</a><br /><br /><br /><br /><br />" +
+                                                "Estimado(a) <font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[4].Rows[0]["NombreRepresentado"].ToString() + "</font>:<br /><br /><br />La coordinaci&oacute;n de relaciones p&uacute;blicas le notifica que fue seleccionado(a) para representar al C. Gobernado en el evento <font style='color:#000000; font-style: italic; font-weight:bold;'>" + EventoNombre + "</font> el cual se llevará a cabo el <font style='color:#000000; font-style: italic; font-weight:bold;'>" + Fecha + "</font> en <font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[4].Rows[0]["LugarEvento"].ToString() + "</font>." +
+                                                "<br /><br /><br /><br /><br />" +
                                                 "Gracias por utilizar nuestros servicios inform&aacute;ticos.<br /><br />" +
                                             "</td>" +
                                         "</tr>" +
@@ -713,12 +676,113 @@ namespace Agenda.BusinessProcess.Object
                                 "</div>" +
                             "</body>" +
                         "</html>";
-                    
+
 
                     // Enviar correo
-                    gcMail.Send("Agenda - Evento agendado", Contactos, "Evento agendado", HTMLMessage);
+                    gcMail.Send("Agenda - Representación de Evento", Contactos, "Representación de Evento", HTMLMessage);
 
-                #endregion
+                    #endregion
+
+                }else{
+
+                    // Validación de envío de correo
+                    if (oENTInvitacion.Notificacion == 4) { return oENTResponse; }
+
+                    // Validaciones de invitación
+                    if (oENTResponse.DataSetResponse.Tables[2].Rows.Count == 0 && oENTResponse.DataSetResponse.Tables[3].Rows.Count == 0) { oENTResponse.MessageDB = "No se detectaron direcciones de correo electrónico para el envío de la notificación, la invitación se aprobó de todas formas "; }
+                    if (oENTResponse.MessageDB != "") { return oENTResponse; }
+
+                    // Listado de correos
+                    switch( oENTInvitacion.Notificacion ){
+                        case 1: // Logística
+
+                            foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[2].Rows) {
+                                Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
+                            }
+
+                            break;
+
+                        case 2: // Dirección de protocolo
+
+                            foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[3].Rows) {
+                                Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
+                            }
+
+                            break;
+
+                        case 3: // Ambos
+
+                            foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[2].Rows) {
+                                Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
+                            }
+                            foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[3].Rows) {
+                                Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
+                            }
+
+                            break;
+                    }
+
+                    // Llave encriptada
+                    Key = "2|" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoId"].ToString();
+                    Key = gcEncryption.EncryptString(Key, false);
+
+                    #region Correo
+
+                        // Configuración del correo
+                        HTMLMessage = "" +
+                            "<html>" +
+                                "<head>" +
+                                    "<title>Agenda - Evento agendado</title>" +
+                                "</head>" +
+                                "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
+                                    "<div style='clear:both; height:80%; text-align:center; width:100%;'>" +
+                                        "<div style='clear:both; height:70%; margin:0px auto; position:relative; top:10%; width:90%;'>" +
+                                        "<table style='color:#339933; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:20%;' valign='middle'>" +
+                                                "<td style='font-weight:bold;'>" +
+                                                    "Evento agendado<br /><br />" +
+                                                    "<div style='border-bottom:1px solid #339933;'></div>" +
+                                                "</td>" +
+                                            "</tr>" +
+                                            "<tr style='height:80%;' valign='top'>" +
+                                                "<td>" +
+                                                    "La coordinaci&oacute;n de relaciones p&uacute;blicas le notifica que la invitaci&oacute;n al evento <font style='color:#000000; font-style: italic; font-weight:bold;'>" + EventoNombre + "</font> ha sido agendada para el Gobernador con fecha de <font style='color:#000000; font-style: italic; font-weight:bold;'>" + Fecha + "</font>.<br /><br /><br />" +
+                                                    ( oENTInvitacion.Comentario.Trim() == "" ? "" : "Notas adicionales:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTInvitacion.Comentario.Trim() + "</font>" ) +
+                                                    "<br /><br /><br /><br /><br />Puede acceder al detalle de dicho evento haciendo click <a href='" + this.ApplicationURLInvitation + "?key=" + Key + "'>aqui</a><br /><br /><br /><br /><br />" +
+                                                    "Gracias por utilizar nuestros servicios inform&aacute;ticos.<br /><br />" +
+                                                "</td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                        "</div>" +
+                                    "</div>" +
+                                    "<div style='background:#339933; clear:both; height:20%; text-align:left; width:100%;'>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "<div style='height:90%;'>" +
+                                        "<table style='color:#FFFFFF; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:100%;' valign='middle'>" +
+                                                "<td style='text-align:center; float:left; width:20%;'>" +
+                                                    "<img src='" + this.MailLogo + "' height='120px' width='92px' />" +
+                                                "</td>" +
+                                                "<td style='text-align:justify; float:left; vertical-align: middle; width:70%;'>" +
+                                                    "<div style='text-align:center; width:90%;'><font style='font-family:Arial; font-size:9px;'>Powered By GCSoft</font><br /><br /></div>" +
+                                                    "<font style='font-family:Arial; font-size:10px;'>Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.</font><br />" +
+                                                "</td>" +
+                                                "<td></td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                    "</div>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "</div>" +
+                                "</body>" +
+                            "</html>";
+                    
+
+                        // Enviar correo
+                        gcMail.Send("Agenda - Evento agendado", Contactos, "Evento agendado", HTMLMessage);
+
+                    #endregion
+                
+                }
 
             }catch (Exception ex){
                 oENTResponse.ExceptionRaised(ex.Message);

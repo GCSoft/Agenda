@@ -21,7 +21,7 @@
         </table>
     </asp:Panel>
 
-    <asp:Panel ID="pnlFormulario" runat="server" CssClass="FormPanel">
+    <asp:Panel ID="pnlFormulario" runat="server" CssClass="FormPanel" style="z-index:2;">
         <table class="FormTable">
             <tr>
 				<td class="Etiqueta">Nombre de evento</td>

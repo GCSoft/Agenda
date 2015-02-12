@@ -47,6 +47,10 @@ namespace Agenda.DataAccess.Object
             if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
 
             // Parametros
+            sqlPar = new SqlParameter("RolId", SqlDbType.Int);
+            sqlPar.Value = oENTEstatusEvento.RolId;
+            sqlCom.Parameters.Add(sqlPar);
+
             sqlPar = new SqlParameter("EstatusEventoId", SqlDbType.Int);
             sqlPar.Value = oENTEstatusEvento.EstatusEventoId;
             sqlCom.Parameters.Add(sqlPar);

@@ -96,7 +96,7 @@
                                 <asp:CheckBox ID="chkEsposaInvitada" runat="server" CssClass="CheckBox_Regular" Text="Invitada" AutoPostBack="True" OnCheckedChanged="chkEsposaInvitada_CheckedChanged" />
                             </td>
                             <td style="text-align:left; width:70px;">
-                                Confirmación:
+                                Asiste:
                             </td>
                             <td style="text-align:left;">
                                 <asp:RadioButtonList ID="rblConfirmacionEsposa" runat="server" RepeatDirection="Horizontal" Enabled ="false">

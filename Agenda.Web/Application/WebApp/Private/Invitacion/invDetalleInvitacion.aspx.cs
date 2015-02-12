@@ -52,44 +52,6 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 		
         // Rutinas del programador
 
-        void CheckValoracion(DataTable tblFuncionarios, DataTable tblComentario){
-            ENTSession oENTSession = new ENTSession();
-
-            try
-            {
-
-                // Obtener sesión
-                oENTSession = (ENTSession)Session["oENTSession"];
-
-                // Sólo si es funcionario podrá interactuar con las evaluaciones
-                if (oENTSession.RolId == 3 )
-                {
-
-                    // Si el funcionario está asociado a la invitación la podrá evaluar
-                    if (tblFuncionarios.Select("UsuarioId=" + oENTSession.UsuarioId.ToString()).Length > 0)
-                    {
-
-                        // El usuario sólo podrá editar la evaluación que haya emitido
-                        if (tblComentario.Select("UsuarioId=" + oENTSession.UsuarioId.ToString()).Length == 0)
-                        {
-                            this.hddInvitacionComentarioId.Value = "0";
-                            this.lblValoracion.Text = "Valorar invitación";
-                        }
-                        else
-                        {
-                            this.hddInvitacionComentarioId.Value = tblComentario.Select("UsuarioId=" + oENTSession.UsuarioId.ToString())[0]["InvitacionComentarioId"].ToString();
-                            this.lblValoracion.Text = "Editar valoración";
-                        }
-
-                    }
-                    
-                }
-
-            }catch(Exception ex){
-                throw(ex);
-            }
-		}
-
         void InsertInvitacionComentario() {
 			BPInvitacion oBPInvitacion = new BPInvitacion();
 
@@ -136,14 +98,19 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
         void SelectInvitacion(){
             ENTResponse oENTResponse = new ENTResponse();
             ENTInvitacion oENTInvitacion = new ENTInvitacion();
+            ENTSession oENTSession = new ENTSession();
 
             BPInvitacion oBPInvitacion = new BPInvitacion();
 
             try
             {
 
+                // Obtener sesión
+                oENTSession = (ENTSession)Session["oENTSession"];
+
                 // Formulario
                 oENTInvitacion.InvitacionId = Int32.Parse(this.hddInvitacionId.Value);
+                oENTInvitacion.UsuarioId = oENTSession.UsuarioId;
 
                 // Transacción
                 oENTResponse = oBPInvitacion.SelectInvitacion_Detalle(oENTInvitacion);
@@ -212,23 +179,59 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 					this.dlstDocumentoList.DataBind();
 				}
 
-                // Evaluaciones (Comentarios)
+                // Valoraciones (Comentarios)
                 if (oENTResponse.DataSetResponse.Tables[5].Rows.Count == 0){
 
-					this.SinComentariosLabel.Text = "<br /><br />No hay evaluaciones emitidas para esta invitación";
+					this.SinComentariosLabel.Text = "<br /><br />No hay valoraciones emitidas para esta invitación";
 					this.repComentarios.DataSource = null;
 					this.repComentarios.DataBind();
 					this.ComentarioTituloLabel.Text = "";
+
 				}else{
 
-					this.SinComentariosLabel.Text = "";
-                    this.repComentarios.DataSource = oENTResponse.DataSetResponse.Tables[5];
-					this.repComentarios.DataBind();
-                    this.ComentarioTituloLabel.Text = oENTResponse.DataSetResponse.Tables[5].Rows.Count.ToString() + " evaluaciones";
+                    // Si es funcionario sólo podrá visualizar sus valoraciones
+                    if (oENTSession.RolId == 3){
+
+                        if (oENTResponse.DataSetResponse.Tables[8].Rows.Count == 0){
+
+                            this.SinComentariosLabel.Text = "<br /><br />No ha emitido su valoración para esta invitación";
+                            this.repComentarios.DataSource = null;
+                            this.repComentarios.DataBind();
+                            this.ComentarioTituloLabel.Text = "";
+                        }else{
+
+                            this.SinComentariosLabel.Text = "";
+                            this.repComentarios.DataSource = oENTResponse.DataSetResponse.Tables[8];
+                            this.repComentarios.DataBind();
+                            this.ComentarioTituloLabel.Text = "Invitación valorada";
+                        }
+
+                        // Si el funcionario está asociado a la invitación la podrá evaluar
+                        if (oENTResponse.DataSetResponse.Tables[2].Select("UsuarioId=" + oENTSession.UsuarioId.ToString()).Length > 0){
+
+                            // El usuario sólo podrá editar la evaluación que haya emitido
+                            if (oENTResponse.DataSetResponse.Tables[5].Select("UsuarioId=" + oENTSession.UsuarioId.ToString()).Length == 0){
+
+                                this.hddInvitacionComentarioId.Value = "0";
+                                this.lblValoracion.Text = "Valorar invitación";
+                            }else{
+
+                                this.hddInvitacionComentarioId.Value = oENTResponse.DataSetResponse.Tables[5].Select("UsuarioId=" + oENTSession.UsuarioId.ToString())[0]["InvitacionComentarioId"].ToString();
+                                this.lblValoracion.Text = "Editar valoración";
+                            }
+
+                        }
+
+                    }else{
+
+                        this.SinComentariosLabel.Text = "";
+                        this.repComentarios.DataSource = oENTResponse.DataSetResponse.Tables[5];
+                        this.repComentarios.DataBind();
+                        this.ComentarioTituloLabel.Text = oENTResponse.DataSetResponse.Tables[5].Rows.Count.ToString() + " valoraciones";
+                    }  
 
 				}
 
-                CheckValoracion(oENTResponse.DataSetResponse.Tables[2], oENTResponse.DataSetResponse.Tables[5]);
 
             }catch (Exception ex){
                 throw (ex);

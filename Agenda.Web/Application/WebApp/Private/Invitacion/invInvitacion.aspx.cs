@@ -215,8 +215,8 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                     oENTInvitacion.CategoriaId = Int32.Parse( this.ddlCategoria.SelectedItem.Value );
                     oENTInvitacion.ConductoId = Int32.Parse(this.ddlConducto.SelectedItem.Value);
                     oENTInvitacion.PrioridadId = Int32.Parse(this.ddlPrioridad.SelectedItem.Value);
-                    oENTInvitacion.SecretarioId_Ramo = Int32.Parse(this.hddSecretarioRamoId.Value);
-                    oENTInvitacion.SecretarioId_Responsable = Int32.Parse(this.hddResponsableId.Value);
+                    oENTInvitacion.SecretarioId_Ramo = ( this.hddSecretarioRamoId.Value.Trim() == "" || this.hddSecretarioRamoId.Value.Trim() == "0" ? 0 : Int32.Parse( this.hddSecretarioRamoId.Value ) );
+                    oENTInvitacion.SecretarioId_Responsable = ( this.hddResponsableId.Value.Trim() == "" || this.hddResponsableId.Value.Trim() == "0" ? 0 : Int32.Parse( this.hddResponsableId.Value ) );
                     oENTInvitacion.SecretarioId_Representante = ( this.hddRepresentanteId.Value.Trim() == "" || this.hddRepresentanteId.Value.Trim() == "0" ? 0 : Int32.Parse( this.hddRepresentanteId.Value ) );
                     oENTInvitacion.InvitacionObservaciones = this.ckeObservaciones.Text.Trim();
                 #endregion
@@ -596,15 +596,15 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                     throw (new Exception("Es necesario seleccionar una Prioridad"));
                 }
 
-                if( this.hddSecretarioRamoId.Value.Trim() == "" || this.hddSecretarioRamoId.Value.Trim() == "0" ){
-                    this.tabInvitacion.ActiveTabIndex = 0;
-                    throw (new Exception("Es necesario seleccionar un Secretario Ramo"));
-                }
+                //if( this.hddSecretarioRamoId.Value.Trim() == "" || this.hddSecretarioRamoId.Value.Trim() == "0" ){
+                //    this.tabInvitacion.ActiveTabIndex = 0;
+                //    throw (new Exception("Es necesario seleccionar un Secretario Ramo"));
+                //}
 
-                if( this.hddResponsableId.Value.Trim() == "" || this.hddResponsableId.Value.Trim() == "0" ){
-                    this.tabInvitacion.ActiveTabIndex = 0;
-                    throw (new Exception("Es necesario seleccionar un Responsable"));
-                }
+                //if( this.hddResponsableId.Value.Trim() == "" || this.hddResponsableId.Value.Trim() == "0" ){
+                //    this.tabInvitacion.ActiveTabIndex = 0;
+                //    throw (new Exception("Es necesario seleccionar un Responsable"));
+                //}
 
                 // TAB - Datos del evento
                 if( this.txtNombreEvento.Text.Trim() == "" ){

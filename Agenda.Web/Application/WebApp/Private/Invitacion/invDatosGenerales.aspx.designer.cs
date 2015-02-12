@@ -130,6 +130,15 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         protected global::System.Web.UI.WebControls.TextBox txtSecretarioRamo;
         
         /// <summary>
+        /// btnDescartarSecretarioRamo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDescartarSecretarioRamo;
+        
+        /// <summary>
         /// hddSecretarioRamoId control.
         /// </summary>
         /// <remarks>
@@ -155,6 +164,15 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtResponsable;
+        
+        /// <summary>
+        /// btnDescartarResponsable control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDescartarResponsable;
         
         /// <summary>
         /// hddResponsableId control.

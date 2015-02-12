@@ -39,7 +39,7 @@
 
         <asp:Panel ID="InformacionComplementariaPanel" CssClass="IconoPanel" runat="server" Visible="true">
             <asp:ImageButton ID="InformacionComplementariaButton" ImageUrl="~/Include/Image/Icon/SubMenuInformacionComplementaria.png" runat="server" OnClick="InformacionComplementariaButton_Click"></asp:ImageButton><br />
-            Información complementaria
+            Programa
         </asp:Panel>
 
         <asp:Panel ID="ContactoPanel" CssClass="IconoPanel" runat="server" Visible="true">

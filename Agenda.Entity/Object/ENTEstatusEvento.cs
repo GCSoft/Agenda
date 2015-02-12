@@ -17,6 +17,7 @@ namespace Agenda.Entity.Object
     {
 
         private Int32   _EstatusEventoId;
+        private Int32   _RolId;
         private String  _Nombre;
         private String  _Descripcion;
         private String  _FechaCreacion;
@@ -29,6 +30,7 @@ namespace Agenda.Entity.Object
         public ENTEstatusEvento()
         {
             _EstatusEventoId = 0;
+            _RolId = 0;
             _Nombre = "";
             _Descripcion = "";
             _FechaCreacion = "";
@@ -49,6 +51,18 @@ namespace Agenda.Entity.Object
         {
             get { return _EstatusEventoId; }
             set { _EstatusEventoId = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEstatusEvento.RolId</name>
+        ///   <create>09-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el identificador único del Rol del usuario que realiza una consulta</summary>
+        public Int32 RolId
+        {
+            get { return _RolId; }
+            set { _RolId = value; }
         }
 
         ///<remarks>

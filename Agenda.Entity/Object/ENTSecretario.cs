@@ -20,6 +20,7 @@ namespace Agenda.Entity.Object
         private Int32   _TituloId;
         private String  _Nombre;
         private String  _Puesto;
+        private String  _Correo;
         private String  _Descripcion;
         private String  _FechaCreacion;
         private Int16   _Activo;
@@ -35,6 +36,7 @@ namespace Agenda.Entity.Object
             _TituloId = 0;
             _Nombre = "";
             _Puesto = "";
+            _Correo = "";
             _Descripcion = "";
             _FechaCreacion = "";
             _Activo = 2;
@@ -91,6 +93,18 @@ namespace Agenda.Entity.Object
         {
             get { return _Puesto; }
             set { _Puesto = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTSecretario.Correo</name>
+        ///   <create>18-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el puesto que tiene el Secretario</summary>
+        public String Correo
+        {
+            get { return _Correo; }
+            set { _Correo = value; }
         }
 
         ///<remarks>

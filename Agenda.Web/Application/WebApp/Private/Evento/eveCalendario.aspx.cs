@@ -61,6 +61,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
             try
             {
+                
+                // Obtener la sesion
+                oENTSession = (ENTSession)this.Session["oENTSession"];
+
+                // Seguridad
+                if  ( oENTSession.RolId == 4 || oENTSession.RolId == 5 ){ this.RepresentadoPanel.Visible = false; }
 
                 // Valores default
                 this.ddlPrioridad.SelectedValue = "0";
@@ -69,12 +75,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.chkProceso.Checked = true;
                 this.chkExpirado.Checked = true;
                 this.chkCancelar.Checked = true;
-                this.chkRepresentado.Checked = true;
+                this.chkRepresentado.Checked = ( oENTSession.RolId == 4 || oENTSession.RolId == 5 ? false : true );
                 this.hddCurrentMonth.Value = DateTime.Now.Month.ToString();
                 this.hddCurrentYear.Value = DateTime.Now.Year.ToString();
-
-                // Obtener la sesion
-                oENTSession = (ENTSession)this.Session["oENTSession"];
 
                 // Configurar sesión
                 oENTFiltroCalendario.PrioridadId = Int32.Parse(this.ddlPrioridad.SelectedItem.Value);
@@ -176,12 +179,33 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         // Rutinas del programador
 
         void SelectDependencia(){
+            ENTSession oENTSession = new ENTSession();
+
             try
             {
 
-                this.ddlDependencia.Items.Insert(0, new ListItem("Dirección de Protocolo", "2"));
-                this.ddlDependencia.Items.Insert(0, new ListItem("Logística", "1"));
-                this.ddlDependencia.Items.Insert(0, new ListItem("[Todas]", "0"));
+                // Datos de sesión
+                oENTSession = (ENTSession)this.Session["oENTSession"];
+
+                // Opciones por Rol
+                switch( oENTSession.RolId ){
+                    case 4: // Logística
+
+                        this.ddlDependencia.Items.Insert(0, new ListItem("Logística", "1"));
+                        break;
+
+                    case 5: // Dirección de Protocolo
+
+                        this.ddlDependencia.Items.Insert(0, new ListItem("Dirección de Protocolo", "2"));
+                        break;
+
+                    default:
+
+                        this.ddlDependencia.Items.Insert(0, new ListItem("Dirección de Protocolo", "2"));
+                        this.ddlDependencia.Items.Insert(0, new ListItem("Logística", "1"));
+                        this.ddlDependencia.Items.Insert(0, new ListItem("[Todas]", "0"));
+                        break;
+                }
 
             }catch (Exception ex){
                 throw (ex);

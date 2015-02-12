@@ -261,7 +261,7 @@
             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                 <tr>
                     <td style="text-align:left;">
-                        <asp:Label ID="lblComentariosSection" CssClass="Label_Detalle_Invitacion" runat="server" Text="Evaluaciones"></asp:Label>
+                        <asp:Label ID="lblComentariosSection" CssClass="Label_Detalle_Invitacion" runat="server" Text="Valoraciones"></asp:Label>
                     </td>
                 </tr>
                 <tr>

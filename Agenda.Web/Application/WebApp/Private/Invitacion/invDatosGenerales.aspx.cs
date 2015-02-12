@@ -205,15 +205,23 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
                 if( oENTResponse.DataSetResponse.Tables[1].Rows[0]["SecretarioId_Representante"].ToString() != "0" ){
 
-                    this.txtRepresentante.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["SecretarioResponsable"].ToString();
-                    this.hddRepresentanteId.Value = oENTResponse.DataSetResponse.Tables[1].Rows[0]["SecretarioId_Responsable"].ToString();
+                    this.txtRepresentante.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["SecretarioRepresentante"].ToString();
+                    this.hddRepresentanteId.Value = oENTResponse.DataSetResponse.Tables[1].Rows[0]["SecretarioId_Representante"].ToString();
                 }
 
                 this.ckeObservaciones.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["InvitacionObservaciones"].ToString();
 
-                // Validación de secretario representante
+                // Validación de secretarios
                 if (oENTResponse.DataSetResponse.Tables[1].Rows[0]["SecretarioId_Representante"].ToString() != "0"){
                     this.btnDescartarRepresentante.Visible = true;
+                }
+
+                if (oENTResponse.DataSetResponse.Tables[1].Rows[0]["SecretarioId_Ramo"].ToString() != "0"){
+                    this.btnDescartarSecretarioRamo.Visible = true;
+                }
+
+                if (oENTResponse.DataSetResponse.Tables[1].Rows[0]["SecretarioId_Responsable"].ToString() != "0"){
+                    this.btnDescartarResponsable.Visible = true;
                 }
 
             }catch (Exception ex){
@@ -270,8 +278,6 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 if (this.ddlCategoria.SelectedIndex == 0) { throw (new Exception("Es necesario seleccionar un Tipo de cita")); }
                 if (this.ddlConducto.SelectedIndex == 0) { throw (new Exception("Es necesario seleccionar un Conducto")); }
                 if (this.ddlPrioridad.SelectedIndex == 0) { throw (new Exception("Es necesario seleccionar una Prioridad")); }
-                if (this.hddSecretarioRamoId.Value.Trim() == "" || this.hddSecretarioRamoId.Value.Trim() == "0") { throw (new Exception("Es necesario seleccionar un Secretario Ramo")); }
-                if (this.hddResponsableId.Value.Trim() == "" || this.hddResponsableId.Value.Trim() == "0") { throw (new Exception("Es necesario seleccionar un Responsable")); }
 
                 // Datos de sesión
                 oENTSession = (ENTSession)this.Session["oENTSession"];
@@ -282,8 +288,8 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 oENTInvitacion.CategoriaId = Int32.Parse(this.ddlCategoria.SelectedItem.Value);
                 oENTInvitacion.ConductoId = Int32.Parse(this.ddlConducto.SelectedItem.Value);
                 oENTInvitacion.PrioridadId = Int32.Parse(this.ddlPrioridad.SelectedItem.Value);
-                oENTInvitacion.SecretarioId_Ramo = Int32.Parse(this.hddSecretarioRamoId.Value);
-                oENTInvitacion.SecretarioId_Responsable = Int32.Parse(this.hddResponsableId.Value);
+                oENTInvitacion.SecretarioId_Ramo = (this.hddSecretarioRamoId.Value.Trim() == "" || this.hddSecretarioRamoId.Value.Trim() == "0" ? 0 : Int32.Parse(this.hddSecretarioRamoId.Value));
+                oENTInvitacion.SecretarioId_Responsable = (this.hddResponsableId.Value.Trim() == "" || this.hddResponsableId.Value.Trim() == "0" ? 0 : Int32.Parse(this.hddResponsableId.Value));
                 oENTInvitacion.SecretarioId_Representante = (this.hddRepresentanteId.Value.Trim() == "" || this.hddRepresentanteId.Value.Trim() == "0" ? 0 : Int32.Parse(this.hddRepresentanteId.Value));
                 oENTInvitacion.InvitacionObservaciones = this.ckeObservaciones.Text.Trim();
 
@@ -368,6 +374,65 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 // Limpiar Autosuggest
                 this.txtRepresentante.Text = "";
                 this.hddRepresentanteId.Value = "";
+
+                // Botones de eliminar
+                this.btnDescartarRepresentante.Visible = false;
+                this.btnDescartarResponsable.Visible = false;
+                this.btnDescartarSecretarioRamo.Visible = false;
+
+                // Actualizar los datos generales
+                UpdateInvitacion_DatosGenerales();
+
+                // Carátula y formulario
+                SelectInvitacion();
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlCategoria.ClientID + "'); }", true);
+            }
+        }
+
+        protected void btnDescartarResponsable_Click(object sender, EventArgs e){
+            try
+            {
+
+                // Limpiar Autosuggest
+                this.txtResponsable.Text = "";
+                this.hddResponsableId.Value = "";
+
+                // Botones de eliminar
+                this.btnDescartarRepresentante.Visible = false;
+                this.btnDescartarResponsable.Visible = false;
+                this.btnDescartarSecretarioRamo.Visible = false;
+
+                // Actualizar los datos generales
+                UpdateInvitacion_DatosGenerales();
+
+                // Carátula y formulario
+                SelectInvitacion();
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlCategoria.ClientID + "'); }", true);
+            }
+        }
+
+        protected void btnDescartarSecretarioRamo_Click(object sender, EventArgs e){
+            try
+            {
+
+                // Limpiar Autosuggest
+                this.txtSecretarioRamo.Text = "";
+                this.hddSecretarioRamoId.Value = "";
+
+                // Botones de eliminar
+                this.btnDescartarRepresentante.Visible = false;
+                this.btnDescartarResponsable.Visible = false;
+                this.btnDescartarSecretarioRamo.Visible = false;
+
+                // Actualizar los datos generales
+                UpdateInvitacion_DatosGenerales();
+
+                // Carátula y formulario
+                SelectInvitacion();
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlCategoria.ClientID + "'); }", true);

@@ -661,6 +661,10 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTInvitacion.InvitacionId;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
+            sqlPar.Value = oENTInvitacion.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
             // Inicializaciones
             oENTResponse.DataSetResponse = new DataSet();
             sqlDA = new SqlDataAdapter(sqlCom);

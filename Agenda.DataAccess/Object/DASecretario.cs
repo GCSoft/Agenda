@@ -63,6 +63,10 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTSecretario.Puesto;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("Correo", SqlDbType.VarChar);
+            sqlPar.Value = oENTSecretario.Correo;
+            sqlCom.Parameters.Add(sqlPar);
+
             sqlPar = new SqlParameter("Activo", SqlDbType.TinyInt);
             sqlPar.Value = oENTSecretario.Activo;
             sqlCom.Parameters.Add(sqlPar);
@@ -283,6 +287,10 @@ namespace Agenda.DataAccess.Object
 
             sqlPar = new SqlParameter("Puesto", SqlDbType.VarChar);
             sqlPar.Value = oENTSecretario.Puesto;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Correo", SqlDbType.VarChar);
+            sqlPar.Value = oENTSecretario.Correo;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("Activo", SqlDbType.TinyInt);
