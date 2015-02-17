@@ -23,7 +23,7 @@
     <asp:Panel ID="pnlSubMenu" runat="server">
 
         <asp:Panel ID="EliminarRepresentantePanel" CssClass="IconoPanel" runat="server" Visible="true">
-            <asp:ImageButton ID="EliminarRepresentanteButton" ImageUrl="~/Include/Image/Icon/SubMenuEliminarRepresentante.png" runat="server" OnClick="EliminarRepresentanteButton_Click" OnClientClick="return confirm('¿Seguro que desea eliminar la representación al evento?');" ></asp:ImageButton><br />
+            <asp:ImageButton ID="EliminarRepresentanteButton" ImageUrl="~/Include/Image/Icon/SubMenuEliminarRepresentante.png" runat="server" OnClick="EliminarRepresentanteButton_Click" ></asp:ImageButton><br />
             Eliminar representante
         </asp:Panel>
         
@@ -37,8 +37,13 @@
             Datos del evento
         </asp:Panel>
 
-        <asp:Panel ID="InformacionComplementariaPanel" CssClass="IconoPanel" runat="server" Visible="true">
-            <asp:ImageButton ID="InformacionComplementariaButton" ImageUrl="~/Include/Image/Icon/SubMenuInformacionComplementaria.png" runat="server" OnClick="InformacionComplementariaButton_Click"></asp:ImageButton><br />
+        <asp:Panel ID="ProgramaLogisticaPanel" CssClass="IconoPanel" runat="server" Visible="true">
+            <asp:ImageButton ID="ProgramaLogisticaButton" ImageUrl="~/Include/Image/Icon/SubMenuInformacionComplementaria.png" runat="server" OnClick="ProgramaLogisticaButton_Click"></asp:ImageButton><br />
+            Programa
+        </asp:Panel>
+
+        <asp:Panel ID="ProgramaProtocoloPanel" CssClass="IconoPanel" runat="server" Visible="true">
+            <asp:ImageButton ID="ProgramaProtocoloButton" ImageUrl="~/Include/Image/Icon/SubMenuInformacionComplementaria.png" runat="server" OnClick="ProgramaProtocoloButton_Click"></asp:ImageButton><br />
             Programa
         </asp:Panel>
 
@@ -238,6 +243,7 @@
     <asp:HiddenField ID="hddEstatusEventoId" runat="server" Value="0" />
     <asp:HiddenField ID="hddSort" runat="server" Value="Nombre" />
     <asp:HiddenField ID="Expired" runat="server" Value="0" />
+    <asp:HiddenField ID="Logistica" runat="server" Value="0" />
     <asp:HiddenField ID="Sender" runat="server" Value=""  />
 	<asp:HiddenField ID="SenderId" runat="server" Value="0"  />
 

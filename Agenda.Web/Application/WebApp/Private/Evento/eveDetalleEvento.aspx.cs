@@ -73,6 +73,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Campos ocultos
                 this.hddEstatusEventoId.Value = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EstatusEventoId"].ToString();
                 this.Expired.Value = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Expired"].ToString();
+                this.Logistica.Value = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Logistica"].ToString();
 
                 // Formulario
                 this.lblDependenciaNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Dependencia"].ToString();
@@ -139,7 +140,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 this.DatosGeneralesPanel.Visible = false;
                 this.DatosEventoPanel.Visible = false;
-                this.InformacionComplementariaPanel.Visible = false;
+                this.ProgramaLogisticaPanel.Visible = false;
                 this.ContactoPanel.Visible = false;
                 this.AdjuntarPanel.Visible = false;
                 this.Historial.Visible = false;
@@ -163,7 +164,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.EliminarRepresentantePanel.Visible = true;
                         this.DatosGeneralesPanel.Visible = true;
                         this.DatosEventoPanel.Visible = true;
-                        this.InformacionComplementariaPanel.Visible = true;
+                        this.ProgramaLogisticaPanel.Visible = ( this.Logistica.Value == "1" ? true : false );
+                        this.ProgramaProtocoloPanel.Visible = ( this.Logistica.Value == "1" ? false : true );
                         this.ContactoPanel.Visible = true;
                         this.AdjuntarPanel.Visible = true;
                         this.RechazarPanel.Visible = true;
@@ -176,11 +178,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.EliminarRepresentantePanel.Visible = true;
 						this.DatosGeneralesPanel.Visible = true;
                         this.DatosEventoPanel.Visible = true;
-                        this.InformacionComplementariaPanel.Visible = true;
+                        this.ProgramaLogisticaPanel.Visible = ( this.Logistica.Value == "1" ? true : false );
+                        this.ProgramaProtocoloPanel.Visible = ( this.Logistica.Value == "1" ? false : true );
                         this.ContactoPanel.Visible = true;
                         this.AdjuntarPanel.Visible = true;
                         this.RechazarPanel.Visible = true;
-                        this.CuadernilloPanel.Visible = true;
+                        this.CuadernilloPanel.Visible = false;
                         this.Historial.Visible = true;
 						break;
 
@@ -188,7 +191,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.EliminarRepresentantePanel.Visible = false;
                         this.DatosGeneralesPanel.Visible = false;
                         this.DatosEventoPanel.Visible = false;
-                        this.InformacionComplementariaPanel.Visible = false;
+                        this.ProgramaLogisticaPanel.Visible = false;
+                        this.ProgramaProtocoloPanel.Visible = false;
                         this.ContactoPanel.Visible = false;
                         this.AdjuntarPanel.Visible = false;
                         this.RechazarPanel.Visible = false;
@@ -216,7 +220,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                     this.DatosGeneralesPanel.Visible = false;
                     this.DatosEventoPanel.Visible = false;
-                    this.InformacionComplementariaPanel.Visible = false;
+                    this.ProgramaLogisticaPanel.Visible = false;
+                    this.ProgramaProtocoloPanel.Visible = false;
                     this.ContactoPanel.Visible = false;
                     this.AdjuntarPanel.Visible = false;
                     this.RechazarPanel.Visible = false;
@@ -251,35 +256,6 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 				throw(ex);
             }
 		}
-
-        void UpdateEvento_EliminarRepresentante(){
-            ENTEvento oENTEvento = new ENTEvento();
-            ENTResponse oENTResponse = new ENTResponse();
-            ENTSession oENTSession = new ENTSession();
-
-            BPEvento oBPEvento = new BPEvento();
-
-            try
-            {
-
-                // Datos de sesión
-                oENTSession = (ENTSession)this.Session["oENTSession"];
-                oENTEvento.UsuarioId = oENTSession.UsuarioId;
-
-                // Formulario
-                oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
-
-                // Transacción
-                oENTResponse = oBPEvento.UpdateEvento_EliminarRepresentante(oENTEvento);
-
-                // Validaciones
-                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
-
-            }catch (Exception ex){
-                throw (ex);
-            }
-        }
 
 
 
@@ -420,23 +396,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         // Opciones de Menu (en orden de aparación)
 
         protected void EliminarRepresentanteButton_Click(object sender, ImageClickEventArgs e){
-            ENTSession oENTSession = new ENTSession();
+            String sKey = "";
 
             try
             {
 
-                // Eliminar el representante
-                UpdateEvento_EliminarRepresentante();
-
-                // Consultar detalle de El Evento
-                SelectEvento();
-
-                // Obtener sesión
-                oENTSession = (ENTSession)Session["oENTSession"];
-
-                // Seguridad
-                SetPermisosGenerales(oENTSession.RolId);
-                SetPermisosParticulares(oENTSession.RolId, oENTSession.UsuarioId);
+                // Llave encriptada
+                sKey = this.hddEventoId.Value + "|" + this.SenderId.Value;
+                sKey = gcEncryption.EncryptString(sKey, true);
+                this.Response.Redirect("eveEliminarRepresentante.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
@@ -475,7 +443,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             }
 		}
 
-        protected void InformacionComplementariaButton_Click(object sender, ImageClickEventArgs e){
+        protected void ProgramaLogisticaButton_Click(object sender, ImageClickEventArgs e){
             String sKey = "";
 
             try
@@ -485,6 +453,22 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 sKey = this.hddEventoId.Value + "|" + this.SenderId.Value;
                 sKey = gcEncryption.EncryptString(sKey, true);
                 this.Response.Redirect("eveConfiguracionEvento.aspx?key=" + sKey, false);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+            }
+		}
+
+        protected void ProgramaProtocoloButton_Click(object sender, ImageClickEventArgs e){
+            String sKey = "";
+
+            try
+            {
+
+                // Llave encriptada
+                sKey = this.hddEventoId.Value + "|" + this.SenderId.Value;
+                sKey = gcEncryption.EncryptString(sKey, true);
+                this.Response.Redirect("eveConfiguracionEventoProtocolo.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);

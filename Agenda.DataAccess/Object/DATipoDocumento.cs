@@ -51,6 +51,10 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTTipoDocumento.TipoDocumentoId;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("ModuloId", SqlDbType.Int);
+            sqlPar.Value = oENTTipoDocumento.ModuloId;
+            sqlCom.Parameters.Add(sqlPar);
+
             sqlPar = new SqlParameter("Nombre", SqlDbType.VarChar);
             sqlPar.Value = oENTTipoDocumento.Nombre;
             sqlCom.Parameters.Add(sqlPar);

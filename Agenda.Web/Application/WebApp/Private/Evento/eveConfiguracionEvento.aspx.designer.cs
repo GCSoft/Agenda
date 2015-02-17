@@ -103,6 +103,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.DropDownList ddlTipoVestimenta;
         
         /// <summary>
+        /// txtTipoVestimentaOtro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTipoVestimentaOtro;
+        
+        /// <summary>
         /// ddlMedioComunicacion control.
         /// </summary>
         /// <remarks>
@@ -211,13 +220,49 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.TextBox txtCaracteristicasInvitados;
         
         /// <summary>
-        /// ckeMenu control.
+        /// txtMenu control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::CKEditor.NET.CKEditorControl ckeMenu;
+        protected global::System.Web.UI.WebControls.TextBox txtMenu;
+        
+        /// <summary>
+        /// txtComiteRecepcionNombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtComiteRecepcionNombre;
+        
+        /// <summary>
+        /// txtComiteRecepcionPuesto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtComiteRecepcionPuesto;
+        
+        /// <summary>
+        /// btnAgregarComiteRecepcion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarComiteRecepcion;
+        
+        /// <summary>
+        /// gvComiteRecepcion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvComiteRecepcion;
         
         /// <summary>
         /// pnlBreak control.
@@ -281,5 +326,14 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField SenderId;
+        
+        /// <summary>
+        /// hddSort control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hddSort;
     }
 }

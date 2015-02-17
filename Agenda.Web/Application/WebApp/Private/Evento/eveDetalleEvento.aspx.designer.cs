@@ -130,22 +130,40 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.ImageButton DatosEventoButton;
         
         /// <summary>
-        /// InformacionComplementariaPanel control.
+        /// ProgramaLogisticaPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel InformacionComplementariaPanel;
+        protected global::System.Web.UI.WebControls.Panel ProgramaLogisticaPanel;
         
         /// <summary>
-        /// InformacionComplementariaButton control.
+        /// ProgramaLogisticaButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton InformacionComplementariaButton;
+        protected global::System.Web.UI.WebControls.ImageButton ProgramaLogisticaButton;
+        
+        /// <summary>
+        /// ProgramaProtocoloPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ProgramaProtocoloPanel;
+        
+        /// <summary>
+        /// ProgramaProtocoloButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ProgramaProtocoloButton;
         
         /// <summary>
         /// ContactoPanel control.
@@ -533,6 +551,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField Expired;
+        
+        /// <summary>
+        /// Logistica control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField Logistica;
         
         /// <summary>
         /// Sender control.

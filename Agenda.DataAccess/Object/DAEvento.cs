@@ -1009,6 +1009,10 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTEvento.UsuarioId;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("Dependencia", SqlDbType.TinyInt);
+            sqlPar.Value = oENTEvento.Dependencia;
+            sqlCom.Parameters.Add(sqlPar);
+
             // Inicializaciones
             oENTResponse.DataSetResponse = new DataSet();
             sqlDA = new SqlDataAdapter(sqlCom);

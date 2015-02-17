@@ -89,6 +89,7 @@
     <Content Include="Application\WebApp\Private\Evento\eveDatosGenerales.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveDetalleEvento.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveDocumentos.aspx" />
+    <Content Include="Application\WebApp\Private\Evento\eveEliminarRepresentante.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveHistorial.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveListadoEventos.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveNuevoEvento.aspx" />
@@ -390,6 +391,13 @@
     </Compile>
     <Compile Include="Application\WebApp\Private\Evento\eveDocumentos.aspx.designer.cs">
       <DependentUpon>eveDocumentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveEliminarRepresentante.aspx.cs">
+      <DependentUpon>eveEliminarRepresentante.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveEliminarRepresentante.aspx.designer.cs">
+      <DependentUpon>eveEliminarRepresentante.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\WebApp\Private\Evento\eveHistorial.aspx.cs">
       <DependentUpon>eveHistorial.aspx</DependentUpon>

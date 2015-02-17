@@ -17,6 +17,7 @@ namespace Agenda.Entity.Object
     {
 
         private Int32   _TipoDocumentoId;
+        private Int32   _ModuloId;
         private String  _Nombre;
         private String  _Descripcion;
         private String  _FechaCreacion;
@@ -29,6 +30,7 @@ namespace Agenda.Entity.Object
         public ENTTipoDocumento()
         {
             _TipoDocumentoId = 0;
+            _ModuloId = 0;
             _Nombre = "";
             _Descripcion = "";
             _FechaCreacion = "";
@@ -49,6 +51,18 @@ namespace Agenda.Entity.Object
         {
             get { return _TipoDocumentoId; }
             set { _TipoDocumentoId = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTTipoDocumento.ModuloId</name>
+        ///   <create>09-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el identificador único del Módulo para el cual está habilitado el documento</summary>
+        public Int32 ModuloId
+        {
+            get { return _ModuloId; }
+            set { _ModuloId = value; }
         }
 
         ///<remarks>

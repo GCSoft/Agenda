@@ -686,7 +686,7 @@ namespace Agenda.BusinessProcess.Object
                 }else{
 
                     // Validación de envío de correo
-                    if (oENTInvitacion.Notificacion == 4) { return oENTResponse; }
+                    if (oENTInvitacion.Notificacion == 3) { return oENTResponse; }
 
                     // Validaciones de invitación
                     if (oENTResponse.DataSetResponse.Tables[2].Rows.Count == 0 && oENTResponse.DataSetResponse.Tables[3].Rows.Count == 0) { oENTResponse.MessageDB = "No se detectaron direcciones de correo electrónico para el envío de la notificación, la invitación se aprobó de todas formas "; }
@@ -704,17 +704,6 @@ namespace Agenda.BusinessProcess.Object
 
                         case 2: // Dirección de protocolo
 
-                            foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[3].Rows) {
-                                Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
-                            }
-
-                            break;
-
-                        case 3: // Ambos
-
-                            foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[2].Rows) {
-                                Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
-                            }
                             foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[3].Rows) {
                                 Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
                             }

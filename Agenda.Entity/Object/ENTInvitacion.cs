@@ -556,7 +556,7 @@ namespace Agenda.Entity.Object
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
-        ///<summary>Obtiene/Asigna el tipo de notificación por correo cuando se aprueba una invitación. 1-> Logística, 2-> Dirección de Protocolo, 3-> Ambos y 4-> Ninguno</summary>
+        ///<summary>Obtiene/Asigna el tipo de notificación por correo cuando se aprueba una invitación. 1-> Logística, 2-> Dirección de Protocolo, 3-> Ninguno</summary>
         public Int16 Notificacion
         {
             get { return _Notificacion; }

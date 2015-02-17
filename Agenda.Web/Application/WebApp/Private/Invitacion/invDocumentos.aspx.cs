@@ -201,6 +201,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
                 // Formulario
                 oENTTipoDocumento.TipoDocumentoId = 0;
+                oENTTipoDocumento.ModuloId = 1; // Invitación
                 oENTTipoDocumento.Nombre = "";
                 oENTTipoDocumento.Activo = 1;
 

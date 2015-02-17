@@ -27,6 +27,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         GCCommon gcCommon = new GCCommon();
         GCEncryption gcEncryption = new GCEncryption();
         GCJavascript gcJavascript = new GCJavascript();
+        GCParse gcParse = new GCParse();
 
 
         // Funciones del programador
@@ -172,8 +173,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Carátula compacta
                 this.lblEventoNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
                 this.lblEventoFechaHora.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHora"].ToString();
-                
-                // Precarga del formulario
+
+                // Sección: Nombre del evento
                 if ( oENTResponse.DataSetResponse.Tables[6].Rows.Count > 0 ){
 
                     this.ddlTipoVestimenta.SelectedValue = oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoVestimentaId"].ToString();
@@ -210,9 +211,17 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                     this.txtAccionRealizar.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["AccionRealizar"].ToString();
                     this.txtCaracteristicasInvitados.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["CaracteristicasInvitados"].ToString();
-                    this.ckeMenu.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["Menu"].ToString();
+                    this.txtMenu.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["Menu"].ToString();
 
                 }
+
+                // Sección: Comité de recepción
+                if ( oENTResponse.DataSetResponse.Tables[8].Rows.Count > 0 ){
+
+                    this.gvComiteRecepcion.DataSource = oENTResponse.DataSetResponse.Tables[8];
+                    this.gvComiteRecepcion.DataBind();
+                }
+
 
             }catch (Exception ex){
                 throw (ex);
@@ -271,7 +280,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 oENTEvento.EsposaConfirma = Int16.Parse((this.rblConfirmacionEsposa.SelectedValue == "3" ? 1 : 0).ToString());
                 oENTEvento.AccionRealizar = this.txtAccionRealizar.Text.Trim();
                 oENTEvento.CaracteristicasInvitados = this.txtCaracteristicasInvitados.Text.Trim();
-                oENTEvento.Menu = this.ckeMenu.Text.Trim();
+                oENTEvento.Menu = this.txtMenu.Text.Trim();
 
                 // Transacción
                 oENTResponse = oBPEvento.UpdateEvento_Configuracion(oENTEvento);
@@ -314,7 +323,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 SelectTipoVestimenta();
                 SelectMedioTraslado();
                 SelectMedioComunicacion();
-
+                
 				// Carátula y formulario
                 SelectEvento();
 
@@ -381,6 +390,193 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
             }
         }
+
+        protected void ddlTipoVestimenta_SelectedIndexChanged(object sender, EventArgs e){
+            try
+            {
+
+                switch( this.ddlTipoVestimenta.SelectedItem.Value ){
+                    case "6":   // Otro
+                        
+                        this.txtTipoVestimentaOtro.Enabled = true;
+                        this.txtTipoVestimentaOtro.CssClass = "Textbox_General";
+                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtTipoVestimentaOtro.ClientID + "'); }", true);
+                        break;
+
+                    default:
+
+                        this.txtTipoVestimentaOtro.Text = "";
+                        this.txtTipoVestimentaOtro.Enabled = false;
+                        this.txtTipoVestimentaOtro.CssClass = "Textbox_Disabled";
+                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlMedioComunicacion.ClientID + "'); }", true);
+                        break;
+                }
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
+            }
+        }
+
+
+        // Eventos de Sección: Comité de recepción
+
+        protected void btnAgregarComiteRecepcion_Click(object sender, EventArgs e){
+            //BPUsuario oBPUsuario = new BPUsuario();
+            //ENTUsuario oENTUsuario = new ENTUsuario();
+            //ENTResponse oENTResponse = new ENTResponse();
+            
+            //DataTable tblComiteRecepcion;
+            //DataRow rowComiteRecepcion;
+
+            //try
+            //{
+
+            //    // Obtener DataTable del grid
+            //    tblComiteRecepcion = gcParse.GridViewToDataTable(this.gvComiteRecepcion, false);
+
+            //    // Validaciones
+            //    if( this.hddComiteRecepcionId.Value.Trim() == "" || this.hddComiteRecepcionId.Value.Trim() == "0" ){ throw ( new Exception( "Es necesario seleccionar un ComiteRecepcion" ) ); }
+            //    if ( tblComiteRecepcion.Select("UsuarioId='" + this.hddComiteRecepcionId.Value.Trim() + "'" ).Length > 0 ){ throw ( new Exception( "Ya ha selecionado este ComiteRecepcion" ) ); }
+
+            //    // Formulario
+            //    oENTUsuario.RolId = 3;      // Rol de ComiteRecepcion
+            //    oENTUsuario.UsuarioId = Int32.Parse(this.hddComiteRecepcionId.Value.Trim());
+            //    oENTUsuario.Email = "";
+            //    oENTUsuario.Nombre = "";
+            //    oENTUsuario.Activo = 1;
+
+            //    // Transacción
+            //    oENTResponse = oBPUsuario.SelectUsuario(oENTUsuario);
+
+            //    // Validaciones
+            //    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+
+            //    // Agregar un nuevo elemento
+            //    rowComiteRecepcion = tblComiteRecepcion.NewRow();
+            //    rowComiteRecepcion["UsuarioId"] = oENTResponse.DataSetResponse.Tables[1].Rows[0]["UsuarioId"].ToString();
+            //    rowComiteRecepcion["Nombre"] = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Nombre"].ToString();
+            //    rowComiteRecepcion["NombreCompletoTitulo"] = oENTResponse.DataSetResponse.Tables[1].Rows[0]["NombreCompletoTitulo"].ToString();
+            //    rowComiteRecepcion["Puesto"] = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Puesto"].ToString();
+            //    rowComiteRecepcion["Correo"] = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Email"].ToString();
+            //    tblComiteRecepcion.Rows.Add(rowComiteRecepcion);
+
+            //    // Actualizar Grid
+            //    this.gvComiteRecepcion.DataSource = tblComiteRecepcion;
+            //    this.gvComiteRecepcion.DataBind();
+
+            //    // Nueva captura
+            //    this.txtComiteRecepcion.Text = "";
+            //    this.hddComiteRecepcionId.Value = "";
+            //    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtComiteRecepcion.ClientID + "'); }", true);
+
+            //}catch (Exception ex){
+            //    this.txtComiteRecepcion.Text = "";
+            //    this.hddComiteRecepcionId.Value = "";
+            //    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtComiteRecepcionNombre.ClientID + "'); }", true);
+            //}
+        }
+
+        protected void gvComiteRecepcion_RowCommand(object sender, GridViewCommandEventArgs e){
+            //DataTable tblComiteRecepcion;
+
+            //String strCommand = "";
+            //String UsuarioId = "";
+            //Int32 intRow = 0;
+
+            //try
+            //{
+
+            //    // Opción seleccionada
+            //    strCommand = e.CommandName.ToString();
+
+            //    // Se dispara el evento RowCommand en el ordenamiento
+            //    if (strCommand == "Sort") { return; }
+
+            //    // Fila
+            //    intRow = Int32.Parse(e.CommandArgument.ToString());
+
+            //    // Datakeys
+            //    UsuarioId = this.gvComiteRecepcion.DataKeys[intRow]["UsuarioId"].ToString();
+
+            //    // Acción
+            //    switch (strCommand){
+
+            //        case "Eliminar":
+
+            //            // Obtener DataTable del grid
+            //            tblComiteRecepcion = gcParse.GridViewToDataTable(this.gvComiteRecepcion, true);
+
+            //            // Remover el elemento
+            //            tblComiteRecepcion.Rows.Remove( tblComiteRecepcion.Select("UsuarioId=" + UsuarioId )[0] );
+
+            //            // Actualizar Grid
+            //            this.gvComiteRecepcion.DataSource = tblComiteRecepcion;
+            //            this.gvComiteRecepcion.DataBind();
+
+            //            // Nueva captura
+            //            this.txtComiteRecepcion.Text = "";
+            //            this.hddComiteRecepcionId.Value = "";
+            //            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtComiteRecepcion.ClientID + "'); }", true);
+
+            //            break;
+            //    }
+
+            //}catch (Exception ex){
+            //    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtComiteRecepcionNombre.ClientID + "'); }", true);
+            //}
+        }
+
+        protected void gvComiteRecepcion_RowDataBound(object sender, GridViewRowEventArgs e){
+            ImageButton imgDelete = null;
+
+            String UsuarioId = "";
+            String ComiteRecepcionNombre = "";
+
+            String sImagesAttributes = "";
+            String sTootlTip = "";
+
+            try
+            {
+
+                // Validación de que sea fila
+                if (e.Row.RowType != DataControlRowType.DataRow) { return; }
+
+                // Obtener imagenes
+                imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+
+                // Datakeys
+                UsuarioId = this.gvComiteRecepcion.DataKeys[e.Row.RowIndex]["UsuarioId"].ToString();
+                ComiteRecepcionNombre = this.gvComiteRecepcion.DataKeys[e.Row.RowIndex]["Nombre"].ToString();
+
+                // Tooltip Edición
+                sTootlTip = "Desasociar ComiteRecepcion [" + ComiteRecepcionNombre + "]";
+                imgDelete.Attributes.Add("title", sTootlTip);
+
+                // Atributos Over
+                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
+
+                // Atributos Out
+                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+
+        }
+
+        protected void gvComiteRecepcion_Sorting(object sender, GridViewSortEventArgs e){
+            try
+            {
+
+                gcCommon.SortGridView(ref this.gvComiteRecepcion, ref this.hddSort, e.SortExpression);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtComiteRecepcionNombre.ClientID + "'); }", true);
+            }
+        }
+
 
     }
 }
