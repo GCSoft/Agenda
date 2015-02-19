@@ -263,6 +263,7 @@
     <Content Include="Include\Image\Icon\SubMenuRechazo.png" />
     <Content Include="Include\Image\Icon\SubMenuHistorial.png" />
     <Content Include="Include\Image\Icon\SubMenuValoracion.png" />
+    <Content Include="Include\Image\Web\TituloAcordeon.png" />
     <Content Include="Include\Image\Web\Background.png" />
     <Content Include="Include\Image\Web\BackgroundGeneral.png" />
     <Content Include="Include\Image\Web\BackgroundRoundedCornerRight.png" />

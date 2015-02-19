@@ -39,17 +39,6 @@
     height: 1px;
 }
 
-.FormTable .Encabezado{
-	background-color: #65B449;
-	border: 1px solid #336600;
-	color: #FFFFFF;
-	font-family:'Lucida Grande',Tahoma,Verdana,Arial,Sans-serif;
-	font-size: 12px;
-	font-weight:normal;
-	height: 15px;
-    text-align:left;
-}
-
 .FormTable .Botones{
 	text-align: left;
 }

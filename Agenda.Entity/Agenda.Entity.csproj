@@ -67,6 +67,7 @@
     <Compile Include="Object\ENTSecretario.cs" />
     <Compile Include="Object\ENTSession.cs" />
     <Compile Include="Object\ENTSubMenu.cs" />
+    <Compile Include="Object\ENTTipoAcomodo.cs" />
     <Compile Include="Object\ENTTipoDocumento.cs" />
     <Compile Include="Object\ENTTipoEvento.cs" />
     <Compile Include="Object\ENTTipoVestimenta.cs" />

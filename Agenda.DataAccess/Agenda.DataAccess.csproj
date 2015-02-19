@@ -63,6 +63,7 @@
     <Compile Include="Object\DARol.cs" />
     <Compile Include="Object\DASecretario.cs" />
     <Compile Include="Object\DASubMenu.cs" />
+    <Compile Include="Object\DATipoAcomodo.cs" />
     <Compile Include="Object\DATipoDocumento.cs" />
     <Compile Include="Object\DATipoEvento.cs" />
     <Compile Include="Object\DATipoVestimenta.cs" />

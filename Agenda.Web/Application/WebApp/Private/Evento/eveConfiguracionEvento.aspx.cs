@@ -46,8 +46,153 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 			return Response;
 		}
 
+        Boolean ValidaFormulario(){
+            DataTable tblTemporal;
+            DataRow rowTemporal;
+
+            Int32 ValidateNumber;
+
+            Boolean Response = false;
+            String CurrentClientID = this.ddlTipoVestimenta.ClientID;
+
+            try
+            {
+
+                #region "Sección: Nombre del evento"
+
+                    // Expander el acordeón
+                    this.Accordion1.SelectedIndex = 0;
+
+                    // Medios de traslado seleccionados
+                    tblTemporal = new DataTable("DataTableMedioTraslado");
+                    tblTemporal.Columns.Add("MedioTrasladoId", typeof(Int32));
+                    for (int k = 0; k < this.chklMedioTraslado.Items.Count; k++) {
+					    if(this.chklMedioTraslado.Items[k].Selected){
+                            rowTemporal = tblTemporal.NewRow();
+                            rowTemporal["MedioTrasladoId"] = this.chklMedioTraslado.Items[k].Value;
+                            tblTemporal.Rows.Add(rowTemporal);
+					    }
+				    }
+                
+                    // Validaciones
+                    CurrentClientID = this.ddlTipoVestimenta.ClientID;
+                    if (this.ddlTipoVestimenta.SelectedItem.Value == "6" && this.txtTipoVestimentaOtro.Text.Trim() == "") { throw (new Exception("Es necesario ïngresar el tipo de vestimenta")); }
+
+                    CurrentClientID = this.chklMedioTraslado.ClientID;
+                    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario seleccionar un medio de traslado")); }
+
+                    CurrentClientID = this.txtAforo.ClientID;
+                    if ( Int32.TryParse(this.txtAforo.Text, out ValidateNumber) == false) { throw (new Exception("La cantidad en Aforo debe de ser numérica")); }
+
+                    CurrentClientID = this.txtTipoMontaje.ClientID;
+                    if (this.txtTipoMontaje.Text.Trim() == "") { throw (new Exception("Es necesario determinar el tipo de montaje")); }
+
+                    CurrentClientID = this.txtAccionRealizar.ClientID;
+                    if (this.txtAccionRealizar.Text.Trim() == "") { throw (new Exception("Es necesario determinar la acción a realizar")); }
+
+                #endregion
+
+                #region "Comité de recepción"
+
+                    // Expander el acordeón
+                    this.Accordion2.SelectedIndex = 0;
+
+                    // Comité de recepción
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvComiteRecepcion, true);
+                    
+                    // Validaciones
+                    CurrentClientID = this.txtComiteRecepcionNombre.ClientID;
+                    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario capturar el Comité de Recepción")); }
+
+                #endregion
+
+                #region "Orden del día"
+
+                    // Expander el acordeón
+                    this.Accordion3.SelectedIndex = 0;
+
+                    // Comité de recepción
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvOrdenDia, true);
+                    
+                    // Validaciones
+                    CurrentClientID = this.txtOrdenDiaDetalle.ClientID;
+                    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario capturar la Orden del Día")); }
+
+                #endregion
+
+                #region "Acomodo"
+
+                    // Expander el acordeón
+                    this.Accordion4.SelectedIndex = 0;
+
+                    // Comité de recepción
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvAcomodo, true);
+                    
+                    // Validaciones
+                    CurrentClientID = this.txtAcomodoNombre.ClientID;
+                    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario capturar el acomodo al evento")); }
+
+                #endregion
+
+                #region "Responsable del evento"
+
+                    // Expander el acordeón
+                    this.Accordion5.SelectedIndex = 0;
+
+                    // Comité de recepción
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvResponsableEvento, true);
+                    
+                    // Validaciones
+                    CurrentClientID = this.txtResponsableEventoNombre.ClientID;
+                    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario ingresar por lo menos un responsable del evento")); }
+
+                #endregion
+
+                #region "Responsable de logística"
+
+                    // Expander el acordeón
+                    this.Accordion6.SelectedIndex = 0;
+
+                    // Comité de recepción
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvResponsableLogistica, true);
+                    
+                    // Validaciones
+                    CurrentClientID = this.txtResponsableLogisticaNombre.ClientID;
+                    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario ingresar por lo menos un responsable de logística"); }
+
+                #endregion
+
+                // Validacion exitosa
+                Response = true;
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + CurrentClientID + "'); }", true);
+            }
+
+            return Response;
+
+        }
+
 
         // Rutinas el programador
+
+        void SelectPropuestaAcomodo(){
+            try
+            {
+
+                // Agregar Item de selección
+                this.ddlPropuestaAcomodo.Items.Insert(0, new ListItem("No", "0"));
+                this.ddlPropuestaAcomodo.Items.Insert(0, new ListItem("Si", "1"));
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
 
         void SelectMedioComunicacion(){
             ENTResponse oENTResponse = new ENTResponse();
@@ -75,9 +220,6 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.ddlMedioComunicacion.DataValueField = "MedioComunicacionId";
                 this.ddlMedioComunicacion.DataSource = oENTResponse.DataSetResponse.Tables[1];
                 this.ddlMedioComunicacion.DataBind();
-
-                // Agregar Item de selección
-                this.ddlMedioComunicacion.Items.Insert(0, new ListItem("[Seleccione]", "0"));
 
             }catch (Exception ex){
                 throw (ex);
@@ -116,6 +258,38 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             }
         }
 
+        void SelectTipoAcomodo(){
+            ENTResponse oENTResponse = new ENTResponse();
+            ENTTipoAcomodo oENTTipoAcomodo = new ENTTipoAcomodo();
+
+            BPTipoAcomodo oBPTipoAcomodo = new BPTipoAcomodo();
+
+            try
+            {
+
+                // Formulario
+                oENTTipoAcomodo.TipoAcomodoId = 0;
+                oENTTipoAcomodo.Nombre = "";
+                oENTTipoAcomodo.Activo = 1;
+
+                // Transacción
+                oENTResponse = oBPTipoAcomodo.SelectTipoAcomodo(oENTTipoAcomodo);
+
+                // Validaciones
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                // Llenado de combo
+                this.ddlTipoAcomodo.DataTextField = "Nombre";
+                this.ddlTipoAcomodo.DataValueField = "TipoAcomodoId";
+                this.ddlTipoAcomodo.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                this.ddlTipoAcomodo.DataBind();
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
+
         void SelectTipoVestimenta(){
             ENTResponse oENTResponse = new ENTResponse();
             ENTTipoVestimenta oENTTipoVestimenta = new ENTTipoVestimenta();
@@ -142,9 +316,6 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.ddlTipoVestimenta.DataValueField = "TipoVestimentaId";
                 this.ddlTipoVestimenta.DataSource = oENTResponse.DataSetResponse.Tables[1];
                 this.ddlTipoVestimenta.DataBind();
-
-                // Agregar Item de selección
-                this.ddlTipoVestimenta.Items.Insert(0, new ListItem("[Seleccione]", "0"));
 
             }catch (Exception ex){
                 throw (ex);
@@ -216,12 +387,24 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 }
 
                 // Sección: Comité de recepción
-                if ( oENTResponse.DataSetResponse.Tables[8].Rows.Count > 0 ){
+                this.gvComiteRecepcion.DataSource = oENTResponse.DataSetResponse.Tables[8];
+                this.gvComiteRecepcion.DataBind();
 
-                    this.gvComiteRecepcion.DataSource = oENTResponse.DataSetResponse.Tables[8];
-                    this.gvComiteRecepcion.DataBind();
-                }
+                // Sección: Orden del día
+                this.gvOrdenDia.DataSource = oENTResponse.DataSetResponse.Tables[9];
+                this.gvOrdenDia.DataBind();
 
+                // Sección: Acomodo
+                this.gvAcomodo.DataSource = oENTResponse.DataSetResponse.Tables[10];
+                this.gvAcomodo.DataBind();
+
+                // Sección: Responsable del evento
+                this.gvResponsableEvento.DataSource = oENTResponse.DataSetResponse.Tables[11];
+                this.gvResponsableEvento.DataBind();
+
+                // Sección: Responsable de logística
+                this.gvResponsableLogistica.DataSource = oENTResponse.DataSetResponse.Tables[12];
+                this.gvResponsableLogistica.DataBind();
 
             }catch (Exception ex){
                 throw (ex);
@@ -235,52 +418,159 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
             BPEvento oBPEvento = new BPEvento();
 
-            Int32 ValidateNumber;
-            DataRow rowMedioTraslado;
+            DataTable tblTemporal;
+            DataRow rowTemporal;
 
             try
             {
 
-                // Medios de traslado seleccionados
-                oENTEvento.DataTableMedioTraslado = new DataTable("DataTableMedioTraslado");
-                oENTEvento.DataTableMedioTraslado.Columns.Add("MedioTrasladoId", typeof(Int32));
-                for (int k = 0; k < this.chklMedioTraslado.Items.Count; k++) {
-					if(this.chklMedioTraslado.Items[k].Selected){
-                        rowMedioTraslado = oENTEvento.DataTableMedioTraslado.NewRow();
-                        rowMedioTraslado["MedioTrasladoId"] = this.chklMedioTraslado.Items[k].Value;
-                        oENTEvento.DataTableMedioTraslado.Rows.Add(rowMedioTraslado);
-					}
-				}
-
-                // Validaciones
-                if (this.ddlTipoVestimenta.SelectedIndex == 0) { throw (new Exception("Es necesario seleccionar un Tipo de vestimenta")); }
-                if (this.ddlMedioComunicacion.SelectedIndex == 0) { throw (new Exception("Es necesario seleccionar una medio de comunicacion")); }
-                if (oENTEvento.DataTableMedioTraslado.Rows.Count == 0) { throw (new Exception("Es necesario seleccionar un medio de traslado")); }
-                
-                if ( Int32.TryParse(this.txtAforo.Text, out ValidateNumber) == false) { throw (new Exception("La cantidad en Aforo debe de ser numérica")); }
-
+                // Evento
+                oENTEvento.EventoId = Int32.Parse( this.hddEventoId.Value );
 
                 // Datos de sesión
                 oENTSession = (ENTSession)this.Session["oENTSession"];
                 oENTEvento.UsuarioId = oENTSession.UsuarioId;
 
-                // Formulario
-                oENTEvento.EventoId = Int32.Parse( this.hddEventoId.Value );
-                oENTEvento.TipoVestimentaId = Int32.Parse(this.ddlTipoVestimenta.SelectedItem.Value);
-                oENTEvento.MedioComunicacionId = Int32.Parse(this.ddlMedioComunicacion.SelectedItem.Value);
-                oENTEvento.PronosticoClima = this.txtPronostico.Text.Trim();
-                oENTEvento.TemperaturaMinima = this.txtTemperaturaMinima.Text.Trim();
-                oENTEvento.TemperaturaMaxima = this.txtTemperaturaMaxima.Text.Trim();
-                oENTEvento.Aforo = Int32.Parse(this.txtAforo.Text.Trim());
-                oENTEvento.TipoMontaje = this.txtTipoMontaje.Text.Trim();
-                oENTEvento.LugarArribo = this.txtLugarArribo.Text.Trim();
-                oENTEvento.Esposa = Int16.Parse( ( this.chkEsposaInvitada.Checked ? 1 : 0 ).ToString() );
-                oENTEvento.EsposaSi = Int16.Parse( ( this.rblConfirmacionEsposa.SelectedValue == "1" ? 1 : 0 ).ToString() );
-                oENTEvento.EsposaNo = Int16.Parse((this.rblConfirmacionEsposa.SelectedValue == "2" ? 1 : 0).ToString());
-                oENTEvento.EsposaConfirma = Int16.Parse((this.rblConfirmacionEsposa.SelectedValue == "3" ? 1 : 0).ToString());
-                oENTEvento.AccionRealizar = this.txtAccionRealizar.Text.Trim();
-                oENTEvento.CaracteristicasInvitados = this.txtCaracteristicasInvitados.Text.Trim();
-                oENTEvento.Menu = this.txtMenu.Text.Trim();
+                #region "Sección: Nombre del evento"
+
+                    // Formulario
+                    oENTEvento.TipoVestimentaId = Int32.Parse(this.ddlTipoVestimenta.SelectedItem.Value);
+                    oENTEvento.MedioComunicacionId = Int32.Parse(this.ddlMedioComunicacion.SelectedItem.Value);
+                    oENTEvento.TipoVestimentaOtro = this.txtTipoVestimentaOtro.Text.Trim();
+                    oENTEvento.PronosticoClima = this.txtPronostico.Text.Trim();
+                    oENTEvento.TemperaturaMinima = this.txtTemperaturaMinima.Text.Trim();
+                    oENTEvento.TemperaturaMaxima = this.txtTemperaturaMaxima.Text.Trim();
+                    oENTEvento.Aforo = Int32.Parse(this.txtAforo.Text.Trim());
+                    oENTEvento.TipoMontaje = this.txtTipoMontaje.Text.Trim();
+                    oENTEvento.LugarArribo = this.txtLugarArribo.Text.Trim();
+                    oENTEvento.Esposa = Int16.Parse( ( this.chkEsposaInvitada.Checked ? 1 : 0 ).ToString() );
+                    oENTEvento.EsposaSi = Int16.Parse( ( this.rblConfirmacionEsposa.SelectedValue == "1" ? 1 : 0 ).ToString() );
+                    oENTEvento.EsposaNo = Int16.Parse((this.rblConfirmacionEsposa.SelectedValue == "2" ? 1 : 0).ToString());
+                    oENTEvento.EsposaConfirma = Int16.Parse((this.rblConfirmacionEsposa.SelectedValue == "3" ? 1 : 0).ToString());
+                    oENTEvento.AccionRealizar = this.txtAccionRealizar.Text.Trim();
+                    oENTEvento.CaracteristicasInvitados = this.txtCaracteristicasInvitados.Text.Trim();
+                    oENTEvento.Menu = this.txtMenu.Text.Trim();
+
+                    // Medios de traslado seleccionados
+                    oENTEvento.DataTableMedioTraslado = new DataTable("DataTableMedioTraslado");
+                    oENTEvento.DataTableMedioTraslado.Columns.Add("MedioTrasladoId", typeof(Int32));
+                    for (int k = 0; k < this.chklMedioTraslado.Items.Count; k++) {
+					    if(this.chklMedioTraslado.Items[k].Selected){
+                            rowTemporal = oENTEvento.DataTableMedioTraslado.NewRow();
+                            rowTemporal["MedioTrasladoId"] = this.chklMedioTraslado.Items[k].Value;
+                            oENTEvento.DataTableMedioTraslado.Rows.Add(rowTemporal);
+					    }
+				    }
+
+                #endregion
+
+                #region "Sección: Comité de recepción"
+                    
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvComiteRecepcion, true);
+                    
+                    oENTEvento.DataTableComiteRecepcion = new DataTable("DataTableComiteRecepcion");
+                    oENTEvento.DataTableComiteRecepcion.Columns.Add("Orden", typeof(Int32));
+                    oENTEvento.DataTableComiteRecepcion.Columns.Add("Nombre", typeof(String));
+                    oENTEvento.DataTableComiteRecepcion.Columns.Add("Puesto", typeof(String));
+                    
+                    foreach( DataRow rowComiteRecepcion in tblTemporal.Rows ){
+
+                        rowTemporal = oENTEvento.DataTableComiteRecepcion.NewRow();
+                        rowTemporal["Orden"] = rowComiteRecepcion["Orden"];
+                        rowTemporal["Nombre"] = rowComiteRecepcion["Nombre"];
+                        rowTemporal["Puesto"] = rowComiteRecepcion["Puesto"];
+                        oENTEvento.DataTableComiteRecepcion.Rows.Add(rowTemporal);
+                    }
+
+                #endregion
+
+                #region "Sección: Orden del día"
+                    
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvOrdenDia, true);
+                    
+                    oENTEvento.DataTableOrdenDia = new DataTable("DataTableOrdenDia");
+                    oENTEvento.DataTableOrdenDia.Columns.Add("Orden", typeof(Int32));
+                    oENTEvento.DataTableOrdenDia.Columns.Add("Nombre", typeof(String));
+                    
+                    foreach( DataRow rowComiteRecepcion in tblTemporal.Rows ){
+
+                        rowTemporal = oENTEvento.DataTableOrdenDia.NewRow();
+                        rowTemporal["Orden"] = rowComiteRecepcion["Orden"];
+                        rowTemporal["Nombre"] = rowComiteRecepcion["Nombre"];
+                        oENTEvento.DataTableOrdenDia.Rows.Add(rowTemporal);
+                    }
+
+                #endregion
+
+                #region "Sección: Acomodo"
+                    
+                    oENTEvento.TipoAcomodoId = Int32.Parse(this.ddlTipoAcomodo.SelectedItem.Value);
+                    oENTEvento.PropuestaAcomodo = Int16.Parse(this.ddlPropuestaAcomodo.SelectedItem.Value);
+                    oENTEvento.AcomodoObservaciones = this.txtAcomodoObservaciones.Text.Trim();
+
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvComiteRecepcion, true);
+                    
+                    oENTEvento.DataTableAcomodo = new DataTable("DataTableAcomodo");
+                    oENTEvento.DataTableAcomodo.Columns.Add("Orden", typeof(Int32));
+                    oENTEvento.DataTableAcomodo.Columns.Add("Nombre", typeof(String));
+                    oENTEvento.DataTableAcomodo.Columns.Add("Puesto", typeof(String));
+                    
+                    foreach( DataRow rowComiteRecepcion in tblTemporal.Rows ){
+
+                        rowTemporal = oENTEvento.DataTableAcomodo.NewRow();
+                        rowTemporal["Orden"] = rowComiteRecepcion["Orden"];
+                        rowTemporal["Nombre"] = rowComiteRecepcion["Nombre"];
+                        rowTemporal["Puesto"] = rowComiteRecepcion["Puesto"];
+                        oENTEvento.DataTableAcomodo.Rows.Add(rowTemporal);
+                    }
+
+                #endregion
+
+                #region "Sección: Responsable del evento"
+
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvResponsableEvento, true);
+                    
+                    oENTEvento.DataTableResponsable = new DataTable("DataTableResponsable");
+                    oENTEvento.DataTableResponsable.Columns.Add("Orden", typeof(Int32));
+                    oENTEvento.DataTableResponsable.Columns.Add("Nombre", typeof(String));
+                    oENTEvento.DataTableResponsable.Columns.Add("Puesto", typeof(String));
+                    
+                    foreach( DataRow rowResponsable in tblTemporal.Rows ){
+
+                        rowTemporal = oENTEvento.DataTableResponsable.NewRow();
+                        rowTemporal["Orden"] = rowResponsable["Orden"];
+                        rowTemporal["Nombre"] = rowResponsable["Nombre"];
+                        rowTemporal["Puesto"] = rowResponsable["Puesto"];
+                        oENTEvento.DataTableResponsable.Rows.Add(rowTemporal);
+                    }
+
+                #endregion
+
+                #region "Sección: Responsable de logística"
+
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvResponsableLogistica, true);
+                    
+                    oENTEvento.DataTableResponsableLogistica = new DataTable("DataTableResponsableLogistica");
+                    oENTEvento.DataTableResponsableLogistica.Columns.Add("Orden", typeof(Int32));
+                    oENTEvento.DataTableResponsableLogistica.Columns.Add("Nombre", typeof(String));
+                    oENTEvento.DataTableResponsableLogistica.Columns.Add("Contacto", typeof(String));
+                    
+                    foreach( DataRow rowResponsableLogistica in tblTemporal.Rows ){
+
+                        rowTemporal = oENTEvento.DataTableResponsableLogistica.NewRow();
+                        rowTemporal["Orden"] = rowResponsableLogistica["Orden"];
+                        rowTemporal["Nombre"] = rowResponsableLogistica["Nombre"];
+                        rowTemporal["Contacto"] = rowResponsableLogistica["Contacto"];
+                        oENTEvento.DataTableResponsableLogistica.Rows.Add(rowTemporal);
+                    }
+
+                #endregion
+
 
                 // Transacción
                 oENTResponse = oBPEvento.UpdateEvento_Configuracion(oENTEvento);
@@ -323,6 +613,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 SelectTipoVestimenta();
                 SelectMedioTraslado();
                 SelectMedioComunicacion();
+                SelectTipoAcomodo();
+                SelectPropuestaAcomodo();
                 
 				// Carátula y formulario
                 SelectEvento();
@@ -342,6 +634,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
 			try
             {
+
+                // Validar formulario
+                if ( !ValidaFormulario() ) { return; }
 
                 // Actualizar los datos generales
                 UpdateEvento_Configuracion();
@@ -421,115 +716,102 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         // Eventos de Sección: Comité de recepción
 
         protected void btnAgregarComiteRecepcion_Click(object sender, EventArgs e){
-            //BPUsuario oBPUsuario = new BPUsuario();
-            //ENTUsuario oENTUsuario = new ENTUsuario();
-            //ENTResponse oENTResponse = new ENTResponse();
-            
-            //DataTable tblComiteRecepcion;
-            //DataRow rowComiteRecepcion;
+            DataTable tblComiteRecepcion;
+            DataRow rowComiteRecepcion;
 
-            //try
-            //{
+            try
+            {
 
-            //    // Obtener DataTable del grid
-            //    tblComiteRecepcion = gcParse.GridViewToDataTable(this.gvComiteRecepcion, false);
+                // Obtener DataTable del grid
+                tblComiteRecepcion = gcParse.GridViewToDataTable(this.gvComiteRecepcion, false);
 
-            //    // Validaciones
-            //    if( this.hddComiteRecepcionId.Value.Trim() == "" || this.hddComiteRecepcionId.Value.Trim() == "0" ){ throw ( new Exception( "Es necesario seleccionar un ComiteRecepcion" ) ); }
-            //    if ( tblComiteRecepcion.Select("UsuarioId='" + this.hddComiteRecepcionId.Value.Trim() + "'" ).Length > 0 ){ throw ( new Exception( "Ya ha selecionado este ComiteRecepcion" ) ); }
+                // Validaciones
+                if ( this.txtComiteRecepcionNombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
+                if ( this.txtComiteRecepcionPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
 
-            //    // Formulario
-            //    oENTUsuario.RolId = 3;      // Rol de ComiteRecepcion
-            //    oENTUsuario.UsuarioId = Int32.Parse(this.hddComiteRecepcionId.Value.Trim());
-            //    oENTUsuario.Email = "";
-            //    oENTUsuario.Nombre = "";
-            //    oENTUsuario.Activo = 1;
+                // Agregar un nuevo elemento
+                rowComiteRecepcion = tblComiteRecepcion.NewRow();
+                rowComiteRecepcion["Orden"] = (tblComiteRecepcion.Rows.Count + 1).ToString();
+                rowComiteRecepcion["Nombre"] = this.txtComiteRecepcionNombre.Text.Trim();
+                rowComiteRecepcion["Puesto"] = this.txtComiteRecepcionPuesto.Text.Trim();
+                tblComiteRecepcion.Rows.Add(rowComiteRecepcion);
 
-            //    // Transacción
-            //    oENTResponse = oBPUsuario.SelectUsuario(oENTUsuario);
+                // Actualizar Grid
+                this.gvComiteRecepcion.DataSource = tblComiteRecepcion;
+                this.gvComiteRecepcion.DataBind();
 
-            //    // Validaciones
-            //    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                // Nueva captura
+                this.txtComiteRecepcionNombre.Text = "";
+                this.txtComiteRecepcionPuesto.Text = "";
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtComiteRecepcionNombre.ClientID + "'); }", true);
 
-            //    // Agregar un nuevo elemento
-            //    rowComiteRecepcion = tblComiteRecepcion.NewRow();
-            //    rowComiteRecepcion["UsuarioId"] = oENTResponse.DataSetResponse.Tables[1].Rows[0]["UsuarioId"].ToString();
-            //    rowComiteRecepcion["Nombre"] = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Nombre"].ToString();
-            //    rowComiteRecepcion["NombreCompletoTitulo"] = oENTResponse.DataSetResponse.Tables[1].Rows[0]["NombreCompletoTitulo"].ToString();
-            //    rowComiteRecepcion["Puesto"] = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Puesto"].ToString();
-            //    rowComiteRecepcion["Correo"] = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Email"].ToString();
-            //    tblComiteRecepcion.Rows.Add(rowComiteRecepcion);
-
-            //    // Actualizar Grid
-            //    this.gvComiteRecepcion.DataSource = tblComiteRecepcion;
-            //    this.gvComiteRecepcion.DataBind();
-
-            //    // Nueva captura
-            //    this.txtComiteRecepcion.Text = "";
-            //    this.hddComiteRecepcionId.Value = "";
-            //    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtComiteRecepcion.ClientID + "'); }", true);
-
-            //}catch (Exception ex){
-            //    this.txtComiteRecepcion.Text = "";
-            //    this.hddComiteRecepcionId.Value = "";
-            //    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtComiteRecepcionNombre.ClientID + "'); }", true);
-            //}
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtComiteRecepcionNombre.ClientID + "'); }", true);
+            }
         }
 
         protected void gvComiteRecepcion_RowCommand(object sender, GridViewCommandEventArgs e){
-            //DataTable tblComiteRecepcion;
+            DataTable tblComiteRecepcion;
 
-            //String strCommand = "";
-            //String UsuarioId = "";
-            //Int32 intRow = 0;
+            String strCommand = "";
+            String Orden = "";
+            Int32 intRow = 0;
 
-            //try
-            //{
+            try
+            {
 
-            //    // Opción seleccionada
-            //    strCommand = e.CommandName.ToString();
+                // Opción seleccionada
+                strCommand = e.CommandName.ToString();
 
-            //    // Se dispara el evento RowCommand en el ordenamiento
-            //    if (strCommand == "Sort") { return; }
+                // Se dispara el evento RowCommand en el ordenamiento
+                if (strCommand == "Sort") { return; }
 
-            //    // Fila
-            //    intRow = Int32.Parse(e.CommandArgument.ToString());
+                // Fila
+                intRow = Int32.Parse(e.CommandArgument.ToString());
 
-            //    // Datakeys
-            //    UsuarioId = this.gvComiteRecepcion.DataKeys[intRow]["UsuarioId"].ToString();
+                // Datakeys
+                Orden = this.gvComiteRecepcion.DataKeys[intRow]["Orden"].ToString();
 
-            //    // Acción
-            //    switch (strCommand){
+                // Acción
+                switch (strCommand){
 
-            //        case "Eliminar":
+                    case "Eliminar":
 
-            //            // Obtener DataTable del grid
-            //            tblComiteRecepcion = gcParse.GridViewToDataTable(this.gvComiteRecepcion, true);
+                        // Obtener DataTable del grid
+                        tblComiteRecepcion = gcParse.GridViewToDataTable(this.gvComiteRecepcion, true);
 
-            //            // Remover el elemento
-            //            tblComiteRecepcion.Rows.Remove( tblComiteRecepcion.Select("UsuarioId=" + UsuarioId )[0] );
+                        // Remover el elemento
+                        tblComiteRecepcion.Rows.Remove( tblComiteRecepcion.Select("Orden=" + Orden )[0] );
 
-            //            // Actualizar Grid
-            //            this.gvComiteRecepcion.DataSource = tblComiteRecepcion;
-            //            this.gvComiteRecepcion.DataBind();
+                        // Reordenar los Items restantes
+                        intRow = 0;
+                        foreach( DataRow rowComiteRecepcion in tblComiteRecepcion.Rows ){
 
-            //            // Nueva captura
-            //            this.txtComiteRecepcion.Text = "";
-            //            this.hddComiteRecepcionId.Value = "";
-            //            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtComiteRecepcion.ClientID + "'); }", true);
+                            tblComiteRecepcion.Rows[intRow]["Orden"] = (intRow + 1);
+                            intRow = intRow + 1;
+                        }
 
-            //            break;
-            //    }
+                        // Actualizar Grid
+                        this.gvComiteRecepcion.DataSource = tblComiteRecepcion;
+                        this.gvComiteRecepcion.DataBind();
 
-            //}catch (Exception ex){
-            //    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtComiteRecepcionNombre.ClientID + "'); }", true);
-            //}
+                        // Nueva captura
+                        this.txtComiteRecepcionNombre.Text = "";
+                        this.txtComiteRecepcionPuesto.Text = "";
+                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtComiteRecepcionNombre.ClientID + "'); }", true);
+
+                        break;
+                }
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtComiteRecepcionNombre.ClientID + "'); }", true);
+            }
         }
 
         protected void gvComiteRecepcion_RowDataBound(object sender, GridViewRowEventArgs e){
             ImageButton imgDelete = null;
 
-            String UsuarioId = "";
+            String Orden = "";
             String ComiteRecepcionNombre = "";
 
             String sImagesAttributes = "";
@@ -545,11 +827,11 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
 
                 // Datakeys
-                UsuarioId = this.gvComiteRecepcion.DataKeys[e.Row.RowIndex]["UsuarioId"].ToString();
+                Orden = this.gvComiteRecepcion.DataKeys[e.Row.RowIndex]["Orden"].ToString();
                 ComiteRecepcionNombre = this.gvComiteRecepcion.DataKeys[e.Row.RowIndex]["Nombre"].ToString();
 
                 // Tooltip Edición
-                sTootlTip = "Desasociar ComiteRecepcion [" + ComiteRecepcionNombre + "]";
+                sTootlTip = "Eliminar a [" + ComiteRecepcionNombre + "]";
                 imgDelete.Attributes.Add("title", sTootlTip);
 
                 // Atributos Over
@@ -570,10 +852,592 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             try
             {
 
-                gcCommon.SortGridView(ref this.gvComiteRecepcion, ref this.hddSort, e.SortExpression);
+                gcCommon.SortGridView(ref this.gvComiteRecepcion, ref this.hddSort, e.SortExpression, true);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtComiteRecepcionNombre.ClientID + "'); }", true);
+            }
+        }
+
+
+        // Eventos de Sección: Orden del día
+
+        protected void btnAgregarOrdenDia_Click(object sender, EventArgs e){
+            DataTable tblOrdenDia;
+            DataRow rowOrdenDia;
+
+            try
+            {
+
+                // Obtener DataTable del grid
+                tblOrdenDia = gcParse.GridViewToDataTable(this.gvOrdenDia, false);
+
+                // Validaciones
+                if (this.txtOrdenDiaDetalle.Text.Trim() == "") { throw (new Exception("Es necesario ingresar el detalle de la orden del día")); }
+
+                // Agregar un nuevo elemento
+                rowOrdenDia = tblOrdenDia.NewRow();
+                rowOrdenDia["Orden"] = (tblOrdenDia.Rows.Count + 1).ToString();
+                rowOrdenDia["Detalle"] = this.txtOrdenDiaDetalle.Text.Trim();
+                tblOrdenDia.Rows.Add(rowOrdenDia);
+
+                // Actualizar Grid
+                this.gvOrdenDia.DataSource = tblOrdenDia;
+                this.gvOrdenDia.DataBind();
+
+                // Nueva captura
+                this.txtOrdenDiaDetalle.Text = "";
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtOrdenDiaDetalle.ClientID + "'); }", true);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtOrdenDiaDetalle.ClientID + "'); }", true);
+            }
+        }
+
+        protected void gvOrdenDia_RowCommand(object sender, GridViewCommandEventArgs e){
+            DataTable tblOrdenDia;
+
+            String strCommand = "";
+            String Orden = "";
+            Int32 intRow = 0;
+
+            try
+            {
+
+                // Opción seleccionada
+                strCommand = e.CommandName.ToString();
+
+                // Se dispara el evento RowCommand en el ordenamiento
+                if (strCommand == "Sort") { return; }
+
+                // Fila
+                intRow = Int32.Parse(e.CommandArgument.ToString());
+
+                // Datakeys
+                Orden = this.gvOrdenDia.DataKeys[intRow]["Orden"].ToString();
+
+                // Acción
+                switch (strCommand){
+
+                    case "Eliminar":
+
+                        // Obtener DataTable del grid
+                        tblOrdenDia = gcParse.GridViewToDataTable(this.gvOrdenDia, true);
+
+                        // Remover el elemento
+                        tblOrdenDia.Rows.Remove( tblOrdenDia.Select("Orden=" + Orden )[0] );
+
+                        // Reordenar los Items restantes
+                        intRow = 0;
+                        foreach( DataRow rowOrdenDia in tblOrdenDia.Rows ){
+
+                            tblOrdenDia.Rows[intRow]["Orden"] = (intRow + 1);
+                            intRow = intRow + 1;
+                        }
+
+                        // Actualizar Grid
+                        this.gvOrdenDia.DataSource = tblOrdenDia;
+                        this.gvOrdenDia.DataBind();
+
+                        // Nueva captura
+                        this.txtOrdenDiaDetalle.Text = "";
+                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtOrdenDiaDetalle.ClientID + "'); }", true);
+
+                        break;
+                }
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtOrdenDiaDetalle.ClientID + "'); }", true);
+            }
+        }
+
+        protected void gvOrdenDia_RowDataBound(object sender, GridViewRowEventArgs e){
+            ImageButton imgDelete = null;
+
+            String Orden = "";
+
+            String sImagesAttributes = "";
+            String sTootlTip = "";
+
+            try
+            {
+
+                // Validación de que sea fila
+                if (e.Row.RowType != DataControlRowType.DataRow) { return; }
+
+                // Obtener imagenes
+                imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+
+                // Datakeys
+                Orden = this.gvOrdenDia.DataKeys[e.Row.RowIndex]["Orden"].ToString();
+
+                // Tooltip Edición
+                sTootlTip = "Eliminar la posición [" + Orden + "]";
+                imgDelete.Attributes.Add("title", sTootlTip);
+
+                // Atributos Over
+                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
+
+                // Atributos Out
+                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+
+        }
+
+        protected void gvOrdenDia_Sorting(object sender, GridViewSortEventArgs e){
+            try
+            {
+
+                gcCommon.SortGridView(ref this.gvOrdenDia, ref this.hddSort, e.SortExpression, true);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtOrdenDiaDetalle.ClientID + "'); }", true);
+            }
+        }
+
+
+        // Eventos de Sección: Acomodo
+
+        protected void btnAgregarAcomodo_Click(object sender, EventArgs e){
+            DataTable tblAcomodo;
+            DataRow rowAcomodo;
+
+            try
+            {
+
+                // Obtener DataTable del grid
+                tblAcomodo = gcParse.GridViewToDataTable(this.gvAcomodo, false);
+
+                // Validaciones
+                if ( this.txtAcomodoNombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
+                if ( this.txtAcomodoPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
+
+                // Agregar un nuevo elemento
+                rowAcomodo = tblAcomodo.NewRow();
+                rowAcomodo["Orden"] = (tblAcomodo.Rows.Count + 1).ToString();
+                rowAcomodo["Nombre"] = this.txtAcomodoNombre.Text.Trim();
+                rowAcomodo["Puesto"] = this.txtAcomodoPuesto.Text.Trim();
+                tblAcomodo.Rows.Add(rowAcomodo);
+
+                // Actualizar Grid
+                this.gvAcomodo.DataSource = tblAcomodo;
+                this.gvAcomodo.DataBind();
+
+                // Nueva captura
+                this.txtAcomodoNombre.Text = "";
+                this.txtAcomodoPuesto.Text = "";
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtAcomodoNombre.ClientID + "'); }", true);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtAcomodoNombre.ClientID + "'); }", true);
+            }
+        }
+
+        protected void gvAcomodo_RowCommand(object sender, GridViewCommandEventArgs e){
+            DataTable tblAcomodo;
+
+            String strCommand = "";
+            String Orden = "";
+            Int32 intRow = 0;
+
+            try
+            {
+
+                // Opción seleccionada
+                strCommand = e.CommandName.ToString();
+
+                // Se dispara el evento RowCommand en el ordenamiento
+                if (strCommand == "Sort") { return; }
+
+                // Fila
+                intRow = Int32.Parse(e.CommandArgument.ToString());
+
+                // Datakeys
+                Orden = this.gvAcomodo.DataKeys[intRow]["Orden"].ToString();
+
+                // Acción
+                switch (strCommand){
+
+                    case "Eliminar":
+
+                        // Obtener DataTable del grid
+                        tblAcomodo = gcParse.GridViewToDataTable(this.gvAcomodo, true);
+
+                        // Remover el elemento
+                        tblAcomodo.Rows.Remove( tblAcomodo.Select("Orden=" + Orden )[0] );
+
+                        // Reordenar los Items restantes
+                        intRow = 0;
+                        foreach( DataRow rowAcomodo in tblAcomodo.Rows ){
+
+                            tblAcomodo.Rows[intRow]["Orden"] = (intRow + 1);
+                            intRow = intRow + 1;
+                        }
+
+                        // Actualizar Grid
+                        this.gvAcomodo.DataSource = tblAcomodo;
+                        this.gvAcomodo.DataBind();
+
+                        // Nueva captura
+                        this.txtAcomodoNombre.Text = "";
+                        this.txtAcomodoPuesto.Text = "";
+                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtAcomodoNombre.ClientID + "'); }", true);
+
+                        break;
+                }
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtAcomodoNombre.ClientID + "'); }", true);
+            }
+        }
+
+        protected void gvAcomodo_RowDataBound(object sender, GridViewRowEventArgs e){
+            ImageButton imgDelete = null;
+
+            String Orden = "";
+            String AcomodoNombre = "";
+
+            String sImagesAttributes = "";
+            String sTootlTip = "";
+
+            try
+            {
+
+                // Validación de que sea fila
+                if (e.Row.RowType != DataControlRowType.DataRow) { return; }
+
+                // Obtener imagenes
+                imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+
+                // Datakeys
+                Orden = this.gvAcomodo.DataKeys[e.Row.RowIndex]["Orden"].ToString();
+                AcomodoNombre = this.gvAcomodo.DataKeys[e.Row.RowIndex]["Nombre"].ToString();
+
+                // Tooltip Edición
+                sTootlTip = "Eliminar a [" + AcomodoNombre + "]";
+                imgDelete.Attributes.Add("title", sTootlTip);
+
+                // Atributos Over
+                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
+
+                // Atributos Out
+                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+
+        }
+
+        protected void gvAcomodo_Sorting(object sender, GridViewSortEventArgs e){
+            try
+            {
+
+                gcCommon.SortGridView(ref this.gvAcomodo, ref this.hddSort, e.SortExpression, true);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtAcomodoNombre.ClientID + "'); }", true);
+            }
+        }
+
+
+        // Eventos de Sección: Comité de recepción
+
+        protected void btnAgregarResponsableEvento_Click(object sender, EventArgs e){
+            DataTable tblResponsableEvento;
+            DataRow rowResponsableEvento;
+
+            try
+            {
+
+                // Obtener DataTable del grid
+                tblResponsableEvento = gcParse.GridViewToDataTable(this.gvResponsableEvento, false);
+
+                // Validaciones
+                if ( this.txtResponsableEventoNombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
+                if ( this.txtResponsableEventoPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
+
+                // Agregar un nuevo elemento
+                rowResponsableEvento = tblResponsableEvento.NewRow();
+                rowResponsableEvento["Orden"] = (tblResponsableEvento.Rows.Count + 1).ToString();
+                rowResponsableEvento["Nombre"] = this.txtResponsableEventoNombre.Text.Trim();
+                rowResponsableEvento["Puesto"] = this.txtResponsableEventoPuesto.Text.Trim();
+                tblResponsableEvento.Rows.Add(rowResponsableEvento);
+
+                // Actualizar Grid
+                this.gvResponsableEvento.DataSource = tblResponsableEvento;
+                this.gvResponsableEvento.DataBind();
+
+                // Nueva captura
+                this.txtResponsableEventoNombre.Text = "";
+                this.txtResponsableEventoPuesto.Text = "";
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtResponsableEventoNombre.ClientID + "'); }", true);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtResponsableEventoNombre.ClientID + "'); }", true);
+            }
+        }
+
+        protected void gvResponsableEvento_RowCommand(object sender, GridViewCommandEventArgs e){
+            DataTable tblResponsableEvento;
+
+            String strCommand = "";
+            String Orden = "";
+            Int32 intRow = 0;
+
+            try
+            {
+
+                // Opción seleccionada
+                strCommand = e.CommandName.ToString();
+
+                // Se dispara el evento RowCommand en el ordenamiento
+                if (strCommand == "Sort") { return; }
+
+                // Fila
+                intRow = Int32.Parse(e.CommandArgument.ToString());
+
+                // Datakeys
+                Orden = this.gvResponsableEvento.DataKeys[intRow]["Orden"].ToString();
+
+                // Acción
+                switch (strCommand){
+
+                    case "Eliminar":
+
+                        // Obtener DataTable del grid
+                        tblResponsableEvento = gcParse.GridViewToDataTable(this.gvResponsableEvento, true);
+
+                        // Remover el elemento
+                        tblResponsableEvento.Rows.Remove( tblResponsableEvento.Select("Orden=" + Orden )[0] );
+
+                        // Reordenar los Items restantes
+                        intRow = 0;
+                        foreach( DataRow rowResponsableEvento in tblResponsableEvento.Rows ){
+
+                            tblResponsableEvento.Rows[intRow]["Orden"] = (intRow + 1);
+                            intRow = intRow + 1;
+                        }
+
+                        // Actualizar Grid
+                        this.gvResponsableEvento.DataSource = tblResponsableEvento;
+                        this.gvResponsableEvento.DataBind();
+
+                        // Nueva captura
+                        this.txtResponsableEventoNombre.Text = "";
+                        this.txtResponsableEventoPuesto.Text = "";
+                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtResponsableEventoNombre.ClientID + "'); }", true);
+
+                        break;
+                }
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtResponsableEventoNombre.ClientID + "'); }", true);
+            }
+        }
+
+        protected void gvResponsableEvento_RowDataBound(object sender, GridViewRowEventArgs e){
+            ImageButton imgDelete = null;
+
+            String Orden = "";
+            String ResponsableEventoNombre = "";
+
+            String sImagesAttributes = "";
+            String sTootlTip = "";
+
+            try
+            {
+
+                // Validación de que sea fila
+                if (e.Row.RowType != DataControlRowType.DataRow) { return; }
+
+                // Obtener imagenes
+                imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+
+                // Datakeys
+                Orden = this.gvResponsableEvento.DataKeys[e.Row.RowIndex]["Orden"].ToString();
+                ResponsableEventoNombre = this.gvResponsableEvento.DataKeys[e.Row.RowIndex]["Nombre"].ToString();
+
+                // Tooltip Edición
+                sTootlTip = "Eliminar a [" + ResponsableEventoNombre + "]";
+                imgDelete.Attributes.Add("title", sTootlTip);
+
+                // Atributos Over
+                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
+
+                // Atributos Out
+                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+
+        }
+
+        protected void gvResponsableEvento_Sorting(object sender, GridViewSortEventArgs e){
+            try
+            {
+
+                gcCommon.SortGridView(ref this.gvResponsableEvento, ref this.hddSort, e.SortExpression, true);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtResponsableEventoNombre.ClientID + "'); }", true);
+            }
+        }
+
+        
+        // Eventos de Sección: Comité de recepción
+
+        protected void btnAgregarResponsableLogistica_Click(object sender, EventArgs e){
+            DataTable tblResponsableLogistica;
+            DataRow rowResponsableLogistica;
+
+            try
+            {
+
+                // Obtener DataTable del grid
+                tblResponsableLogistica = gcParse.GridViewToDataTable(this.gvResponsableLogistica, false);
+
+                // Validaciones
+                if ( this.txtResponsableLogisticaNombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
+                if ( this.txtResponsableLogisticaContacto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
+
+                // Agregar un nuevo elemento
+                rowResponsableLogistica = tblResponsableLogistica.NewRow();
+                rowResponsableLogistica["Orden"] = (tblResponsableLogistica.Rows.Count + 1).ToString();
+                rowResponsableLogistica["Nombre"] = this.txtResponsableLogisticaNombre.Text.Trim();
+                rowResponsableLogistica["Contacto"] = this.txtResponsableLogisticaContacto.Text.Trim();
+                tblResponsableLogistica.Rows.Add(rowResponsableLogistica);
+
+                // Actualizar Grid
+                this.gvResponsableLogistica.DataSource = tblResponsableLogistica;
+                this.gvResponsableLogistica.DataBind();
+
+                // Nueva captura
+                this.txtResponsableLogisticaNombre.Text = "";
+                this.txtResponsableLogisticaContacto.Text = "";
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtResponsableLogisticaNombre.ClientID + "'); }", true);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtResponsableLogisticaNombre.ClientID + "'); }", true);
+            }
+        }
+
+        protected void gvResponsableLogistica_RowCommand(object sender, GridViewCommandEventArgs e){
+            DataTable tblResponsableLogistica;
+
+            String strCommand = "";
+            String Orden = "";
+            Int32 intRow = 0;
+
+            try
+            {
+
+                // Opción seleccionada
+                strCommand = e.CommandName.ToString();
+
+                // Se dispara el evento RowCommand en el ordenamiento
+                if (strCommand == "Sort") { return; }
+
+                // Fila
+                intRow = Int32.Parse(e.CommandArgument.ToString());
+
+                // Datakeys
+                Orden = this.gvResponsableLogistica.DataKeys[intRow]["Orden"].ToString();
+
+                // Acción
+                switch (strCommand){
+
+                    case "Eliminar":
+
+                        // Obtener DataTable del grid
+                        tblResponsableLogistica = gcParse.GridViewToDataTable(this.gvResponsableLogistica, true);
+
+                        // Remover el elemento
+                        tblResponsableLogistica.Rows.Remove( tblResponsableLogistica.Select("Orden=" + Orden )[0] );
+
+                        // Reordenar los Items restantes
+                        intRow = 0;
+                        foreach( DataRow rowResponsableLogistica in tblResponsableLogistica.Rows ){
+
+                            tblResponsableLogistica.Rows[intRow]["Orden"] = (intRow + 1);
+                            intRow = intRow + 1;
+                        }
+
+                        // Actualizar Grid
+                        this.gvResponsableLogistica.DataSource = tblResponsableLogistica;
+                        this.gvResponsableLogistica.DataBind();
+
+                        // Nueva captura
+                        this.txtResponsableLogisticaNombre.Text = "";
+                        this.txtResponsableLogisticaContacto.Text = "";
+                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtResponsableLogisticaNombre.ClientID + "'); }", true);
+
+                        break;
+                }
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtResponsableLogisticaNombre.ClientID + "'); }", true);
+            }
+        }
+
+        protected void gvResponsableLogistica_RowDataBound(object sender, GridViewRowEventArgs e){
+            ImageButton imgDelete = null;
+
+            String Orden = "";
+            String ResponsableLogisticaNombre = "";
+
+            String sImagesAttributes = "";
+            String sTootlTip = "";
+
+            try
+            {
+
+                // Validación de que sea fila
+                if (e.Row.RowType != DataControlRowType.DataRow) { return; }
+
+                // Obtener imagenes
+                imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+
+                // Datakeys
+                Orden = this.gvResponsableLogistica.DataKeys[e.Row.RowIndex]["Orden"].ToString();
+                ResponsableLogisticaNombre = this.gvResponsableLogistica.DataKeys[e.Row.RowIndex]["Nombre"].ToString();
+
+                // Tooltip Edición
+                sTootlTip = "Eliminar a [" + ResponsableLogisticaNombre + "]";
+                imgDelete.Attributes.Add("title", sTootlTip);
+
+                // Atributos Over
+                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
+
+                // Atributos Out
+                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+
+        }
+
+        protected void gvResponsableLogistica_Sorting(object sender, GridViewSortEventArgs e){
+            try
+            {
+
+                gcCommon.SortGridView(ref this.gvResponsableLogistica, ref this.hddSort, e.SortExpression, true);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtResponsableLogisticaNombre.ClientID + "'); }", true);
             }
         }
 

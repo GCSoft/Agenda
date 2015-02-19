@@ -707,12 +707,20 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTEvento.UsuarioId;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("TipoAcomodoId", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.TipoAcomodoId;
+            sqlCom.Parameters.Add(sqlPar);
+
             sqlPar = new SqlParameter("TipoVestimentaId", SqlDbType.Int);
             sqlPar.Value = oENTEvento.TipoVestimentaId;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("MedioComunicacionId", SqlDbType.Int);
             sqlPar.Value = oENTEvento.MedioComunicacionId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("TipoVestimentaOtro", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.TipoVestimentaOtro;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("PronosticoClima", SqlDbType.VarChar);
@@ -755,6 +763,14 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTEvento.EsposaConfirma;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("PropuestaAcomodo", SqlDbType.TinyInt);
+            sqlPar.Value = oENTEvento.PropuestaAcomodo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("AcomodoObservaciones", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.AcomodoObservaciones;
+            sqlCom.Parameters.Add(sqlPar);
+
             sqlPar = new SqlParameter("AccionRealizar", SqlDbType.VarChar);
             sqlPar.Value = oENTEvento.AccionRealizar;
             sqlCom.Parameters.Add(sqlPar);
@@ -769,6 +785,26 @@ namespace Agenda.DataAccess.Object
 
             sqlPar = new SqlParameter("tblMedioTraslado", SqlDbType.Structured);
             sqlPar.Value = oENTEvento.DataTableMedioTraslado;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("tblComiteRecepcion", SqlDbType.Structured);
+            sqlPar.Value = oENTEvento.DataTableComiteRecepcion;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("tblOrdenDia", SqlDbType.Structured);
+            sqlPar.Value = oENTEvento.DataTableOrdenDia;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("tblAcomodo", SqlDbType.Structured);
+            sqlPar.Value = oENTEvento.DataTableAcomodo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("tblResponsable", SqlDbType.Structured);
+            sqlPar.Value = oENTEvento.DataTableResponsable;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("tblResponsableLogistica", SqlDbType.Structured);
+            sqlPar.Value = oENTEvento.DataTableResponsableLogistica;
             sqlCom.Parameters.Add(sqlPar);
 
             // Inicializaciones

@@ -35,10 +35,12 @@ namespace Agenda.Entity.Object
         private Int32   _SecretarioId_Ramo;
         private Int32   _SecretarioId_Representante;
         private Int32   _SecretarioId_Responsable;
+        private Int32   _TipoAcomodoId;
         private Int32   _TipoVestimentaId;
         private Int32   _UsuarioId;
         private Int32   _UsuarioId_Temp;
         private String  _AccionRealizar;
+        private String  _AcomodoObservaciones;
         private String  _EventoDetalle;
         private String  _EventoNombre;
         private String  _EventoObservaciones;
@@ -60,6 +62,7 @@ namespace Agenda.Entity.Object
         private String  _TemperaturaMaxima;
         private String  _TemperaturaMinima;
         private String  _TipoMontaje;
+        private String  _TipoVestimentaOtro;
         private String  _FechaEvento;
         private String  _FechaFin;
         private String  _FechaInicio;
@@ -77,9 +80,15 @@ namespace Agenda.Entity.Object
         private Int16   _Logistica;
         private Int16   _Nivel;
         private Int16   _Notificacion;
+        private Int16   _PropuestaAcomodo;
         private Int16   _Protocolo;
+        private DataTable   _DataTableAcomodo;
+        private DataTable   _DataTableComiteRecepcion;
         private DataTable   _DataTableEstatusEvento;
         private DataTable   _DataTableMedioTraslado;
+        private DataTable   _DataTableOrdenDia;
+        private DataTable   _DataTableResponsable;
+        private DataTable   _DataTableResponsableLogistica;
         private ENTInvitacionContacto _Contacto;
 
 
@@ -103,10 +112,12 @@ namespace Agenda.Entity.Object
             _SecretarioId_Ramo = 0;
             _SecretarioId_Representante = 0;
             _SecretarioId_Responsable = 0;
+            _TipoAcomodoId = 0;
             _TipoVestimentaId = 0;
             _UsuarioId = 0;
             _UsuarioId_Temp = 0;
             _AccionRealizar = "";
+            _AcomodoObservaciones = "";
             _EventoDetalle = "";
             _EventoNombre = "";
             _EventoObservaciones = "";
@@ -128,6 +139,7 @@ namespace Agenda.Entity.Object
             _TemperaturaMaxima = "";
             _TemperaturaMinima = "";
             _TipoMontaje = "";
+            _TipoVestimentaOtro = "";
             _FechaEvento = "";
             _FechaFin = "";
             _FechaInicio = "";
@@ -145,9 +157,15 @@ namespace Agenda.Entity.Object
             _Logistica = 0;
             _Nivel = 0;
             _Notificacion = 0;
+            _PropuestaAcomodo = 0;
             _Protocolo = 0;
+            _DataTableAcomodo = null;
+            _DataTableComiteRecepcion = null;
             _DataTableEstatusEvento = null;
             _DataTableMedioTraslado = null;
+            _DataTableOrdenDia = null;
+            _DataTableResponsable = null;
+            _DataTableResponsableLogistica = null;
             _Contacto = new ENTInvitacionContacto();
         }
 
@@ -347,6 +365,18 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
+        ///   <name>ENTEvento.TipoAcomodoId</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el identificador único del tipo de acomodo en el evento</summary>
+        public Int32 TipoAcomodoId
+        {
+            get { return _TipoAcomodoId; }
+            set { _TipoAcomodoId = value; }
+        }
+
+        ///<remarks>
         ///   <name>ENTEvento.TipoVestimentaId</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
@@ -392,6 +422,18 @@ namespace Agenda.Entity.Object
         {
             get { return _AccionRealizar; }
             set { _AccionRealizar = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.AcomodoObservaciones</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna las observaciones en el acomodo</summary>
+        public String AcomodoObservaciones
+        {
+            get { return _AcomodoObservaciones; }
+            set { _AcomodoObservaciones = value; }
         }
 
         ///<remarks>
@@ -647,6 +689,18 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
+        ///   <name>ENTEvento.TipoVestimentaOtro</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el tipo de vestimenta cuando se selecciona la opción de otro</summary>
+        public String TipoVestimentaOtro
+        {
+            get { return _TipoVestimentaOtro; }
+            set { _TipoVestimentaOtro = value; }
+        }
+
+        ///<remarks>
         ///   <name>ENTEvento.FechaEvento</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
@@ -851,6 +905,18 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
+        ///   <name>ENTEvento.PropuestaAcomodo</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un valor que determina si se incluirá la propuesta de acomodo en el cuadernillo</summary>
+        public Int16 PropuestaAcomodo
+        {
+            get { return _PropuestaAcomodo; }
+            set { _PropuestaAcomodo = value; }
+        }
+
+        ///<remarks>
         ///   <name>ENTEvento.Protocolo</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
@@ -860,6 +926,30 @@ namespace Agenda.Entity.Object
         {
             get { return _Protocolo; }
             set { _Protocolo = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.DataTableAcomodo</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un DataTable el cual contiene el acomodo en un evento</summary>
+        public DataTable DataTableAcomodo
+        {
+            get { return _DataTableAcomodo; }
+            set { _DataTableAcomodo = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.DataTableComiteRecepcion</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un DataTable el cual contiene el detalle del comité de recepción</summary>
+        public DataTable DataTableComiteRecepcion
+        {
+            get { return _DataTableComiteRecepcion; }
+            set { _DataTableComiteRecepcion = value; }
         }
 
         ///<remarks>
@@ -884,6 +974,42 @@ namespace Agenda.Entity.Object
         {
             get { return _DataTableMedioTraslado; }
             set { _DataTableMedioTraslado = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.DataTableOrdenDia</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un DataTable el cual contiene el detalle de la orden del día</summary>
+        public DataTable DataTableOrdenDia
+        {
+            get { return _DataTableOrdenDia; }
+            set { _DataTableOrdenDia = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.DataTableResponsable</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un DataTable el cual contiene al responsable del evento</summary>
+        public DataTable DataTableResponsable
+        {
+            get { return _DataTableResponsable; }
+            set { _DataTableResponsable = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.DataTableResponsableLogistica</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un DataTable el cual contiene al responsable de logística del evento</summary>
+        public DataTable DataTableResponsableLogistica
+        {
+            get { return _DataTableResponsableLogistica; }
+            set { _DataTableResponsableLogistica = value; }
         }
 
         ///<remarks>
