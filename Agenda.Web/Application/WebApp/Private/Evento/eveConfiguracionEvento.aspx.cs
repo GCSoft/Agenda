@@ -50,6 +50,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             DataTable tblTemporal;
             DataRow rowTemporal;
 
+            Int32 AccordionSelectedIndex;
             Int32 ValidateNumber;
 
             Boolean Response = false;
@@ -61,6 +62,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 #region "Sección: Nombre del evento"
 
                     // Expander el acordeón
+                    AccordionSelectedIndex = this.Accordion1.SelectedIndex;
                     this.Accordion1.SelectedIndex = 0;
 
                     // Medios de traslado seleccionados
@@ -89,12 +91,16 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                     CurrentClientID = this.txtAccionRealizar.ClientID;
                     if (this.txtAccionRealizar.Text.Trim() == "") { throw (new Exception("Es necesario determinar la acción a realizar")); }
-
+                    
+                    // Estado original del acordeón
+                    this.Accordion1.SelectedIndex = AccordionSelectedIndex;
+                    
                 #endregion
 
                 #region "Comité de recepción"
 
                     // Expander el acordeón
+                    AccordionSelectedIndex = this.Accordion2.SelectedIndex;
                     this.Accordion2.SelectedIndex = 0;
 
                     // Comité de recepción
@@ -105,11 +111,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     CurrentClientID = this.txtComiteRecepcionNombre.ClientID;
                     if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario capturar el Comité de Recepción")); }
 
+                    // Estado original del acordeón
+                    this.Accordion2.SelectedIndex = AccordionSelectedIndex;
+
                 #endregion
 
                 #region "Orden del día"
 
                     // Expander el acordeón
+                    AccordionSelectedIndex = this.Accordion3.SelectedIndex;
                     this.Accordion3.SelectedIndex = 0;
 
                     // Comité de recepción
@@ -120,11 +130,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     CurrentClientID = this.txtOrdenDiaDetalle.ClientID;
                     if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario capturar la Orden del Día")); }
 
+                    // Estado original del acordeón
+                    this.Accordion3.SelectedIndex = AccordionSelectedIndex;
+
                 #endregion
 
                 #region "Acomodo"
 
                     // Expander el acordeón
+                    AccordionSelectedIndex = this.Accordion4.SelectedIndex;
                     this.Accordion4.SelectedIndex = 0;
 
                     // Comité de recepción
@@ -135,11 +149,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     CurrentClientID = this.txtAcomodoNombre.ClientID;
                     if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario capturar el acomodo al evento")); }
 
+                    // Estado original del acordeón
+                    this.Accordion4.SelectedIndex = AccordionSelectedIndex;
+
                 #endregion
 
                 #region "Responsable del evento"
 
                     // Expander el acordeón
+                    AccordionSelectedIndex = this.Accordion5.SelectedIndex;
                     this.Accordion5.SelectedIndex = 0;
 
                     // Comité de recepción
@@ -150,11 +168,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     CurrentClientID = this.txtResponsableEventoNombre.ClientID;
                     if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario ingresar por lo menos un responsable del evento")); }
 
+                    // Estado original del acordeón
+                    this.Accordion5.SelectedIndex = AccordionSelectedIndex;
+
                 #endregion
 
                 #region "Responsable de logística"
 
                     // Expander el acordeón
+                    AccordionSelectedIndex = this.Accordion6.SelectedIndex;
                     this.Accordion6.SelectedIndex = 0;
 
                     // Comité de recepción
@@ -163,7 +185,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     
                     // Validaciones
                     CurrentClientID = this.txtResponsableLogisticaNombre.ClientID;
-                    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario ingresar por lo menos un responsable de logística"); }
+                    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario ingresar por lo menos un responsable de logística")); }
+
+                    // Estado original del acordeón
+                    this.Accordion6.SelectedIndex = AccordionSelectedIndex;
 
                 #endregion
 
@@ -171,7 +196,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 Response = true;
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + CurrentClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + CurrentClientID + "'); }", true);
             }
 
             return Response;
@@ -384,6 +409,11 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     this.txtCaracteristicasInvitados.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["CaracteristicasInvitados"].ToString();
                     this.txtMenu.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["Menu"].ToString();
 
+
+                    this.ddlTipoAcomodo.SelectedValue = oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoAcomodoId"].ToString();
+                    this.ddlPropuestaAcomodo.SelectedValue = oENTResponse.DataSetResponse.Tables[6].Rows[0]["PropuestaAcomodo"].ToString();
+                    this.txtAcomodoObservaciones.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["AcomodoObservaciones"].ToString();
+
                 }
 
                 // Sección: Comité de recepción
@@ -492,13 +522,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     
                     oENTEvento.DataTableOrdenDia = new DataTable("DataTableOrdenDia");
                     oENTEvento.DataTableOrdenDia.Columns.Add("Orden", typeof(Int32));
-                    oENTEvento.DataTableOrdenDia.Columns.Add("Nombre", typeof(String));
+                    oENTEvento.DataTableOrdenDia.Columns.Add("Detalle", typeof(String));
+                    oENTEvento.DataTableOrdenDia.Columns.Add("Columna3", typeof(String)); // El DataType es de 3 columnas
                     
                     foreach( DataRow rowComiteRecepcion in tblTemporal.Rows ){
 
                         rowTemporal = oENTEvento.DataTableOrdenDia.NewRow();
                         rowTemporal["Orden"] = rowComiteRecepcion["Orden"];
-                        rowTemporal["Nombre"] = rowComiteRecepcion["Nombre"];
+                        rowTemporal["Detalle"] = rowComiteRecepcion["Detalle"];
+                        rowTemporal["Columna3"] = "";
                         oENTEvento.DataTableOrdenDia.Rows.Add(rowTemporal);
                     }
 
@@ -511,7 +543,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     oENTEvento.AcomodoObservaciones = this.txtAcomodoObservaciones.Text.Trim();
 
                     tblTemporal = null;
-                    tblTemporal = gcParse.GridViewToDataTable(this.gvComiteRecepcion, true);
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvAcomodo, true);
                     
                     oENTEvento.DataTableAcomodo = new DataTable("DataTableAcomodo");
                     oENTEvento.DataTableAcomodo.Columns.Add("Orden", typeof(Int32));
@@ -625,7 +657,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             }catch (Exception ex){
                 this.btnActualizar.Enabled = false;
                 this.btnActualizar.CssClass = "Button_General_Disabled";
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
             }
         }
 
@@ -647,7 +679,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.Response.Redirect("eveDetalleEvento.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
             }
 		}
 
@@ -663,7 +695,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.Response.Redirect("eveDetalleEvento.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
             }
 		}
 
@@ -682,7 +714,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 }
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
             }
         }
 
@@ -708,7 +740,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 }
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
             }
         }
 
