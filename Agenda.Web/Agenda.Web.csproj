@@ -92,6 +92,9 @@
     <Content Include="Application\WebApp\Private\Catalogo\catColonia.aspx" />
     <Content Include="Application\WebApp\Private\Catalogo\catLugarEvento.aspx" />
     <Content Include="Application\WebApp\Private\Catalogo\catSecretario.aspx" />
+    <Content Include="Application\WebApp\Private\Evento\Cudernillos\Gira.aspx" />
+    <Content Include="Application\WebApp\Private\Evento\Cudernillos\Logistica.aspx" />
+    <Content Include="Application\WebApp\Private\Evento\Cudernillos\Protocolo.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveCalendario.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveCalendarioCompleto.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveCancelar.aspx" />
@@ -347,6 +350,27 @@
     </Compile>
     <Compile Include="Application\WebApp\Private\Catalogo\catSecretario.aspx.designer.cs">
       <DependentUpon>catSecretario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\Cudernillos\Gira.aspx.cs">
+      <DependentUpon>Gira.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\Cudernillos\Gira.aspx.designer.cs">
+      <DependentUpon>Gira.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\Cudernillos\Logistica.aspx.cs">
+      <DependentUpon>Logistica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\Cudernillos\Logistica.aspx.designer.cs">
+      <DependentUpon>Logistica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\Cudernillos\Protocolo.aspx.cs">
+      <DependentUpon>Protocolo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\Cudernillos\Protocolo.aspx.designer.cs">
+      <DependentUpon>Protocolo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\WebApp\Private\Evento\eveCalendario.aspx.cs">
       <DependentUpon>eveCalendario.aspx</DependentUpon>
