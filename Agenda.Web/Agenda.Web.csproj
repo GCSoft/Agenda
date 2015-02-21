@@ -54,6 +54,18 @@
       <HintPath>..\..\..\Proyectos\BHM\Solution\BHM.Web\Include\Components\GCSoft\GCUtility.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Syncfusion.Compression.Base, Version=9.303.0.61, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Include\Components\Syncfusion\Syncfusion.Compression.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Core, Version=9.103.0.20, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Include\Components\Syncfusion\Syncfusion.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.DocIO.Base, Version=9.103.0.20, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Include\Components\Syncfusion\Syncfusion.DocIO.Base.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -84,6 +96,7 @@
     <Content Include="Application\WebApp\Private\Evento\eveCalendarioCompleto.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveCancelar.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveConfiguracionEvento.aspx" />
+    <Content Include="Application\WebApp\Private\Evento\eveConfiguracionEventoProtocolo.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveContacto.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveDatosEvento.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveDatosGenerales.aspx" />
@@ -224,6 +237,9 @@
     <Content Include="Include\Components\CKEditor\Core\styles.js" />
     <Content Include="Include\Components\GCSoft\GCUtility.dll" />
     <Content Include="Include\Components\GCSoft\GCUtility.xml" />
+    <Content Include="Include\Components\Syncfusion\Syncfusion.Compression.Base.dll" />
+    <Content Include="Include\Components\Syncfusion\Syncfusion.Core.dll" />
+    <Content Include="Include\Components\Syncfusion\Syncfusion.DocIO.Base.dll" />
     <Content Include="Include\Image\Buttons\Calendar.png" />
     <Content Include="Include\Image\Buttons\PrioridadAlta.png" />
     <Content Include="Include\Image\Buttons\PrioridadBaja.png" />
@@ -357,6 +373,13 @@
     </Compile>
     <Compile Include="Application\WebApp\Private\Evento\eveConfiguracionEvento.aspx.designer.cs">
       <DependentUpon>eveConfiguracionEvento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveConfiguracionEventoProtocolo.aspx.cs">
+      <DependentUpon>eveConfiguracionEventoProtocolo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveConfiguracionEventoProtocolo.aspx.designer.cs">
+      <DependentUpon>eveConfiguracionEventoProtocolo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\WebApp\Private\Evento\eveContacto.aspx.cs">
       <DependentUpon>eveContacto.aspx</DependentUpon>
