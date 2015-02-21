@@ -266,7 +266,9 @@
     <Content Include="Include\Image\Buttons\Restore.png" />
     <Content Include="Include\Image\Buttons\Restore_Over.png" />
     <Content Include="Include\Image\Buttons\Search.png" />
+    <Content Include="Include\Image\Icon\Logo.png" />
     <Content Include="Include\Image\Icon\Print.png" />
+    <Content Include="Include\Image\Icon\Separador.png" />
     <Content Include="Include\Image\Icon\SubMenuAdjuntarDocumento.png" />
     <Content Include="Include\Image\Icon\SubMenuAprobar.png" />
     <Content Include="Include\Image\Icon\SubMenuAsociarFuncionario.png" />
