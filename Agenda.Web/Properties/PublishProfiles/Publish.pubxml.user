@@ -22,7 +22,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/05/2015 16:37:47</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Catalogo/catSecretario.aspx">
-      <publishTime>02/05/2015 16:08:41</publishTime>
+      <publishTime>02/11/2015 16:24:31</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Evento/eveCalendario.aspx">
       <publishTime>01/30/2015 10:59:05</publishTime>
@@ -34,7 +34,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/03/2015 15:52:27</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Evento/eveConfiguracionEvento.aspx">
-      <publishTime>02/03/2015 15:52:11</publishTime>
+      <publishTime>02/18/2015 17:48:22</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Evento/eveContacto.aspx">
       <publishTime>02/03/2015 15:51:52</publishTime>
@@ -46,10 +46,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/03/2015 15:50:46</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Evento/eveDetalleEvento.aspx">
-      <publishTime>02/03/2015 12:45:11</publishTime>
+      <publishTime>02/16/2015 16:56:24</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Evento/eveDocumentos.aspx">
       <publishTime>01/28/2015 18:30:58</publishTime>
+    </File>
+    <File Include="Application/WebApp/Private/Evento/eveEliminarRepresentante.aspx">
+      <publishTime>02/16/2015 16:18:34</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Evento/eveHistorial.aspx">
       <publishTime>01/28/2015 17:39:36</publishTime>
@@ -64,7 +67,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/03/2015 17:31:06</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Invitacion/invAprobar.aspx">
-      <publishTime>01/28/2015 17:44:05</publishTime>
+      <publishTime>02/16/2015 15:06:16</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Invitacion/invContacto.aspx">
       <publishTime>02/03/2015 15:54:06</publishTime>
@@ -73,22 +76,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/03/2015 15:54:21</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Invitacion/invDatosGenerales.aspx">
-      <publishTime>02/03/2015 15:54:35</publishTime>
+      <publishTime>02/10/2015 13:21:03</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Invitacion/invDetalleInvitacion.aspx">
-      <publishTime>02/03/2015 15:54:51</publishTime>
+      <publishTime>02/10/2015 12:13:00</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Invitacion/invDocumentos.aspx">
       <publishTime>01/28/2015 17:43:06</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Invitacion/invFuncionarios.aspx">
-      <publishTime>01/28/2015 17:42:52</publishTime>
+      <publishTime>02/09/2015 12:41:14</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Invitacion/invHistorial.aspx">
       <publishTime>01/28/2015 17:40:52</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Invitacion/invInvitacion.aspx">
-      <publishTime>02/03/2015 15:55:56</publishTime>
+      <publishTime>02/10/2015 11:33:49</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Invitacion/invListado.aspx">
       <publishTime>02/06/2015 16:35:36</publishTime>
@@ -121,16 +124,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/13/2015 16:11:31</publishTime>
     </File>
     <File Include="bin/Agenda.BusinessProcess.dll">
-      <publishTime>02/06/2015 18:24:04</publishTime>
+      <publishTime>02/20/2015 18:46:23</publishTime>
     </File>
     <File Include="bin/Agenda.DataAccess.dll">
-      <publishTime>02/06/2015 18:24:04</publishTime>
+      <publishTime>02/20/2015 18:46:23</publishTime>
     </File>
     <File Include="bin/Agenda.Entity.dll">
-      <publishTime>02/06/2015 18:24:03</publishTime>
+      <publishTime>02/20/2015 18:46:22</publishTime>
     </File>
     <File Include="bin/Agenda.Web.dll">
-      <publishTime>02/06/2015 18:24:05</publishTime>
+      <publishTime>02/20/2015 18:46:23</publishTime>
     </File>
     <File Include="bin/AjaxControlToolkit.dll">
       <publishTime>06/23/2014 11:45:59</publishTime>
@@ -1326,6 +1329,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Include/Image/Web/SalirOn.png">
       <publishTime>10/24/2013 00:13:34</publishTime>
     </File>
+    <File Include="Include/Image/Web/TituloAcordeon.png">
+      <publishTime>02/18/2015 12:40:10</publishTime>
+    </File>
     <File Include="Include/Javascript/GCSoft/GCSoft.js">
       <publishTime>12/18/2014 16:15:34</publishTime>
     </File>
@@ -1351,7 +1357,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/30/2014 11:06:48</publishTime>
     </File>
     <File Include="Include/Style/Table.css">
-      <publishTime>02/05/2015 12:58:44</publishTime>
+      <publishTime>02/18/2015 14:53:17</publishTime>
     </File>
     <File Include="Include/Style/Text.css">
       <publishTime>01/20/2015 18:12:46</publishTime>
@@ -1393,7 +1399,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/27/2014 12:58:28</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/06/2015 18:24:55</publishTime>
+      <publishTime>02/20/2015 18:47:19</publishTime>
     </File>
   </ItemGroup>
 </Project>
