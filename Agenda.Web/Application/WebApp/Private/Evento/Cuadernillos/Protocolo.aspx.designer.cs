@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Agenda.Web.Application.WebApp.Private.Evento.Cudernillos
+namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
 {
 
 
-    public partial class Logistica
+    public partial class Protocolo
     {
 
         /// <summary>

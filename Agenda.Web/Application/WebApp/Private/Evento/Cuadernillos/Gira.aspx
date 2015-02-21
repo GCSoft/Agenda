@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Logistica.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Evento.Cudernillos.Logistica" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Gira.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos.Gira" %>
 
 <!DOCTYPE html>
 

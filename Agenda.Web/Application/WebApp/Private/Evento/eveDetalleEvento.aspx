@@ -63,7 +63,7 @@
         </asp:Panel>
 
         <asp:Panel ID="CuadernilloPanel" CssClass="IconoPanel" runat="server" Visible="true">
-            <asp:ImageButton ID="CuadernilloButton" ImageUrl="~/Include/Image/Icon/SubMenuGenerarCuadernillo.png" runat="server" OnClick="CuadernilloButton_Click"></asp:ImageButton><br />
+            <asp:ImageButton ID="CuadernilloButton" ImageUrl="~/Include/Image/Icon/SubMenuGenerarCuadernillo.png" runat="server"></asp:ImageButton><br />
             Generar cuadernillo
         </asp:Panel>
 

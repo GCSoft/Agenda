@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace Agenda.Web.Application.WebApp.Private.Evento.Cudernillos
+namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
 {
-    public partial class Gira : System.Web.UI.Page
+    public partial class Protocolo : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

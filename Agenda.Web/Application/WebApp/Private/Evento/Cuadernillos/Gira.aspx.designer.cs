@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Agenda.Web.Application.WebApp.Private.Evento.Cudernillos
+namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
 {
 
 

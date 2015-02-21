@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Protocolo.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Evento.Cudernillos.Protocolo" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Logistica.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos.Logistica" %>
 
 <!DOCTYPE html>
 
