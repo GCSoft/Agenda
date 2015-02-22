@@ -366,7 +366,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 				Icono = this.gvDocumento.DataKeys[e.Row.RowIndex]["Icono"].ToString();
 				NombreDocumento = this.gvDocumento.DataKeys[e.Row.RowIndex]["NombreDocumento"].ToString();
 
-				// Configuración del Icono
+                // ToolTip Visualizar
 				sToolTip = "Visualizar [" + NombreDocumento + "]";
                 imgView.Attributes.Add("title", sToolTip);
 				imgView.Attributes.Add("style", "cursor:hand;");
@@ -383,9 +383,9 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
 				}else{
 
-					// Tooltip
+                    // Tooltip Eliminar
 					sToolTip = "Eliminar [" + NombreDocumento + "]";
-                    imgView.Attributes.Add("title", sToolTip);
+                    imgDelete.Attributes.Add("title", sToolTip);
 					imgDelete.Attributes.Add("style", "cursor:hand;");
 
 					// Atributos Over

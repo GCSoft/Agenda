@@ -73,7 +73,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.lblEventoNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
                 this.lblEventoFechaHora.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHora"].ToString();
 
-                // Documentos
+                // Historial
                 this.gvEventoSeguimiento.DataSource = oENTResponse.DataSetResponse.Tables[5];
                 this.gvEventoSeguimiento.DataBind();
 

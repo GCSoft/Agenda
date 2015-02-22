@@ -65,9 +65,6 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Obtener la sesion
                 oENTSession = (ENTSession)this.Session["oENTSession"];
 
-                // Seguridad
-                if  ( oENTSession.RolId == 4 || oENTSession.RolId == 5 ){ this.RepresentadoPanel.Visible = false; }
-
                 // Valores default
                 this.ddlPrioridad.SelectedValue = "0";
                 this.ddlDependencia.SelectedValue = "0";
@@ -112,6 +109,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
 				// Obtener la sesion
 				oENTSession = (ENTSession)this.Session["oENTSession"];
+
+                // Seguridad
+                if (oENTSession.RolId == 4 || oENTSession.RolId == 5) { this.RepresentadoPanel.Visible = false; }
 
 				// Validaciones
                 if (oENTSession.Entity == null) { DefaultForm();  return; }

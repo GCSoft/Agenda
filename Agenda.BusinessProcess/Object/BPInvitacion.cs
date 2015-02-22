@@ -624,7 +624,7 @@ namespace Agenda.BusinessProcess.Object
                 Fecha = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHora"].ToString();
 
                 // Obtener el listado de direcciones a donde se enviará la notificación y enviar correo
-                if( oENTResponse.DataSetResponse.Tables[4].Rows.Count > 0 ){
+                if( oENTResponse.DataSetResponse.Tables[4].Rows[0]["CorreoRepresentado"].ToString() != "" ){
 
                     Contactos = oENTResponse.DataSetResponse.Tables[4].Rows[0]["CorreoRepresentado"].ToString();
 
