@@ -74,7 +74,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
 
             // Nueva hoja
             oSection = oDocument.AddSection();
-            oSection.PageSetup.PageSize = new SizeF(612, 653);
+            oSection.PageSetup.PageSize = new SizeF(612, 652);
 
             // Margenes
             //oSection.PageSetup.Margins.Bottom = 36f;
@@ -134,7 +134,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Top;
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-            System.Drawing.Image imgSeparadorE = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Icon/Separador.png"));
+            System.Drawing.Image imgSeparadorE = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Icon/Separador_NL.png"));
             wPicture = wTableCell.AppendPicture(imgSeparadorE);
             wPicture.Height = 5;
             wPicture.Width = 510;
@@ -1464,7 +1464,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             //TODO: VALIDAR QUE EXISTA IMAGEN DE ESTRADO EN LA TABLA DE LOGÍSTICA [RepLogistica]
             #region Estrado
             oSection = oDocument.AddSection();
-            oSection.PageSetup.PageSize = new SizeF(567, 567);
+            oSection.PageSetup.PageSize = new SizeF(612, 652);
             oSection.PageSetup.Margins.Bottom = 28f;
             oSection.PageSetup.Margins.Left = 56f;
             oSection.PageSetup.Margins.Right = 28f;
@@ -1501,6 +1501,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             // imagen
             wTable = oSection.Body.AddTable();
             wTable.ResetCells(1, 1);
+  
 
             //Fila 1
             wTableRow = wTable.Rows[0];
@@ -1517,16 +1518,47 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[0].Width = 510;
 
+            wTable = oSection.Body.AddTable();
+            wTable.ResetCells(2, 11);
+
+            //tabla
+            wTableRow = wTable.Rows[0];
+            wTableRow.Height = 10f;
+            wTableCell = wTableRow.Cells[0].AddParagraph();
+            wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Bottom;
+            wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+
+            System.Drawing.Image silla10 = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Icon/silla10.png"));
+            wPicture = wTableCell.AppendPicture(silla10);
+            wPicture.Height = 64;
+            wPicture.Width = 28;
+
+            wTableRow.Cells[0].Width = 36;
+
+            //Fila 2
+            wTableRow = wTable.Rows[1];
+            wTableRow.Height = 300f;
+            wTableCell = wTableRow.Cells[0].AddParagraph();
+            wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+            wTableRow.Cells[0].CellFormat.TextDirection = TextDirection.VerticalBottomToTop;
+            wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
+            wText = wTableCell.AppendText("(PROPUESTA DE ACOMODO)");
+            wText.CharacterFormat.FontName = "Arial";
+            wText.CharacterFormat.FontSize = 10f;
+            wTableRow.Cells[0].Width = 36;
+            
 
             // Brinco de linea (genera espacio)
             oSection.AddParagraph();
+
+
 
             #endregion
 
             //TODO: VALIDAR QUE EXISTA IMAGEN DE MONTAJE EN LA TABLA DE LOGÍSTICA [RepLogistica]
             #region Montaje
             oSection = oDocument.AddSection();
-            oSection.PageSetup.PageSize = new SizeF(567, 567);
+            oSection.PageSetup.PageSize = new SizeF(612, 652);
             oSection.PageSetup.Margins.Bottom = 28f;
             oSection.PageSetup.Margins.Left = 56f;
             oSection.PageSetup.Margins.Right = 28f;

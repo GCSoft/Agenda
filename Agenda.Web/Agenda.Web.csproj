@@ -273,6 +273,7 @@
     <Content Include="Include\Image\Icon\Print.png" />
     <Content Include="Include\Image\Icon\puestoAcomodo.png" />
     <Content Include="Include\Image\Icon\Separador.png" />
+    <Content Include="Include\Image\Icon\Separador_NL.png" />
     <Content Include="Include\Image\Icon\silla1.png" />
     <Content Include="Include\Image\Icon\silla10.png" />
     <Content Include="Include\Image\Icon\silla11.png" />
