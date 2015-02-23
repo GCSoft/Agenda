@@ -783,6 +783,50 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTEvento.Menu;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("ProtocoloInvitacionA", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.ProtocoloInvitacionA;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ProtocoloResponsableEvento", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.ProtocoloResponsableEvento;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ProtocoloBandera", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.ProtocoloBandera;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ProtocoloLeyenda", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.ProtocoloLeyenda;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ProtocoloResponsable", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.ProtocoloResponsable;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ProtocoloSonido", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.ProtocoloSonido;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ProtocoloResponsableSonido", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.ProtocoloResponsableSonido;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ProtocoloDesayuno", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.ProtocoloDesayuno;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ProtocoloSillas", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.ProtocoloSillas;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ProtocoloMesas", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.ProtocoloMesas;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ProtocoloPresentacion", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.ProtocoloPresentacion;
+            sqlCom.Parameters.Add(sqlPar);
+
             sqlPar = new SqlParameter("tblMedioTraslado", SqlDbType.Structured);
             sqlPar.Value = oENTEvento.DataTableMedioTraslado;
             sqlCom.Parameters.Add(sqlPar);

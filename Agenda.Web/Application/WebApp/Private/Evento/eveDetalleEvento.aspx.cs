@@ -135,14 +135,17 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 			try
             {
 
+                this.EliminarRepresentantePanel.Visible = false;
                 this.DatosGeneralesPanel.Visible = false;
                 this.DatosEventoPanel.Visible = false;
                 this.ProgramaLogisticaPanel.Visible = false;
+                this.ProgramaProtocoloPanel.Visible = false;
                 this.ContactoPanel.Visible = false;
                 this.AdjuntarPanel.Visible = false;
                 this.Historial.Visible = false;
                 this.RechazarPanel.Visible = false;
-                this.CuadernilloPanel.Visible = false;
+                this.CuadernilloLogisticaPanel.Visible = false;
+                this.CuadernilloProtocoloPanel.Visible = false;
 
             }catch (Exception){
 				// Do Nothing
@@ -166,7 +169,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.ContactoPanel.Visible = true;
                         this.AdjuntarPanel.Visible = true;
                         this.RechazarPanel.Visible = true;
-                        this.CuadernilloPanel.Visible = true;
+                        this.CuadernilloLogisticaPanel.Visible = (this.Logistica.Value == "1" ? true : false);
+                        this.CuadernilloProtocoloPanel.Visible = (this.Logistica.Value == "1" ? false : true);
                         this.Historial.Visible = true;
 						break;
 
@@ -180,7 +184,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.ContactoPanel.Visible = true;
                         this.AdjuntarPanel.Visible = true;
                         this.RechazarPanel.Visible = true;
-                        this.CuadernilloPanel.Visible = false;
+                        this.CuadernilloLogisticaPanel.Visible = false;
+                        this.CuadernilloProtocoloPanel.Visible = false;
                         this.Historial.Visible = true;
 						break;
 
@@ -193,7 +198,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.ContactoPanel.Visible = false;
                         this.AdjuntarPanel.Visible = false;
                         this.RechazarPanel.Visible = false;
-                        this.CuadernilloPanel.Visible = false;
+                        this.CuadernilloLogisticaPanel.Visible = false;
+                        this.CuadernilloProtocoloPanel.Visible = false;
                         this.Historial.Visible = false;
 						break;
 
@@ -230,8 +236,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // 5 - Representado
 				if ( Int32.Parse(this.hddEstatusEventoId.Value) == 4 || Int32.Parse(this.hddEstatusEventoId.Value) == 5 ){
 
-                    this.CuadernilloPanel.Visible = false;
-
+                    this.CuadernilloLogisticaPanel.Visible = false;
+                    this.CuadernilloProtocoloPanel.Visible = false;
 				}
 
                 // Si el evento no está representado no se podrá eliminar al respresentante
@@ -303,7 +309,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 }
 
                 // Atributos de controles
-                this.CuadernilloButton.Attributes.Add("onclick", "window.open('Cuadernillos/Logistica.aspx?key=" + gcEncryption.EncryptString(this.hddEventoId.Value, true) + "'); return false;");
+                this.CuadernilloLogisticaButton.Attributes.Add("onclick", "window.open('Cuadernillos/Logistica.aspx?key=" + gcEncryption.EncryptString(this.hddEventoId.Value, true) + "'); return false;");
+                this.CuadernilloProtocoloButton.Attributes.Add("onclick", "window.open('Cuadernillos/Protocolo.aspx?key=" + gcEncryption.EncryptString(this.hddEventoId.Value, true) + "'); return false;");
 
                 // Consultar detalle de El Evento
                 SelectEvento();

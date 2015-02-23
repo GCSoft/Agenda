@@ -220,22 +220,40 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.ImageButton RechazarButton;
         
         /// <summary>
-        /// CuadernilloPanel control.
+        /// CuadernilloLogisticaPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel CuadernilloPanel;
+        protected global::System.Web.UI.WebControls.Panel CuadernilloLogisticaPanel;
         
         /// <summary>
-        /// CuadernilloButton control.
+        /// CuadernilloLogisticaButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton CuadernilloButton;
+        protected global::System.Web.UI.WebControls.ImageButton CuadernilloLogisticaButton;
+        
+        /// <summary>
+        /// CuadernilloProtocoloPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel CuadernilloProtocoloPanel;
+        
+        /// <summary>
+        /// CuadernilloProtocoloButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton CuadernilloProtocoloButton;
         
         /// <summary>
         /// Historial control.

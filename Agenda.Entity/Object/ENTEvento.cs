@@ -53,6 +53,17 @@ namespace Agenda.Entity.Object
         private String  _NumeroExterior;
         private String  _NumeroInterior;
         private String  _PronosticoClima;
+        private String  _ProtocoloInvitacionA;
+        private String  _ProtocoloResponsableEvento;
+        private String  _ProtocoloBandera;
+        private String  _ProtocoloLeyenda;
+        private String  _ProtocoloResponsable;
+        private String  _ProtocoloSonido;
+        private String  _ProtocoloResponsableSonido;
+        private String  _ProtocoloDesayuno;
+        private String  _ProtocoloSillas;
+        private String  _ProtocoloMesas;
+        private String  _ProtocoloPresentacion;
         private String  _RepresentanteNombre;
         private String  _RepresentanteCargo;
         private String  _RepresentanteTelefonoOficina;
@@ -130,6 +141,17 @@ namespace Agenda.Entity.Object
             _NumeroExterior = "";
             _NumeroInterior = "";
             _PronosticoClima = "";
+            _ProtocoloInvitacionA = "";
+            _ProtocoloResponsableEvento = "";
+            _ProtocoloBandera = "";
+            _ProtocoloLeyenda = "";
+            _ProtocoloResponsable = "";
+            _ProtocoloSonido = "";
+            _ProtocoloResponsableSonido = "";
+            _ProtocoloDesayuno = "";
+            _ProtocoloSillas = "";
+            _ProtocoloMesas = "";
+            _ProtocoloPresentacion = "";
             _RepresentanteNombre = "";
             _RepresentanteCargo = "";
             _RepresentanteTelefonoOficina = "";
@@ -557,6 +579,18 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
+        ///   <name>ENTEvento.NumeroInterior</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el número interior del predio en donde se realizará el evento</summary>
+        public String NumeroInterior
+        {
+            get { return _NumeroInterior; }
+            set { _NumeroInterior = value; }
+        }
+
+        ///<remarks>
         ///   <name>ENTEvento.PronosticoClima</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
@@ -569,15 +603,135 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
-        ///   <name>ENTEvento.NumeroInterior</name>
+        ///   <name>ENTEvento.ProtocoloInvitacionA</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
-        ///<summary>Obtiene/Asigna el número interior del predio en donde se realizará el evento</summary>
-        public String NumeroInterior
+        ///<summary>Obtiene/Asigna el valor de "ProtocoloInvitacionA" usado en el programa de dirección de protocolo</summary>
+        public String ProtocoloInvitacionA
         {
-            get { return _NumeroInterior; }
-            set { _NumeroInterior = value; }
+            get { return _ProtocoloInvitacionA; }
+            set { _ProtocoloInvitacionA = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.ProtocoloResponsableEvento</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el Responsable del Evento en el programa de dirección de protocolo</summary>
+        public String ProtocoloResponsableEvento
+        {
+            get { return _ProtocoloResponsableEvento; }
+            set { _ProtocoloResponsableEvento = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.ProtocoloBandera</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el valor de "ProtocoloBandera" usado en el programa de dirección de protocolo</summary>
+        public String ProtocoloBandera
+        {
+            get { return _ProtocoloBandera; }
+            set { _ProtocoloBandera = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.ProtocoloLeyenda</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el valor de "ProtocoloLeyenda" usado en el programa de dirección de protocolo</summary>
+        public String ProtocoloLeyenda
+        {
+            get { return _ProtocoloLeyenda; }
+            set { _ProtocoloLeyenda = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.ProtocoloResponsable</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el valor de "ProtocoloResponsable" usado en el programa de dirección de protocolo</summary>
+        public String ProtocoloResponsable
+        {
+            get { return _ProtocoloResponsable; }
+            set { _ProtocoloResponsable = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.ProtocoloSonido</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el valor de "ProtocoloSonido" usado en el programa de dirección de protocolo</summary>
+        public String ProtocoloSonido
+        {
+            get { return _ProtocoloSonido; }
+            set { _ProtocoloSonido = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.ProtocoloResponsableSonido</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el valor de "ProtocoloResponsableSonido" usado en el programa de dirección de protocolo</summary>
+        public String ProtocoloResponsableSonido
+        {
+            get { return _ProtocoloResponsableSonido; }
+            set { _ProtocoloResponsableSonido = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.ProtocoloDesayuno</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el valor de "ProtocoloDesayuno" usado en el programa de dirección de protocolo</summary>
+        public String ProtocoloDesayuno
+        {
+            get { return _ProtocoloDesayuno; }
+            set { _ProtocoloDesayuno = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.ProtocoloSillas</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el valor de "ProtocoloSillas" usado en el programa de dirección de protocolo</summary>
+        public String ProtocoloSillas
+        {
+            get { return _ProtocoloSillas; }
+            set { _ProtocoloSillas = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.ProtocoloMesas</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el valor de "ProtocoloMesas" usado en el programa de dirección de protocolo</summary>
+        public String ProtocoloMesas
+        {
+            get { return _ProtocoloMesas; }
+            set { _ProtocoloMesas = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.ProtocoloPresentacion</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el valor de "ProtocoloPresentacion" usado en el programa de dirección de protocolo</summary>
+        public String ProtocoloPresentacion
+        {
+            get { return _ProtocoloPresentacion; }
+            set { _ProtocoloPresentacion = value; }
         }
 
         ///<remarks>

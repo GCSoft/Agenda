@@ -62,8 +62,13 @@
             Cancelar evento
         </asp:Panel>
 
-        <asp:Panel ID="CuadernilloPanel" CssClass="IconoPanel" runat="server" Visible="true">
-            <asp:ImageButton ID="CuadernilloButton" ImageUrl="~/Include/Image/Icon/SubMenuGenerarCuadernillo.png" runat="server"></asp:ImageButton><br />
+        <asp:Panel ID="CuadernilloLogisticaPanel" CssClass="IconoPanel" runat="server" Visible="true">
+            <asp:ImageButton ID="CuadernilloLogisticaButton" ImageUrl="~/Include/Image/Icon/SubMenuGenerarCuadernillo.png" runat="server"></asp:ImageButton><br />
+            Generar cuadernillo
+        </asp:Panel>
+
+        <asp:Panel ID="CuadernilloProtocoloPanel" CssClass="IconoPanel" runat="server" Visible="true">
+            <asp:ImageButton ID="CuadernilloProtocoloButton" ImageUrl="~/Include/Image/Icon/SubMenuGenerarCuadernillo.png" runat="server"></asp:ImageButton><br />
             Generar cuadernillo
         </asp:Panel>
 
