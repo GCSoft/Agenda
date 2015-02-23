@@ -64,6 +64,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             IWParagraph wTableCell;
             IWPicture wPicture;
             IWTextRange wText;
+            
 
             Char ENTER = Convert.ToChar(13);
 
@@ -73,23 +74,24 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
 
             // Nueva hoja
             oSection = oDocument.AddSection();
-            oSection.PageSetup.PageSize = new SizeF(567, 567);
+            oSection.PageSetup.PageSize = new SizeF(612, 653);
 
-            // Margenes a 1 cm a excepción del izquierdo
-            oSection.PageSetup.Margins.Bottom = 28f;
-            oSection.PageSetup.Margins.Left = 56f;
-            oSection.PageSetup.Margins.Right = 28f;
-            oSection.PageSetup.Margins.Top = 28f;
+            // Margenes
+            //oSection.PageSetup.Margins.Bottom = 36f;
+            //oSection.PageSetup.Margins.Left = 36f;
+            //oSection.PageSetup.Margins.Right = 66f;
+            //oSection.PageSetup.Margins.Top = 100f;
 
 
             #region Encabezado
 
             #region LogoYFecha
+   
             wTable = oSection.HeadersFooters.Header.AddTable();
             wTable.ResetCells(1, 2); // 1 Fila 2 columnas
-
+             
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 25f;
+            wTableRow.Height = 17f;
 
             // Celda 1 (Logo)
             wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -99,7 +101,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             System.Drawing.Image imgNLSGL_E = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Icon/Logo.png"));
             wPicture = wTableCell.AppendPicture(imgNLSGL_E);
             wPicture.Height = 50;
-            wPicture.Width = 200;
+            wPicture.Width = 320;
 
             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[0].Width = 350;
@@ -108,12 +110,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell = wTableRow.Cells[1].AddParagraph();
             wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Top;
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Right;
-            wText = wTableCell.AppendText("ACTUALIZACIÓN...");
+            wText = wTableCell.AppendText("ACTUALIZACIÓN...");//bd
             wText.CharacterFormat.Bold = false;
             wText.CharacterFormat.FontName = "Arial";
             wText.CharacterFormat.FontSize = 8f;
+            wText.CharacterFormat.UnderlineStyle = UnderlineStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-            wTableRow.Cells[1].Width = 150;
+            wTableRow.Cells[1].Width = 190;
 
             // Agregar el párrafo recién creado
             oSection.AddParagraph();
@@ -124,7 +127,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTable.ResetCells(1, 1); // 1 Fila 1 columnas
 
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 20f;
+            wTableRow.Height = 17f;
 
             // Celda 1 (Separador)
             wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -134,13 +137,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             System.Drawing.Image imgSeparadorE = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Icon/Separador.png"));
             wPicture = wTableCell.AppendPicture(imgSeparadorE);
             wPicture.Height = 5;
-            wPicture.Width = 500;
+            wPicture.Width = 510;
 
             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-            wTableRow.Cells[0].Width = 550;
+            wTableRow.Cells[0].Width = 510;
 
             // Agregar el párrafo recién creado
-            oSection.AddParagraph();
+            //oSection.AddParagraph();
             #endregion
 
             #endregion
@@ -151,7 +154,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTable = oSection.Body.AddTable();
             wTable.ResetCells(1, 1);
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 20f;
+            wTableRow.Height = 21f;
 
             //Encabezado
             wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -160,10 +163,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("NOMBRE DEL EVENTO");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 12f;
+            wText.CharacterFormat.FontSize = 14f;
             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.BackColor = Color.LightGray;
-            wTableRow.Cells[0].Width = 500;
+            wTableRow.Cells[0].Width = 510;
 
             // Brinco de linea (genera espacio)
             oSection.AddParagraph();
@@ -173,7 +176,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTable = oSection.Body.AddTable();
             wTable.ResetCells(1, 1);
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 24f;
+            wTableRow.Height = 25f;
 
             //col 1
             wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -183,9 +186,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("Pruebas GCSOFT");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[0].Width = 500;
+            wTableRow.Cells[0].Width = 510;
 
             // Brinco de linea (genera espacio)
             oSection.AddParagraph();
@@ -195,7 +198,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTable = oSection.Body.AddTable();
             wTable.ResetCells(1, 4);
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 24f;
+            wTableRow.Height = 17f;
 
             //col 1
             wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -203,7 +206,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("FECHA:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
@@ -218,7 +221,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("MARTES 3 DE JULIO DE 2013");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -231,7 +234,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("HORARIO:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[2].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[2].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[2].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
@@ -243,15 +246,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableRow.Cells[3].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             //TODO: FECHA DEL EVENTO DINAMICA [RepLogistica.FechaEvento]
-            wText = wTableCell.AppendText("HORARIO: 09:00 A 10:30 HRS ");
+            wText = wTableCell.AppendText("09:00 A 10:30 HRS ");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[3].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[3].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[3].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[3].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[3].Width = 150;
+            wTableRow.Cells[3].Width = 160;
 
             // Brinco de linea (genera espacio)
             oSection.AddParagraph();
@@ -261,7 +264,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTable = oSection.Body.AddTable();
             wTable.ResetCells(1, 6);
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 24f;
+            wTableRow.Height = 17f;
 
             //col 1
             wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -269,7 +272,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("PRONÓSTICO CLIMÁTICO:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
@@ -284,12 +287,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("SOLEADO/DESPEJADO");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[1].Width = 150;
+            wTableRow.Cells[1].Width = 180;
 
             //col 3
             wTableCell = wTableRow.Cells[2].AddParagraph();
@@ -297,7 +300,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("MÍNIMA:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[2].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[2].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[2].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
@@ -312,12 +315,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("22 C");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[3].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[3].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[3].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[3].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[3].Width = 50;
+            wTableRow.Cells[3].Width = 39;
 
             //col 5
             wTableCell = wTableRow.Cells[4].AddParagraph();
@@ -325,12 +328,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("MÁXIMA:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[4].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[4].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[4].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[4].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[4].Width = 50;
+            wTableRow.Cells[4].Width = 54;
 
             //Col6
             wTableCell = wTableRow.Cells[5].AddParagraph();
@@ -340,12 +343,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("35 C");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[5].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[5].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[5].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[5].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[5].Width = 50;
+            wTableRow.Cells[5].Width = 37;
 
             // Brinco de linea (genera espacio)
             oSection.AddParagraph();
@@ -357,7 +360,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
 
             #region Lugar
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 20f;
+            wTableRow.Height = 17f;
 
             //col 1
             wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -365,7 +368,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("LUGAR:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
@@ -380,12 +383,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("PATIO DE HONOR DE PALACIO DE GOBIERNO");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[1].Width = 400;
+            wTableRow.Cells[1].Width = 410;
             #endregion
 
             #region Domicilio
@@ -398,7 +401,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("DOMICILIO:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
@@ -413,17 +416,17 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("AV. MADERO Y ANOTONIO I. VILLARREAL, COL, OBRERA, MONTERREY");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[1].Width = 400;
+            wTableRow.Cells[1].Width = 410;
             #endregion
 
             #region LugarArribo
             wTableRow = wTable.Rows[2];
-            wTableRow.Height = 20f;
+            wTableRow.Height = 17f;
 
             //col 1
             wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -431,12 +434,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("LUGAR DE ARRIBO:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[0].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-            wTableRow.Cells[0].Width = 100;
+            wTableRow.Cells[0].Width = 130;
 
             //col 2
             wTableCell = wTableRow.Cells[1].AddParagraph();
@@ -446,12 +449,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("PUERTA PRINCIPAL");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[1].Width = 400;
+            wTableRow.Cells[1].Width = 380;
             #endregion
 
             // Brinco de linea (genera espacio)
@@ -463,7 +466,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTable.ResetCells(1, 9);
 
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 24f;
+            wTableRow.Height = 17f;
 
             //Col 1
             wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -471,9 +474,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("MEDIO DE TRASLADO:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[0].Width = 80;
+            wTableRow.Cells[0].Width = 123;
 
             //Col 2
             wTableCell = wTableRow.Cells[1].AddParagraph();
@@ -485,13 +488,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                 wText = wTableCell.AppendText("X");
                 wText.CharacterFormat.Bold = true;
                 wText.CharacterFormat.FontName = "Arial";
-                wText.CharacterFormat.FontSize = 9f;
+                wText.CharacterFormat.FontSize = 10f;
             }
             wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[1].Width = 15;
+            wTableRow.Cells[1].Width = 10;
 
             //col 3
             wTableCell = wTableRow.Cells[2].AddParagraph();
@@ -499,7 +502,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("HEICÓPTERO");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[2].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[2].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[2].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -516,13 +519,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                 wText = wTableCell.AppendText("X");
                 wText.CharacterFormat.Bold = true;
                 wText.CharacterFormat.FontName = "Arial";
-                wText.CharacterFormat.FontSize = 9f;
+                wText.CharacterFormat.FontSize = 10f;
             }
             wTableRow.Cells[3].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[3].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[3].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[3].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[3].Width = 15;
+            wTableRow.Cells[3].Width = 10;
 
             //col 5
             wTableCell = wTableRow.Cells[4].AddParagraph();
@@ -530,7 +533,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("VEHÍCULO");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[4].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[4].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[4].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -547,13 +550,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                 wText = wTableCell.AppendText("X");
                 wText.CharacterFormat.Bold = true;
                 wText.CharacterFormat.FontName = "Arial";
-                wText.CharacterFormat.FontSize = 9f;
+                wText.CharacterFormat.FontSize = 10f;
             }
             wTableRow.Cells[5].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[5].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[5].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[5].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[5].Width = 15;
+            wTableRow.Cells[5].Width = 10;
 
             //col 7
             wTableCell = wTableRow.Cells[6].AddParagraph();
@@ -561,7 +564,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("INFANTERÍA");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[6].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[6].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[6].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -578,13 +581,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                 wText = wTableCell.AppendText("X");
                 wText.CharacterFormat.Bold = true;
                 wText.CharacterFormat.FontName = "Arial";
-                wText.CharacterFormat.FontSize = 9f;
+                wText.CharacterFormat.FontSize = 10f;
             }
             wTableRow.Cells[7].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[7].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[7].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[7].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[7].Width = 15;
+            wTableRow.Cells[7].Width = 10;
 
             //col 9
             wTableCell = wTableRow.Cells[8].AddParagraph();
@@ -592,12 +595,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("OTRO");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[8].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[8].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[8].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[8].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[8].Width = 90;
+            wTableRow.Cells[8].Width = 70;
 
             // Brinco de linea (genera espacio)
             oSection.AddParagraph();
@@ -607,7 +610,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTable = oSection.Body.AddTable();
             wTable.ResetCells(1, 2);
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 24f;
+            wTableRow.Height = 17f;
 
             //col 1
             wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -615,12 +618,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("TIPO MONTAJE:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[0].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[0].Width = 150;
+            wTableRow.Cells[0].Width = 110;
 
             //col 2
             wTableCell = wTableRow.Cells[1].AddParagraph();
@@ -630,12 +633,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("AUDITORIO");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[1].Width = 350;
+            wTableRow.Cells[1].Width = 400;
 
             // Brinco de linea (genera espacio)
             oSection.AddParagraph();
@@ -645,7 +648,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTable = oSection.Body.AddTable();
             wTable.ResetCells(1, 4);
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 30f;
+            wTableRow.Height = 17f;
 
             //col 1
             wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -653,7 +656,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("AFORO:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
@@ -668,7 +671,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("7000");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -681,7 +684,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("CARACTERÍSTICAS DE INVITADOS");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[2].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[2].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[2].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
@@ -696,12 +699,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("FUNCIONARIOS ESTATALES, DEPORTISTAS, MAESTROS, MAESTROS DE EDUCACIÓN FISICA, PADRES...");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[3].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[3].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[3].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[3].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[3].Width = 250;
+            wTableRow.Cells[3].Width = 260;
             #endregion
 
             #region InvitacionEsposa
@@ -709,7 +712,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTable.ResetCells(1, 9);
 
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 24f;
+            wTableRow.Height = 17f;
 
             //Col 1
             wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -717,12 +720,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("INVITACIÓN CON ESPOSA:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[0].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[0].Width = 160;
+            wTableRow.Cells[0].Width = 170;
 
             //Col 2
             wTableCell = wTableRow.Cells[1].AddParagraph();
@@ -732,7 +735,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText((1 == 1 ? "SI" : "NO"));
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -745,7 +748,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("ASISTE:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[2].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[2].Width = 75;
 
@@ -759,7 +762,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                 wText = wTableCell.AppendText("X");
                 wText.CharacterFormat.Bold = true;
                 wText.CharacterFormat.FontName = "Arial";
-                wText.CharacterFormat.FontSize = 9f;
+                wText.CharacterFormat.FontSize = 10f;
             }
             wTableRow.Cells[3].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[3].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -773,7 +776,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("SI");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[4].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[4].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[4].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -790,7 +793,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                 wText = wTableCell.AppendText("X");
                 wText.CharacterFormat.Bold = true;
                 wText.CharacterFormat.FontName = "Arial";
-                wText.CharacterFormat.FontSize = 9f;
+                wText.CharacterFormat.FontSize = 10f;
             }
             wTableRow.Cells[5].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[5].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -804,7 +807,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("NO");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[6].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[6].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[6].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -821,7 +824,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                 wText = wTableCell.AppendText("X");
                 wText.CharacterFormat.Bold = true;
                 wText.CharacterFormat.FontName = "Arial";
-                wText.CharacterFormat.FontSize = 9f;
+                wText.CharacterFormat.FontSize = 10f;
             }
             wTableRow.Cells[7].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[7].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -835,7 +838,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("PENDIENTE");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[8].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[8].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[8].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -850,7 +853,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTable = oSection.Body.AddTable();
             wTable.ResetCells(1, 2);
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 24f;
+            wTableRow.Height = 17f;
 
             //col 1
             wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -858,7 +861,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("INVITADO ESPECIAL:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
@@ -872,12 +875,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("NO APLICA");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[1].Width = 350;
+            wTableRow.Cells[1].Width = 360;
 
             // Brinco de linea (genera espacio)
             oSection.AddParagraph();
@@ -887,7 +890,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTable = oSection.Body.AddTable();
             wTable.ResetCells(1, 2);
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 24f;
+            wTableRow.Height = 17f;
 
             //col 1
             wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -895,12 +898,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("MEDIOS DE COMUNICACIÓN:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[0].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[0].Width = 150;
+            wTableRow.Cells[0].Width = 200;
 
             //col 2
             wTableCell = wTableRow.Cells[1].AddParagraph();
@@ -910,12 +913,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText((1 == 1 ? "SI" : "NO"));
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[1].Width = 350;
+            wTableRow.Cells[1].Width = 310;
 
             // Brinco de linea (genera espacio)
             oSection.AddParagraph();
@@ -939,7 +942,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("VESTIMENTA:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -956,7 +959,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                 wText = wTableCell.AppendText("X");
                 wText.CharacterFormat.Bold = true;
                 wText.CharacterFormat.FontName = "Arial";
-                wText.CharacterFormat.FontSize = 9f;
+                wText.CharacterFormat.FontSize = 10f;
             }
             wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -970,7 +973,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("GALA");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[2].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[2].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[2].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -987,7 +990,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                 wText = wTableCell.AppendText("X");
                 wText.CharacterFormat.Bold = true;
                 wText.CharacterFormat.FontName = "Arial";
-                wText.CharacterFormat.FontSize = 9f;
+                wText.CharacterFormat.FontSize = 10f;
             }
             wTableRow.Cells[3].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[3].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -1001,7 +1004,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("FORMAL");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[4].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[4].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[4].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -1018,7 +1021,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                 wText = wTableCell.AppendText("X");
                 wText.CharacterFormat.Bold = true;
                 wText.CharacterFormat.FontName = "Arial";
-                wText.CharacterFormat.FontSize = 9f;
+                wText.CharacterFormat.FontSize = 10f;
             }
             wTableRow.Cells[5].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[5].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -1032,12 +1035,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("FORMAL (TRAJE OSCURO)");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[6].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[6].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[6].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[6].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[6].Width = 120;
+            wTableRow.Cells[6].Width = 130;
 
             #endregion
 
@@ -1062,7 +1065,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                 wText = wTableCell.AppendText("X");
                 wText.CharacterFormat.Bold = true;
                 wText.CharacterFormat.FontName = "Arial";
-                wText.CharacterFormat.FontSize = 9f;
+                wText.CharacterFormat.FontSize = 10f;
             }
             wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -1074,9 +1077,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell = wTableRow.Cells[2].AddParagraph();
             wTableRow.Cells[2].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-            wText = wTableCell.AppendText("GALA");
+            wText = wTableCell.AppendText("CASUAL (SACO SIN CORBATA) ");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[2].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[2].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[2].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -1093,7 +1096,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                 wText = wTableCell.AppendText("X");
                 wText.CharacterFormat.Bold = true;
                 wText.CharacterFormat.FontName = "Arial";
-                wText.CharacterFormat.FontSize = 9f;
+                wText.CharacterFormat.FontSize = 10f;
             }
             wTableRow.Cells[3].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[3].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -1105,9 +1108,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell = wTableRow.Cells[4].AddParagraph();
             wTableRow.Cells[4].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-            wText = wTableCell.AppendText("FORMAL");
+            wText = wTableCell.AppendText("CASUAL (SIN SACO)");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[4].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[4].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[4].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -1124,7 +1127,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                 wText = wTableCell.AppendText("X");
                 wText.CharacterFormat.Bold = true;
                 wText.CharacterFormat.FontName = "Arial";
-                wText.CharacterFormat.FontSize = 9f;
+                wText.CharacterFormat.FontSize = 10f;
             }
             wTableRow.Cells[5].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[5].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -1136,14 +1139,14 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell = wTableRow.Cells[6].AddParagraph();
             wTableRow.Cells[6].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-            wText = wTableCell.AppendText("FORMAL (TRAJE OSCURO)");
+            wText = wTableCell.AppendText("OTRO");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[6].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[6].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[6].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[6].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[6].Width = 120;
+            wTableRow.Cells[6].Width = 130;
 
             #endregion
 
@@ -1155,7 +1158,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTable = oSection.Body.AddTable();
             wTable.ResetCells(1, 2);
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 24f;
+            wTableRow.Height = 17f;
 
             //col 1
             wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -1163,12 +1166,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("MENÚ:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[0].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[0].Width = 150;
+            wTableRow.Cells[0].Width = 50;
 
             //col 2
             wTableCell = wTableRow.Cells[1].AddParagraph();
@@ -1178,12 +1181,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("AGUA");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[1].Width = 350;
+            wTableRow.Cells[1].Width = 460;
 
             // Brinco de linea (genera espacio)
             oSection.AddParagraph();
@@ -1193,7 +1196,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTable = oSection.Body.AddTable();
             wTable.ResetCells(1, 2);
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 24f;
+            wTableRow.Height = 17f;
 
             //col 1
             wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -1201,7 +1204,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("ACCIÓN A REALIZAR:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
@@ -1216,12 +1219,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("DECLARATORIA INAUGURAL");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[1].Width = 350;
+            wTableRow.Cells[1].Width = 360;
 
             // Brinco de linea (genera espacio)
             oSection.AddParagraph();
@@ -1235,7 +1238,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTable = oSection.Body.AddTable();
             wTable.ResetCells(1, 1);
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 20f;
+            wTableRow.Height = 21f;
 
             //Encabezado
             wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -1244,10 +1247,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("COMITÉ DE RECEPCIÓN");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 12f;
+            wText.CharacterFormat.FontSize = 14f;
             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.BackColor = Color.LightGray;
-            wTableRow.Cells[0].Width = 500;
+            wTableRow.Cells[0].Width = 510;
 
             // Brinco de linea (genera espacio)
             oSection.AddParagraph();
@@ -1257,7 +1260,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTable = oSection.Body.AddTable();
             wTable.ResetCells(1, 1);
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 20f;
+            wTableRow.Height = 17f;
 
             //col 1
             wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -1267,9 +1270,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("1.  ARRIBO AL PARTIDO DE HONOR Y TRASLADO DE INFANTERIA A LA MESA PRINCIPAL");
             wText.CharacterFormat.Bold = false;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[0].Width = 500;
+            wTableRow.Cells[0].Width = 510;
 
             // Brinco de linea (genera espacio)
             oSection.AddParagraph();
@@ -1284,20 +1287,20 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTable = oSection.Body.AddTable();
             wTable.ResetCells(1, 1);
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 20f;
+            wTableRow.Height = 21f;
 
             //Encabezado
             wTableCell = wTableRow.Cells[0].AddParagraph();
             wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
             //TODO: NOMBRE DEL EVENTO DINÁMICO [RepLogistica.ModoDeEstanciaG1]
-            wText = wTableCell.AppendText("PRIMERA FILA");
+            wText = wTableCell.AppendText("ORDEN DEL DÍA");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 12f;
+            wText.CharacterFormat.FontSize = 14f;
             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.BackColor = Color.LightGray;
-            wTableRow.Cells[0].Width = 500;
+            wTableRow.Cells[0].Width = 510;
 
             // Brinco de linea (genera espacio)
             oSection.AddParagraph();
@@ -1305,7 +1308,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
 
             #region Comite
             wTable = oSection.Body.AddTable();
-            wTable.ResetCells(3, 1);
+            wTable.ResetCells(1, 1);
 
             // Fila1
             wTableRow = wTable.Rows[0];
@@ -1315,102 +1318,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             //TODO: CICLO DINÁMICO [RepGrupo1.Nombre y Puesto]
             wText = wTableCell.AppendText("1.  LIC RODRIGO MEDINA DE LA CRUZ, GOBERNADOR CONSTITUCIONAL DEL ESTADO DE NUEVO LEON" + ENTER + ENTER);
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[0].Width = 500;
-
-            // Fila2
-            wTableRow = wTable.Rows[1];
-            wTableCell = wTableRow.Cells[0].AddParagraph();
-            wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-            wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-            wText = wTableCell.AppendText("OBSERVACIONES");
-            wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
-            wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[0].Width = 500;
-
-            // Fila3
-            wTableRow = wTable.Rows[2];
-            wTableRow.Height = 30f;
-            wTableCell = wTableRow.Cells[0].AddParagraph();
-            wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-            wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-            //TODO: OBSERVACIONES DINÁMICO [RepLogistica.Observaciones]
-            wText = wTableCell.AppendText("** EL ENCENDIDO DEL PEBETERO SE REALIZARÁ POR MEDIO DE UN VIDEO");
-            wText.CharacterFormat.Bold = true;
-            wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
-            wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[0].Width = 500;
-
-            // Brinco de linea (genera espacio)
-            oSection.AddParagraph();
-            #endregion
-
-            #region Responsable
-            wTable = oSection.Body.AddTable();
-            wTable.ResetCells(2, 2);
-
-            //Fila 1
-            wTableRow = wTable.Rows[0];
-            wTableRow.Height = 30f;
-            wTableCell = wTableRow.Cells[0].AddParagraph();
-            wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-            wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-            wText = wTableCell.AppendText("RESPONSABLE DEL EVENTO:");
-            wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
-            wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-            wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-            wTableRow.Cells[0].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[0].Width = 150;
-
-            //col 2
-            wTableCell = wTableRow.Cells[1].AddParagraph();
-            wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-            wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-            //TODO: RESPONSABLE DEL EVENTO DINÁMICO (para pasar enter usar la varibale ENTER concatenada) [RepLogistica.ResponsableEvento]
-            wText = wTableCell.AppendText("ING. JOSÉ ANTONIO GONZALEZ TREVIÑO");
-            wText.CharacterFormat.Bold = true;
-            wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
-            wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-            wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-            wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[1].Width = 350;
-
-            //Fila 2
-            wTableRow = wTable.Rows[1];
-            wTableRow.Height = 30f;
-            wTableCell = wTableRow.Cells[0].AddParagraph();
-            wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-            wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-            wText = wTableCell.AppendText("RESPONSABLE DE LOGÍSTICA:");
-            wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
-            wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-            wTableRow.Cells[0].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-            wTableRow.Cells[0].Width = 150;
-
-            //col 2
-            wTableCell = wTableRow.Cells[1].AddParagraph();
-            wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-            wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-            //TODO: RESPONSABLE DE LOGÍSTICA DINÁMICO (para pasar enter usar la varibale ENTER concatenada) [RepLogistica.ResponsableLogistica y ResponsableLogistica2]
-            wText = wTableCell.AppendText("RESPONSABLE 1" + ENTER + "RESPONSABLE 2");
-            wText.CharacterFormat.Bold = true;
-            wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
-            wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-            wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-            wTableRow.Cells[1].Width = 350;
+            wTableRow.Cells[0].Width = 510;
 
             // Brinco de linea (genera espacio)
             oSection.AddParagraph();
@@ -1425,28 +1335,28 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTable = oSection.Body.AddTable();
             wTable.ResetCells(1, 1);
             wTableRow = wTable.Rows[0];
-            wTableRow.Height = 20f;
+            wTableRow.Height = 21f;
 
             //Encabezado
             wTableCell = wTableRow.Cells[0].AddParagraph();
             wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
             //TODO: NOMBRE DEL EVENTO DINÁMICO [RepLogistica.ModoDeEstanciaG2]
-            wText = wTableCell.AppendText("SEGUNDA FILA");
+            wText = wTableCell.AppendText("PRESÍDIUM ");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 12f;
+            wText.CharacterFormat.FontSize = 14f;
             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.BackColor = Color.LightGray;
-            wTableRow.Cells[0].Width = 500;
+            wTableRow.Cells[0].Width = 510;
 
             // Brinco de linea (genera espacio)
             oSection.AddParagraph();
             #endregion
 
-            #region Comite
+            #region Presidium
             wTable = oSection.Body.AddTable();
-            wTable.ResetCells(3, 1);
+            wTable.ResetCells(1, 1);
 
             // Fila1
             wTableRow = wTable.Rows[0];
@@ -1456,37 +1366,29 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             //TODO: CICLO DINÁMICO [RepGrupo2.Nombre y Puesto]
             wText = wTableCell.AppendText("1.  LIC RODRIGO MEDINA DE LA CRUZ, GOBERNADOR CONSTITUCIONAL DEL ESTADO DE NUEVO LEON" + ENTER + ENTER + ENTER + ENTER);
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[0].Width = 500;
-
-            // Fila2
-            wTableRow = wTable.Rows[1];
-            wTableCell = wTableRow.Cells[0].AddParagraph();
-            wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-            wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-            wText = wTableCell.AppendText("OBSERVACIONES");
-            wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
-            wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[0].Width = 500;
-
-            // Fila3
-            wTableRow = wTable.Rows[2];
-            wTableRow.Height = 30f;
-            wTableCell = wTableRow.Cells[0].AddParagraph();
-            wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-            wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-            //TODO: OBSERVACIONES DINÁMICO [RepLogistica.Observaciones]
-            wText = wTableCell.AppendText("** EL ENCENDIDO DEL PEBETERO SE REALIZARÁ POR MEDIO DE UN VIDEO");
-            wText.CharacterFormat.Bold = true;
-            wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
-            wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[0].Width = 500;
+            wTableRow.Cells[0].Width = 510;
 
             // Brinco de linea (genera espacio)
             oSection.AddParagraph();
+
+            wTable = oSection.Body.AddTable();
+            wTable.ResetCells(1, 1);
+
+            wTableRow = wTable.Rows[0];
+            wTableCell = wTableRow.Cells[0].AddParagraph();
+            wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+            wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+            wText = wTableCell.AppendText("OBSERVACIONES: ");
+            wText.CharacterFormat.FontName = "Arial";
+            wText.CharacterFormat.FontSize = 10f;
+            wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+            wTableRow.Cells[0].Width = 510;
+
+            // Brinco de linea (genera espacio)
+            oSection.AddParagraph();
+
             #endregion
 
             #region Responsable
@@ -1501,12 +1403,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("RESPONSABLE DEL EVENTO:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[0].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[0].Width = 150;
+            wTableRow.Cells[0].Width = 170;
 
             //col 2
             wTableCell = wTableRow.Cells[1].AddParagraph();
@@ -1516,12 +1418,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("ING. JOSÉ ANTONIO GONZALEZ TREVIÑO");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-            wTableRow.Cells[1].Width = 350;
+            wTableRow.Cells[1].Width = 340;
 
             //Fila 2
             wTableRow = wTable.Rows[1];
@@ -1531,12 +1433,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
             wText = wTableCell.AppendText("RESPONSABLE DE LOGÍSTICA:");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[0].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-            wTableRow.Cells[0].Width = 150;
+            wTableRow.Cells[0].Width = 170;
 
             //col 2
             wTableCell = wTableRow.Cells[1].AddParagraph();
@@ -1546,12 +1448,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("RESPONSABLE 1" + ENTER + "RESPONSABLE 2");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
             wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
             wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-            wTableRow.Cells[1].Width = 350;
+            wTableRow.Cells[1].Width = 340;
 
             // Brinco de linea (genera espacio)
             oSection.AddParagraph();
@@ -1569,7 +1471,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             oSection.PageSetup.Margins.Top = 28f;
 
             wTable = oSection.Body.AddTable();
-            wTable.ResetCells(3, 1);
+            wTable.ResetCells(2, 1);
 
             //Fila 1
             wTableRow = wTable.Rows[0];
@@ -1580,9 +1482,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wText = wTableCell.AppendText("ESTRADO");
             wText.CharacterFormat.Bold = true;
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 14f;
             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-            wTableRow.Cells[0].Width = 500;
+            wTableRow.Cells[0].Width = 510;
 
             //Fila 2
             wTableRow = wTable.Rows[1];
@@ -1592,9 +1494,28 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
             wText = wTableCell.AppendText("(PROPUESTA DE ACOMODO)");
             wText.CharacterFormat.FontName = "Arial";
-            wText.CharacterFormat.FontSize = 9f;
+            wText.CharacterFormat.FontSize = 10f;
             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-            wTableRow.Cells[0].Width = 500;
+            wTableRow.Cells[0].Width = 510;
+
+            // imagen
+            wTable = oSection.Body.AddTable();
+            wTable.ResetCells(1, 1);
+
+            //Fila 1
+            wTableRow = wTable.Rows[0];
+            wTableRow.Height = 20f;
+            wTableCell = wTableRow.Cells[0].AddParagraph();
+            wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Bottom;
+            wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+
+            System.Drawing.Image imgAcomodo = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Icon/puestoAcomodo.png"));
+            wPicture = wTableCell.AppendPicture(imgAcomodo);
+            wPicture.Height = 50;
+            wPicture.Width = 510;
+
+            wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+            wTableRow.Cells[0].Width = 510;
 
 
             // Brinco de linea (genera espacio)
