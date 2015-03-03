@@ -77,11 +77,15 @@ namespace Agenda.Entity.Object
         private String  _FechaEvento;
         private String  _FechaFin;
         private String  _FechaInicio;
+        private String  _HelipuertoLugar;
+        private String  _HelipuertoDomicilio;
+        private String  _HelipuertoCoordenadas;
         private String  _HoraEventoInicio;
         private String  _HoraEventoFin;
         private Int16   _Activo;
         private Int32   _Aforo;
         private Int32   _Anio;
+        private Int16   _ComiteHelipuerto;
         private Int16   _Dependencia;
         private Int32   _Mes;
         private Int16   _Esposa;
@@ -94,6 +98,7 @@ namespace Agenda.Entity.Object
         private Int16   _PropuestaAcomodo;
         private Int16   _Protocolo;
         private DataTable   _DataTableAcomodo;
+        private DataTable   _DataTableComiteHelipuerto;
         private DataTable   _DataTableComiteRecepcion;
         private DataTable   _DataTableEstatusEvento;
         private DataTable   _DataTableMedioTraslado;
@@ -165,11 +170,15 @@ namespace Agenda.Entity.Object
             _FechaEvento = "";
             _FechaFin = "";
             _FechaInicio = "";
+            _HelipuertoLugar = "";
+            _HelipuertoDomicilio = "";
+            _HelipuertoCoordenadas = "";
             _HoraEventoInicio = "";
             _HoraEventoFin = "";
             _Activo = 2;
             _Aforo = 0;
             _Anio = 0;
+            _ComiteHelipuerto = 0;
             _Dependencia = 0;
             _Mes = 0;
             _Esposa = 0;
@@ -182,6 +191,7 @@ namespace Agenda.Entity.Object
             _PropuestaAcomodo = 0;
             _Protocolo = 0;
             _DataTableAcomodo = null;
+            _DataTableComiteHelipuerto = null;
             _DataTableComiteRecepcion = null;
             _DataTableEstatusEvento = null;
             _DataTableMedioTraslado = null;
@@ -891,6 +901,42 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
+        ///   <name>ENTEvento.HelipuertoLugar</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el lugar del Helipuerto provisional</summary>
+        public String HelipuertoLugar
+        {
+            get { return _HelipuertoLugar; }
+            set { _HelipuertoLugar = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.HelipuertoDomicilio</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el domicilio del Helipuerto provisional</summary>
+        public String HelipuertoDomicilio
+        {
+            get { return _HelipuertoDomicilio; }
+            set { _HelipuertoDomicilio = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.HelipuertoCoordenadas</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna las coordenadas del Helipuerto provisional</summary>
+        public String HelipuertoCoordenadas
+        {
+            get { return _HelipuertoCoordenadas; }
+            set { _HelipuertoCoordenadas = value; }
+        }
+
+        ///<remarks>
         ///   <name>ENTEvento.HoraEventoInicio</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
@@ -948,6 +994,18 @@ namespace Agenda.Entity.Object
         {
             get { return _Anio; }
             set { _Anio = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.ComiteHelipuerto</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un valor que determina si se incluye el comité del helipuerto</summary>
+        public Int16 ComiteHelipuerto
+        {
+            get { return _ComiteHelipuerto; }
+            set { _ComiteHelipuerto = value; }
         }
 
         ///<remarks>
@@ -1092,6 +1150,18 @@ namespace Agenda.Entity.Object
         {
             get { return _DataTableAcomodo; }
             set { _DataTableAcomodo = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.DataTableComiteHelipuerto</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un DataTable el cual contiene el detalle del comité de recepción del helipuerto provisional</summary>
+        public DataTable DataTableComiteHelipuerto
+        {
+            get { return _DataTableComiteHelipuerto; }
+            set { _DataTableComiteHelipuerto = value; }
         }
 
         ///<remarks>

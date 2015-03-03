@@ -783,6 +783,22 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTEvento.Menu;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("ComiteHelipuerto", SqlDbType.TinyInt);
+            sqlPar.Value = oENTEvento.ComiteHelipuerto;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("HelipuertoLugar", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.HelipuertoLugar;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("HelipuertoDomicilio", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.HelipuertoDomicilio;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("HelipuertoCoordenadas", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.HelipuertoCoordenadas;
+            sqlCom.Parameters.Add(sqlPar);
+
             sqlPar = new SqlParameter("ProtocoloInvitacionA", SqlDbType.VarChar);
             sqlPar.Value = oENTEvento.ProtocoloInvitacionA;
             sqlCom.Parameters.Add(sqlPar);
@@ -829,6 +845,10 @@ namespace Agenda.DataAccess.Object
 
             sqlPar = new SqlParameter("tblMedioTraslado", SqlDbType.Structured);
             sqlPar.Value = oENTEvento.DataTableMedioTraslado;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("tblComiteHelipuerto", SqlDbType.Structured);
+            sqlPar.Value = oENTEvento.DataTableComiteHelipuerto;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("tblComiteRecepcion", SqlDbType.Structured);

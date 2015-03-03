@@ -85,31 +85,40 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.Label lblEventoNombre;
         
         /// <summary>
-        /// lblEventoFechaHora control.
+        /// lblEventoFecha control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEventoFechaHora;
+        protected global::System.Web.UI.WebControls.Label lblEventoFecha;
         
         /// <summary>
-        /// Accordion1 control.
+        /// lblEventoHora control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.Accordion Accordion1;
+        protected global::System.Web.UI.WebControls.Label lblEventoHora;
         
         /// <summary>
-        /// AccordionPane1 control.
+        /// acrdNombreEvento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.AccordionPane AccordionPane1;
+        protected global::AjaxControlToolkit.Accordion acrdNombreEvento;
+        
+        /// <summary>
+        /// apanNombreEvento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AccordionPane apanNombreEvento;
         
         /// <summary>
         /// Label1 control.
@@ -119,42 +128,6 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label1;
-        
-        /// <summary>
-        /// ddlTipoVestimenta control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoVestimenta;
-        
-        /// <summary>
-        /// txtTipoVestimentaOtro control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTipoVestimentaOtro;
-        
-        /// <summary>
-        /// ddlMedioComunicacion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMedioComunicacion;
-        
-        /// <summary>
-        /// chklMedioTraslado control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList chklMedioTraslado;
         
         /// <summary>
         /// txtPronostico control.
@@ -184,13 +157,22 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.TextBox txtTemperaturaMaxima;
         
         /// <summary>
-        /// txtAforo control.
+        /// txtLugarArribo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAforo;
+        protected global::System.Web.UI.WebControls.TextBox txtLugarArribo;
+        
+        /// <summary>
+        /// chklMedioTraslado control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList chklMedioTraslado;
         
         /// <summary>
         /// txtTipoMontaje control.
@@ -202,13 +184,22 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.TextBox txtTipoMontaje;
         
         /// <summary>
-        /// txtLugarArribo control.
+        /// txtAforo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLugarArribo;
+        protected global::System.Web.UI.WebControls.TextBox txtAforo;
+        
+        /// <summary>
+        /// txtCaracteristicasInvitados control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCaracteristicasInvitados;
         
         /// <summary>
         /// chkEsposaInvitada control.
@@ -229,22 +220,31 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.RadioButtonList rblConfirmacionEsposa;
         
         /// <summary>
-        /// txtAccionRealizar control.
+        /// ddlMedioComunicacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAccionRealizar;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMedioComunicacion;
         
         /// <summary>
-        /// txtCaracteristicasInvitados control.
+        /// ddlTipoVestimenta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCaracteristicasInvitados;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoVestimenta;
+        
+        /// <summary>
+        /// txtTipoVestimentaOtro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtTipoVestimentaOtro;
         
         /// <summary>
         /// txtMenu control.
@@ -256,22 +256,130 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.TextBox txtMenu;
         
         /// <summary>
-        /// Accordion2 control.
+        /// txtAccionRealizar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.Accordion Accordion2;
+        protected global::System.Web.UI.WebControls.TextBox txtAccionRealizar;
         
         /// <summary>
-        /// AccordionPane2 control.
+        /// acrdComiteHelipuerto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.AccordionPane AccordionPane2;
+        protected global::AjaxControlToolkit.Accordion acrdComiteHelipuerto;
+        
+        /// <summary>
+        /// apanComiteHelipuerto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AccordionPane apanComiteHelipuerto;
+        
+        /// <summary>
+        /// Label7 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label7;
+        
+        /// <summary>
+        /// ddlComiteHelipuerto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlComiteHelipuerto;
+        
+        /// <summary>
+        /// txtComiteHelipuertoLugar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtComiteHelipuertoLugar;
+        
+        /// <summary>
+        /// txtComiteHelipuertoDomicilio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtComiteHelipuertoDomicilio;
+        
+        /// <summary>
+        /// txtComiteHelipuertoCoordenadas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtComiteHelipuertoCoordenadas;
+        
+        /// <summary>
+        /// txtComiteHelipuertoNombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtComiteHelipuertoNombre;
+        
+        /// <summary>
+        /// txtComiteHelipuertoPuesto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtComiteHelipuertoPuesto;
+        
+        /// <summary>
+        /// btnAgregarComiteHelipuerto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarComiteHelipuerto;
+        
+        /// <summary>
+        /// gvComiteHelipuerto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvComiteHelipuerto;
+        
+        /// <summary>
+        /// acrdComiteRecepcion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.Accordion acrdComiteRecepcion;
+        
+        /// <summary>
+        /// apanComiteRecepcion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AccordionPane apanComiteRecepcion;
         
         /// <summary>
         /// Label2 control.
@@ -319,22 +427,22 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.GridView gvComiteRecepcion;
         
         /// <summary>
-        /// Accordion3 control.
+        /// acrdOrdenDia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.Accordion Accordion3;
+        protected global::AjaxControlToolkit.Accordion acrdOrdenDia;
         
         /// <summary>
-        /// AccordionPane3 control.
+        /// apanOrdenDia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.AccordionPane AccordionPane3;
+        protected global::AjaxControlToolkit.AccordionPane apanOrdenDia;
         
         /// <summary>
         /// Label3 control.
@@ -373,22 +481,22 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.GridView gvOrdenDia;
         
         /// <summary>
-        /// Accordion4 control.
+        /// acrdAcomodo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.Accordion Accordion4;
+        protected global::AjaxControlToolkit.Accordion acrdAcomodo;
         
         /// <summary>
-        /// AccordionPane4 control.
+        /// apanAcomodo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.AccordionPane AccordionPane4;
+        protected global::AjaxControlToolkit.AccordionPane apanAcomodo;
         
         /// <summary>
         /// Label4 control.
@@ -463,22 +571,22 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.TextBox txtAcomodoObservaciones;
         
         /// <summary>
-        /// Accordion5 control.
+        /// acrdResponsable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.Accordion Accordion5;
+        protected global::AjaxControlToolkit.Accordion acrdResponsable;
         
         /// <summary>
-        /// AccordionPane5 control.
+        /// apanResponsable control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.AccordionPane AccordionPane5;
+        protected global::AjaxControlToolkit.AccordionPane apanResponsable;
         
         /// <summary>
         /// Label5 control.
@@ -526,22 +634,22 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.GridView gvResponsableEvento;
         
         /// <summary>
-        /// Accordion6 control.
+        /// acrdResponsableLogistica control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.Accordion Accordion6;
+        protected global::AjaxControlToolkit.Accordion acrdResponsableLogistica;
         
         /// <summary>
-        /// AccordionPane6 control.
+        /// apanResponsableLogistica control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.AccordionPane AccordionPane6;
+        protected global::AjaxControlToolkit.AccordionPane apanResponsableLogistica;
         
         /// <summary>
         /// Label6 control.

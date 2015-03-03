@@ -184,7 +184,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Carátula compacta
                 this.lblEventoNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
-                this.lblEventoFechaHora.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHora"].ToString();
+                this.lblEventoFecha.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaLarga"].ToString();
+                this.lblEventoHora.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoHorario"].ToString();
 
                 // Sección: Nombre del evento
                 if ( oENTResponse.DataSetResponse.Tables[6].Rows.Count > 0 ){

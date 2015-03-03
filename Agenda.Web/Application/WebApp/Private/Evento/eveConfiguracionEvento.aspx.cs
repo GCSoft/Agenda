@@ -63,8 +63,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 #region "Sección: Nombre del evento"
 
                     // Expander el acordeón
-                    AccordionSelectedIndex = this.Accordion1.SelectedIndex;
-                    this.Accordion1.SelectedIndex = 0;
+                    AccordionSelectedIndex = this.acrdNombreEvento.SelectedIndex;
+                    this.acrdNombreEvento.SelectedIndex = 0;
 
                     // Medios de traslado seleccionados
                     tblTemporal = new DataTable("DataTableMedioTraslado");
@@ -94,15 +94,47 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     if (this.txtAccionRealizar.Text.Trim() == "") { throw (new Exception("Es necesario determinar la acción a realizar")); }
                     
                     // Estado original del acordeón
-                    this.Accordion1.SelectedIndex = AccordionSelectedIndex;
+                    this.acrdNombreEvento.SelectedIndex = AccordionSelectedIndex;
                     
+                #endregion
+
+                #region "Comité de Recepción en el Helipuerto Provisional"
+
+                    // Expander el acordeón
+                    AccordionSelectedIndex = this.acrdComiteHelipuerto.SelectedIndex;
+                    this.acrdComiteHelipuerto.SelectedIndex = 0;
+
+                    if ( this.ddlComiteHelipuerto.SelectedItem.Value == "1" ){
+
+                        CurrentClientID = this.txtComiteHelipuertoLugar.ClientID;
+                        if (this.txtComiteHelipuertoLugar.Text.Trim() == "") { throw (new Exception("Es necesario determinar el lugar del helipuerto provisional")); }
+
+                        CurrentClientID = this.txtComiteHelipuertoDomicilio.ClientID;
+                        if (this.txtComiteHelipuertoDomicilio.Text.Trim() == "") { throw (new Exception("Es necesario determinar el domicilio del helipuerto provisional")); }
+
+                        CurrentClientID = this.txtComiteHelipuertoCoordenadas.ClientID;
+                        if (this.txtComiteHelipuertoCoordenadas.Text.Trim() == "") { throw (new Exception("Es necesario determinar las coordenadas del helipuerto provisional")); }
+
+                        // Comité de recepción en helipuerto
+                        tblTemporal = null;
+                        tblTemporal = gcParse.GridViewToDataTable(this.gvComiteHelipuerto, true);
+                    
+                        // Validaciones
+                        CurrentClientID = this.txtComiteHelipuertoNombre.ClientID;
+                        if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario capturar el Comité de Recepción en el Helipuerto")); }
+
+                    }
+
+                    // Estado original del acordeón
+                    this.acrdComiteHelipuerto.SelectedIndex = AccordionSelectedIndex;
+
                 #endregion
 
                 #region "Comité de recepción"
 
                     // Expander el acordeón
-                    AccordionSelectedIndex = this.Accordion2.SelectedIndex;
-                    this.Accordion2.SelectedIndex = 0;
+                    AccordionSelectedIndex = this.acrdComiteRecepcion.SelectedIndex;
+                    this.acrdComiteRecepcion.SelectedIndex = 0;
 
                     // Comité de recepción
                     tblTemporal = null;
@@ -113,15 +145,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario capturar el Comité de Recepción")); }
 
                     // Estado original del acordeón
-                    this.Accordion2.SelectedIndex = AccordionSelectedIndex;
+                    this.acrdComiteRecepcion.SelectedIndex = AccordionSelectedIndex;
 
                 #endregion
 
                 #region "Orden del día"
 
                     // Expander el acordeón
-                    AccordionSelectedIndex = this.Accordion3.SelectedIndex;
-                    this.Accordion3.SelectedIndex = 0;
+                    AccordionSelectedIndex = this.acrdOrdenDia.SelectedIndex;
+                    this.acrdOrdenDia.SelectedIndex = 0;
 
                     // Comité de recepción
                     tblTemporal = null;
@@ -132,15 +164,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario capturar la Orden del Día")); }
 
                     // Estado original del acordeón
-                    this.Accordion3.SelectedIndex = AccordionSelectedIndex;
+                    this.acrdOrdenDia.SelectedIndex = AccordionSelectedIndex;
 
                 #endregion
 
                 #region "Acomodo"
 
                     // Expander el acordeón
-                    AccordionSelectedIndex = this.Accordion4.SelectedIndex;
-                    this.Accordion4.SelectedIndex = 0;
+                    AccordionSelectedIndex = this.acrdAcomodo.SelectedIndex;
+                    this.acrdAcomodo.SelectedIndex = 0;
 
                     // Comité de recepción
                     tblTemporal = null;
@@ -151,15 +183,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario capturar el acomodo al evento")); }
 
                     // Estado original del acordeón
-                    this.Accordion4.SelectedIndex = AccordionSelectedIndex;
+                    this.acrdAcomodo.SelectedIndex = AccordionSelectedIndex;
 
                 #endregion
 
                 #region "Responsable del evento"
 
                     // Expander el acordeón
-                    AccordionSelectedIndex = this.Accordion5.SelectedIndex;
-                    this.Accordion5.SelectedIndex = 0;
+                    AccordionSelectedIndex = this.acrdResponsable.SelectedIndex;
+                    this.acrdResponsable.SelectedIndex = 0;
 
                     // Comité de recepción
                     tblTemporal = null;
@@ -170,15 +202,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario ingresar por lo menos un responsable del evento")); }
 
                     // Estado original del acordeón
-                    this.Accordion5.SelectedIndex = AccordionSelectedIndex;
+                    this.acrdResponsable.SelectedIndex = AccordionSelectedIndex;
 
                 #endregion
 
                 #region "Responsable de logística"
 
                     // Expander el acordeón
-                    AccordionSelectedIndex = this.Accordion6.SelectedIndex;
-                    this.Accordion6.SelectedIndex = 0;
+                    AccordionSelectedIndex = this.acrdResponsableLogistica.SelectedIndex;
+                    this.acrdResponsableLogistica.SelectedIndex = 0;
 
                     // Comité de recepción
                     tblTemporal = null;
@@ -189,7 +221,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario ingresar por lo menos un responsable de logística")); }
 
                     // Estado original del acordeón
-                    this.Accordion6.SelectedIndex = AccordionSelectedIndex;
+                    this.acrdResponsableLogistica.SelectedIndex = AccordionSelectedIndex;
 
                 #endregion
 
@@ -206,6 +238,19 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
 
         // Rutinas el programador
+
+        void SelectComiteHelipuerto(){
+            try
+            {
+
+                // Agregar Item de selección
+                this.ddlComiteHelipuerto.Items.Insert(0, new ListItem("No", "0"));
+                this.ddlComiteHelipuerto.Items.Insert(0, new ListItem("Si", "1"));
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
 
         void SelectEvento(){
             ENTResponse oENTResponse = new ENTResponse();
@@ -228,7 +273,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Carátula compacta
                 this.lblEventoNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
-                this.lblEventoFechaHora.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHora"].ToString();
+                this.lblEventoFecha.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaLarga"].ToString();
+                this.lblEventoHora.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoHorario"].ToString();
 
                 // Sección: Nombre del evento
                 if ( oENTResponse.DataSetResponse.Tables[6].Rows.Count > 0 ){
@@ -275,7 +321,16 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     this.ddlPropuestaAcomodo.SelectedValue = oENTResponse.DataSetResponse.Tables[6].Rows[0]["PropuestaAcomodo"].ToString();
                     this.txtAcomodoObservaciones.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["AcomodoObservaciones"].ToString();
 
+                    this.ddlComiteHelipuerto.SelectedValue = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ComiteHelipuerto"].ToString();
+                    this.txtComiteHelipuertoLugar.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["HelipuertoLugar"].ToString();
+                    this.txtComiteHelipuertoDomicilio.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["HelipuertoDomicilio"].ToString();
+                    this.txtComiteHelipuertoCoordenadas.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["HelipuertoCoordenadas"].ToString();
+
                 }
+
+                // Sección: Comité de Recepción en el Helipuerto Provisional
+                this.gvComiteHelipuerto.DataSource = oENTResponse.DataSetResponse.Tables[14];
+                this.gvComiteHelipuerto.DataBind();
 
                 // Sección: Comité de recepción
                 this.gvComiteRecepcion.DataSource = oENTResponse.DataSetResponse.Tables[8];
@@ -507,6 +562,32 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 #endregion
 
+                #region "Sección: Comité de Recepción en el Helipuerto Provisional"
+
+                    oENTEvento.ComiteHelipuerto = Int16.Parse(this.ddlComiteHelipuerto.SelectedItem.Value);
+                    oENTEvento.HelipuertoLugar = this.txtComiteHelipuertoLugar.Text.Trim();
+                    oENTEvento.HelipuertoDomicilio = this.txtComiteHelipuertoDomicilio.Text.Trim();
+                    oENTEvento.HelipuertoCoordenadas = this.txtComiteHelipuertoCoordenadas.Text.Trim();
+
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvComiteHelipuerto, true);
+                    
+                    oENTEvento.DataTableComiteHelipuerto = new DataTable("DataTableComiteHelipuerto");
+                    oENTEvento.DataTableComiteHelipuerto.Columns.Add("Orden", typeof(Int32));
+                    oENTEvento.DataTableComiteHelipuerto.Columns.Add("Nombre", typeof(String));
+                    oENTEvento.DataTableComiteHelipuerto.Columns.Add("Puesto", typeof(String));
+                    
+                    foreach( DataRow rowComiteHelipuerto in tblTemporal.Rows ){
+
+                        rowTemporal = oENTEvento.DataTableComiteHelipuerto.NewRow();
+                        rowTemporal["Orden"] = rowComiteHelipuerto["Orden"];
+                        rowTemporal["Nombre"] = rowComiteHelipuerto["Nombre"];
+                        rowTemporal["Puesto"] = rowComiteHelipuerto["Puesto"];
+                        oENTEvento.DataTableComiteHelipuerto.Rows.Add(rowTemporal);
+                    }
+
+                #endregion
+
                 #region "Sección: Comité de recepción"
                     
                     tblTemporal = null;
@@ -660,17 +741,18 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 SelectMedioComunicacion();
                 SelectTipoAcomodo();
                 SelectPropuestaAcomodo();
+                SelectComiteHelipuerto();
                 
 				// Carátula y formulario
                 SelectEvento();
 
                 // Foco
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPronostico.ClientID + "'); }", true);
 
             }catch (Exception ex){
                 this.btnActualizar.Enabled = false;
                 this.btnActualizar.CssClass = "Button_General_Disabled";
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtPronostico.ClientID + "'); }", true);
             }
         }
 
@@ -692,7 +774,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.Response.Redirect("eveDetalleEvento.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtPronostico.ClientID + "'); }", true);
             }
 		}
 
@@ -708,7 +790,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.Response.Redirect("eveDetalleEvento.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtPronostico.ClientID + "'); }", true);
             }
 		}
 
@@ -727,7 +809,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 }
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtPronostico.ClientID + "'); }", true);
             }
         }
 
@@ -753,9 +835,158 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 }
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtPronostico.ClientID + "'); }", true);
             }
         }
+
+
+
+        // Eventos de Sección: Comité de Recepción en el Helipuerto Provisional
+
+        protected void btnAgregarComiteHelipuerto_Click(object sender, EventArgs e){
+            DataTable tblComiteHelipuerto;
+            DataRow rowComiteHelipuerto;
+
+            try
+            {
+
+                // Obtener DataTable del grid
+                tblComiteHelipuerto = gcParse.GridViewToDataTable(this.gvComiteHelipuerto, false);
+
+                // Validaciones
+                if ( this.txtComiteHelipuertoNombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
+                if ( this.txtComiteHelipuertoPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
+
+                // Agregar un nuevo elemento
+                rowComiteHelipuerto = tblComiteHelipuerto.NewRow();
+                rowComiteHelipuerto["Orden"] = (tblComiteHelipuerto.Rows.Count + 1).ToString();
+                rowComiteHelipuerto["Nombre"] = this.txtComiteHelipuertoNombre.Text.Trim();
+                rowComiteHelipuerto["Puesto"] = this.txtComiteHelipuertoPuesto.Text.Trim();
+                tblComiteHelipuerto.Rows.Add(rowComiteHelipuerto);
+
+                // Actualizar Grid
+                this.gvComiteHelipuerto.DataSource = tblComiteHelipuerto;
+                this.gvComiteHelipuerto.DataBind();
+
+                // Nueva captura
+                this.txtComiteHelipuertoNombre.Text = "";
+                this.txtComiteHelipuertoPuesto.Text = "";
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtComiteHelipuertoNombre.ClientID + "'); }", true);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtComiteHelipuertoNombre.ClientID + "'); }", true);
+            }
+        }
+
+        protected void gvComiteHelipuerto_RowCommand(object sender, GridViewCommandEventArgs e){
+            DataTable tblComiteHelipuerto;
+
+            String strCommand = "";
+            String Orden = "";
+            Int32 intRow = 0;
+
+            try
+            {
+
+                // Opción seleccionada
+                strCommand = e.CommandName.ToString();
+
+                // Se dispara el evento RowCommand en el ordenamiento
+                if (strCommand == "Sort") { return; }
+
+                // Fila
+                intRow = Int32.Parse(e.CommandArgument.ToString());
+
+                // Datakeys
+                Orden = this.gvComiteHelipuerto.DataKeys[intRow]["Orden"].ToString();
+
+                // Acción
+                switch (strCommand){
+
+                    case "Eliminar":
+
+                        // Obtener DataTable del grid
+                        tblComiteHelipuerto = gcParse.GridViewToDataTable(this.gvComiteHelipuerto, true);
+
+                        // Remover el elemento
+                        tblComiteHelipuerto.Rows.Remove( tblComiteHelipuerto.Select("Orden=" + Orden )[0] );
+
+                        // Reordenar los Items restantes
+                        intRow = 0;
+                        foreach( DataRow rowComiteHelipuerto in tblComiteHelipuerto.Rows ){
+
+                            tblComiteHelipuerto.Rows[intRow]["Orden"] = (intRow + 1);
+                            intRow = intRow + 1;
+                        }
+
+                        // Actualizar Grid
+                        this.gvComiteHelipuerto.DataSource = tblComiteHelipuerto;
+                        this.gvComiteHelipuerto.DataBind();
+
+                        // Nueva captura
+                        this.txtComiteHelipuertoNombre.Text = "";
+                        this.txtComiteHelipuertoPuesto.Text = "";
+                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtComiteHelipuertoNombre.ClientID + "'); }", true);
+
+                        break;
+                }
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtComiteHelipuertoNombre.ClientID + "'); }", true);
+            }
+        }
+
+        protected void gvComiteHelipuerto_RowDataBound(object sender, GridViewRowEventArgs e){
+            ImageButton imgDelete = null;
+
+            String Orden = "";
+            String ComiteHelipuertoNombre = "";
+
+            String sImagesAttributes = "";
+            String sTootlTip = "";
+
+            try
+            {
+
+                // Validación de que sea fila
+                if (e.Row.RowType != DataControlRowType.DataRow) { return; }
+
+                // Obtener imagenes
+                imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+
+                // Datakeys
+                Orden = this.gvComiteHelipuerto.DataKeys[e.Row.RowIndex]["Orden"].ToString();
+                ComiteHelipuertoNombre = this.gvComiteHelipuerto.DataKeys[e.Row.RowIndex]["Nombre"].ToString();
+
+                // Tooltip Edición
+                sTootlTip = "Eliminar a [" + ComiteHelipuertoNombre + "]";
+                imgDelete.Attributes.Add("title", sTootlTip);
+
+                // Atributos Over
+                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
+
+                // Atributos Out
+                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+
+        }
+
+        protected void gvComiteHelipuerto_Sorting(object sender, GridViewSortEventArgs e){
+            try
+            {
+
+                gcCommon.SortGridView(ref this.gvComiteHelipuerto, ref this.hddSort, e.SortExpression, true);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtComiteHelipuertoNombre.ClientID + "'); }", true);
+            }
+        }
+
 
 
         // Eventos de Sección: Comité de recepción
@@ -905,6 +1136,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         }
 
 
+
         // Eventos de Sección: Orden del día
 
         protected void btnAgregarOrdenDia_Click(object sender, EventArgs e){
@@ -1044,6 +1276,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtOrdenDiaDetalle.ClientID + "'); }", true);
             }
         }
+
 
 
         // Eventos de Sección: Acomodo
@@ -1193,6 +1426,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         }
 
 
+
         // Eventos de Sección: Responsable Evento
 
         protected void btnAgregarResponsableEvento_Click(object sender, EventArgs e){
@@ -1340,6 +1574,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         }
 
 
+
         // Eventos de Sección: Responsable Evento Logística
 
         protected void btnAgregarResponsableLogistica_Click(object sender, EventArgs e){
@@ -1485,6 +1720,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtResponsableLogisticaNombre.ClientID + "'); }", true);
             }
         }
+
 
 
     }

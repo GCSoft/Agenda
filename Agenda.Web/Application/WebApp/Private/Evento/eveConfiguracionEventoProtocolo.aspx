@@ -33,7 +33,12 @@
             <tr>
 				<td class="Etiqueta">Fecha</td>
 				<td class="Espacio"></td>
-				<td class="Campo" colspan="2"><asp:Label ID="lblEventoFechaHora" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
+				<td class="Campo" colspan="2"><asp:Label ID="lblEventoFecha" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
+			</tr>
+            <tr>
+				<td class="Etiqueta">Horario</td>
+				<td class="Espacio"></td>
+				<td class="Campo" colspan="2"><asp:Label ID="lblEventoHora" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
 			</tr>
             <tr>
 				<td class="Etiqueta"></td>
@@ -397,7 +402,7 @@
                                                     <td>Puesto</td>
                                                 </tr>
                                                 <tr class="Grid_Row">
-                                                    <td colspan="3">No se ha capturado el comité de recepción</td>
+                                                    <td colspan="3">No se ha capturado asistentes</td>
                                                 </tr>
                                             </table>
                                         </EmptyDataTemplate>
