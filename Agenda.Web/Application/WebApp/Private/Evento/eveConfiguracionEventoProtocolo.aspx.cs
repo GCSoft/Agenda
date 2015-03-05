@@ -490,12 +490,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 SelectEvento();
 
                 // Foco
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtProtocoloInvitacionA.ClientID + "'); }", true);
 
             }catch (Exception ex){
                 this.btnActualizar.Enabled = false;
                 this.btnActualizar.CssClass = "Button_General_Disabled";
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtProtocoloInvitacionA.ClientID + "'); }", true);
             }
         }
 
@@ -517,7 +517,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.Response.Redirect("eveDetalleEvento.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtProtocoloInvitacionA.ClientID + "'); }", true);
             }
 		}
 
@@ -533,7 +533,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.Response.Redirect("eveDetalleEvento.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtProtocoloInvitacionA.ClientID + "'); }", true);
             }
 		}
 
@@ -559,7 +559,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 }
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlTipoVestimenta.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtProtocoloInvitacionA.ClientID + "'); }", true);
             }
         }
 

@@ -130,6 +130,24 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
+        /// txtProtocoloInvitacionA control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtProtocoloInvitacionA;
+        
+        /// <summary>
+        /// txtAforo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtAforo;
+        
+        /// <summary>
         /// ddlTipoVestimenta control.
         /// </summary>
         /// <remarks>
@@ -148,33 +166,6 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.TextBox txtTipoVestimentaOtro;
         
         /// <summary>
-        /// ddlMedioComunicacion control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMedioComunicacion;
-        
-        /// <summary>
-        /// txtAforo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAforo;
-        
-        /// <summary>
-        /// txtProtocoloInvitacionA control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtProtocoloInvitacionA;
-        
-        /// <summary>
         /// txtProtocoloResponsableEvento control.
         /// </summary>
         /// <remarks>
@@ -182,6 +173,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtProtocoloResponsableEvento;
+        
+        /// <summary>
+        /// ddlMedioComunicacion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlMedioComunicacion;
         
         /// <summary>
         /// Accordion2 control.

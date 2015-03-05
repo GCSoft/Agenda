@@ -66,6 +66,18 @@
 					<Content>
 						<table class="FormTable" style="border:solid 1px #336600;">
                             <tr>
+				                <td class="Etiqueta">Invitación a</td>
+				                <td class="Espacio"></td>
+				                <td class="Campo"><asp:TextBox ID="txtProtocoloInvitacionA" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
+                                <td></td>
+			                </tr>
+                            <tr>
+				                <td class="Etiqueta">Aforo</td>
+				                <td class="VinetaObligatorio">*</td>
+				                <td class="Campo"><asp:TextBox ID="txtAforo" runat="server" CssClass="Textbox_General" MaxLength="5" Text="0" Width="130px"></asp:TextBox></td>
+                                <td></td>
+			                </tr>
+                            <tr>
 				                <td class="Etiqueta">Tipo de vestimenta</td>
 				                <td class="VinetaObligatorio">*</td>
 				                <td class="Campo"><asp:DropDownList ID="ddlTipoVestimenta" runat="server" CssClass="DropDownList_General" Width="216px" AutoPostBack="True" OnSelectedIndexChanged="ddlTipoVestimenta_SelectedIndexChanged"></asp:DropDownList></td>
@@ -78,27 +90,15 @@
                                 <td></td>
 			                </tr>
                             <tr>
+				                <td class="Etiqueta">Responsable de evento</td>
+				                <td class="Espacio"></td>
+				                <td class="Campo" colspan="2"><asp:TextBox ID="txtProtocoloResponsableEvento" runat="server" CssClass="Textarea_General" Height="70px" MaxLength="1000" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
+			                </tr>
+                            <tr>
 				                <td class="Etiqueta">Prensa</td>
 				                <td class="VinetaObligatorio">*</td>
 				                <td class="Campo"><asp:DropDownList ID="ddlMedioComunicacion" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
                                 <td></td>
-			                </tr>
-                            <tr>
-				                <td class="Etiqueta">Aforo</td>
-				                <td class="VinetaObligatorio">*</td>
-				                <td class="Campo"><asp:TextBox ID="txtAforo" runat="server" CssClass="Textbox_General" MaxLength="5" Text="0" Width="130px"></asp:TextBox></td>
-                                <td></td>
-			                </tr>
-                            <tr>
-				                <td class="Etiqueta">Invitación a</td>
-				                <td class="Espacio"></td>
-				                <td class="Campo"><asp:TextBox ID="txtProtocoloInvitacionA" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
-                                <td></td>
-			                </tr>
-                            <tr>
-				                <td class="Etiqueta">Responsable</td>
-				                <td class="Espacio"></td>
-				                <td class="Campo" colspan="2"><asp:TextBox ID="txtProtocoloResponsableEvento" runat="server" CssClass="Textarea_General" Height="70px" MaxLength="1000" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
 			                </tr>
                             <tr style="height:10px;"><td colspan="4"></td></tr>
                         </table>

@@ -269,7 +269,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wText.CharacterFormat.FontName = "Arial";
                         wText.CharacterFormat.FontSize = 14f;
                         wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                        wTableRow.Cells[0].CellFormat.BackColor = Color.LightGray;
+                        wTableRow.Cells[0].CellFormat.BackColor = System.Drawing.ColorTranslator.FromHtml("#999999");
                         wTableRow.Cells[0].Width = 510;
 
                         // Brinco de linea (genera espacio)
@@ -1202,7 +1202,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                             wTableCell = wTableRow.Cells[6].AddParagraph();
                             wTableRow.Cells[6].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-                            wText = wTableCell.AppendText((int.Parse(oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoVestimentaId"].ToString()) == 6) ? oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoVestimentaOtro"].ToString() : "OTRO");
+                            wText = wTableCell.AppendText((oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoVestimentaId"].ToString() == "6" ? oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoVestimentaOtro"].ToString() : "OTRO"));
                             wText.CharacterFormat.FontName = "Arial";
                             wText.CharacterFormat.FontSize = 10f;
                             wTableRow.Cells[6].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
@@ -1320,7 +1320,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                             wText.CharacterFormat.FontName = "Arial";
                             wText.CharacterFormat.FontSize = 14f;
                             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                            wTableRow.Cells[0].CellFormat.BackColor = Color.LightGray;
+                            wTableRow.Cells[0].CellFormat.BackColor = System.Drawing.ColorTranslator.FromHtml("#999999");
                             wTableRow.Cells[0].Width = 510;
 
                             // Brinco de linea (genera espacio)
@@ -1447,7 +1447,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                                 
                             #endregion
                             
-                             #region Fila 2
+                            #region Fila 2
                                 
                                 wTableRow = wTable.Rows[2];
                                 wTableRow.Height = 6f;
@@ -1502,7 +1502,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                             wText.CharacterFormat.FontName = "Arial";
                             wText.CharacterFormat.FontSize = 14f;
                             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                            wTableRow.Cells[0].CellFormat.BackColor = Color.LightGray;
+                            wTableRow.Cells[0].CellFormat.BackColor = System.Drawing.ColorTranslator.FromHtml("#999999");
                             wTableRow.Cells[0].Width = 510;
 
                             // Brinco de linea (genera espacio)
@@ -1603,7 +1603,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                             wText.CharacterFormat.FontName = "Arial";
                             wText.CharacterFormat.FontSize = 14f;
                             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                            wTableRow.Cells[0].CellFormat.BackColor = Color.LightGray;
+                            wTableRow.Cells[0].CellFormat.BackColor = System.Drawing.ColorTranslator.FromHtml("#999999");
                             wTableRow.Cells[0].Width = 510;
 
                             // Brinco de linea (genera espacio)
@@ -1693,7 +1693,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                             wText.CharacterFormat.FontName = "Arial";
                             wText.CharacterFormat.FontSize = 14f;
                             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                            wTableRow.Cells[0].CellFormat.BackColor = Color.LightGray;
+                            wTableRow.Cells[0].CellFormat.BackColor = System.Drawing.ColorTranslator.FromHtml("#999999");
                             wTableRow.Cells[0].Width = 510;
 
                             // Brinco de linea (genera espacio)
@@ -2439,7 +2439,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                             wText.CharacterFormat.FontName = "Arial";
                             wText.CharacterFormat.FontSize = 14f;
                             wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                            wTableRow.Cells[0].CellFormat.BackColor = Color.LightGray;
+                            wTableRow.Cells[0].CellFormat.BackColor = System.Drawing.ColorTranslator.FromHtml("#999999");
                             wTableRow.Cells[0].Width = 510;
                             
                         #endregion
