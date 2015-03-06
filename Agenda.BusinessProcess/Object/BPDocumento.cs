@@ -26,6 +26,79 @@ namespace Agenda.BusinessProcess.Object
         // Enumeraciones
 		public enum RepositoryTypes { Invitacion, Evento }
 
+        ///<remarks>
+        ///   <name>BPDocumento.CloneFile</name>
+		///   <create>22-Diciembre-2014</create>
+		///   <author>Ruben.Cobos</author>
+		///</remarks>
+		///<summary>Clona un archivo prestablecio en el servidor, regresando la ruta en donde se guardó físicamente</summary>
+        ///<param name="FileName">Nombre del archivo a clonar</param>
+		///<param name="Seed">Semilla el directorio. ID de Expediente o Solicitud</param>
+		///<param name="RepositoryType">Tipo de repositorio (Expediente o Solicitud)</param>
+		///<returns>La ruta completa del directorio creado</returns>
+		public String CloneFile( String FileName,  String Seed, RepositoryTypes RepositoryType){
+            String Path;
+
+			try{
+
+                // Obtener la ruta física del contenedor de archivos
+                if ( ConfigurationManager.AppSettings["Application.Repository.Virtual"].ToString() == "0" ){
+
+                    Path = ConfigurationManager.AppSettings["Application.Repository"].ToString();
+                }else{
+
+                    Path = HttpContext.Current.Server.MapPath ( ConfigurationManager.AppSettings["Application.Repository"].ToString() );
+                }
+
+
+				// Armar el path
+				switch(RepositoryType){
+					case RepositoryTypes.Invitacion:
+
+                        Path = Path + "I" + Seed + Convert.ToChar(92);
+						break;
+
+                    case RepositoryTypes.Evento:
+                        Path = Path + "E" + Seed + Convert.ToChar(92);
+						break;
+
+					default:
+						throw( new Exception("Tipo de repositorio inválido"));
+				}
+
+				// Validar existencia de la ruta
+				if (!Directory.Exists(Path)) { Directory.CreateDirectory(Path); }
+
+				// Validar la existencia del archivo
+				if (File.Exists(Path + FileName)) { 
+
+                    switch(RepositoryType){
+					    case RepositoryTypes.Invitacion:
+                            throw (new Exception("Ya existe éste archivo asociado a la invitación"));
+
+                        case RepositoryTypes.Evento:
+                            throw (new Exception("Ya existe éste archivo asociado al evento"));
+				    }
+
+                }
+
+				// Clonar el archivo
+                System.IO.File.Copy( HttpContext.Current.Server.MapPath ("~/Include/Image/Cuadernillo/" + FileName), Path + FileName);
+
+			}catch (IOException ioEx){
+
+				throw(ioEx);
+
+			} catch (Exception ex){
+
+				throw(ex);
+
+			}
+
+			// Directorio con nombre de archivo
+			return Path + FileName;
+		}
+
 		///<remarks>
 		///   <name>BPDocumento.UploadFile</name>
 		///   <create>22-Diciembre-2014</create>

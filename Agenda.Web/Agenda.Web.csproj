@@ -247,6 +247,9 @@
     <Content Include="Include\Image\Buttons\PrioridadAlta.png" />
     <Content Include="Include\Image\Buttons\PrioridadBaja.png" />
     <Content Include="Include\Image\Buttons\PrioridadMedia.png" />
+    <Content Include="Include\Image\Cuadernillo\Montaje1.png" />
+    <Content Include="Include\Image\Cuadernillo\Montaje2.png" />
+    <Content Include="Include\Image\Cuadernillo\Montaje3.png" />
     <Content Include="Include\Image\File\FileIcon_Excel.png" />
     <Content Include="Include\Image\File\FileIcon_Foto.png" />
     <Content Include="Include\Image\File\FileIcon_Pdf.png" />
