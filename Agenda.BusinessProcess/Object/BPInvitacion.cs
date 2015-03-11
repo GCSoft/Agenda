@@ -446,9 +446,6 @@ namespace Agenda.BusinessProcess.Object
                 // Validación de error en consulta
                 if (oENTResponse.GeneratesException) { return oENTResponse; }
 
-                // Validación de mensajes de la BD
-                oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
-
             }catch (Exception ex){
                 oENTResponse.ExceptionRaised(ex.Message);
             }

@@ -1,7 +1,9 @@
 ﻿/*---------------------------------------------------------------------------------------------------------------------------------
-' Nombre:	invListado
+' Nombre:	repInvitacion
 ' Autor:	Ruben.Cobos
-' Fecha:	23-Diciembre-2014
+' Fecha:	06-Marzo-2015
+'
+' https://www.youtube.com/watch?v=859BmmVOm8M
 '----------------------------------------------------------------------------------------------------------------------------------*/
 
 // Referencias
@@ -19,13 +21,13 @@ using Agenda.BusinessProcess.Object;
 using Agenda.BusinessProcess.Page;
 using Agenda.Entity.Object;
 using System.Data;
+using Microsoft.Reporting.WebForms;
 
-namespace Agenda.Web.Application.WebApp.Private.Invitacion
+namespace Agenda.Web.Application.WebApp.Private.Reportes
 {
-    public partial class invListado : BPPage
+    public partial class repInvitacion : BPPage
     {
-       
-
+        
         // Utilerías
         GCCommon gcCommon = new GCCommon();
         GCEncryption gcEncryption = new GCEncryption();
@@ -90,6 +92,42 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
 
         // Rutinas del programador
+
+        void CrearReporte(DataTable tblInvitacionResumen, DataTable tblInvitacionDetalle){
+            ReportDataSource repDataSource;
+            ReportParameter[] repParameters;
+            
+            try
+            {
+
+                // Reset
+                this.rptViewerInvitacion.Reset();
+
+                // DataSources
+                repDataSource = new ReportDataSource("dsInvitacionResumen", tblInvitacionResumen);
+                this.rptViewerInvitacion.LocalReport.DataSources.Add(repDataSource);
+
+                repDataSource = new ReportDataSource("dsInvitacionDetalle", tblInvitacionDetalle);
+                this.rptViewerInvitacion.LocalReport.DataSources.Add(repDataSource);
+
+                // Path
+                this.rptViewerInvitacion.LocalReport.ReportPath = Server.MapPath("~/Application/WebApp/Private/Reportes/RDLC/rptInvitacion.rdlc");
+
+                // Parameters
+                repParameters = new ReportParameter[] {
+                    new ReportParameter("FechaInicial", this.wucBeginDate.DisplayDate ),
+                    new ReportParameter("FechaFinal", this.wucEndDate.DisplayDate )
+                };
+
+                this.rptViewerInvitacion.LocalReport.SetParameters(repParameters);
+
+                // Refresh
+                this.rptViewerInvitacion.LocalReport.Refresh();
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
 
         void SelectEstatusInvitacion(){
             ENTResponse oENTResponse = new ENTResponse();
@@ -161,9 +199,8 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
                 if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
 
-                // Listado de invitaciones
-                this.gvInvitacion.DataSource = oENTResponse.DataSetResponse.Tables[0];
-                this.gvInvitacion.DataBind();
+                // Crear reporte
+                CrearReporte(oENTResponse.DataSetResponse.Tables[1], oENTResponse.DataSetResponse.Tables[0]);
 
             }catch (Exception ex){
                 throw (ex);
@@ -205,9 +242,9 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
             }
         }
 
-        
 
-        // Invitacions de la página
+        
+        // Invitaciones de la página
 
         protected void Page_Load(object sender, EventArgs e){
             DateTime tempDate = DateTime.Now;
@@ -223,21 +260,18 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 SelectPrioridad();
 
                 // Por default preseleccionado todo el mes
-                tempDate = tempDate.AddDays( (DateTime.Now.Day - 1) * -1 );
+                tempDate = tempDate.AddDays((DateTime.Now.Day - 1) * -1);
                 this.wucBeginDate.SetDate(tempDate);
 
                 tempDate = tempDate.AddMonths(1);
                 tempDate = tempDate.AddDays(-1);
                 this.wucEndDate.SetDate(tempDate);
 
-                // Consulta
-                SelectInvitacion(false);
-
                 // Foco
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlEstatusInvitacion.ClientID + "'); }", true);
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){  alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusInvitacion.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusInvitacion.ClientID + "'); }", true);
             }
         }
 
@@ -248,99 +282,9 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 SelectInvitacion(true);
 
             }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){  alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusInvitacion.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusInvitacion.ClientID + "'); }", true);
             }
         }
-
-        protected void gvInvitacion_RowCommand(object sender, GridViewCommandEventArgs e){
-            Int32 InvitacionId = 0;
-            Int32 intRow = 0;
-
-            String strCommand = "";
-            String Key = "";
-
-            try
-            {
-
-                // Opción seleccionada
-                strCommand = e.CommandName.ToString();
-
-                // Se dispara el Invitacion RowCommand en el ordenamiento
-                if (strCommand == "Sort") { return; }
-
-                // Fila
-                intRow = Int32.Parse(e.CommandArgument.ToString());
-
-                // Datakeys
-                InvitacionId = Int32.Parse(this.gvInvitacion.DataKeys[intRow]["InvitacionId"].ToString());
-
-                // Acción
-                switch (strCommand){
-                    case "Editar":
-
-                        // Llave encriptada
-                        Key = InvitacionId.ToString() + "|3";
-                        Key = gcEncryption.EncryptString(Key, true);
-                        this.Response.Redirect("invDetalleInvitacion.aspx?key=" + Key, false);
-                        break;
-                }
-
-            }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){  alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusInvitacion.ClientID + "'); }", true);
-            }
-        }
-
-        protected void gvInvitacion_RowDataBound(object sender, GridViewRowEventArgs e){
-            ImageButton imgEdit = null;
-
-            String InvitacionId = "";
-            String EventoNombre = "";
-
-            String sImagesAttributes = "";
-            String sTootlTip = "";
-
-            try
-            {
-
-                // Validación de que sea fila
-                if (e.Row.RowType != DataControlRowType.DataRow) { return; }
-
-                // Obtener imagenes
-                imgEdit = (ImageButton)e.Row.FindControl("imgEdit");
-
-                // Datakeys
-                InvitacionId = this.gvInvitacion.DataKeys[e.Row.RowIndex]["InvitacionId"].ToString();
-                EventoNombre = this.gvInvitacion.DataKeys[e.Row.RowIndex]["EventoNombre"].ToString();
-
-                // Tooltip Edición
-                sTootlTip = "Detalle de invitación [" + EventoNombre + "]";
-                imgEdit.Attributes.Add("title", sTootlTip);
-
-                // Atributos Over
-                sImagesAttributes = " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit_Over.png';";
-                e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over'; " + sImagesAttributes);
-
-                // Atributos Out
-                sImagesAttributes = " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
-                e.Row.Attributes.Add("onmouseout", "this.className='" + ((e.Row.RowIndex % 2) != 0 ? "Grid_Row_Alternating" : "Grid_Row") + "'; " + sImagesAttributes);
-
-            }catch (Exception ex){
-                throw (ex);
-            }
-        }
-
-        protected void gvInvitacion_Sorting(object sender, GridViewSortEventArgs e){
-            try
-            {
-
-                gcCommon.SortGridView(ref this.gvInvitacion, ref this.hddSort, e.SortExpression);
-
-            }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){  alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusInvitacion.ClientID + "'); }", true);
-            }
-
-        }
-
 
     }
 }

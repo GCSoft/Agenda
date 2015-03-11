@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Include/MasterPage/PrivateTemplate.Master" AutoEventWireup="true" CodeBehind="repEvento.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Reportes.repEvento" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Include/MasterPage/PrivateTemplate.Master" AutoEventWireup="true" CodeBehind="repInvitacion.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Reportes.repInvitacion" %>
 <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 <%@ Register Src="~/Include/WebUserControls/wucCalendar.ascx" TagPrefix="wuc" TagName="wucCalendar" %>
 
@@ -11,13 +11,13 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPageName" runat="server" CssClass="MasterPageName">
-        <asp:Label ID="lblPageName" runat="server" CssClass="PageNameText" Text="Reportes - Reporte de eventos"></asp:Label>
+        <asp:Label ID="lblPageName" runat="server" CssClass="PageNameText" Text="Reportes - Reporte de Invitaciones"></asp:Label>
     </asp:Panel>
 
     <asp:Panel ID="pnlTitulo" runat="server" CssClass="TitlePanel">
         <table class="HeaderTable">
             <tr>
-                <td class="Titulo"><asp:Label ID="lblSubTitulo" runat="server" Text="Ajuste los filtros para poder visualizar el reporte de eventos."></asp:Label></td>
+                <td class="Titulo"><asp:Label ID="lblSubTitulo" runat="server" Text="Ajuste los filtros para poder visualizar el reporte de Invitaciones."></asp:Label></td>
             </tr>
         </table>
     </asp:Panel>
@@ -27,19 +27,13 @@
             <tr>
 				<td class="Etiqueta">Estatus</td>
 				<td class="Espacio"></td>
-				<td class="Campo"><asp:DropDownList ID="ddlEstatusEvento" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
+				<td class="Campo"><asp:DropDownList ID="ddlEstatusInvitacion" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
                 <td></td>
 			</tr>
             <tr>
 				<td class="Etiqueta">Prioridad</td>
 				<td class="Espacio"></td>
 				<td class="Campo"><asp:DropDownList ID="ddlPrioridad" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
-                <td></td>
-			</tr>
-            <tr>
-				<td class="Etiqueta">Dependencia</td>
-				<td class="Espacio"></td>
-				<td class="Campo"><asp:DropDownList ID="ddlDependencia" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
                 <td></td>
 			</tr>
             <tr>
@@ -69,7 +63,7 @@
 
     <asp:Panel ID="pnlReporte" runat="server" CssClass="ReportePanel">
         <asp:Panel ID="pnlReporteCanvas" runat="server" CssClass="ReportePanelCanvas">
-            <rsweb:ReportViewer ID="rptViewerEvento" runat="server" SizeToReportContent="True"></rsweb:ReportViewer>
+            <rsweb:ReportViewer ID="rptViewerInvitacion" runat="server" SizeToReportContent="True"></rsweb:ReportViewer>
         </asp:Panel>
         <asp:Panel ID="pnlReporteWaterMark" runat="server" CssClass="ReportePanelImageWaterMark">
             <asp:Image ID="imgReporteWaterMark" runat="server" ImageUrl="~/Include/Image/Web/EscudoNL_BackGround.png" />
@@ -80,7 +74,7 @@
         <%--Empty Content--%>
     </asp:Panel>
 
-    <asp:HiddenField ID="hddEvento" runat="server" Value="" />
+    <asp:HiddenField ID="hddInvitacion" runat="server" Value="" />
     <asp:HiddenField ID="hddSort" runat="server" Value="Nombre" />
 
 </asp:Content>
