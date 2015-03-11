@@ -1,7 +1,9 @@
 ﻿/*---------------------------------------------------------------------------------------------------------------------------------
-' Nombre:	scatEvento
+' Nombre:	repEvento
 ' Autor:	Ruben.Cobos
-' Fecha:	27-Octubre-2013
+' Fecha:	06-Marzo-2015
+'
+' https://www.youtube.com/watch?v=859BmmVOm8M
 '----------------------------------------------------------------------------------------------------------------------------------*/
 
 // Referencias
@@ -19,10 +21,11 @@ using Agenda.BusinessProcess.Object;
 using Agenda.BusinessProcess.Page;
 using Agenda.Entity.Object;
 using System.Data;
+using Microsoft.Reporting.WebForms;
 
-namespace Agenda.Web.Application.WebApp.Private.Evento
+namespace Agenda.Web.Application.WebApp.Private.Reportes
 {
-    public partial class eveListadoEventos : BPPage
+    public partial class repEvento : BPPage
     {
        
         // Utilerías
@@ -89,6 +92,42 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
 
         // Rutinas del programador
+
+        void CrearReporte(DataTable tblEventoResumen, DataTable tblEventoDetalle){
+            ReportDataSource repDataSource;
+            ReportParameter[] repParameters;
+            
+            try
+            {
+
+                // Reset
+                this.rptViewerEvento.Reset();
+
+                // DataSources
+                repDataSource = new ReportDataSource("dsEventoResumen", tblEventoResumen);
+                this.rptViewerEvento.LocalReport.DataSources.Add(repDataSource);
+
+                repDataSource = new ReportDataSource("dsEventoDetalle", tblEventoDetalle);
+                this.rptViewerEvento.LocalReport.DataSources.Add(repDataSource);
+
+                // Path
+                this.rptViewerEvento.LocalReport.ReportPath = Server.MapPath("~/Application/WebApp/Private/Reportes/RDLC/rptEvento.rdlc");
+
+                // Parameters
+                repParameters = new ReportParameter[] {
+                    new ReportParameter("FechaInicial", this.wucBeginDate.DisplayDate ),
+                    new ReportParameter("FechaFinal", this.wucEndDate.DisplayDate )
+                };
+
+                this.rptViewerEvento.LocalReport.SetParameters(repParameters);
+
+                // Refresh
+                this.rptViewerEvento.LocalReport.Refresh();
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
 
         void SelectDependencia(){
             ENTSession oENTSession = new ENTSession();
@@ -178,17 +217,17 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     if (!this.wucBeginDate.IsValidDate()) { throw new Exception("El campo [Fecha Inicial] es requerido"); }
                     if (!this.wucEndDate.IsValidDate()) { throw new Exception("El campo [Fecha Inicial] es requerido"); }
                 }
-
+               
                 // Datos de sesión
                 oENTSession = (ENTSession)this.Session["oENTSession"];
 
                 // Formulario
                 oENTEvento.EventoId = 0;
                 oENTEvento.UsuarioId = oENTSession.UsuarioId;
-                oENTEvento.EstatusEventoId = Int32.Parse( this.ddlEstatusEvento.SelectedItem.Value );
+                oENTEvento.EstatusEventoId = Int32.Parse(this.ddlEstatusEvento.SelectedItem.Value);
                 oENTEvento.PrioridadId = Int32.Parse(this.ddlPrioridad.SelectedItem.Value);
-                oENTEvento.FechaInicio = ( CheckDate ? this.wucBeginDate.DisplayUTCDate : GetUTCBeginDate() );
-                oENTEvento.FechaFin = ( CheckDate ? this.wucEndDate.DisplayUTCDate : GetUTCEndDate() );
+                oENTEvento.FechaInicio = (CheckDate ? this.wucBeginDate.DisplayUTCDate : GetUTCBeginDate());
+                oENTEvento.FechaFin = (CheckDate ? this.wucEndDate.DisplayUTCDate : GetUTCEndDate());
                 oENTEvento.Nivel = 1;
                 oENTEvento.Dependencia = Int16.Parse(this.ddlDependencia.SelectedItem.Value);
 
@@ -198,9 +237,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Validaciones
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
 
-                // Listado de Eventoes
-                this.gvEvento.DataSource = oENTResponse.DataSetResponse.Tables[0];
-                this.gvEvento.DataBind();
+                // Crear reporte
+                CrearReporte(oENTResponse.DataSetResponse.Tables[1], oENTResponse.DataSetResponse.Tables[0]);
 
             }catch (Exception ex){
                 throw (ex);
@@ -242,6 +280,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             }
         }
 
+
         
         // Eventos de la página
 
@@ -267,9 +306,6 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 tempDate = tempDate.AddDays(-1);
                 this.wucEndDate.SetDate(tempDate);
 
-                // Consulta
-                SelectEvento(false);
-
                 // Foco
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlEstatusEvento.ClientID + "'); }", true);
 
@@ -287,95 +323,6 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusEvento.ClientID + "'); }", true);
             }
-        }
-
-        protected void gvEvento_RowCommand(object sender, GridViewCommandEventArgs e){
-            Int32 EventoId = 0;
-            Int32 intRow = 0;
-
-            String strCommand = "";
-            String Key = "";
-
-            try
-            {
-
-                // Opción seleccionada
-                strCommand = e.CommandName.ToString();
-
-                // Se dispara el Evento RowCommand en el ordenamiento
-                if (strCommand == "Sort") { return; }
-
-                // Fila
-                intRow = Int32.Parse(e.CommandArgument.ToString());
-
-                // Datakeys
-                EventoId = Int32.Parse(this.gvEvento.DataKeys[intRow]["EventoId"].ToString());
-
-                // Acción
-                switch (strCommand){
-                    case "Editar":
-
-                        // Llave encriptada
-                        Key = EventoId.ToString() + "|3";
-                        Key = gcEncryption.EncryptString(Key, true);
-                        this.Response.Redirect("eveDetalleEvento.aspx?key=" + Key, false);
-                        break;
-                }
-
-            }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusEvento.ClientID + "'); }", true);
-            }
-        }
-
-        protected void gvEvento_RowDataBound(object sender, GridViewRowEventArgs e){
-            ImageButton imgEdit = null;
-
-            String EventoId = "";
-            String EventoNombre = "";
-
-            String sImagesAttributes = "";
-            String sTootlTip = "";
-
-            try
-            {
-
-                // Validación de que sea fila
-                if (e.Row.RowType != DataControlRowType.DataRow) { return; }
-
-                // Obtener imagenes
-                imgEdit = (ImageButton)e.Row.FindControl("imgEdit");
-
-                // Datakeys
-                EventoId = this.gvEvento.DataKeys[e.Row.RowIndex]["EventoId"].ToString();
-                EventoNombre = this.gvEvento.DataKeys[e.Row.RowIndex]["EventoNombre"].ToString();
-
-                // Tooltip Edición
-                sTootlTip = "Detalle de invitación [" + EventoNombre + "]";
-                imgEdit.Attributes.Add("title", sTootlTip);
-
-                // Atributos Over
-                sImagesAttributes = " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit_Over.png';";
-                e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over'; " + sImagesAttributes);
-
-                // Atributos Out
-                sImagesAttributes = " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
-                e.Row.Attributes.Add("onmouseout", "this.className='" + ((e.Row.RowIndex % 2) != 0 ? "Grid_Row_Alternating" : "Grid_Row") + "'; " + sImagesAttributes);
-
-            }catch (Exception ex){
-                throw (ex);
-            }
-        }
-
-        protected void gvEvento_Sorting(object sender, GridViewSortEventArgs e){
-            try
-            {
-
-                gcCommon.SortGridView(ref this.gvEvento, ref this.hddSort, e.SortExpression);
-
-            }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusEvento.ClientID + "'); }", true);
-            }
-
         }
 
     }

@@ -69,6 +69,36 @@
 	width: 100%;
 }
 
+.ReportePanel{
+    border:solid 0px #000000;
+    background-color:#999999;
+    clear:both;
+    float:left;
+    height:1420px;
+    top:40px;
+    padding: 0px;
+    position:relative;
+	width:100%;
+}
+
+.ReportePanelCanvas{
+    border-left:solid 20px #FFFFFF;
+    background-color:white;
+    clear:both;
+    height:1350px;
+    margin:0px auto;
+    top:40px;
+    position:relative;
+	width:735px;
+}
+
+.ReportePanelImageWaterMark{
+    height:494px;
+    margin:-1000px auto;
+    position:relative;
+	width:441px;
+}
+
 .TitlePanel{
 	padding: 0px;
 	width: 100%;

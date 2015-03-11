@@ -54,6 +54,7 @@
       <HintPath>..\..\..\Proyectos\BHM\Solution\BHM.Web\Include\Components\GCSoft\GCUtility.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="Syncfusion.Compression.Base, Version=9.303.0.61, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Include\Components\Syncfusion\Syncfusion.Compression.Base.dll</HintPath>
@@ -120,6 +121,7 @@
     <Content Include="Application\WebApp\Private\Invitacion\invInvitacion.aspx" />
     <Content Include="Application\WebApp\Private\Invitacion\invListado.aspx" />
     <Content Include="Application\WebApp\Private\Invitacion\invRechazar.aspx" />
+    <Content Include="Application\WebApp\Private\Reportes\repEvento.aspx" />
     <Content Include="Application\WebApp\Private\SysApp\sappChangePassword.aspx" />
     <Content Include="Application\WebApp\Private\SysApp\sappLogout.aspx" />
     <Content Include="Application\WebApp\Private\SysApp\sappNotificacion.aspx" />
@@ -300,6 +302,7 @@
     <Content Include="Include\Image\Icon\SubMenuRechazo.png" />
     <Content Include="Include\Image\Icon\SubMenuHistorial.png" />
     <Content Include="Include\Image\Icon\SubMenuValoracion.png" />
+    <Content Include="Include\Image\Web\EscudoNL_BackGround.png" />
     <Content Include="Include\Image\Web\TituloAcordeon.png" />
     <Content Include="Include\Image\Web\Background.png" />
     <Content Include="Include\Image\Web\BackgroundGeneral.png" />
@@ -563,6 +566,13 @@
     <Compile Include="Application\WebApp\Private\Invitacion\invRechazar.aspx.designer.cs">
       <DependentUpon>invRechazar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Application\WebApp\Private\Reportes\repEvento.aspx.cs">
+      <DependentUpon>repEvento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Reportes\repEvento.aspx.designer.cs">
+      <DependentUpon>repEvento.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Application\WebApp\Private\SysApp\sappChangePassword.aspx.cs">
       <DependentUpon>sappChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -706,6 +716,9 @@
       <Project>{d6b775da-9a03-4c1c-848a-0db9132db256}</Project>
       <Name>Agenda.Entity</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Application\WebApp\Private\Reportes\RDLC\rptEvento.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
