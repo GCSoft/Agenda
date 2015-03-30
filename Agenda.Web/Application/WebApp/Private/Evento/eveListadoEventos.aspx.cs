@@ -294,6 +294,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             Int32 intRow = 0;
 
             String strCommand = "";
+            String Gira = "";
             String Key = "";
 
             try
@@ -310,6 +311,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Datakeys
                 EventoId = Int32.Parse(this.gvEvento.DataKeys[intRow]["EventoId"].ToString());
+                Gira = this.gvEvento.DataKeys[intRow]["Gira"].ToString();
 
                 // Acción
                 switch (strCommand){
@@ -318,7 +320,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         // Llave encriptada
                         Key = EventoId.ToString() + "|3";
                         Key = gcEncryption.EncryptString(Key, true);
-                        this.Response.Redirect("eveDetalleEvento.aspx?key=" + Key, false);
+                        this.Response.Redirect( ( Gira == "1" ? "../Gira/girDetalleGira.aspx" : "eveDetalleEvento.aspx") + "?key=" + Key, false);
                         break;
                 }
 

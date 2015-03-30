@@ -1,22 +1,22 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Include/MasterPage/PrivateTemplate.Master" AutoEventWireup="true" CodeBehind="eveContacto.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Evento.eveContacto" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Include/MasterPage/PrivateTemplate.Master" AutoEventWireup="true" CodeBehind="girContacto.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Gira.girContacto" %>
 <%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="cntPrivateTemplateHeader" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cntPrivateTemplateBody" runat="server">
-
+    
     <asp:Panel ID="pnlIconPage" runat="server" CssClass="MasterIconPage">
         <img id="imgIconPage" alt="Nuevo León" runat="server" src="~/Include/Image/Icon/IconLens.png" />
     </asp:Panel>
 
     <asp:Panel ID="pnlPageName" runat="server" CssClass="MasterPageName">
-        <asp:Label ID="lblPageName" runat="server" CssClass="PageNameText" Text="Contactos asociados al evento"></asp:Label>
+        <asp:Label ID="lblPageName" runat="server" CssClass="PageNameText" Text="Contactos asociados a la gira"></asp:Label>
     </asp:Panel>
 
     <asp:Panel ID="pnlTitulo" runat="server" CssClass="TitlePanel">
         <table class="HeaderTable">
             <tr>
-                <td class="Titulo"><asp:Label ID="lblSubTitulo" runat="server" Text="Edite la información de los contactos asociados al evento o bien, agregue uno nuevo."></asp:Label></td>
+                <td class="Titulo"><asp:Label ID="lblSubTitulo" runat="server" Text="Edite la información de los contactos asociados a la gira o bien, agregue uno nuevo."></asp:Label></td>
             </tr>
         </table>
     </asp:Panel>
@@ -24,14 +24,14 @@
     <asp:Panel ID="pnlFormulario" runat="server" CssClass="FormPanel">
         <table class="FormTable">
             <tr>
-				<td class="Etiqueta">Nombre de evento</td>
+				<td class="Etiqueta">Nombre de la Gira</td>
 				<td class="Espacio"></td>
-				<td class="Campo" colspan="2"><asp:Label ID="lblEventoNombre" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
+				<td class="Campo" colspan="2"><asp:Label ID="lblGiraNombre" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
 			</tr>
             <tr>
-				<td class="Etiqueta">Fecha de evento</td>
+				<td class="Etiqueta">Fecha de la Gira</td>
 				<td class="Espacio"></td>
-				<td class="Campo" colspan="2"><asp:Label ID="lblEventoFechaHora" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
+				<td class="Campo" colspan="2"><asp:Label ID="lblGiraFechaHora" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
 			</tr>
             <tr>
 				<td class="Etiqueta"></td>
@@ -53,7 +53,7 @@
 
     <asp:Panel ID="pnlGrid" runat="server" CssClass="GridPanel">
         <asp:GridView ID="gvContacto" runat="server" AllowPaging="false" AllowSorting="true" AutoGenerateColumns="False" Width="100%"
-			DataKeyNames="EventoContactoId,Nombre" 
+			DataKeyNames="GiraContactoId,Nombre" 
             OnRowCommand="gvContacto_RowCommand"
 			OnRowDataBound="gvContacto_RowDataBound"
             OnSorting="gvContacto_Sorting">
@@ -72,7 +72,7 @@
 						<td>Comentarios</td>
                     </tr>
                     <tr class="Grid_Row">
-                        <td colspan="6">No se encontraron Contactos asociados al evento</td>
+                        <td colspan="6">No se encontraron Contactos asociados a la gira</td>
                     </tr>
                 </table>
             </EmptyDataTemplate>
@@ -159,8 +159,8 @@
         <%--Empty Content--%>
     </asp:Panel>
 
-    <asp:HiddenField ID="hddEventoContactoId" runat="server" Value="0" />
-    <asp:HiddenField ID="hddEventoId" runat="server" Value="0" />
+    <asp:HiddenField ID="hddGiraContactoId" runat="server" Value="0" />
+    <asp:HiddenField ID="hddGiraId" runat="server" Value="0" />
     <asp:HiddenField ID="hddSort" runat="server" Value="Nombre"  />
     <asp:HiddenField ID="SenderId" runat="server" Value="0"  />
 

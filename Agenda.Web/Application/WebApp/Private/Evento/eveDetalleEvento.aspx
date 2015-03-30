@@ -184,7 +184,7 @@
 									    <td>Comentarios</td>
                                     </tr>
                                     <tr class="Grid_Row">
-                                        <td colspan="3">No se encontraron Contactos asociados a la invitación</td>
+                                        <td colspan="3">No se encontraron Contactos asociados al evento</td>
                                     </tr>
                                 </table>
                             </EmptyDataTemplate>

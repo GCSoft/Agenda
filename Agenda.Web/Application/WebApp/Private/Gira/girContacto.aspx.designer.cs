@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Agenda.Web.Application.WebApp.Private.Evento {
+namespace Agenda.Web.Application.WebApp.Private.Gira {
     
     
-    public partial class eveDatosEvento {
+    public partial class girContacto {
         
         /// <summary>
         /// pnlIconPage control.
@@ -76,148 +76,22 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.Panel pnlFormulario;
         
         /// <summary>
-        /// lblEventoNombre control.
+        /// lblGiraNombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEventoNombre;
+        protected global::System.Web.UI.WebControls.Label lblGiraNombre;
         
         /// <summary>
-        /// lblEventoFechaHora control.
+        /// lblGiraFechaHora control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEventoFechaHora;
-        
-        /// <summary>
-        /// txtNombreEvento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreEvento;
-        
-        /// <summary>
-        /// wucCalendar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Agenda.Web.Include.WebUserControls.wucCalendar wucCalendar;
-        
-        /// <summary>
-        /// wucTimerDesde control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Agenda.Web.Include.WebUserControls.wucTimer wucTimerDesde;
-        
-        /// <summary>
-        /// wucTimerHasta control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::Agenda.Web.Include.WebUserControls.wucTimer wucTimerHasta;
-        
-        /// <summary>
-        /// txtLugarEvento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLugarEvento;
-        
-        /// <summary>
-        /// btnNuevoLugarEvento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNuevoLugarEvento;
-        
-        /// <summary>
-        /// hddLugarEventoId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hddLugarEventoId;
-        
-        /// <summary>
-        /// autosuggestLugarEvento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::AjaxControlToolkit.AutoCompleteExtender autosuggestLugarEvento;
-        
-        /// <summary>
-        /// txtMunicipio control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMunicipio;
-        
-        /// <summary>
-        /// txtColonia control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtColonia;
-        
-        /// <summary>
-        /// txtCalle control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCalle;
-        
-        /// <summary>
-        /// txtNumeroExterior control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNumeroExterior;
-        
-        /// <summary>
-        /// txtNumeroInterior control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNumeroInterior;
-        
-        /// <summary>
-        /// ckeObservaciones control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::CKEditor.NET.CKEditorControl ckeObservaciones;
+        protected global::System.Web.UI.WebControls.Label lblGiraFechaHora;
         
         /// <summary>
         /// pnlBreak control.
@@ -238,13 +112,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.Panel pnlBotones;
         
         /// <summary>
-        /// btnActualizar control.
+        /// btnNuevo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnActualizar;
+        protected global::System.Web.UI.WebControls.Button btnNuevo;
         
         /// <summary>
         /// btnRegresar control.
@@ -256,166 +130,148 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.Button btnRegresar;
         
         /// <summary>
-        /// pnlPopUp_LugarEvento control.
+        /// pnlGrid control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlPopUp_LugarEvento;
+        protected global::System.Web.UI.WebControls.Panel pnlGrid;
         
         /// <summary>
-        /// pnlPopUpContent_LugarEvento control.
+        /// gvContacto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlPopUpContent_LugarEvento;
+        protected global::System.Web.UI.WebControls.GridView gvContacto;
         
         /// <summary>
-        /// pnlPopUpHeader_LugarEvento control.
+        /// pnlPopUp control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlPopUpHeader_LugarEvento;
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp;
         
         /// <summary>
-        /// lblPopUpTitle_LugarEvento control.
+        /// pnlPopUpContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPopUpTitle_LugarEvento;
+        protected global::System.Web.UI.WebControls.Panel pnlPopUpContent;
         
         /// <summary>
-        /// imgCloseWindow_LugarEvento control.
+        /// pnlPopUpHeader control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgCloseWindow_LugarEvento;
+        protected global::System.Web.UI.WebControls.Panel pnlPopUpHeader;
         
         /// <summary>
-        /// pnlPopUpBody_LugarEvento control.
+        /// lblPopUpTitle control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlPopUpBody_LugarEvento;
+        protected global::System.Web.UI.WebControls.Label lblPopUpTitle;
         
         /// <summary>
-        /// txtPopUpNombre_LugarEvento control.
+        /// imgCloseWindow control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPopUpNombre_LugarEvento;
+        protected global::System.Web.UI.WebControls.ImageButton imgCloseWindow;
         
         /// <summary>
-        /// ddlPopUpEstado_LugarEvento control.
+        /// pnlPopUpBody control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPopUpEstado_LugarEvento;
+        protected global::System.Web.UI.WebControls.Panel pnlPopUpBody;
         
         /// <summary>
-        /// ddlPopUpMunicipio_LugarEvento control.
+        /// txtPopUpNombre control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPopUpMunicipio_LugarEvento;
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpNombre;
         
         /// <summary>
-        /// txtPopUpColonia_LugarEvento control.
+        /// txtPopUpPuesto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPopUpColonia_LugarEvento;
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpPuesto;
         
         /// <summary>
-        /// hddPopUpColoniaId_LugarEvento control.
+        /// txtPopUpOrganizacion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hddPopUpColoniaId_LugarEvento;
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpOrganizacion;
         
         /// <summary>
-        /// autosuggestColonia_LugarEvento control.
+        /// txtPopUpTelefono control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.AutoCompleteExtender autosuggestColonia_LugarEvento;
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpTelefono;
         
         /// <summary>
-        /// txtPopUpCalle_LugarEvento control.
+        /// txtPopUpEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPopUpCalle_LugarEvento;
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpEmail;
         
         /// <summary>
-        /// txtPopUpNumeroExterior_LugarEvento control.
+        /// ckePopUpComentarios control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPopUpNumeroExterior_LugarEvento;
+        protected global::CKEditor.NET.CKEditorControl ckePopUpComentarios;
         
         /// <summary>
-        /// txtPopUpNumeroInterior_LugarEvento control.
+        /// btnPopUpCommand control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPopUpNumeroInterior_LugarEvento;
+        protected global::System.Web.UI.WebControls.Button btnPopUpCommand;
         
         /// <summary>
-        /// ckePopUpDescripcion_LugarEvento control.
+        /// lblPopUpMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::CKEditor.NET.CKEditorControl ckePopUpDescripcion_LugarEvento;
-        
-        /// <summary>
-        /// btnPopUpCommand_LugarEvento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPopUpCommand_LugarEvento;
-        
-        /// <summary>
-        /// lblPopUpMessage_LugarEvento control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPopUpMessage_LugarEvento;
+        protected global::System.Web.UI.WebControls.Label lblPopUpMessage;
         
         /// <summary>
         /// pnlFooter control.
@@ -427,13 +283,31 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.Panel pnlFooter;
         
         /// <summary>
-        /// hddEventoId control.
+        /// hddGiraContactoId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hddEventoId;
+        protected global::System.Web.UI.WebControls.HiddenField hddGiraContactoId;
+        
+        /// <summary>
+        /// hddGiraId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hddGiraId;
+        
+        /// <summary>
+        /// hddSort control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hddSort;
         
         /// <summary>
         /// SenderId control.

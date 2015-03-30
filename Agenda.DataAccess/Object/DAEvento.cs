@@ -488,7 +488,7 @@ namespace Agenda.DataAccess.Object
         ///   <create>22-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
-        ///<summary>Obtiene el detalle de una invitación en particular</summary>
+        ///<summary>Obtiene el detalle de un evento en particular</summary>
         ///<param name="oENTEvento">Entidad de Evento con los parámetros necesarios para consultar la información</param>
         ///<param name="sConnection">Cadena de conexión a la base de datos</param>
         ///<param name="iAlternateDBTimeout">Valor en milisegundos del Timeout en la consulta a la base de datos. 0 si se desea el Timeout por default</param>

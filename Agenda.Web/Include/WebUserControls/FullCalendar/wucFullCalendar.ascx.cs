@@ -331,6 +331,7 @@ namespace Agenda.Web.Include.WebUserControls.FullCalendar
                                                 "coordinacion: '" + rowEvento["Coordinacion"].ToString() + "', " +
                                                 "icono: '../../../../Include/Image/Buttons/Prioridad" + rowEvento["PrioridadNombre"].ToString() + ".png', " +
                                                 "llave:'" + gcEncryption.EncryptString(rowEvento["EventoId"].ToString() + "|4", true) + "', " +
+                                                "gira: '" + rowEvento["Gira"].ToString() + "', " +
                                                 "tooltip: 'Evento: " + rowEvento["EventoNombre"].ToString() + "<br /><br />Estatus: " + rowEvento["EstatusEventoNombre"].ToString() + "<br />Dependencia: " + rowEvento["Dependencia"].ToString() + "<br /><br />Fecha: " + rowEvento["EventoFechaEstandar"].ToString() + "<br />Inicio: " + rowEvento["EventoHoraInicioEstandar"].ToString() + "<br />Fin: " + rowEvento["EventoHoraFinEstandar"].ToString() + "' " +
                                             "} ";
 
@@ -362,8 +363,13 @@ namespace Agenda.Web.Include.WebUserControls.FullCalendar
                                             "if (event.coordinacion) { sCoordinacion = event.coordinacion; } " +
                                             "if (event.icono) { sIcono = event.icono; } " +
                                             "if (event.tooltip) { sToolTip = CreateLineBreaks(event.tooltip); } " +
+                                            "if (event.gira == '1') { sCoordinacion = 'GIRA'; } " +
                                             "" +
-                                            "eventElement.find(" + Convert.ToChar(34) + "div.fc-content" + Convert.ToChar(34) + ").prepend(" + Convert.ToChar(34) + "<div style='border-bottom:solid 1px #FFF; height:19px; width:100%;'><div style='float:left;'>" + Convert.ToChar(34) + " + sCoordinacion + " + Convert.ToChar(34) + "</div><div style='float:right;'><img src='" + Convert.ToChar(34) + " + sIcono + " + Convert.ToChar(34) + "' ></div></div>" + Convert.ToChar(34) + "); " +
+                                            "if (event.gira == '1') { " +
+                                                "eventElement.find(" + Convert.ToChar(34) + "div.fc-content" + Convert.ToChar(34) + ").prepend(" + Convert.ToChar(34) + "<div style='border-bottom:solid 1px #FFF; height:19px; width:100%;'><div style='float:left;'>" + Convert.ToChar(34) + " + sCoordinacion + " + Convert.ToChar(34) + "</div></div>" + Convert.ToChar(34) + "); " +
+                                            "} else { " +
+                                                "eventElement.find(" + Convert.ToChar(34) + "div.fc-content" + Convert.ToChar(34) + ").prepend(" + Convert.ToChar(34) + "<div style='border-bottom:solid 1px #FFF; height:19px; width:100%;'><div style='float:left;'>" + Convert.ToChar(34) + " + sCoordinacion + " + Convert.ToChar(34) + "</div><div style='float:right;'><img src='" + Convert.ToChar(34) + " + sIcono + " + Convert.ToChar(34) + "' ></div></div>" + Convert.ToChar(34) + "); " +
+                                            "}" +
                                             "eventElement.find(" + Convert.ToChar(34) + "div.fc-content" + Convert.ToChar(34) + ").css('cursor', 'pointer'); " +
                                             "eventElement.find(" + Convert.ToChar(34) + "div.fc-content" + Convert.ToChar(34) + ").prop('title', sToolTip); " +
                                         "}, " +
@@ -373,7 +379,8 @@ namespace Agenda.Web.Include.WebUserControls.FullCalendar
                                             "" +
                                             "if (event.llave) { sKey = event.llave; } " +
                                             "" +
-                                            "window.location = " + Convert.ToChar(34) + "eveDetalleEvento.aspx?key=" + Convert.ToChar(34) + " + sKey;" +
+                                            "if (event.gira == '1') { window.location = " + Convert.ToChar(34) + "../Gira/girDetalleGira.aspx?key=" + Convert.ToChar(34) + " + sKey; } else { window.location = " + Convert.ToChar(34) + "eveDetalleEvento.aspx?key=" + Convert.ToChar(34) + " + sKey; }" +
+                                            "" +
                                         "}, " +
                                         "" +
                                         "viewRender: function (view, element) { " +

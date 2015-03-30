@@ -928,6 +928,8 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
             }
         }
 
+        
+        
         // Eventos del paginado
 
         protected void GridView_SelectPage(object sender, CommandEventArgs e){

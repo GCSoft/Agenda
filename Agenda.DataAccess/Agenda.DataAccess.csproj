@@ -51,6 +51,7 @@
     <Compile Include="Object\DAEstatusEvento.cs" />
     <Compile Include="Object\DAEstatusInvitacion.cs" />
     <Compile Include="Object\DAEvento.cs" />
+    <Compile Include="Object\DAGira.cs" />
     <Compile Include="Object\DAInvitacion.cs" />
     <Compile Include="Object\DALugarEvento.cs" />
     <Compile Include="Object\DAMedioComunicacion.cs" />

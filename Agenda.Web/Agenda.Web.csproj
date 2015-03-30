@@ -93,7 +93,7 @@
     <Content Include="Application\WebApp\Private\Catalogo\catColonia.aspx" />
     <Content Include="Application\WebApp\Private\Catalogo\catLugarEvento.aspx" />
     <Content Include="Application\WebApp\Private\Catalogo\catSecretario.aspx" />
-    <Content Include="Application\WebApp\Private\Evento\Cuadernillos\Gira.aspx" />
+    <Content Include="Application\WebApp\Private\Gira\Cuadernillos\Gira.aspx" />
     <Content Include="Application\WebApp\Private\Evento\Cuadernillos\Logistica.aspx" />
     <Content Include="Application\WebApp\Private\Evento\Cuadernillos\Protocolo.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveCalendario.aspx" />
@@ -105,8 +105,15 @@
     <Content Include="Application\WebApp\Private\Evento\eveDatosEvento.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveDatosGenerales.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveDetalleEvento.aspx" />
+    <Content Include="Application\WebApp\Private\Gira\girCancelar.aspx" />
+    <Content Include="Application\WebApp\Private\Gira\girConfiguracionGira.aspx" />
+    <Content Include="Application\WebApp\Private\Gira\girContacto.aspx" />
+    <Content Include="Application\WebApp\Private\Gira\girDatosGenerales.aspx" />
+    <Content Include="Application\WebApp\Private\Gira\girDetalleGira.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveDocumentos.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveEliminarRepresentante.aspx" />
+    <Content Include="Application\WebApp\Private\Gira\girHistorial.aspx" />
+    <Content Include="Application\WebApp\Private\Gira\girNuevaGira.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveHistorial.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveListadoEventos.aspx" />
     <Content Include="Application\WebApp\Private\Evento\eveNuevoEvento.aspx" />
@@ -371,11 +378,11 @@
     <Compile Include="Application\WebApp\Private\Catalogo\catSecretario.aspx.designer.cs">
       <DependentUpon>catSecretario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Application\WebApp\Private\Evento\Cuadernillos\Gira.aspx.cs">
+    <Compile Include="Application\WebApp\Private\Gira\Cuadernillos\Gira.aspx.cs">
       <DependentUpon>Gira.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Application\WebApp\Private\Evento\Cuadernillos\Gira.aspx.designer.cs">
+    <Compile Include="Application\WebApp\Private\Gira\Cuadernillos\Gira.aspx.designer.cs">
       <DependentUpon>Gira.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\WebApp\Private\Evento\Cuadernillos\Logistica.aspx.cs">
@@ -455,6 +462,41 @@
     <Compile Include="Application\WebApp\Private\Evento\eveDetalleEvento.aspx.designer.cs">
       <DependentUpon>eveDetalleEvento.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Application\WebApp\Private\Gira\girCancelar.aspx.cs">
+      <DependentUpon>girCancelar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Gira\girCancelar.aspx.designer.cs">
+      <DependentUpon>girCancelar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Gira\girConfiguracionGira.aspx.cs">
+      <DependentUpon>girConfiguracionGira.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Gira\girConfiguracionGira.aspx.designer.cs">
+      <DependentUpon>girConfiguracionGira.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Gira\girContacto.aspx.cs">
+      <DependentUpon>girContacto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Gira\girContacto.aspx.designer.cs">
+      <DependentUpon>girContacto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Gira\girDatosGenerales.aspx.cs">
+      <DependentUpon>girDatosGenerales.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Gira\girDatosGenerales.aspx.designer.cs">
+      <DependentUpon>girDatosGenerales.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Gira\girDetalleGira.aspx.cs">
+      <DependentUpon>girDetalleGira.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Gira\girDetalleGira.aspx.designer.cs">
+      <DependentUpon>girDetalleGira.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Application\WebApp\Private\Evento\eveDocumentos.aspx.cs">
       <DependentUpon>eveDocumentos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -468,6 +510,20 @@
     </Compile>
     <Compile Include="Application\WebApp\Private\Evento\eveEliminarRepresentante.aspx.designer.cs">
       <DependentUpon>eveEliminarRepresentante.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Gira\girHistorial.aspx.cs">
+      <DependentUpon>girHistorial.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Gira\girHistorial.aspx.designer.cs">
+      <DependentUpon>girHistorial.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Gira\girNuevaGira.aspx.cs">
+      <DependentUpon>girNuevaGira.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Gira\girNuevaGira.aspx.designer.cs">
+      <DependentUpon>girNuevaGira.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\WebApp\Private\Evento\eveHistorial.aspx.cs">
       <DependentUpon>eveHistorial.aspx</DependentUpon>

@@ -186,7 +186,7 @@ namespace Agenda.BusinessProcess.Object
         ///   <create>24-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
-        ///<summary>Obtiene el detalle de una invitación en particular</summary>
+        ///<summary>Obtiene el detalle de un evento en particular</summary>
         ///<param name="oENTEvento">Entidad de Evento con los parámetros necesarios para consultar la información</param>
         ///<returns>Una entidad de respuesta</returns>
         public ENTResponse SelectEvento_Detalle(ENTEvento oENTEvento){

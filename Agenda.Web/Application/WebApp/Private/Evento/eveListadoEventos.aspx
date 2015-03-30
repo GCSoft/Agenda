@@ -68,7 +68,7 @@
 
     <asp:Panel ID="pnlGrid" runat="server" CssClass="GridPanel">
         <asp:GridView ID="gvEvento" runat="server" AllowPaging="false" AllowSorting="true" AutoGenerateColumns="False" Width="100%"
-            DataKeyNames="EventoId, EventoNombre"
+            DataKeyNames="EventoId, EventoNombre,Gira"
             OnRowDataBound="gvEvento_RowDataBound"
             OnRowCommand="gvEvento_RowCommand"
             OnSorting="gvEvento_Sorting">
