@@ -21,7 +21,10 @@ namespace Agenda.Entity.Object
 
         private Int32   _GiraId;
         private Int32   _EstatusGiraId;
+        private Int32   _GiraConfiguracionId;
         private Int32   _GiraContactoId;
+        private Int32   _LugarEventoId;
+        private Int32   _TipoGiraConfiguracionId;
         private Int32   _UsuarioId;
         private Int16   _Activo;
         private String  _GiraDetalle;
@@ -30,6 +33,11 @@ namespace Agenda.Entity.Object
         private String  _HoraGiraFin;
         private String  _HoraGiraInicio;
         private String  _MotivoRechazo;
+        private String  _ConfiguracionGrupo;
+        private String  _ConfiguracionHoraInicio;
+        private String  _ConfiguracionHoraFin;
+        private String  _ConfiguracionDetalle;
+        private Int16   _ConfiguracionActivo;
         private ENTInvitacionContacto _Contacto;
 
 
@@ -39,7 +47,10 @@ namespace Agenda.Entity.Object
         {
             _GiraId = 0;
             _EstatusGiraId = 0;
+            _GiraConfiguracionId = 0;
             _GiraContactoId = 0;
+            _LugarEventoId = 0;
+            _TipoGiraConfiguracionId = 0;
             _UsuarioId = 0;
             _Activo = 0;
             _GiraDetalle = "";
@@ -48,6 +59,11 @@ namespace Agenda.Entity.Object
             _HoraGiraFin = "";
             _HoraGiraInicio = "";
             _MotivoRechazo = "";
+            _ConfiguracionGrupo = "";
+            _ConfiguracionHoraInicio = "";
+            _ConfiguracionHoraFin = "";
+            _ConfiguracionDetalle = "";
+            _ConfiguracionActivo = 0;
             _Contacto = new ENTInvitacionContacto();
         }
 
@@ -79,6 +95,18 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
+        ///   <name>ENTGira.GiraConfiguracionId</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el identificador único de la Configuracion asociada a la Gira</summary>
+        public Int32 GiraConfiguracionId
+        {
+            get { return _GiraConfiguracionId; }
+            set { _GiraConfiguracionId = value; }
+        }
+
+        ///<remarks>
         ///   <name>ENTGira.GiraContactoId</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
@@ -88,6 +116,30 @@ namespace Agenda.Entity.Object
         {
             get { return _GiraContactoId; }
             set { _GiraContactoId = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.LugarEventoId</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el identificador único del lugar del evento asociado a la configuración de la gira</summary>
+        public Int32 LugarEventoId
+        {
+            get { return _LugarEventoId; }
+            set { _LugarEventoId = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.TipoGiraConfiguracionId</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el identificador único del tipo de configuración asociado a la gira</summary>
+        public Int32 TipoGiraConfiguracionId
+        {
+            get { return _TipoGiraConfiguracionId; }
+            set { _TipoGiraConfiguracionId = value; }
         }
 
         ///<remarks>
@@ -184,6 +236,66 @@ namespace Agenda.Entity.Object
         {
             get { return _MotivoRechazo; }
             set { _MotivoRechazo = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.ConfiguracionGrupo</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el grupo al que pertenece una partida de configuración de una Gira</summary>
+        public String ConfiguracionGrupo
+        {
+            get { return _ConfiguracionGrupo; }
+            set { _ConfiguracionGrupo = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.ConfiguracionHoraInicio</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna la hora inicial en una configuracion de una Gira</summary>
+        public String ConfiguracionHoraInicio
+        {
+            get { return _ConfiguracionHoraInicio; }
+            set { _ConfiguracionHoraInicio = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.ConfiguracionHoraFin</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna la hora final en una configuracion de una Gira</summary>
+        public String ConfiguracionHoraFin
+        {
+            get { return _ConfiguracionHoraFin; }
+            set { _ConfiguracionHoraFin = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.ConfiguracionDetalle</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el detalle en una configuracion de una Gira</summary>
+        public String ConfiguracionDetalle
+        {
+            get { return _ConfiguracionDetalle; }
+            set { _ConfiguracionDetalle = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.ConfiguracionActivo</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un valor que determina si el registro de configuración está activo o no</summary>
+        public Int16 ConfiguracionActivo
+        {
+            get { return _ConfiguracionActivo; }
+            set { _ConfiguracionActivo = value; }
         }
 
         ///<remarks>

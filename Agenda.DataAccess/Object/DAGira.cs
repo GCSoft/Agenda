@@ -194,6 +194,96 @@ namespace Agenda.DataAccess.Object
         }
 
         ///<remarks>
+        ///   <name>DAGira.InsertGiraConfiguracion</name>
+        ///   <create>30-Marzo-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Asocia una nueva Configuración a la Gira</summary>
+        ///<param name="oENTGira">Entidad de Gira con los parámetros necesarios para realizar la transacción</param>
+        ///<param name="sConnection">Cadena de conexión a la base de datos</param>
+        ///<param name="iAlternateDBTimeout">Valor en milisegundos del Timeout en la consulta a la base de datos. 0 si se desea el Timeout por default</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse InsertGiraConfiguracion(ENTGira oENTGira, String sConnection, Int32 iAlternateDBTimeout){
+            SqlConnection sqlCnn = new SqlConnection(sConnection);
+            SqlCommand sqlCom;
+            SqlParameter sqlPar;
+            SqlDataAdapter sqlDA;
+
+            ENTResponse oENTResponse = new ENTResponse();
+
+            // Configuración de objetos
+            sqlCom = new SqlCommand("uspGiraConfiguracion_Ins", sqlCnn);
+            sqlCom.CommandType = CommandType.StoredProcedure;
+
+            // Timeout alternativo en caso de ser solicitado
+            if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
+
+            // Parametros
+            sqlPar = new SqlParameter("GiraId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.GiraId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("LugarEventoId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.LugarEventoId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("TipoGiraConfiguracionId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.TipoGiraConfiguracionId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ConfiguracionGrupo", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.ConfiguracionGrupo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ConfiguracionHoraInicio", SqlDbType.Time);
+            sqlPar.Value = oENTGira.ConfiguracionHoraInicio;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ConfiguracionHoraFin", SqlDbType.Time);
+            sqlPar.Value = oENTGira.ConfiguracionHoraFin;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ConfiguracionDetalle", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.ConfiguracionDetalle;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ConfiguracionActivo", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.ConfiguracionActivo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            // Inicializaciones
+            oENTResponse.DataSetResponse = new DataSet();
+            sqlDA = new SqlDataAdapter(sqlCom);
+
+            // Transacción
+            try
+            {
+
+                sqlCnn.Open();
+                sqlDA.Fill(oENTResponse.DataSetResponse);
+                sqlCnn.Close();
+
+            }catch (SqlException sqlEx){
+
+                oENTResponse.ExceptionRaised(sqlEx.Message);
+            }catch (Exception ex){
+
+                oENTResponse.ExceptionRaised(ex.Message);
+            }finally{
+
+                if (sqlCnn.State == ConnectionState.Open) { sqlCnn.Close(); }
+                sqlCnn.Dispose();
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
         ///   <name>DAGira.InsertGiraContacto</name>
         ///   <create>30-Marzo-2015</create>
         ///   <author>Ruben.Cobos</author>
@@ -307,6 +397,72 @@ namespace Agenda.DataAccess.Object
             // Parametros
             sqlPar = new SqlParameter("GiraId", SqlDbType.Int);
             sqlPar.Value = oENTGira.GiraId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            // Inicializaciones
+            oENTResponse.DataSetResponse = new DataSet();
+            sqlDA = new SqlDataAdapter(sqlCom);
+
+            // Transacción
+            try
+            {
+
+                sqlCnn.Open();
+                sqlDA.Fill(oENTResponse.DataSetResponse);
+                sqlCnn.Close();
+
+            }catch (SqlException sqlEx){
+
+                oENTResponse.ExceptionRaised(sqlEx.Message);
+            }catch (Exception ex){
+
+                oENTResponse.ExceptionRaised(ex.Message);
+            }finally{
+
+                if (sqlCnn.State == ConnectionState.Open) { sqlCnn.Close(); }
+                sqlCnn.Dispose();
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
+        ///   <name>DAGira.SelectGiraConfiguracion</name>
+        ///   <create>30-Marzo-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene un listado de Configuraciones asociadas a una Gira en particular en base a los parámetros proporcionados</summary>
+        ///<param name="oENTGira">Entidad de Gira con los parámetros necesarios para consultar la información</param>
+        ///<param name="sConnection">Cadena de conexión a la base de datos</param>
+        ///<param name="iAlternateDBTimeout">Valor en milisegundos del Timeout en la consulta a la base de datos. 0 si se desea el Timeout por default</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse SelectGiraConfiguracion(ENTGira oENTGira, String sConnection, Int32 iAlternateDBTimeout){
+            SqlConnection sqlCnn = new SqlConnection(sConnection);
+            SqlCommand sqlCom;
+            SqlParameter sqlPar;
+            SqlDataAdapter sqlDA;
+
+            ENTResponse oENTResponse = new ENTResponse();
+
+            // Configuración de objetos
+            sqlCom = new SqlCommand("uspGiraConfiguracion_Sel", sqlCnn);
+            sqlCom.CommandType = CommandType.StoredProcedure;
+
+            // Timeout alternativo en caso de ser solicitado
+            if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
+
+            // Parametros
+            sqlPar = new SqlParameter("GiraConfiguracionId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.GiraConfiguracionId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("GiraId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.GiraId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Activo", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Activo;
             sqlCom.Parameters.Add(sqlPar);
 
             // Inicializaciones
@@ -521,6 +677,100 @@ namespace Agenda.DataAccess.Object
 
             sqlPar = new SqlParameter("GiraDetalle", SqlDbType.VarChar);
             sqlPar.Value = oENTGira.GiraDetalle;
+            sqlCom.Parameters.Add(sqlPar);
+
+            // Inicializaciones
+            oENTResponse.DataSetResponse = new DataSet();
+            sqlDA = new SqlDataAdapter(sqlCom);
+
+            // Transacción
+            try
+            {
+
+                sqlCnn.Open();
+                sqlDA.Fill(oENTResponse.DataSetResponse);
+                sqlCnn.Close();
+
+            }catch (SqlException sqlEx){
+
+                oENTResponse.ExceptionRaised(sqlEx.Message);
+            }catch (Exception ex){
+
+                oENTResponse.ExceptionRaised(ex.Message);
+            }finally{
+
+                if (sqlCnn.State == ConnectionState.Open) { sqlCnn.Close(); }
+                sqlCnn.Dispose();
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
+        ///   <name>DAGira.UpdateGiraConfiguracion</name>
+        ///   <create>30-Marzo-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Actualiza una Configuración existente y asociada a la Gira</summary>
+        ///<param name="oENTGira">Entidad de Gira con los parámetros necesarios para realizar la transacción</param>
+        ///<param name="sConnection">Cadena de conexión a la base de datos</param>
+        ///<param name="iAlternateDBTimeout">Valor en milisegundos del Timeout en la consulta a la base de datos. 0 si se desea el Timeout por default</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse UpdateGiraConfiguracion(ENTGira oENTGira, String sConnection, Int32 iAlternateDBTimeout){
+            SqlConnection sqlCnn = new SqlConnection(sConnection);
+            SqlCommand sqlCom;
+            SqlParameter sqlPar;
+            SqlDataAdapter sqlDA;
+
+            ENTResponse oENTResponse = new ENTResponse();
+
+            // Configuración de objetos
+            sqlCom = new SqlCommand("uspGiraConfiguracion_Upd", sqlCnn);
+            sqlCom.CommandType = CommandType.StoredProcedure;
+
+            // Timeout alternativo en caso de ser solicitado
+            if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
+
+            // Parametros
+            sqlPar = new SqlParameter("GiraConfiguracionId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.GiraConfiguracionId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("GiraId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.GiraId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("LugarEventoId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.LugarEventoId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("TipoGiraConfiguracionId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.TipoGiraConfiguracionId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ConfiguracionGrupo", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.ConfiguracionGrupo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ConfiguracionHoraInicio", SqlDbType.Time);
+            sqlPar.Value = oENTGira.ConfiguracionHoraInicio;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ConfiguracionHoraFin", SqlDbType.Time);
+            sqlPar.Value = oENTGira.ConfiguracionHoraFin;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ConfiguracionDetalle", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.ConfiguracionDetalle;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ConfiguracionActivo", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.ConfiguracionActivo;
             sqlCom.Parameters.Add(sqlPar);
 
             // Inicializaciones

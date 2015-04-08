@@ -105,8 +105,8 @@
                 <tr>
                     <td>
                         <asp:GridView ID="gvPrograma" runat="server" AllowPaging="false" AllowSorting="true" AutoGenerateColumns="False" Width="100%"
-						    DataKeyNames="GiraConfiguracionId,EventoNombre" 
-						    OnRowDataBound="gvPrograma_RowDataBound"
+			                DataKeyNames="GiraConfiguracionId,TipoGiraConfiguracionId,ConfiguracionDetalle" 
+			                OnRowDataBound="gvPrograma_RowDataBound"
                             OnSorting="gvPrograma_Sorting">
                             <RowStyle CssClass="Grid_Row" />
                             <EditRowStyle Wrap="True" />
@@ -115,11 +115,11 @@
                             <EmptyDataTemplate>
                                 <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
                                     <tr class="Grid_Header">
-                                        <td style="width:200px;">EventoNombre</td>
-									    <td>LugarEventoNombre</td>
-									    <td style="width:150px;">EventoFecha</td>
-									    <td style="width:100px;">EventoHoraInicio</td>
-                                        <td style="width:100px;">EventoHoraFin</td>
+                                        <td style="width:150px;">Grupo</td>
+						                <td style="width:100px;">Fecha</td>
+						                <td style="width:100px;">Inicio</td>
+                                        <td style="width:100px;">Fin</td>
+                                        <td>Detalle</td>
                                     </tr>
                                     <tr class="Grid_Row">
                                         <td colspan="5">No se ha capturado el programa de la gira</td>
@@ -127,11 +127,11 @@
                                 </table>
                             </EmptyDataTemplate>
                             <Columns>
-							    <asp:BoundField HeaderText="EventoNombre"       ItemStyle-HorizontalAlign="Left"	ItemStyle-Width="200px"	DataField="Nombre"                          SortExpression="Nombre"></asp:BoundField>
-							    <asp:BoundField HeaderText="LugarEventoNombre"  ItemStyle-HorizontalAlign="Left"							DataField="Comentarios" HtmlEncode="false"  SortExpression="Comentarios"></asp:BoundField>
-							    <asp:BoundField HeaderText="EventoFecha"        ItemStyle-HorizontalAlign="Left"	ItemStyle-Width="150px"	DataField="Organizacion"                    SortExpression="Organizacion"></asp:BoundField>
-							    <asp:BoundField HeaderText="EventoHoraInicio"   ItemStyle-HorizontalAlign="Center"	ItemStyle-Width="100px"	DataField="Telefono"                        SortExpression="Telefono"></asp:BoundField>
-							    <asp:BoundField HeaderText="EventoHoraFin"      ItemStyle-HorizontalAlign="Center"	ItemStyle-Width="100px"	DataField="Email"                           SortExpression="Email"></asp:BoundField>
+				                <asp:BoundField HeaderText="Grupo"      ItemStyle-HorizontalAlign="Left"	ItemStyle-Width="150px"	DataField="ConfiguracionGrupo"                      SortExpression="ConfiguracionGrupo"></asp:BoundField>
+				                <asp:BoundField HeaderText="Fecha"      ItemStyle-HorizontalAlign="Center"	ItemStyle-Width="100px"	DataField="GiraFechaEstandar"                       SortExpression="GiraFechaEstandar"></asp:BoundField>
+				                <asp:BoundField HeaderText="Inicio"     ItemStyle-HorizontalAlign="Center"	ItemStyle-Width="100px"	DataField="ConfiguracionHoraInicioEstandar"         SortExpression="ConfiguracionHoraInicioEstandar"></asp:BoundField>
+				                <asp:BoundField HeaderText="Fin"        ItemStyle-HorizontalAlign="Center"	ItemStyle-Width="100px"	DataField="ConfiguracionHoraFinEstandar"            SortExpression="ConfiguracionHoraFinEstandar"></asp:BoundField>
+                                <asp:BoundField HeaderText="Detalle"    ItemStyle-HorizontalAlign="Left"							DataField="ConfiguracionDetalle" HtmlEncode="false" SortExpression="ConfiguracionDetalle"></asp:BoundField>
                             </Columns>
                         </asp:GridView>
                     </td>

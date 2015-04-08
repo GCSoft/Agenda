@@ -89,6 +89,38 @@ namespace Agenda.BusinessProcess.Object
         }
 
         ///<remarks>
+        ///   <name>BPGira.InsertGiraConfiguracion</name>
+        ///   <create>30-Marzo-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Asocia una nueva Configuración a la Gira</summary>
+        ///<param name="oENTGira">Entidad de Gira con los parámetros necesarios para realizar la transacción</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse InsertGiraConfiguracion(ENTGira oENTGira){
+            DAGira oDAGira = new DAGira();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            try
+            {
+
+                // Transacción en base de datos
+                oENTResponse = oDAGira.InsertGiraConfiguracion(oENTGira, this.ConnectionApplication, 0);
+
+                // Validación de error en consulta
+                if (oENTResponse.GeneratesException) { return oENTResponse; }
+
+                // Validación de mensajes de la BD
+                oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
+
+            }catch (Exception ex){
+                oENTResponse.ExceptionRaised(ex.Message);
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
         ///   <name>BPGira.InsertGiraContacto</name>
         ///   <create>30-Marzo-2015</create>
         ///   <author>Ruben.Cobos</author>
@@ -137,6 +169,38 @@ namespace Agenda.BusinessProcess.Object
 
                 // Transacción en base de datos
                 oENTResponse = oDAGira.SelectGira_Detalle(oENTGira, this.ConnectionApplication, 0);
+
+                // Validación de error en consulta
+                if (oENTResponse.GeneratesException) { return oENTResponse; }
+
+                // Validación de mensajes de la BD
+                oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
+
+            }catch (Exception ex){
+                oENTResponse.ExceptionRaised(ex.Message);
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
+        ///   <name>BPGira.SelectGiraConfiguracion</name>
+        ///   <create>30-Marzo-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene un listado de Configuracions asociados a una invitación en particular en base a los parámetros proporcionados</summary>
+        ///<param name="oENTGira">Entidad de Gira con los parámetros necesarios para consultar la información</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse SelectGiraConfiguracion(ENTGira oENTGira){
+            DAGira oDAGira = new DAGira();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            try
+            {
+
+                // Transacción en base de datos
+                oENTResponse = oDAGira.SelectGiraConfiguracion(oENTGira, this.ConnectionApplication, 0);
 
                 // Validación de error en consulta
                 if (oENTResponse.GeneratesException) { return oENTResponse; }
@@ -234,6 +298,38 @@ namespace Agenda.BusinessProcess.Object
 
                 // Transacción en base de datos
                 oENTResponse = oDAGira.UpdateGira_DatosGira(oENTGira, this.ConnectionApplication, 0);
+
+                // Validación de error en consulta
+                if (oENTResponse.GeneratesException) { return oENTResponse; }
+
+                // Validación de mensajes de la BD
+                oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
+
+            }catch (Exception ex){
+                oENTResponse.ExceptionRaised(ex.Message);
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
+        ///   <name>BPGira.UpdateGiraConfiguracion</name>
+        ///   <create>30-Marzo-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Actualiza una Configuración existente y asociada a la Gira</summary>
+        ///<param name="oENTGira">Entidad de Gira con los parámetros necesarios para realizar la transacción</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse UpdateGiraConfiguracion(ENTGira oENTGira){
+            DAGira oDAGira = new DAGira();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            try
+            {
+
+                // Transacción en base de datos
+                oENTResponse = oDAGira.UpdateGiraConfiguracion(oENTGira, this.ConnectionApplication, 0);
 
                 // Validación de error en consulta
                 if (oENTResponse.GeneratesException) { return oENTResponse; }

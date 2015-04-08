@@ -323,7 +323,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
 
 
-        // Giras de la página
+        // Eventos de la página
 
         protected void Page_Load(object sender, EventArgs e){
             String Key = "";
@@ -483,7 +483,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
 
 
-        // Giras del PopUp
+        // Eventos del PopUp
 
         protected void btnPopUpCommand_Click(object sender, EventArgs e){
             try
