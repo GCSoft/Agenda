@@ -344,7 +344,6 @@
     <Content Include="Include\WebUserControls\FullCalendar\Style\fullcalendar.print.css" />
     <Content Include="Include\WebUserControls\FullCalendar\wucFullCalendar.ascx" />
     <Content Include="Include\WebUserControls\wucCalendar.ascx" />
-    <Content Include="Include\WebUserControls\wucGiraAgrupacion.ascx" />
     <Content Include="Include\WebUserControls\wucMenu.ascx" />
     <Content Include="Include\WebUserControls\wucTimer.ascx" />
     <Content Include="Index.aspx" />
@@ -731,13 +730,6 @@
     </Compile>
     <Compile Include="Include\WebUserControls\wucCalendar.ascx.designer.cs">
       <DependentUpon>wucCalendar.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Include\WebUserControls\wucGiraAgrupacion.ascx.cs">
-      <DependentUpon>wucGiraAgrupacion.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Include\WebUserControls\wucGiraAgrupacion.ascx.designer.cs">
-      <DependentUpon>wucGiraAgrupacion.ascx</DependentUpon>
     </Compile>
     <Compile Include="Include\WebUserControls\wucMenu.ascx.cs">
       <DependentUpon>wucMenu.ascx</DependentUpon>

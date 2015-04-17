@@ -683,6 +683,59 @@
 	height: 22px;
 }
 
+/*GRIDVIEW SCROLL*/
+.Grid_Row_Scroll {
+	background-color: #FFFFFF;
+    border:0px;
+	color: #675C9D;
+	font:11px Tahoma;
+	font-weight:normal;
+	height:15px;
+}
+
+.Grid_Row_Scroll a{
+	color: #675C9D;
+	background: none;
+}
+
+.Grid_Row_Scroll td {
+	border-left:0px;
+    border-top: 0px;
+    border-right:1px solid #C1C1C1;
+    border-bottom:1px solid #C1C1C1;
+	color: #675C9D;
+	font:11px Tahoma;
+	font-weight:normal;
+	height:15px;
+	padding:2px;
+}
+
+.Grid_Row_Over_Scroll{
+	background-color: #675C9D;
+	border:0px;
+	color: #C1C1C1;
+	font:11px Tahoma;
+	font-weight:normal;
+	height:15px;
+}
+
+.Grid_Row_Over_Scroll a{
+	color:#C1C1C1;
+	background: none;
+}
+
+.Grid_Row_Over_Scroll td {
+	border-left:0px;
+    border-top: 0px;
+    border-right:1px solid #C1C1C1;
+    border-bottom:1px solid #C1C1C1;
+	color:#C1C1C1;
+	font:11px Tahoma;
+	font-weight:normal;
+	height:15px;
+	padding:2px;
+}
+
 /*LABEL*/
 .Label_General{
 	color:#333333;

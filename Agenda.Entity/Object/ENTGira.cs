@@ -38,6 +38,11 @@ namespace Agenda.Entity.Object
         private String  _ConfiguracionHoraFin;
         private String  _ConfiguracionDetalle;
         private Int16   _ConfiguracionActivo;
+        private String  _HelipuertoLugar;
+        private String  _HelipuertoDomicilio;
+        private String  _HelipuertoCoordenadas;
+        private DataTable   _DataTableComite;
+        private DataTable   _DataTableComiteHelipuerto;
         private ENTInvitacionContacto _Contacto;
 
 
@@ -64,6 +69,11 @@ namespace Agenda.Entity.Object
             _ConfiguracionHoraFin = "";
             _ConfiguracionDetalle = "";
             _ConfiguracionActivo = 0;
+            _HelipuertoLugar = "";
+            _HelipuertoDomicilio = "";
+            _HelipuertoCoordenadas = "";
+            _DataTableComite = null;
+            _DataTableComiteHelipuerto = null;
             _Contacto = new ENTInvitacionContacto();
         }
 
@@ -296,6 +306,66 @@ namespace Agenda.Entity.Object
         {
             get { return _ConfiguracionActivo; }
             set { _ConfiguracionActivo = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.HelipuertoLugar</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el lugar en donde se ubica el helipuerto</summary>
+        public String HelipuertoLugar
+        {
+            get { return _HelipuertoLugar; }
+            set { _HelipuertoLugar = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.HelipuertoDomicilio</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna el domicilio del helipuerto</summary>
+        public String HelipuertoDomicilio
+        {
+            get { return _HelipuertoDomicilio; }
+            set { _HelipuertoDomicilio = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.HelipuertoCoordenadas</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna las coordenadas donde se ubica el helipuerto</summary>
+        public String HelipuertoCoordenadas
+        {
+            get { return _HelipuertoCoordenadas; }
+            set { _HelipuertoCoordenadas = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.DataTableComite</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un DataTable el cual contiene el detalle del comité de recepción</summary>
+        public DataTable DataTableComite
+        {
+            get { return _DataTableComite; }
+            set { _DataTableComite = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.DataTableComiteHelipuerto</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un DataTable el cual contiene el detalle del comité de recepción del helipuerto</summary>
+        public DataTable DataTableComiteHelipuerto
+        {
+            get { return _DataTableComiteHelipuerto; }
+            set { _DataTableComiteHelipuerto = value; }
         }
 
         ///<remarks>

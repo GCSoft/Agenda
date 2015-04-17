@@ -22,6 +22,72 @@ namespace Agenda.DataAccess.Object
     {
 
         ///<remarks>
+        ///   <name>DAGira.DeleteGiraConfiguracion</name>
+        ///   <create>30-Marzo-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>elimina lógicamente una Configuración asociada a la Gira</summary>
+        ///<param name="oENTGira">Entidad de Gira con los parámetros necesarios para realizar la transacción</param>
+        ///<param name="sConnection">Cadena de conexión a la base de datos</param>
+        ///<param name="iAlternateDBTimeout">Valor en milisegundos del Timeout en la consulta a la base de datos. 0 si se desea el Timeout por default</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse DeleteGiraConfiguracion(ENTGira oENTGira, String sConnection, Int32 iAlternateDBTimeout){
+            SqlConnection sqlCnn = new SqlConnection(sConnection);
+            SqlCommand sqlCom;
+            SqlParameter sqlPar;
+            SqlDataAdapter sqlDA;
+
+            ENTResponse oENTResponse = new ENTResponse();
+
+            // Configuración de objetos
+            sqlCom = new SqlCommand("uspGiraConfiguracion_Del", sqlCnn);
+            sqlCom.CommandType = CommandType.StoredProcedure;
+
+            // Timeout alternativo en caso de ser solicitado
+            if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
+
+            // Parametros
+            sqlPar = new SqlParameter("GiraConfiguracionId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.GiraConfiguracionId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("GiraId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.GiraId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            // Inicializaciones
+            oENTResponse.DataSetResponse = new DataSet();
+            sqlDA = new SqlDataAdapter(sqlCom);
+
+            // Transacción
+            try
+            {
+
+                sqlCnn.Open();
+                sqlDA.Fill(oENTResponse.DataSetResponse);
+                sqlCnn.Close();
+
+            }catch (SqlException sqlEx){
+
+                oENTResponse.ExceptionRaised(sqlEx.Message);
+            }catch (Exception ex){
+
+                oENTResponse.ExceptionRaised(ex.Message);
+            }finally{
+
+                if (sqlCnn.State == ConnectionState.Open) { sqlCnn.Close(); }
+                sqlCnn.Dispose();
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
         ///   <name>DAGira.DeleteGiraContacto</name>
         ///   <create>30-Marzo-2015</create>
         ///   <author>Ruben.Cobos</author>
@@ -251,8 +317,24 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTGira.ConfiguracionDetalle;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("HelipuertoLugar", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.HelipuertoLugar;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("HelipuertoDomicilio", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.HelipuertoDomicilio;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("HelipuertoCoordenadas", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.HelipuertoCoordenadas;
+            sqlCom.Parameters.Add(sqlPar);
+
             sqlPar = new SqlParameter("ConfiguracionActivo", SqlDbType.TinyInt);
             sqlPar.Value = oENTGira.ConfiguracionActivo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("tblComiteHelipuerto", SqlDbType.Structured);
+            sqlPar.Value = oENTGira.DataTableComiteHelipuerto;
             sqlCom.Parameters.Add(sqlPar);
 
             // Inicializaciones
@@ -769,8 +851,25 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTGira.ConfiguracionDetalle;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("HelipuertoLugar", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.HelipuertoLugar;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("HelipuertoDomicilio", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.HelipuertoDomicilio;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("HelipuertoCoordenadas", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.HelipuertoCoordenadas;
+            sqlCom.Parameters.Add(sqlPar);
+
+
             sqlPar = new SqlParameter("ConfiguracionActivo", SqlDbType.TinyInt);
             sqlPar.Value = oENTGira.ConfiguracionActivo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("tblComiteHelipuerto", SqlDbType.Structured);
+            sqlPar.Value = oENTGira.DataTableComiteHelipuerto;
             sqlCom.Parameters.Add(sqlPar);
 
             // Inicializaciones

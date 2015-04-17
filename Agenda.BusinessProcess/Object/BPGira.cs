@@ -25,6 +25,38 @@ namespace Agenda.BusinessProcess.Object
     {
 
         ///<remarks>
+        ///   <name>BPGira.DeleteGiraConfiguracion</name>
+        ///   <create>30-Marzo-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>elimina lógicamente una Configuración asociada a la Gira</summary>
+        ///<param name="oENTGira">Entidad de Gira con los parámetros necesarios para realizar la transacción</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse DeleteGiraConfiguracion(ENTGira oENTGira){
+            DAGira oDAGira = new DAGira();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            try
+            {
+
+                // Transacción en base de datos
+                oENTResponse = oDAGira.DeleteGiraConfiguracion(oENTGira, this.ConnectionApplication, 0);
+
+                // Validación de error en consulta
+                if (oENTResponse.GeneratesException) { return oENTResponse; }
+
+                // Validación de mensajes de la BD
+                oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
+
+            }catch (Exception ex){
+                oENTResponse.ExceptionRaised(ex.Message);
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
         ///   <name>BPGira.DeleteGiraContacto</name>
         ///   <create>30-Marzo-2015</create>
         ///   <author>Ruben.Cobos</author>
