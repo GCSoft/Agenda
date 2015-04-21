@@ -23,7 +23,6 @@ namespace Agenda.Entity.Object
         private Int32   _EstatusGiraId;
         private Int32   _GiraConfiguracionId;
         private Int32   _GiraContactoId;
-        private Int32   _LugarEventoId;
         private Int32   _TipoGiraConfiguracionId;
         private Int32   _UsuarioId;
         private Int16   _Activo;
@@ -41,9 +40,13 @@ namespace Agenda.Entity.Object
         private String  _HelipuertoLugar;
         private String  _HelipuertoDomicilio;
         private String  _HelipuertoCoordenadas;
-        private DataTable   _DataTableComite;
+        private DataTable   _DataTableComiteRecepcion;
         private DataTable   _DataTableComiteHelipuerto;
-        private ENTInvitacionContacto _Contacto;
+        private DataTable   _DataTableMedioTraslado;
+        private DataTable   _DataTableOrdenDia;
+        private DataTable   _DataTableAcomodo;
+        private ENTInvitacionContacto   _Contacto;
+        private ENTEvento               _Evento;
 
 
         //Constructor
@@ -54,7 +57,6 @@ namespace Agenda.Entity.Object
             _EstatusGiraId = 0;
             _GiraConfiguracionId = 0;
             _GiraContactoId = 0;
-            _LugarEventoId = 0;
             _TipoGiraConfiguracionId = 0;
             _UsuarioId = 0;
             _Activo = 0;
@@ -72,9 +74,13 @@ namespace Agenda.Entity.Object
             _HelipuertoLugar = "";
             _HelipuertoDomicilio = "";
             _HelipuertoCoordenadas = "";
-            _DataTableComite = null;
+            _DataTableComiteRecepcion = null;
             _DataTableComiteHelipuerto = null;
+            _DataTableMedioTraslado = null;
+            _DataTableOrdenDia = null;
+            _DataTableAcomodo = null;
             _Contacto = new ENTInvitacionContacto();
+            _Evento = new ENTEvento();
         }
 
 
@@ -126,18 +132,6 @@ namespace Agenda.Entity.Object
         {
             get { return _GiraContactoId; }
             set { _GiraContactoId = value; }
-        }
-
-        ///<remarks>
-        ///   <name>ENTGira.LugarEventoId</name>
-        ///   <create>19-Diciembre-2014</create>
-        ///   <author>Ruben.Cobos</author>
-        ///</remarks>
-        ///<summary>Obtiene/Asigna el identificador único del lugar del evento asociado a la configuración de la gira</summary>
-        public Int32 LugarEventoId
-        {
-            get { return _LugarEventoId; }
-            set { _LugarEventoId = value; }
         }
 
         ///<remarks>
@@ -345,15 +339,15 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
-        ///   <name>ENTGira.DataTableComite</name>
+        ///   <name>ENTGira.DataTableComiteRecepcion</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
         ///<summary>Obtiene/Asigna un DataTable el cual contiene el detalle del comité de recepción</summary>
-        public DataTable DataTableComite
+        public DataTable DataTableComiteRecepcion
         {
-            get { return _DataTableComite; }
-            set { _DataTableComite = value; }
+            get { return _DataTableComiteRecepcion; }
+            set { _DataTableComiteRecepcion = value; }
         }
 
         ///<remarks>
@@ -369,7 +363,43 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
-        ///   <name>ENTEvento.Contacto</name>
+        ///   <name>ENTGira.DataTableMedioTraslado</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un DataTable el cual contiene los ID's de los medio sd etraslado seleccionadosr</summary>
+        public DataTable DataTableMedioTraslado
+        {
+            get { return _DataTableMedioTraslado; }
+            set { _DataTableMedioTraslado = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.DataTableOrdenDia</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un DataTable el cual contiene el detalle de la orden del día</summary>
+        public DataTable DataTableOrdenDia
+        {
+            get { return _DataTableOrdenDia; }
+            set { _DataTableOrdenDia = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.DataTableAcomodo</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un DataTable el cual contiene el acomodo en un evento</summary>
+        public DataTable DataTableAcomodo
+        {
+            get { return _DataTableAcomodo; }
+            set { _DataTableAcomodo = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.Contacto</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
@@ -378,6 +408,18 @@ namespace Agenda.Entity.Object
         {
             get { return _Contacto; }
             set { _Contacto = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.Evento</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna la información del Evento</summary>
+        public ENTEvento Evento
+        {
+            get { return _Evento; }
+            set { _Evento = value; }
         }
 
     }

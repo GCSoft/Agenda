@@ -289,10 +289,6 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTGira.GiraId;
             sqlCom.Parameters.Add(sqlPar);
 
-            sqlPar = new SqlParameter("LugarEventoId", SqlDbType.Int);
-            sqlPar.Value = oENTGira.LugarEventoId;
-            sqlCom.Parameters.Add(sqlPar);
-
             sqlPar = new SqlParameter("TipoGiraConfiguracionId", SqlDbType.Int);
             sqlPar.Value = oENTGira.TipoGiraConfiguracionId;
             sqlCom.Parameters.Add(sqlPar);
@@ -329,12 +325,88 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTGira.HelipuertoCoordenadas;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("EventoLugarEventoId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.Evento.LugarEventoId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoMedioComunicacionId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.Evento.MedioComunicacionId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoTipoVestimentaId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.Evento.TipoVestimentaId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoLugarArribo", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.LugarArribo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoTipoMontaje", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.TipoMontaje;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoAforo", SqlDbType.Int);
+            sqlPar.Value = oENTGira.Evento.Aforo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoCaracteristicasInvitados", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.CaracteristicasInvitados;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoEsposa", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.Esposa;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoEsposaSi", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.EsposaSi;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoEsposaNo", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.EsposaNo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoEsposaConfirma", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.EsposaConfirma;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoTipoVestimentaOtro", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.TipoVestimentaOtro;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoMenu", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.Menu;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoPronosticoClima", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.PronosticoClima;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoAccionRealizar", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.AccionRealizar;
+            sqlCom.Parameters.Add(sqlPar);
+
             sqlPar = new SqlParameter("ConfiguracionActivo", SqlDbType.TinyInt);
             sqlPar.Value = oENTGira.ConfiguracionActivo;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("tblComiteHelipuerto", SqlDbType.Structured);
             sqlPar.Value = oENTGira.DataTableComiteHelipuerto;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("tblMedioTraslado", SqlDbType.Structured);
+            sqlPar.Value = oENTGira.DataTableMedioTraslado;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("tblComiteRecepcion", SqlDbType.Structured);
+            sqlPar.Value = oENTGira.DataTableComiteRecepcion;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("tblOrdenDia", SqlDbType.Structured);
+            sqlPar.Value = oENTGira.DataTableOrdenDia;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("tblAcomodo", SqlDbType.Structured);
+            sqlPar.Value = oENTGira.DataTableAcomodo;
             sqlCom.Parameters.Add(sqlPar);
 
             // Inicializaciones
@@ -823,10 +895,6 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTGira.GiraId;
             sqlCom.Parameters.Add(sqlPar);
 
-            sqlPar = new SqlParameter("LugarEventoId", SqlDbType.Int);
-            sqlPar.Value = oENTGira.LugarEventoId;
-            sqlCom.Parameters.Add(sqlPar);
-
             sqlPar = new SqlParameter("TipoGiraConfiguracionId", SqlDbType.Int);
             sqlPar.Value = oENTGira.TipoGiraConfiguracionId;
             sqlCom.Parameters.Add(sqlPar);
@@ -863,6 +931,65 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTGira.HelipuertoCoordenadas;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("EventoLugarEventoId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.Evento.LugarEventoId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoMedioComunicacionId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.Evento.MedioComunicacionId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoTipoVestimentaId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.Evento.TipoVestimentaId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoLugarArribo", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.LugarArribo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoTipoMontaje", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.TipoMontaje;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoAforo", SqlDbType.Int);
+            sqlPar.Value = oENTGira.Evento.Aforo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoCaracteristicasInvitados", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.CaracteristicasInvitados;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoEsposa", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.Esposa;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoEsposaSi", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.EsposaSi;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoEsposaNo", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.EsposaNo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoEsposaConfirma", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.EsposaConfirma;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoTipoVestimentaOtro", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.TipoVestimentaOtro;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoMenu", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.Menu;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoPronosticoClima", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.PronosticoClima;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoAccionRealizar", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.AccionRealizar;
+            sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("ConfiguracionActivo", SqlDbType.TinyInt);
             sqlPar.Value = oENTGira.ConfiguracionActivo;
@@ -870,6 +997,22 @@ namespace Agenda.DataAccess.Object
 
             sqlPar = new SqlParameter("tblComiteHelipuerto", SqlDbType.Structured);
             sqlPar.Value = oENTGira.DataTableComiteHelipuerto;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("tblMedioTraslado", SqlDbType.Structured);
+            sqlPar.Value = oENTGira.DataTableMedioTraslado;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("tblComiteRecepcion", SqlDbType.Structured);
+            sqlPar.Value = oENTGira.DataTableComiteRecepcion;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("tblOrdenDia", SqlDbType.Structured);
+            sqlPar.Value = oENTGira.DataTableOrdenDia;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("tblAcomodo", SqlDbType.Structured);
+            sqlPar.Value = oENTGira.DataTableAcomodo;
             sqlCom.Parameters.Add(sqlPar);
 
             // Inicializaciones

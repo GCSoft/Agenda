@@ -656,7 +656,6 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                     // Formulario
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
-                    oENTGira.LugarEventoId = 0;
                     oENTGira.TipoGiraConfiguracionId = 1; // Traslado en vehículo
                     oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_TrasladoVehiculo.SelectedItem.Text;
                     oENTGira.ConfiguracionHoraInicio = this.wucPopUp_TrasladoVehiculoTimerDesde.DisplayUTCTime;
@@ -666,11 +665,6 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     oENTGira.HelipuertoDomicilio = "";
                     oENTGira.HelipuertoCoordenadas = "";
                     oENTGira.ConfiguracionActivo = 1;
-
-                    oENTGira.DataTableComiteHelipuerto = new DataTable("DataTableComiteHelipuerto");
-                    oENTGira.DataTableComiteHelipuerto.Columns.Add("Orden", typeof(Int32));
-                    oENTGira.DataTableComiteHelipuerto.Columns.Add("Nombre", typeof(String));
-                    oENTGira.DataTableComiteHelipuerto.Columns.Add("Puesto", typeof(String));
 
                     // Transacción
                     oENTResponse = oBPGira.InsertGiraConfiguracion(oENTGira);
@@ -793,7 +787,6 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Formulario
                     oENTGira.GiraConfiguracionId = Int32.Parse(this.hddGiraConfiguracionId.Value);
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
-                    oENTGira.LugarEventoId = 0;
                     oENTGira.TipoGiraConfiguracionId = 1; // Traslado en vehículo
                     oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_TrasladoVehiculo.SelectedItem.Text;
                     oENTGira.ConfiguracionHoraInicio = this.wucPopUp_TrasladoVehiculoTimerDesde.DisplayUTCTime;
@@ -803,11 +796,6 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     oENTGira.HelipuertoDomicilio = "";
                     oENTGira.HelipuertoCoordenadas = "";
                     oENTGira.ConfiguracionActivo = 1;
-
-                    oENTGira.DataTableComiteHelipuerto = new DataTable("DataTableComiteHelipuerto");
-                    oENTGira.DataTableComiteHelipuerto.Columns.Add("Orden", typeof(Int32));
-                    oENTGira.DataTableComiteHelipuerto.Columns.Add("Nombre", typeof(String));
-                    oENTGira.DataTableComiteHelipuerto.Columns.Add("Puesto", typeof(String));
 
                     // Transacción
                     oENTResponse = oBPGira.UpdateGiraConfiguracion(oENTGira);
@@ -1009,7 +997,6 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                     // Formulario
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
-                    oENTGira.LugarEventoId = 0;
                     oENTGira.TipoGiraConfiguracionId = 2; // Traslado en helicóptero
                     oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_TrasladoHelicoptero.SelectedItem.Text;
                     oENTGira.ConfiguracionHoraInicio = this.wucPopUp_TrasladoHelicopteroTimerDesde.DisplayUTCTime;
@@ -1168,7 +1155,6 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Formulario
                     oENTGira.GiraConfiguracionId = Int32.Parse(this.hddGiraConfiguracionId.Value);
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
-                    oENTGira.LugarEventoId = 0;
                     oENTGira.TipoGiraConfiguracionId = 2; // Traslado en helicóptero
                     oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_TrasladoHelicoptero.SelectedItem.Text;
                     oENTGira.ConfiguracionHoraInicio = this.wucPopUp_TrasladoHelicopteroTimerDesde.DisplayUTCTime;
@@ -1550,29 +1536,93 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                     // Formulario
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
-                    oENTGira.LugarEventoId = 0;
-                    oENTGira.TipoGiraConfiguracionId = 2; // Traslado en helicóptero
+                    oENTGira.TipoGiraConfiguracionId = 3; // Evento
                     oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_Evento.SelectedItem.Text;
                     oENTGira.ConfiguracionHoraInicio = this.wucPopUp_EventoTimerDesde.DisplayUTCTime;
                     oENTGira.ConfiguracionHoraFin = this.wucPopUp_EventoTimerHasta.DisplayUTCTime;
                     oENTGira.ConfiguracionDetalle = this.txtPopUp_EventoDetalle.Text.Trim();
                     oENTGira.ConfiguracionActivo = 1;
+                    
+                    oENTGira.Evento.LugarEventoId = Int32.Parse(this.txtPopUp_EventoAforo.Text);
+                    oENTGira.Evento.MedioComunicacionId = Int32.Parse(this.ddlPopUp_EventoMedioComunicacion.SelectedItem.Value);
+                    oENTGira.Evento.TipoVestimentaId = Int32.Parse(this.ddlPopUp_EventoTipoVestimenta.SelectedItem.Value);
+                    oENTGira.Evento.LugarArribo = this.txtPopUp_EventoLugarArribo.Text.Trim();
+                    oENTGira.Evento.TipoMontaje = this.txtPopUp_EventoTipoMontaje.Text.Trim();
+                    oENTGira.Evento.Aforo = Int32.Parse(this.txtPopUp_EventoAforo.Text.Trim());
+                    oENTGira.Evento.CaracteristicasInvitados = this.txtPopUp_EventoCaracteristicasInvitados.Text.Trim();
+                    oENTGira.Evento.Esposa = Int16.Parse((this.chkPopUp_EventoEsposaInvitada.Checked ? 1 : 0).ToString());
+                    oENTGira.Evento.EsposaSi = Int16.Parse((this.rblPopUp_EventoConfirmacionEsposa.SelectedValue == "1" ? 1 : 0).ToString());
+                    oENTGira.Evento.EsposaNo = Int16.Parse((this.rblPopUp_EventoConfirmacionEsposa.SelectedValue == "2" ? 1 : 0).ToString());
+                    oENTGira.Evento.EsposaConfirma = Int16.Parse((this.rblPopUp_EventoConfirmacionEsposa.SelectedValue == "3" ? 1 : 0).ToString());
+                    oENTGira.Evento.TipoVestimentaOtro = this.txtPopUp_EventoTipoVestimentaOtro.Text.Trim();
+                    oENTGira.Evento.Menu = this.txtPopUp_EventoMenu.Text.Trim();
+                    oENTGira.Evento.PronosticoClima = this.txtPopUp_EventoPronostico.Text.Trim();
+                    oENTGira.Evento.AccionRealizar = this.txtPopUp_EventoAccionRealizar.Text.Trim();
+                    
+                    oENTGira.DataTableMedioTraslado = new DataTable("DataTableMedioTraslado");
+                    oENTGira.DataTableMedioTraslado.Columns.Add("MedioTrasladoId", typeof(Int32));
+                    for (int k = 0; k < this.chklPopUp_EventoMedioTraslado.Items.Count; k++) {
+					    if(this.chklPopUp_EventoMedioTraslado.Items[k].Selected){
+                            rowTemporal = oENTGira.DataTableMedioTraslado.NewRow();
+                            rowTemporal["MedioTrasladoId"] = this.chklPopUp_EventoMedioTraslado.Items[k].Value;
+                            oENTGira.DataTableMedioTraslado.Rows.Add(rowTemporal);
+					    }
+				    }
 
+                    // Comité de recepción
                     tblTemporal = null;
                     tblTemporal = gcParse.GridViewToDataTable(this.gvComite, true);
 
-                    oENTGira.DataTableComite = new DataTable("DataTableComite");
-                    oENTGira.DataTableComite.Columns.Add("Orden", typeof(Int32));
-                    oENTGira.DataTableComite.Columns.Add("Nombre", typeof(String));
-                    oENTGira.DataTableComite.Columns.Add("Puesto", typeof(String));
+                    oENTGira.DataTableComiteRecepcion = new DataTable("DataTableComiteRecepcion");
+                    oENTGira.DataTableComiteRecepcion.Columns.Add("Orden", typeof(Int32));
+                    oENTGira.DataTableComiteRecepcion.Columns.Add("Nombre", typeof(String));
+                    oENTGira.DataTableComiteRecepcion.Columns.Add("Puesto", typeof(String));
                     
                     foreach( DataRow rowComite in tblTemporal.Rows ){
 
-                        rowTemporal = oENTGira.DataTableComite.NewRow();
+                        rowTemporal = oENTGira.DataTableComiteRecepcion.NewRow();
                         rowTemporal["Orden"] = rowComite["Orden"];
                         rowTemporal["Nombre"] = rowComite["Nombre"];
                         rowTemporal["Puesto"] = rowComite["Puesto"];
-                        oENTGira.DataTableComite.Rows.Add(rowTemporal);
+                        oENTGira.DataTableComiteRecepcion.Rows.Add(rowTemporal);
+                    }
+
+                    // Orden del día
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvOrdenDia, true);
+                    
+                    oENTGira.DataTableOrdenDia = new DataTable("DataTableOrdenDia");
+                    oENTGira.DataTableOrdenDia.Columns.Add("Orden", typeof(Int32));
+                    oENTGira.DataTableOrdenDia.Columns.Add("Detalle", typeof(String));
+                    oENTGira.DataTableOrdenDia.Columns.Add("Columna3", typeof(String)); // El DataType es de 3 columnas
+                    
+                    foreach( DataRow rowComiteRecepcion in tblTemporal.Rows ){
+
+                        rowTemporal = oENTGira.DataTableOrdenDia.NewRow();
+                        rowTemporal["Orden"] = rowComiteRecepcion["Orden"];
+                        rowTemporal["Detalle"] = rowComiteRecepcion["Detalle"];
+                        rowTemporal["Columna3"] = "";
+                        oENTGira.DataTableOrdenDia.Rows.Add(rowTemporal);
+                    }
+
+                    // Acomodo
+                    oENTGira.Evento.TipoAcomodoId = Int32.Parse(this.ddlPopUp_EventoTipoAcomodo.SelectedItem.Value);
+
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvAcomodo, true);
+                    
+                    oENTGira.DataTableAcomodo = new DataTable("DataTableAcomodo");
+                    oENTGira.DataTableAcomodo.Columns.Add("Orden", typeof(Int32));
+                    oENTGira.DataTableAcomodo.Columns.Add("Nombre", typeof(String));
+                    oENTGira.DataTableAcomodo.Columns.Add("Puesto", typeof(String));
+                    
+                    foreach( DataRow rowComiteRecepcion in tblTemporal.Rows ){
+
+                        rowTemporal = oENTGira.DataTableAcomodo.NewRow();
+                        rowTemporal["Orden"] = rowComiteRecepcion["Orden"];
+                        rowTemporal["Nombre"] = rowComiteRecepcion["Nombre"];
+                        rowTemporal["Puesto"] = rowComiteRecepcion["Puesto"];
+                        oENTGira.DataTableAcomodo.Rows.Add(rowTemporal);
                     }
 
                     // Transacción
@@ -1625,17 +1675,61 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     dtAgrupacion = (DataTable)this.ViewState["dtAgrupacion"];
 
                     // Llenado de formulario
-                    //this.txtPopUp_EventoDetalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionDetalle"].ToString();
-                    //this.ddlAgrupacion_Evento.SelectedValue = dtAgrupacion.Select("Agrupacion='" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionGrupo"].ToString() + "'")[0]["Row"].ToString();
-                    //this.wucPopUp_EventoTimerDesde.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionHoraInicioEstandar"].ToString();
-                    //this.wucPopUp_EventoTimerHasta.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionHoraFinEstandar"].ToString();
-                    //this.txtPopUp_EventoLugar.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Lugar"].ToString();
-                    //this.txtPopUp_EventoDomicilio.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Domicilio"].ToString();
-                    //this.txtPopUp_EventoCoordenadas.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Coordenadas"].ToString();
+                    this.ddlAgrupacion_Evento.SelectedValue = dtAgrupacion.Select("Agrupacion='" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionGrupo"].ToString() + "'")[0]["row"].ToString();
+                    this.txtPopUp_EventoDetalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionDetalle"].ToString();
+                    this.wucPopUp_EventoTimerDesde.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionHoraInicioEstandar"].ToString();
+                    this.wucPopUp_EventoTimerHasta.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionHoraFinEstandar"].ToString();
 
-                    // Comité de recepción del 
-                    this.gvComite.DataSource = oENTResponse.DataSetResponse.Tables[2];
+                    this.txtPopUp_EventoLugar.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["LugarEventoNombre"].ToString();
+                    this.hddLugarEventoId.Value = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoLugarEventoId"].ToString();
+                    this.txtPopUp_Domicilio.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoLugarEvento"].ToString();
+
+                    this.txtPopUp_EventoLugarArribo.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoLugarArribo"].ToString();
+                    
+                    for (int k = 0; k < this.chklPopUp_EventoMedioTraslado.Items.Count; k++) {
+					    if( oENTResponse.DataSetResponse.Tables[3].Select("MedioTrasladoId=" + this.chklPopUp_EventoMedioTraslado.Items[k].Value).Length > 0 ){
+                            this.chklPopUp_EventoMedioTraslado.Items[k].Selected = true;
+					    }
+				    }
+                    
+                    this.txtPopUp_EventoTipoMontaje.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoTipoMontaje"].ToString();
+                    this.txtPopUp_EventoAforo.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoAforo"].ToString();
+                    this.txtPopUp_EventoCaracteristicasInvitados.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoCaracteristicasInvitados"].ToString();
+                    
+                    if ( oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoEsposa"].ToString() == "1" ){
+
+                        this.chkPopUp_EventoEsposaInvitada.Checked = true;
+                        this.rblPopUp_EventoConfirmacionEsposa.Enabled = true;
+
+                        if (oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoEsposaSi"].ToString() == "1") { this.rblPopUp_EventoConfirmacionEsposa.SelectedValue = "1"; }
+                        if (oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoEsposaNo"].ToString() == "1") { this.rblPopUp_EventoConfirmacionEsposa.SelectedValue = "2"; }
+                        if (oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoEsposaConfirma"].ToString() == "1") { this.rblPopUp_EventoConfirmacionEsposa.SelectedValue = "3"; }
+                    
+                    }else{
+
+                        this.chkPopUp_EventoEsposaInvitada.Checked = false;
+                        this.rblPopUp_EventoConfirmacionEsposa.Enabled = false;
+                        this.rblPopUp_EventoConfirmacionEsposa.ClearSelection();
+                    }
+
+                    this.ddlPopUp_EventoMedioComunicacion.SelectedValue = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoMedioComunicacionId"].ToString();
+                    this.ddlPopUp_EventoTipoVestimenta.SelectedValue = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoTipoVestimentaId"].ToString();
+                    this.txtPopUp_EventoTipoVestimentaOtro.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoTipoVestimentaOtro"].ToString();
+                    this.txtPopUp_EventoMenu.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoMenu"].ToString();
+                    this.txtPopUp_EventoPronostico.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoPronosticoClima"].ToString();
+                    this.txtPopUp_EventoAccionRealizar.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoAccionRealizar"].ToString();
+
+                    // Comité de recepción
+                    this.gvComite.DataSource = oENTResponse.DataSetResponse.Tables[4];
                     this.gvComite.DataBind();
+
+                    // Orden del día
+                    this.gvOrdenDia.DataSource = oENTResponse.DataSetResponse.Tables[5];
+                    this.gvOrdenDia.DataBind();
+
+                    // Acomodo
+                    this.gvAcomodo.DataSource = oENTResponse.DataSetResponse.Tables[6];
+                    this.gvAcomodo.DataBind();
 
                 }catch (Exception ex){
                     throw (ex);
@@ -1739,29 +1833,93 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Formulario
                     oENTGira.GiraConfiguracionId = Int32.Parse(this.hddGiraConfiguracionId.Value);
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
-                    oENTGira.LugarEventoId = 0;
-                    oENTGira.TipoGiraConfiguracionId = 2; // Traslado en helicóptero
+                    oENTGira.TipoGiraConfiguracionId = 3; // Evento
                     oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_Evento.SelectedItem.Text;
                     oENTGira.ConfiguracionHoraInicio = this.wucPopUp_EventoTimerDesde.DisplayUTCTime;
                     oENTGira.ConfiguracionHoraFin = this.wucPopUp_EventoTimerHasta.DisplayUTCTime;
                     oENTGira.ConfiguracionDetalle = this.txtPopUp_EventoDetalle.Text.Trim();
                     oENTGira.ConfiguracionActivo = 1;
 
+                    oENTGira.Evento.LugarEventoId = Int32.Parse(this.txtPopUp_EventoAforo.Text);
+                    oENTGira.Evento.MedioComunicacionId = Int32.Parse(this.ddlPopUp_EventoMedioComunicacion.SelectedItem.Value);
+                    oENTGira.Evento.TipoVestimentaId = Int32.Parse(this.ddlPopUp_EventoTipoVestimenta.SelectedItem.Value);
+                    oENTGira.Evento.LugarArribo = this.txtPopUp_EventoLugarArribo.Text.Trim();
+                    oENTGira.Evento.TipoMontaje = this.txtPopUp_EventoTipoMontaje.Text.Trim();
+                    oENTGira.Evento.Aforo = Int32.Parse(this.txtPopUp_EventoAforo.Text.Trim());
+                    oENTGira.Evento.CaracteristicasInvitados = this.txtPopUp_EventoCaracteristicasInvitados.Text.Trim();
+                    oENTGira.Evento.Esposa = Int16.Parse((this.chkPopUp_EventoEsposaInvitada.Checked ? 1 : 0).ToString());
+                    oENTGira.Evento.EsposaSi = Int16.Parse((this.rblPopUp_EventoConfirmacionEsposa.SelectedValue == "1" ? 1 : 0).ToString());
+                    oENTGira.Evento.EsposaNo = Int16.Parse((this.rblPopUp_EventoConfirmacionEsposa.SelectedValue == "2" ? 1 : 0).ToString());
+                    oENTGira.Evento.EsposaConfirma = Int16.Parse((this.rblPopUp_EventoConfirmacionEsposa.SelectedValue == "3" ? 1 : 0).ToString());
+                    oENTGira.Evento.TipoVestimentaOtro = this.txtPopUp_EventoTipoVestimentaOtro.Text.Trim();
+                    oENTGira.Evento.Menu = this.txtPopUp_EventoMenu.Text.Trim();
+                    oENTGira.Evento.PronosticoClima = this.txtPopUp_EventoPronostico.Text.Trim();
+                    oENTGira.Evento.AccionRealizar = this.txtPopUp_EventoAccionRealizar.Text.Trim();
+                    
+                    oENTGira.DataTableMedioTraslado = new DataTable("DataTableMedioTraslado");
+                    oENTGira.DataTableMedioTraslado.Columns.Add("MedioTrasladoId", typeof(Int32));
+                    for (int k = 0; k < this.chklPopUp_EventoMedioTraslado.Items.Count; k++) {
+					    if(this.chklPopUp_EventoMedioTraslado.Items[k].Selected){
+                            rowTemporal = oENTGira.DataTableMedioTraslado.NewRow();
+                            rowTemporal["MedioTrasladoId"] = this.chklPopUp_EventoMedioTraslado.Items[k].Value;
+                            oENTGira.DataTableMedioTraslado.Rows.Add(rowTemporal);
+					    }
+				    }
+
+                    // Comité de recepción
                     tblTemporal = null;
                     tblTemporal = gcParse.GridViewToDataTable(this.gvComite, true);
 
-                    oENTGira.DataTableComite = new DataTable("DataTableComite");
-                    oENTGira.DataTableComite.Columns.Add("Orden", typeof(Int32));
-                    oENTGira.DataTableComite.Columns.Add("Nombre", typeof(String));
-                    oENTGira.DataTableComite.Columns.Add("Puesto", typeof(String));
+                    oENTGira.DataTableComiteRecepcion = new DataTable("DataTableComite");
+                    oENTGira.DataTableComiteRecepcion.Columns.Add("Orden", typeof(Int32));
+                    oENTGira.DataTableComiteRecepcion.Columns.Add("Nombre", typeof(String));
+                    oENTGira.DataTableComiteRecepcion.Columns.Add("Puesto", typeof(String));
                     
                     foreach( DataRow rowComite in tblTemporal.Rows ){
 
-                        rowTemporal = oENTGira.DataTableComite.NewRow();
+                        rowTemporal = oENTGira.DataTableComiteRecepcion.NewRow();
                         rowTemporal["Orden"] = rowComite["Orden"];
                         rowTemporal["Nombre"] = rowComite["Nombre"];
                         rowTemporal["Puesto"] = rowComite["Puesto"];
-                        oENTGira.DataTableComite.Rows.Add(rowTemporal);
+                        oENTGira.DataTableComiteRecepcion.Rows.Add(rowTemporal);
+                    }
+
+                    // Orden del día
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvOrdenDia, true);
+                    
+                    oENTGira.DataTableOrdenDia = new DataTable("DataTableOrdenDia");
+                    oENTGira.DataTableOrdenDia.Columns.Add("Orden", typeof(Int32));
+                    oENTGira.DataTableOrdenDia.Columns.Add("Detalle", typeof(String));
+                    oENTGira.DataTableOrdenDia.Columns.Add("Columna3", typeof(String)); // El DataType es de 3 columnas
+                    
+                    foreach( DataRow rowComiteRecepcion in tblTemporal.Rows ){
+
+                        rowTemporal = oENTGira.DataTableOrdenDia.NewRow();
+                        rowTemporal["Orden"] = rowComiteRecepcion["Orden"];
+                        rowTemporal["Detalle"] = rowComiteRecepcion["Detalle"];
+                        rowTemporal["Columna3"] = "";
+                        oENTGira.DataTableOrdenDia.Rows.Add(rowTemporal);
+                    }
+
+                    // Acomodo
+                    oENTGira.Evento.TipoAcomodoId = Int32.Parse(this.ddlPopUp_EventoTipoAcomodo.SelectedItem.Value);
+
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvAcomodo, true);
+                    
+                    oENTGira.DataTableAcomodo = new DataTable("DataTableAcomodo");
+                    oENTGira.DataTableAcomodo.Columns.Add("Orden", typeof(Int32));
+                    oENTGira.DataTableAcomodo.Columns.Add("Nombre", typeof(String));
+                    oENTGira.DataTableAcomodo.Columns.Add("Puesto", typeof(String));
+                    
+                    foreach( DataRow rowComiteRecepcion in tblTemporal.Rows ){
+
+                        rowTemporal = oENTGira.DataTableAcomodo.NewRow();
+                        rowTemporal["Orden"] = rowComiteRecepcion["Orden"];
+                        rowTemporal["Nombre"] = rowComiteRecepcion["Nombre"];
+                        rowTemporal["Puesto"] = rowComiteRecepcion["Puesto"];
+                        oENTGira.DataTableAcomodo.Rows.Add(rowTemporal);
                     }
 
                     // Transacción
@@ -1786,24 +1944,39 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
             }
 
             void ValidatePopUp_EventoForm(){
+                DataTable tblTemporal;
+                DataRow rowTemporal;
+
                 String ErrorDetailHour = "";
+                Int32 ValidateNumber;
 
                 try
                 {
-                
+
+                    // Medios de traslado seleccionados
+                    tblTemporal = new DataTable("DataTableMedioTraslado");
+                    tblTemporal.Columns.Add("MedioTrasladoId", typeof(Int32));
+                    for (int k = 0; k < this.chklPopUp_EventoMedioTraslado.Items.Count; k++) {
+					    if(this.chklPopUp_EventoMedioTraslado.Items[k].Selected){
+                            rowTemporal = tblTemporal.NewRow();
+                            rowTemporal["MedioTrasladoId"] = this.chklPopUp_EventoMedioTraslado.Items[k].Value;
+                            tblTemporal.Rows.Add(rowTemporal);
+					    }
+				    }
+
+                    // Validaciones
+                    if (this.txtOtraAgrupacion_Evento.Enabled) { throw (new Exception("El campo [Agrupación] es requerido")); }
+                    if (this.ddlAgrupacion_Evento.SelectedItem.Value == "-1") { throw (new Exception("El campo [Agrupación] es requerido")); }
                     if (this.txtPopUp_EventoDetalle.Text.Trim() == "") { throw new Exception("* El campo [Nombre] es requerido"); }
                     if (!this.wucPopUp_EventoTimerDesde.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora de inicio del evento] es requerido: " + ErrorDetailHour); }
                     if (!this.wucPopUp_EventoTimerHasta.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora final del evento] es requerido: " + ErrorDetailHour); }
-                    if (this.txtOtraAgrupacion_Evento.Enabled) { throw (new Exception("El campo [Agrupación] es requerido")); }
-                    if (this.ddlAgrupacion_Evento.SelectedItem.Value == "-1") { throw (new Exception("El campo [Agrupación] es requerido")); }
-                    if (this.txtPopUp_EventoLugar.Text.Trim() == "") { throw new Exception("* El campo [Lugar del ] es requerido"); }
-                    
-                    if( this.hddLugarEventoId.Value.Trim() == "" || this.hddLugarEventoId.Value.Trim() == "0" ){
-                        this.tabFormulario_Evento.ActiveTabIndex = 0;
-                        throw (new Exception("Es necesario seleccionar un Lugar del Evento"));
-                    }
+                    if( this.hddLugarEventoId.Value.Trim() == "" || this.hddLugarEventoId.Value.Trim() == "0" ){ throw (new Exception("Es necesario seleccionar un Lugar del Evento")); }
+                    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario seleccionar un medio de traslado")); }
+                    if (Int32.TryParse(this.txtPopUp_EventoAforo.Text, out ValidateNumber) == false) { throw (new Exception("La cantidad en Aforo debe de ser numérica")); }
+                    if (this.txtPopUp_EventoAccionRealizar.Text.Trim() == "") { throw (new Exception("Es necesario determinar la acción a realizar")); }
 
                 }catch (Exception ex){
+                    this.tabFormulario_Evento.ActiveTabIndex = 0;
                     throw (ex);
                 }
             }

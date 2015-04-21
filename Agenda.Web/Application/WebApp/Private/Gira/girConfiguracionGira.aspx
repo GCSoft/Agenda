@@ -461,7 +461,7 @@
                                 <tr>
 				                    <td class="Etiqueta">Caracteristicas de invitados</td>
 				                    <td class="Espacio"></td>
-				                    <td class="Campo" colspan="2"><asp:TextBox ID="txtPopUp_EventoCaracteristicasInvitados" runat="server" CssClass="Textarea_General" Height="30px" MaxLength="200" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
+				                    <td class="Campo" colspan="2"><asp:TextBox ID="txtPopUp_EventoCaracteristicasInvitados" runat="server" CssClass="Textarea_General" Height="30px" MaxLength="500" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
 			                    </tr>
                                 <tr>
 				                    <td class="Etiqueta">Esposa</td>
@@ -507,7 +507,7 @@
                                 <tr>
 				                    <td class="Etiqueta">Menú</td>
 				                    <td class="Espacio"></td>
-				                    <td class="Campo" colspan="2"><asp:TextBox ID="txtPopUp_EventoMenu" runat="server" CssClass="Textarea_General" Height="30px" MaxLength="200" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
+				                    <td class="Campo" colspan="2"><asp:TextBox ID="txtPopUp_EventoMenu" runat="server" CssClass="Textarea_General" Height="30px" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
 			                    </tr>
                                 <tr>
 				                    <td class="Etiqueta">Pronóstico</td>
