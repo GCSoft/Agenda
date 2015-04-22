@@ -443,6 +443,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 ClearPopUp_TrasladoVehiculoPanel();
                 ClearPopUp_TrasladoHelicopteroPanel();
                 ClearPopUp_EventoPanel();
+                ClearPopUp_ActividadGeneralPanel();
                 ClearPopUpPanel_LugarEvento();
 
 				// Carátula
@@ -502,6 +503,17 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
             }
 		}
 
+        protected void btnActividadGeneral_Click(object sender, EventArgs e){
+			try
+            {
+
+                SetPopUp_ActividadGeneralPanel(PopUpTypes.Insert);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+            }
+		}
+
         protected void gvPrograma_RowCommand(object sender, GridViewCommandEventArgs e){
             Int32 GiraConfiguracionId = 0;
             Int32 TipoGiraConfiguracionId = 0;
@@ -542,6 +554,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                             case 3: // Evento
                                 SetPopUp_EventoPanel(PopUpTypes.Update, GiraConfiguracionId);
+                                break;
+
+                            case 4: // Actividad General
+                                SetPopUp_ActividadGeneralPanel(PopUpTypes.Update, GiraConfiguracionId);
                                 break;
                         }
 
@@ -1100,6 +1116,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Acciones comunes
                     this.pnlPopUp_TrasladoHelicoptero.Visible = true;
                     this.hddGiraConfiguracionId.Value = idItem.ToString();
+                    this.tabFormulario_TrasladoHelicoptero.ActiveTabIndex = 0;
 
                     // Actualizar combo
                     dtAgrupacion = (DataTable)this.ViewState["dtAgrupacion"];
@@ -1502,6 +1519,21 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     this.btnPopUp_EventoCommand.Text = "";
                     this.lblPopUp_EventoMessage.Text = "";
                     this.hddGiraConfiguracionId.Value = "";
+                    this.hddLugarEventoId.Value = "0";
+                    this.ddlPopUp_EventoMedioComunicacion.SelectedIndex = 0;
+                    this.ddlPopUp_EventoTipoVestimenta.SelectedIndex = 0;
+                    this.txtPopUp_EventoLugarArribo.Text = "";
+                    this.txtPopUp_EventoTipoMontaje.Text = "";
+                    this.txtPopUp_EventoAforo.Text = "";
+                    this.txtPopUp_EventoCaracteristicasInvitados.Text = "";
+                    this.rblPopUp_EventoConfirmacionEsposa.Enabled = false;
+                    this.rblPopUp_EventoConfirmacionEsposa.ClearSelection();
+                    this.txtPopUp_EventoTipoVestimentaOtro.Text = "";
+                    this.txtPopUp_EventoMenu.Text = "";
+                    this.txtPopUp_EventoPronostico.Text = "";
+                    this.txtPopUp_EventoAccionRealizar.Text = "";
+                    this.chklPopUp_EventoMedioTraslado.ClearSelection();
+                    this.ddlPopUp_EventoTipoAcomodo.SelectedIndex = 0;
 
                     this.gvComite.DataSource = null;
                     this.gvComite.DataBind();
@@ -1542,8 +1574,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     oENTGira.ConfiguracionHoraFin = this.wucPopUp_EventoTimerHasta.DisplayUTCTime;
                     oENTGira.ConfiguracionDetalle = this.txtPopUp_EventoDetalle.Text.Trim();
                     oENTGira.ConfiguracionActivo = 1;
-                    
-                    oENTGira.Evento.LugarEventoId = Int32.Parse(this.txtPopUp_EventoAforo.Text);
+
+                    oENTGira.Evento.LugarEventoId = Int32.Parse(this.hddLugarEventoId.Value);
                     oENTGira.Evento.MedioComunicacionId = Int32.Parse(this.ddlPopUp_EventoMedioComunicacion.SelectedItem.Value);
                     oENTGira.Evento.TipoVestimentaId = Int32.Parse(this.ddlPopUp_EventoTipoVestimenta.SelectedItem.Value);
                     oENTGira.Evento.LugarArribo = this.txtPopUp_EventoLugarArribo.Text.Trim();
@@ -1719,6 +1751,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     this.txtPopUp_EventoPronostico.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoPronosticoClima"].ToString();
                     this.txtPopUp_EventoAccionRealizar.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoAccionRealizar"].ToString();
 
+                    this.ddlPopUp_EventoTipoAcomodo.SelectedValue = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoTipoAcomodoId"].ToString();
+
                     // Comité de recepción
                     this.gvComite.DataSource = oENTResponse.DataSetResponse.Tables[4];
                     this.gvComite.DataBind();
@@ -1778,6 +1812,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Acciones comunes
                     this.pnlPopUp_Evento.Visible = true;
                     this.hddGiraConfiguracionId.Value = idItem.ToString();
+                    this.tabFormulario_Evento.ActiveTabIndex = 0;
 
                     // Actualizar combo
                     dtAgrupacion = (DataTable)this.ViewState["dtAgrupacion"];
@@ -1840,7 +1875,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     oENTGira.ConfiguracionDetalle = this.txtPopUp_EventoDetalle.Text.Trim();
                     oENTGira.ConfiguracionActivo = 1;
 
-                    oENTGira.Evento.LugarEventoId = Int32.Parse(this.txtPopUp_EventoAforo.Text);
+                    oENTGira.Evento.LugarEventoId = Int32.Parse(this.hddLugarEventoId.Value);
                     oENTGira.Evento.MedioComunicacionId = Int32.Parse(this.ddlPopUp_EventoMedioComunicacion.SelectedItem.Value);
                     oENTGira.Evento.TipoVestimentaId = Int32.Parse(this.ddlPopUp_EventoTipoVestimenta.SelectedItem.Value);
                     oENTGira.Evento.LugarArribo = this.txtPopUp_EventoLugarArribo.Text.Trim();
@@ -2545,6 +2580,338 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
             }
             
+            
+        #endregion
+
+        #region PopUp - Actividad General
+            
+            
+            // Rutinas
+
+            void ClearPopUp_ActividadGeneralPanel(){
+                try
+                {
+
+                    // Limpiar formulario
+                    this.txtPopUp_ActividadGeneralDetalle.Text = "";
+                    this.wucPopUp_ActividadGeneralTimerDesde.DisplayTime = "10:00 AM";
+                    this.wucPopUp_ActividadGeneralTimerHasta.DisplayTime = "10:00 AM";
+
+                    // Estado incial de controles
+                    this.pnlPopUp_ActividadGeneral.Visible = false;
+                    this.lblPopUp_ActividadGeneralTitle.Text = "";
+                    this.btnPopUp_ActividadGeneralCommand.Text = "";
+                    this.lblPopUp_ActividadGeneralMessage.Text = "";
+                    this.hddGiraConfiguracionId.Value = "";
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            void InsertConfiguracion_ActividadGeneral(){
+                ENTGira oENTGira = new ENTGira();
+                ENTResponse oENTResponse = new ENTResponse();
+                ENTSession oENTSession = new ENTSession();
+
+                BPGira oBPGira = new BPGira();
+
+                try
+                {
+
+                    // Datos de sesión
+                    oENTSession = (ENTSession)this.Session["oENTSession"];
+                    oENTGira.UsuarioId = oENTSession.UsuarioId;
+
+                    // Formulario
+                    oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
+                    oENTGira.TipoGiraConfiguracionId = 4; // Actividad General
+                    oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_ActividadGeneral.SelectedItem.Text;
+                    oENTGira.ConfiguracionHoraInicio = this.wucPopUp_ActividadGeneralTimerDesde.DisplayUTCTime;
+                    oENTGira.ConfiguracionHoraFin = this.wucPopUp_ActividadGeneralTimerHasta.DisplayUTCTime;
+                    oENTGira.ConfiguracionDetalle = this.txtPopUp_ActividadGeneralDetalle.Text.Trim();
+                    oENTGira.HelipuertoLugar = "";
+                    oENTGira.HelipuertoDomicilio = "";
+                    oENTGira.HelipuertoCoordenadas = "";
+                    oENTGira.ConfiguracionActivo = 1;
+
+                    // Transacción
+                    oENTResponse = oBPGira.InsertGiraConfiguracion(oENTGira);
+
+                    // Validaciones
+                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                    // Transacción exitosa
+                    ClearPopUp_ActividadGeneralPanel();
+
+                    // Actualizar formulario
+                    SelectGira();
+
+                    // Mensaje de usuario
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Configuración creada con éxito!');", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            void SelectGiraConfiguracion_ActividadGeneral_ForEdit(Int32 GiraConfiguracionId){
+                ENTGira oENTGira = new ENTGira();
+                ENTResponse oENTResponse = new ENTResponse();
+
+                BPGira oBPGira = new BPGira();
+
+                DataTable dtAgrupacion;
+
+                try
+                {
+                    
+                    // Formulario
+                    oENTGira.GiraConfiguracionId = GiraConfiguracionId;
+                    oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
+                    oENTGira.Activo = 1;
+
+                    // Transacción
+                    oENTResponse = oBPGira.SelectGiraConfiguracion(oENTGira);
+
+                    // Validaciones
+                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+
+                    // Mensaje de la BD
+                    this.lblPopUp_ActividadGeneralMessage.Text = oENTResponse.MessageDB;
+
+                    // Recuperar agrupación
+                    dtAgrupacion = (DataTable)this.ViewState["dtAgrupacion"];
+
+                    // Llenado de formulario
+                    this.txtPopUp_ActividadGeneralDetalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionDetalle"].ToString();
+                    this.ddlAgrupacion_ActividadGeneral.SelectedValue = dtAgrupacion.Select("Agrupacion='" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionGrupo"].ToString() + "'")[0]["Row"].ToString();
+                    this.wucPopUp_ActividadGeneralTimerDesde.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionHoraInicioEstandar"].ToString();
+                    this.wucPopUp_ActividadGeneralTimerHasta.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionHoraFinEstandar"].ToString();
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            void SetPopUp_ActividadGeneralPanel(PopUpTypes PopUpType, Int32 idItem = 0){
+                DataTable dtAgrupacion = null;
+
+                try
+                {
+
+                    // Acciones comunes
+                    this.pnlPopUp_ActividadGeneral.Visible = true;
+                    this.hddGiraConfiguracionId.Value = idItem.ToString();
+
+                    // Actualizar combo
+                    dtAgrupacion = (DataTable)this.ViewState["dtAgrupacion"];
+                    this.ddlAgrupacion_ActividadGeneral.Items.Clear();
+                    this.ddlAgrupacion_ActividadGeneral.DataTextField = "Agrupacion";
+                    this.ddlAgrupacion_ActividadGeneral.DataValueField = "Row";
+                    this.ddlAgrupacion_ActividadGeneral.DataSource = dtAgrupacion;
+                    this.ddlAgrupacion_ActividadGeneral.DataBind();
+                    if ( this.AgrupacionKey.Value != "" ) { this.ddlAgrupacion_ActividadGeneral.SelectedValue = this.AgrupacionKey.Value; }
+
+                    // Detalle de acción
+                    switch (PopUpType)
+                    {
+                        case PopUpTypes.Insert:
+
+                            this.lblPopUp_ActividadGeneralTitle.Text = "Nueva Actividad General";
+                            this.btnPopUp_ActividadGeneralCommand.Text = "Agregar Actividad General";
+                            break;
+
+                        case PopUpTypes.Update:
+
+                            this.lblPopUp_ActividadGeneralTitle.Text = "Edición de Actividad General";
+                            this.btnPopUp_ActividadGeneralCommand.Text = "Actualizar Actividad General";
+                            SelectGiraConfiguracion_ActividadGeneral_ForEdit(idItem);
+                            break;
+
+                        default:
+                            throw (new Exception("Opción inválida"));
+                    }
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+            
+            void UpdateConfiguracion_ActividadGeneral(){
+                ENTGira oENTGira = new ENTGira();
+                ENTResponse oENTResponse = new ENTResponse();
+                ENTSession oENTSession = new ENTSession();
+
+                BPGira oBPGira = new BPGira();
+
+                try
+                {
+
+                    // Datos de sesión
+                    oENTSession = (ENTSession)this.Session["oENTSession"];
+                    oENTGira.UsuarioId = oENTSession.UsuarioId;
+
+                    // Formulario
+                    oENTGira.GiraConfiguracionId = Int32.Parse(this.hddGiraConfiguracionId.Value);
+                    oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
+                    oENTGira.TipoGiraConfiguracionId = 4; // Actividad General
+                    oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_ActividadGeneral.SelectedItem.Text;
+                    oENTGira.ConfiguracionHoraInicio = this.wucPopUp_ActividadGeneralTimerDesde.DisplayUTCTime;
+                    oENTGira.ConfiguracionHoraFin = this.wucPopUp_ActividadGeneralTimerHasta.DisplayUTCTime;
+                    oENTGira.ConfiguracionDetalle = this.txtPopUp_ActividadGeneralDetalle.Text.Trim();
+                    oENTGira.HelipuertoLugar = "";
+                    oENTGira.HelipuertoDomicilio = "";
+                    oENTGira.HelipuertoCoordenadas = "";
+                    oENTGira.ConfiguracionActivo = 1;
+
+                    // Transacción
+                    oENTResponse = oBPGira.UpdateGiraConfiguracion(oENTGira);
+
+                    // Validaciones
+                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                    // Transacción exitosa
+                    ClearPopUp_ActividadGeneralPanel();
+
+                    // Actualizar formulario
+                    SelectGira();
+
+                    // Mensaje de usuario
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Configuración actualizada con éxito!');", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            void ValidatePopUp_ActividadGeneralForm(){
+                String ErrorDetailHour = "";
+
+                try
+                {
+                
+                    if (this.txtPopUp_ActividadGeneralDetalle.Text.Trim() == "") { throw new Exception("* El campo [Nombre] es requerido"); }
+                    if (!this.wucPopUp_ActividadGeneralTimerDesde.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora de inicio del evento] es requerido: " + ErrorDetailHour); }
+                    if (!this.wucPopUp_ActividadGeneralTimerHasta.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora final del evento] es requerido: " + ErrorDetailHour); }
+                    if (this.txtOtraAgrupacion_ActividadGeneral.Enabled) { throw (new Exception("El campo [Agrupación] es requerido")); }
+                    if (this.ddlAgrupacion_ActividadGeneral.SelectedItem.Value == "-1") { throw (new Exception("El campo [Agrupación] es requerido")); }
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            
+            // Eventos
+
+            protected void btnPopUp_ActividadGeneralCommand_Click(object sender, EventArgs e){
+                try
+                {
+
+                    // Validar formulario
+                    ValidatePopUp_ActividadGeneralForm();
+
+                    // Determinar acción
+                    if (this.hddGiraConfiguracionId.Value == "0"){
+
+                        InsertConfiguracion_ActividadGeneral();
+                    }else{
+
+                        UpdateConfiguracion_ActividadGeneral();
+                    }
+
+                }catch (Exception ex){
+                    this.lblPopUp_ActividadGeneralMessage.Text = ex.Message;
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.txtPopUp_ActividadGeneralDetalle.ClientID + "');", true);
+                }
+            }
+
+            protected void imgCloseWindow_ActividadGeneral_Click(object sender, ImageClickEventArgs e){
+                try
+                {
+
+                    // Cancelar transacción
+                    ClearPopUp_ActividadGeneralPanel();
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+                }
+            }
+            
+            
+            // Eventos del control de agrupación
+            
+            protected void btnNuevaAgrupacion_ActividadGeneral_Click(object sender, EventArgs e){
+                DataTable dtAgrupacion;
+
+                try
+                {
+
+                    // Nueva agrupación
+                    dtAgrupacion = NuevaAgrupacion(this.txtOtraAgrupacion_ActividadGeneral.Text.Trim());
+
+                    // Actualizar combo
+                    this.ddlAgrupacion_ActividadGeneral.Items.Clear();
+                    this.ddlAgrupacion_ActividadGeneral.DataTextField = "Agrupacion";
+                    this.ddlAgrupacion_ActividadGeneral.DataValueField = "Row";
+                    this.ddlAgrupacion_ActividadGeneral.DataSource = dtAgrupacion;
+                    this.ddlAgrupacion_ActividadGeneral.DataBind();
+
+                    // Seleccionar el item deseado
+                    this.ddlAgrupacion_ActividadGeneral.SelectedValue = dtAgrupacion.Select("Agrupacion='" + this.txtOtraAgrupacion_ActividadGeneral.Text.Trim() + "'")[0]["Row"].ToString();
+                    this.AgrupacionKey.Value = this.ddlAgrupacion_ActividadGeneral.SelectedValue;
+
+                    // Estado inicial
+                    this.txtOtraAgrupacion_ActividadGeneral.Text = "";
+                    this.txtOtraAgrupacion_ActividadGeneral.Enabled = false;
+                    this.btnNuevaAgrupacion_ActividadGeneral.Enabled = false;
+
+                    this.txtOtraAgrupacion_ActividadGeneral.CssClass = "Textbox_Disabled";
+                    this.btnNuevaAgrupacion_ActividadGeneral.CssClass = "Button_Special_Gray";
+
+                    // Foco
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.ddlAgrupacion_ActividadGeneral.ClientID + "');", true);
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + ex.Message + "');", true);
+                }
+		    }
+
+            protected void ddlAgrupacion_ActividadGeneral_SelectedIndexChanged(object sender, EventArgs e){
+                try
+                {
+
+                    if( this.ddlAgrupacion_ActividadGeneral.SelectedItem.Value == "-1" ){
+
+                        this.txtOtraAgrupacion_ActividadGeneral.Text = "";
+                        this.txtOtraAgrupacion_ActividadGeneral.Enabled = true;
+                        this.btnNuevaAgrupacion_ActividadGeneral.Enabled = true;
+
+                        this.txtOtraAgrupacion_ActividadGeneral.CssClass = "Textbox_General";
+                        this.btnNuevaAgrupacion_ActividadGeneral.CssClass = "Button_Special_Blue";
+
+                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.txtOtraAgrupacion_ActividadGeneral.ClientID + "');", true);
+                    }else{
+
+                        this.txtOtraAgrupacion_ActividadGeneral.Text = "";
+                        this.txtOtraAgrupacion_ActividadGeneral.Enabled = false;
+                        this.btnNuevaAgrupacion_ActividadGeneral.Enabled = false;
+
+                        this.txtOtraAgrupacion_ActividadGeneral.CssClass = "Textbox_Disabled";
+                        this.btnNuevaAgrupacion_ActividadGeneral.CssClass = "Button_Special_Gray";
+
+                        this.AgrupacionKey.Value = this.ddlAgrupacion_ActividadGeneral.SelectedValue;
+                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.ddlAgrupacion_ActividadGeneral.ClientID + "');", true);
+                    }
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + ex.Message + "');", true);
+                }
+            }
+
             
         #endregion
         

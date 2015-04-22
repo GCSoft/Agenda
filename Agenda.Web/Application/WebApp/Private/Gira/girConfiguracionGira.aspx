@@ -70,6 +70,7 @@
         <asp:Button ID="btnTrasladoVehiculo" runat="server" Text="Traslado en vehículo" CssClass="Button_General" width="175px" onclick="btnTrasladoVehiculo_Click" /> &nbsp;&nbsp;
         <asp:Button ID="btnTrasladoHelicoptero" runat="server" Text="Traslado en helicóptero" CssClass="Button_General" width="175px" onclick="btnTrasladoHelicoptero_Click" /> &nbsp;&nbsp;
         <asp:Button ID="btnEvento" runat="server" Text="Evento" CssClass="Button_General" width="175px" onclick="btnEvento_Click" /> &nbsp;&nbsp;
+        <asp:Button ID="btnActividadGeneral" runat="server" Text="Actividad General" CssClass="Button_General" width="175px" onclick="btnActividadGeneral_Click" /> &nbsp;&nbsp;
         <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="Button_General" width="125px" onclick="btnRegresar_Click" />
     </asp:Panel>
 
@@ -723,6 +724,68 @@
                     <tr>
                         <td class="Mensajes">
                             <asp:Label ID="lblPopUp_EventoMessage" runat="server" CssClass="PopUpTextMessage"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+        </asp:Panel>
+    </asp:Panel>
+
+    <asp:Panel ID="pnlPopUp_ActividadGeneral" runat="server" CssClass="PopUpBlock">
+        <asp:Panel ID="pnlPopUp_ActividadGeneralContent" runat="server" CssClass="PopUpContent" style="margin-top:-130px; margin-left:-260px;" Height="260px" Width="520px">
+            <asp:Panel ID="pnlPopUp_ActividadGeneralHeader" runat="server" CssClass="PopUpHeader">
+                <table class="PopUpHeaderTable">
+                    <tr>
+                        <td class="Espacio"></td>
+                        <td class="Etiqueta"><asp:Label ID="lblPopUp_ActividadGeneralTitle" runat="server" CssClass="PopUpHeaderTitle"></asp:Label></td>
+                        <td class="Cierre"><asp:ImageButton ID="imgCloseWindow_ActividadGeneral" runat="server" ImageUrl="~/Include/Image/Buttons/CloseWindow.png" ToolTip="Cerrar Ventana" OnClick="imgCloseWindow_ActividadGeneral_Click"></asp:ImageButton></td>
+                    </tr>
+                </table>
+            </asp:Panel>
+            <asp:Panel ID="pnlPopUp_ActividadGeneralBody" runat="server" CssClass="PopUpBody">
+                <table class="PopUpBodyTable">
+                    <tr>
+                        <td class="Etiqueta" style="vertical-align:top;">Agrupación</td>
+                        <td class="VinetaObligatorio" style="vertical-align:top;">*</td>
+                        <td class="Campo">
+                            <table style="width:405px">
+	                            <tr>
+		                            <td colspan="2" style="text-align:left;">
+                                        <asp:DropDownList ID="ddlAgrupacion_ActividadGeneral" runat="server" CssClass="DropDownList_General" Width="400px" AutoPostBack="True" OnSelectedIndexChanged="ddlAgrupacion_ActividadGeneral_SelectedIndexChanged"></asp:DropDownList>
+		                            </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left;">
+                                        <asp:TextBox ID="txtOtraAgrupacion_ActividadGeneral" runat="server" CssClass="Textbox_Disabled" Enabled="false" MaxLength="1000" Width="360px"></asp:TextBox>
+		                            </td>
+                                    <td style="text-align:right;">
+                                        <asp:Button ID="btnNuevaAgrupacion_ActividadGeneral" runat="server" Text="+" CssClass="Button_Special_Gray" Enabled="false" ToolTip="Nueva Agrupacion" Width="25px" OnClick="btnNuevaAgrupacion_ActividadGeneral_Click" />
+		                            </td>
+	                            </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Nombre</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo"><asp:TextBox ID="txtPopUp_ActividadGeneralDetalle" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+				        <td class="Etiqueta">Desde las</td>
+				        <td class="VinetaObligatorio">*</td>
+				        <td class="Campo">
+                            <wuc:wucTimer ID="wucPopUp_ActividadGeneralTimerDesde" runat="server" />&nbsp;&nbsp;&nbsp;hasta las&nbsp;&nbsp;&nbsp;
+                            <wuc:wucTimer ID="wucPopUp_ActividadGeneralTimerHasta" runat="server" />
+				        </td>
+			        </tr>
+                    <tr>
+                        <td class="Botones" colspan="3">
+                            <asp:Button ID="btnPopUp_ActividadGeneralCommand" runat="server" Text="" CssClass="Button_General" Width="175px" OnClick="btnPopUp_ActividadGeneralCommand_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Mensajes" colspan="3">
+                            <asp:Label ID="lblPopUp_ActividadGeneralMessage" runat="server" CssClass="PopUpTextMessage"></asp:Label>
                         </td>
                     </tr>
                 </table>

@@ -333,6 +333,10 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTGira.Evento.MedioComunicacionId;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("EventoTipoAcomodoId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.Evento.TipoAcomodoId;
+            sqlCom.Parameters.Add(sqlPar);
+
             sqlPar = new SqlParameter("EventoTipoVestimentaId", SqlDbType.Int);
             sqlPar.Value = oENTGira.Evento.TipoVestimentaId;
             sqlCom.Parameters.Add(sqlPar);
@@ -937,6 +941,10 @@ namespace Agenda.DataAccess.Object
 
             sqlPar = new SqlParameter("EventoMedioComunicacionId", SqlDbType.Int);
             sqlPar.Value = oENTGira.Evento.MedioComunicacionId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoTipoAcomodoId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.Evento.TipoAcomodoId;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("EventoTipoVestimentaId", SqlDbType.Int);

@@ -139,6 +139,15 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         protected global::System.Web.UI.WebControls.Button btnEvento;
         
         /// <summary>
+        /// btnActividadGeneral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnActividadGeneral;
+        
+        /// <summary>
         /// btnRegresar control.
         /// </summary>
         /// <remarks>
@@ -947,6 +956,132 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblPopUp_EventoMessage;
+        
+        /// <summary>
+        /// pnlPopUp_ActividadGeneral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_ActividadGeneral;
+        
+        /// <summary>
+        /// pnlPopUp_ActividadGeneralContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_ActividadGeneralContent;
+        
+        /// <summary>
+        /// pnlPopUp_ActividadGeneralHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_ActividadGeneralHeader;
+        
+        /// <summary>
+        /// lblPopUp_ActividadGeneralTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPopUp_ActividadGeneralTitle;
+        
+        /// <summary>
+        /// imgCloseWindow_ActividadGeneral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgCloseWindow_ActividadGeneral;
+        
+        /// <summary>
+        /// pnlPopUp_ActividadGeneralBody control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_ActividadGeneralBody;
+        
+        /// <summary>
+        /// ddlAgrupacion_ActividadGeneral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAgrupacion_ActividadGeneral;
+        
+        /// <summary>
+        /// txtOtraAgrupacion_ActividadGeneral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtOtraAgrupacion_ActividadGeneral;
+        
+        /// <summary>
+        /// btnNuevaAgrupacion_ActividadGeneral control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNuevaAgrupacion_ActividadGeneral;
+        
+        /// <summary>
+        /// txtPopUp_ActividadGeneralDetalle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUp_ActividadGeneralDetalle;
+        
+        /// <summary>
+        /// wucPopUp_ActividadGeneralTimerDesde control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Agenda.Web.Include.WebUserControls.wucTimer wucPopUp_ActividadGeneralTimerDesde;
+        
+        /// <summary>
+        /// wucPopUp_ActividadGeneralTimerHasta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Agenda.Web.Include.WebUserControls.wucTimer wucPopUp_ActividadGeneralTimerHasta;
+        
+        /// <summary>
+        /// btnPopUp_ActividadGeneralCommand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPopUp_ActividadGeneralCommand;
+        
+        /// <summary>
+        /// lblPopUp_ActividadGeneralMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPopUp_ActividadGeneralMessage;
         
         /// <summary>
         /// pnlPopUp_LugarEvento control.
