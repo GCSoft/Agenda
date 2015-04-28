@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Gira.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos.Gira" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Gira.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos.Gira" %>
 
 <!DOCTYPE html>
 
