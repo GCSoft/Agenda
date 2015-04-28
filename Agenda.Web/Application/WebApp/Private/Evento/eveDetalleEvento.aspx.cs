@@ -255,6 +255,36 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
 				}
 
+                // Si es un usuario de Dirección de Protocolo y el Evento es de Logística
+                if ( RolId == 5 &&  this.Logistica.Value == "1" ){
+                    this.EliminarRepresentantePanel.Visible = false;
+                    this.DatosGeneralesPanel.Visible = false;
+                    this.DatosEventoPanel.Visible = false;
+                    this.ProgramaLogisticaPanel.Visible = false;
+                    this.ProgramaProtocoloPanel.Visible = false;
+                    this.ContactoPanel.Visible = false;
+                    this.AdjuntarPanel.Visible = false;
+                    this.RechazarPanel.Visible = false;
+                    this.CuadernilloLogisticaPanel.Visible = false;
+                    this.CuadernilloProtocoloPanel.Visible = false;
+                    this.Historial.Visible = false;
+                }
+
+                // Si es un usuario de Logística y el Evento es de Dirección de Protocolo
+                if ( RolId == 4 &&  this.Logistica.Value != "1" ){
+                    this.EliminarRepresentantePanel.Visible = false;
+                    this.DatosGeneralesPanel.Visible = false;
+                    this.DatosEventoPanel.Visible = false;
+                    this.ProgramaLogisticaPanel.Visible = false;
+                    this.ProgramaProtocoloPanel.Visible = false;
+                    this.ContactoPanel.Visible = false;
+                    this.AdjuntarPanel.Visible = false;
+                    this.RechazarPanel.Visible = false;
+                    this.CuadernilloLogisticaPanel.Visible = false;
+                    this.CuadernilloProtocoloPanel.Visible = false;
+                    this.Historial.Visible = false;
+                }
+
             }catch (Exception ex){
 				throw(ex);
             }

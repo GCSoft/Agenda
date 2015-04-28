@@ -12,7 +12,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 // Referencias manuales
-using GCUtility.Communication;
 using GCUtility.Security;
 using Agenda.DataAccess.Object;
 using Agenda.Entity.Object;

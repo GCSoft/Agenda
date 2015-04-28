@@ -1902,7 +1902,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                             wTableCell = wTableRow.Cells[0].AddParagraph();
                             wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
-                            wText = wTableCell.AppendText("ASISTENTES");
+                            wText = wTableCell.AppendText("ASISTENTES:");
                             wText.CharacterFormat.Bold = true;
                             wText.CharacterFormat.FontName = "Arial";
                             wText.CharacterFormat.FontSize = 12f;

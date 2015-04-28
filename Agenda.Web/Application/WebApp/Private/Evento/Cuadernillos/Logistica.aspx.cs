@@ -520,7 +520,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                             wTableCell = wTableRow.Cells[1].AddParagraph();
                             wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-                            wText = wTableCell.AppendText(oENTResponse.DataSetResponse.Tables[1].Rows[0]["LugarEventoCompleto"].ToString());
+                            wText = wTableCell.AppendText(oENTResponse.DataSetResponse.Tables[1].Rows[0]["DireccionEventoCompleto"].ToString());
                             wText.CharacterFormat.Bold = true;
                             wText.CharacterFormat.FontName = "Arial";
                             wText.CharacterFormat.FontSize = 10f;
