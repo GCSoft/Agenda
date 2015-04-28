@@ -472,7 +472,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
 
                             #region Comité de recepción
                                 
-                                if ( ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows.Count != 0) {
+                                if ( ENTResponseGiraConfiguracion.DataSetResponse.Tables[2].Rows.Count != 0) {
                                     
                                     // Inicializaciones
                                     wTable = oSection.Body.AddTable();
@@ -488,7 +488,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                     
                                     // Configuración de la tabla
                                     wtblListado = new WTable(oDocument, false);
-                                    wtblListado.ResetCells(ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows.Count + 1, 1);
+                                    wtblListado.ResetCells(ENTResponseGiraConfiguracion.DataSetResponse.Tables[2].Rows.Count + 1, 1);
                                     wtblListado.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
 
                                     // Encabezado
@@ -510,7 +510,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                     tRow.Cells[0].Width = 500;
 
                                     // Cuerpo
-                                    foreach (DataRow oRow in ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows){
+                                    foreach (DataRow oRow in ENTResponseGiraConfiguracion.DataSetResponse.Tables[2].Rows){
 
                                         tRow = wtblListado.Rows[FilaOrden];
                                         tRow.Height = 17f;
@@ -1052,8 +1052,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                         tRow = wtblListado.Rows[FilaOrden];
                                         tRow.Height = 17f;
 
-                                        ListadoOrden = oRow["Orden"].ToString() + ". ";
-                                        ListadoPuesto = ", " + oRow["Detalle"].ToString();
+                                        ListadoOrden = oRow["Orden"].ToString();
+                                        ListadoPuesto = oRow["Detalle"].ToString();
 
                                         // Celda 1
                                         wTableCell = tRow.Cells[0].AddParagraph();
@@ -1061,7 +1061,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                         tRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                                        wText = wTableCell.AppendText(ListadoOrden + ListadoPuesto + ENTER);
+                                        wText = wTableCell.AppendText(ListadoPuesto + ENTER);
                                         wText.CharacterFormat.FontName = "Arial";
                                         wText.CharacterFormat.FontSize = 10f;
                                         wText.CharacterFormat.Bold = true;
