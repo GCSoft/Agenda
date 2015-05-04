@@ -158,7 +158,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                             
                     #endregion
                     
-                    #region Nomre de la Gira
+                    #region Nombre de la Gira
 
                         wTable = oSection.HeadersFooters.Header.AddTable();
                         wTable.ResetCells(1, 3); // 1 Fila 3 Columnas

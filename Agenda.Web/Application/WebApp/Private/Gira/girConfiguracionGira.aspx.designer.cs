@@ -580,13 +580,13 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         protected global::AjaxControlToolkit.TabContainer tabFormulario_Evento;
         
         /// <summary>
-        /// tpnlGenerales_Evento control.
+        /// tpnlDetalle_Evento control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.TabPanel tpnlGenerales_Evento;
+        protected global::AjaxControlToolkit.TabPanel tpnlDetalle_Evento;
         
         /// <summary>
         /// ddlAgrupacion_Evento control.
@@ -722,6 +722,15 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPopUp_EventoAforo;
+        
+        /// <summary>
+        /// tpnlGenerales_Evento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel tpnlGenerales_Evento;
         
         /// <summary>
         /// txtPopUp_EventoCaracteristicasInvitados control.

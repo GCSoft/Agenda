@@ -338,7 +338,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPopUp_Evento" runat="server" CssClass="PopUpBlock">
-        <asp:Panel ID="pnlPopUp_EventoContent" runat="server" style="background-color:#FFFFFF; border:1px solid #4B4878; clear:both; margin: 10px auto; z-index:901;" Height="800px" Width="580px">
+        <asp:Panel ID="pnlPopUp_EventoContent" runat="server" CssClass="PopUpContent" style="margin-top:-250px; margin-left:-375px;" Height="500px" Width="650px">
             <asp:Panel ID="pnlPopUp_EventoHeader" runat="server" CssClass="PopUpHeader">
                 <table class="PopUpHeaderTable">
                     <tr>
@@ -349,9 +349,9 @@
                 </table>
             </asp:Panel>
             <asp:Panel ID="pnlPopUp_EventoBody" runat="server" CssClass="PopUpBody">
-                <asp:TabContainer ID="tabFormulario_Evento" runat="server" ActiveTabIndex="0" CssClass="Tabcontainer_General" Height="660" >
-                    <asp:TabPanel ID="tpnlGenerales_Evento" runat="server">
-                        <HeaderTemplate>Datos generales</HeaderTemplate>
+                <asp:TabContainer ID="tabFormulario_Evento" runat="server" ActiveTabIndex="0" CssClass="Tabcontainer_General" Height="360" >
+                    <asp:TabPanel ID="tpnlDetalle_Evento" runat="server">
+                        <HeaderTemplate>Datos del Evento</HeaderTemplate>
                         <ContentTemplate>
                             <br />
                             <table class="FormTable">
@@ -459,6 +459,14 @@
 				                    <td class="Campo"><asp:TextBox ID="txtPopUp_EventoAforo" runat="server" CssClass="Textbox_General" MaxLength="5" Text="0" Width="130px"></asp:TextBox></td>
                                     <td></td>
 			                    </tr>
+                            </table>
+                        </ContentTemplate>
+                    </asp:TabPanel>
+                    <asp:TabPanel ID="tpnlGenerales_Evento" runat="server">
+                        <HeaderTemplate>Datos generales</HeaderTemplate>
+                        <ContentTemplate>
+                            <br />
+                            <table class="FormTable">
                                 <tr>
 				                    <td class="Etiqueta">Caracteristicas de invitados</td>
 				                    <td class="Espacio"></td>
@@ -551,15 +559,15 @@
                                 <tr>
                                     <td colspan="4">
                                         <div style="border:0px solid #000000; clear:both; position:relative; width:100%;">
-                                            <table cellspacing="0" rules="all" border="1" style="border-collapse:collapse; width:550px;">
+                                            <table cellspacing="0" rules="all" border="1" style="border-collapse:collapse; width:620px;">
                                                 <tr class="Grid_Header_PopUp">
                                                     <th scope="col" style="width:80px;">Orden</th>
                                                     <th scope="col" style="width:200px;">Nombre</th>
-										            <th scope="col" style="width:270px;">Puesto</th>
+										            <th scope="col">Puesto</th>
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div style="border:1px solid #C1C1C1; height:482px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:548px">
+                                        <div style="border:1px solid #C1C1C1; height:182px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:618px">
                                             <asp:GridView ID="gvComite" runat="server" AllowPaging="false" AllowSorting="False" AutoGenerateColumns="False" ShowHeader="false" Width="100%"
                                                 DataKeyNames="Orden,Nombre,Puesto"
                                                 OnRowCommand="gvComite_RowCommand"
@@ -571,8 +579,8 @@
                                                     </div>
                                                 </EmptyDataTemplate>
                                                 <Columns>
-                                                    <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="78px"  DataField="Orden"   SortExpression="Orden"></asp:BoundField>
-                                                    <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="194px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
+                                                    <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="79px"  DataField="Orden"   SortExpression="Orden"></asp:BoundField>
+                                                    <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="200px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
                                                     <asp:BoundField HeaderText="Puesto" ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
                                                     <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
                                                         <ItemTemplate>
@@ -611,14 +619,14 @@
                                 <tr>
                                     <td colspan="4">
                                         <div style="border:0px solid #000000; clear:both; position:relative; width:100%;">
-                                            <table cellspacing="0" rules="all" border="1" style="border-collapse:collapse; width:550px;">
+                                            <table cellspacing="0" rules="all" border="1" style="border-collapse:collapse; width:620px;">
                                                 <tr class="Grid_Header_PopUp">
                                                     <th scope="col" style="width:102px;">Orden</th>
-                                                    <th scope="col" style="width:448px;">Detalle</th>
+                                                    <th scope="col">Detalle</th>
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div style="border:1px solid #C1C1C1; height:432px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:548px">
+                                        <div style="border:1px solid #C1C1C1; height:132px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:618px">
                                             <asp:GridView ID="gvOrdenDia" runat="server" AllowPaging="false" AllowSorting="False" AutoGenerateColumns="False" ShowHeader="false" Width="100%"
                                                 DataKeyNames="Orden,Detalle"
 												OnRowCommand="gvOrdenDia_RowCommand"
@@ -630,7 +638,7 @@
                                                     </div>
                                                 </EmptyDataTemplate>
                                                 <Columns>
-													<asp:BoundField HeaderText="Orden"      ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
+													<asp:BoundField HeaderText="Orden"      ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="101px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
 													<asp:BoundField HeaderText="Detalle"    ItemStyle-HorizontalAlign="Left"                            DataField="Detalle" SortExpression="Detalle"></asp:BoundField>
 													<asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
 														<ItemTemplate>
@@ -678,15 +686,15 @@
                                 <tr>
                                     <td colspan="4">
                                         <div style="border:0px solid #000000; clear:both; position:relative; width:100%;">
-                                            <table cellspacing="0" rules="all" border="1" style="border-collapse:collapse; width:550px;">
+                                            <table cellspacing="0" rules="all" border="1" style="border-collapse:collapse; width:620px;">
                                                 <tr class="Grid_Header_PopUp">
                                                     <th scope="col" style="width:80px;">Orden</th>
                                                     <th scope="col" style="width:200px;">Nombre</th>
-										            <th scope="col" style="width:270px;">Puesto</th>
+										            <th scope="col">Puesto</th>
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div style="border:1px solid #C1C1C1; height:450px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:548px">
+                                        <div style="border:1px solid #C1C1C1; height:150px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:618px">
                                             <asp:GridView ID="gvAcomodo" runat="server" AllowPaging="false" AllowSorting="False" AutoGenerateColumns="False" ShowHeader="false" Width="100%"
                                                 DataKeyNames="Orden,Nombre,Puesto"
                                                 OnRowCommand="gvAcomodo_RowCommand"
@@ -698,8 +706,8 @@
                                                     </div>
                                                 </EmptyDataTemplate>
                                                 <Columns>
-                                                    <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="78px"  DataField="Orden"   SortExpression="Orden"></asp:BoundField>
-                                                    <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="194px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
+                                                    <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="79px"  DataField="Orden"   SortExpression="Orden"></asp:BoundField>
+                                                    <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="200px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
                                                     <asp:BoundField HeaderText="Puesto" ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
                                                     <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
                                                         <ItemTemplate>
