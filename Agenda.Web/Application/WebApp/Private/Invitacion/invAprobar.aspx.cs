@@ -93,9 +93,6 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
             try
             {
 
-                // Validaciones
-                if (this.ckeComentarios.Text.Trim() == "") { throw new Exception("Es necesario ingresar un motivo de rechazo"); }
-
                 // Datos de sesión
                 oENTSession = (ENTSession)this.Session["oENTSession"];
                 oENTInvitacion.UsuarioId = oENTSession.UsuarioId;

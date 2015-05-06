@@ -130,6 +130,8 @@
     <Content Include="Application\WebApp\Private\Invitacion\invRechazar.aspx" />
     <Content Include="Application\WebApp\Private\Reportes\repEvento.aspx" />
     <Content Include="Application\WebApp\Private\Reportes\repInvitacion.aspx" />
+    <Content Include="Application\WebApp\Private\Reportes\repInvitacionDetalle.aspx" />
+    <Content Include="Application\WebApp\Private\Reportes\repInvitacionPrensa.aspx" />
     <Content Include="Application\WebApp\Private\SysApp\sappChangePassword.aspx" />
     <Content Include="Application\WebApp\Private\SysApp\sappLogout.aspx" />
     <Content Include="Application\WebApp\Private\SysApp\sappNotificacion.aspx" />
@@ -637,6 +639,20 @@
     </Compile>
     <Compile Include="Application\WebApp\Private\Reportes\repInvitacion.aspx.designer.cs">
       <DependentUpon>repInvitacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Reportes\repInvitacionDetalle.aspx.cs">
+      <DependentUpon>repInvitacionDetalle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Reportes\repInvitacionDetalle.aspx.designer.cs">
+      <DependentUpon>repInvitacionDetalle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Reportes\repInvitacionPrensa.aspx.cs">
+      <DependentUpon>repInvitacionPrensa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Reportes\repInvitacionPrensa.aspx.designer.cs">
+      <DependentUpon>repInvitacionPrensa.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\WebApp\Private\SysApp\sappChangePassword.aspx.cs">
       <DependentUpon>sappChangePassword.aspx</DependentUpon>

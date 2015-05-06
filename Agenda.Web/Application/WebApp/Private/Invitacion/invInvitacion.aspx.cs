@@ -624,7 +624,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
         }
 
         void ValidarFormulario(TransactionTypes TransactionType){
-            DataTable tblFuncionario;
+            //DataTable tblFuncionario;
             String ErrorDetailHour = "";
 
             try
@@ -693,16 +693,16 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                     throw (new Exception("Es necesario ingresar un Teléfono del contacto"));
                 }
 
-                // TAB - Asociar funcionarios
-                if ( TransactionType == TransactionTypes.Registrar ){
+                //// TAB - Asociar funcionarios
+                //if ( TransactionType == TransactionTypes.Registrar ){
 
-                    tblFuncionario = gcParse.GridViewToDataTable(this.gvFuncionario, false);
-                    if( tblFuncionario.Rows.Count == 0 ){
-                        this.tabInvitacion.ActiveTabIndex = 3;
-                        throw (new Exception("Es necesario asociar por lo menos a un funcionario"));
-                    }
+                //    tblFuncionario = gcParse.GridViewToDataTable(this.gvFuncionario, false);
+                //    if( tblFuncionario.Rows.Count == 0 ){
+                //        this.tabInvitacion.ActiveTabIndex = 3;
+                //        throw (new Exception("Es necesario asociar por lo menos a un funcionario"));
+                //    }
 
-                }
+                //}
 
             }catch (Exception ex){
                 throw (ex);
