@@ -45,11 +45,12 @@ html, body, form
 
 .MasterEscudoNL{
 	border:0px solid #000000;
-	bottom:10px;
-	height:120px;
-	left:10px;
+    background-color:#fff;
+	bottom:5px;
+	height:82px;
+	left:5px;
 	position:fixed;
-	width:92px;
+	width:253px;
 	z-index:800;
 }
 
