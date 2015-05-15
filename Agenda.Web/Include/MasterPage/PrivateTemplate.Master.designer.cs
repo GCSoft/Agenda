@@ -94,24 +94,6 @@ namespace Agenda.Web.Include.MasterPage {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder cntPrivateTemplateBody;
         
         /// <summary>
-        /// pnlLogoNL control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlLogoNL;
-        
-        /// <summary>
-        /// imgLogoNL control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage imgLogoNL;
-        
-        /// <summary>
         /// pnlRoundedCornerRight control.
         /// </summary>
         /// <remarks>

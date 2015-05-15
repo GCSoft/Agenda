@@ -85,7 +85,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/30/2015 15:25:56</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Gira/girConfiguracionGira.aspx">
-      <publishTime>04/22/2015 17:59:45</publishTime>
+      <publishTime>05/04/2015 16:15:53</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Gira/girContacto.aspx">
       <publishTime>03/30/2015 15:25:53</publishTime>
@@ -141,6 +141,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Application/WebApp/Private/Reportes/repInvitacion.aspx">
       <publishTime>03/11/2015 13:05:15</publishTime>
     </File>
+    <File Include="Application/WebApp/Private/Reportes/repInvitacionDetalle.aspx">
+      <publishTime>05/14/2015 17:42:01</publishTime>
+    </File>
+    <File Include="Application/WebApp/Private/Reportes/repInvitacionPrensa.aspx">
+      <publishTime>05/14/2015 17:41:08</publishTime>
+    </File>
     <File Include="Application/WebApp/Private/SysApp/sappChangePassword.aspx">
       <publishTime>01/21/2015 12:22:16</publishTime>
     </File>
@@ -166,16 +172,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/13/2015 16:11:31</publishTime>
     </File>
     <File Include="bin/Agenda.BusinessProcess.dll">
-      <publishTime>04/29/2015 17:37:05</publishTime>
+      <publishTime>05/14/2015 20:26:05</publishTime>
     </File>
     <File Include="bin/Agenda.DataAccess.dll">
-      <publishTime>04/29/2015 17:37:05</publishTime>
+      <publishTime>05/14/2015 20:26:05</publishTime>
     </File>
     <File Include="bin/Agenda.Entity.dll">
-      <publishTime>04/29/2015 17:37:04</publishTime>
+      <publishTime>05/14/2015 20:26:04</publishTime>
     </File>
     <File Include="bin/Agenda.Web.dll">
-      <publishTime>04/29/2015 17:37:08</publishTime>
+      <publishTime>05/14/2015 20:26:07</publishTime>
     </File>
     <File Include="bin/AjaxControlToolkit.dll">
       <publishTime>06/23/2014 11:45:59</publishTime>
@@ -358,7 +364,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/04/2013 13:25:48</publishTime>
     </File>
     <File Include="DB.config">
-      <publishTime>04/28/2015 12:16:19</publishTime>
+      <publishTime>05/14/2015 19:04:50</publishTime>
     </File>
     <File Include="Include/Components/Ajax/AjaxControlToolkit.dll">
       <publishTime>06/23/2014 11:45:59</publishTime>
@@ -1468,10 +1474,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/24/2014 14:19:12</publishTime>
     </File>
     <File Include="Include/Image/Web/LogoNL.png">
-      <publishTime>01/20/2015 17:38:36</publishTime>
+      <publishTime>05/08/2015 18:20:55</publishTime>
     </File>
     <File Include="Include/Image/Web/LogoNL_Recortado.png">
-      <publishTime>01/20/2015 17:41:38</publishTime>
+      <publishTime>05/08/2015 18:21:35</publishTime>
     </File>
     <File Include="Include/Image/Web/MenuBackground.jpg">
       <publishTime>01/21/2015 11:41:11</publishTime>
@@ -1498,19 +1504,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/18/2014 16:15:34</publishTime>
     </File>
     <File Include="Include/MasterPage/LoginTemplate.Master">
-      <publishTime>02/06/2015 16:55:35</publishTime>
+      <publishTime>05/14/2015 17:12:23</publishTime>
     </File>
     <File Include="Include/MasterPage/NonMenuTemplate.Master">
-      <publishTime>02/06/2015 16:55:47</publishTime>
+      <publishTime>05/14/2015 17:23:38</publishTime>
     </File>
     <File Include="Include/MasterPage/PrivateTemplate.Master">
-      <publishTime>02/06/2015 16:55:55</publishTime>
+      <publishTime>05/14/2015 17:23:45</publishTime>
     </File>
     <File Include="Include/Style/Control.css">
       <publishTime>04/13/2015 17:43:41</publishTime>
     </File>
     <File Include="Include/Style/MasterPage.css">
-      <publishTime>02/05/2015 17:29:49</publishTime>
+      <publishTime>05/14/2015 17:25:20</publishTime>
     </File>
     <File Include="Include/Style/Panel.css">
       <publishTime>03/10/2015 17:42:35</publishTime>
@@ -1561,7 +1567,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/27/2014 12:58:28</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/29/2015 17:37:24</publishTime>
+      <publishTime>05/14/2015 20:26:14</publishTime>
     </File>
   </ItemGroup>
 </Project>

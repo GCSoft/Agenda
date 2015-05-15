@@ -49,6 +49,107 @@ namespace Agenda.Web.Include.WebUserControls
         }
 
         ///<remarks>
+        ///   <name>wucCalendar.DisplayLongDate</name>
+        ///   <create>21-Octubre-2013</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/asigna la fecha desplegada en el control</summary>
+        public String DisplayLongDate
+        {
+            get
+            {
+
+                String LongDate = "";
+                DateTime SelectedDate = DateTime.Parse ( this.txtCanvas.Text.Split(new Char[] { '/' })[2] + "-" + this.txtCanvas.Text.Split(new Char[] { '/' })[1] + "-" + this.txtCanvas.Text.Split(new Char[] { '/' })[0] );
+
+                switch( SelectedDate.DayOfWeek ){
+                    case DayOfWeek.Friday:
+                        LongDate = "Viernes";
+                        break;
+
+                    case DayOfWeek.Monday:
+                        LongDate = "Lunes";
+                        break;
+
+                    case DayOfWeek.Saturday:
+                        LongDate = "Sábado";
+                        break;
+
+                    case DayOfWeek.Sunday:
+                        LongDate = "Domingo";
+                        break;
+
+                    case DayOfWeek.Thursday:
+                        LongDate = "Jueves";
+                        break;
+
+                    case DayOfWeek.Tuesday:
+                        LongDate = "Martes";
+                        break;
+
+                    case DayOfWeek.Wednesday:
+                        LongDate = "Miércoles";
+                        break;
+                }
+
+                LongDate = LongDate + " " + this.txtCanvas.Text.Split(new Char[] { '/' })[0] + " de ";
+
+                switch( this.txtCanvas.Text.Split(new Char[] { '/' })[1] ){
+
+                    case "01":
+                        LongDate = LongDate + " Enero de " + this.txtCanvas.Text.Split(new Char[] { '/' })[2];
+                        break;
+
+                    case "02":
+                        LongDate = LongDate + " Febrero de " + this.txtCanvas.Text.Split(new Char[] { '/' })[2];
+                        break;
+
+                    case "03":
+                        LongDate = LongDate + " Marzo de " + this.txtCanvas.Text.Split(new Char[] { '/' })[2];
+                        break;
+
+                    case "04":
+                        LongDate = LongDate + " Abril de " + this.txtCanvas.Text.Split(new Char[] { '/' })[2];
+                        break;
+
+                    case "05":
+                        LongDate = LongDate + " Mayo de " + this.txtCanvas.Text.Split(new Char[] { '/' })[2];
+                        break;
+
+                    case "06":
+                        LongDate = LongDate + " Junio de " + this.txtCanvas.Text.Split(new Char[] { '/' })[2];
+                        break;
+
+                    case "07":
+                        LongDate = LongDate + " Julio de " + this.txtCanvas.Text.Split(new Char[] { '/' })[2];
+                        break;
+
+                    case "08":
+                        LongDate = LongDate + " Agosto de " + this.txtCanvas.Text.Split(new Char[] { '/' })[2];
+                        break;
+
+                    case "09":
+                        LongDate = LongDate + " Septiembre de " + this.txtCanvas.Text.Split(new Char[] { '/' })[2];
+                        break;
+
+                    case "10":
+                        LongDate = LongDate + " Octubre de " + this.txtCanvas.Text.Split(new Char[] { '/' })[2];
+                        break;
+
+                    case "11":
+                        LongDate = LongDate + " Noviembre de " + this.txtCanvas.Text.Split(new Char[] { '/' })[2];
+                        break;
+
+                    case "12":
+                        LongDate = LongDate + " Diciembre de " + this.txtCanvas.Text.Split(new Char[] { '/' })[2];
+                        break;
+                }
+
+                return LongDate;
+            }
+        }
+
+        ///<remarks>
         ///   <name>wucCalendar.DisplayUTCDate</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>

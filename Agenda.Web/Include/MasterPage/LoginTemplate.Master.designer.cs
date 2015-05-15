@@ -67,22 +67,22 @@ namespace Agenda.Web.Include.MasterPage {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder cntLoginBody;
         
         /// <summary>
-        /// pnlLogoNL control.
+        /// pnlEscudoNL_Nuevo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlLogoNL;
+        protected global::System.Web.UI.WebControls.Panel pnlEscudoNL_Nuevo;
         
         /// <summary>
-        /// imgLogoNL control.
+        /// imgEscudoNL_Nuevo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage imgLogoNL;
+        protected global::System.Web.UI.HtmlControls.HtmlImage imgEscudoNL_Nuevo;
         
         /// <summary>
         /// pnlRoundedCornerRight control.
@@ -101,24 +101,6 @@ namespace Agenda.Web.Include.MasterPage {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlImage imgRoundedCornerRight;
-        
-        /// <summary>
-        /// pnlEscudoNL control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlEscudoNL;
-        
-        /// <summary>
-        /// imgEscudoNL control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlImage imgEscudoNL;
         
         /// <summary>
         /// uprMaster control.

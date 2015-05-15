@@ -801,6 +801,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Application\WebApp\Private\Reportes\RDLC\rptEvento.rdlc" />
     <EmbeddedResource Include="Application\WebApp\Private\Reportes\RDLC\rptInvitacion.rdlc" />
+    <EmbeddedResource Include="Application\WebApp\Private\Reportes\RDLC\rptInvitacionDetalle.rdlc" />
+    <EmbeddedResource Include="Application\WebApp\Private\Reportes\RDLC\rptInvitacionPrensa.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

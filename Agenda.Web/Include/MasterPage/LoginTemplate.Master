@@ -66,17 +66,21 @@
 			        </tr>
 		        </table>
 
-                <asp:Panel ID="pnlLogoNL" runat="server" CssClass="MasterLogoNL">
+                <%--<asp:Panel ID="pnlLogoNL" runat="server" CssClass="MasterLogoNL">
                     <img id="imgLogoNL" alt="Nuevo León" runat="server" src="~/Include/Image/Web/LogoNL.png" />
+                </asp:Panel>--%>
+
+                <asp:Panel ID="pnlEscudoNL_Nuevo" runat="server" CssClass="MasterEscudoNL_Nuevo">
+                    <img id="imgEscudoNL_Nuevo" alt="Escudo NL" runat="server" src="~/Include/Image/Web/EscudoNL_Nuevo.png" height="120" width="92" />
                 </asp:Panel>
 
                 <asp:Panel ID="pnlRoundedCornerRight" runat="server" CssClass="MasterRoundedCornerRight">
                     <img id="imgRoundedCornerRight" alt="Nuevo León" runat="server" src="~/Include/Image/Web/BackgroundRoundedCornerRight.png" />
                 </asp:Panel>
 
-                <asp:Panel ID="pnlEscudoNL" runat="server" CssClass="MasterEscudoNL">
-                    <img id="imgEscudoNL" alt="Escudo NL" runat="server" src="~/Include/Image/Web/LogoNL_BN.png" height="76" width="143" />
-                </asp:Panel>
+                <%--<asp:Panel ID="pnlEscudoNL" runat="server" CssClass="MasterEscudoNL">
+                    <img id="imgEscudoNL" alt="Escudo NL" runat="server" src="~/Include/Image/Web/EscudoNL.png" height="120" width="92" />
+                </asp:Panel>--%>
 
                 <asp:UpdateProgress runat="server" ID="uprMaster" AssociatedUpdatePanelID="updMaster">
                     <ProgressTemplate>
