@@ -314,6 +314,8 @@
     <Content Include="Include\Image\Icon\SubMenuHistorial.png" />
     <Content Include="Include\Image\Icon\SubMenuValoracion.png" />
     <Content Include="Include\Image\Web\EscudoNL_BackGround.png" />
+    <Content Include="Include\Image\Web\EscudoNL_Nuevo.png" />
+    <Content Include="Include\Image\Web\LogoNL_BN.png" />
     <Content Include="Include\Image\Web\TituloAcordeon.png" />
     <Content Include="Include\Image\Web\Background.png" />
     <Content Include="Include\Image\Web\BackgroundGeneral.png" />
