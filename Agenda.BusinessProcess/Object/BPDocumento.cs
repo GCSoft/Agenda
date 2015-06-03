@@ -37,7 +37,7 @@ namespace Agenda.BusinessProcess.Object
 		///<param name="RepositoryType">Tipo de repositorio (Expediente o Solicitud)</param>
 		///<returns>La ruta completa del directorio creado</returns>
 		public String CloneFile( String FileName,  String Seed, RepositoryTypes RepositoryType){
-            String Path;
+            String Path = "";
 
 			try{
 
@@ -87,11 +87,11 @@ namespace Agenda.BusinessProcess.Object
 
 			}catch (IOException ioEx){
 
-				throw(ioEx);
+				throw( new Exception( ioEx.Message + " [" + Path + FileName + "]" ) );
 
 			} catch (Exception ex){
 
-				throw(ex);
+				throw( new Exception( ex.Message + " [" + Path + FileName + "]" ) );
 
 			}
 
@@ -110,13 +110,14 @@ namespace Agenda.BusinessProcess.Object
 		///<param name="RepositoryType">Tipo de repositorio (Expediente o Solicitud)</param>
 		///<returns>La ruta completa del directorio creado</returns>
 		public String UploadFile( HttpPostedFile PostedFile,  String Seed, RepositoryTypes RepositoryType){
-            String Path;
-			String FileName;
+            String Path = "";
+            String FileName = "";
 
 			try{
 
 				// Nombre del archivo físico
-				FileName = PostedFile.FileName;
+				//FileName = PostedFile.FileName;
+                FileName = new FileInfo(PostedFile.FileName).Name;
 
                 // Obtener la ruta física del contenedor de archivos
                 if ( ConfigurationManager.AppSettings["Application.Repository.Virtual"].ToString() == "0" ){
@@ -164,11 +165,11 @@ namespace Agenda.BusinessProcess.Object
 
 			}catch (IOException ioEx){
 
-				throw(ioEx);
+				throw( new Exception( ioEx.Message + " [" + Path + FileName + "]" ) );
 
 			} catch (Exception ex){
 
-				throw(ex);
+				throw( new Exception( ex.Message + " [" + Path + FileName + "]" ) );
 
 			}
 
