@@ -231,8 +231,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 #endregion
 
                 oENTEvento.EstatusEventoId = 1;
-                if( oENTSession.RolId == 4 ) { oENTEvento.Logistica = 1; }
-                if( oENTSession.RolId == 5 ) { oENTEvento.Protocolo = 1; }
+                if( this.rblDependencia.SelectedValue == "1" ) { oENTEvento.Logistica = 1; }
+                if( this.rblDependencia.SelectedValue == "2" ) { oENTEvento.Protocolo = 1; }
 
                 // Transacción
                 oENTResponse = oBPEvento.InsertEvento(oENTEvento);
@@ -687,6 +687,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         // Eventos de la página
 
         protected void Page_Load(object sender, EventArgs e){
+            ENTSession oENTSession = new ENTSession();
+
             try
             {
 
@@ -704,6 +706,11 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 SelectEstado_PopUp_LugarEvento();
                 SelectMunicipio_PopUp_LugarEvento();
                 ClearPopUpPanel_LugarEvento();
+                
+                // Dependencia
+                oENTSession = (ENTSession)this.Session["oENTSession"];
+                if (oENTSession.RolId == 4) { this.rblDependencia.SelectedValue = "1"; this.rblDependencia.Enabled = false; } // Logística
+                if (oENTSession.RolId == 5) { this.rblDependencia.SelectedValue = "2"; this.rblDependencia.Enabled = false; } // Dirección de Protocolo
 
                 // Foco
                 this.tabEvento.ActiveTabIndex = 0;

@@ -10,7 +10,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="App.config">
-      <publishTime>03/09/2015 16:16:59</publishTime>
+      <publishTime>06/03/2015 12:16:57</publishTime>
     </File>
     <File Include="Application/WebApp/Private/AppIndex.aspx">
       <publishTime>12/03/2014 13:14:53</publishTime>
@@ -19,7 +19,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/05/2015 12:56:47</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Catalogo/catLugarEvento.aspx">
-      <publishTime>02/05/2015 16:37:47</publishTime>
+      <publishTime>06/09/2015 12:22:39</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Catalogo/catSecretario.aspx">
       <publishTime>02/11/2015 16:24:31</publishTime>
@@ -76,7 +76,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/24/2015 17:10:48</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Evento/eveNuevoEvento.aspx">
-      <publishTime>03/19/2015 11:36:22</publishTime>
+      <publishTime>06/09/2015 12:06:23</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Gira/Cuadernillos/Gira.aspx">
       <publishTime>04/23/2015 17:35:14</publishTime>
@@ -172,16 +172,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/13/2015 16:11:31</publishTime>
     </File>
     <File Include="bin/Agenda.BusinessProcess.dll">
-      <publishTime>05/14/2015 20:26:05</publishTime>
+      <publishTime>06/09/2015 12:34:45</publishTime>
     </File>
     <File Include="bin/Agenda.DataAccess.dll">
-      <publishTime>05/14/2015 20:26:05</publishTime>
+      <publishTime>06/09/2015 12:34:45</publishTime>
     </File>
     <File Include="bin/Agenda.Entity.dll">
-      <publishTime>05/14/2015 20:26:04</publishTime>
+      <publishTime>06/09/2015 12:34:45</publishTime>
     </File>
     <File Include="bin/Agenda.Web.dll">
-      <publishTime>05/14/2015 20:26:07</publishTime>
+      <publishTime>06/09/2015 12:34:47</publishTime>
     </File>
     <File Include="bin/AjaxControlToolkit.dll">
       <publishTime>06/23/2014 11:45:59</publishTime>
@@ -247,7 +247,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/04/2013 13:25:48</publishTime>
     </File>
     <File Include="bin/GCUtility.dll">
-      <publishTime>01/12/2015 17:17:16</publishTime>
+      <publishTime>06/03/2015 13:30:26</publishTime>
     </File>
     <File Include="bin/he/AjaxControlToolkit.resources.dll">
       <publishTime>12/14/2013 08:04:06</publishTime>
@@ -364,7 +364,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/04/2013 13:25:48</publishTime>
     </File>
     <File Include="DB.config">
-      <publishTime>05/14/2015 19:04:50</publishTime>
+      <publishTime>06/09/2015 12:03:43</publishTime>
     </File>
     <File Include="Include/Components/Ajax/AjaxControlToolkit.dll">
       <publishTime>06/23/2014 11:45:59</publishTime>
@@ -1192,7 +1192,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/23/2014 11:45:59</publishTime>
     </File>
     <File Include="Include/Components/GCSoft/GCUtility.dll">
-      <publishTime>01/12/2015 17:17:16</publishTime>
+      <publishTime>06/03/2015 13:30:26</publishTime>
     </File>
     <File Include="Include/Components/Syncfusion/Syncfusion.Compression.Base.dll">
       <publishTime>02/21/2015 13:27:39</publishTime>
@@ -1452,6 +1452,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Include/Image/Web/EscudoNL_BackGround.png">
       <publishTime>03/10/2015 19:18:33</publishTime>
     </File>
+    <File Include="Include/Image/Web/EscudoNL_Nuevo.png">
+      <publishTime>05/14/2015 17:18:07</publishTime>
+    </File>
     <File Include="Include/Image/Web/favicon.ico">
       <publishTime>11/29/2014 20:28:18</publishTime>
     </File>
@@ -1475,6 +1478,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Include/Image/Web/LogoNL.png">
       <publishTime>05/08/2015 18:20:55</publishTime>
+    </File>
+    <File Include="Include/Image/Web/LogoNL_BN.png">
+      <publishTime>05/08/2015 18:38:57</publishTime>
     </File>
     <File Include="Include/Image/Web/LogoNL_Recortado.png">
       <publishTime>05/08/2015 18:21:35</publishTime>
@@ -1513,7 +1519,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/14/2015 17:23:45</publishTime>
     </File>
     <File Include="Include/Style/Control.css">
-      <publishTime>04/13/2015 17:43:41</publishTime>
+      <publishTime>06/09/2015 12:30:37</publishTime>
     </File>
     <File Include="Include/Style/MasterPage.css">
       <publishTime>05/14/2015 17:25:20</publishTime>
@@ -1567,7 +1573,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/27/2014 12:58:28</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/14/2015 20:26:14</publishTime>
+      <publishTime>06/09/2015 12:35:02</publishTime>
     </File>
   </ItemGroup>
 </Project>

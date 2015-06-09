@@ -109,9 +109,14 @@
                             <td></td>
 			            </tr>
                         <tr>
-				            <td class="Etiqueta"></td>
+				            <td class="Etiqueta">Dependencia</td>
 				            <td class="Espacio"></td>
-				            <td class="Campo"></td>
+				            <td class="Campo">
+                                <asp:RadioButtonList ID="rblDependencia" runat="server" RepeatDirection="Horizontal">
+						            <asp:ListItem Text="Logística" Value="1" Selected="True"></asp:ListItem>
+						            <asp:ListItem Text="Dirección de Protocolo" Value="2"></asp:ListItem>
+					            </asp:RadioButtonList>
+				            </td>
                             <td></td>
 			            </tr>
                     </table>

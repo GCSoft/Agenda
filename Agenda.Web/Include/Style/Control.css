@@ -118,8 +118,10 @@
     list-style-type:none; 
     margin:0px! important;
     padding:0;
+    position:absolute;
     text-align:left;
 	visibility:hidden;
+    z-index:950;
 }
 
 .Autocomplete_HighLightedListItem{
