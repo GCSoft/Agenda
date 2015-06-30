@@ -28,7 +28,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPageName" runat="server" CssClass="MasterPageName">
-        <asp:Label ID="lblPageName" runat="server" CssClass="PageNameText" Text="Historial de cambios"></asp:Label>
+        <asp:Label ID="lblPageName" runat="server" CssClass="PageNameText" Text="Programa"></asp:Label>
     </asp:Panel>
 
     <asp:Panel ID="pnlTitulo" runat="server" CssClass="TitlePanel">

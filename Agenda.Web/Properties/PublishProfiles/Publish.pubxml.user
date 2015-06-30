@@ -10,7 +10,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="App.config">
-      <publishTime>06/03/2015 12:16:57</publishTime>
+      <publishTime>06/18/2015 13:29:24</publishTime>
     </File>
     <File Include="Application/WebApp/Private/AppIndex.aspx">
       <publishTime>12/03/2014 13:14:53</publishTime>
@@ -34,7 +34,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/21/2015 16:06:43</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Evento/eveCalendario.aspx">
-      <publishTime>01/30/2015 10:59:05</publishTime>
+      <publishTime>06/29/2015 11:58:48</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Evento/eveCalendarioCompleto.aspx">
       <publishTime>02/03/2015 11:45:19</publishTime>
@@ -85,7 +85,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/30/2015 15:25:56</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Gira/girConfiguracionGira.aspx">
-      <publishTime>05/04/2015 16:15:53</publishTime>
+      <publishTime>06/26/2015 17:23:19</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Gira/girContacto.aspx">
       <publishTime>03/30/2015 15:25:53</publishTime>
@@ -172,16 +172,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/13/2015 16:11:31</publishTime>
     </File>
     <File Include="bin/Agenda.BusinessProcess.dll">
-      <publishTime>06/09/2015 12:34:45</publishTime>
+      <publishTime>06/29/2015 18:18:32</publishTime>
     </File>
     <File Include="bin/Agenda.DataAccess.dll">
-      <publishTime>06/09/2015 12:34:45</publishTime>
+      <publishTime>06/29/2015 18:18:32</publishTime>
     </File>
     <File Include="bin/Agenda.Entity.dll">
-      <publishTime>06/09/2015 12:34:45</publishTime>
+      <publishTime>06/29/2015 18:18:32</publishTime>
     </File>
     <File Include="bin/Agenda.Web.dll">
-      <publishTime>06/09/2015 12:34:47</publishTime>
+      <publishTime>06/29/2015 18:18:34</publishTime>
     </File>
     <File Include="bin/AjaxControlToolkit.dll">
       <publishTime>06/23/2014 11:45:59</publishTime>
@@ -364,7 +364,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/04/2013 13:25:48</publishTime>
     </File>
     <File Include="DB.config">
-      <publishTime>06/09/2015 12:03:43</publishTime>
+      <publishTime>06/29/2015 17:50:22</publishTime>
     </File>
     <File Include="Include/Components/Ajax/AjaxControlToolkit.dll">
       <publishTime>06/23/2014 11:45:59</publishTime>
@@ -1573,7 +1573,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/27/2014 12:58:28</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/09/2015 12:35:02</publishTime>
+      <publishTime>06/29/2015 18:18:45</publishTime>
     </File>
   </ItemGroup>
 </Project>

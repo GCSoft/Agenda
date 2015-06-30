@@ -54,7 +54,7 @@
                             <td style="text-align:center; width:17%">
                                 <asp:Panel ID="ExpiradoPanel" CssClass="FiltroPanel" runat="server" Visible="true">
                                     <div style='background-color:#ff9933; border:1px solid #675C9D; float:left; height:16px; width:16px;'></div>
-                                    <div style='float:left; '><asp:CheckBox ID="chkExpirado" runat="server" CssClass="CheckBox_Regular" Checked="true" Text="Expirado" AutoPostBack="True" OnCheckedChanged="chkExpirado_CheckedChanged" /></div>
+                                    <div style='float:left; '><asp:CheckBox ID="chkExpirado" runat="server" CssClass="CheckBox_Regular" Checked="true" Text="Concretado" AutoPostBack="True" OnCheckedChanged="chkExpirado_CheckedChanged" /></div>
                                 </asp:Panel>
                             </td>
                             <td style="text-align:center; width:17%">

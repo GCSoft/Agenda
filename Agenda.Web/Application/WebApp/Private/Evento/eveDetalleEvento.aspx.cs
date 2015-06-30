@@ -240,7 +240,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     this.CuadernilloProtocoloPanel.Visible = false;
 				}
 
-                // Si el evento no está representado no se podrá eliminar al respresentante
+                // Si el evento no está representado no se podrá eliminar al representante
                 // 5 - Representado
 				if ( Int32.Parse(this.hddEstatusEventoId.Value) != 5 ){
 
@@ -284,6 +284,36 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     this.CuadernilloProtocoloPanel.Visible = false;
                     this.Historial.Visible = false;
                 }
+
+                // Si el evento está expirado, pero lo está consultando un administrador, se podrán hacer ajustes a la captura
+				if ( this.Expired.Value == "1" && RolId < 3 ){
+
+                    this.EliminarRepresentantePanel.Visible = true;
+                    this.DatosGeneralesPanel.Visible = true;
+                    this.DatosEventoPanel.Visible = true;
+                    this.ProgramaLogisticaPanel.Visible = (this.Logistica.Value == "1" ? true : false);
+                    this.ProgramaProtocoloPanel.Visible = (this.Logistica.Value == "1" ? false : true);
+                    this.ContactoPanel.Visible = true;
+                    this.AdjuntarPanel.Visible = (this.Logistica.Value == "1" ? true : false);
+                    this.RechazarPanel.Visible = true;
+                    this.CuadernilloLogisticaPanel.Visible = (this.Logistica.Value == "1" ? true : false);
+                    this.CuadernilloProtocoloPanel.Visible = (this.Logistica.Value == "1" ? false : true);
+                    this.Historial.Visible = true;
+
+                    // Ajustes
+                    if (Int32.Parse(this.hddEstatusEventoId.Value) == 4 || Int32.Parse(this.hddEstatusEventoId.Value) == 5){
+
+                        this.CuadernilloLogisticaPanel.Visible = false;
+                        this.CuadernilloProtocoloPanel.Visible = false;
+                    }
+
+                    if (Int32.Parse(this.hddEstatusEventoId.Value) != 5){
+
+                        this.EliminarRepresentantePanel.Visible = false;
+
+                    }
+
+				}
 
             }catch (Exception ex){
 				throw(ex);
