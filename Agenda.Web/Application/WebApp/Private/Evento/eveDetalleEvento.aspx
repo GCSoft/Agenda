@@ -72,6 +72,11 @@
             Generar cuadernillo
         </asp:Panel>
 
+        <asp:Panel ID="EnviarCuadernilloPanel" CssClass="IconoPanel" runat="server" Visible="true">
+            <asp:ImageButton ID="EnviarCuadernilloButton" ImageUrl="~/Include/Image/Icon/SubMenuEnviarPorCorreo.png" runat="server"  OnClick="EnviarCuadernilloButton_Click"></asp:ImageButton><br />
+            Enviar evento por correo
+        </asp:Panel>
+
         <asp:Panel ID="Historial" CssClass="IconoPanel" runat="server" Visible="true">
             <asp:ImageButton ID="HistorialButton" ImageUrl="~/Include/Image/Icon/SubMenuHistorial.png" runat="server" OnClick="HistorialButton_Click"></asp:ImageButton><br />
             Historial de cambios
@@ -184,7 +189,7 @@
 									    <td>Comentarios</td>
                                     </tr>
                                     <tr class="Grid_Row">
-                                        <td colspan="3">No se encontraron Contactos asociados al evento</td>
+                                        <td colspan="6">No se encontraron Contactos asociados al evento</td>
                                     </tr>
                                 </table>
                             </EmptyDataTemplate>

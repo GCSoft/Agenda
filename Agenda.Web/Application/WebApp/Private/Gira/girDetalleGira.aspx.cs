@@ -188,6 +188,27 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
 				}
 
+                 // Si el evento está expirado, pero lo está consultando un administrador, se podrán hacer ajustes a la captura
+				if ( this.Expired.Value == "1" && RolId < 3 ){
+
+                    this.DatosGiraPanel.Visible = true;
+                    this.ProgramaGiraPanel.Visible = true;
+                    this.ContactoPanel.Visible = true;
+                    this.RechazarPanel.Visible = true;
+                    this.CuadernilloGiraPanel.Visible = true;
+                    this.Historial.Visible = true;
+
+                    // Si el Gira está cancelado no se podrá generar el cuadernillo
+                    // 4 - Cancelado
+                    if (Int32.Parse(this.hddEstatusGiraId.Value) == 4)
+                    {
+
+                        this.CuadernilloGiraPanel.Visible = false;
+                    }
+
+                }
+
+
             }catch (Exception ex){
 				throw(ex);
             }

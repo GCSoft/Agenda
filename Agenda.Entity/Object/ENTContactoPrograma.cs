@@ -1,7 +1,7 @@
 ﻿/*---------------------------------------------------------------------------------------------------------------------------------
-' Clase: ENTTipoAcomodo
+' Clase: ENTContactoPrograma
 ' Autor: Ruben.Cobos
-' Fecha: 09-Diciembre-2014
+' Fecha: 18-Diciembre-2014
 '----------------------------------------------------------------------------------------------------------------------------------*/
 
 // Referencias
@@ -13,25 +13,25 @@ using System.Threading.Tasks;
 
 namespace Agenda.Entity.Object
 {
-    public class ENTTipoAcomodo : ENTBase
+    public class ENTContactoPrograma
     {
 
-        private Int32   _TipoAcomodoId;
+        private Int32   _ContactoProgramaId;
         private String  _Nombre;
-        private String  _Descripcion;
+        private String  _Correo;
         private String  _FechaCreacion;
         private Int16   _Activo;
         private Int32   _Rank;
-        private ENTPaginacion _Paginacion;
+        private ENTPaginacion   _Paginacion;
 
 
         //Constructor
 
-        public ENTTipoAcomodo()
+        public ENTContactoPrograma()
         {
-            _TipoAcomodoId = 0;
+            _ContactoProgramaId = 0;
             _Nombre = "";
-            _Descripcion = "";
+            _Correo = "";
             _FechaCreacion = "";
             _Activo = 2;
             _Rank = 0;
@@ -42,23 +42,23 @@ namespace Agenda.Entity.Object
         // Propiedades
 
         ///<remarks>
-        ///   <name>ENTTipoAcomodo.TipoAcomodoId</name>
-        ///   <create>09-Diciembre-2014</create>
+        ///   <name>ENTContactoPrograma.ContactoProgramaId</name>
+        ///   <create>18-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
-        ///<summary>Obtiene/Asigna el identificador único de Tipo de Acomodo</summary>
-        public Int32 TipoAcomodoId
+        ///<summary>Obtiene/Asigna el identificador único del Contacto de Programa</summary>
+        public Int32 ContactoProgramaId
         {
-            get { return _TipoAcomodoId; }
-            set { _TipoAcomodoId = value; }
+            get { return _ContactoProgramaId; }
+            set { _ContactoProgramaId = value; }
         }
 
         ///<remarks>
-        ///   <name>ENTTipoAcomodo.Nombre</name>
-        ///   <create>09-Diciembre-2014</create>
+        ///   <name>ENTContactoPrograma.Nombre</name>
+        ///   <create>18-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
-        ///<summary>Obtiene/Asigna el nombre del Tipo de Acomodo</summary>
+        ///<summary>Obtiene/Asigna el nombre del Contacto de Programa</summary>
         public String Nombre
         {
             get { return _Nombre; }
@@ -66,20 +66,20 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
-        ///   <name>ENTTipoAcomodo.Descripcion</name>
-        ///   <create>09-Diciembre-2014</create>
+        ///   <name>ENTContactoPrograma.Correo</name>
+        ///   <create>18-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
-        ///<summary>Obtiene/Asigna la descripción/notas del registro</summary>
-        public String Descripcion
+        ///<summary>Obtiene/Asigna el puesto que tiene el Contacto de Programa</summary>
+        public String Correo
         {
-            get { return _Descripcion; }
-            set { _Descripcion = value; }
+            get { return _Correo; }
+            set { _Correo = value; }
         }
 
         ///<remarks>
-        ///   <name>ENTTipoAcomodo.FechaCreacion</name>
-        ///   <create>09-Diciembre-2014</create>
+        ///   <name>ENTContactoPrograma.FechaCreacion</name>
+        ///   <create>18-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
         ///<summary>Obtiene/Asigna la fecha de creación del registro</summary>
@@ -90,8 +90,8 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
-        ///   <name>ENTTipoAcomodo.Activo</name>
-        ///   <create>09-Diciembre-2014</create>
+        ///   <name>ENTContactoPrograma.Activo</name>
+        ///   <create>18-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
         ///<summary>Obtiene/Asigna el control de baja lógica de registro</summary>
@@ -102,8 +102,8 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
-        ///   <name>ENTTipoAcomodo.Rank</name>
-        ///   <create>09-Diciembre-2014</create>
+        ///   <name>ENTContactoPrograma.Rank</name>
+        ///   <create>18-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
         ///<summary>Obtiene/Asigna el valor de posicionamiento del registro en un ordenado</summary>
@@ -114,7 +114,7 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
-        ///   <name>ENTTipoAcomodo.Paginacion</name>
+        ///   <name>ENTContactoPrograma.Paginacion</name>
         ///   <create>04-Febrero-2015</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>

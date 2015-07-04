@@ -51,57 +51,67 @@ namespace Agenda.Web.Include.WebUserControls
                 // Obtener sesion
                 oENTSession = (ENTSession)this.Session["oENTSession"];
 
-                // Secciones de Menú
-                foreach (DataRow drMenu in oENTSession.DataTableMenu.Rows){
+                
+                if ( oENTSession.DataTableMenu == null )
+                {
+                    this.Response.Redirect("~/Index.aspx", false);
+                }
+                else
+                {
+                    // Secciones de Menú
+                    foreach (DataRow drMenu in oENTSession.DataTableMenu.Rows)
+                    {
 
-                    // Obtener el id menu actual
-                    sMenuId = drMenu["MenuId"].ToString();
+                        // Obtener el id menu actual
+                        sMenuId = drMenu["MenuId"].ToString();
 
-                    // Nuevo Panel
-                    oAccordionPane = new AccordionPane();
-                    oAccordionPane.ID = "apnl" + sMenuId;
+                        // Nuevo Panel
+                        oAccordionPane = new AccordionPane();
+                        oAccordionPane.ID = "apnl" + sMenuId;
 
-                    // Header
-                    lblAccordionHeader = new Label();
-                    lblAccordionHeader.Text = drMenu["NombreMenu"].ToString();
-                    oAccordionPane.HeaderContainer.Controls.Add(lblAccordionHeader);
+                        // Header
+                        lblAccordionHeader = new Label();
+                        lblAccordionHeader.Text = drMenu["NombreMenu"].ToString();
+                        oAccordionPane.HeaderContainer.Controls.Add(lblAccordionHeader);
 
-                    // Content
-                    foreach (DataRow drSubMenu in oENTSession.DataTableSubMenu.Select("MenuId = " + sMenuId)){
+                        // Content
+                        foreach (DataRow drSubMenu in oENTSession.DataTableSubMenu.Select("MenuId = " + sMenuId))
+                        {
 
-                        // Nuevo panel
-                        pnlContent = new Panel();
-                        pnlContent.ID = "pnl" + drSubMenu["SubMenuId"].ToString();
-                        pnlContent.CssClass = "MenuItem";
+                            // Nuevo panel
+                            pnlContent = new Panel();
+                            pnlContent.ID = "pnl" + drSubMenu["SubMenuId"].ToString();
+                            pnlContent.CssClass = "MenuItem";
 
-                        // Nuevo Anchor
-                        anchContent = new HtmlAnchor();
-                        anchContent.Title = drSubMenu["Descripcion"].ToString();
-                        anchContent.HRef = this.ResolveUrl(drSubMenu["URL"].ToString());
-                        anchContent.InnerHtml = (char)187 + " " + drSubMenu["NombreSubMenu"].ToString();
+                            // Nuevo Anchor
+                            anchContent = new HtmlAnchor();
+                            anchContent.Title = drSubMenu["Descripcion"].ToString();
+                            anchContent.HRef = this.ResolveUrl(drSubMenu["URL"].ToString());
+                            anchContent.InnerHtml = (char)187 + " " + drSubMenu["NombreSubMenu"].ToString();
 
-                        // Nuevo campo oculto (nombre de página)
-                        hddContentPageName = new HiddenField();
-                        hddContentPageName.ID = "hdd" + drSubMenu["SubMenuId"].ToString();
-                        hddContentPageName.Value = drSubMenu["ASPX"].ToString();
+                            // Nuevo campo oculto (nombre de página)
+                            hddContentPageName = new HiddenField();
+                            hddContentPageName.ID = "hdd" + drSubMenu["SubMenuId"].ToString();
+                            hddContentPageName.Value = drSubMenu["ASPX"].ToString();
 
-                        // Agregar contenido al Panel
-                        pnlContent.Controls.Add(anchContent);
-                        pnlContent.Controls.Add(hddContentPageName);
+                            // Agregar contenido al Panel
+                            pnlContent.Controls.Add(anchContent);
+                            pnlContent.Controls.Add(hddContentPageName);
 
-                        // Agregar contenido al Acordeón
-                        oAccordionPane.ContentContainer.Controls.Add(pnlContent);
+                            // Agregar contenido al Acordeón
+                            oAccordionPane.ContentContainer.Controls.Add(pnlContent);
+                        }
+
+                        // Agregar Pane al Acordeón
+                        this.acrdMenu.Panes.Add(oAccordionPane);
                     }
 
-                    // Agregar Pane al Acordeón
-                    this.acrdMenu.Panes.Add(oAccordionPane);
+                    // DataSet en ViewState
+                    dsMenu = new DataSet();
+                    dsMenu.Tables.Add(oENTSession.DataTableMenu.Copy());
+                    dsMenu.Tables.Add(oENTSession.DataTableSubMenu.Copy());
+                    this.ViewState["dsMenu"] = dsMenu;
                 }
-
-                // DataSet en ViewState
-                dsMenu = new DataSet();
-                dsMenu.Tables.Add(oENTSession.DataTableMenu.Copy());
-                dsMenu.Tables.Add(oENTSession.DataTableSubMenu.Copy());
-                this.ViewState["dsMenu"] = dsMenu;
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);

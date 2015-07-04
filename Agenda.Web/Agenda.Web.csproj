@@ -90,9 +90,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Application\WebApp\Private\AppIndex.aspx" />
+    <Content Include="Application\WebApp\Private\Catalogo\catAcomodo.aspx" />
     <Content Include="Application\WebApp\Private\Catalogo\catColonia.aspx" />
+    <Content Include="Application\WebApp\Private\Catalogo\catContactoPrograma.aspx" />
     <Content Include="Application\WebApp\Private\Catalogo\catLugarEvento.aspx" />
     <Content Include="Application\WebApp\Private\Catalogo\catSecretario.aspx" />
+    <Content Include="Application\WebApp\Private\Evento\eveEnviarCuadernillo.aspx" />
     <Content Include="Application\WebApp\Private\Gira\Cuadernillos\Gira.aspx" />
     <Content Include="Application\WebApp\Private\Evento\Cuadernillos\Logistica.aspx" />
     <Content Include="Application\WebApp\Private\Evento\Cuadernillos\Protocolo.aspx" />
@@ -308,6 +311,7 @@
     <Content Include="Include\Image\Icon\SubMenuDatosEvento.png" />
     <Content Include="Include\Image\Icon\SubMenuDatosGenerales.png" />
     <Content Include="Include\Image\Icon\SubMenuEliminarRepresentante.png" />
+    <Content Include="Include\Image\Icon\SubMenuEnviarPorCorreo.png" />
     <Content Include="Include\Image\Icon\SubMenuGenerarCuadernillo.png" />
     <Content Include="Include\Image\Icon\SubMenuInformacionComplementaria.png" />
     <Content Include="Include\Image\Icon\SubMenuRechazo.png" />
@@ -362,12 +366,26 @@
     <Compile Include="Application\WebApp\Private\AppIndex.aspx.designer.cs">
       <DependentUpon>AppIndex.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Application\WebApp\Private\Catalogo\catAcomodo.aspx.cs">
+      <DependentUpon>catAcomodo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Catalogo\catAcomodo.aspx.designer.cs">
+      <DependentUpon>catAcomodo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Application\WebApp\Private\Catalogo\catColonia.aspx.cs">
       <DependentUpon>catColonia.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Application\WebApp\Private\Catalogo\catColonia.aspx.designer.cs">
       <DependentUpon>catColonia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Catalogo\catContactoPrograma.aspx.cs">
+      <DependentUpon>catContactoPrograma.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Catalogo\catContactoPrograma.aspx.designer.cs">
+      <DependentUpon>catContactoPrograma.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\WebApp\Private\Catalogo\catLugarEvento.aspx.cs">
       <DependentUpon>catLugarEvento.aspx</DependentUpon>
@@ -382,6 +400,13 @@
     </Compile>
     <Compile Include="Application\WebApp\Private\Catalogo\catSecretario.aspx.designer.cs">
       <DependentUpon>catSecretario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveEnviarCuadernillo.aspx.cs">
+      <DependentUpon>eveEnviarCuadernillo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Evento\eveEnviarCuadernillo.aspx.designer.cs">
+      <DependentUpon>eveEnviarCuadernillo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\WebApp\Private\Gira\Cuadernillos\Gira.aspx.cs">
       <DependentUpon>Gira.aspx</DependentUpon>

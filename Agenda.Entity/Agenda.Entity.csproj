@@ -46,6 +46,7 @@
     <Compile Include="Object\ENTCategoria.cs" />
     <Compile Include="Object\ENTColonia.cs" />
     <Compile Include="Object\ENTConducto.cs" />
+    <Compile Include="Object\ENTContactoPrograma.cs" />
     <Compile Include="Object\ENTDocumento.cs" />
     <Compile Include="Object\ENTEstado.cs" />
     <Compile Include="Object\ENTEstatusEvento.cs" />

@@ -118,10 +118,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Bottom;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                        imgTemporal = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Cuadernillo/Logo.png"));
-                        wPicture = wTableCell.AppendPicture(imgTemporal);
-                        wPicture.Height = 50;
-                        wPicture.Width = 249;
+                        if (System.IO.File.Exists(Server.MapPath("~/Include/Image/Cuadernillo/Logo.png")))
+                        {
+                            imgTemporal = System.Drawing.Image.FromFile(Server.MapPath("~/Include/Image/Cuadernillo/Logo.png"));
+                            wPicture = wTableCell.AppendPicture(imgTemporal);
+                            wPicture.Height = 50;
+                            wPicture.Width = 249;
+                        }
 
                         wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
                         wTableRow.Cells[0].Width = 350;
@@ -156,10 +159,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Top;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                        imgTemporal = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Cuadernillo/Separador_NL.png"));
-                        wPicture = wTableCell.AppendPicture(imgTemporal);
-                        wPicture.Height = 5;
-                        wPicture.Width = 510;
+                        if (System.IO.File.Exists(Server.MapPath("~/Include/Image/Cuadernillo/Separador_NL.png")))
+                        {
+                            imgTemporal = System.Drawing.Image.FromFile(Server.MapPath("~/Include/Image/Cuadernillo/Separador_NL.png"));
+                            wPicture = wTableCell.AppendPicture(imgTemporal);
+                            wPicture.Height = 5;
+                            wPicture.Width = 510;
+                        }
 
                         wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
                         wTableRow.Cells[0].Width = 510;
@@ -196,10 +202,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Bottom;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                        imgTemporal = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Cuadernillo/Logo.png"));
-                        wPicture = wTableCell.AppendPicture(imgTemporal);
-                        wPicture.Height = 50;
-                        wPicture.Width = 249;
+                        if (System.IO.File.Exists(Server.MapPath("~/Include/Image/Cuadernillo/Logo.png")))
+                        {
+                            imgTemporal = System.Drawing.Image.FromFile(Server.MapPath("~/Include/Image/Cuadernillo/Logo.png"));
+                            wPicture = wTableCell.AppendPicture(imgTemporal);
+                            wPicture.Height = 50;
+                            wPicture.Width = 249;
+                        }
 
                         wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
                         wTableRow.Cells[0].Width = 350;
@@ -227,10 +236,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Top;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                        imgTemporal = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Cuadernillo/Separador_NL.png"));
-                        wPicture = wTableCell.AppendPicture(imgTemporal);
-                        wPicture.Height = 5;
-                        wPicture.Width = 510;
+                        if (System.IO.File.Exists(Server.MapPath("~/Include/Image/Cuadernillo/Separador_NL.png")))
+                        {
+                            imgTemporal = System.Drawing.Image.FromFile(Server.MapPath("~/Include/Image/Cuadernillo/Separador_NL.png"));
+                            wPicture = wTableCell.AppendPicture(imgTemporal);
+                            wPicture.Height = 5;
+                            wPicture.Width = 510;
+                        }
 
                         wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
                         wTableRow.Cells[0].Width = 510;
@@ -1954,10 +1966,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Bottom;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                        System.Drawing.Image imgAcomodo = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Cuadernillo/puestoAcomodo.png"));
-                        wPicture = wTableCell.AppendPicture(imgAcomodo);
-                        wPicture.Height = 50;
-                        wPicture.Width = 510;
+                        if (System.IO.File.Exists(Server.MapPath("~/Include/Image/Cuadernillo/puestoAcomodo.png")))
+                        {
+                            System.Drawing.Image imgAcomodo = System.Drawing.Image.FromFile(Server.MapPath("~/Include/Image/Cuadernillo/puestoAcomodo.png"));
+                            wPicture = wTableCell.AppendPicture(imgAcomodo);
+                            wPicture.Height = 50;
+                            wPicture.Width = 510;
+                        }
 
                         wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
                         wTableRow.Cells[0].Width = 510;
@@ -1974,10 +1989,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Bottom;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                        System.Drawing.Image silla10 = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Cuadernillo/silla10.png"));
-                        wPicture = wTableCell.AppendPicture(silla10);
-                        wPicture.Height = 64;
-                        wPicture.Width = 28;
+                        if (System.IO.File.Exists(Server.MapPath("~/Include/Image/Cuadernillo/silla10.png")))
+                        {
+                            System.Drawing.Image silla10 = System.Drawing.Image.FromFile(Server.MapPath("~/Include/Image/Cuadernillo/silla10.png"));
+                            wPicture = wTableCell.AppendPicture(silla10);
+                            wPicture.Height = 64;
+                            wPicture.Width = 28;
+                        }
 
                         wTableRow.Cells[0].Width = 46;
 
@@ -1988,10 +2006,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Bottom;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                        System.Drawing.Image silla8 = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Cuadernillo/silla8.png"));
-                        wPicture = wTableCell.AppendPicture(silla8);
-                        wPicture.Height = 64;
-                        wPicture.Width = 28;
+                        if (System.IO.File.Exists(Server.MapPath("~/Include/Image/Cuadernillo/silla8.png")))
+                        {
+                            System.Drawing.Image silla8 = System.Drawing.Image.FromFile(Server.MapPath("~/Include/Image/Cuadernillo/silla8.png"));
+                            wPicture = wTableCell.AppendPicture(silla8);
+                            wPicture.Height = 64;
+                            wPicture.Width = 28;
+                        }
 
                         wTableRow.Cells[1].Width = 46;
 
@@ -2002,10 +2023,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wTableRow.Cells[2].CellFormat.VerticalAlignment = VerticalAlignment.Bottom;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                        System.Drawing.Image silla6 = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Cuadernillo/silla6.png"));
-                        wPicture = wTableCell.AppendPicture(silla6);
-                        wPicture.Height = 64;
-                        wPicture.Width = 28;
+                        if (System.IO.File.Exists(Server.MapPath("~/Include/Image/Cuadernillo/silla6.png")))
+                        {
+                            System.Drawing.Image silla6 = System.Drawing.Image.FromFile(Server.MapPath("~/Include/Image/Cuadernillo/silla6.png"));
+                            wPicture = wTableCell.AppendPicture(silla6);
+                            wPicture.Height = 64;
+                            wPicture.Width = 28;
+                        }
 
                         wTableRow.Cells[2].Width = 46;
 
@@ -2016,10 +2040,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wTableRow.Cells[3].CellFormat.VerticalAlignment = VerticalAlignment.Bottom;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                        System.Drawing.Image silla4 = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Cuadernillo/silla4.png"));
-                        wPicture = wTableCell.AppendPicture(silla4);
-                        wPicture.Height = 64;
-                        wPicture.Width = 28;
+                        if (System.IO.File.Exists(Server.MapPath("~/Include/Image/Cuadernillo/silla4.png")))
+                        {
+                            System.Drawing.Image silla4 = System.Drawing.Image.FromFile(Server.MapPath("~/Include/Image/Cuadernillo/silla4.png"));
+                            wPicture = wTableCell.AppendPicture(silla4);
+                            wPicture.Height = 64;
+                            wPicture.Width = 28;
+                        }
 
                         wTableRow.Cells[3].Width = 46;
 
@@ -2030,10 +2057,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wTableRow.Cells[4].CellFormat.VerticalAlignment = VerticalAlignment.Bottom;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                        System.Drawing.Image silla2 = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Cuadernillo/silla2.png"));
-                        wPicture = wTableCell.AppendPicture(silla2);
-                        wPicture.Height = 64;
-                        wPicture.Width = 28;
+                        if (System.IO.File.Exists(Server.MapPath("~/Include/Image/Cuadernillo/silla2.png")))
+                        {
+                            System.Drawing.Image silla2 = System.Drawing.Image.FromFile(Server.MapPath("~/Include/Image/Cuadernillo/silla2.png"));
+                            wPicture = wTableCell.AppendPicture(silla2);
+                            wPicture.Height = 64;
+                            wPicture.Width = 28;
+                        }
 
                         wTableRow.Cells[4].Width = 46;
 
@@ -2044,10 +2074,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wTableRow.Cells[5].CellFormat.VerticalAlignment = VerticalAlignment.Bottom;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                        System.Drawing.Image silla1 = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Cuadernillo/silla1.png"));
-                        wPicture = wTableCell.AppendPicture(silla1);
-                        wPicture.Height = 64;
-                        wPicture.Width = 28;
+                        if (System.IO.File.Exists(Server.MapPath("~/Include/Image/Cuadernillo/silla1.png")))
+                        {
+                            System.Drawing.Image silla1 = System.Drawing.Image.FromFile(Server.MapPath("~/Include/Image/Cuadernillo/silla1.png"));
+                            wPicture = wTableCell.AppendPicture(silla1);
+                            wPicture.Height = 64;
+                            wPicture.Width = 28;
+                        }
 
                         wTableRow.Cells[5].Width = 46;
 
@@ -2058,10 +2091,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wTableRow.Cells[6].CellFormat.VerticalAlignment = VerticalAlignment.Bottom;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                        System.Drawing.Image silla3 = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Cuadernillo/silla3.png"));
-                        wPicture = wTableCell.AppendPicture(silla3);
-                        wPicture.Height = 64;
-                        wPicture.Width = 28;
+                        if (System.IO.File.Exists(Server.MapPath("~/Include/Image/Cuadernillo/silla3.png")))
+                        {
+                            System.Drawing.Image silla3 = System.Drawing.Image.FromFile(Server.MapPath("~/Include/Image/Cuadernillo/silla3.png"));
+                            wPicture = wTableCell.AppendPicture(silla3);
+                            wPicture.Height = 64;
+                            wPicture.Width = 28;
+                        }
 
                         wTableRow.Cells[6].Width = 46;
 
@@ -2072,10 +2108,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wTableRow.Cells[7].CellFormat.VerticalAlignment = VerticalAlignment.Bottom;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                        System.Drawing.Image silla5 = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Cuadernillo/silla5.png"));
-                        wPicture = wTableCell.AppendPicture(silla5);
-                        wPicture.Height = 64;
-                        wPicture.Width = 28;
+                        if (System.IO.File.Exists(Server.MapPath("~/Include/Image/Cuadernillo/silla5.png")))
+                        {
+                            System.Drawing.Image silla5 = System.Drawing.Image.FromFile(Server.MapPath("~/Include/Image/Cuadernillo/silla5.png"));
+                            wPicture = wTableCell.AppendPicture(silla5);
+                            wPicture.Height = 64;
+                            wPicture.Width = 28;
+                        }
 
                         wTableRow.Cells[7].Width = 46;
 
@@ -2086,10 +2125,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wTableRow.Cells[8].CellFormat.VerticalAlignment = VerticalAlignment.Bottom;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                        System.Drawing.Image silla7 = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Cuadernillo/silla7.png"));
-                        wPicture = wTableCell.AppendPicture(silla7);
-                        wPicture.Height = 64;
-                        wPicture.Width = 28;
+                        if (System.IO.File.Exists(Server.MapPath("~/Include/Image/Cuadernillo/silla7.png")))
+                        {
+                            System.Drawing.Image silla7 = System.Drawing.Image.FromFile(Server.MapPath("~/Include/Image/Cuadernillo/silla7.png"));
+                            wPicture = wTableCell.AppendPicture(silla7);
+                            wPicture.Height = 64;
+                            wPicture.Width = 28;
+                        }
 
                         wTableRow.Cells[8].Width = 46;
 
@@ -2100,10 +2142,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wTableRow.Cells[9].CellFormat.VerticalAlignment = VerticalAlignment.Bottom;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                        System.Drawing.Image silla9 = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Cuadernillo/silla9.png"));
-                        wPicture = wTableCell.AppendPicture(silla9);
-                        wPicture.Height = 64;
-                        wPicture.Width = 28;
+                        if (System.IO.File.Exists(Server.MapPath("~/Include/Image/Cuadernillo/silla9.png")))
+                        {
+                            System.Drawing.Image silla9 = System.Drawing.Image.FromFile(Server.MapPath("~/Include/Image/Cuadernillo/silla9.png"));
+                            wPicture = wTableCell.AppendPicture(silla9);
+                            wPicture.Height = 64;
+                            wPicture.Width = 28;
+                        }
 
                         wTableRow.Cells[9].Width = 46;
 
@@ -2114,10 +2159,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wTableRow.Cells[10].CellFormat.VerticalAlignment = VerticalAlignment.Bottom;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                        System.Drawing.Image silla11 = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Cuadernillo/silla11.png"));
-                        wPicture = wTableCell.AppendPicture(silla11);
-                        wPicture.Height = 64;
-                        wPicture.Width = 28;
+                        if (System.IO.File.Exists(Server.MapPath("~/Include/Image/Cuadernillo/silla11.png")))
+                        {
+                            System.Drawing.Image silla11 = System.Drawing.Image.FromFile(Server.MapPath("~/Include/Image/Cuadernillo/silla11.png"));
+                            wPicture = wTableCell.AppendPicture(silla11);
+                            wPicture.Height = 64;
+                            wPicture.Width = 28;
+                        }
 
                         wTableRow.Cells[10].Width = 46;
 
@@ -2508,9 +2556,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                 // Descargar el documeno en la página
                 oDocument.Save("EventoLogistica.doc", Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment);
 
-            }catch (Exception ex) {
-                throw ( new Exception(LevelError + "-" + ex.Message) );
-            }
+                }catch (IOException ioEx) {
+                    throw ( new Exception(LevelError + "-" + ioEx.Message) );
+
+                }catch (Exception ex) {
+                    throw ( new Exception(LevelError + "-" + ex.Message) );
+                }
         }
 
 

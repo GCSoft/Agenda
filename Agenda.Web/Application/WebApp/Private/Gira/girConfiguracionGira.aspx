@@ -71,7 +71,6 @@
         <asp:Button ID="btnTrasladoHelicoptero" runat="server" Text="Traslado en helicóptero" CssClass="Button_General" width="175px" onclick="btnTrasladoHelicoptero_Click" /> &nbsp;&nbsp;
         <asp:Button ID="btnEvento" runat="server" Text="Evento" CssClass="Button_General" width="175px" onclick="btnEvento_Click" /> &nbsp;&nbsp;
         <asp:Button ID="btnActividadGeneral" runat="server" Text="Actividad General" CssClass="Button_General" width="175px" onclick="btnActividadGeneral_Click" /> &nbsp;&nbsp;
-        <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="Button_General" width="125px" onclick="btnRegresar_Click" />
     </asp:Panel>
 
     <asp:Panel ID="pnlGrid" runat="server" CssClass="GridPanel">
@@ -116,6 +115,8 @@
                 </asp:TemplateField>
             </Columns>
         </asp:GridView>
+        <br /><br />
+        <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="Button_General" width="125px" onclick="btnRegresar_Click" />
     </asp:Panel>
 
     <asp:Panel ID="pnlPopUp_TrasladoVehiculo" runat="server" CssClass="PopUpBlock">
@@ -338,7 +339,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPopUp_Evento" runat="server" CssClass="PopUpBlock">
-        <asp:Panel ID="pnlPopUp_EventoContent" runat="server" CssClass="PopUpContent" style="margin-top:-250px; margin-left:-375px;" Height="500px" Width="650px">
+        <asp:Panel ID="pnlPopUp_EventoContent" runat="server" CssClass="PopUpContent" style="margin-top:-310px; margin-left:-375px;" Height="620px" Width="650px">
             <asp:Panel ID="pnlPopUp_EventoHeader" runat="server" CssClass="PopUpHeader">
                 <table class="PopUpHeaderTable">
                     <tr>
@@ -349,7 +350,7 @@
                 </table>
             </asp:Panel>
             <asp:Panel ID="pnlPopUp_EventoBody" runat="server" CssClass="PopUpBody">
-                <asp:TabContainer ID="tabFormulario_Evento" runat="server" ActiveTabIndex="0" CssClass="Tabcontainer_General" Height="360" >
+                <asp:TabContainer ID="tabFormulario_Evento" runat="server" ActiveTabIndex="0" CssClass="Tabcontainer_General" Height="485" >
                     <asp:TabPanel ID="tpnlDetalle_Evento" runat="server">
                         <HeaderTemplate>Datos del Evento</HeaderTemplate>
                         <ContentTemplate>
@@ -380,7 +381,7 @@
                                 <tr>
                                     <td class="Etiqueta">Nombre</td>
                                     <td class="VinetaObligatorio">*</td>
-                                    <td class="Campo"><asp:TextBox ID="txtPopUp_EventoDetalle" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
+                                    <td class="Campo"><asp:TextBox ID="txtPopUp_EventoDetalle" runat="server" CssClass="Textarea_General" Height="70px" MaxLength="1000" TextMode="MultiLine" Width="400px"></asp:TextBox></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -453,7 +454,7 @@
                                     <td class="Campo"><asp:TextBox ID="txtPopUp_EventoTipoMontaje" runat="server" CssClass="Textbox_General" MaxLength="200" Width="400px"></asp:TextBox></td>
                                     <td></td>
                                 </tr>
-                                 <tr>
+                                <tr>
 				                    <td class="Etiqueta">Aforo</td>
 				                    <td class="VinetaObligatorio">*</td>
 				                    <td class="Campo"><asp:TextBox ID="txtPopUp_EventoAforo" runat="server" CssClass="Textbox_General" MaxLength="5" Text="0" Width="130px"></asp:TextBox></td>
@@ -470,7 +471,7 @@
                                 <tr>
 				                    <td class="Etiqueta">Caracteristicas de invitados</td>
 				                    <td class="Espacio"></td>
-				                    <td class="Campo" colspan="2"><asp:TextBox ID="txtPopUp_EventoCaracteristicasInvitados" runat="server" CssClass="Textarea_General" Height="30px" MaxLength="500" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
+				                    <td class="Campo" colspan="2"><asp:TextBox ID="txtPopUp_EventoCaracteristicasInvitados" runat="server" CssClass="Textarea_General" Height="50px" MaxLength="500" TextMode="MultiLine" Width="400px"></asp:TextBox></td>
 			                    </tr>
                                 <tr>
 				                    <td class="Etiqueta">Esposa</td>
@@ -516,7 +517,7 @@
                                 <tr>
 				                    <td class="Etiqueta">Menú</td>
 				                    <td class="Espacio"></td>
-				                    <td class="Campo" colspan="2"><asp:TextBox ID="txtPopUp_EventoMenu" runat="server" CssClass="Textarea_General" Height="30px" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
+				                    <td class="Campo" colspan="2"><asp:TextBox ID="txtPopUp_EventoMenu" runat="server" CssClass="Textarea_General" Height="50px" TextMode="MultiLine" Width="400px"></asp:TextBox></td>
 			                    </tr>
                                 <tr>
 				                    <td class="Etiqueta">Pronóstico</td>
@@ -527,7 +528,21 @@
                                 <tr>
 				                    <td class="Etiqueta">Acción a realizar</td>
 				                    <td class="VinetaObligatorio">*</td>
-				                    <td class="Campo" colspan="2"><asp:TextBox ID="txtPopUp_EventoAccionRealizar" runat="server" CssClass="Textarea_General" Height="30px" MaxLength="200" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
+				                    <td class="Campo" colspan="2"><asp:TextBox ID="txtPopUp_EventoAccionRealizar" runat="server" CssClass="Textarea_General" Height="50px" MaxLength="200" TextMode="MultiLine" Width="400px"></asp:TextBox></td>
+			                    </tr>
+                                <tr>
+				                    <td class="Etiqueta">Incluir nota/observación</td>
+				                    <td class="Espacio"></td>
+				                    <td class="Campo" colspan="2">
+                                        <asp:RadioButtonList ID="rblPopUp_EventoIncluirNotaEvento" runat="server" RepeatDirection="Horizontal">
+						                    <asp:ListItem Text="No Incluir" Value="1" Selected="True"></asp:ListItem>
+						                    <asp:ListItem Text="Al Inicio de la sección" Value="2"></asp:ListItem>
+                                            <asp:ListItem Text="Al Final de la sección" Value="3"></asp:ListItem>
+					                    </asp:RadioButtonList>
+				                    </td>
+			                    </tr>
+                                <tr>
+				                    <td colspan="4"><asp:TextBox ID="txtPopUp_EventoNotaEvento" runat="server" CssClass="Textarea_General" Height="60px" MaxLength="1000" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
 			                    </tr>
                             </table>
                         </ContentTemplate>
@@ -555,7 +570,6 @@
 				                    <td class="Campo"></td>
                                     <td></td>
 			                    </tr>
-                                <tr><td colspan="4" style="height:10px;"></td></tr>
                                 <tr>
                                     <td colspan="4">
                                         <div style="border:0px solid #000000; clear:both; position:relative; width:100%;">
@@ -567,7 +581,7 @@
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div style="border:1px solid #C1C1C1; height:182px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:618px">
+                                        <div style="border:1px solid #C1C1C1; height:220px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:618px">
                                             <asp:GridView ID="gvComite" runat="server" AllowPaging="false" AllowSorting="False" AutoGenerateColumns="False" ShowHeader="false" Width="100%"
                                                 DataKeyNames="Orden,Nombre,Puesto"
                                                 OnRowCommand="gvComite_RowCommand"
@@ -592,6 +606,20 @@
                                         </div>
                                     </td>
 			                    </tr>
+                                <tr>
+				                    <td class="Etiqueta">Incluir nota/observación</td>
+				                    <td class="Espacio"></td>
+				                    <td class="Campo" colspan="2">
+                                        <asp:RadioButtonList ID="rblPopUp_EventoIncluirNotaComite" runat="server" RepeatDirection="Horizontal">
+						                    <asp:ListItem Text="No Incluir" Value="1" Selected="True"></asp:ListItem>
+						                    <asp:ListItem Text="Al Inicio de la sección" Value="2"></asp:ListItem>
+                                            <asp:ListItem Text="Al Final de la sección" Value="3"></asp:ListItem>
+					                    </asp:RadioButtonList>
+				                    </td>
+			                    </tr>
+                                <tr>
+				                   <td colspan="4"><asp:TextBox ID="txtPopUp_EventoNotaEventoComite" runat="server" CssClass="Textarea_General" Height="60px" MaxLength="1000" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
+			                    </tr>
                             </table>
                         </ContentTemplate>
                     </asp:TabPanel>
@@ -601,13 +629,18 @@
                             <br />
                             <table class="FormTable">
                                <tr>
-									<td class="Etiqueta">Detalle</td>
-									<td class="Espacio"></td>
-									<td class="Campo"></td>
-									<td></td>
-								</tr>
-								<tr>
-									<td class="Campo" colspan="4"><asp:TextBox ID="txtOrdenDiaDetalle" runat="server" CssClass="Textarea_General" Height="70px" MaxLength="200" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
+                                    <td class="Campo" colspan="4">
+                                        <table style="width:100%; padding:0px; border-spacing:0px;">
+                                            <tr>
+                                                <td style="width:50px;">
+                                                    Detalle
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox ID="txtOrdenDiaDetalle" runat="server" CssClass="Textarea_General" Height="50px" MaxLength="200" TextMode="MultiLine" Width="99%"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
 								</tr>
 								<tr>
 									<td class="Etiqueta"><asp:Button ID="btnAgregarOrdenDia" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarOrdenDia_Click" /></td>
@@ -615,7 +648,6 @@
 									<td class="Campo"></td>
 									<td></td>
 								</tr>
-                                <tr><td colspan="4" style="height:10px;"></td></tr>
                                 <tr>
                                     <td colspan="4">
                                         <div style="border:0px solid #000000; clear:both; position:relative; width:100%;">
@@ -626,7 +658,7 @@
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div style="border:1px solid #C1C1C1; height:132px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:618px">
+                                        <div style="border:1px solid #C1C1C1; height:210px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:618px">
                                             <asp:GridView ID="gvOrdenDia" runat="server" AllowPaging="false" AllowSorting="False" AutoGenerateColumns="False" ShowHeader="false" Width="100%"
                                                 DataKeyNames="Orden,Detalle"
 												OnRowCommand="gvOrdenDia_RowCommand"
@@ -649,6 +681,20 @@
                                             </asp:GridView>
                                         </div>
                                     </td>
+			                    </tr>
+                                <tr>
+				                    <td class="Etiqueta">Incluir nota/observación</td>
+				                    <td class="Espacio"></td>
+				                    <td class="Campo" colspan="2">
+                                        <asp:RadioButtonList ID="rblPopUp_EventoIncluirNotaOrden" runat="server" RepeatDirection="Horizontal">
+						                    <asp:ListItem Text="No Incluir" Value="1" Selected="True"></asp:ListItem>
+						                    <asp:ListItem Text="Al Inicio de la sección" Value="2"></asp:ListItem>
+                                            <asp:ListItem Text="Al Final de la sección" Value="3"></asp:ListItem>
+					                    </asp:RadioButtonList>
+				                    </td>
+			                    </tr>
+                                <tr>
+				                    <td colspan="4"><asp:TextBox ID="txtPopUp_EventoNotaEventoOrden" runat="server" CssClass="Textarea_General" Height="60px" MaxLength="1000" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
 			                    </tr>
                             </table>
                         </ContentTemplate>
@@ -682,7 +728,6 @@
 				                    <td class="Campo"></td>
                                     <td></td>
 			                    </tr>
-                                <tr><td colspan="4" style="height:10px;"></td></tr>
                                 <tr>
                                     <td colspan="4">
                                         <div style="border:0px solid #000000; clear:both; position:relative; width:100%;">
@@ -694,7 +739,7 @@
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div style="border:1px solid #C1C1C1; height:150px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:618px">
+                                        <div style="border:1px solid #C1C1C1; height:180px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:618px">
                                             <asp:GridView ID="gvAcomodo" runat="server" AllowPaging="false" AllowSorting="False" AutoGenerateColumns="False" ShowHeader="false" Width="100%"
                                                 DataKeyNames="Orden,Nombre,Puesto"
                                                 OnRowCommand="gvAcomodo_RowCommand"
@@ -718,6 +763,20 @@
                                             </asp:GridView>
                                         </div>
                                     </td>
+			                    </tr>
+                                <tr>
+				                    <td class="Etiqueta">Incluir nota/observación</td>
+				                    <td class="Espacio"></td>
+				                    <td class="Campo" colspan="2">
+                                        <asp:RadioButtonList ID="rblPopUp_EventoIncluirNotaAcomodo" runat="server" RepeatDirection="Horizontal">
+						                    <asp:ListItem Text="No Incluir" Value="1" Selected="True"></asp:ListItem>
+						                    <asp:ListItem Text="Al Inicio de la sección" Value="2"></asp:ListItem>
+                                            <asp:ListItem Text="Al Final de la sección" Value="3"></asp:ListItem>
+					                    </asp:RadioButtonList>
+				                    </td>
+			                    </tr>
+                                <tr>
+				                    <td colspan="4"><asp:TextBox ID="txtPopUp_EventoNotaEventoAcomodo" runat="server" CssClass="Textarea_General" Height="60px" MaxLength="1000" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
 			                    </tr>
                             </table>
                         </ContentTemplate>

@@ -148,15 +148,6 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         protected global::System.Web.UI.WebControls.Button btnActividadGeneral;
         
         /// <summary>
-        /// btnRegresar control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnRegresar;
-        
-        /// <summary>
         /// pnlGrid control.
         /// </summary>
         /// <remarks>
@@ -173,6 +164,15 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvPrograma;
+        
+        /// <summary>
+        /// btnRegresar control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnRegresar;
         
         /// <summary>
         /// pnlPopUp_TrasladoVehiculo control.
@@ -814,6 +814,24 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         protected global::System.Web.UI.WebControls.TextBox txtPopUp_EventoAccionRealizar;
         
         /// <summary>
+        /// rblPopUp_EventoIncluirNotaEvento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblPopUp_EventoIncluirNotaEvento;
+        
+        /// <summary>
+        /// txtPopUp_EventoNotaEvento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUp_EventoNotaEvento;
+        
+        /// <summary>
         /// tpnlComite_Evento control.
         /// </summary>
         /// <remarks>
@@ -859,6 +877,24 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         protected global::System.Web.UI.WebControls.GridView gvComite;
         
         /// <summary>
+        /// rblPopUp_EventoIncluirNotaComite control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblPopUp_EventoIncluirNotaComite;
+        
+        /// <summary>
+        /// txtPopUp_EventoNotaEventoComite control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUp_EventoNotaEventoComite;
+        
+        /// <summary>
         /// tpnlOrdenDia_Evento control.
         /// </summary>
         /// <remarks>
@@ -893,6 +929,24 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvOrdenDia;
+        
+        /// <summary>
+        /// rblPopUp_EventoIncluirNotaOrden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblPopUp_EventoIncluirNotaOrden;
+        
+        /// <summary>
+        /// txtPopUp_EventoNotaEventoOrden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUp_EventoNotaEventoOrden;
         
         /// <summary>
         /// tpnlAcomodo_Evento control.
@@ -947,6 +1001,24 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvAcomodo;
+        
+        /// <summary>
+        /// rblPopUp_EventoIncluirNotaAcomodo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblPopUp_EventoIncluirNotaAcomodo;
+        
+        /// <summary>
+        /// txtPopUp_EventoNotaEventoAcomodo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUp_EventoNotaEventoAcomodo;
         
         /// <summary>
         /// btnPopUp_EventoCommand control.

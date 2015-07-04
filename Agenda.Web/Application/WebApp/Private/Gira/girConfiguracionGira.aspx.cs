@@ -1535,6 +1535,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     this.chklPopUp_EventoMedioTraslado.ClearSelection();
                     this.ddlPopUp_EventoTipoAcomodo.SelectedIndex = 0;
 
+                    this.chkPopUp_EventoEsposaInvitada.Checked = false;
+                    this.rblPopUp_EventoConfirmacionEsposa.Enabled = false;
+                    this.rblPopUp_EventoConfirmacionEsposa.ClearSelection();
+
                     this.gvComite.DataSource = null;
                     this.gvComite.DataBind();
 
@@ -1543,6 +1547,19 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                     this.gvAcomodo.DataSource = null;
                     this.gvAcomodo.DataBind();
+
+                    this.rblPopUp_EventoIncluirNotaEvento.SelectedIndex = 0;
+	                this.txtPopUp_EventoNotaEvento.Text = "";
+	
+	                this.rblPopUp_EventoIncluirNotaComite.SelectedIndex = 0;
+	                this.txtPopUp_EventoNotaEventoComite.Text = "";
+	
+	                this.rblPopUp_EventoIncluirNotaOrden.SelectedIndex = 0;
+	                this.txtPopUp_EventoNotaEventoOrden.Text = "";
+	
+	                this.rblPopUp_EventoIncluirNotaAcomodo.SelectedIndex = 0;
+                    this.txtPopUp_EventoNotaEventoAcomodo.Text = "";
+
 
                 }catch (Exception ex){
                     throw (ex);
@@ -1657,6 +1674,23 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                         oENTGira.DataTableAcomodo.Rows.Add(rowTemporal);
                     }
 
+                    // Notas en cuadernillo
+                    oENTGira.Evento.NotaInicioEvento = Int16.Parse ( ( rblPopUp_EventoIncluirNotaEvento.SelectedIndex == 0 ? 0 : ( rblPopUp_EventoIncluirNotaEvento.SelectedIndex == 1 ? 1 : 0 ) ).ToString() );
+                    oENTGira.Evento.NotaFinEvento = Int16.Parse ( ( rblPopUp_EventoIncluirNotaEvento.SelectedIndex == 0 ? 0 : ( rblPopUp_EventoIncluirNotaEvento.SelectedIndex == 1 ? 0 : 1 ) ).ToString() );
+                    oENTGira.Evento.NotaEvento = this.txtPopUp_EventoNotaEvento.Text.Trim();
+
+                    oENTGira.Evento.NotaInicioComite = Int16.Parse ( ( rblPopUp_EventoIncluirNotaComite.SelectedIndex == 0 ? 0 : ( rblPopUp_EventoIncluirNotaComite.SelectedIndex == 1 ? 1 : 0 ) ).ToString() );
+                    oENTGira.Evento.NotaFinComite = Int16.Parse ( ( rblPopUp_EventoIncluirNotaComite.SelectedIndex == 0 ? 0 : ( rblPopUp_EventoIncluirNotaComite.SelectedIndex == 1 ? 0 : 1 ) ).ToString() );
+                    oENTGira.Evento.NotaComite = this.txtPopUp_EventoNotaEventoComite.Text.Trim();
+
+                    oENTGira.Evento.NotaInicioOrden = Int16.Parse ( ( rblPopUp_EventoIncluirNotaOrden.SelectedIndex == 0 ? 0 : ( rblPopUp_EventoIncluirNotaOrden.SelectedIndex == 1 ? 1 : 0 ) ).ToString() );
+                    oENTGira.Evento.NotaFinOrden = Int16.Parse ( ( rblPopUp_EventoIncluirNotaOrden.SelectedIndex == 0 ? 0 : ( rblPopUp_EventoIncluirNotaOrden.SelectedIndex == 1 ? 0 : 1 ) ).ToString() );
+                    oENTGira.Evento.NotaOrden = this.txtPopUp_EventoNotaEventoOrden.Text.Trim();
+
+                    oENTGira.Evento.NotaInicioAcomodo = Int16.Parse ( ( rblPopUp_EventoIncluirNotaAcomodo.SelectedIndex == 0 ? 0 : ( rblPopUp_EventoIncluirNotaAcomodo.SelectedIndex == 1 ? 1 : 0 ) ).ToString() );
+                    oENTGira.Evento.NotaFinAcomodo = Int16.Parse ( ( rblPopUp_EventoIncluirNotaAcomodo.SelectedIndex == 0 ? 0 : ( rblPopUp_EventoIncluirNotaAcomodo.SelectedIndex == 1 ? 0 : 1 ) ).ToString() );
+                    oENTGira.Evento.NotaAcomodo = this.txtPopUp_EventoNotaEventoAcomodo.Text.Trim();
+
                     // Transacción
                     oENTResponse = oBPGira.InsertGiraConfiguracion(oENTGira);
 
@@ -1752,6 +1786,31 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     this.txtPopUp_EventoAccionRealizar.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoAccionRealizar"].ToString();
 
                     this.ddlPopUp_EventoTipoAcomodo.SelectedValue = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoTipoAcomodoId"].ToString();
+
+                    // Notas en cuadernillo
+                    this.rblPopUp_EventoIncluirNotaEvento.SelectedIndex = (
+                        oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaInicioEvento"].ToString() == "0" && oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaFinEvento"].ToString() == "0" ? 0
+                        : ( oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaInicioEvento"].ToString() == "1" ? 1 : 2 )
+                    );
+                    this.txtPopUp_EventoNotaEvento.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaEvento"].ToString();
+
+                    this.rblPopUp_EventoIncluirNotaComite.SelectedIndex = (
+                        oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaInicioComite"].ToString() == "0" && oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaFinComite"].ToString() == "0" ? 0
+                        : ( oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaInicioComite"].ToString() == "1" ? 1 : 2 )
+                    );
+                    this.txtPopUp_EventoNotaEventoComite.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaComite"].ToString();
+
+                    this.rblPopUp_EventoIncluirNotaOrden.SelectedIndex = (
+                        oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaInicioOrden"].ToString() == "0" && oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaFinOrden"].ToString() == "0" ? 0
+                        : (oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaInicioOrden"].ToString() == "1" ? 1 : 2)
+                    );
+                    this.txtPopUp_EventoNotaEventoOrden.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaOrden"].ToString();
+
+                    this.rblPopUp_EventoIncluirNotaAcomodo.SelectedIndex = (
+                        oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaInicioAcomodo"].ToString() == "0" && oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaFinAcomodo"].ToString() == "0" ? 0
+                        : (oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaInicioAcomodo"].ToString() == "1" ? 1 : 2)
+                    );
+                    this.txtPopUp_EventoNotaEventoAcomodo.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaAcomodo"].ToString();
 
                     // Comité de recepción
                     this.gvComite.DataSource = oENTResponse.DataSetResponse.Tables[4];
@@ -1956,6 +2015,23 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                         rowTemporal["Puesto"] = rowComiteRecepcion["Puesto"];
                         oENTGira.DataTableAcomodo.Rows.Add(rowTemporal);
                     }
+
+                    // Notas en cuadernillo
+                    oENTGira.Evento.NotaInicioEvento = Int16.Parse((rblPopUp_EventoIncluirNotaEvento.SelectedIndex == 0 ? 0 : (rblPopUp_EventoIncluirNotaEvento.SelectedIndex == 1 ? 1 : 0)).ToString());
+                    oENTGira.Evento.NotaFinEvento = Int16.Parse((rblPopUp_EventoIncluirNotaEvento.SelectedIndex == 0 ? 0 : (rblPopUp_EventoIncluirNotaEvento.SelectedIndex == 1 ? 0 : 1)).ToString());
+                    oENTGira.Evento.NotaEvento = this.txtPopUp_EventoNotaEvento.Text.Trim();
+
+                    oENTGira.Evento.NotaInicioComite = Int16.Parse((rblPopUp_EventoIncluirNotaComite.SelectedIndex == 0 ? 0 : (rblPopUp_EventoIncluirNotaComite.SelectedIndex == 1 ? 1 : 0)).ToString());
+                    oENTGira.Evento.NotaFinComite = Int16.Parse((rblPopUp_EventoIncluirNotaComite.SelectedIndex == 0 ? 0 : (rblPopUp_EventoIncluirNotaComite.SelectedIndex == 1 ? 0 : 1)).ToString());
+                    oENTGira.Evento.NotaComite = this.txtPopUp_EventoNotaEventoComite.Text.Trim();
+
+                    oENTGira.Evento.NotaInicioOrden = Int16.Parse((rblPopUp_EventoIncluirNotaOrden.SelectedIndex == 0 ? 0 : (rblPopUp_EventoIncluirNotaOrden.SelectedIndex == 1 ? 1 : 0)).ToString());
+                    oENTGira.Evento.NotaFinOrden = Int16.Parse((rblPopUp_EventoIncluirNotaOrden.SelectedIndex == 0 ? 0 : (rblPopUp_EventoIncluirNotaOrden.SelectedIndex == 1 ? 0 : 1)).ToString());
+                    oENTGira.Evento.NotaOrden = this.txtPopUp_EventoNotaEventoOrden.Text.Trim();
+
+                    oENTGira.Evento.NotaInicioAcomodo = Int16.Parse((rblPopUp_EventoIncluirNotaAcomodo.SelectedIndex == 0 ? 0 : (rblPopUp_EventoIncluirNotaAcomodo.SelectedIndex == 1 ? 1 : 0)).ToString());
+                    oENTGira.Evento.NotaFinAcomodo = Int16.Parse((rblPopUp_EventoIncluirNotaAcomodo.SelectedIndex == 0 ? 0 : (rblPopUp_EventoIncluirNotaAcomodo.SelectedIndex == 1 ? 0 : 1)).ToString());
+                    oENTGira.Evento.NotaAcomodo = this.txtPopUp_EventoNotaEventoAcomodo.Text.Trim();
 
                     // Transacción
                     oENTResponse = oBPGira.UpdateGiraConfiguracion(oENTGira);

@@ -130,10 +130,13 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                         wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Top;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
 
-                        imgTemporal = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Cuadernillo/LogoSolo.png"));
-                        wPicture = wTableCell.AppendPicture(imgTemporal);
-                        wPicture.Height = 47;
-                        wPicture.Width = 89;
+                        if (System.IO.File.Exists(Server.MapPath("~/Include/Image/Cuadernillo/LogoSolo.png")))
+                        {
+                            imgTemporal = System.Drawing.Image.FromFile(Server.MapPath("~/Include/Image/Cuadernillo/LogoSolo.png"));
+                            wPicture = wTableCell.AppendPicture(imgTemporal);
+                            wPicture.Height = 47;
+                            wPicture.Width = 89;
+                        }
 
                         wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
                         wTableRow.Cells[0].Width = 100;
@@ -174,7 +177,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                         wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Top;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
                         
-                        wText = wTableCell.AppendText( System.Text.RegularExpressions.Regex.Replace( HttpUtility.HtmlDecode( ENTResponseGira.DataSetResponse.Tables[1].Rows[0]["GiraDetalle"].ToString() ), @"<(.|\n)*?>", String.Empty));
+                        wText = wTableCell.AppendText( System.Text.RegularExpressions.Regex.Replace( HttpUtility.HtmlDecode( ENTResponseGira.DataSetResponse.Tables[1].Rows[0]["GiraNombre"].ToString() ), @"<(.|\n)*?>", String.Empty));
                         wText.CharacterFormat.FontName = "Arial";
                         wText.CharacterFormat.FontSize = 10f;
 
@@ -208,10 +211,13 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                         wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Top;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                        imgTemporal = System.Drawing.Image.FromFile(Server.MapPath("/Include/Image/Cuadernillo/Separador_NL.png"));
-                        wPicture = wTableCell.AppendPicture(imgTemporal);
-                        wPicture.Height = 5;
-                        wPicture.Width = 510;
+                        if (System.IO.File.Exists(Server.MapPath("~/Include/Image/Cuadernillo/Separador_NL.png")))
+                        {
+                            imgTemporal = System.Drawing.Image.FromFile(Server.MapPath("~/Include/Image/Cuadernillo/Separador_NL.png"));
+                            wPicture = wTableCell.AppendPicture(imgTemporal);
+                            wPicture.Height = 5;
+                            wPicture.Width = 510;
+                        }
 
                         wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
                         wTableRow.Cells[0].Width = 510;
@@ -568,6 +574,37 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
 
                             #region Evento
                                 
+                                #region Nota al Inicio del Evento
+                                
+                                    if ( rowPrograma["NotaInicioEvento"].ToString() == "1" ) {
+                                    
+                                        // Inicializaciones
+                                        wTable = oSection.Body.AddTable();
+                                        wTable.ResetCells(1, 1);
+                                        wTable.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+
+                                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                                        wTableRow = wTable.Rows[0];
+                                        wTableRow.Height = 17f;
+                                        wTableRow.Cells[0].Width = 500;
+
+                                        // Celda 1
+                                        wTableCell = wTableRow.Cells[0].AddParagraph();
+
+                                        // Texto
+                                        wText = wTableCell.AppendText( rowPrograma["NotaEvento"].ToString() + ENTER );
+                                        wText.CharacterFormat.FontName = "Arial";
+                                        wText.CharacterFormat.FontSize = 10f;
+                                        wText.CharacterFormat.Bold = true;
+
+                                        // Brinco de linea (genera espacio)
+                                        oSection.AddParagraph();
+
+                                    }
+
+                                #endregion
+                                
                                 // Llenar encabezado
                                 wTable = oSection.Body.AddTable();
                                 wTable.ResetCells(14, 2);
@@ -919,10 +956,72 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
 
                                 // Brinco de linea (genera espacio)
                                 oSection.AddParagraph();
+                                
+                                #region Nota al Fin del Evento
+                                
+                                    if ( rowPrograma["NotaFinEvento"].ToString() == "1" ) {
 
+                                        // Inicializaciones
+                                        wTable = oSection.Body.AddTable();
+                                        wTable.ResetCells(1, 1);
+                                        wTable.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+
+                                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                                        wTableRow = wTable.Rows[0];
+                                        wTableRow.Height = 17f;
+                                        wTableRow.Cells[0].Width = 500;
+
+                                        // Celda 1
+                                        wTableCell = wTableRow.Cells[0].AddParagraph();
+
+                                        // Texto
+                                        wText = wTableCell.AppendText(rowPrograma["NotaEvento"].ToString() + ENTER );
+                                        wText.CharacterFormat.FontName = "Arial";
+                                        wText.CharacterFormat.FontSize = 10f;
+                                        wText.CharacterFormat.Bold = true;
+
+                                        // Brinco de linea (genera espacio)
+                                        oSection.AddParagraph();
+
+                                    }
+
+                                #endregion
+                                
                             #endregion
 
                             #region Comité de recepción
+                                
+                                #region Nota al Inicio del Comite
+                                
+                                    if ( rowPrograma["NotaInicioComite"].ToString() == "1" ) {
+
+                                        // Inicializaciones
+                                        wTable = oSection.Body.AddTable();
+                                        wTable.ResetCells(1, 1);
+                                        wTable.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+
+                                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                                        wTableRow = wTable.Rows[0];
+                                        wTableRow.Height = 17f;
+                                        wTableRow.Cells[0].Width = 500;
+
+                                        // Celda 1
+                                        wTableCell = wTableRow.Cells[0].AddParagraph();
+
+                                        // Texto
+                                        wText = wTableCell.AppendText(rowPrograma["NotaComite"].ToString() + ENTER );
+                                        wText.CharacterFormat.FontName = "Arial";
+                                        wText.CharacterFormat.FontSize = 10f;
+                                        wText.CharacterFormat.Bold = true;
+
+                                        // Brinco de linea (genera espacio)
+                                        oSection.AddParagraph();
+
+                                    }
+
+                                #endregion
                                 
                                 if ( ENTResponseGiraConfiguracion.DataSetResponse.Tables[4].Rows.Count != 0) {
                                     
@@ -1004,11 +1103,73 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                     oSection.AddParagraph();
 
                                 }
+                                
+                                #region Nota al Fin del Comite
+                                
+                                    if ( rowPrograma["NotaFinComite"].ToString() == "1" ) {
+
+                                        // Inicializaciones
+                                        wTable = oSection.Body.AddTable();
+                                        wTable.ResetCells(1, 1);
+                                        wTable.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+
+                                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                                        wTableRow = wTable.Rows[0];
+                                        wTableRow.Height = 17f;
+                                        wTableRow.Cells[0].Width = 500;
+
+                                        // Celda 1
+                                        wTableCell = wTableRow.Cells[0].AddParagraph();
+
+                                        // Texto
+                                        wText = wTableCell.AppendText(rowPrograma["NotaComite"].ToString() + ENTER );
+                                        wText.CharacterFormat.FontName = "Arial";
+                                        wText.CharacterFormat.FontSize = 10f;
+                                        wText.CharacterFormat.Bold = true;
+
+                                        // Brinco de linea (genera espacio)
+                                        oSection.AddParagraph();
+
+                                    }
+
+                                #endregion
 
                             #endregion
 
                             #region Orden del día
                                 
+                                #region Nota al Inicio del Orden
+                                
+                                    if ( rowPrograma["NotaInicioOrden"].ToString() == "1" ) {
+
+                                        // Inicializaciones
+                                        wTable = oSection.Body.AddTable();
+                                        wTable.ResetCells(1, 1);
+                                        wTable.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+
+                                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                                        wTableRow = wTable.Rows[0];
+                                        wTableRow.Height = 17f;
+                                        wTableRow.Cells[0].Width = 500;
+
+                                        // Celda 1
+                                        wTableCell = wTableRow.Cells[0].AddParagraph();
+
+                                        // Texto
+                                        wText = wTableCell.AppendText(rowPrograma["NotaOrden"].ToString() + ENTER );
+                                        wText.CharacterFormat.FontName = "Arial";
+                                        wText.CharacterFormat.FontSize = 10f;
+                                        wText.CharacterFormat.Bold = true;
+
+                                        // Brinco de linea (genera espacio)
+                                        oSection.AddParagraph();
+
+                                    }
+
+                                #endregion
+
                                 if ( ENTResponseGiraConfiguracion.DataSetResponse.Tables[5].Rows.Count != 0) {
                                     
                                     // Inicializaciones
@@ -1080,11 +1241,73 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                     oSection.AddParagraph();
 
                                 }
+                                
+                                #region Nota al Fin del Orden
+                                
+                                    if ( rowPrograma["NotaFinOrden"].ToString() == "1" ) {
+
+                                        // Inicializaciones
+                                        wTable = oSection.Body.AddTable();
+                                        wTable.ResetCells(1, 1);
+                                        wTable.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+
+                                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                                        wTableRow = wTable.Rows[0];
+                                        wTableRow.Height = 17f;
+                                        wTableRow.Cells[0].Width = 500;
+
+                                        // Celda 1
+                                        wTableCell = wTableRow.Cells[0].AddParagraph();
+
+                                        // Texto
+                                        wText = wTableCell.AppendText(rowPrograma["NotaOrden"].ToString() + ENTER );
+                                        wText.CharacterFormat.FontName = "Arial";
+                                        wText.CharacterFormat.FontSize = 10f;
+                                        wText.CharacterFormat.Bold = true;
+
+                                        // Brinco de linea (genera espacio)
+                                        oSection.AddParagraph();
+
+                                    }
+
+                                #endregion
 
                             #endregion
 
                             #region Acomodo
+                            
+                                #region Nota al Inicio del Acomodo
                                 
+                                    if ( rowPrograma["NotaInicioAcomodo"].ToString() == "1" ) {
+
+                                        // Inicializaciones
+                                        wTable = oSection.Body.AddTable();
+                                        wTable.ResetCells(1, 1);
+                                        wTable.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+
+                                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                                        wTableRow = wTable.Rows[0];
+                                        wTableRow.Height = 17f;
+                                        wTableRow.Cells[0].Width = 500;
+
+                                        // Celda 1
+                                        wTableCell = wTableRow.Cells[0].AddParagraph();
+
+                                        // Texto
+                                        wText = wTableCell.AppendText(rowPrograma["NotaAcomodo"].ToString() + ENTER );
+                                        wText.CharacterFormat.FontName = "Arial";
+                                        wText.CharacterFormat.FontSize = 10f;
+                                        wText.CharacterFormat.Bold = true;
+
+                                        // Brinco de linea (genera espacio)
+                                        oSection.AddParagraph();
+
+                                    }
+
+                                #endregion
+
                                 if ( ENTResponseGiraConfiguracion.DataSetResponse.Tables[6].Rows.Count != 0) {
                                     
                                     // Inicializaciones
@@ -1165,6 +1388,37 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                     oSection.AddParagraph();
 
                                 }
+                                
+                                #region Nota al Fin del Acomodo
+                                
+                                    if ( rowPrograma["NotaFinAcomodo"].ToString() == "1" ) {
+
+                                        // Inicializaciones
+                                        wTable = oSection.Body.AddTable();
+                                        wTable.ResetCells(1, 1);
+                                        wTable.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+
+                                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                                        wTableRow = wTable.Rows[0];
+                                        wTableRow.Height = 17f;
+                                        wTableRow.Cells[0].Width = 500;
+
+                                        // Celda 1
+                                        wTableCell = wTableRow.Cells[0].AddParagraph();
+
+                                        // Texto
+                                        wText = wTableCell.AppendText(rowPrograma["NotaAcomodo"].ToString() + ENTER );
+                                        wText.CharacterFormat.FontName = "Arial";
+                                        wText.CharacterFormat.FontSize = 10f;
+                                        wText.CharacterFormat.Bold = true;
+
+                                        // Brinco de linea (genera espacio)
+                                        oSection.AddParagraph();
+
+                                    }
+
+                                #endregion
 
                             #endregion
                             
@@ -1175,6 +1429,9 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
 
                 // Descargar el documeno en la página
                 oDocument.Save("Gira.doc", Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment);
+
+            }catch (IOException ioEx) {
+                throw ( new Exception(LevelError + "-" + ioEx.Message) );
 
             }catch (Exception ex) {
                 throw ( new Exception(LevelError + "-" + ex.Message) );

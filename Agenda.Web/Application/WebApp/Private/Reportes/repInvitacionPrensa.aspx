@@ -11,7 +11,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPageName" runat="server" CssClass="MasterPageName">
-        <asp:Label ID="lblPageName" runat="server" CssClass="PageNameText" Text="Reportes - Invitaciones para la prensa"></asp:Label>
+        <asp:Label ID="lblPageName" runat="server" CssClass="PageNameText" Text="Reportes - Para Prensa"></asp:Label>
     </asp:Panel>
 
     <asp:Panel ID="pnlTitulo" runat="server" CssClass="TitlePanel">

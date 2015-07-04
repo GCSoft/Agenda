@@ -39,7 +39,7 @@
             <tr>
 				<td class="Etiqueta">Nombre de la gira</td>
 				<td class="VinetaObligatorio">*</td>
-				<td class="Campo" colspan="2"><asp:TextBox ID="txtNombreGira" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="600px"></asp:TextBox></td>
+				<td class="Campo" colspan="2"><asp:TextBox ID="txtNombreGira" runat="server" CssClass="Textarea_General" Height="70px" TextMode="MultiLine" MaxLength="1000" Width="600px"></asp:TextBox></td>
 			</tr>
             <tr>
 				<td class="Etiqueta">Fecha y hora de la Gira</td>

@@ -51,6 +51,7 @@
     <Compile Include="Object\BPCategoria.cs" />
     <Compile Include="Object\BPColonia.cs" />
     <Compile Include="Object\BPConducto.cs" />
+    <Compile Include="Object\BPContactoPrograma.cs" />
     <Compile Include="Object\BPDocumento.cs" />
     <Compile Include="Object\BPEstado.cs" />
     <Compile Include="Object\BPEstatusEvento.cs" />

@@ -107,6 +107,22 @@ namespace Agenda.Entity.Object
         private DataTable   _DataTableResponsableLogistica;
         private ENTInvitacionContacto _Contacto;
 
+        private Int16   _NotaInicioEvento;
+        private Int16   _NotaFinEvento;
+        private String  _NotaEvento;
+
+        private Int16   _NotaInicioComite;
+        private Int16   _NotaFinComite;
+        private String  _NotaComite;
+
+        private Int16   _NotaInicioOrden;
+        private Int16   _NotaFinOrden;
+        private String  _NotaOrden;
+
+        private Int16   _NotaInicioAcomodo;
+        private Int16   _NotaFinAcomodo;
+        private String  _NotaAcomodo;
+
 
         //Constructor
 
@@ -199,6 +215,22 @@ namespace Agenda.Entity.Object
             _DataTableResponsable = null;
             _DataTableResponsableLogistica = null;
             _Contacto = new ENTInvitacionContacto();
+
+            _NotaInicioEvento = 0;
+            _NotaFinEvento = 0;
+            _NotaEvento = "";
+
+            _NotaInicioComite = 0;
+            _NotaFinComite = 0;
+            _NotaComite = "";
+
+            _NotaInicioOrden = 0;
+            _NotaFinOrden = 0;
+            _NotaOrden = "";
+
+            _NotaInicioAcomodo = 0;
+            _NotaFinAcomodo = 0;
+            _NotaAcomodo = "";
         }
 
 
@@ -1247,6 +1279,138 @@ namespace Agenda.Entity.Object
             get { return _Contacto; }
             set { _Contacto = value; }
         }
+
+        ///<remarks>
+        ///   <name>ENTGira.NotaInicioEvento</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int16 NotaInicioEvento
+        {
+            get { return _NotaInicioEvento; }
+            set { _NotaInicioEvento = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.NotaFinEvento</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int16 NotaFinEvento
+        {
+            get { return _NotaFinEvento; }
+            set { _NotaFinEvento = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.NotaEvento</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public String NotaEvento
+        {
+            get { return _NotaEvento; }
+            set { _NotaEvento = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.NotaInicioComite</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int16 NotaInicioComite
+        {
+            get { return _NotaInicioComite; }
+            set { _NotaInicioComite = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.NotaFinComite</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int16 NotaFinComite
+        {
+            get { return _NotaFinComite; }
+            set { _NotaFinComite = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.NotaComite</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public String NotaComite
+        {
+            get { return _NotaComite; }
+            set { _NotaComite = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.NotaInicioOrden</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int16 NotaInicioOrden
+        {
+            get { return _NotaInicioOrden; }
+            set { _NotaInicioOrden = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.NotaFinOrden</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int16 NotaFinOrden
+        {
+            get { return _NotaFinOrden; }
+            set { _NotaFinOrden = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.NotaOrden</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public String NotaOrden
+        {
+            get { return _NotaOrden; }
+            set { _NotaOrden = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.NotaInicioAcomodo</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int16 NotaInicioAcomodo
+        {
+            get { return _NotaInicioAcomodo; }
+            set { _NotaInicioAcomodo = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.NotaFinAcomodo</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int16 NotaFinAcomodo
+        {
+            get { return _NotaFinAcomodo; }
+            set { _NotaFinAcomodo = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.NotaAcomodo</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public String NotaAcomodo
+        {
+            get { return _NotaAcomodo; }
+            set { _NotaAcomodo = value; }
+        } 
 
     }
 }

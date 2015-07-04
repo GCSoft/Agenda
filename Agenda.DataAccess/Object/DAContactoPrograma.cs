@@ -1,7 +1,7 @@
 ﻿/*---------------------------------------------------------------------------------------------------------------------------------
-' Clase: DATipoAcomodo
+' Clase: DAContactoPrograma
 ' Autor: Ruben.Cobos
-' Fecha: 09-Diciembre-2014
+' Fecha: 18-Diciembre-2014
 '----------------------------------------------------------------------------------------------------------------------------------*/
 
 // Referencias
@@ -18,20 +18,20 @@ using Agenda.Entity.Object;
 
 namespace Agenda.DataAccess.Object
 {
-    public class DATipoAcomodo : DABase
+    public class DAContactoPrograma : DABase
     {
 
         ///<remarks>
-        ///   <name>DATipoAcomodo.InsertTipoAcomodo</name>
+        ///   <name>DAContactoPrograma.InsertContactoPrograma</name>
         ///   <create>08-Enero-2015</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
         ///<summary>Crea un nuevo Contacto de Programa</summary>
-        ///<param name="oENTTipoAcomodo">Entidad de Contacto de Programa con los parámetros necesarios para realizar la transacción</param>
+        ///<param name="oENTContactoPrograma">Entidad de Contacto de Programa con los parámetros necesarios para realizar la transacción</param>
         ///<param name="sConnection">Cadena de conexión a la base de datos</param>
         ///<param name="iAlternateDBTimeout">Valor en milisegundos del Timeout en la consulta a la base de datos. 0 si se desea el Timeout por default</param>
         ///<returns>Una entidad de respuesta</returns>
-        public ENTResponse InsertTipoAcomodo(ENTTipoAcomodo oENTTipoAcomodo, String sConnection, Int32 iAlternateDBTimeout){
+        public ENTResponse InsertContactoPrograma(ENTContactoPrograma oENTContactoPrograma, String sConnection, Int32 iAlternateDBTimeout){
             SqlConnection sqlCnn = new SqlConnection(sConnection);
             SqlCommand sqlCom;
             SqlParameter sqlPar;
@@ -40,7 +40,7 @@ namespace Agenda.DataAccess.Object
             ENTResponse oENTResponse = new ENTResponse();
 
             // Configuración de objetos
-            sqlCom = new SqlCommand("uspTipoAcomodo_Ins", sqlCnn);
+            sqlCom = new SqlCommand("uspContactoPrograma_Ins", sqlCnn);
             sqlCom.CommandType = CommandType.StoredProcedure;
 
             // Timeout alternativo en caso de ser solicitado
@@ -48,19 +48,19 @@ namespace Agenda.DataAccess.Object
 
             // Parametros
             sqlPar = new SqlParameter("Nombre", SqlDbType.VarChar);
-            sqlPar.Value = oENTTipoAcomodo.Nombre;
+            sqlPar.Value = oENTContactoPrograma.Nombre;
             sqlCom.Parameters.Add(sqlPar);
 
-            sqlPar = new SqlParameter("Descripcion", SqlDbType.VarChar);
-            sqlPar.Value = oENTTipoAcomodo.Descripcion;
+            sqlPar = new SqlParameter("Correo", SqlDbType.VarChar);
+            sqlPar.Value = oENTContactoPrograma.Correo;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("Activo", SqlDbType.TinyInt);
-            sqlPar.Value = oENTTipoAcomodo.Activo;
+            sqlPar.Value = oENTContactoPrograma.Activo;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("Rank", SqlDbType.Int);
-            sqlPar.Value = oENTTipoAcomodo.Rank;
+            sqlPar.Value = oENTContactoPrograma.Rank;
             sqlCom.Parameters.Add(sqlPar);
 
             // Inicializaciones
@@ -92,16 +92,16 @@ namespace Agenda.DataAccess.Object
         }
 
         ///<remarks>
-        ///   <name>DATipoAcomodo.SelectTipoAcomodo</name>
-        ///   <create>09-Diciembre-2014</create>
+        ///   <name>DAContactoPrograma.SelectContactoPrograma</name>
+        ///   <create>18-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
-        ///<summary>Obtiene un listado de Tipos de Acomodo en base a los parámetros proporcionados</summary>
-        ///<param name="oENTTipoAcomodo">Entidad de Tipo de Evento con los parámetros necesarios para consultar la información</param>
+        ///<summary>Obtiene un listado de Contacto de Programas en base a los parámetros proporcionados</summary>
+        ///<param name="oENTContactoPrograma">Entidad de Contacto d Programa con los parámetros necesarios para consultar la información</param>
         ///<param name="sConnection">Cadena de conexión a la base de datos</param>
         ///<param name="iAlternateDBTimeout">Valor en milisegundos del Timeout en la consulta a la base de datos. 0 si se desea el Timeout por default</param>
         ///<returns>Una entidad de respuesta</returns>
-        public ENTResponse SelectTipoAcomodo(ENTTipoAcomodo oENTTipoAcomodo, String sConnection, Int32 iAlternateDBTimeout){
+        public ENTResponse SelectContactoPrograma(ENTContactoPrograma oENTContactoPrograma, String sConnection, Int32 iAlternateDBTimeout){
             SqlConnection sqlCnn = new SqlConnection(sConnection);
             SqlCommand sqlCom;
             SqlParameter sqlPar;
@@ -110,23 +110,23 @@ namespace Agenda.DataAccess.Object
             ENTResponse oENTResponse = new ENTResponse();
 
             // Configuración de objetos
-            sqlCom = new SqlCommand("uspTipoAcomodo_Sel", sqlCnn);
+            sqlCom = new SqlCommand("uspContactoPrograma_Sel", sqlCnn);
             sqlCom.CommandType = CommandType.StoredProcedure;
 
             // Timeout alternativo en caso de ser solicitado
             if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
 
             // Parametros
-            sqlPar = new SqlParameter("TipoAcomodoId", SqlDbType.Int);
-            sqlPar.Value = oENTTipoAcomodo.TipoAcomodoId;
+            sqlPar = new SqlParameter("ContactoProgramaId", SqlDbType.Int);
+            sqlPar.Value = oENTContactoPrograma.ContactoProgramaId;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("Nombre", SqlDbType.VarChar);
-            sqlPar.Value = oENTTipoAcomodo.Nombre;
+            sqlPar.Value = oENTContactoPrograma.Nombre;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("Activo", SqlDbType.TinyInt);
-            sqlPar.Value = oENTTipoAcomodo.Activo;
+            sqlPar.Value = oENTContactoPrograma.Activo;
             sqlCom.Parameters.Add(sqlPar);
 
             // Inicializaciones
@@ -158,16 +158,16 @@ namespace Agenda.DataAccess.Object
         }
 
         ///<remarks>
-        ///   <name>DATipoAcomodo.SelectTipoAcomodo_Paginado</name>
+        ///   <name>DAContactoPrograma.SelectContactoPrograma_Paginado</name>
         ///   <create>18-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
         ///<summary>Obtiene un listado paginado de Contacto de Programas en base a los parámetros proporcionados</summary>
-        ///<param name="oENTTipoAcomodo">Entidad de Contacto de Programa con los parámetros necesarios para consultar la información</param>
+        ///<param name="oENTContactoPrograma">Entidad de Contacto de Programa con los parámetros necesarios para consultar la información</param>
         ///<param name="sConnection">Cadena de conexión a la base de datos</param>
         ///<param name="iAlternateDBTimeout">Valor en milisegundos del Timeout en la consulta a la base de datos. 0 si se desea el Timeout por default</param>
         ///<returns>Una entidad de respuesta</returns>
-        public ENTResponse SelectTipoAcomodo_Paginado(ENTTipoAcomodo oENTTipoAcomodo, String sConnection, Int32 iAlternateDBTimeout){
+        public ENTResponse SelectContactoPrograma_Paginado(ENTContactoPrograma oENTContactoPrograma, String sConnection, Int32 iAlternateDBTimeout){
             SqlConnection sqlCnn = new SqlConnection(sConnection);
             SqlCommand sqlCom;
             SqlParameter sqlPar;
@@ -176,31 +176,31 @@ namespace Agenda.DataAccess.Object
             ENTResponse oENTResponse = new ENTResponse();
 
             // Configuración de objetos
-            sqlCom = new SqlCommand("uspTipoAcomodo_Sel_Paginado", sqlCnn);
+            sqlCom = new SqlCommand("uspContactoPrograma_Sel_Paginado", sqlCnn);
             sqlCom.CommandType = CommandType.StoredProcedure;
 
             // Timeout alternativo en caso de ser solicitado
             if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
 
             // Parametros
-            sqlPar = new SqlParameter("TipoAcomodoId", SqlDbType.Int);
-            sqlPar.Value = oENTTipoAcomodo.TipoAcomodoId;
+            sqlPar = new SqlParameter("ContactoProgramaId", SqlDbType.Int);
+            sqlPar.Value = oENTContactoPrograma.ContactoProgramaId;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("Nombre", SqlDbType.VarChar);
-            sqlPar.Value = oENTTipoAcomodo.Nombre;
+            sqlPar.Value = oENTContactoPrograma.Nombre;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("Activo", SqlDbType.TinyInt);
-            sqlPar.Value = oENTTipoAcomodo.Activo;
+            sqlPar.Value = oENTContactoPrograma.Activo;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("Page", SqlDbType.Int);
-            sqlPar.Value = oENTTipoAcomodo.Paginacion.Page;
+            sqlPar.Value = oENTContactoPrograma.Paginacion.Page;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("PageSize", SqlDbType.Int);
-            sqlPar.Value = oENTTipoAcomodo.Paginacion.PageSize;
+            sqlPar.Value = oENTContactoPrograma.Paginacion.PageSize;
             sqlCom.Parameters.Add(sqlPar);
 
             // Inicializaciones
@@ -232,16 +232,16 @@ namespace Agenda.DataAccess.Object
         }
 
         ///<remarks>
-        ///   <name>DATipoAcomodo.UpdateTipoAcomodo</name>
+        ///   <name>DAContactoPrograma.UpdateContactoPrograma</name>
         ///   <create>08-Enero-2015</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
-        ///<summary>Actualiza un TipoAcomodo existente</summary>
-        ///<param name="oENTTipoAcomodo">Entidad de Contacto de Programa con los parámetros necesarios para realizar la transacción</param>
+        ///<summary>Actualiza un ContactoPrograma existente</summary>
+        ///<param name="oENTContactoPrograma">Entidad de Contacto de Programa con los parámetros necesarios para realizar la transacción</param>
         ///<param name="sConnection">Cadena de conexión a la base de datos</param>
         ///<param name="iAlternateDBTimeout">Valor en milisegundos del Timeout en la consulta a la base de datos. 0 si se desea el Timeout por default</param>
         ///<returns>Una entidad de respuesta</returns>
-        public ENTResponse UpdateTipoAcomodo(ENTTipoAcomodo oENTTipoAcomodo, String sConnection, Int32 iAlternateDBTimeout){
+        public ENTResponse UpdateContactoPrograma(ENTContactoPrograma oENTContactoPrograma, String sConnection, Int32 iAlternateDBTimeout){
             SqlConnection sqlCnn = new SqlConnection(sConnection);
             SqlCommand sqlCom;
             SqlParameter sqlPar;
@@ -250,31 +250,31 @@ namespace Agenda.DataAccess.Object
             ENTResponse oENTResponse = new ENTResponse();
 
             // Configuración de objetos
-            sqlCom = new SqlCommand("uspTipoAcomodo_Upd", sqlCnn);
+            sqlCom = new SqlCommand("uspContactoPrograma_Upd", sqlCnn);
             sqlCom.CommandType = CommandType.StoredProcedure;
 
             // Timeout alternativo en caso de ser solicitado
             if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
 
             // Parametros
-            sqlPar = new SqlParameter("TipoAcomodoId", SqlDbType.Int);
-            sqlPar.Value = oENTTipoAcomodo.TipoAcomodoId;
+            sqlPar = new SqlParameter("ContactoProgramaId", SqlDbType.Int);
+            sqlPar.Value = oENTContactoPrograma.ContactoProgramaId;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("Nombre", SqlDbType.VarChar);
-            sqlPar.Value = oENTTipoAcomodo.Nombre;
+            sqlPar.Value = oENTContactoPrograma.Nombre;
             sqlCom.Parameters.Add(sqlPar);
 
-            sqlPar = new SqlParameter("Descripcion", SqlDbType.VarChar);
-            sqlPar.Value = oENTTipoAcomodo.Descripcion;
+            sqlPar = new SqlParameter("Correo", SqlDbType.VarChar);
+            sqlPar.Value = oENTContactoPrograma.Correo;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("Activo", SqlDbType.TinyInt);
-            sqlPar.Value = oENTTipoAcomodo.Activo;
+            sqlPar.Value = oENTContactoPrograma.Activo;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("Rank", SqlDbType.Int);
-            sqlPar.Value = oENTTipoAcomodo.Rank;
+            sqlPar.Value = oENTContactoPrograma.Rank;
             sqlCom.Parameters.Add(sqlPar);
 
             // Inicializaciones
@@ -306,16 +306,16 @@ namespace Agenda.DataAccess.Object
         }
 
         ///<remarks>
-        ///   <name>DATipoAcomodo.UpdateTipoAcomodo_Estatus</name>
+        ///   <name>DAContactoPrograma.UpdateContactoPrograma_Estatus</name>
         ///   <create>08-Enero-2015</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
-        ///<summary>Actualiza el estatus de un TipoAcomodo existente</summary>
-        ///<param name="oENTTipoAcomodo">Entidad de TipoAcomodo con los parámetros necesarios para realizar la transacción</param>
+        ///<summary>Actualiza el estatus de un ContactoPrograma existente</summary>
+        ///<param name="oENTContactoPrograma">Entidad de ContactoPrograma con los parámetros necesarios para realizar la transacción</param>
         ///<param name="sConnection">Cadena de conexión a la base de datos</param>
         ///<param name="iAlternateDBTimeout">Valor en milisegundos del Timeout en la consulta a la base de datos. 0 si se desea el Timeout por default</param>
         ///<returns>Una entidad de respuesta</returns>
-        public ENTResponse UpdateTipoAcomodo_Estatus(ENTTipoAcomodo oENTTipoAcomodo, String sConnection, Int32 iAlternateDBTimeout){
+        public ENTResponse UpdateContactoPrograma_Estatus(ENTContactoPrograma oENTContactoPrograma, String sConnection, Int32 iAlternateDBTimeout){
             SqlConnection sqlCnn = new SqlConnection(sConnection);
             SqlCommand sqlCom;
             SqlParameter sqlPar;
@@ -324,19 +324,19 @@ namespace Agenda.DataAccess.Object
             ENTResponse oENTResponse = new ENTResponse();
 
             // Configuración de objetos
-            sqlCom = new SqlCommand("uspTipoAcomodo_Upd_Estatus", sqlCnn);
+            sqlCom = new SqlCommand("uspContactoPrograma_Upd_Estatus", sqlCnn);
             sqlCom.CommandType = CommandType.StoredProcedure;
 
             // Timeout alternativo en caso de ser solicitado
             if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
 
             // Parametros
-            sqlPar = new SqlParameter("TipoAcomodoId", SqlDbType.Int);
-            sqlPar.Value = oENTTipoAcomodo.TipoAcomodoId;
+            sqlPar = new SqlParameter("ContactoProgramaId", SqlDbType.Int);
+            sqlPar.Value = oENTContactoPrograma.ContactoProgramaId;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("Activo", SqlDbType.TinyInt);
-            sqlPar.Value = oENTTipoAcomodo.Activo;
+            sqlPar.Value = oENTContactoPrograma.Activo;
             sqlCom.Parameters.Add(sqlPar);
 
             // Inicializaciones

@@ -171,6 +171,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.RechazarPanel.Visible = true;
                         this.CuadernilloLogisticaPanel.Visible = (this.Logistica.Value == "1" ? true : false);
                         this.CuadernilloProtocoloPanel.Visible = (this.Logistica.Value == "1" ? false : true);
+                        this.EnviarCuadernilloPanel.Visible = true;
                         this.Historial.Visible = true;
 						break;
 
@@ -186,6 +187,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.RechazarPanel.Visible = true;
                         this.CuadernilloLogisticaPanel.Visible = false;
                         this.CuadernilloProtocoloPanel.Visible = false;
+                        this.EnviarCuadernilloPanel.Visible = false;
                         this.Historial.Visible = true;
 						break;
 
@@ -200,6 +202,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.RechazarPanel.Visible = false;
                         this.CuadernilloLogisticaPanel.Visible = false;
                         this.CuadernilloProtocoloPanel.Visible = false;
+                        this.EnviarCuadernilloPanel.Visible = false;
                         this.Historial.Visible = false;
 						break;
 
@@ -238,6 +241,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                     this.CuadernilloLogisticaPanel.Visible = false;
                     this.CuadernilloProtocoloPanel.Visible = false;
+                    this.EnviarCuadernilloPanel.Visible = false;
 				}
 
                 // Si el evento no está representado no se podrá eliminar al representante
@@ -267,6 +271,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     this.RechazarPanel.Visible = false;
                     this.CuadernilloLogisticaPanel.Visible = false;
                     this.CuadernilloProtocoloPanel.Visible = false;
+                    this.EnviarCuadernilloPanel.Visible = false;
                     this.Historial.Visible = false;
                 }
 
@@ -282,6 +287,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     this.RechazarPanel.Visible = false;
                     this.CuadernilloLogisticaPanel.Visible = false;
                     this.CuadernilloProtocoloPanel.Visible = false;
+                    this.EnviarCuadernilloPanel.Visible = false;
                     this.Historial.Visible = false;
                 }
 
@@ -298,6 +304,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     this.RechazarPanel.Visible = true;
                     this.CuadernilloLogisticaPanel.Visible = (this.Logistica.Value == "1" ? true : false);
                     this.CuadernilloProtocoloPanel.Visible = (this.Logistica.Value == "1" ? false : true);
+                    this.EnviarCuadernilloPanel.Visible = true;
                     this.Historial.Visible = true;
 
                     // Ajustes
@@ -584,6 +591,22 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 sKey = this.hddEventoId.Value + "|" + this.SenderId.Value;
                 sKey = gcEncryption.EncryptString(sKey, true);
                 this.Response.Redirect("eveCancelar.aspx?key=" + sKey, false);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+            }
+		}
+
+        protected void EnviarCuadernilloButton_Click(object sender, ImageClickEventArgs e){
+			String sKey = "";
+
+            try
+            {
+
+                // Llave encriptada
+                sKey = this.hddEventoId.Value + "|" + this.SenderId.Value;
+                sKey = gcEncryption.EncryptString(sKey, true);
+                this.Response.Redirect("eveEnviarCuadernillo.aspx?key=" + sKey, false);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);

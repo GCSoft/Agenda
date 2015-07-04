@@ -46,6 +46,7 @@
     <Compile Include="Object\DACategoria.cs" />
     <Compile Include="Object\DAColonia.cs" />
     <Compile Include="Object\DAConducto.cs" />
+    <Compile Include="Object\DAContactoPrograma.cs" />
     <Compile Include="Object\DADocumento.cs" />
     <Compile Include="Object\DAEstado.cs" />
     <Compile Include="Object\DAEstatusEvento.cs" />

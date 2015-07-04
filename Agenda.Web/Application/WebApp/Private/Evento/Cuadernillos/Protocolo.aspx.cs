@@ -2020,9 +2020,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                 // Descargar el documeno en la página
                 WDocument.Save("EventoProtocolo.doc", Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment);
 
+            }catch (IOException ioEx) {
+                throw ( new Exception(LevelError + "-" + ioEx.Message) );
+
             }catch (Exception ex) {
                 throw ( new Exception(LevelError + "-" + ex.Message) );
             }
+
         }
 
 

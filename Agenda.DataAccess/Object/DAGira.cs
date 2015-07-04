@@ -413,6 +413,54 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTGira.DataTableAcomodo;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("NotaInicioEvento", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.NotaInicioEvento;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaFinEvento", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.NotaFinEvento;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaEvento", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.NotaEvento;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaInicioComite", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.NotaInicioComite;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaFinComite", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.NotaFinComite;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaComite", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.NotaComite;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaInicioOrden", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.NotaInicioOrden;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaFinOrden", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.NotaFinOrden;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaOrden", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.NotaOrden;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaInicioAcomodo", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.NotaInicioAcomodo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaFinAcomodo", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.NotaFinAcomodo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaAcomodo", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.NotaAcomodo;
+            sqlCom.Parameters.Add(sqlPar);
+
             // Inicializaciones
             oENTResponse.DataSetResponse = new DataSet();
             sqlDA = new SqlDataAdapter(sqlCom);
@@ -1021,6 +1069,54 @@ namespace Agenda.DataAccess.Object
 
             sqlPar = new SqlParameter("tblAcomodo", SqlDbType.Structured);
             sqlPar.Value = oENTGira.DataTableAcomodo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaInicioEvento", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.NotaInicioEvento;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaFinEvento", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.NotaFinEvento;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaEvento", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.NotaEvento;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaInicioComite", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.NotaInicioComite;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaFinComite", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.NotaFinComite;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaComite", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.NotaComite;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaInicioOrden", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.NotaInicioOrden;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaFinOrden", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.NotaFinOrden;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaOrden", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.NotaOrden;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaInicioAcomodo", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.NotaInicioAcomodo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaFinAcomodo", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.Evento.NotaFinAcomodo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaAcomodo", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Evento.NotaAcomodo;
             sqlCom.Parameters.Add(sqlPar);
 
             // Inicializaciones

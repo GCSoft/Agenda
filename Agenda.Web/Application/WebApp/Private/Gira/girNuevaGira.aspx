@@ -34,7 +34,7 @@
                         <tr>
 				            <td class="Etiqueta">Nombre de la gira</td>
 				            <td class="VinetaObligatorio">*</td>
-				            <td class="Campo"><asp:TextBox ID="txtNombreGira" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
+				            <td class="Campo"><asp:TextBox ID="txtNombreGira" runat="server" CssClass="Textarea_General" Height="70px" MaxLength="1000" TextMode="MultiLine" Width="400px"></asp:TextBox></td>
                             <td></td>
 			            </tr>
                         <tr>
@@ -71,7 +71,7 @@
 			            </tr>
 			            <tr>
 				            <td colspan="4" style="text-align:left; vertical-align:bottom;">
-					            <CKEditor:CKEditorControl ID="ckeGiraDetalle" runat="server" BasePath="~/Include/Components/CKEditor/Core" Height="210px" ContentsCss="~/Include/Components/CKEditor/Core/contents.css" TemplatesFiles="~/Include/Components/CKEditor/Core/plugins/templates/templates/default.js" Width=""></CKEditor:CKEditorControl>
+					            <CKEditor:CKEditorControl ID="ckeGiraDetalle" runat="server" BasePath="~/Include/Components/CKEditor/Core" Height="165px" ContentsCss="~/Include/Components/CKEditor/Core/contents.css" TemplatesFiles="~/Include/Components/CKEditor/Core/plugins/templates/templates/default.js" Width=""></CKEditor:CKEditorControl>
 				            </td>
 			            </tr>
                     </table>
