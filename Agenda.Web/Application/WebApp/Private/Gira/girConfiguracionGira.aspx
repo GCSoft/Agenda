@@ -71,6 +71,7 @@
         <asp:Button ID="btnTrasladoHelicoptero" runat="server" Text="Traslado en helicóptero" CssClass="Button_General" width="175px" onclick="btnTrasladoHelicoptero_Click" /> &nbsp;&nbsp;
         <asp:Button ID="btnEvento" runat="server" Text="Evento" CssClass="Button_General" width="175px" onclick="btnEvento_Click" /> &nbsp;&nbsp;
         <asp:Button ID="btnActividadGeneral" runat="server" Text="Actividad General" CssClass="Button_General" width="175px" onclick="btnActividadGeneral_Click" /> &nbsp;&nbsp;
+        <asp:Button ID="btnComentarioEnCuadernillo" runat="server" Text="Comentario En Cuadernillo" CssClass="Button_General" width="175px" onclick="btnComentarioEnCuadernillo_Click" /> &nbsp;&nbsp;
     </asp:Panel>
 
     <asp:Panel ID="pnlGrid" runat="server" CssClass="GridPanel">
@@ -940,6 +941,48 @@
                     <tr>
                         <td colspan="3">
                             <asp:Label ID="lblPopUpMessage_LugarEvento" runat="server" CssClass="PopUpTextMessage"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+        </asp:Panel>
+    </asp:Panel>
+
+    <asp:Panel ID="pnlPopUp_ComentarioEnCuadernillo" runat="server" CssClass="PopUpBlock">
+        <asp:Panel ID="pnlPopUp_ComentarioEnCuadernilloContent" runat="server" CssClass="PopUpContent" style="margin-top:-110px; margin-left:-260px;" Height="220px" Width="520px">
+            <asp:Panel ID="pnlPopUp_ComentarioEnCuadernilloHeader" runat="server" CssClass="PopUpHeader">
+                <table class="PopUpHeaderTable">
+                    <tr>
+                        <td class="Espacio"></td>
+                        <td class="Etiqueta"><asp:Label ID="lblPopUp_ComentarioEnCuadernilloTitle" runat="server" CssClass="PopUpHeaderTitle"></asp:Label></td>
+                        <td class="Cierre"><asp:ImageButton ID="imgCloseWindow_ComentarioEnCuadernillo" runat="server" ImageUrl="~/Include/Image/Buttons/CloseWindow.png" ToolTip="Cerrar Ventana" OnClick="imgCloseWindow_ComentarioEnCuadernillo_Click"></asp:ImageButton></td>
+                    </tr>
+                </table>
+            </asp:Panel>
+            <asp:Panel ID="pnlPopUp_ComentarioEnCuadernilloBody" runat="server" CssClass="PopUpBody">
+                <table class="PopUpBodyTable">
+                    <tr>
+                        <td class="Etiqueta">Comentario</td>
+                        <td class="VinetaObligatorio"></td>
+                        <td class="Campo">
+                            <asp:RadioButtonList ID="rblPopUp_ComentarioEnCuadernillo" runat="server" RepeatDirection="Horizontal">
+						        <asp:ListItem Text="No Incluir" Value="1" Selected="True"></asp:ListItem>
+						        <asp:ListItem Text="Al Inicio del cuadernillo" Value="2"></asp:ListItem>
+                                <asp:ListItem Text="Al Final del cuadernillo" Value="3"></asp:ListItem>
+					        </asp:RadioButtonList>
+                        </td>
+                    </tr>
+                    <tr>
+				        <td colspan="3"><asp:TextBox ID="txtPopUp_ComentarioEnCuadernilloDetalle" runat="server" CssClass="Textarea_General" Height="60px" MaxLength="1000" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
+			        </tr>
+                    <tr>
+                        <td class="Botones" colspan="3">
+                            <asp:Button ID="btnPopUp_ComentarioEnCuadernilloCommand" runat="server" Text="" CssClass="Button_General" Width="175px" OnClick="btnPopUp_ComentarioEnCuadernilloCommand_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Mensajes" colspan="3">
+                            <asp:Label ID="lblPopUp_ComentarioEnCuadernilloMessage" runat="server" CssClass="PopUpTextMessage"></asp:Label>
                         </td>
                     </tr>
                 </table>

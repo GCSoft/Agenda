@@ -58,6 +58,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
             BPGira oBPGira = new BPGira();
 
+            DataRow rowComentarioCuadernillo;
+
             try
             {
 
@@ -83,6 +85,70 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 this.lblGiraDetalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraDetalle"].ToString();
 
                 // Programa
+                if ( oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaInicioDocumento"].ToString() == "1" ){
+
+                    #region Agregar un registro al inicio del programa
+                        rowComentarioCuadernillo = oENTResponse.DataSetResponse.Tables[2].NewRow();
+                        rowComentarioCuadernillo["GiraConfiguracionId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraConfiguracionId"].ToString();
+                        rowComentarioCuadernillo["GiraId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraId"].ToString();
+                        rowComentarioCuadernillo["TipoGiraConfiguracionId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoGiraConfiguracionId"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionGrupo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionGrupo"].ToString();
+                        rowComentarioCuadernillo["GiraFecha"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFecha"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraInicio"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraInicio"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraFin"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraFin"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionDetalle"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionDetalle"].ToString();
+                        rowComentarioCuadernillo["GiraFechaEstandar"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFechaEstandar"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraInicioEstandar"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraInicioEstandar"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraFinEstandar"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraFinEstandar"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraInicio24H"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraInicio24H"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraFin24H"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraFin24H"].ToString();
+                        rowComentarioCuadernillo["NotaInicioEvento"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaInicioEvento"].ToString();
+                        rowComentarioCuadernillo["NotaFinEvento"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaFinEvento"].ToString();
+                        rowComentarioCuadernillo["NotaEvento"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaEvento"].ToString();
+                        rowComentarioCuadernillo["NotaInicioComite"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaInicioComite"].ToString();
+                        rowComentarioCuadernillo["NotaFinComite"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaFinComite"].ToString();
+                        rowComentarioCuadernillo["NotaComite"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaComite"].ToString();
+                        rowComentarioCuadernillo["NotaInicioOrden"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaInicioOrden"].ToString();
+                        rowComentarioCuadernillo["NotaFinOrden"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaFinOrden"].ToString();
+                        rowComentarioCuadernillo["NotaOrden"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaOrden"].ToString();
+                        rowComentarioCuadernillo["NotaInicioAcomodo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaInicioAcomodo"].ToString();
+                        rowComentarioCuadernillo["NotaFinAcomodo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaFinAcomodo"].ToString();
+                        rowComentarioCuadernillo["NotaAcomodo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaAcomodo"].ToString();
+                        oENTResponse.DataSetResponse.Tables[2].Rows.InsertAt(rowComentarioCuadernillo, 0);
+                    #endregion
+
+                } else if ( oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaFinDocumento"].ToString() == "1" ) {
+
+                    #region Agregar un registro al fin del programa
+                        rowComentarioCuadernillo = oENTResponse.DataSetResponse.Tables[2].NewRow();
+                        rowComentarioCuadernillo["GiraConfiguracionId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraConfiguracionId"].ToString();
+                        rowComentarioCuadernillo["GiraId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraId"].ToString();
+                        rowComentarioCuadernillo["TipoGiraConfiguracionId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoGiraConfiguracionId"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionGrupo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionGrupo"].ToString();
+                        rowComentarioCuadernillo["GiraFecha"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFecha"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraInicio"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraInicio"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraFin"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraFin"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionDetalle"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionDetalle"].ToString();
+                        rowComentarioCuadernillo["GiraFechaEstandar"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFechaEstandar"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraInicioEstandar"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraInicioEstandar"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraFinEstandar"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraFinEstandar"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraInicio24H"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraInicio24H"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraFin24H"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraFin24H"].ToString();
+                        rowComentarioCuadernillo["NotaInicioEvento"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaInicioEvento"].ToString();
+                        rowComentarioCuadernillo["NotaFinEvento"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaFinEvento"].ToString();
+                        rowComentarioCuadernillo["NotaEvento"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaEvento"].ToString();
+                        rowComentarioCuadernillo["NotaInicioComite"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaInicioComite"].ToString();
+                        rowComentarioCuadernillo["NotaFinComite"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaFinComite"].ToString();
+                        rowComentarioCuadernillo["NotaComite"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaComite"].ToString();
+                        rowComentarioCuadernillo["NotaInicioOrden"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaInicioOrden"].ToString();
+                        rowComentarioCuadernillo["NotaFinOrden"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaFinOrden"].ToString();
+                        rowComentarioCuadernillo["NotaOrden"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaOrden"].ToString();
+                        rowComentarioCuadernillo["NotaInicioAcomodo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaInicioAcomodo"].ToString();
+                        rowComentarioCuadernillo["NotaFinAcomodo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaFinAcomodo"].ToString();
+                        rowComentarioCuadernillo["NotaAcomodo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaAcomodo"].ToString();
+                        oENTResponse.DataSetResponse.Tables[2].Rows.Add(rowComentarioCuadernillo);
+                    #endregion
+                }
                 this.gvPrograma.DataSource = oENTResponse.DataSetResponse.Tables[2];
                 this.gvPrograma.DataBind();
                 

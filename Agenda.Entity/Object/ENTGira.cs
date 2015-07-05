@@ -48,6 +48,10 @@ namespace Agenda.Entity.Object
         private ENTInvitacionContacto   _Contacto;
         private ENTEvento               _Evento;
 
+        private Int16   _NotaInicioDocumento;
+        private Int16   _NotaFinDocumento;
+        private String  _NotaDocumento;
+
 
         //Constructor
 
@@ -81,6 +85,10 @@ namespace Agenda.Entity.Object
             _DataTableAcomodo = null;
             _Contacto = new ENTInvitacionContacto();
             _Evento = new ENTEvento();
+
+            _NotaInicioDocumento = 0;
+            _NotaFinDocumento = 0;
+            _NotaDocumento = "";
         }
 
 
@@ -421,6 +429,39 @@ namespace Agenda.Entity.Object
             get { return _Evento; }
             set { _Evento = value; }
         }
+
+        ///<remarks>
+        ///   <name>ENTGira.NotaInicioDocumento</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int16 NotaInicioDocumento
+        {
+            get { return _NotaInicioDocumento; }
+            set { _NotaInicioDocumento = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.NotaFinDocumento</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int16 NotaFinDocumento
+        {
+            get { return _NotaFinDocumento; }
+            set { _NotaFinDocumento = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.NotaDocumento</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public String NotaDocumento
+        {
+            get { return _NotaDocumento; }
+            set { _NotaDocumento = value; }
+        } 
 
     }
 }

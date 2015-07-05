@@ -1119,6 +1119,18 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTGira.Evento.NotaAcomodo;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("NotaInicioDocumento", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.NotaInicioDocumento;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaFinDocumento", SqlDbType.TinyInt);
+            sqlPar.Value = oENTGira.NotaFinDocumento;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaDocumento", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.NotaDocumento;
+            sqlCom.Parameters.Add(sqlPar);
+
             // Inicializaciones
             oENTResponse.DataSetResponse = new DataSet();
             sqlDA = new SqlDataAdapter(sqlCom);

@@ -148,6 +148,15 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         protected global::System.Web.UI.WebControls.Button btnActividadGeneral;
         
         /// <summary>
+        /// btnComentarioEnCuadernillo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnComentarioEnCuadernillo;
+        
+        /// <summary>
         /// pnlGrid control.
         /// </summary>
         /// <remarks>
@@ -1325,6 +1334,96 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblPopUpMessage_LugarEvento;
+        
+        /// <summary>
+        /// pnlPopUp_ComentarioEnCuadernillo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_ComentarioEnCuadernillo;
+        
+        /// <summary>
+        /// pnlPopUp_ComentarioEnCuadernilloContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_ComentarioEnCuadernilloContent;
+        
+        /// <summary>
+        /// pnlPopUp_ComentarioEnCuadernilloHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_ComentarioEnCuadernilloHeader;
+        
+        /// <summary>
+        /// lblPopUp_ComentarioEnCuadernilloTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPopUp_ComentarioEnCuadernilloTitle;
+        
+        /// <summary>
+        /// imgCloseWindow_ComentarioEnCuadernillo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgCloseWindow_ComentarioEnCuadernillo;
+        
+        /// <summary>
+        /// pnlPopUp_ComentarioEnCuadernilloBody control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_ComentarioEnCuadernilloBody;
+        
+        /// <summary>
+        /// rblPopUp_ComentarioEnCuadernillo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblPopUp_ComentarioEnCuadernillo;
+        
+        /// <summary>
+        /// txtPopUp_ComentarioEnCuadernilloDetalle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUp_ComentarioEnCuadernilloDetalle;
+        
+        /// <summary>
+        /// btnPopUp_ComentarioEnCuadernilloCommand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPopUp_ComentarioEnCuadernilloCommand;
+        
+        /// <summary>
+        /// lblPopUp_ComentarioEnCuadernilloMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPopUp_ComentarioEnCuadernilloMessage;
         
         /// <summary>
         /// pnlFooter control.

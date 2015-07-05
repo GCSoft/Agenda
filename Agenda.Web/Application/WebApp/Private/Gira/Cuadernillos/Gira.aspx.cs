@@ -267,6 +267,37 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
 
                 #endregion
 
+                #region Nota al Inicio del Cuadernillo
+
+                    if (ENTResponseGira.DataSetResponse.Tables[1].Rows[0]["NotaInicioDocumento"].ToString() == "1") {
+
+                        // Inicializaciones
+                        wTable = oSection.Body.AddTable();
+                        wTable.ResetCells(1, 1);
+                        wTable.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+
+                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                        wTableRow = wTable.Rows[0];
+                        wTableRow.Height = 17f;
+                        wTableRow.Cells[0].Width = 500;
+
+                        // Celda 1
+                        wTableCell = wTableRow.Cells[0].AddParagraph();
+
+                        // Texto
+                        wText = wTableCell.AppendText(ENTResponseGira.DataSetResponse.Tables[1].Rows[0]["NotaDocumento"].ToString() + ENTER);
+                        wText.CharacterFormat.FontName = "Arial";
+                        wText.CharacterFormat.FontSize = 10f;
+                        wText.CharacterFormat.Bold = true;
+
+                        // Brinco de linea (genera espacio)
+                        oSection.AddParagraph();
+
+                    }
+
+                #endregion
+
                 // Para cada partida del programa
                 foreach( DataRow rowPrograma in ENTResponseGira.DataSetResponse.Tables[2].Rows ){
 
@@ -1426,6 +1457,37 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
 
                     }
                 }
+
+                #region Nota al Final del Cuadernillo
+
+                    if (ENTResponseGira.DataSetResponse.Tables[1].Rows[0]["NotaFinDocumento"].ToString() == "1") {
+
+                        // Inicializaciones
+                        wTable = oSection.Body.AddTable();
+                        wTable.ResetCells(1, 1);
+                        wTable.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+
+                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                        wTableRow = wTable.Rows[0];
+                        wTableRow.Height = 17f;
+                        wTableRow.Cells[0].Width = 500;
+
+                        // Celda 1
+                        wTableCell = wTableRow.Cells[0].AddParagraph();
+
+                        // Texto
+                        wText = wTableCell.AppendText(ENTResponseGira.DataSetResponse.Tables[1].Rows[0]["NotaDocumento"].ToString() + ENTER);
+                        wText.CharacterFormat.FontName = "Arial";
+                        wText.CharacterFormat.FontSize = 10f;
+                        wText.CharacterFormat.Bold = true;
+
+                        // Brinco de linea (genera espacio)
+                        oSection.AddParagraph();
+
+                    }
+
+                #endregion
 
                 // Descargar el documeno en la página
                 oDocument.Save("Gira.doc", Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment);

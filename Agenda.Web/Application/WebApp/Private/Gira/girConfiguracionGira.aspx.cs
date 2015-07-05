@@ -217,6 +217,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
             DataTable dtAgrupacion;
             DataRow rowNuevaAgrupacion;
+            DataRow rowComentarioCuadernillo;
 
             try
             {
@@ -236,6 +237,71 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 this.lblGiraFechaHora.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraFechaHora"].ToString();
 
                 // Programa
+                if ( oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaInicioDocumento"].ToString() == "1" ){
+
+                    #region Agregar un registro al inicio del programa
+                        rowComentarioCuadernillo = oENTResponse.DataSetResponse.Tables[2].NewRow();
+                        rowComentarioCuadernillo["GiraConfiguracionId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraConfiguracionId"].ToString();
+                        rowComentarioCuadernillo["GiraId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraId"].ToString();
+                        rowComentarioCuadernillo["TipoGiraConfiguracionId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoGiraConfiguracionId"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionGrupo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionGrupo"].ToString();
+                        rowComentarioCuadernillo["GiraFecha"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFecha"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraInicio"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraInicio"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraFin"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraFin"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionDetalle"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionDetalle"].ToString();
+                        rowComentarioCuadernillo["GiraFechaEstandar"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFechaEstandar"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraInicioEstandar"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraInicioEstandar"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraFinEstandar"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraFinEstandar"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraInicio24H"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraInicio24H"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraFin24H"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraFin24H"].ToString();
+                        rowComentarioCuadernillo["NotaInicioEvento"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaInicioEvento"].ToString();
+                        rowComentarioCuadernillo["NotaFinEvento"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaFinEvento"].ToString();
+                        rowComentarioCuadernillo["NotaEvento"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaEvento"].ToString();
+                        rowComentarioCuadernillo["NotaInicioComite"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaInicioComite"].ToString();
+                        rowComentarioCuadernillo["NotaFinComite"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaFinComite"].ToString();
+                        rowComentarioCuadernillo["NotaComite"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaComite"].ToString();
+                        rowComentarioCuadernillo["NotaInicioOrden"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaInicioOrden"].ToString();
+                        rowComentarioCuadernillo["NotaFinOrden"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaFinOrden"].ToString();
+                        rowComentarioCuadernillo["NotaOrden"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaOrden"].ToString();
+                        rowComentarioCuadernillo["NotaInicioAcomodo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaInicioAcomodo"].ToString();
+                        rowComentarioCuadernillo["NotaFinAcomodo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaFinAcomodo"].ToString();
+                        rowComentarioCuadernillo["NotaAcomodo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaAcomodo"].ToString();
+                        oENTResponse.DataSetResponse.Tables[2].Rows.InsertAt(rowComentarioCuadernillo, 0);
+                    #endregion
+
+                } else if ( oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaFinDocumento"].ToString() == "1" ) {
+
+                    #region Agregar un registro al fin del programa
+                        rowComentarioCuadernillo = oENTResponse.DataSetResponse.Tables[2].NewRow();
+                        rowComentarioCuadernillo["GiraConfiguracionId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraConfiguracionId"].ToString();
+                        rowComentarioCuadernillo["GiraId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraId"].ToString();
+                        rowComentarioCuadernillo["TipoGiraConfiguracionId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoGiraConfiguracionId"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionGrupo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionGrupo"].ToString();
+                        rowComentarioCuadernillo["GiraFecha"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFecha"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraInicio"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraInicio"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraFin"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraFin"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionDetalle"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionDetalle"].ToString();
+                        rowComentarioCuadernillo["GiraFechaEstandar"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFechaEstandar"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraInicioEstandar"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraInicioEstandar"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraFinEstandar"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraFinEstandar"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraInicio24H"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraInicio24H"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionHoraFin24H"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraFin24H"].ToString();
+                        rowComentarioCuadernillo["NotaInicioEvento"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaInicioEvento"].ToString();
+                        rowComentarioCuadernillo["NotaFinEvento"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaFinEvento"].ToString();
+                        rowComentarioCuadernillo["NotaEvento"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaEvento"].ToString();
+                        rowComentarioCuadernillo["NotaInicioComite"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaInicioComite"].ToString();
+                        rowComentarioCuadernillo["NotaFinComite"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaFinComite"].ToString();
+                        rowComentarioCuadernillo["NotaComite"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaComite"].ToString();
+                        rowComentarioCuadernillo["NotaInicioOrden"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaInicioOrden"].ToString();
+                        rowComentarioCuadernillo["NotaFinOrden"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaFinOrden"].ToString();
+                        rowComentarioCuadernillo["NotaOrden"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaOrden"].ToString();
+                        rowComentarioCuadernillo["NotaInicioAcomodo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaInicioAcomodo"].ToString();
+                        rowComentarioCuadernillo["NotaFinAcomodo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaFinAcomodo"].ToString();
+                        rowComentarioCuadernillo["NotaAcomodo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["NotaAcomodo"].ToString();
+                        oENTResponse.DataSetResponse.Tables[2].Rows.Add(rowComentarioCuadernillo);
+                    #endregion
+                }
+
                 this.gvPrograma.DataSource = oENTResponse.DataSetResponse.Tables[2];
                 this.gvPrograma.DataBind();
 
@@ -252,6 +318,25 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     }
                 }
                 this.ViewState["dtAgrupacion"] = dtAgrupacion;
+
+                // Configuración de las Notas del Cuadernillo
+                this.rblPopUp_ComentarioEnCuadernillo.SelectedIndex = (
+                        oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaInicioDocumento"].ToString() == "0" && oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaFinDocumento"].ToString() == "0" ? 0
+                        : (oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaInicioDocumento"].ToString() == "1" ? 1 : 2)
+                    );
+                this.txtPopUp_ComentarioEnCuadernilloDetalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaDocumento"].ToString();
+
+                if ( this.rblPopUp_ComentarioEnCuadernillo.SelectedIndex > 0 ) {
+                    
+                    this.btnComentarioEnCuadernillo.Enabled = false;
+                    this.btnComentarioEnCuadernillo.CssClass = "Button_General_Disabled";
+
+                }else{
+
+                    this.btnComentarioEnCuadernillo.Enabled = true;
+                    this.btnComentarioEnCuadernillo.CssClass = "Button_General";
+
+                }
 
             }catch (Exception ex){
                 throw (ex);
@@ -445,6 +530,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 ClearPopUp_EventoPanel();
                 ClearPopUp_ActividadGeneralPanel();
                 ClearPopUpPanel_LugarEvento();
+                ClearPopUp_ComentarioEnCuadernilloPanel();
 
 				// Carátula
                 SelectGira();
@@ -514,6 +600,17 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
             }
 		}
 
+        protected void btnComentarioEnCuadernillo_Click(object sender, EventArgs e){
+			try
+            {
+
+                SetPopUp_ComentarioEnCuadernilloPanel(PopUpTypes.Insert);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+            }
+		}
+
         protected void gvPrograma_RowCommand(object sender, GridViewCommandEventArgs e){
             Int32 GiraConfiguracionId = 0;
             Int32 TipoGiraConfiguracionId = 0;
@@ -559,12 +656,33 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                             case 4: // Actividad General
                                 SetPopUp_ActividadGeneralPanel(PopUpTypes.Update, GiraConfiguracionId);
                                 break;
+
+                            case 0:
+                                // Comentario en Cuadernillo
+                                SetPopUp_ComentarioEnCuadernilloPanel(PopUpTypes.Update);
+                                break;
                         }
 
                         break;
 
                     case "Eliminar":
-                        DeleteGiraConfiguracion(GiraConfiguracionId);
+
+                        switch (TipoGiraConfiguracionId)
+                        {
+
+                            case 0:
+
+                                // Comentario en Cuadernillo
+                                this.rblPopUp_ComentarioEnCuadernillo.SelectedIndex = 0;
+                                this.txtPopUp_ComentarioEnCuadernilloDetalle.Text = "";
+                                UpdateConfiguracion_ComentarioEnCuadernillo();
+                                break;
+
+                            default:
+                                DeleteGiraConfiguracion(GiraConfiguracionId);
+                                break;
+                        }
+
                         break;
                 }
 
@@ -578,6 +696,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
             ImageButton imgDelete = null;
 
             String ProgramaNombre = "";
+            String GiraConfiguracionId = "";
 
             String sImagesAttributes = "";
             String sTootlTip = "";
@@ -594,13 +713,14 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                 // Datakeys
                 ProgramaNombre = this.gvPrograma.DataKeys[e.Row.RowIndex]["ConfiguracionDetalle"].ToString();
+                GiraConfiguracionId = this.gvPrograma.DataKeys[e.Row.RowIndex]["GiraConfiguracionId"].ToString();
 
                 // Tooltip Edición
-                sTootlTip = "Editar Programa [" + ProgramaNombre + "]";
+                sTootlTip = "Editar " + ( GiraConfiguracionId == "0" ? "Comentario" : "Programa" ) + " [" + ProgramaNombre + "]";
                 imgEdit.Attributes.Add("title", sTootlTip);
 
                 // Tooltip Delete
-                sTootlTip = "Eliminar Programa [" + ProgramaNombre + "]";
+                sTootlTip = "Eliminar " + ( GiraConfiguracionId == "0" ? "Comentario" : "Programa" ) + " [" + ProgramaNombre + "]";
                 imgDelete.Attributes.Add("title", sTootlTip);
 
                 // Atributos Over
@@ -3257,6 +3377,149 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 }
             }
 
+        #endregion
+
+        #region PopUp - Comentario En Cuadernillo
+            
+            
+            // Rutinas
+
+            void ClearPopUp_ComentarioEnCuadernilloPanel(){
+                try
+                {
+
+                    // Limpiar formulario
+                    this.txtPopUp_ComentarioEnCuadernilloDetalle.Text = "";
+
+                    // Estado incial de controles
+                    this.pnlPopUp_ComentarioEnCuadernillo.Visible = false;
+                    this.lblPopUp_ComentarioEnCuadernilloTitle.Text = "";
+                    this.btnPopUp_ComentarioEnCuadernilloCommand.Text = "";
+                    this.lblPopUp_ComentarioEnCuadernilloMessage.Text = "";
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            void SetPopUp_ComentarioEnCuadernilloPanel(PopUpTypes PopUpType){
+                try
+                {
+
+                    // Acciones comunes
+                    this.pnlPopUp_ComentarioEnCuadernillo.Visible = true;
+
+                    // Detalle de acción
+                    switch (PopUpType)
+                    {
+                        case PopUpTypes.Insert:
+
+                            this.lblPopUp_ComentarioEnCuadernilloTitle.Text = "Nuevo Comentario En Cuadernillo";
+                            this.btnPopUp_ComentarioEnCuadernilloCommand.Text = "Agregar Comentario";
+                            break;
+
+                        case PopUpTypes.Update:
+
+                            this.lblPopUp_ComentarioEnCuadernilloTitle.Text = "Edición de Comentario En Cuadernillo";
+                            this.btnPopUp_ComentarioEnCuadernilloCommand.Text = "Actualizar Comentario";
+                            break;
+
+                        default:
+                            throw (new Exception("Opción inválida"));
+                    }
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+            
+            void UpdateConfiguracion_ComentarioEnCuadernillo(){
+                ENTGira oENTGira = new ENTGira();
+                ENTResponse oENTResponse = new ENTResponse();
+                ENTSession oENTSession = new ENTSession();
+
+                BPGira oBPGira = new BPGira();
+
+                try
+                {
+
+                    // Datos de sesión
+                    oENTSession = (ENTSession)this.Session["oENTSession"];
+                    oENTGira.UsuarioId = oENTSession.UsuarioId;
+
+                    // Formulario
+                    oENTGira.GiraId = Int32.Parse(this.hddGiraId.Value);
+                    oENTGira.TipoGiraConfiguracionId = 0; // Nota de cuadernillo
+                    oENTGira.NotaInicioDocumento = Int16.Parse((rblPopUp_ComentarioEnCuadernillo.SelectedIndex == 0 ? 0 : (rblPopUp_ComentarioEnCuadernillo.SelectedIndex == 1 ? 1 : 0)).ToString());
+                    oENTGira.NotaFinDocumento = Int16.Parse((rblPopUp_ComentarioEnCuadernillo.SelectedIndex == 0 ? 0 : (rblPopUp_ComentarioEnCuadernillo.SelectedIndex == 1 ? 0 : 1)).ToString());
+                    oENTGira.NotaDocumento = this.txtPopUp_ComentarioEnCuadernilloDetalle.Text.Trim();
+                    oENTGira.ConfiguracionHoraInicio = "00:00";
+                    oENTGira.ConfiguracionHoraFin = "00:00";
+
+                    // Transacción
+                    oENTResponse = oBPGira.UpdateGiraConfiguracion(oENTGira);
+
+                    // Validaciones
+                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                    // Transacción exitosa
+                    ClearPopUp_ComentarioEnCuadernilloPanel();
+
+                    // Actualizar formulario
+                    SelectGira();
+
+                    // Mensaje de usuario
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Comentario actualizado con éxito!');", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            void ValidatePopUp_ComentarioEnCuadernilloForm(){
+                try
+                {
+                
+                    if ( this.rblPopUp_ComentarioEnCuadernillo.SelectedIndex > 0 && this.txtPopUp_ComentarioEnCuadernilloDetalle.Text.Trim() == "") { throw new Exception("Es necesario ingresar una Nota/Comentario"); }
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            
+            // Eventos
+
+            protected void btnPopUp_ComentarioEnCuadernilloCommand_Click(object sender, EventArgs e){
+                try
+                {
+
+                    // Validar formulario
+                    ValidatePopUp_ComentarioEnCuadernilloForm();
+
+                    // Transacción
+                    UpdateConfiguracion_ComentarioEnCuadernillo();
+
+                }catch (Exception ex){
+                    this.lblPopUp_ComentarioEnCuadernilloMessage.Text = ex.Message;
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.txtPopUp_ComentarioEnCuadernilloDetalle.ClientID + "');", true);
+                }
+            }
+
+            protected void imgCloseWindow_ComentarioEnCuadernillo_Click(object sender, ImageClickEventArgs e){
+                try
+                {
+
+                    // Cancelar transacción
+                    ClearPopUp_ComentarioEnCuadernilloPanel();
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+                }
+            }
+
+            
         #endregion
 
 

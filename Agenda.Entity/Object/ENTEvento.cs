@@ -231,6 +231,7 @@ namespace Agenda.Entity.Object
             _NotaInicioAcomodo = 0;
             _NotaFinAcomodo = 0;
             _NotaAcomodo = "";
+
         }
 
 
@@ -1410,7 +1411,7 @@ namespace Agenda.Entity.Object
         {
             get { return _NotaAcomodo; }
             set { _NotaAcomodo = value; }
-        } 
+        }
 
     }
 }
