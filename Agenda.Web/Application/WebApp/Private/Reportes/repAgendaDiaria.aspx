@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Include/MasterPage/PrivateTemplate.Master" AutoEventWireup="true" CodeBehind="repInvitacionPrensa.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Reportes.repInvitacionPrensa" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Include/MasterPage/PrivateTemplate.Master" AutoEventWireup="true" CodeBehind="repAgendaDiaria.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Reportes.repAgendaDiaria" %>
 <%@ Register assembly="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" namespace="Microsoft.Reporting.WebForms" tagprefix="rsweb" %>
 <%@ Register Src="~/Include/WebUserControls/wucCalendar.ascx" TagPrefix="wuc" TagName="wucCalendar" %>
 
@@ -17,13 +17,19 @@
     <asp:Panel ID="pnlTitulo" runat="server" CssClass="TitlePanel">
         <table class="HeaderTable">
             <tr>
-                <td class="Titulo"><asp:Label ID="lblSubTitulo" runat="server" Text="Ajuste los filtros para poder visualizar el reporte para prensa."></asp:Label></td>
+                <td class="Titulo"><asp:Label ID="lblSubTitulo" runat="server" Text="Ajuste los filtros para poder visualizar el reporte de Agenda Diaria."></asp:Label></td>
             </tr>
         </table>
     </asp:Panel>
 
     <asp:Panel ID="pnlFormulario" runat="server" CssClass="FormPanel" style="z-index:2;">
         <table class="FormTable">
+            <tr>
+				<td class="Etiqueta">Gobernador</td>
+				<td class="Espacio"></td>
+				<td class="Campo"><asp:TextBox ID="txtNombre" runat="server" CssClass="Textbox_General" Text="Lic. Rodrigo Medina de la Cruz" Width="210px"></asp:TextBox></td>
+                <td></td>
+			</tr>
             <tr>
 				<td class="Etiqueta">Fecha</td>
 				<td class="Espacio"></td>
@@ -45,7 +51,7 @@
 
     <asp:Panel ID="pnlReporte" runat="server" CssClass="ReportePanel">
         <asp:Panel ID="pnlReporteCanvas" runat="server" CssClass="ReportePanelCanvas">
-            <rsweb:ReportViewer ID="rptInvitacionPrensa" runat="server" SizeToReportContent="True"></rsweb:ReportViewer>
+            <rsweb:ReportViewer ID="rptAgendaDiaria" runat="server" SizeToReportContent="True"></rsweb:ReportViewer>
         </asp:Panel>
         <asp:Panel ID="pnlReporteWaterMark" runat="server" CssClass="ReportePanelImageWaterMark">
             <asp:Image ID="imgReporteWaterMark" runat="server" ImageUrl="~/Include/Image/Web/EscudoNL_BackGround.png" />

@@ -131,6 +131,7 @@
     <Content Include="Application\WebApp\Private\Invitacion\invInvitacion.aspx" />
     <Content Include="Application\WebApp\Private\Invitacion\invListado.aspx" />
     <Content Include="Application\WebApp\Private\Invitacion\invRechazar.aspx" />
+    <Content Include="Application\WebApp\Private\Reportes\repAgendaDiaria.aspx" />
     <Content Include="Application\WebApp\Private\Reportes\repEvento.aspx" />
     <Content Include="Application\WebApp\Private\Reportes\repInvitacion.aspx" />
     <Content Include="Application\WebApp\Private\Reportes\repInvitacionDetalle.aspx" />
@@ -653,6 +654,13 @@
     <Compile Include="Application\WebApp\Private\Invitacion\invRechazar.aspx.designer.cs">
       <DependentUpon>invRechazar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Application\WebApp\Private\Reportes\repAgendaDiaria.aspx.cs">
+      <DependentUpon>repAgendaDiaria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Reportes\repAgendaDiaria.aspx.designer.cs">
+      <DependentUpon>repAgendaDiaria.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Application\WebApp\Private\Reportes\repEvento.aspx.cs">
       <DependentUpon>repEvento.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -828,6 +836,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Application\WebApp\Private\Reportes\RDLC\rptAgendaDiaria.rdlc" />
     <EmbeddedResource Include="Application\WebApp\Private\Reportes\RDLC\rptEvento.rdlc" />
     <EmbeddedResource Include="Application\WebApp\Private\Reportes\RDLC\rptInvitacion.rdlc" />
     <EmbeddedResource Include="Application\WebApp\Private\Reportes\RDLC\rptInvitacionDetalle.rdlc" />
