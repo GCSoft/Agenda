@@ -56,6 +56,7 @@ namespace Agenda.Entity.Object
         private Int16   _Notificacion;
         private ENTInvitacionContacto       _Contacto;
         private ENTInvitacionFuncionario    _Funcionario;
+        private String  _PalabraClave;
 
 
         //Constructor
@@ -102,6 +103,7 @@ namespace Agenda.Entity.Object
             _Notificacion = 0;
             _Contacto = new ENTInvitacionContacto();
             _Funcionario = new ENTInvitacionFuncionario();
+            _PalabraClave = "";
         }
 
 
@@ -585,6 +587,18 @@ namespace Agenda.Entity.Object
         {
             get { return _Funcionario; }
             set { _Funcionario = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTInvitacion.PalabraClave</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna una palabra/palabras clave en la consulta de información</summary>
+        public String PalabraClave
+        {
+            get { return _PalabraClave; }
+            set { _PalabraClave = value; }
         }
 
     }

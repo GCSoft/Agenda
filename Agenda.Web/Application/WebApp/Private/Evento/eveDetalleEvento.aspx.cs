@@ -185,8 +185,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.ContactoPanel.Visible = true;
                         this.AdjuntarPanel.Visible = (this.Logistica.Value == "1" ? true : false);
                         this.RechazarPanel.Visible = true;
-                        this.CuadernilloLogisticaPanel.Visible = false;
-                        this.CuadernilloProtocoloPanel.Visible = false;
+                        this.CuadernilloLogisticaPanel.Visible = (this.Logistica.Value == "1" ? true : false);
+                        this.CuadernilloProtocoloPanel.Visible = (this.Logistica.Value == "1" ? false : true);
                         this.EnviarCuadernilloPanel.Visible = false;
                         this.Historial.Visible = true;
 						break;

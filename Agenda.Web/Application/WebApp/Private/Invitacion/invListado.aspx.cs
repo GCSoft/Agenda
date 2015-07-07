@@ -142,6 +142,11 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                     if (!this.wucEndDate.IsValidDate()) { throw new Exception("El campo [Fecha Inicial] es requerido"); }
                 }
 
+                if( this.rblBusqueda.SelectedIndex > 0 ){ // Por palabra clave
+
+                    if (this.txtNombre.Text.Trim() == "") { throw new Exception("Las consultas históricas consideran mucha información. Introduzca por lo menos una palabra clave como filtro."); }
+                }
+
                 // Datos de sesión
                 oENTSession = (ENTSession)this.Session["oENTSession"];
 
@@ -150,9 +155,19 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 oENTInvitacion.UsuarioId = oENTSession.UsuarioId;
                 oENTInvitacion.EstatusInvitacionId = Int32.Parse( this.ddlEstatusInvitacion.SelectedItem.Value );
                 oENTInvitacion.PrioridadId = Int32.Parse( this.ddlPrioridad.SelectedItem.Value );
-                oENTInvitacion.FechaInicio = ( CheckDate ? this.wucBeginDate.DisplayUTCDate : GetUTCBeginDate() );
-                oENTInvitacion.FechaFin = ( CheckDate ? this.wucEndDate.DisplayUTCDate : GetUTCEndDate() );
                 oENTInvitacion.Nivel = 1;
+
+                if( this.rblBusqueda.SelectedIndex == 0 ){ // Por fecha
+
+                    oENTInvitacion.FechaInicio = ( CheckDate ? this.wucBeginDate.DisplayUTCDate : GetUTCBeginDate() );
+                    oENTInvitacion.FechaFin = ( CheckDate ? this.wucEndDate.DisplayUTCDate : GetUTCEndDate() );
+                    oENTInvitacion.PalabraClave = "";
+                }else{ // Por Palabra Clave
+                    
+                    oENTInvitacion.FechaInicio = "1900-01-01";
+                    oENTInvitacion.FechaFin = "2900-01-01";
+                    oENTInvitacion.PalabraClave = this.txtNombre.Text.Trim();
+                }
 
                 // Transacción
                 oENTResponse = oBPInvitacion.SelectInvitacion(oENTInvitacion);
@@ -230,6 +245,8 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 tempDate = tempDate.AddDays(-1);
                 this.wucEndDate.SetDate(tempDate);
 
+                this.txtNombre.Text = "";
+
                 // Consulta
                 SelectInvitacion(false);
 
@@ -294,7 +311,10 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
             ImageButton imgEdit = null;
 
             String InvitacionId = "";
-            String EventoNombre = "";
+            String EventoHoraInicio = "";
+            String EventoHoraFin = "";
+            String EventoPrioridad = "";
+            String InvitacionObservaciones = "";
 
             String sImagesAttributes = "";
             String sTootlTip = "";
@@ -310,10 +330,13 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
                 // Datakeys
                 InvitacionId = this.gvInvitacion.DataKeys[e.Row.RowIndex]["InvitacionId"].ToString();
-                EventoNombre = this.gvInvitacion.DataKeys[e.Row.RowIndex]["EventoNombre"].ToString();
+                EventoHoraInicio = this.gvInvitacion.DataKeys[e.Row.RowIndex]["EventoHoraInicioEstandar"].ToString();
+                EventoHoraFin = this.gvInvitacion.DataKeys[e.Row.RowIndex]["EventoHoraFinEstandar"].ToString();
+                EventoPrioridad = this.gvInvitacion.DataKeys[e.Row.RowIndex]["PrioridadNombre"].ToString();
+                InvitacionObservaciones = this.gvInvitacion.DataKeys[e.Row.RowIndex]["InvitacionObservaciones"].ToString();
 
                 // Tooltip Edición
-                sTootlTip = "Detalle de invitación [" + EventoNombre + "]";
+                sTootlTip = "Hora de evento: " + EventoHoraInicio + " - " + EventoHoraFin + Convert.ToChar(13) + Convert.ToChar(13) + "Prioridad: " + EventoPrioridad + Convert.ToChar(13) + Convert.ToChar(13) + "Observaciones:" + Convert.ToChar(13) + InvitacionObservaciones;
                 imgEdit.Attributes.Add("title", sTootlTip);
 
                 // Atributos Over
@@ -333,12 +356,44 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
             try
             {
 
-                gcCommon.SortGridView(ref this.gvInvitacion, ref this.hddSort, e.SortExpression);
+                gcCommon.SortGridView(ref this.gvInvitacion, ref this.hddSort, e.SortExpression, true);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){  alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusInvitacion.ClientID + "'); }", true);
             }
 
+        }
+
+        protected void rblBusqueda_SelectedIndexChanged(object sender, EventArgs e){
+            DateTime tempDate = DateTime.Now;
+
+            try
+            {
+
+                // Por default preseleccionado todo el mes
+                tempDate = tempDate.AddDays((DateTime.Now.Day - 1) * -1);
+                this.wucBeginDate.SetDate(tempDate);
+
+                tempDate = tempDate.AddMonths(1);
+                tempDate = tempDate.AddDays(-1);
+                this.wucEndDate.SetDate(tempDate);
+
+                this.txtNombre.Text = "";
+
+                // ocultar/mostrar panel
+                if( this.rblBusqueda.SelectedIndex == 0 ){
+
+                    this.pnlBusquedaFecha.Visible = true;
+                    this.pnlBusquedaPalabra.Visible = false;
+                }else{
+
+                    this.pnlBusquedaFecha.Visible = false;
+                    this.pnlBusquedaPalabra.Visible = true;
+                }
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){  alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusInvitacion.ClientID + "'); }", true);
+            }
         }
 
 

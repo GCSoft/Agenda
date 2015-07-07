@@ -792,7 +792,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>="Eventos Publicos"</Value>
+                  <Value>="Eventos Públicos"</Value>
                   <Style>
                     <FontStyle>Italic</FontStyle>
                     <FontSize>11pt</FontSize>

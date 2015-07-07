@@ -94,7 +94,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/30/2015 15:25:56</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Gira/girConfiguracionGira.aspx">
-      <publishTime>07/01/2015 16:18:18</publishTime>
+      <publishTime>07/05/2015 00:39:55</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Gira/girContacto.aspx">
       <publishTime>03/30/2015 15:25:53</publishTime>
@@ -139,10 +139,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/19/2015 11:37:39</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Invitacion/invListado.aspx">
-      <publishTime>02/06/2015 16:35:36</publishTime>
+      <publishTime>07/06/2015 16:23:35</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Invitacion/invRechazar.aspx">
       <publishTime>01/28/2015 17:42:24</publishTime>
+    </File>
+    <File Include="Application/WebApp/Private/Reportes/repAgendaDiaria.aspx">
+      <publishTime>07/05/2015 13:45:54</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Reportes/repEvento.aspx">
       <publishTime>03/11/2015 11:59:56</publishTime>
@@ -154,7 +157,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/14/2015 17:42:01</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Reportes/repInvitacionPrensa.aspx">
-      <publishTime>07/01/2015 15:13:32</publishTime>
+      <publishTime>07/05/2015 13:09:55</publishTime>
     </File>
     <File Include="Application/WebApp/Private/SysApp/sappChangePassword.aspx">
       <publishTime>01/21/2015 12:22:16</publishTime>
@@ -181,16 +184,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/13/2015 16:11:31</publishTime>
     </File>
     <File Include="bin/Agenda.BusinessProcess.dll">
-      <publishTime>07/02/2015 11:50:44</publishTime>
+      <publishTime>07/06/2015 16:34:55</publishTime>
     </File>
     <File Include="bin/Agenda.DataAccess.dll">
-      <publishTime>07/02/2015 11:50:44</publishTime>
+      <publishTime>07/06/2015 16:34:55</publishTime>
     </File>
     <File Include="bin/Agenda.Entity.dll">
-      <publishTime>07/02/2015 11:50:43</publishTime>
+      <publishTime>07/06/2015 16:34:54</publishTime>
     </File>
     <File Include="bin/Agenda.Web.dll">
-      <publishTime>07/02/2015 11:50:45</publishTime>
+      <publishTime>07/06/2015 16:34:57</publishTime>
     </File>
     <File Include="bin/AjaxControlToolkit.dll">
       <publishTime>06/23/2014 11:45:59</publishTime>
@@ -373,7 +376,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/04/2013 13:25:48</publishTime>
     </File>
     <File Include="DB.config">
-      <publishTime>07/01/2015 14:50:07</publishTime>
+      <publishTime>07/06/2015 15:42:25</publishTime>
     </File>
     <File Include="Include/Components/Ajax/AjaxControlToolkit.dll">
       <publishTime>06/23/2014 11:45:59</publishTime>
@@ -1585,7 +1588,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/27/2014 12:58:28</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/02/2015 11:51:14</publishTime>
+      <publishTime>07/06/2015 16:35:33</publishTime>
     </File>
   </ItemGroup>
 </Project>

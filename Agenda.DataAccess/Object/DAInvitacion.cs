@@ -603,6 +603,10 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTInvitacion.Nivel;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("PalabraClave", SqlDbType.VarChar);
+            sqlPar.Value = oENTInvitacion.PalabraClave;
+            sqlCom.Parameters.Add(sqlPar);
+
             // Inicializaciones
             oENTResponse.DataSetResponse = new DataSet();
             sqlDA = new SqlDataAdapter(sqlCom);
