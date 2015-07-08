@@ -32,7 +32,29 @@
 
         };
 
-        </script>
+        // Mantener la sesión activa
+        function KeepAliveSession() {
+            try
+            {
+                
+                var head = document.getElementsByTagName('head').item(0);
+
+                script = document.createElement('script');
+                script.src = '../../../../Include/Handler/KeepAliveSession.ashx';
+                script.setAttribute('type', 'text/javascript');
+                script.defer = true;
+
+                head.appendChild(script);
+
+            }
+            catch (e)
+            {
+            }
+        };
+
+        setInterval('KeepAliveSession()', 900000);
+
+    </script>
     <asp:ContentPlaceHolder ID="cntPrivateTemplateHeader" runat="server">
     </asp:ContentPlaceHolder>
 </head>

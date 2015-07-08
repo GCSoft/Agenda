@@ -748,6 +748,9 @@
     <Compile Include="Include\Handler\Documento.ashx.cs">
       <DependentUpon>Documento.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Include\Handler\KeepAliveSession.ashx.cs">
+      <DependentUpon>KeepAliveSession.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Include\MasterPage\LoginTemplate.Master.cs">
       <DependentUpon>LoginTemplate.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -817,6 +820,7 @@
     <Content Include="Include\MasterPage\PrivateTemplate.Master" />
     <Content Include="Include\MasterPage\NonMenuTemplate.Master" />
     <Content Include="Include\Handler\Documento.ashx" />
+    <Content Include="Include\Handler\KeepAliveSession.ashx" />
     <None Include="Properties\PublishProfiles\Publish.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
