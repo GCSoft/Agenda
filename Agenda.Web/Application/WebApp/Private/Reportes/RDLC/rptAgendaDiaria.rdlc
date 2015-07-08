@@ -13,7 +13,7 @@
               </TablixColumns>
               <TablixRows>
                 <TablixRow>
-                  <Height>1.69792in</Height>
+                  <Height>2.13542in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -566,6 +566,9 @@
                               </Style>
                             </Textbox>
                           </ReportItems>
+                          <PageBreak>
+                            <BreakLocation>End</BreakLocation>
+                          </PageBreak>
                           <KeepTogether>true</KeepTogether>
                           <Style>
                             <Border>
@@ -593,7 +596,7 @@
             </TablixRowHierarchy>
             <DataSetName>dsReporteAgendaDiaria</DataSetName>
             <Top>0.0375in</Top>
-            <Height>1.69792in</Height>
+            <Height>2.13542in</Height>
             <Width>7.44614in</Width>
             <Style>
               <Border>
@@ -604,7 +607,7 @@
         </ReportItems>
         <KeepTogether>true</KeepTogether>
         <Left>0.03417in</Left>
-        <Height>8.80729in</Height>
+        <Height>8.79688in</Height>
         <Width>7.44614in</Width>
         <Style>
           <Border>
