@@ -179,6 +179,11 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     if (!this.wucEndDate.IsValidDate()) { throw new Exception("El campo [Fecha Inicial] es requerido"); }
                 }
 
+                if( this.rblBusqueda.SelectedIndex > 0 ){ // Por palabra clave
+
+                    if (this.txtNombre.Text.Trim() == "") { throw new Exception("Las consultas históricas consideran mucha información. Introduzca por lo menos una palabra clave como filtro."); }
+                }
+
                 // Datos de sesión
                 oENTSession = (ENTSession)this.Session["oENTSession"];
 
@@ -187,10 +192,20 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 oENTEvento.UsuarioId = oENTSession.UsuarioId;
                 oENTEvento.EstatusEventoId = Int32.Parse( this.ddlEstatusEvento.SelectedItem.Value );
                 oENTEvento.PrioridadId = Int32.Parse(this.ddlPrioridad.SelectedItem.Value);
-                oENTEvento.FechaInicio = ( CheckDate ? this.wucBeginDate.DisplayUTCDate : GetUTCBeginDate() );
-                oENTEvento.FechaFin = ( CheckDate ? this.wucEndDate.DisplayUTCDate : GetUTCEndDate() );
                 oENTEvento.Nivel = 1;
                 oENTEvento.Dependencia = Int16.Parse(this.ddlDependencia.SelectedItem.Value);
+
+                if( this.rblBusqueda.SelectedIndex == 0 ){ // Por fecha
+
+                    oENTEvento.FechaInicio = (CheckDate ? this.wucBeginDate.DisplayUTCDate : GetUTCBeginDate());
+                    oENTEvento.FechaFin = (CheckDate ? this.wucEndDate.DisplayUTCDate : GetUTCEndDate());
+                    oENTEvento.PalabraClave = "";
+                }else{ // Por Palabra Clave
+
+                    oENTEvento.FechaInicio = "1900-01-01";
+                    oENTEvento.FechaFin = "2900-01-01";
+                    oENTEvento.PalabraClave = this.txtNombre.Text.Trim();
+                }
 
                 // Transacción
                 oENTResponse = oBPEvento.SelectEvento(oENTEvento);
@@ -378,6 +393,38 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusEvento.ClientID + "'); }", true);
             }
 
+        }
+
+        protected void rblBusqueda_SelectedIndexChanged(object sender, EventArgs e){
+            DateTime tempDate = DateTime.Now;
+
+            try
+            {
+
+                // Por default preseleccionado todo el mes
+                tempDate = tempDate.AddDays((DateTime.Now.Day - 1) * -1);
+                this.wucBeginDate.SetDate(tempDate);
+
+                tempDate = tempDate.AddMonths(1);
+                tempDate = tempDate.AddDays(-1);
+                this.wucEndDate.SetDate(tempDate);
+
+                this.txtNombre.Text = "";
+
+                // ocultar/mostrar panel
+                if( this.rblBusqueda.SelectedIndex == 0 ){
+
+                    this.pnlBusquedaFecha.Visible = true;
+                    this.pnlBusquedaPalabra.Visible = false;
+                }else{
+
+                    this.pnlBusquedaFecha.Visible = false;
+                    this.pnlBusquedaPalabra.Visible = true;
+                }
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){  alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusEvento.ClientID + "'); }", true);
+            }
         }
 
     }

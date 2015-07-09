@@ -63,7 +63,7 @@
                         <table style="width:100%;"">
                             <tr>
                                 <td style="text-align:left; width:100%;">
-                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="Textbox_General" Width="600px"></asp:TextBox>
+                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="600px"></asp:TextBox>
                                 </td>
                             </tr>
                         </table>

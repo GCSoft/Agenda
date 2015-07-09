@@ -42,18 +42,39 @@
                 <td></td>
 			</tr>
             <tr>
-				<td class="Etiqueta">Desde</td>
+				<td class="Etiqueta">Búsqueda</td>
 				<td class="Espacio"></td>
 				<td class="Campo">
-                    <wuc:wucCalendar ID="wucBeginDate" runat="server" />
+                    <asp:RadioButtonList ID="rblBusqueda" runat="server" RepeatDirection="Horizontal" AutoPostBack="true" OnSelectedIndexChanged="rblBusqueda_SelectedIndexChanged">
+						<asp:ListItem Text="Por fecha" Value="1" Selected="True"></asp:ListItem>
+						<asp:ListItem Text="Por palabra clave" Value="2"></asp:ListItem>
+					</asp:RadioButtonList>
 				</td>
                 <td></td>
 			</tr>
             <tr>
-				<td class="Etiqueta">Hasta</td>
+				<td class="Etiqueta"></td>
 				<td class="Espacio"></td>
-				<td class="Campo"><wuc:wucCalendar ID="wucEndDate" runat="server" /></td>
-                <td></td>
+				<td colspan="2">
+                    <asp:Panel ID="pnlBusquedaFecha" runat="server" Visible="true" >
+                        <table style="width:100%;"">
+                            <tr>
+                                <td style="text-align:left; width:100%;">
+                                    Desde&nbsp;<wuc:wucCalendar ID="wucBeginDate" runat="server" />&nbsp;&nbsp;&nbsp;Hasta&nbsp;<wuc:wucCalendar ID="wucEndDate" runat="server" />
+                                </td>
+                            </tr>
+                        </table>
+                    </asp:Panel>
+                    <asp:Panel ID="pnlBusquedaPalabra" runat="server" Visible="false">
+                        <table style="width:100%;"">
+                            <tr>
+                                <td style="text-align:left; width:100%;">
+                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="600px"></asp:TextBox>
+                                </td>
+                            </tr>
+                        </table>
+                    </asp:Panel>
+                </td>
 			</tr>
         </table>
     </asp:Panel>

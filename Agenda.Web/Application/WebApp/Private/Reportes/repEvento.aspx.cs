@@ -228,6 +228,7 @@ namespace Agenda.Web.Application.WebApp.Private.Reportes
                 oENTEvento.PrioridadId = Int32.Parse(this.ddlPrioridad.SelectedItem.Value);
                 oENTEvento.FechaInicio = (CheckDate ? this.wucBeginDate.DisplayUTCDate : GetUTCBeginDate());
                 oENTEvento.FechaFin = (CheckDate ? this.wucEndDate.DisplayUTCDate : GetUTCEndDate());
+                oENTEvento.PalabraClave = "";
                 oENTEvento.Nivel = 1;
                 oENTEvento.Dependencia = Int16.Parse(this.ddlDependencia.SelectedItem.Value);
 

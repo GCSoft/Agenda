@@ -103,6 +103,24 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.DropDownList ddlDependencia;
         
         /// <summary>
+        /// rblBusqueda control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblBusqueda;
+        
+        /// <summary>
+        /// pnlBusquedaFecha control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlBusquedaFecha;
+        
+        /// <summary>
         /// wucBeginDate control.
         /// </summary>
         /// <remarks>
@@ -119,6 +137,24 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Agenda.Web.Include.WebUserControls.wucCalendar wucEndDate;
+        
+        /// <summary>
+        /// pnlBusquedaPalabra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlBusquedaPalabra;
+        
+        /// <summary>
+        /// txtNombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNombre;
         
         /// <summary>
         /// pnlBreak control.

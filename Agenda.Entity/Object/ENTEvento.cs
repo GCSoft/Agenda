@@ -123,6 +123,8 @@ namespace Agenda.Entity.Object
         private Int16   _NotaFinAcomodo;
         private String  _NotaAcomodo;
 
+        private String  _PalabraClave;
+
 
         //Constructor
 
@@ -231,6 +233,8 @@ namespace Agenda.Entity.Object
             _NotaInicioAcomodo = 0;
             _NotaFinAcomodo = 0;
             _NotaAcomodo = "";
+
+            _PalabraClave = "";
 
         }
 
@@ -1411,6 +1415,17 @@ namespace Agenda.Entity.Object
         {
             get { return _NotaAcomodo; }
             set { _NotaAcomodo = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.PalabraClave</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public String PalabraClave
+        {
+            get { return _PalabraClave; }
+            set { _PalabraClave = value; }
         }
 
     }
