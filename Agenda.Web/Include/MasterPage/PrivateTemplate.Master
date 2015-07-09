@@ -69,7 +69,9 @@
 				        <td style="background-color:#65B449; min-width:260px; vertical-align:top; width:260px;">
 
                             <asp:Panel ID="pnlMenu" runat="server" CssClass="MasterMenu" BackImageUrl="~/Include/Image/Web/MenuBackground.jpg">
-                                <wuc:wucMenu ID="wucMenuPrincipal" runat="server"></wuc:wucMenu>
+                                <asp:Panel ID="pnlMenuFlotante" runat="server" CssClass="MasterMenuFlotante">
+                                    <wuc:wucMenu ID="wucMenuPrincipal" runat="server"></wuc:wucMenu>
+                                </asp:Panel>
                             </asp:Panel>
 
 				        </td>

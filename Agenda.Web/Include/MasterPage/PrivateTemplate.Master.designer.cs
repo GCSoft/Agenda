@@ -58,6 +58,15 @@ namespace Agenda.Web.Include.MasterPage {
         protected global::System.Web.UI.WebControls.Panel pnlMenu;
         
         /// <summary>
+        /// pnlMenuFlotante control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlMenuFlotante;
+        
+        /// <summary>
         /// wucMenuPrincipal control.
         /// </summary>
         /// <remarks>

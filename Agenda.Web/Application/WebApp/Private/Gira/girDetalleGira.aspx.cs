@@ -260,7 +260,6 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     this.DatosGiraPanel.Visible = true;
                     this.ProgramaGiraPanel.Visible = true;
                     this.ContactoPanel.Visible = true;
-                    this.RechazarPanel.Visible = true;
                     this.CuadernilloGiraPanel.Visible = true;
                     this.Historial.Visible = true;
 

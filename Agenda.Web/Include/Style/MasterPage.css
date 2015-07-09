@@ -126,6 +126,16 @@ html, body, form
 	width:261px;
 }
 
+.MasterMenuFlotante{
+	border:0px solid #000000;
+    top:10px;
+	height:100%;
+	left:0px;
+	position:fixed;
+	width:261px;
+	z-index:800;
+}
+
 .MasterPageName{
 	border: 0px solid #000000;
 	float:left;

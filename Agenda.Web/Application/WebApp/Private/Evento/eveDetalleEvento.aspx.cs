@@ -231,6 +231,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     this.ContactoPanel.Visible = false;
                     this.AdjuntarPanel.Visible = false;
                     this.RechazarPanel.Visible = false;
+                    this.EnviarCuadernilloPanel.Visible = false;
 
 				}
 
@@ -301,10 +302,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     this.ProgramaProtocoloPanel.Visible = (this.Logistica.Value == "1" ? false : true);
                     this.ContactoPanel.Visible = true;
                     this.AdjuntarPanel.Visible = (this.Logistica.Value == "1" ? true : false);
-                    this.RechazarPanel.Visible = true;
                     this.CuadernilloLogisticaPanel.Visible = (this.Logistica.Value == "1" ? true : false);
                     this.CuadernilloProtocoloPanel.Visible = (this.Logistica.Value == "1" ? false : true);
-                    this.EnviarCuadernilloPanel.Visible = true;
                     this.Historial.Visible = true;
 
                     // Ajustes
@@ -312,6 +311,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                         this.CuadernilloLogisticaPanel.Visible = false;
                         this.CuadernilloProtocoloPanel.Visible = false;
+                        this.DatosGeneralesPanel.Visible = false;
+                        this.EnviarCuadernilloPanel.Visible = false;
                     }
 
                     if (Int32.Parse(this.hddEstatusEventoId.Value) != 5){
