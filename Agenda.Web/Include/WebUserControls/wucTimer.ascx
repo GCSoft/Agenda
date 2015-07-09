@@ -8,7 +8,7 @@
 	Mask="99:99"
 	MessageValidatorTip="true"
 	MaskType="Time"
-	AcceptAMPM="True"
+	AcceptAMPM="False"
 	ErrorTooltipEnabled="True"
 	OnBlurCssNegative="Timer_Error_Canvas"
 	OnFocusCssClass="Timer_Focus_Canvas"

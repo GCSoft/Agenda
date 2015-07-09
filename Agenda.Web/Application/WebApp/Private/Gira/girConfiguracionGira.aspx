@@ -121,7 +121,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPopUp_TrasladoVehiculo" runat="server" CssClass="PopUpBlock">
-        <asp:Panel ID="pnlPopUp_TrasladoVehiculoContent" runat="server" CssClass="PopUpContent" style="margin-top:-130px; margin-left:-260px;" Height="260px" Width="520px">
+        <asp:Panel ID="pnlPopUp_TrasladoVehiculoContent" runat="server" CssClass="PopUpContent" style="margin-top:-150px; margin-left:-260px;" Height="300px" Width="520px">
             <asp:Panel ID="pnlPopUp_TrasladoVehiculoHeader" runat="server" CssClass="PopUpHeader">
                 <table class="PopUpHeaderTable">
                     <tr>
@@ -155,16 +155,16 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="Etiqueta">Nombre</td>
+                        <td class="Etiqueta">Detalle</td>
                         <td class="VinetaObligatorio">*</td>
-                        <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoVehiculoDetalle" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
+                        <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoVehiculoDetalle" runat="server" CssClass="Textarea_General" Height="70px" TextMode="MultiLine" MaxLength="1000" Width="400px"></asp:TextBox></td>
                     </tr>
                     <tr>
 				        <td class="Etiqueta">Desde las</td>
 				        <td class="VinetaObligatorio">*</td>
 				        <td class="Campo">
                             <wuc:wucTimer ID="wucPopUp_TrasladoVehiculoTimerDesde" runat="server" />&nbsp;&nbsp;&nbsp;hasta las&nbsp;&nbsp;&nbsp;
-                            <wuc:wucTimer ID="wucPopUp_TrasladoVehiculoTimerHasta" runat="server" />
+                            <wuc:wucTimer ID="wucPopUp_TrasladoVehiculoTimerHasta" runat="server" />&nbsp;HRS.
 				        </td>
 			        </tr>
                     <tr>
@@ -183,7 +183,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPopUp_TrasladoHelicoptero" runat="server" CssClass="PopUpBlock">
-        <asp:Panel ID="pnlPopUp_TrasladoHelicopteroContent" runat="server" CssClass="PopUpContent" style="margin-top:-210px; margin-left:-260px;" Height="420px" Width="580px">
+        <asp:Panel ID="pnlPopUp_TrasladoHelicopteroContent" runat="server" CssClass="PopUpContent" style="margin-top:-235px; margin-left:-260px;" Height="470px" Width="580px">
             <asp:Panel ID="pnlPopUp_TrasladoHelicopteroHeader" runat="server" CssClass="PopUpHeader">
                 <table class="PopUpHeaderTable">
                     <tr>
@@ -194,7 +194,7 @@
                 </table>
             </asp:Panel>
             <asp:Panel ID="pnlPopUp_TrasladoHelicopteroBody" runat="server" CssClass="PopUpBody">
-                <asp:TabContainer ID="tabFormulario_TrasladoHelicoptero" runat="server" ActiveTabIndex="0" CssClass="Tabcontainer_General" Height="280" >
+                <asp:TabContainer ID="tabFormulario_TrasladoHelicoptero" runat="server" ActiveTabIndex="0" CssClass="Tabcontainer_General" Height="330" >
                     <asp:TabPanel ID="tpnlGenerales_TrasladoHelicoptero" runat="server">
                         <HeaderTemplate>Datos generales</HeaderTemplate>
                         <ContentTemplate>
@@ -225,7 +225,7 @@
                                 <tr>
                                     <td class="Etiqueta">Nombre</td>
                                     <td class="VinetaObligatorio">*</td>
-                                    <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroDetalle" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
+                                    <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroDetalle" runat="server" CssClass="Textarea_General" Height="70px" TextMode="MultiLine" MaxLength="1000" Width="400px"></asp:TextBox></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -233,7 +233,7 @@
 				                    <td class="VinetaObligatorio">*</td>
 				                    <td class="Campo">
                                         <wuc:wucTimer ID="wucPopUp_TrasladoHelicopteroTimerDesde" runat="server" />&nbsp;&nbsp;&nbsp;hasta las&nbsp;&nbsp;&nbsp;
-                                        <wuc:wucTimer ID="wucPopUp_TrasladoHelicopteroTimerHasta" runat="server" />
+                                        <wuc:wucTimer ID="wucPopUp_TrasladoHelicopteroTimerHasta" runat="server" />&nbsp;HRS.
 				                    </td>
                                     <td></td>
 			                    </tr>
@@ -266,13 +266,13 @@
                                 <tr>
                                     <td class="Etiqueta">Nombre</td>
                                     <td class="VinetaObligatorio"></td>
-                                    <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroComiteNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
+                                    <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroComiteNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="375px"></asp:TextBox></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td class="Etiqueta">Puesto</td>
                                     <td class="VinetaObligatorio"></td>
-                                    <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroComitePuesto" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
+                                    <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroComitePuesto" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="375px"></asp:TextBox></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -293,7 +293,7 @@
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div style="border:1px solid #C1C1C1; height:100px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:548px">
+                                        <div style="border:1px solid #C1C1C1; height:150px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:548px">
                                             <asp:GridView ID="gvComiteHelipuerto" runat="server" AllowPaging="false" AllowSorting="True" AutoGenerateColumns="False" ShowHeader="false" Width="100%"
                                                 DataKeyNames="Orden,Nombre,Puesto"
                                                 OnRowCommand="gvComiteHelipuerto_RowCommand"
@@ -390,7 +390,7 @@
 				                    <td class="VinetaObligatorio">*</td>
 				                    <td class="Campo">
                                         <wuc:wucTimer ID="wucPopUp_EventoTimerDesde" runat="server" />&nbsp;&nbsp;&nbsp;hasta las&nbsp;&nbsp;&nbsp;
-                                        <wuc:wucTimer ID="wucPopUp_EventoTimerHasta" runat="server" />
+                                        <wuc:wucTimer ID="wucPopUp_EventoTimerHasta" runat="server" />&nbsp;HRS.
 				                    </td>
                                     <td></td>
 			                    </tr>
@@ -800,7 +800,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPopUp_ActividadGeneral" runat="server" CssClass="PopUpBlock">
-        <asp:Panel ID="pnlPopUp_ActividadGeneralContent" runat="server" CssClass="PopUpContent" style="margin-top:-130px; margin-left:-260px;" Height="260px" Width="520px">
+        <asp:Panel ID="pnlPopUp_ActividadGeneralContent" runat="server" CssClass="PopUpContent" style="margin-top:-150px; margin-left:-260px;" Height="300px" Width="520px">
             <asp:Panel ID="pnlPopUp_ActividadGeneralHeader" runat="server" CssClass="PopUpHeader">
                 <table class="PopUpHeaderTable">
                     <tr>
@@ -836,14 +836,14 @@
                     <tr>
                         <td class="Etiqueta">Nombre</td>
                         <td class="VinetaObligatorio">*</td>
-                        <td class="Campo"><asp:TextBox ID="txtPopUp_ActividadGeneralDetalle" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
+                        <td class="Campo"><asp:TextBox ID="txtPopUp_ActividadGeneralDetalle" runat="server" CssClass="Textarea_General" Height="70px" TextMode="MultiLine" MaxLength="1000" Width="400px"></asp:TextBox></td>
                     </tr>
                     <tr>
 				        <td class="Etiqueta">Desde las</td>
 				        <td class="VinetaObligatorio">*</td>
 				        <td class="Campo">
                             <wuc:wucTimer ID="wucPopUp_ActividadGeneralTimerDesde" runat="server" />&nbsp;&nbsp;&nbsp;hasta las&nbsp;&nbsp;&nbsp;
-                            <wuc:wucTimer ID="wucPopUp_ActividadGeneralTimerHasta" runat="server" />
+                            <wuc:wucTimer ID="wucPopUp_ActividadGeneralTimerHasta" runat="server" />&nbsp;HRS.
 				        </td>
 			        </tr>
                     <tr>
@@ -921,7 +921,7 @@
                     </tr>
                     <tr>
                         <td class="Etiqueta"># Ext</td>
-				        <td class="VinetaObligatorio">*</td>
+				        <td class="VinetaObligatorio"></td>
 				        <td class="Etiqueta">
                             <asp:TextBox ID="txtPopUpNumeroExterior_LugarEvento" runat="server" CssClass="Textbox_General" MaxLength="50" Width="130px"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             # Int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -949,7 +949,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPopUp_ComentarioEnCuadernillo" runat="server" CssClass="PopUpBlock">
-        <asp:Panel ID="pnlPopUp_ComentarioEnCuadernilloContent" runat="server" CssClass="PopUpContent" style="margin-top:-110px; margin-left:-260px;" Height="220px" Width="520px">
+        <asp:Panel ID="pnlPopUp_ComentarioEnCuadernilloContent" runat="server" CssClass="PopUpContent" style="margin-top:-115px; margin-left:-260px;" Height="230px" Width="520px">
             <asp:Panel ID="pnlPopUp_ComentarioEnCuadernilloHeader" runat="server" CssClass="PopUpHeader">
                 <table class="PopUpHeaderTable">
                     <tr>
@@ -973,7 +973,7 @@
                         </td>
                     </tr>
                     <tr>
-				        <td colspan="3"><asp:TextBox ID="txtPopUp_ComentarioEnCuadernilloDetalle" runat="server" CssClass="Textarea_General" Height="60px" MaxLength="1000" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
+				        <td colspan="3"><asp:TextBox ID="txtPopUp_ComentarioEnCuadernilloDetalle" runat="server" CssClass="Textarea_General" Height="70px" MaxLength="1000" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
 			        </tr>
                     <tr>
                         <td class="Botones" colspan="3">

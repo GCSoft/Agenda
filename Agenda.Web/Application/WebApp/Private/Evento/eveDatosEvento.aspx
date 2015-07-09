@@ -46,7 +46,7 @@
             <tr>
 				<td class="Etiqueta">Nombre del evento</td>
 				<td class="VinetaObligatorio">*</td>
-				<td class="Campo"><asp:TextBox ID="txtNombreEvento" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
+				<td class="Campo"><asp:TextBox ID="txtNombreEvento" runat="server" CssClass="Textarea_General" Height="70px" MaxLength="1000" TextMode="MultiLine" Width="400px"></asp:TextBox></td>
                 <td></td>
 			</tr>
             <tr>
@@ -60,7 +60,7 @@
                             </td>
                             <td style="text-align:left; width:300px;">
                                 <wuc:wucTimer ID="wucTimerDesde" runat="server" />&nbsp;&nbsp;a&nbsp;&nbsp;
-                                <wuc:wucTimer ID="wucTimerHasta" runat="server" />
+                                <wuc:wucTimer ID="wucTimerHasta" runat="server" />&nbsp;HRS.
                             </td>
                             <td></td>
                         </tr>
@@ -230,7 +230,7 @@
                     </tr>
                     <tr>
                         <td class="Etiqueta"># Ext</td>
-				        <td class="VinetaObligatorio">*</td>
+				        <td class="VinetaObligatorio"></td>
 				        <td class="Etiqueta">
                             <asp:TextBox ID="txtPopUpNumeroExterior_LugarEvento" runat="server" CssClass="Textbox_General" MaxLength="50" Width="130px"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             # Int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

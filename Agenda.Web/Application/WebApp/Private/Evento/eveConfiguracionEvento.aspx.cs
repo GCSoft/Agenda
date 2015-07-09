@@ -66,164 +66,164 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     AccordionSelectedIndex = this.acrdNombreEvento.SelectedIndex;
                     this.acrdNombreEvento.SelectedIndex = 0;
 
-                    // Medios de traslado seleccionados
-                    tblTemporal = new DataTable("DataTableMedioTraslado");
-                    tblTemporal.Columns.Add("MedioTrasladoId", typeof(Int32));
-                    for (int k = 0; k < this.chklMedioTraslado.Items.Count; k++) {
-					    if(this.chklMedioTraslado.Items[k].Selected){
-                            rowTemporal = tblTemporal.NewRow();
-                            rowTemporal["MedioTrasladoId"] = this.chklMedioTraslado.Items[k].Value;
-                            tblTemporal.Rows.Add(rowTemporal);
-					    }
-				    }
+                    //// Medios de traslado seleccionados
+                    //tblTemporal = new DataTable("DataTableMedioTraslado");
+                    //tblTemporal.Columns.Add("MedioTrasladoId", typeof(Int32));
+                    //for (int k = 0; k < this.chklMedioTraslado.Items.Count; k++) {
+                    //    if(this.chklMedioTraslado.Items[k].Selected){
+                    //        rowTemporal = tblTemporal.NewRow();
+                    //        rowTemporal["MedioTrasladoId"] = this.chklMedioTraslado.Items[k].Value;
+                    //        tblTemporal.Rows.Add(rowTemporal);
+                    //    }
+                    //}
                 
-                    // Validaciones
-                    CurrentClientID = this.ddlTipoVestimenta.ClientID;
-                    if (this.ddlTipoVestimenta.SelectedItem.Value == "6" && this.txtTipoVestimentaOtro.Text.Trim() == "") { throw (new Exception("Es necesario ïngresar el tipo de vestimenta")); }
+                    //// Validaciones
+                    //CurrentClientID = this.ddlTipoVestimenta.ClientID;
+                    //if (this.ddlTipoVestimenta.SelectedItem.Value == "6" && this.txtTipoVestimentaOtro.Text.Trim() == "") { throw (new Exception("Es necesario ïngresar el tipo de vestimenta")); }
 
-                    CurrentClientID = this.chklMedioTraslado.ClientID;
-                    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario seleccionar un medio de traslado")); }
+                    //CurrentClientID = this.chklMedioTraslado.ClientID;
+                    //if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario seleccionar un medio de traslado")); }
 
                     CurrentClientID = this.txtAforo.ClientID;
                     if ( Int32.TryParse(this.txtAforo.Text, out ValidateNumber) == false) { throw (new Exception("La cantidad en Aforo debe de ser numérica")); }
 
-                    CurrentClientID = this.txtTipoMontaje.ClientID;
-                    if (this.txtTipoMontaje.Text.Trim() == "") { throw (new Exception("Es necesario determinar el tipo de montaje")); }
+                    //CurrentClientID = this.txtTipoMontaje.ClientID;
+                    //if (this.txtTipoMontaje.Text.Trim() == "") { throw (new Exception("Es necesario determinar el tipo de montaje")); }
 
-                    CurrentClientID = this.txtAccionRealizar.ClientID;
-                    if (this.txtAccionRealizar.Text.Trim() == "") { throw (new Exception("Es necesario determinar la acción a realizar")); }
+                    //CurrentClientID = this.txtAccionRealizar.ClientID;
+                    //if (this.txtAccionRealizar.Text.Trim() == "") { throw (new Exception("Es necesario determinar la acción a realizar")); }
                     
                     // Estado original del acordeón
                     this.acrdNombreEvento.SelectedIndex = AccordionSelectedIndex;
                     
                 #endregion
 
-                #region "Comité de Recepción en el Helipuerto Provisional"
+                //#region "Comité de Recepción en el Helipuerto Provisional"
 
-                    // Expander el acordeón
-                    AccordionSelectedIndex = this.acrdComiteHelipuerto.SelectedIndex;
-                    this.acrdComiteHelipuerto.SelectedIndex = 0;
+                //    // Expander el acordeón
+                //    AccordionSelectedIndex = this.acrdComiteHelipuerto.SelectedIndex;
+                //    this.acrdComiteHelipuerto.SelectedIndex = 0;
 
-                    if ( this.ddlComiteHelipuerto.SelectedItem.Value == "1" ){
+                //    if ( this.ddlComiteHelipuerto.SelectedItem.Value == "1" ){
 
-                        CurrentClientID = this.txtComiteHelipuertoLugar.ClientID;
-                        if (this.txtComiteHelipuertoLugar.Text.Trim() == "") { throw (new Exception("Es necesario determinar el lugar del helipuerto provisional")); }
+                //        CurrentClientID = this.txtComiteHelipuertoLugar.ClientID;
+                //        if (this.txtComiteHelipuertoLugar.Text.Trim() == "") { throw (new Exception("Es necesario determinar el lugar del helipuerto provisional")); }
 
-                        CurrentClientID = this.txtComiteHelipuertoDomicilio.ClientID;
-                        if (this.txtComiteHelipuertoDomicilio.Text.Trim() == "") { throw (new Exception("Es necesario determinar el domicilio del helipuerto provisional")); }
+                //        CurrentClientID = this.txtComiteHelipuertoDomicilio.ClientID;
+                //        if (this.txtComiteHelipuertoDomicilio.Text.Trim() == "") { throw (new Exception("Es necesario determinar el domicilio del helipuerto provisional")); }
 
-                        CurrentClientID = this.txtComiteHelipuertoCoordenadas.ClientID;
-                        if (this.txtComiteHelipuertoCoordenadas.Text.Trim() == "") { throw (new Exception("Es necesario determinar las coordenadas del helipuerto provisional")); }
+                //        CurrentClientID = this.txtComiteHelipuertoCoordenadas.ClientID;
+                //        if (this.txtComiteHelipuertoCoordenadas.Text.Trim() == "") { throw (new Exception("Es necesario determinar las coordenadas del helipuerto provisional")); }
 
-                        // Comité de recepción en helipuerto
-                        tblTemporal = null;
-                        tblTemporal = gcParse.GridViewToDataTable(this.gvComiteHelipuerto, true);
+                //        // Comité de recepción en helipuerto
+                //        tblTemporal = null;
+                //        tblTemporal = gcParse.GridViewToDataTable(this.gvComiteHelipuerto, true);
                     
-                        // Validaciones
-                        CurrentClientID = this.txtComiteHelipuertoNombre.ClientID;
-                        if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario capturar el Comité de Recepción en el Helipuerto")); }
+                //        // Validaciones
+                //        CurrentClientID = this.txtComiteHelipuertoNombre.ClientID;
+                //        if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario capturar el Comité de Recepción en el Helipuerto")); }
 
-                    }
+                //    }
 
-                    // Estado original del acordeón
-                    this.acrdComiteHelipuerto.SelectedIndex = AccordionSelectedIndex;
+                //    // Estado original del acordeón
+                //    this.acrdComiteHelipuerto.SelectedIndex = AccordionSelectedIndex;
 
-                #endregion
+                //#endregion
 
-                #region "Comité de recepción"
+                //#region "Comité de recepción"
 
-                    // Expander el acordeón
-                    AccordionSelectedIndex = this.acrdComiteRecepcion.SelectedIndex;
-                    this.acrdComiteRecepcion.SelectedIndex = 0;
+                //    // Expander el acordeón
+                //    AccordionSelectedIndex = this.acrdComiteRecepcion.SelectedIndex;
+                //    this.acrdComiteRecepcion.SelectedIndex = 0;
 
-                    // Comité de recepción
-                    tblTemporal = null;
-                    tblTemporal = gcParse.GridViewToDataTable(this.gvComiteRecepcion, true);
+                //    // Comité de recepción
+                //    tblTemporal = null;
+                //    tblTemporal = gcParse.GridViewToDataTable(this.gvComiteRecepcion, true);
                     
-                    // Validaciones
-                    CurrentClientID = this.txtComiteRecepcionNombre.ClientID;
-                    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario capturar el Comité de Recepción")); }
+                //    // Validaciones
+                //    CurrentClientID = this.txtComiteRecepcionNombre.ClientID;
+                //    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario capturar el Comité de Recepción")); }
 
-                    // Estado original del acordeón
-                    this.acrdComiteRecepcion.SelectedIndex = AccordionSelectedIndex;
+                //    // Estado original del acordeón
+                //    this.acrdComiteRecepcion.SelectedIndex = AccordionSelectedIndex;
 
-                #endregion
+                //#endregion
 
-                #region "Orden del día"
+                //#region "Orden del día"
 
-                    // Expander el acordeón
-                    AccordionSelectedIndex = this.acrdOrdenDia.SelectedIndex;
-                    this.acrdOrdenDia.SelectedIndex = 0;
+                //    // Expander el acordeón
+                //    AccordionSelectedIndex = this.acrdOrdenDia.SelectedIndex;
+                //    this.acrdOrdenDia.SelectedIndex = 0;
 
-                    // Comité de recepción
-                    tblTemporal = null;
-                    tblTemporal = gcParse.GridViewToDataTable(this.gvOrdenDia, true);
+                //    // Comité de recepción
+                //    tblTemporal = null;
+                //    tblTemporal = gcParse.GridViewToDataTable(this.gvOrdenDia, true);
                     
-                    // Validaciones
-                    CurrentClientID = this.txtOrdenDiaDetalle.ClientID;
-                    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario capturar la Orden del Día")); }
+                //    // Validaciones
+                //    CurrentClientID = this.txtOrdenDiaDetalle.ClientID;
+                //    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario capturar la Orden del Día")); }
 
-                    // Estado original del acordeón
-                    this.acrdOrdenDia.SelectedIndex = AccordionSelectedIndex;
+                //    // Estado original del acordeón
+                //    this.acrdOrdenDia.SelectedIndex = AccordionSelectedIndex;
 
-                #endregion
+                //#endregion
 
-                #region "Acomodo"
+                //#region "Acomodo"
 
-                    // Expander el acordeón
-                    AccordionSelectedIndex = this.acrdAcomodo.SelectedIndex;
-                    this.acrdAcomodo.SelectedIndex = 0;
+                //    // Expander el acordeón
+                //    AccordionSelectedIndex = this.acrdAcomodo.SelectedIndex;
+                //    this.acrdAcomodo.SelectedIndex = 0;
 
-                    // Comité de recepción
-                    tblTemporal = null;
-                    tblTemporal = gcParse.GridViewToDataTable(this.gvAcomodo, true);
+                //    // Comité de recepción
+                //    tblTemporal = null;
+                //    tblTemporal = gcParse.GridViewToDataTable(this.gvAcomodo, true);
                     
-                    // Validaciones
-                    CurrentClientID = this.txtAcomodoNombre.ClientID;
-                    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario capturar el acomodo al evento")); }
+                //    // Validaciones
+                //    CurrentClientID = this.txtAcomodoNombre.ClientID;
+                //    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario capturar el acomodo al evento")); }
 
-                    // Estado original del acordeón
-                    this.acrdAcomodo.SelectedIndex = AccordionSelectedIndex;
+                //    // Estado original del acordeón
+                //    this.acrdAcomodo.SelectedIndex = AccordionSelectedIndex;
 
-                #endregion
+                //#endregion
 
-                #region "Responsable del evento"
+                //#region "Responsable del evento"
 
-                    // Expander el acordeón
-                    AccordionSelectedIndex = this.acrdResponsable.SelectedIndex;
-                    this.acrdResponsable.SelectedIndex = 0;
+                //    // Expander el acordeón
+                //    AccordionSelectedIndex = this.acrdResponsable.SelectedIndex;
+                //    this.acrdResponsable.SelectedIndex = 0;
 
-                    // Comité de recepción
-                    tblTemporal = null;
-                    tblTemporal = gcParse.GridViewToDataTable(this.gvResponsableEvento, true);
+                //    // Comité de recepción
+                //    tblTemporal = null;
+                //    tblTemporal = gcParse.GridViewToDataTable(this.gvResponsableEvento, true);
                     
-                    // Validaciones
-                    CurrentClientID = this.txtResponsableEventoNombre.ClientID;
-                    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario ingresar por lo menos un responsable del evento")); }
+                //    // Validaciones
+                //    CurrentClientID = this.txtResponsableEventoNombre.ClientID;
+                //    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario ingresar por lo menos un responsable del evento")); }
 
-                    // Estado original del acordeón
-                    this.acrdResponsable.SelectedIndex = AccordionSelectedIndex;
+                //    // Estado original del acordeón
+                //    this.acrdResponsable.SelectedIndex = AccordionSelectedIndex;
 
-                #endregion
+                //#endregion
 
-                #region "Responsable de logística"
+                //#region "Responsable de logística"
 
-                    // Expander el acordeón
-                    AccordionSelectedIndex = this.acrdResponsableLogistica.SelectedIndex;
-                    this.acrdResponsableLogistica.SelectedIndex = 0;
+                //    // Expander el acordeón
+                //    AccordionSelectedIndex = this.acrdResponsableLogistica.SelectedIndex;
+                //    this.acrdResponsableLogistica.SelectedIndex = 0;
 
-                    // Comité de recepción
-                    tblTemporal = null;
-                    tblTemporal = gcParse.GridViewToDataTable(this.gvResponsableLogistica, true);
+                //    // Comité de recepción
+                //    tblTemporal = null;
+                //    tblTemporal = gcParse.GridViewToDataTable(this.gvResponsableLogistica, true);
                     
-                    // Validaciones
-                    CurrentClientID = this.txtResponsableLogisticaNombre.ClientID;
-                    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario ingresar por lo menos un responsable de logística")); }
+                //    // Validaciones
+                //    CurrentClientID = this.txtResponsableLogisticaNombre.ClientID;
+                //    if (tblTemporal.Rows.Count == 0) { throw (new Exception("Es necesario ingresar por lo menos un responsable de logística")); }
 
-                    // Estado original del acordeón
-                    this.acrdResponsableLogistica.SelectedIndex = AccordionSelectedIndex;
+                //    // Estado original del acordeón
+                //    this.acrdResponsableLogistica.SelectedIndex = AccordionSelectedIndex;
 
-                #endregion
+                //#endregion
 
                 // Validacion exitosa
                 Response = true;
@@ -244,8 +244,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             {
 
                 // Agregar Item de selección
-                this.ddlComiteHelipuerto.Items.Insert(0, new ListItem("No", "0"));
                 this.ddlComiteHelipuerto.Items.Insert(0, new ListItem("Si", "1"));
+                this.ddlComiteHelipuerto.Items.Insert(0, new ListItem("No", "0"));
 
             }catch (Exception ex){
                 throw (ex);
@@ -426,8 +426,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             {
 
                 // Agregar Item de selección
-                this.ddlPropuestaAcomodo.Items.Insert(0, new ListItem("No", "0"));
                 this.ddlPropuestaAcomodo.Items.Insert(0, new ListItem("Si", "1"));
+                this.ddlPropuestaAcomodo.Items.Insert(0, new ListItem("No", "0"));
 
             }catch (Exception ex){
                 throw (ex);

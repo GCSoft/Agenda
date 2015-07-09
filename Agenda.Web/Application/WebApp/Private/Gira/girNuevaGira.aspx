@@ -48,7 +48,7 @@
                                         </td>
                                         <td style="text-align:left; width:300px;">
                                             <wuc:wucTimer ID="wucTimerDesde" runat="server" />&nbsp;&nbsp;&nbsp;a&nbsp;&nbsp;&nbsp;
-                                            <wuc:wucTimer ID="wucTimerHasta" runat="server" />
+                                            <wuc:wucTimer ID="wucTimerHasta" runat="server" />&nbsp;HRS.
                                         </td>
                                     </tr>
                                 </table>

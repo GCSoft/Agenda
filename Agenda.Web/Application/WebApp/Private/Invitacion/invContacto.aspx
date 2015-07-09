@@ -72,7 +72,7 @@
 						<td>Comentarios</td>
                     </tr>
                     <tr class="Grid_Row">
-                        <td colspan="3">No se encontraron Contactos asociados a la invitación</td>
+                        <td colspan="6">No se encontraron Contactos asociados a la invitación</td>
                     </tr>
                 </table>
             </EmptyDataTemplate>

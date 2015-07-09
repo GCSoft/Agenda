@@ -164,7 +164,7 @@
                         <tr>
 				            <td class="Etiqueta">Nombre del evento</td>
 				            <td class="VinetaObligatorio">*</td>
-				            <td class="Campo"><asp:TextBox ID="txtNombreEvento" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
+				            <td class="Campo"><asp:TextBox ID="txtNombreEvento" runat="server" CssClass="Textarea_General" Height="40px" MaxLength="1000" TextMode="MultiLine" Width="400px"></asp:TextBox></td>
                             <td></td>
 			            </tr>
                         <tr>
@@ -178,7 +178,7 @@
                                         </td>
                                         <td style="text-align:left; width:300px;">
                                             <wuc:wucTimer ID="wucTimerDesde" runat="server" />&nbsp;&nbsp;&nbsp;a&nbsp;&nbsp;&nbsp;
-                                            <wuc:wucTimer ID="wucTimerHasta" runat="server" />
+                                            <wuc:wucTimer ID="wucTimerHasta" runat="server" />&nbsp;HRS.
                                         </td>
                                     </tr>
                                 </table>
@@ -272,7 +272,7 @@
 						</tr>
 						<tr>
 							<td colspan="4" style="text-align:left; vertical-align:bottom;">
-								<CKEditor:CKEditorControl ID="ckeDetalleEvento" runat="server" BasePath="~/Include/Components/CKEditor/Core/" Height="80px"></CKEditor:CKEditorControl>
+								<CKEditor:CKEditorControl ID="ckeDetalleEvento" runat="server" BasePath="~/Include/Components/CKEditor/Core/" Height="55px"></CKEditor:CKEditorControl>
 							</td>
 						</tr>
                     </table>
@@ -285,7 +285,7 @@
                     <table class="FormTable">
                         <tr>
 				            <td class="Etiqueta">Nombre</td>
-				            <td class="VinetaObligatorio">*</td>
+				            <td class="VinetaObligatorio"></td>
 				            <td class="Campo"><asp:TextBox ID="txtContactoNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
                             <td></td>
 			            </tr>
@@ -303,7 +303,7 @@
 			            </tr>
                         <tr>
 				            <td class="Etiqueta">Teléfono</td>
-				            <td class="VinetaObligatorio">*</td>
+				            <td class="VinetaObligatorio"></td>
 				            <td class="Campo"><asp:TextBox ID="txtContactoTelefono" runat="server" CssClass="Textbox_General" MaxLength="100" Width="400px"></asp:TextBox></td>
                             <td></td>
 			            </tr>
@@ -337,7 +337,7 @@
                     <table class="FormTable">
                         <tr>
 				            <td class="Etiqueta">Funcionarios</td>
-				            <td class="VinetaObligatorio">*</td>
+				            <td class="VinetaObligatorio"></td>
 				            <td style="text-align:left;">
                                 <script type = "text/javascript"> function FuncionarioSelected(sender, e) { $get("<%=hddFuncionarioId.ClientID %>").value = e.get_value(); } </script>
 								<asp:TextBox ID="txtFuncionario" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
@@ -511,7 +511,7 @@
                     </tr>
                     <tr>
                         <td class="Etiqueta"># Ext</td>
-				        <td class="VinetaObligatorio">*</td>
+				        <td class="VinetaObligatorio"></td>
 				        <td class="Etiqueta">
                             <asp:TextBox ID="txtPopUpNumeroExterior_LugarEvento" runat="server" CssClass="Textbox_General" MaxLength="50" Width="130px"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             # Int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

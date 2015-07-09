@@ -622,7 +622,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 if (this.txtPopUpNombre.Text.Trim() == "") { throw new Exception("* El campo [Nombre] es requerido"); }
                 if (this.hddPopUpColoniaId.Value.Trim() == "" || this.hddPopUpColoniaId.Value.Trim() == "0") { throw new Exception("* Es necesario seleccionar una colonia"); }
                 if (this.txtPopUpCalle.Text.Trim() == "") { throw new Exception("* El campo [Calle] es requerido"); }
-                if (this.txtPopUpNumeroExterior.Text.Trim() == "") { throw new Exception("* El campo [Número Exterior] es requerido"); }
+                //if (this.txtPopUpNumeroExterior.Text.Trim() == "") { throw new Exception("* El campo [Número Exterior] es requerido"); }
                 if (this.ddlPopUpStatus.SelectedIndex == 0) { throw new Exception("* El campo [Estatus] es requerido"); }
 
             }catch (Exception ex){

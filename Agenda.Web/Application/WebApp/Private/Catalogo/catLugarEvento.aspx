@@ -209,7 +209,7 @@
                     </tr>
                     <tr>
                         <td class="Etiqueta"># Ext</td>
-				        <td class="VinetaObligatorio">*</td>
+				        <td class="VinetaObligatorio"></td>
 				        <td class="Etiqueta">
                             <asp:TextBox ID="txtPopUpNumeroExterior" runat="server" CssClass="Textbox_General" MaxLength="50" Width="130px"></asp:TextBox>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             # Int&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -1818,99 +1818,103 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                 #region Responsables
 
                     LevelError = "Responsables";
-
-                    Int32 Responsables;
-                    Int32 CurrentResponsable;
                     
-                    wTable = oSection.Body.AddTable();
-                    wTable.ResetCells(2, 2);
+                    if( oENTResponse.DataSetResponse.Tables[11].Rows.Count > 0 || oENTResponse.DataSetResponse.Tables[12].Rows.Count > 0 ){
 
-                    //Fila 1
-                    wTableRow = wTable.Rows[0];
-                    wTableRow.Height = 30f;
-                    wTableCell = wTableRow.Cells[0].AddParagraph();
-                    wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-                    wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-                    wText = wTableCell.AppendText("RESPONSABLE DEL EVENTO:");
-                    wText.CharacterFormat.FontName = "Arial";
-                    wText.CharacterFormat.FontSize = 10f;
-                    wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                    wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                    wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                    wTableRow.Cells[0].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                    wTableRow.Cells[0].Width = 170;
+                        Int32 Responsables;
+                        Int32 CurrentResponsable;
+                    
+                        wTable = oSection.Body.AddTable();
+                        wTable.ResetCells(2, 2);
 
-                    // Celda 2
-                    wTableCell = wTableRow.Cells[1].AddParagraph();
-                    wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-                    wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                        //Fila 1
+                        wTableRow = wTable.Rows[0];
+                        wTableRow.Height = 30f;
+                        wTableCell = wTableRow.Cells[0].AddParagraph();
+                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                        wText = wTableCell.AppendText("RESPONSABLE DEL EVENTO:");
+                        wText.CharacterFormat.FontName = "Arial";
+                        wText.CharacterFormat.FontSize = 10f;
+                        wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                        wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                        wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                        wTableRow.Cells[0].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                        wTableRow.Cells[0].Width = 170;
 
-                    Responsables = oENTResponse.DataSetResponse.Tables[11].Rows.Count;
-                    CurrentResponsable = 1;
-                    foreach( DataRow drResponsable in oENTResponse.DataSetResponse.Tables[11].Rows ){
+                        // Celda 2
+                        wTableCell = wTableRow.Cells[1].AddParagraph();
+                        wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+
+                        Responsables = oENTResponse.DataSetResponse.Tables[11].Rows.Count;
+                        CurrentResponsable = 1;
+                        foreach( DataRow drResponsable in oENTResponse.DataSetResponse.Tables[11].Rows ){
                         
-                        wText = wTableCell.AppendText(drResponsable["Nombre"].ToString() + ", ");
-                        wText.CharacterFormat.Bold = true;
-                        wText.CharacterFormat.FontName = "Arial";
-                        wText.CharacterFormat.FontSize = 10f;
+                            wText = wTableCell.AppendText(drResponsable["Nombre"].ToString() + ", ");
+                            wText.CharacterFormat.Bold = true;
+                            wText.CharacterFormat.FontName = "Arial";
+                            wText.CharacterFormat.FontSize = 10f;
 
-                        wText = wTableCell.AppendText( drResponsable["Puesto"].ToString() + ( CurrentResponsable  < Responsables ? ENTER.ToString() : "" ) );
-                        wText.CharacterFormat.FontName = "Arial";
-                        wText.CharacterFormat.FontSize = 10f;
+                            wText = wTableCell.AppendText( drResponsable["Puesto"].ToString() + ( CurrentResponsable  < Responsables ? ENTER.ToString() : "" ) );
+                            wText.CharacterFormat.FontName = "Arial";
+                            wText.CharacterFormat.FontSize = 10f;
 
-                        CurrentResponsable = CurrentResponsable + 1;
-                    }
+                            CurrentResponsable = CurrentResponsable + 1;
+                        }
                     
-                    wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                    wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                    wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                    wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                    wTableRow.Cells[1].Width = 340;
+                        wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                        wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                        wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                        wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                        wTableRow.Cells[1].Width = 340;
 
-                    //Fila 2
-                    wTableRow = wTable.Rows[1];
-                    wTableRow.Height = 30f;
-                    wTableCell = wTableRow.Cells[0].AddParagraph();
-                    wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-                    wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-                    wText = wTableCell.AppendText("RESPONSABLE DE LOGÍSTICA:");
-                    wText.CharacterFormat.FontName = "Arial";
-                    wText.CharacterFormat.FontSize = 10f;
-                    wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                    wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                    wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                    wTableRow.Cells[0].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                    wTableRow.Cells[0].Width = 170;
+                        //Fila 2
+                        wTableRow = wTable.Rows[1];
+                        wTableRow.Height = 30f;
+                        wTableCell = wTableRow.Cells[0].AddParagraph();
+                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                        wText = wTableCell.AppendText("RESPONSABLE DE LOGÍSTICA:");
+                        wText.CharacterFormat.FontName = "Arial";
+                        wText.CharacterFormat.FontSize = 10f;
+                        wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                        wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                        wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                        wTableRow.Cells[0].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                        wTableRow.Cells[0].Width = 170;
 
-                    // Celda 2
-                    wTableCell = wTableRow.Cells[1].AddParagraph();
-                    wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-                    wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                        // Celda 2
+                        wTableCell = wTableRow.Cells[1].AddParagraph();
+                        wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                    Responsables = oENTResponse.DataSetResponse.Tables[12].Rows.Count;
-                    CurrentResponsable = 1;
-                    foreach( DataRow drResponsableLogistica in oENTResponse.DataSetResponse.Tables[12].Rows ){
+                        Responsables = oENTResponse.DataSetResponse.Tables[12].Rows.Count;
+                        CurrentResponsable = 1;
+                        foreach( DataRow drResponsableLogistica in oENTResponse.DataSetResponse.Tables[12].Rows ){
                         
-                        wText = wTableCell.AppendText(drResponsableLogistica["Nombre"].ToString());
-                        wText.CharacterFormat.Bold = true;
-                        wText.CharacterFormat.FontName = "Arial";
-                        wText.CharacterFormat.FontSize = 10f;
+                            wText = wTableCell.AppendText(drResponsableLogistica["Nombre"].ToString());
+                            wText.CharacterFormat.Bold = true;
+                            wText.CharacterFormat.FontName = "Arial";
+                            wText.CharacterFormat.FontSize = 10f;
 
-                        wText = wTableCell.AppendText( "(" + drResponsableLogistica["Contacto"].ToString() + ")" + ( CurrentResponsable  < Responsables ? ENTER.ToString() : "" ) );
-                        wText.CharacterFormat.FontName = "Arial";
-                        wText.CharacterFormat.FontSize = 10f;
+                            wText = wTableCell.AppendText( "(" + drResponsableLogistica["Contacto"].ToString() + ")" + ( CurrentResponsable  < Responsables ? ENTER.ToString() : "" ) );
+                            wText.CharacterFormat.FontName = "Arial";
+                            wText.CharacterFormat.FontSize = 10f;
 
-                        CurrentResponsable = CurrentResponsable + 1;
-                    }
+                            CurrentResponsable = CurrentResponsable + 1;
+                        }
                     
-                    wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                    wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                    wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                    wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                    wTableRow.Cells[1].Width = 340;
+                        wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                        wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                        wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                        wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                        wTableRow.Cells[1].Width = 340;
 
-                    // Brinco de linea (genera espacio)
-                    oSection.AddParagraph();
+                        // Brinco de linea (genera espacio)
+                        oSection.AddParagraph();
+
+                    }
                     
                 #endregion
 

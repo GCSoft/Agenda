@@ -52,7 +52,7 @@
                             </td>
                             <td style="text-align:left; width:300px;">
                                 <wuc:wucTimer ID="wucTimerDesde" runat="server" />&nbsp;&nbsp;a&nbsp;&nbsp;
-                                <wuc:wucTimer ID="wucTimerHasta" runat="server" />
+                                <wuc:wucTimer ID="wucTimerHasta" runat="server" />&nbsp;HRS.
                             </td>
                             <td></td>
                         </tr>

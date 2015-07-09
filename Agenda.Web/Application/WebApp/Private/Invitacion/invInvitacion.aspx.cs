@@ -682,16 +682,16 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                     throw (new Exception("Es necesario seleccionar un Lugar del Evento"));
                 }
 
-                // TAB - Contacto
-                if( this.txtContactoNombre.Text.Trim() == "" ){
-                    this.tabInvitacion.ActiveTabIndex = 2;
-                    throw (new Exception("Es necesario ingresar un Nombre de contacto"));
-                }
+                //// TAB - Contacto
+                //if( this.txtContactoNombre.Text.Trim() == "" ){
+                //    this.tabInvitacion.ActiveTabIndex = 2;
+                //    throw (new Exception("Es necesario ingresar un Nombre de contacto"));
+                //}
 
-                if( this.txtContactoTelefono.Text.Trim() == "" ){
-                    this.tabInvitacion.ActiveTabIndex = 2;
-                    throw (new Exception("Es necesario ingresar un Teléfono del contacto"));
-                }
+                //if( this.txtContactoTelefono.Text.Trim() == "" ){
+                //    this.tabInvitacion.ActiveTabIndex = 2;
+                //    throw (new Exception("Es necesario ingresar un Teléfono del contacto"));
+                //}
 
                 //// TAB - Asociar funcionarios
                 //if ( TransactionType == TransactionTypes.Registrar ){
@@ -759,7 +759,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 if (this.txtPopUpNombre_LugarEvento.Text.Trim() == "") { throw new Exception("* El campo [Nombre] es requerido"); }
                 if (this.hddPopUpColoniaId_LugarEvento.Value.Trim() == "" || this.hddPopUpColoniaId_LugarEvento.Value.Trim() == "0") { throw new Exception("* Es necesario seleccionar una colonia"); }
                 if (this.txtPopUpCalle_LugarEvento.Text.Trim() == "") { throw new Exception("* El campo [Calle] es requerido"); }
-                if (this.txtPopUpNumeroExterior_LugarEvento.Text.Trim() == "") { throw new Exception("* El campo [Número Exterior] es requerido"); }
+                // if (this.txtPopUpNumeroExterior_LugarEvento.Text.Trim() == "") { throw new Exception("* El campo [Número Exterior] es requerido"); }
 
                 // Formulario
                 oENTLugarEvento.Nombre = this.txtPopUpNombre_LugarEvento.Text.Trim();
