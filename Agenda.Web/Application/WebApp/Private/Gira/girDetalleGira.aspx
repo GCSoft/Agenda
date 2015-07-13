@@ -105,7 +105,7 @@
                 <tr>
                     <td>
                         <asp:GridView ID="gvPrograma" runat="server" AllowPaging="false" AllowSorting="true" AutoGenerateColumns="False" Width="100%"
-			                DataKeyNames="GiraConfiguracionId,TipoGiraConfiguracionId,ConfiguracionDetalle" 
+			                DataKeyNames="GiraConfiguracionId,TipoGiraConfiguracionId,ConfiguracionDetalle,ConfiguracionFechaHoraInicio,ConfiguracionFechaHoraFin" 
 			                OnRowDataBound="gvPrograma_RowDataBound"
                             OnSorting="gvPrograma_Sorting">
                             <RowStyle CssClass="Grid_Row" />
@@ -116,22 +116,20 @@
                                 <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
                                     <tr class="Grid_Header">
                                         <td style="width:150px;">Grupo</td>
-						                <td style="width:100px;">Fecha</td>
-						                <td style="width:100px;">Inicio</td>
-                                        <td style="width:100px;">Fin</td>
+						                <td style="width: 120px;">Fecha Inicio</td>
+                                        <td style="width: 120px;">Fecha Fin</td>
                                         <td>Detalle</td>
                                     </tr>
                                     <tr class="Grid_Row">
-                                        <td colspan="5">No se ha capturado el programa de la gira</td>
+                                        <td colspan="4">No se ha capturado el programa de la gira</td>
                                     </tr>
                                 </table>
                             </EmptyDataTemplate>
                             <Columns>
-				                <asp:BoundField HeaderText="Grupo"      ItemStyle-HorizontalAlign="Left"	ItemStyle-Width="150px"	DataField="ConfiguracionGrupo"                      SortExpression="ConfiguracionGrupo"></asp:BoundField>
-				                <asp:BoundField HeaderText="Fecha"      ItemStyle-HorizontalAlign="Center"	ItemStyle-Width="100px"	DataField="GiraFechaEstandar"                       SortExpression="GiraFechaEstandar"></asp:BoundField>
-				                <asp:BoundField HeaderText="Inicio"     ItemStyle-HorizontalAlign="Center"	ItemStyle-Width="100px"	DataField="ConfiguracionHoraInicioEstandar"         SortExpression="ConfiguracionHoraInicioEstandar"></asp:BoundField>
-				                <asp:BoundField HeaderText="Fin"        ItemStyle-HorizontalAlign="Center"	ItemStyle-Width="100px"	DataField="ConfiguracionHoraFinEstandar"            SortExpression="ConfiguracionHoraFinEstandar"></asp:BoundField>
-                                <asp:BoundField HeaderText="Detalle"    ItemStyle-HorizontalAlign="Left"							DataField="ConfiguracionDetalle" HtmlEncode="false" SortExpression="ConfiguracionDetalle"></asp:BoundField>
+				                <asp:BoundField HeaderText="Grupo"          ItemStyle-HorizontalAlign="Left"	ItemStyle-Width="150px"	DataField="ConfiguracionGrupo"                      SortExpression="ConfiguracionGrupo"></asp:BoundField>
+				                <asp:BoundField HeaderText="Fecha Inicio"   ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="120px" DataField="ConfiguracionFechaInicioTexto"           SortExpression="ConfiguracionFechaHoraInicio"></asp:BoundField>
+                                <asp:BoundField HeaderText="Fecha Fin"      ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="120px" DataField="ConfiguracionFechaFinTexto"              SortExpression="ConfiguracionFechaHoraFin"></asp:BoundField>
+                                <asp:BoundField HeaderText="Detalle"        ItemStyle-HorizontalAlign="Left"							DataField="ConfiguracionDetalle" HtmlEncode="false" SortExpression="ConfiguracionDetalle"></asp:BoundField>
                             </Columns>
                         </asp:GridView>
                     </td>

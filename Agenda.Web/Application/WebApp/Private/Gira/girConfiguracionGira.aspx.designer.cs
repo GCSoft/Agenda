@@ -274,6 +274,15 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         protected global::System.Web.UI.WebControls.TextBox txtPopUp_TrasladoVehiculoDetalle;
         
         /// <summary>
+        /// wucPopUp_TrasladoVehiculoCalendarInicio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Agenda.Web.Include.WebUserControls.wucCalendar wucPopUp_TrasladoVehiculoCalendarInicio;
+        
+        /// <summary>
         /// wucPopUp_TrasladoVehiculoTimerDesde control.
         /// </summary>
         /// <remarks>
@@ -281,6 +290,15 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Agenda.Web.Include.WebUserControls.wucTimer wucPopUp_TrasladoVehiculoTimerDesde;
+        
+        /// <summary>
+        /// wucPopUp_TrasladoVehiculoCalendarFin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Agenda.Web.Include.WebUserControls.wucCalendar wucPopUp_TrasladoVehiculoCalendarFin;
         
         /// <summary>
         /// wucPopUp_TrasladoVehiculoTimerHasta control.
@@ -418,6 +436,15 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         protected global::System.Web.UI.WebControls.TextBox txtPopUp_TrasladoHelicopteroDetalle;
         
         /// <summary>
+        /// wucPopUp_TrasladoHelicopteroCalendarInicio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Agenda.Web.Include.WebUserControls.wucCalendar wucPopUp_TrasladoHelicopteroCalendarInicio;
+        
+        /// <summary>
         /// wucPopUp_TrasladoHelicopteroTimerDesde control.
         /// </summary>
         /// <remarks>
@@ -425,6 +452,15 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Agenda.Web.Include.WebUserControls.wucTimer wucPopUp_TrasladoHelicopteroTimerDesde;
+        
+        /// <summary>
+        /// wucPopUp_TrasladoHelicopteroCalendarFin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Agenda.Web.Include.WebUserControls.wucCalendar wucPopUp_TrasladoHelicopteroCalendarFin;
         
         /// <summary>
         /// wucPopUp_TrasladoHelicopteroTimerHasta control.
@@ -634,6 +670,15 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         protected global::System.Web.UI.WebControls.TextBox txtPopUp_EventoDetalle;
         
         /// <summary>
+        /// wucPopUp_EventoCalendarInicio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Agenda.Web.Include.WebUserControls.wucCalendar wucPopUp_EventoCalendarInicio;
+        
+        /// <summary>
         /// wucPopUp_EventoTimerDesde control.
         /// </summary>
         /// <remarks>
@@ -641,6 +686,15 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Agenda.Web.Include.WebUserControls.wucTimer wucPopUp_EventoTimerDesde;
+        
+        /// <summary>
+        /// wucPopUp_EventoCalendarFin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Agenda.Web.Include.WebUserControls.wucCalendar wucPopUp_EventoCalendarFin;
         
         /// <summary>
         /// wucPopUp_EventoTimerHasta control.
@@ -1138,6 +1192,15 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         protected global::System.Web.UI.WebControls.TextBox txtPopUp_ActividadGeneralDetalle;
         
         /// <summary>
+        /// wucPopUp_ActividadGeneralCalendarInicio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Agenda.Web.Include.WebUserControls.wucCalendar wucPopUp_ActividadGeneralCalendarInicio;
+        
+        /// <summary>
         /// wucPopUp_ActividadGeneralTimerDesde control.
         /// </summary>
         /// <remarks>
@@ -1145,6 +1208,15 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Agenda.Web.Include.WebUserControls.wucTimer wucPopUp_ActividadGeneralTimerDesde;
+        
+        /// <summary>
+        /// wucPopUp_ActividadGeneralCalendarFin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Agenda.Web.Include.WebUserControls.wucCalendar wucPopUp_ActividadGeneralCalendarFin;
         
         /// <summary>
         /// wucPopUp_ActividadGeneralTimerHasta control.
@@ -1478,5 +1550,14 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField SenderId;
+        
+        /// <summary>
+        /// GiraFechaInicio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField GiraFechaInicio;
     }
 }

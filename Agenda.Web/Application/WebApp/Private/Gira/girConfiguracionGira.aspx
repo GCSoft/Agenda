@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Include/MasterPage/PrivateTemplate.Master" AutoEventWireup="true" CodeBehind="girConfiguracionGira.aspx.cs" Inherits="Agenda.Web.Application.WebApp.Private.Gira.girConfiguracionGira" %>
+<%@ Register Src="~/Include/WebUserControls/wucCalendar.ascx" TagPrefix="wuc" TagName="wucCalendar" %>
 <%@ Register Src="~/Include/WebUserControls/wucTimer.ascx" TagPrefix="wuc" TagName="wucTimer" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
@@ -76,7 +77,7 @@
 
     <asp:Panel ID="pnlGrid" runat="server" CssClass="GridPanel">
         <asp:GridView ID="gvPrograma" runat="server" AllowPaging="false" AllowSorting="true" AutoGenerateColumns="False" Width="100%"
-			DataKeyNames="GiraConfiguracionId,TipoGiraConfiguracionId,ConfiguracionDetalle" 
+			DataKeyNames="GiraConfiguracionId,TipoGiraConfiguracionId,ConfiguracionDetalle,ConfiguracionFechaHoraInicio,ConfiguracionFechaHoraFin" 
             OnRowCommand="gvPrograma_RowCommand"
 			OnRowDataBound="gvPrograma_RowDataBound"
             OnSorting="gvPrograma_Sorting">
@@ -88,22 +89,20 @@
                 <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
                     <tr class="Grid_Header">
                         <td style="width:150px;">Grupo</td>
-						<td style="width:100px;">Fecha</td>
-						<td style="width:100px;">Inicio</td>
-                        <td style="width:100px;">Fin</td>
+						<td style="width: 120px;">Fecha Inicio</td>
+                        <td style="width: 120px;">Fecha Fin</td>
                         <td>Detalle</td>
                     </tr>
                     <tr class="Grid_Row">
-                        <td colspan="5">No se ha capturado el programa de la gira</td>
+                        <td colspan="4">No se ha capturado el programa de la gira</td>
                     </tr>
                 </table>
             </EmptyDataTemplate>
             <Columns>
-				<asp:BoundField HeaderText="Grupo"      ItemStyle-HorizontalAlign="Left"	ItemStyle-Width="150px"	DataField="ConfiguracionGrupo"                      SortExpression="ConfiguracionGrupo"></asp:BoundField>
-				<asp:BoundField HeaderText="Fecha"      ItemStyle-HorizontalAlign="Center"	ItemStyle-Width="100px"	DataField="GiraFechaEstandar"                       SortExpression="GiraFechaEstandar"></asp:BoundField>
-				<asp:BoundField HeaderText="Inicio"     ItemStyle-HorizontalAlign="Center"	ItemStyle-Width="100px"	DataField="ConfiguracionHoraInicioEstandar"         SortExpression="ConfiguracionHoraInicioEstandar"></asp:BoundField>
-				<asp:BoundField HeaderText="Fin"        ItemStyle-HorizontalAlign="Center"	ItemStyle-Width="100px"	DataField="ConfiguracionHoraFinEstandar"            SortExpression="ConfiguracionHoraFinEstandar"></asp:BoundField>
-                <asp:BoundField HeaderText="Detalle"    ItemStyle-HorizontalAlign="Left"							DataField="ConfiguracionDetalle" HtmlEncode="false" SortExpression="ConfiguracionDetalle"></asp:BoundField>
+				<asp:BoundField HeaderText="Grupo"          ItemStyle-HorizontalAlign="Left"	ItemStyle-Width="150px"	DataField="ConfiguracionGrupo"                      SortExpression="ConfiguracionGrupo"></asp:BoundField>
+				<asp:BoundField HeaderText="Fecha Inicio"   ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="120px" DataField="ConfiguracionFechaInicioTexto"           SortExpression="ConfiguracionFechaHoraInicio"></asp:BoundField>
+                <asp:BoundField HeaderText="Fecha Fin"      ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="120px" DataField="ConfiguracionFechaFinTexto"              SortExpression="ConfiguracionFechaHoraFin"></asp:BoundField>
+                <asp:BoundField HeaderText="Detalle"        ItemStyle-HorizontalAlign="Left"							DataField="ConfiguracionDetalle" HtmlEncode="false" SortExpression="ConfiguracionDetalle"></asp:BoundField>
                 <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
                     <ItemTemplate>
                         <asp:ImageButton ID="imgEdit" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Editar" ImageUrl="~/Include/Image/Buttons/Edit.png" runat="server" />
@@ -121,7 +120,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPopUp_TrasladoVehiculo" runat="server" CssClass="PopUpBlock">
-        <asp:Panel ID="pnlPopUp_TrasladoVehiculoContent" runat="server" CssClass="PopUpContent" style="margin-top:-150px; margin-left:-260px;" Height="300px" Width="520px">
+        <asp:Panel ID="pnlPopUp_TrasladoVehiculoContent" runat="server" CssClass="PopUpContent" style="margin-top:-170px; margin-left:-260px;" Height="340px" Width="520px">
             <asp:Panel ID="pnlPopUp_TrasladoVehiculoHeader" runat="server" CssClass="PopUpHeader">
                 <table class="PopUpHeaderTable">
                     <tr>
@@ -160,11 +159,37 @@
                         <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoVehiculoDetalle" runat="server" CssClass="Textarea_General" Height="70px" TextMode="MultiLine" MaxLength="1000" Width="400px"></asp:TextBox></td>
                     </tr>
                     <tr>
-				        <td class="Etiqueta">Desde las</td>
+				        <td class="Etiqueta">Fecha y hora</td>
 				        <td class="VinetaObligatorio">*</td>
 				        <td class="Campo">
-                            <wuc:wucTimer ID="wucPopUp_TrasladoVehiculoTimerDesde" runat="server" />&nbsp;&nbsp;&nbsp;hasta las&nbsp;&nbsp;&nbsp;
-                            <wuc:wucTimer ID="wucPopUp_TrasladoVehiculoTimerHasta" runat="server" />&nbsp;HRS.
+                            <table style="border:0px; padding:0px; width:100%;">
+                                <tr>
+                                    <td style="text-align:left; width:220px;">
+                                        Desde&nbsp;<wuc:wucCalendar ID="wucPopUp_TrasladoVehiculoCalendarInicio" runat="server" />
+                                    </td>
+                                    <td style="text-align:left; width:150px;">
+                                        <wuc:wucTimer ID="wucPopUp_TrasladoVehiculoTimerDesde" runat="server" />&nbsp;HRS.
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+				        </td>
+			        </tr>
+                    <tr>
+				        <td class="Etiqueta"></td>
+				        <td class="VinetaObligatorio"></td>
+				        <td class="Campo">
+                            <table style="border:0px; padding:0px; width:100%;">
+                                <tr>
+                                    <td style="text-align:left; width:220px;">
+                                        Hasta&nbsp;&nbsp;<wuc:wucCalendar ID="wucPopUp_TrasladoVehiculoCalendarFin" runat="server" />
+                                    </td>
+                                    <td style="text-align:left; width:150px;">
+                                        <wuc:wucTimer ID="wucPopUp_TrasladoVehiculoTimerHasta" runat="server" />&nbsp;HRS.
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
 				        </td>
 			        </tr>
                     <tr>
@@ -183,7 +208,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPopUp_TrasladoHelicoptero" runat="server" CssClass="PopUpBlock">
-        <asp:Panel ID="pnlPopUp_TrasladoHelicopteroContent" runat="server" CssClass="PopUpContent" style="margin-top:-235px; margin-left:-260px;" Height="470px" Width="580px">
+        <asp:Panel ID="pnlPopUp_TrasladoHelicopteroContent" runat="server" CssClass="PopUpContent" style="margin-top:-250px; margin-left:-260px;" Height="500px" Width="580px">
             <asp:Panel ID="pnlPopUp_TrasladoHelicopteroHeader" runat="server" CssClass="PopUpHeader">
                 <table class="PopUpHeaderTable">
                     <tr>
@@ -194,7 +219,7 @@
                 </table>
             </asp:Panel>
             <asp:Panel ID="pnlPopUp_TrasladoHelicopteroBody" runat="server" CssClass="PopUpBody">
-                <asp:TabContainer ID="tabFormulario_TrasladoHelicoptero" runat="server" ActiveTabIndex="0" CssClass="Tabcontainer_General" Height="330" >
+                <asp:TabContainer ID="tabFormulario_TrasladoHelicoptero" runat="server" ActiveTabIndex="0" CssClass="Tabcontainer_General" Height="360" >
                     <asp:TabPanel ID="tpnlGenerales_TrasladoHelicoptero" runat="server">
                         <HeaderTemplate>Datos generales</HeaderTemplate>
                         <ContentTemplate>
@@ -229,13 +254,38 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-				                    <td class="Etiqueta">Desde las</td>
+				                    <td class="Etiqueta">Fecha y hora</td>
 				                    <td class="VinetaObligatorio">*</td>
-				                    <td class="Campo">
-                                        <wuc:wucTimer ID="wucPopUp_TrasladoHelicopteroTimerDesde" runat="server" />&nbsp;&nbsp;&nbsp;hasta las&nbsp;&nbsp;&nbsp;
-                                        <wuc:wucTimer ID="wucPopUp_TrasladoHelicopteroTimerHasta" runat="server" />&nbsp;HRS.
+				                    <td class="Campo" colspan="2">
+                                        <table style="border:0px; padding:0px; width:100%;">
+                                            <tr>
+                                                <td style="text-align:left; width:220px;">
+                                                    Desde&nbsp;<wuc:wucCalendar ID="wucPopUp_TrasladoHelicopteroCalendarInicio" runat="server" />
+                                                </td>
+                                                <td style="text-align:left; width:150px;">
+                                                    <wuc:wucTimer ID="wucPopUp_TrasladoHelicopteroTimerDesde" runat="server" />&nbsp;HRS.
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        </table>
 				                    </td>
-                                    <td></td>
+			                    </tr>
+                                <tr>
+				                    <td class="Etiqueta"></td>
+				                    <td class="VinetaObligatorio"></td>
+				                    <td class="Campo" colspan="2">
+                                        <table style="border:0px; padding:0px; width:100%;">
+                                            <tr>
+                                                <td style="text-align:left; width:220px;">
+                                                    Hasta&nbsp;&nbsp;<wuc:wucCalendar ID="wucPopUp_TrasladoHelicopteroCalendarFin" runat="server" />
+                                                </td>
+                                                <td style="text-align:left; width:150px;">
+                                                    <wuc:wucTimer ID="wucPopUp_TrasladoHelicopteroTimerHasta" runat="server" />&nbsp;HRS.
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        </table>
+				                    </td>
 			                    </tr>
                                 <tr>
                                     <td class="Etiqueta">Lugar del Helipuerto</td>
@@ -293,7 +343,7 @@
                                                 </tr>
                                             </table>
                                         </div>
-                                        <div style="border:1px solid #C1C1C1; height:150px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:548px">
+                                        <div style="border:1px solid #C1C1C1; height:185px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:548px">
                                             <asp:GridView ID="gvComiteHelipuerto" runat="server" AllowPaging="false" AllowSorting="True" AutoGenerateColumns="False" ShowHeader="false" Width="100%"
                                                 DataKeyNames="Orden,Nombre,Puesto"
                                                 OnRowCommand="gvComiteHelipuerto_RowCommand"
@@ -386,13 +436,38 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-				                    <td class="Etiqueta">Desde las</td>
+				                    <td class="Etiqueta">Fecha y hora del evento</td>
 				                    <td class="VinetaObligatorio">*</td>
-				                    <td class="Campo">
-                                        <wuc:wucTimer ID="wucPopUp_EventoTimerDesde" runat="server" />&nbsp;&nbsp;&nbsp;hasta las&nbsp;&nbsp;&nbsp;
-                                        <wuc:wucTimer ID="wucPopUp_EventoTimerHasta" runat="server" />&nbsp;HRS.
+				                    <td class="Campo" colspan="2">
+                                        <table style="border:0px; padding:0px; width:100%;">
+                                            <tr>
+                                                <td style="text-align:left; width:220px;">
+                                                    Desde&nbsp;<wuc:wucCalendar ID="wucPopUp_EventoCalendarInicio" runat="server" />
+                                                </td>
+                                                <td style="text-align:left; width:150px;">
+                                                    <wuc:wucTimer ID="wucPopUp_EventoTimerDesde" runat="server" />&nbsp;HRS.
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        </table>
 				                    </td>
-                                    <td></td>
+			                    </tr>
+                                <tr>
+				                    <td class="Etiqueta"></td>
+				                    <td class="VinetaObligatorio"></td>
+				                    <td class="Campo" colspan="2">
+                                        <table style="border:0px; padding:0px; width:100%;">
+                                            <tr>
+                                                <td style="text-align:left; width:220px;">
+                                                    Hasta&nbsp;&nbsp;<wuc:wucCalendar ID="wucPopUp_EventoCalendarFin" runat="server" />
+                                                </td>
+                                                <td style="text-align:left; width:150px;">
+                                                    <wuc:wucTimer ID="wucPopUp_EventoTimerHasta" runat="server" />&nbsp;HRS.
+                                                </td>
+                                                <td></td>
+                                            </tr>
+                                        </table>
+				                    </td>
 			                    </tr>
                                 <tr>
 				                    <td class="Etiqueta">Lugar del evento</td>
@@ -800,7 +875,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlPopUp_ActividadGeneral" runat="server" CssClass="PopUpBlock">
-        <asp:Panel ID="pnlPopUp_ActividadGeneralContent" runat="server" CssClass="PopUpContent" style="margin-top:-150px; margin-left:-260px;" Height="300px" Width="520px">
+        <asp:Panel ID="pnlPopUp_ActividadGeneralContent" runat="server" CssClass="PopUpContent" style="margin-top:-170px; margin-left:-260px;" Height="340px" Width="520px">
             <asp:Panel ID="pnlPopUp_ActividadGeneralHeader" runat="server" CssClass="PopUpHeader">
                 <table class="PopUpHeaderTable">
                     <tr>
@@ -839,11 +914,37 @@
                         <td class="Campo"><asp:TextBox ID="txtPopUp_ActividadGeneralDetalle" runat="server" CssClass="Textarea_General" Height="70px" TextMode="MultiLine" MaxLength="1000" Width="400px"></asp:TextBox></td>
                     </tr>
                     <tr>
-				        <td class="Etiqueta">Desde las</td>
+				        <td class="Etiqueta">Fecha y hora</td>
 				        <td class="VinetaObligatorio">*</td>
 				        <td class="Campo">
-                            <wuc:wucTimer ID="wucPopUp_ActividadGeneralTimerDesde" runat="server" />&nbsp;&nbsp;&nbsp;hasta las&nbsp;&nbsp;&nbsp;
-                            <wuc:wucTimer ID="wucPopUp_ActividadGeneralTimerHasta" runat="server" />&nbsp;HRS.
+                            <table style="border:0px; padding:0px; width:100%;">
+                                <tr>
+                                    <td style="text-align:left; width:220px;">
+                                        Desde&nbsp;<wuc:wucCalendar ID="wucPopUp_ActividadGeneralCalendarInicio" runat="server" />
+                                    </td>
+                                    <td style="text-align:left; width:150px;">
+                                        <wuc:wucTimer ID="wucPopUp_ActividadGeneralTimerDesde" runat="server" />&nbsp;HRS.
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+				        </td>
+			        </tr>
+                    <tr>
+				        <td class="Etiqueta"></td>
+				        <td class="VinetaObligatorio"></td>
+				        <td class="Campo">
+                            <table style="border:0px; padding:0px; width:100%;">
+                                <tr>
+                                    <td style="text-align:left; width:220px;">
+                                        Hasta&nbsp;&nbsp;<wuc:wucCalendar ID="wucPopUp_ActividadGeneralCalendarFin" runat="server" />
+                                    </td>
+                                    <td style="text-align:left; width:150px;">
+                                        <wuc:wucTimer ID="wucPopUp_ActividadGeneralTimerHasta" runat="server" />&nbsp;HRS.
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
 				        </td>
 			        </tr>
                     <tr>
@@ -999,5 +1100,6 @@
     <asp:HiddenField ID="hddSort" runat="server" Value="ConfiguracionHoraInicioEstandar" />
     <asp:HiddenField ID="AgrupacionKey" runat="server" Value=""  />
     <asp:HiddenField ID="SenderId" runat="server" Value="0"  />
+    <asp:HiddenField ID="GiraFechaInicio" runat="server" Value=""  />
 
 </asp:Content>

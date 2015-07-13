@@ -402,7 +402,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
             try
             {
 
-                gcCommon.SortGridView(ref this.gvPrograma, ref this.hddSort, e.SortExpression);
+                gcCommon.SortGridView(ref this.gvPrograma, ref this.hddSort, e.SortExpression, true);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);

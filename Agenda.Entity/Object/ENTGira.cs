@@ -34,6 +34,8 @@ namespace Agenda.Entity.Object
         private String  _HoraGiraInicio;
         private String  _MotivoRechazo;
         private String  _ConfiguracionGrupo;
+        private String  _ConfiguracionFechaInicio;
+        private String  _ConfiguracionFechaFin;
         private String  _ConfiguracionHoraInicio;
         private String  _ConfiguracionHoraFin;
         private String  _ConfiguracionDetalle;
@@ -73,6 +75,8 @@ namespace Agenda.Entity.Object
             _HoraGiraInicio = "";
             _MotivoRechazo = "";
             _ConfiguracionGrupo = "";
+            _ConfiguracionFechaInicio = "";
+            _ConfiguracionFechaFin = "";
             _ConfiguracionHoraInicio = "";
             _ConfiguracionHoraFin = "";
             _ConfiguracionDetalle = "";
@@ -272,6 +276,28 @@ namespace Agenda.Entity.Object
         {
             get { return _ConfiguracionGrupo; }
             set { _ConfiguracionGrupo = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.ConfiguracionFechaInicio</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public String ConfiguracionFechaInicio
+        {
+            get { return _ConfiguracionFechaInicio; }
+            set { _ConfiguracionFechaInicio = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.ConfiguracionFechaFin</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public String ConfiguracionFechaFin
+        {
+            get { return _ConfiguracionFechaFin; }
+            set { _ConfiguracionFechaFin = value; }
         }
 
         ///<remarks>

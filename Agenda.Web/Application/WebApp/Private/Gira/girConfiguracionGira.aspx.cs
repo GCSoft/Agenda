@@ -232,6 +232,9 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
                 if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
 
+                // Campos ocultos
+                this.GiraFechaInicio.Value = oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraFechaInicio"].ToString();
+
                 // Carátula compacta
                 this.lblGiraNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraNombre"].ToString();
                 this.lblGiraFechaHora.Text = "Del " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraFechaHoraInicioTexto"].ToString() + " al " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraFechaHoraFinTexto"].ToString();
@@ -524,6 +527,9 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 SelectTipoVestimenta();
                 SelectTipoAcomodo();
 
+                // Carátula
+                SelectGira();
+
                 // Ocultar paneles
                 ClearPopUp_TrasladoVehiculoPanel();
                 ClearPopUp_TrasladoHelicopteroPanel();
@@ -532,8 +538,15 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 ClearPopUpPanel_LugarEvento();
                 ClearPopUp_ComentarioEnCuadernilloPanel();
 
-				// Carátula
-                SelectGira();
+                // Estado inicial
+                this.wucPopUp_EventoCalendarInicio.Width = 176;
+                this.wucPopUp_EventoCalendarFin.Width = 176;
+                this.wucPopUp_TrasladoVehiculoCalendarInicio.Width = 176;
+                this.wucPopUp_TrasladoVehiculoCalendarFin.Width = 176;
+                this.wucPopUp_TrasladoHelicopteroCalendarInicio.Width = 176;
+                this.wucPopUp_TrasladoHelicopteroCalendarFin.Width = 176;
+                this.wucPopUp_ActividadGeneralCalendarInicio.Width = 176;
+                this.wucPopUp_ActividadGeneralCalendarFin.Width = 176;
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
@@ -742,7 +755,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
             try
             {
 
-                gcCommon.SortGridView(ref this.gvPrograma, ref this.hddSort, e.SortExpression);
+                gcCommon.SortGridView(ref this.gvPrograma, ref this.hddSort, e.SortExpression, true);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
@@ -761,8 +774,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                     // Limpiar formulario
                     this.txtPopUp_TrasladoVehiculoDetalle.Text = "";
-                    this.wucPopUp_TrasladoVehiculoTimerDesde.DisplayTime = "10:00 AM";
-                    this.wucPopUp_TrasladoVehiculoTimerHasta.DisplayTime = "10:00 AM";
+                    this.wucPopUp_TrasladoVehiculoCalendarInicio.SetDate(DateTime.Parse(this.GiraFechaInicio.Value));
+                    this.wucPopUp_TrasladoVehiculoCalendarFin.SetDate(DateTime.Parse(this.GiraFechaInicio.Value));
+                    this.wucPopUp_TrasladoVehiculoTimerDesde.DisplayTime = "10:00";
+                    this.wucPopUp_TrasladoVehiculoTimerHasta.DisplayTime = "10:00";
 
                     // Estado incial de controles
                     this.pnlPopUp_TrasladoVehiculo.Visible = false;
@@ -794,6 +809,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
                     oENTGira.TipoGiraConfiguracionId = 1; // Traslado en vehículo
                     oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_TrasladoVehiculo.SelectedItem.Text;
+                    oENTGira.ConfiguracionFechaInicio = this.wucPopUp_TrasladoVehiculoCalendarInicio.DisplayUTCDate;
+                    oENTGira.ConfiguracionFechaFin = this.wucPopUp_TrasladoVehiculoCalendarFin.DisplayUTCDate;
                     oENTGira.ConfiguracionHoraInicio = this.wucPopUp_TrasladoVehiculoTimerDesde.DisplayUTCTime;
                     oENTGira.ConfiguracionHoraFin = this.wucPopUp_TrasladoVehiculoTimerHasta.DisplayUTCTime;
                     oENTGira.ConfiguracionDetalle = this.txtPopUp_TrasladoVehiculoDetalle.Text.Trim();
@@ -854,6 +871,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Llenado de formulario
                     this.txtPopUp_TrasladoVehiculoDetalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionDetalle"].ToString();
                     this.ddlAgrupacion_TrasladoVehiculo.SelectedValue = dtAgrupacion.Select("Agrupacion='" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionGrupo"].ToString() + "'")[0]["Row"].ToString();
+                    this.wucPopUp_TrasladoVehiculoCalendarInicio.SetDate(DateTime.Parse(oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionFechaInicio"].ToString()));
+                    this.wucPopUp_TrasladoVehiculoCalendarFin.SetDate(DateTime.Parse(oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionFechaFin"].ToString()));
                     this.wucPopUp_TrasladoVehiculoTimerDesde.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionHoraInicioEstandar"].ToString();
                     this.wucPopUp_TrasladoVehiculoTimerHasta.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionHoraFinEstandar"].ToString();
 
@@ -925,6 +944,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
                     oENTGira.TipoGiraConfiguracionId = 1; // Traslado en vehículo
                     oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_TrasladoVehiculo.SelectedItem.Text;
+                    oENTGira.ConfiguracionFechaInicio = this.wucPopUp_TrasladoVehiculoCalendarInicio.DisplayUTCDate;
+                    oENTGira.ConfiguracionFechaFin = this.wucPopUp_TrasladoVehiculoCalendarFin.DisplayUTCDate;
                     oENTGira.ConfiguracionHoraInicio = this.wucPopUp_TrasladoVehiculoTimerDesde.DisplayUTCTime;
                     oENTGira.ConfiguracionHoraFin = this.wucPopUp_TrasladoVehiculoTimerHasta.DisplayUTCTime;
                     oENTGira.ConfiguracionDetalle = this.txtPopUp_TrasladoVehiculoDetalle.Text.Trim();
@@ -961,6 +982,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 {
                 
                     if (this.txtPopUp_TrasladoVehiculoDetalle.Text.Trim() == "") { throw new Exception("* El campo [Nombre] es requerido"); }
+
+                    if (!this.wucPopUp_TrasladoVehiculoCalendarInicio.IsValidDate()) { throw new Exception("El campo [Fecha de Inicio] es requerido"); }
+                    if (!this.wucPopUp_TrasladoVehiculoCalendarFin.IsValidDate()) { throw new Exception("El campo [Fecha final] es requerido"); }
+
                     if (!this.wucPopUp_TrasladoVehiculoTimerDesde.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora de inicio del evento] es requerido: " + ErrorDetailHour); }
                     if (!this.wucPopUp_TrasladoVehiculoTimerHasta.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora final del evento] es requerido: " + ErrorDetailHour); }
                     if (this.txtOtraAgrupacion_TrasladoVehiculo.Enabled) { throw (new Exception("El campo [Agrupación] es requerido")); }
@@ -1093,8 +1118,12 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                     // Limpiar formulario
                     this.txtPopUp_TrasladoHelicopteroDetalle.Text = "";
-                    this.wucPopUp_TrasladoHelicopteroTimerDesde.DisplayTime = "10:00 AM";
-                    this.wucPopUp_TrasladoHelicopteroTimerHasta.DisplayTime = "10:00 AM";
+                    
+                    this.wucPopUp_TrasladoHelicopteroCalendarInicio.SetDate(DateTime.Parse(this.GiraFechaInicio.Value));
+                    this.wucPopUp_TrasladoHelicopteroCalendarFin.SetDate(DateTime.Parse(this.GiraFechaInicio.Value));
+
+                    this.wucPopUp_TrasladoHelicopteroTimerDesde.DisplayTime = "10:00";
+                    this.wucPopUp_TrasladoHelicopteroTimerHasta.DisplayTime = "10:00";
                     this.txtPopUp_TrasladoHelicopteroLugar.Text = "";
                     this.txtPopUp_TrasladoHelicopteroDomicilio.Text = "";
                     this.txtPopUp_TrasladoHelicopteroCoordenadas.Text = "";
@@ -1135,6 +1164,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
                     oENTGira.TipoGiraConfiguracionId = 2; // Traslado en helicóptero
                     oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_TrasladoHelicoptero.SelectedItem.Text;
+
+                    oENTGira.ConfiguracionFechaInicio = this.wucPopUp_TrasladoHelicopteroCalendarInicio.DisplayUTCDate;
+                    oENTGira.ConfiguracionFechaFin = this.wucPopUp_TrasladoHelicopteroCalendarFin.DisplayUTCDate;
+
                     oENTGira.ConfiguracionHoraInicio = this.wucPopUp_TrasladoHelicopteroTimerDesde.DisplayUTCTime;
                     oENTGira.ConfiguracionHoraFin = this.wucPopUp_TrasladoHelicopteroTimerHasta.DisplayUTCTime;
                     oENTGira.ConfiguracionDetalle = this.txtPopUp_TrasladoHelicopteroDetalle.Text.Trim();
@@ -1212,6 +1245,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Llenado de formulario
                     this.txtPopUp_TrasladoHelicopteroDetalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionDetalle"].ToString();
                     this.ddlAgrupacion_TrasladoHelicoptero.SelectedValue = dtAgrupacion.Select("Agrupacion='" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionGrupo"].ToString() + "'")[0]["Row"].ToString();
+
+                    this.wucPopUp_TrasladoHelicopteroCalendarInicio.SetDate(DateTime.Parse(oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionFechaInicio"].ToString()));
+                    this.wucPopUp_TrasladoHelicopteroCalendarFin.SetDate(DateTime.Parse(oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionFechaFin"].ToString()));
+
                     this.wucPopUp_TrasladoHelicopteroTimerDesde.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionHoraInicioEstandar"].ToString();
                     this.wucPopUp_TrasladoHelicopteroTimerHasta.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionHoraFinEstandar"].ToString();
                     this.txtPopUp_TrasladoHelicopteroLugar.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["HelipuertoLugar"].ToString();
@@ -1294,6 +1331,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
                     oENTGira.TipoGiraConfiguracionId = 2; // Traslado en helicóptero
                     oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_TrasladoHelicoptero.SelectedItem.Text;
+
+                    oENTGira.ConfiguracionFechaInicio = this.wucPopUp_TrasladoHelicopteroCalendarInicio.DisplayUTCDate;
+                    oENTGira.ConfiguracionFechaFin = this.wucPopUp_TrasladoHelicopteroCalendarFin.DisplayUTCDate;
+
                     oENTGira.ConfiguracionHoraInicio = this.wucPopUp_TrasladoHelicopteroTimerDesde.DisplayUTCTime;
                     oENTGira.ConfiguracionHoraFin = this.wucPopUp_TrasladoHelicopteroTimerHasta.DisplayUTCTime;
                     oENTGira.ConfiguracionDetalle = this.txtPopUp_TrasladoHelicopteroDetalle.Text.Trim();
@@ -1347,6 +1388,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 {
                 
                     if (this.txtPopUp_TrasladoHelicopteroDetalle.Text.Trim() == "") { throw new Exception("* El campo [Nombre] es requerido"); }
+
+                    if (!this.wucPopUp_TrasladoHelicopteroCalendarInicio.IsValidDate()) { throw new Exception("El campo [Fecha de Inicio] es requerido"); }
+                    if (!this.wucPopUp_TrasladoHelicopteroCalendarFin.IsValidDate()) { throw new Exception("El campo [Fecha final] es requerido"); }
+
                     if (!this.wucPopUp_TrasladoHelicopteroTimerDesde.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora de inicio del evento] es requerido: " + ErrorDetailHour); }
                     if (!this.wucPopUp_TrasladoHelicopteroTimerHasta.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora final del evento] es requerido: " + ErrorDetailHour); }
                     if (this.txtOtraAgrupacion_TrasladoHelicoptero.Enabled) { throw (new Exception("El campo [Agrupación] es requerido")); }
@@ -1626,8 +1671,11 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                     // Limpiar formulario
                     this.txtPopUp_EventoDetalle.Text = "";
-                    this.wucPopUp_EventoTimerDesde.DisplayTime = "10:00 AM";
-                    this.wucPopUp_EventoTimerHasta.DisplayTime = "10:00 AM";
+
+                    this.wucPopUp_EventoCalendarInicio.SetDate(DateTime.Parse( this.GiraFechaInicio.Value));
+                    this.wucPopUp_EventoCalendarFin.SetDate(DateTime.Parse(this.GiraFechaInicio.Value));
+                    this.wucPopUp_EventoTimerDesde.DisplayTime = "10:00";
+                    this.wucPopUp_EventoTimerHasta.DisplayTime = "10:00";
                     this.txtPopUp_EventoLugar.Text = "";
                     this.hddLugarEventoId.Value = "";
                     this.txtPopUp_Domicilio.Text = "";
@@ -1707,6 +1755,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
                     oENTGira.TipoGiraConfiguracionId = 3; // Evento
                     oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_Evento.SelectedItem.Text;
+                    oENTGira.ConfiguracionFechaInicio = this.wucPopUp_EventoCalendarInicio.DisplayUTCDate;
+                    oENTGira.ConfiguracionFechaFin = this.wucPopUp_EventoCalendarFin.DisplayUTCDate;
                     oENTGira.ConfiguracionHoraInicio = this.wucPopUp_EventoTimerDesde.DisplayUTCTime;
                     oENTGira.ConfiguracionHoraFin = this.wucPopUp_EventoTimerHasta.DisplayUTCTime;
                     oENTGira.ConfiguracionDetalle = this.txtPopUp_EventoDetalle.Text.Trim();
@@ -1863,6 +1913,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Llenado de formulario
                     this.ddlAgrupacion_Evento.SelectedValue = dtAgrupacion.Select("Agrupacion='" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionGrupo"].ToString() + "'")[0]["row"].ToString();
                     this.txtPopUp_EventoDetalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionDetalle"].ToString();
+                    this.wucPopUp_EventoCalendarInicio.SetDate(DateTime.Parse(oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionFechaInicio"].ToString()));
+                    this.wucPopUp_EventoCalendarFin.SetDate(DateTime.Parse(oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionFechaFin"].ToString()));
                     this.wucPopUp_EventoTimerDesde.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionHoraInicioEstandar"].ToString();
                     this.wucPopUp_EventoTimerHasta.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionHoraFinEstandar"].ToString();
 
@@ -2049,6 +2101,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
                     oENTGira.TipoGiraConfiguracionId = 3; // Evento
                     oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_Evento.SelectedItem.Text;
+                    oENTGira.ConfiguracionFechaInicio = this.wucPopUp_EventoCalendarInicio.DisplayUTCDate;
+                    oENTGira.ConfiguracionFechaFin = this.wucPopUp_EventoCalendarFin.DisplayUTCDate;
                     oENTGira.ConfiguracionHoraInicio = this.wucPopUp_EventoTimerDesde.DisplayUTCTime;
                     oENTGira.ConfiguracionHoraFin = this.wucPopUp_EventoTimerHasta.DisplayUTCTime;
                     oENTGira.ConfiguracionDetalle = this.txtPopUp_EventoDetalle.Text.Trim();
@@ -2199,6 +2253,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     if (this.txtOtraAgrupacion_Evento.Enabled) { throw (new Exception("El campo [Agrupación] es requerido")); }
                     if (this.ddlAgrupacion_Evento.SelectedItem.Value == "-1") { throw (new Exception("El campo [Agrupación] es requerido")); }
                     if (this.txtPopUp_EventoDetalle.Text.Trim() == "") { throw new Exception("* El campo [Nombre] es requerido"); }
+
+                    if (!this.wucPopUp_EventoCalendarInicio.IsValidDate()) { throw new Exception("El campo [Fecha de Inicio] es requerido"); }
+                    if (!this.wucPopUp_EventoCalendarFin.IsValidDate()) { throw new Exception("El campo [Fecha final] es requerido"); }
+
                     if (!this.wucPopUp_EventoTimerDesde.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora de inicio del evento] es requerido: " + ErrorDetailHour); }
                     if (!this.wucPopUp_EventoTimerHasta.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora final del evento] es requerido: " + ErrorDetailHour); }
                     if( this.hddLugarEventoId.Value.Trim() == "" || this.hddLugarEventoId.Value.Trim() == "0" ){ throw (new Exception("Es necesario seleccionar un Lugar del Evento")); }
@@ -2790,8 +2848,12 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                     // Limpiar formulario
                     this.txtPopUp_ActividadGeneralDetalle.Text = "";
-                    this.wucPopUp_ActividadGeneralTimerDesde.DisplayTime = "10:00 AM";
-                    this.wucPopUp_ActividadGeneralTimerHasta.DisplayTime = "10:00 AM";
+
+                    this.wucPopUp_ActividadGeneralCalendarInicio.SetDate(DateTime.Parse(this.GiraFechaInicio.Value));
+                    this.wucPopUp_ActividadGeneralCalendarFin.SetDate(DateTime.Parse(this.GiraFechaInicio.Value));
+
+                    this.wucPopUp_ActividadGeneralTimerDesde.DisplayTime = "10:00";
+                    this.wucPopUp_ActividadGeneralTimerHasta.DisplayTime = "10:00";
 
                     // Estado incial de controles
                     this.pnlPopUp_ActividadGeneral.Visible = false;
@@ -2823,6 +2885,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
                     oENTGira.TipoGiraConfiguracionId = 4; // Actividad General
                     oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_ActividadGeneral.SelectedItem.Text;
+
+                    oENTGira.ConfiguracionFechaInicio = this.wucPopUp_ActividadGeneralCalendarInicio.DisplayUTCDate;
+                    oENTGira.ConfiguracionFechaFin = this.wucPopUp_ActividadGeneralCalendarFin.DisplayUTCDate;
+
                     oENTGira.ConfiguracionHoraInicio = this.wucPopUp_ActividadGeneralTimerDesde.DisplayUTCTime;
                     oENTGira.ConfiguracionHoraFin = this.wucPopUp_ActividadGeneralTimerHasta.DisplayUTCTime;
                     oENTGira.ConfiguracionDetalle = this.txtPopUp_ActividadGeneralDetalle.Text.Trim();
@@ -2883,6 +2949,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Llenado de formulario
                     this.txtPopUp_ActividadGeneralDetalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionDetalle"].ToString();
                     this.ddlAgrupacion_ActividadGeneral.SelectedValue = dtAgrupacion.Select("Agrupacion='" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionGrupo"].ToString() + "'")[0]["Row"].ToString();
+
+                    this.wucPopUp_ActividadGeneralCalendarInicio.SetDate(DateTime.Parse(oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionFechaInicio"].ToString()));
+                    this.wucPopUp_ActividadGeneralCalendarFin.SetDate(DateTime.Parse(oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionFechaFin"].ToString()));
+
                     this.wucPopUp_ActividadGeneralTimerDesde.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionHoraInicioEstandar"].ToString();
                     this.wucPopUp_ActividadGeneralTimerHasta.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionHoraFinEstandar"].ToString();
 
@@ -2954,6 +3024,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
                     oENTGira.TipoGiraConfiguracionId = 4; // Actividad General
                     oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_ActividadGeneral.SelectedItem.Text;
+
+                    oENTGira.ConfiguracionFechaInicio = this.wucPopUp_ActividadGeneralCalendarInicio.DisplayUTCDate;
+                    oENTGira.ConfiguracionFechaFin = this.wucPopUp_ActividadGeneralCalendarFin.DisplayUTCDate;
+
                     oENTGira.ConfiguracionHoraInicio = this.wucPopUp_ActividadGeneralTimerDesde.DisplayUTCTime;
                     oENTGira.ConfiguracionHoraFin = this.wucPopUp_ActividadGeneralTimerHasta.DisplayUTCTime;
                     oENTGira.ConfiguracionDetalle = this.txtPopUp_ActividadGeneralDetalle.Text.Trim();
@@ -2990,6 +3064,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 {
                 
                     if (this.txtPopUp_ActividadGeneralDetalle.Text.Trim() == "") { throw new Exception("* El campo [Nombre] es requerido"); }
+
+                    if (!this.wucPopUp_ActividadGeneralCalendarInicio.IsValidDate()) { throw new Exception("El campo [Fecha de Inicio] es requerido"); }
+                    if (!this.wucPopUp_ActividadGeneralCalendarFin.IsValidDate()) { throw new Exception("El campo [Fecha final] es requerido"); }
+
                     if (!this.wucPopUp_ActividadGeneralTimerDesde.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora de inicio del evento] es requerido: " + ErrorDetailHour); }
                     if (!this.wucPopUp_ActividadGeneralTimerHasta.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora final del evento] es requerido: " + ErrorDetailHour); }
                     if (this.txtOtraAgrupacion_ActividadGeneral.Enabled) { throw (new Exception("El campo [Agrupación] es requerido")); }

@@ -305,6 +305,14 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTGira.ConfiguracionGrupo;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("ConfiguracionFechaInicio", SqlDbType.Date);
+            sqlPar.Value = oENTGira.ConfiguracionFechaInicio;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ConfiguracionFechaFin", SqlDbType.Date);
+            sqlPar.Value = oENTGira.ConfiguracionFechaFin;
+            sqlCom.Parameters.Add(sqlPar);
+
             sqlPar = new SqlParameter("ConfiguracionHoraInicio", SqlDbType.Time);
             sqlPar.Value = oENTGira.ConfiguracionHoraInicio;
             sqlCom.Parameters.Add(sqlPar);
@@ -965,6 +973,14 @@ namespace Agenda.DataAccess.Object
 
             sqlPar = new SqlParameter("ConfiguracionGrupo", SqlDbType.VarChar);
             sqlPar.Value = oENTGira.ConfiguracionGrupo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ConfiguracionFechaInicio", SqlDbType.Date);
+            sqlPar.Value = oENTGira.ConfiguracionFechaInicio;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ConfiguracionFechaFin", SqlDbType.Date);
+            sqlPar.Value = oENTGira.ConfiguracionFechaFin;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("ConfiguracionHoraInicio", SqlDbType.Time);
