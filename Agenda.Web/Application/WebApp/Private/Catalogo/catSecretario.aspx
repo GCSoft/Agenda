@@ -24,9 +24,9 @@
     <asp:Panel ID="pnlFormulario" runat="server" CssClass="FormPanel">
         <table class="FormTable">
             <tr>
-				<td class="Etiqueta">Nombre</td>
+				<td class="Etiqueta">Palabra clave</td>
 				<td class="Espacio"></td>
-				<td class="Campo"><asp:TextBox ID="txtNombre" runat="server" CssClass="Textbox_General" Width="210px"></asp:TextBox></td>
+				<td class="Campo"><asp:TextBox ID="txtNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="210px"></asp:TextBox></td>
                 <td></td>
 			</tr>
             <tr>
@@ -60,11 +60,11 @@
                 <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
                     <tr class="Grid_Header">
                         <td style="width: 250px;">Nombre</td>
-                        <td style="width: 80px;">Título</td>
                         <td style="width: 200px;">Puesto</td>
                         <td style="width: 200px;">Correo</td>
-                        <td style="width: 100px;">Estatus</td>
-                        <td>Descripción</td>
+                        <td style="width: 100px;">Teléfono</td>
+                        <td style="width: 80px;">Estatus</td>
+                        <td>Observaciones</td>
                     </tr>
                     <tr class="Grid_Row">
                         <td colspan="6">No se encontraron Secretarios registrados en el sistema</td>
@@ -73,11 +73,11 @@
             </EmptyDataTemplate>
             <Columns>
                 <asp:BoundField HeaderText="Nombre"         ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="250px" DataField="Nombre"                          SortExpression="Nombre"></asp:BoundField>
-                <asp:BoundField HeaderText="Título"         ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="80px" DataField="TituloNombre"                    SortExpression="TituloNombre"></asp:BoundField>
                 <asp:BoundField HeaderText="Puesto"         ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="200px" DataField="Puesto"                          SortExpression="Puesto"></asp:BoundField>
                 <asp:BoundField HeaderText="Correo"         ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="200px" DataField="Correo"                          SortExpression="Correo"></asp:BoundField>
-                <asp:BoundField HeaderText="Estatus"        ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Estatus"                         SortExpression="Estatus"></asp:BoundField>
-                <asp:BoundField HeaderText="Descripción"    ItemStyle-HorizontalAlign="Left"                            DataField="Descripcion" HtmlEncode="false"  SortExpression="Descripcion"></asp:BoundField>
+                <asp:BoundField HeaderText="Teléfono"       ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Telefono"                        SortExpression="Telefono"></asp:BoundField>
+                <asp:BoundField HeaderText="Estatus"        ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="80px"  DataField="Estatus"                         SortExpression="Estatus"></asp:BoundField>
+                <asp:BoundField HeaderText="Observaciones"  ItemStyle-HorizontalAlign="Left"                            DataField="Descripcion" HtmlEncode="false"  SortExpression="Descripcion"></asp:BoundField>
                 <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
                     <ItemTemplate>
                         <asp:ImageButton ID="imgEdit" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Editar" ImageUrl="~/Include/Image/Buttons/Edit.png" runat="server" />
@@ -151,13 +151,18 @@
                         <td class="Campo"><asp:TextBox ID="txtPopUpCorreo" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
                     </tr>
                     <tr>
+                        <td class="Etiqueta">Teléfono</td>
+                        <td class="VinetaObligatorio"></td>
+                        <td class="Campo"><asp:TextBox ID="txtPopUpTelefono" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
+                    </tr>
+                    <tr>
                         <td class="Etiqueta">Estatus</td>
                         <td class="VinetaObligatorio">*</td>
                         <td class="Campo"><asp:DropDownList ID="ddlPopUpStatus" runat="server" CssClass="DropDownList_General" Width="405px"></asp:DropDownList></td>
                     </tr>
                     <tr>
 				        <td colspan="3">
-                            <CKEditor:CKEditorControl ID="ckePopUpDescripcion" runat="server" BasePath="~/Include/Components/CKEditor/Core/" Height="130px"></CKEditor:CKEditorControl>
+                            <CKEditor:CKEditorControl ID="ckePopUpDescripcion" runat="server" BasePath="~/Include/Components/CKEditor/Core/" Height="90px"></CKEditor:CKEditorControl>
 				        </td>
 			        </tr>
                     <tr>

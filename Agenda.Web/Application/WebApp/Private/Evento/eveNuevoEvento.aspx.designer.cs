@@ -211,13 +211,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.TextBox txtNombreEvento;
         
         /// <summary>
-        /// wucCalendar control.
+        /// wucCalendarInicio control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::Agenda.Web.Include.WebUserControls.wucCalendar wucCalendar;
+        protected global::Agenda.Web.Include.WebUserControls.wucCalendar wucCalendarInicio;
         
         /// <summary>
         /// wucTimerDesde control.
@@ -227,6 +227,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::Agenda.Web.Include.WebUserControls.wucTimer wucTimerDesde;
+        
+        /// <summary>
+        /// wucCalendarFin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::Agenda.Web.Include.WebUserControls.wucCalendar wucCalendarFin;
         
         /// <summary>
         /// wucTimerHasta control.

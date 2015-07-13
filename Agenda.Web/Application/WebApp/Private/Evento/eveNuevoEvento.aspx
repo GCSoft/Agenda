@@ -10,7 +10,7 @@
         function ColoniaSelected_LugarEvento(sender, e) {
             $get("<%=hddPopUpColoniaId_LugarEvento.ClientID %>").value = e.get_value();
         }
-
+        
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cntPrivateTemplateBody" runat="server">
@@ -32,7 +32,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlFormulario" runat="server" CssClass="FormPanel">
-        <asp:TabContainer ID="tabEvento" runat="server" ActiveTabIndex="0" CssClass="Tabcontainer_General" Height="435px" >
+        <asp:TabContainer ID="tabEvento" runat="server" ActiveTabIndex="0" CssClass="Tabcontainer_General" Height="500px" >
             <asp:TabPanel ID="tpnlDatosGenerales" runat="server">
                 <HeaderTemplate>Datos generales</HeaderTemplate>
                 <ContentTemplate>
@@ -120,6 +120,7 @@
                             <td></td>
 			            </tr>
                     </table>
+                    <br /><br /><br /><br />
 					<table border="0" style="width:100%">
 						<tr>
 							<td class="Etiqueta">Observaciones</td>
@@ -152,11 +153,27 @@
 				            <td class="Campo">
                                 <table style="border:0px; padding:0px; width:100%;">
                                     <tr>
-                                        <td style="text-align:left; width:200px;">
-                                            <wuc:wucCalendar ID="wucCalendar" runat="server" />
+                                        <td style="text-align:left; width:250px;">
+                                            Desde&nbsp;<wuc:wucCalendar ID="wucCalendarInicio" runat="server" />
                                         </td>
                                         <td style="text-align:left; width:300px;">
-                                            <wuc:wucTimer ID="wucTimerDesde" runat="server" />&nbsp;&nbsp;&nbsp;a&nbsp;&nbsp;&nbsp;
+                                            <wuc:wucTimer ID="wucTimerDesde" runat="server" />&nbsp;HRS.
+                                        </td>
+                                    </tr>
+                                </table>
+				            </td>
+                            <td></td>
+			            </tr>
+                        <tr>
+				            <td class="Etiqueta"></td>
+				            <td class="VinetaObligatorio"></td>
+				            <td class="Campo">
+                                <table style="border:0px; padding:0px; width:100%;">
+                                    <tr>
+                                        <td style="text-align:left; width:250px;">
+                                            Hasta&nbsp;&nbsp;<wuc:wucCalendar ID="wucCalendarFin" runat="server" />
+                                        </td>
+                                        <td style="text-align:left; width:300px;">
                                             <wuc:wucTimer ID="wucTimerHasta" runat="server" />&nbsp;HRS.
                                         </td>
                                     </tr>
@@ -251,7 +268,7 @@
 						</tr>
 						<tr>
 							<td colspan="4" style="text-align:left; vertical-align:bottom;">
-								<CKEditor:CKEditorControl ID="ckeDetalleEvento" runat="server" BasePath="~/Include/Components/CKEditor/Core/" Height="55px"></CKEditor:CKEditorControl>
+								<CKEditor:CKEditorControl ID="ckeDetalleEvento" runat="server" BasePath="~/Include/Components/CKEditor/Core/" Height="80px"></CKEditor:CKEditorControl>
 							</td>
 						</tr>
                     </table>
@@ -293,7 +310,7 @@
                             <td></td>
 			            </tr>
                     </table>
-                    <br /><br />
+                    <br /><br /><br /><br /><br /><br />
                     <table border="0" style="width:100%">
 						<tr>
 							<td class="Etiqueta" style="width:180px">Comentarios</td>
@@ -303,7 +320,7 @@
 						</tr>
 						<tr>
 							<td colspan="4" style="text-align:left; vertical-align:bottom;">
-								<CKEditor:CKEditorControl ID="ckeContactoComentarios" runat="server" BasePath="~/Include/Components/CKEditor/Core/" Height="130px"></CKEditor:CKEditorControl>
+								<CKEditor:CKEditorControl ID="ckeContactoComentarios" runat="server" BasePath="~/Include/Components/CKEditor/Core/" Height="125px"></CKEditor:CKEditorControl>
 							</td>
 						</tr>
 					</table>

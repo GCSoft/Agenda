@@ -55,14 +55,29 @@
 				<td class="Campo">
                     <table style="border:0px; padding:0px; width:100%;">
                         <tr>
-                            <td style="text-align:left; width:200px;">
-                                <wuc:wucCalendar ID="wucCalendar" runat="server" />
+                            <td style="text-align:left; width:250px;">
+                                Desde&nbsp;<wuc:wucCalendar ID="wucCalendarInicio" runat="server" />
                             </td>
                             <td style="text-align:left; width:300px;">
-                                <wuc:wucTimer ID="wucTimerDesde" runat="server" />&nbsp;&nbsp;a&nbsp;&nbsp;
+                                <wuc:wucTimer ID="wucTimerDesde" runat="server" />&nbsp;HRS.
+                            </td>
+                        </tr>
+                    </table>
+				</td>
+                <td></td>
+			</tr>
+            <tr>
+				<td class="Etiqueta"></td>
+				<td class="VinetaObligatorio"></td>
+				<td class="Campo">
+                    <table style="border:0px; padding:0px; width:100%;">
+                        <tr>
+                            <td style="text-align:left; width:250px;">
+                                Hasta&nbsp;&nbsp;<wuc:wucCalendar ID="wucCalendarFin" runat="server" />
+                            </td>
+                            <td style="text-align:left; width:300px;">
                                 <wuc:wucTimer ID="wucTimerHasta" runat="server" />&nbsp;HRS.
                             </td>
-                            <td></td>
                         </tr>
                     </table>
 				</td>

@@ -185,8 +185,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     Eventos = Eventos + "{ " +
                                                 "id: " + rowEvento["EventoId"].ToString() + ", " +
                                                 "title: '', " +
-                                                "start: '" + rowEvento["EventoFecha_ANSI"].ToString() + "T" + rowEvento["EventoHoraInicio_ANSI"].ToString() + "', " +
-                                                "end: '" + rowEvento["EventoFecha_ANSI"].ToString() + "T" + rowEvento["EventoHoraFin_ANSI"].ToString() + "', " +
+                                                "start: '" + rowEvento["EventoFechaInicio_ANSI"].ToString() + "T" + rowEvento["EventoHoraInicio_ANSI"].ToString() + "', " +
+                                                "end: '" + rowEvento["EventoFechaFin_ANSI"].ToString() + "T" + rowEvento["EventoHoraFin_ANSI"].ToString() + "', " +
                                                 "backgroundColor: '" + rowEvento["HexColor"].ToString() + "', " +
                                                 "description: '" + rowEvento["EventoNombre"].ToString() + "'" +
                                             "} ";
@@ -213,7 +213,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                                         "events: [ " + Eventos + " ], " +
                                         "" +
                                         "eventRender: function (event, element) { " +
-                                            "element.find('.fc-content').after(" + Convert.ToChar(34) + "<div style='font-family:Arial; font-size:11px; text-align:justify;'>" + Convert.ToChar(34) + " + event.description + " + Convert.ToChar(34) + "</div>" + Convert.ToChar(34) + ");" +
+                                            "element.find('.fc-content').after(" + Convert.ToChar(34) + "<div style='font-family:Arial; font-size:7px; text-align:justify;'>" + Convert.ToChar(34) + " + event.description + " + Convert.ToChar(34) + "</div>" + Convert.ToChar(34) + ");" +
                                         "}" +
                                         "" +
                                     "}); " +

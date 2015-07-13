@@ -169,13 +169,14 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Carátula compacta
                 this.lblEventoNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
-                this.lblEventoFechaHora.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHora"].ToString();
+                this.lblEventoFechaHora.Text = "Del " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHoraInicioTexto"].ToString() + " al " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHoraFinTexto"].ToString();
 
                 // Precarga del formulario
                 this.txtNombreEvento.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
-                this.wucCalendar.SetDate( DateTime.Parse( oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFecha"].ToString() ) );
-                this.wucTimerDesde.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoHoraInicioEstandar"].ToString();
-                this.wucTimerHasta.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoHoraFinEstandar"].ToString();
+                this.wucCalendarInicio.SetDate( DateTime.Parse( oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaInicio"].ToString() ) );
+                this.wucCalendarFin.SetDate( DateTime.Parse( oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaFin"].ToString() ) );
+                this.wucTimerDesde.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoHoraInicioTexto"].ToString();
+                this.wucTimerHasta.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoHoraFinTexto"].ToString();
 
                 this.txtLugarEvento.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["LugarEventoNombre"].ToString();
                 this.hddLugarEventoId.Value = oENTResponse.DataSetResponse.Tables[1].Rows[0]["LugarEventoId"].ToString();
@@ -243,7 +244,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Validaciones
                 if (this.txtNombreEvento.Text.Trim() == "") { throw new Exception("El campo [Nombre del evento] es requerido"); }
-                if (!this.wucCalendar.IsValidDate()) { throw new Exception("El campo [Fecha del evento] es requerido"); }
+                if (!this.wucCalendarInicio.IsValidDate()) { throw new Exception("El campo [Fecha de inicio del evento] es requerido"); }
+                if (!this.wucCalendarFin.IsValidDate()) { throw new Exception("El campo [Fecha final del evento] es requerido"); }
                 if (!this.wucTimerDesde.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora de inicio del evento] es requerido: " + ErrorDetailHour); }
                 if (!this.wucTimerHasta.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora de finalización del evento] es requerido: " + ErrorDetailHour); }
                 if (this.hddLugarEventoId.Value.Trim() == "" || this.hddLugarEventoId.Value.Trim() == "0") { throw (new Exception("Es necesario seleccionar un Lugar del Evento")); }
@@ -255,7 +257,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Formulario
                 oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
                 oENTEvento.EventoNombre = this.txtNombreEvento.Text.Trim();
-                oENTEvento.FechaEvento = this.wucCalendar.DisplayUTCDate;
+                oENTEvento.FechaInicio = this.wucCalendarInicio.DisplayUTCDate;
+                oENTEvento.FechaFin = this.wucCalendarFin.DisplayUTCDate;
                 oENTEvento.HoraEventoInicio = this.wucTimerDesde.DisplayUTCTime;
                 oENTEvento.HoraEventoFin = this.wucTimerHasta.DisplayUTCTime;
                 oENTEvento.LugarEventoId = Int32.Parse(this.hddLugarEventoId.Value);
@@ -460,7 +463,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.SenderId.Value = Key.ToString().Split(new Char[] { '|' })[1];
 
                 // Estado inicial
-                this.wucCalendar.Width = 176;
+                this.wucCalendarInicio.Width = 176;
+                this.wucCalendarFin.Width = 176;
 
                 SelectEstado_PopUp_LugarEvento();
                 SelectMunicipio_PopUp_LugarEvento();

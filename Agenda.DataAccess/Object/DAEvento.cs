@@ -157,8 +157,12 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTEvento.EventoObservaciones;
             sqlCom.Parameters.Add(sqlPar);
 
-            sqlPar = new SqlParameter("FechaEvento", SqlDbType.Date);
-            sqlPar.Value = oENTEvento.FechaEvento;
+            sqlPar = new SqlParameter("FechaInicio", SqlDbType.Date);
+            sqlPar.Value = oENTEvento.FechaInicio;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("FechaFin", SqlDbType.Date);
+            sqlPar.Value = oENTEvento.FechaFin;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("HoraEventoInicio", SqlDbType.Time);
@@ -945,8 +949,12 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTEvento.EventoNombre;
             sqlCom.Parameters.Add(sqlPar);
 
-            sqlPar = new SqlParameter("FechaEvento", SqlDbType.Date);
-            sqlPar.Value = oENTEvento.FechaEvento;
+            sqlPar = new SqlParameter("FechaInicio", SqlDbType.Date);
+            sqlPar.Value = oENTEvento.FechaInicio;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("FechaFin", SqlDbType.Date);
+            sqlPar.Value = oENTEvento.FechaFin;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("HoraEventoInicio", SqlDbType.Time);

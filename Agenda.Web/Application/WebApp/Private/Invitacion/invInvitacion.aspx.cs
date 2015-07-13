@@ -324,7 +324,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 Key = gcEncryption.EncryptString(Key, true);
 
                 // Mensaje a desplegar y script
-                JSScript = "function pageLoad(){ " + MessageDB + " if( confirm('Se registró la invitación exitosamente. ¿Desea ir al detalle para continuar con la captura?') ) { window.location.href('invDetalleInvitacion.aspx?key=" + Key + "'); } else { window.location.href('invInvitacion.aspx'); } }";
+                JSScript = "function pageLoad(){ " + MessageDB + " if( confirm('Se registró la invitación exitosamente. ¿Desea ir al detalle para continuar con la captura?') ) { window.location.href = 'invDetalleInvitacion.aspx?key=" + Key + "'; } else { window.location.href = 'invInvitacion.aspx'; } }";
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), JSScript, true);
 
             }catch (Exception ex){
@@ -445,7 +445,8 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 // TAB - Datos del evento
                 this.txtNombreEvento.Text = "";
                 this.wucCalendar.SetDate(DateTime.Now);
-                this.wucTimerDesde.DisplayTime = "10:00 a.m.";
+                this.wucTimerDesde.DisplayTime = "10:00";
+                this.wucTimerHasta.DisplayTime = "10:00";
 
                 this.txtLugarEvento.Text = "";
                 this.hddLugarEventoId.Value = "";

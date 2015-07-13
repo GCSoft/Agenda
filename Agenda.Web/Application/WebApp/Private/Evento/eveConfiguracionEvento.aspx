@@ -26,19 +26,14 @@
         <%-- Carátula --%>
         <table class="FormTable">
             <tr>
-				<td class="Etiqueta">Evento</td>
+				<td class="Etiqueta">Nombre de evento</td>
 				<td class="Espacio"></td>
 				<td class="Campo" colspan="2"><asp:Label ID="lblEventoNombre" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
 			</tr>
             <tr>
-				<td class="Etiqueta">Fecha</td>
+				<td class="Etiqueta">Fecha de evento</td>
 				<td class="Espacio"></td>
-				<td class="Campo" colspan="2"><asp:Label ID="lblEventoFecha" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
-			</tr>
-            <tr>
-				<td class="Etiqueta">Horario</td>
-				<td class="Espacio"></td>
-				<td class="Campo" colspan="2"><asp:Label ID="lblEventoHora" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
+				<td class="Campo" colspan="2"><asp:Label ID="lblEventoFechaHora" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
 			</tr>
             <tr>
 				<td class="Etiqueta"></td>

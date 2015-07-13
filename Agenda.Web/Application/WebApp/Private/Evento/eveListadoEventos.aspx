@@ -89,7 +89,7 @@
 
     <asp:Panel ID="pnlGrid" runat="server" CssClass="GridPanel">
         <asp:GridView ID="gvEvento" runat="server" AllowPaging="false" AllowSorting="true" AutoGenerateColumns="False" Width="100%"
-            DataKeyNames="EventoId, EventoNombre,Gira"
+            DataKeyNames="EventoId, EventoNombre,Gira,EventoFechaHoraInicio,EventoFechaHoraFin"
             OnRowDataBound="gvEvento_RowDataBound"
             OnRowCommand="gvEvento_RowCommand"
             OnSorting="gvEvento_Sorting">
@@ -104,14 +104,13 @@
                         <td style="width: 90px;">Prioridad</td>
                         <td style="width: 90px;">Dependencia</td>
                         <td style="width: 200px;">Lugar del Evento</td>
-                        <td style="width: 70px;">Fecha</td>
-                        <td style="width: 70px;">Inicio</td>
-                        <td style="width: 70px;">Fin</td>
+                        <td style="width: 120px;">Fecha Inicio</td>
+                        <td style="width: 120px;">Fecha Fin</td>
                         <td style="width: 200px;">Nombre de Evento</td>
                         <td>Detalle de Evento</td>
                     </tr>
                     <tr class="Grid_Row">
-                        <td colspan="10">No se encontraron Eventoes registradas</td>
+                        <td colspan="9">No se encontraron Eventos registradas</td>
                     </tr>
                 </table>
             </EmptyDataTemplate>
@@ -121,9 +120,8 @@
                 <asp:BoundField HeaderText="Prioridad"          ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="90px"  DataField="PrioridadNombre"                     SortExpression="PrioridadNombre"></asp:BoundField>
                 <asp:BoundField HeaderText="Dependencia"        ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="90px"  DataField="Dependencia"                         SortExpression="Dependencia"></asp:BoundField>
                 <asp:BoundField HeaderText="Lugar del Evento"   ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="200px" DataField="LugarEvento"                         SortExpression="LugarEvento"></asp:BoundField>
-                <asp:BoundField HeaderText="Fecha"              ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="70px"  DataField="EventoFechaEstandar"                 SortExpression="EventoFechaEstandar"></asp:BoundField>
-                <asp:BoundField HeaderText="Inicio"             ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="70px"  DataField="EventoHoraInicioEstandar"            SortExpression="EventoHoraInicioEstandar"></asp:BoundField>
-                <asp:BoundField HeaderText="Fin"                ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="70px"  DataField="EventoHoraFinEstandar"               SortExpression="EventoHoraFinEstandar"></asp:BoundField>
+                <asp:BoundField HeaderText="Fecha Inicio"       ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="120px" DataField="EventoFechaInicioTexto"              SortExpression="EventoFechaHoraInicio"></asp:BoundField>
+                <asp:BoundField HeaderText="Fecha Fin"          ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="120px" DataField="EventoFechaFinTexto"                 SortExpression="EventoFechaHoraFin"></asp:BoundField>
                 <asp:BoundField HeaderText="Nombre de Evento"   ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="200px" DataField="EventoNombre"                        SortExpression="EventoNombre"></asp:BoundField>
                 <asp:BoundField HeaderText="Detalle de Evento"  ItemStyle-HorizontalAlign="Left"                            DataField="EventoDetalle" HtmlEncode="false"    SortExpression="EventoDetalle"></asp:BoundField>
                 <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">

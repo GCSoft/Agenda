@@ -54,7 +54,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                 // Formulario
                 oENTGira.GiraNombre = this.txtNombreGira.Text.Trim();
-                oENTGira.FechaGira = this.wucCalendar.DisplayUTCDate;
+                oENTGira.FechaGiraInicio = this.wucCalendarInicio.DisplayUTCDate;
+                oENTGira.FechaGiraFin = this.wucCalendarFin.DisplayUTCDate;
                 oENTGira.HoraGiraInicio = this.wucTimerDesde.DisplayUTCTime;
                 oENTGira.HoraGiraFin = this.wucTimerHasta.DisplayUTCTime;
                 oENTGira.GiraDetalle = this.ckeGiraDetalle.Text.Trim();
@@ -83,7 +84,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 Key = gcEncryption.EncryptString(Key, true);
 
                 // Mensaje a desplegar y script
-                JSScript = "function pageLoad(){ if( confirm('Se registró la Gira exitosamente. ¿Desea ir al detalle para continuar con la captura?') ) { window.location.href('girDetalleGira.aspx?key=" + Key + "'); } else { window.location.href('girNuevaGira.aspx'); } }";
+                JSScript = "function pageLoad(){ if( confirm('Se registró la Gira exitosamente. ¿Desea ir al detalle para continuar con la captura?') ) { window.location.href = 'girDetalleGira.aspx?key=" + Key + "'; } else { window.location.href = 'girNuevaGira.aspx'; } }";
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), JSScript, true);
 
             }catch (Exception ex){
@@ -97,8 +98,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                 // TAB - Datos de la Gira
                 this.txtNombreGira.Text = "";
-                this.wucCalendar.SetDate(DateTime.Now);
-                this.wucTimerDesde.DisplayTime = "10:00 a.m.";
+                this.wucCalendarInicio.SetDate(DateTime.Now);
+                this.wucCalendarFin.SetDate(DateTime.Now);
+                this.wucTimerDesde.DisplayTime = "10:00";
+                this.wucTimerHasta.DisplayTime = "10:00";
                 this.ckeGiraDetalle.Text = "";
 
                 // TAB - Contacto
@@ -130,9 +133,14 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     throw (new Exception("Es necesario ingresar un Nombre de Gira"));
                 }
 
-                if ( !this.wucCalendar.IsValidDate() ) {
+                if ( !this.wucCalendarInicio.IsValidDate() ) {
                     this.tabGira.ActiveTabIndex = 0;
-                    throw new Exception("El campo [Fecha del Gira] es requerido");
+                    throw new Exception("El campo [Fecha de Inicio de la Gira] es requerido");
+                }
+
+                if ( !this.wucCalendarFin.IsValidDate() ) {
+                    this.tabGira.ActiveTabIndex = 0;
+                    throw new Exception("El campo [Fecha final de la Gira] es requerido");
                 }
 
                 if ( !this.wucTimerDesde.IsValidTime(ref ErrorDetailHour) ) {
@@ -146,16 +154,16 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 }
 
 
-                // TAB - Contacto
-                if( this.txtContactoNombre.Text.Trim() == "" ){
-                    this.tabGira.ActiveTabIndex = 1;
-                    throw (new Exception("Es necesario ingresar un Nombre de contacto"));
-                }
+                //// TAB - Contacto
+                //if( this.txtContactoNombre.Text.Trim() == "" ){
+                //    this.tabGira.ActiveTabIndex = 1;
+                //    throw (new Exception("Es necesario ingresar un Nombre de contacto"));
+                //}
 
-                if( this.txtContactoTelefono.Text.Trim() == "" ){
-                    this.tabGira.ActiveTabIndex = 1;
-                    throw (new Exception("Es necesario ingresar un Teléfono del contacto"));
-                }
+                //if( this.txtContactoTelefono.Text.Trim() == "" ){
+                //    this.tabGira.ActiveTabIndex = 1;
+                //    throw (new Exception("Es necesario ingresar un Teléfono del contacto"));
+                //}
 
             }catch (Exception ex){
                 throw (ex);
@@ -174,7 +182,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 if (this.IsPostBack) { return; }
 
                 // Estado inicial
-                this.wucCalendar.Width = 176;
+                this.wucCalendarInicio.Width = 176;
+                this.wucCalendarFin.Width = 176;
 
                 // Foco
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtNombreGira.ClientID + "'); }", true);

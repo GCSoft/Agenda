@@ -70,13 +70,14 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                 // Carátula compacta
                 this.lblGiraNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraNombre"].ToString();
-                this.lblGiraFechaHora.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraFechaHora"].ToString();
+                this.lblGiraFechaHora.Text = "Del " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraFechaHoraInicioTexto"].ToString() + " al " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraFechaHoraFinTexto"].ToString();
                 
                 // Precarga del formulario
                 this.txtNombreGira.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraNombre"].ToString();
-                this.wucCalendar.SetDate(DateTime.Parse(oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraFecha"].ToString()));
-                this.wucTimerDesde.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraHoraInicioEstandar"].ToString();
-                this.wucTimerHasta.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraHoraFinEstandar"].ToString();
+                this.wucCalendarInicio.SetDate(DateTime.Parse(oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraFechaInicio"].ToString()));
+                this.wucCalendarFin.SetDate(DateTime.Parse(oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraFechaFin"].ToString()));
+                this.wucTimerDesde.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraHoraInicioTexto"].ToString();
+                this.wucTimerHasta.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraHoraFinTexto"].ToString();
                 this.ckeGiraDetalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraDetalle"].ToString();
 
             }catch (Exception ex){
@@ -98,7 +99,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                 // Validaciones
                 if (this.txtNombreGira.Text.Trim() == "") { throw new Exception("El campo [Nombre del Gira] es requerido"); }
-                if (!this.wucCalendar.IsValidDate()) { throw new Exception("El campo [Fecha del Gira] es requerido"); }
+                if (!this.wucCalendarInicio.IsValidDate()) { throw new Exception("El campo [Fecha inicial de la Gira] es requerido"); }
+                if (!this.wucCalendarFin.IsValidDate()) { throw new Exception("El campo [Fecha final de la Gira] es requerido"); }
                 if (!this.wucTimerDesde.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora de inicio del Gira] es requerido: " + ErrorDetailHour); }
                 if (!this.wucTimerHasta.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora de finalización del Gira] es requerido: " + ErrorDetailHour); }
 
@@ -109,7 +111,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 // Formulario
                 oENTGira.GiraId = Int32.Parse(this.hddGiraId.Value);
                 oENTGira.GiraNombre = this.txtNombreGira.Text.Trim();
-                oENTGira.FechaGira = this.wucCalendar.DisplayUTCDate;
+                oENTGira.FechaGiraInicio = this.wucCalendarInicio.DisplayUTCDate;
+                oENTGira.FechaGiraFin = this.wucCalendarFin.DisplayUTCDate;
                 oENTGira.HoraGiraInicio = this.wucTimerDesde.DisplayUTCTime;
                 oENTGira.HoraGiraFin = this.wucTimerHasta.DisplayUTCTime;
                 oENTGira.GiraDetalle = this.ckeGiraDetalle.Text.Trim();
@@ -153,6 +156,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
 				// Carátula y formulario
                 SelectGira();
+
+                // Estado inicial
+                this.wucCalendarInicio.Width = 176;
+                this.wucCalendarFin.Width = 176;
 
                 // Foco
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtNombreGira.ClientID + "'); }", true);

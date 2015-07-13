@@ -310,6 +310,15 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo {
         protected global::System.Web.UI.WebControls.TextBox txtPopUpCorreo;
         
         /// <summary>
+        /// txtPopUpTelefono control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpTelefono;
+        
+        /// <summary>
         /// ddlPopUpStatus control.
         /// </summary>
         /// <remarks>

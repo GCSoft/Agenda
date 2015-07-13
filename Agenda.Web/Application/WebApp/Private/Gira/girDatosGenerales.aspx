@@ -47,11 +47,27 @@
 				<td class="Campo" colspan="2">
                     <table style="border:0px; padding:0px; width:100%;">
                         <tr>
-                            <td style="text-align:left; width:200px;">
-                                <wuc:wucCalendar ID="wucCalendar" runat="server" />
+                            <td style="text-align:left; width:220px;">
+                                Desde&nbsp;<wuc:wucCalendar ID="wucCalendarInicio" runat="server" />
                             </td>
-                            <td style="text-align:left; width:300px;">
-                                <wuc:wucTimer ID="wucTimerDesde" runat="server" />&nbsp;&nbsp;a&nbsp;&nbsp;
+                            <td style="text-align:left; width:150px;">
+                                <wuc:wucTimer ID="wucTimerDesde" runat="server" />&nbsp;HRS.
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+				</td>
+			</tr>
+            <tr>
+				<td class="Etiqueta"></td>
+				<td class="VinetaObligatorio"></td>
+				<td class="Campo" colspan="2">
+                    <table style="border:0px; padding:0px; width:100%;">
+                        <tr>
+                            <td style="text-align:left; width:220px;">
+                                Hasta&nbsp;&nbsp;<wuc:wucCalendar ID="wucCalendarFin" runat="server" />
+                            </td>
+                            <td style="text-align:left; width:150px;">
                                 <wuc:wucTimer ID="wucTimerHasta" runat="server" />&nbsp;HRS.
                             </td>
                             <td></td>
@@ -86,7 +102,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlBotones" runat="server" CssClass="ButtonPanel">
-        <asp:Button ID="btnActualizar" runat="server" Text="Actualizar" CssClass="Button_General" Width="125px" OnClick="btnActualizar_Click" />&nbsp;
+        <asp:Button ID="btnActualizar" runat="server" Text="Actualizar" CssClass="Button_General" Width="125px" OnClick="btnActualizar_Click" OnClientClick="return confirm('Si modificó la fecha de la Gira los eventos registrados se ajustarán, ¿Seguro que desea continuar?');" />&nbsp;
         <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="Button_General" width="125px" onclick="btnRegresar_Click" />
     </asp:Panel>
 

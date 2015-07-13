@@ -195,8 +195,12 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTGira.GiraNombre;
             sqlCom.Parameters.Add(sqlPar);
 
-            sqlPar = new SqlParameter("FechaGira", SqlDbType.Date);
-            sqlPar.Value = oENTGira.FechaGira;
+            sqlPar = new SqlParameter("FechaGiraInicio", SqlDbType.Date);
+            sqlPar.Value = oENTGira.FechaGiraInicio;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("FechaGiraFin", SqlDbType.Date);
+            sqlPar.Value = oENTGira.FechaGiraFin;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("HoraGiraInicio", SqlDbType.Time);
@@ -869,8 +873,12 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTGira.GiraNombre;
             sqlCom.Parameters.Add(sqlPar);
 
-            sqlPar = new SqlParameter("FechaGira", SqlDbType.Date);
-            sqlPar.Value = oENTGira.FechaGira;
+            sqlPar = new SqlParameter("FechaGiraInicio", SqlDbType.Date);
+            sqlPar.Value = oENTGira.FechaGiraInicio;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("FechaGiraFin", SqlDbType.Date);
+            sqlPar.Value = oENTGira.FechaGiraFin;
             sqlCom.Parameters.Add(sqlPar);
 
             sqlPar = new SqlParameter("HoraGiraInicio", SqlDbType.Time);

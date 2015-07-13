@@ -83,7 +83,7 @@
 
     <asp:Panel ID="pnlGrid" runat="server" CssClass="GridPanel">
         <asp:GridView ID="gvInvitacion" runat="server" AllowPaging="false" AllowSorting="true" AutoGenerateColumns="False" Width="100%"
-            DataKeyNames="InvitacionId,EventoNombre,PrioridadNombre,EventoHoraInicioEstandar,EventoHoraFinEstandar,InvitacionObservaciones"
+            DataKeyNames="InvitacionId,EventoNombre,PrioridadNombre,EventoHoraInicioEstandar,EventoHoraFinEstandar,InvitacionObservaciones,EventoFechaHoraInicio"
             OnRowDataBound="gvInvitacion_RowDataBound"
             OnRowCommand="gvInvitacion_RowCommand"
             OnSorting="gvInvitacion_Sorting">
@@ -111,7 +111,7 @@
                 <asp:BoundField HeaderText="Categoría"          ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="CategoriaNombre"                     SortExpression="CategoriaNombre"></asp:BoundField>
                 <asp:BoundField HeaderText="Lugar del Evento"   ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="120px" DataField="LugarEvento"                         SortExpression="LugarEvento"></asp:BoundField>
                 <asp:BoundField HeaderText="Representante"      ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="200px" DataField="RepresentanteEvento"                 SortExpression="RepresentanteEvento"></asp:BoundField>
-                <asp:BoundField HeaderText="Fecha"              ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="80px"  DataField="EventoFechaEstandar"                 SortExpression="EventoFechaEstandar"></asp:BoundField>
+                <asp:BoundField HeaderText="Fecha"              ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="80px"  DataField="EventoFechaEstandar"                 SortExpression="EventoFechaHoraInicio"></asp:BoundField>
                 <asp:BoundField HeaderText="Nombre de Evento"   ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="200px" DataField="EventoNombre"                        SortExpression="EventoNombre"></asp:BoundField>
                 <asp:BoundField HeaderText="Detalle de Evento"  ItemStyle-HorizontalAlign="Left"                            DataField="EventoDetalle" HtmlEncode="false"    SortExpression="EventoDetalle"></asp:BoundField>
                 <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">

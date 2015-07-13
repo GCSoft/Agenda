@@ -214,7 +214,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 #region TAB - Datos del evento
                     oENTEvento.EventoNombre = this.txtNombreEvento.Text.Trim();
-                    oENTEvento.FechaEvento = this.wucCalendar.DisplayUTCDate;
+                    oENTEvento.FechaInicio = this.wucCalendarInicio.DisplayUTCDate;
+                    oENTEvento.FechaFin = this.wucCalendarFin.DisplayUTCDate;
                     oENTEvento.HoraEventoInicio = this.wucTimerDesde.DisplayUTCTime;
                     oENTEvento.HoraEventoFin = this.wucTimerHasta.DisplayUTCTime;
                     oENTEvento.LugarEventoId = Int32.Parse( this.hddLugarEventoId.Value );
@@ -249,7 +250,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 Key = gcEncryption.EncryptString(Key, true);
 
                 // Mensaje a desplegar y script
-                JSScript = "function pageLoad(){ if( confirm('Se registró el evento exitosamente. ¿Desea ir al detalle para continuar con la captura?') ) { window.location.href('eveDetalleEvento.aspx?key=" + Key + "'); } else { window.location.href('eveNuevoEvento.aspx'); } }";
+                JSScript = "function pageLoad(){ if( confirm('Se registró el evento exitosamente. ¿Desea ir al detalle para continuar con la captura?') ) { window.location.href = 'eveDetalleEvento.aspx?key=" + Key + "'; } else { window.location.href = 'eveNuevoEvento.aspx'; } }";
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), JSScript, true);
 
             }catch (Exception ex){
@@ -276,8 +277,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // TAB - Datos del evento
                 this.txtNombreEvento.Text = "";
-                this.wucCalendar.SetDate(DateTime.Now);
-                this.wucTimerDesde.DisplayTime = "10:00 a.m.";
+                this.wucCalendarInicio.SetDate(DateTime.Now);
+                this.wucCalendarFin.SetDate(DateTime.Now);
+                this.wucTimerDesde.DisplayTime = "10:00";
+                this.wucTimerHasta.DisplayTime = "10:00";
 
                 this.txtLugarEvento.Text = "";
                 this.hddLugarEventoId.Value = "";
@@ -486,9 +489,14 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     throw (new Exception("Es necesario ingresar un Nombre de evento"));
                 }
 
-                if ( !this.wucCalendar.IsValidDate() ) {
+                if ( !this.wucCalendarInicio.IsValidDate() ) {
                     this.tabEvento.ActiveTabIndex = 1;
-                    throw new Exception("El campo [Fecha del evento] es requerido");
+                    throw new Exception("El campo [Fecha de Inicio del evento] es requerido");
+                }
+
+                if ( !this.wucCalendarFin.IsValidDate() ) {
+                    this.tabEvento.ActiveTabIndex = 1;
+                    throw new Exception("El campo [Fecha Final del evento] es requerido");
                 }
 
                 if ( !this.wucTimerDesde.IsValidTime(ref ErrorDetailHour) ) {
@@ -701,7 +709,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 SelectPrioridad();
 
                 // Estado inicial
-                this.wucCalendar.Width = 176;
+                this.wucCalendarInicio.Width = 176;
+                this.wucCalendarFin.Width = 176;
 
                 SelectEstado_PopUp_LugarEvento();
                 SelectMunicipio_PopUp_LugarEvento();

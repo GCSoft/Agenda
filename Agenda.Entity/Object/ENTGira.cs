@@ -28,7 +28,8 @@ namespace Agenda.Entity.Object
         private Int16   _Activo;
         private String  _GiraDetalle;
         private String  _GiraNombre;
-        private String  _FechaGira;
+        private String  _FechaGiraInicio;
+        private String  _FechaGiraFin;
         private String  _HoraGiraFin;
         private String  _HoraGiraInicio;
         private String  _MotivoRechazo;
@@ -66,7 +67,8 @@ namespace Agenda.Entity.Object
             _Activo = 0;
             _GiraDetalle = "";
             _GiraNombre = "";
-            _FechaGira = "";
+            _FechaGiraInicio = "";
+            _FechaGiraFin = "";
             _HoraGiraFin = "";
             _HoraGiraInicio = "";
             _MotivoRechazo = "";
@@ -203,15 +205,25 @@ namespace Agenda.Entity.Object
         }
 
         ///<remarks>
-        ///   <name>ENTGira.FechaGira</name>
+        ///   <name>ENTGira.FechaGiraInicio</name>
         ///   <create>19-Diciembre-2014</create>
         ///   <author>Ruben.Cobos</author>
         ///</remarks>
-        ///<summary>Obtiene/Asigna la fecha en la que se realizará el Gira</summary>
-        public String FechaGira
+        public String FechaGiraInicio
         {
-            get { return _FechaGira; }
-            set { _FechaGira = value; }
+            get { return _FechaGiraInicio; }
+            set { _FechaGiraInicio = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.FechaGiraFin</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public String FechaGiraFin
+        {
+            get { return _FechaGiraFin; }
+            set { _FechaGiraFin = value; }
         }
 
         ///<remarks>

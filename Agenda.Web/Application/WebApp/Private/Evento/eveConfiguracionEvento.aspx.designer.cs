@@ -85,22 +85,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.Label lblEventoNombre;
         
         /// <summary>
-        /// lblEventoFecha control.
+        /// lblEventoFechaHora control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEventoFecha;
-        
-        /// <summary>
-        /// lblEventoHora control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblEventoHora;
+        protected global::System.Web.UI.WebControls.Label lblEventoFechaHora;
         
         /// <summary>
         /// acrdNombreEvento control.

@@ -53,6 +53,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 oENTSecretario.Descripcion = this.ckePopUpDescripcion.Text.Trim();
                 oENTSecretario.Puesto = this.txtPopUpPuesto.Text.Trim();
                 oENTSecretario.Correo = this.txtPopUpCorreo.Text.Trim();
+                oENTSecretario.Telefono = this.txtPopUpTelefono.Text.Trim();
                 oENTSecretario.Activo = Int16.Parse(this.ddlPopUpStatus.SelectedValue);
                 oENTSecretario.Rank = 1;
 
@@ -184,6 +185,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 this.ddlPopUpTitulo.SelectedValue = oENTResponse.DataSetResponse.Tables[1].Rows[0]["TituloId"].ToString();
                 this.txtPopUpPuesto.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Puesto"].ToString();
                 this.txtPopUpCorreo.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Correo"].ToString();
+                this.txtPopUpTelefono.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Telefono"].ToString();
                 this.ddlPopUpStatus.SelectedValue = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Activo"].ToString();
                 this.ckePopUpDescripcion.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Descripcion"].ToString();
 
@@ -241,6 +243,7 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 oENTSecretario.Descripcion = this.ckePopUpDescripcion.Text.Trim();
                 oENTSecretario.Puesto = this.txtPopUpPuesto.Text.Trim();
                 oENTSecretario.Correo = this.txtPopUpCorreo.Text.Trim();
+                oENTSecretario.Telefono = this.txtPopUpTelefono.Text.Trim();
                 oENTSecretario.Activo = Int16.Parse(this.ddlPopUpStatus.SelectedValue);
                 oENTSecretario.Rank = 1;
 
@@ -315,6 +318,8 @@ namespace Agenda.Web.Application.WebApp.Private.Catalogo
                 this.txtPopUpNombre.Text = "";
                 this.ddlPopUpTitulo.SelectedIndex = 0;
                 this.txtPopUpPuesto.Text = "";
+                this.txtPopUpCorreo.Text = "";
+                this.txtPopUpTelefono.Text = "";
                 this.ddlPopUpStatus.SelectedIndex = 0;
                 this.ckePopUpDescripcion.Text = "";
 

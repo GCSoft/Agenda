@@ -38,16 +38,32 @@
                             <td></td>
 			            </tr>
                         <tr>
-				            <td class="Etiqueta">Fecha y hora de la gira</td>
+				            <td class="Etiqueta">Fecha y hora de la Gira</td>
 				            <td class="VinetaObligatorio">*</td>
 				            <td class="Campo">
                                 <table style="border:0px; padding:0px; width:100%;">
                                     <tr>
-                                        <td style="text-align:left; width:200px;">
-                                            <wuc:wucCalendar ID="wucCalendar" runat="server" />
+                                        <td style="text-align:left; width:250px;">
+                                            Desde&nbsp;<wuc:wucCalendar ID="wucCalendarInicio" runat="server" />
                                         </td>
-                                        <td style="text-align:left; width:300px;">
-                                            <wuc:wucTimer ID="wucTimerDesde" runat="server" />&nbsp;&nbsp;&nbsp;a&nbsp;&nbsp;&nbsp;
+                                        <td style="text-align:left; width:150px;">
+                                            <wuc:wucTimer ID="wucTimerDesde" runat="server" />&nbsp;HRS.
+                                        </td>
+                                    </tr>
+                                </table>
+				            </td>
+                            <td></td>
+			            </tr>
+                        <tr>
+				            <td class="Etiqueta"></td>
+				            <td class="VinetaObligatorio"></td>
+				            <td class="Campo">
+                                <table style="border:0px; padding:0px; width:100%;">
+                                    <tr>
+                                        <td style="text-align:left; width:250px;">
+                                            Hasta&nbsp;&nbsp;<wuc:wucCalendar ID="wucCalendarFin" runat="server" />
+                                        </td>
+                                        <td style="text-align:left; width:150px;">
                                             <wuc:wucTimer ID="wucTimerHasta" runat="server" />&nbsp;HRS.
                                         </td>
                                     </tr>
@@ -71,7 +87,7 @@
 			            </tr>
 			            <tr>
 				            <td colspan="4" style="text-align:left; vertical-align:bottom;">
-					            <CKEditor:CKEditorControl ID="ckeGiraDetalle" runat="server" BasePath="~/Include/Components/CKEditor/Core" Height="165px" ContentsCss="~/Include/Components/CKEditor/Core/contents.css" TemplatesFiles="~/Include/Components/CKEditor/Core/plugins/templates/templates/default.js" Width=""></CKEditor:CKEditorControl>
+					            <CKEditor:CKEditorControl ID="ckeGiraDetalle" runat="server" BasePath="~/Include/Components/CKEditor/Core" Height="129px" ContentsCss="~/Include/Components/CKEditor/Core/contents.css" TemplatesFiles="~/Include/Components/CKEditor/Core/plugins/templates/templates/default.js" Width=""></CKEditor:CKEditorControl>
 				            </td>
 			            </tr>
                     </table>
@@ -84,7 +100,7 @@
                     <table class="FormTable">
                         <tr>
 				            <td class="Etiqueta">Nombre</td>
-				            <td class="VinetaObligatorio">*</td>
+				            <td class="VinetaObligatorio"></td>
 				            <td class="Campo"><asp:TextBox ID="txtContactoNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
                             <td></td>
 			            </tr>
@@ -102,7 +118,7 @@
 			            </tr>
                         <tr>
 				            <td class="Etiqueta">Teléfono</td>
-				            <td class="VinetaObligatorio">*</td>
+				            <td class="VinetaObligatorio"></td>
 				            <td class="Campo"><asp:TextBox ID="txtContactoTelefono" runat="server" CssClass="Textbox_General" MaxLength="100" Width="400px"></asp:TextBox></td>
                             <td></td>
 			            </tr>
