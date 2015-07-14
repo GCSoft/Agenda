@@ -1782,36 +1782,136 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                             oSection.AddParagraph();
 
                         #endregion
+                    
+                    }
 
-                        #region Observaciones
-                            
+                #endregion
+
+                #region Sección: Listado Adicional
+
+                    LevelError = "Listado Adicional";
+                    
+                    if (int.Parse(oENTResponse.DataSetResponse.Tables[6].Rows[0]["ListadoAdicional"].ToString()) != 0){
+
+                        #region Label_NombreSeccion
+                    
                             wTable = oSection.Body.AddTable();
                             wTable.ResetCells(1, 1);
+                            wTableRow = wTable.Rows[0];
+                            wTableRow.Height = 21f;
+
+                            //Encabezado
+                            wTableCell = wTableRow.Cells[0].AddParagraph();
+                            wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                            wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
+                            wText = wTableCell.AppendText( oENTResponse.DataSetResponse.Tables[6].Rows[0]["ListadoAdicionalTitulo"].ToString().Trim() );
+                            wText.CharacterFormat.Bold = true;
+                            wText.CharacterFormat.FontName = "Arial";
+                            wText.CharacterFormat.FontSize = 14f;
+                            wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                            wTableRow.Cells[0].CellFormat.BackColor = System.Drawing.ColorTranslator.FromHtml("#999999");
+                            wTableRow.Cells[0].Width = 510;
+
+                            // Brinco de linea (genera espacio)
+                            oSection.AddParagraph();
+                    
+                        #endregion
+
+                        #region Listado Adicional
+                        
+                            wTable = oSection.Body.AddTable();
+                            wTable.ResetCells(1, 1);
+                            wTable.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
 
                             wTableRow = wTable.Rows[0];
                             wTableRow.Height = 17f;
+
+                            // Celda 1
                             wTableCell = wTableRow.Cells[0].AddParagraph();
+                            WTable tListadoAdicional;
+
+                            tListadoAdicional = new WTable(oDocument, false);
+                            tListadoAdicional.ResetCells(oENTResponse.DataSetResponse.Tables[8].Rows.Count, 1);
+                            tListadoAdicional.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+
+                            int Fila = 0;
+                            string Orden_ListadoAdicional;
+                            string Nombre_ListadoAdicional;
+                            string Puesto_ListadoAdicional;
+
+                            foreach (DataRow oRow in oENTResponse.DataSetResponse.Tables[15].Rows){
+                                tRow = tListadoAdicional.Rows[Fila];
+                                tRow.Height = 17f;
+
+                                Orden_ListadoAdicional = oRow["Orden"].ToString() + ". ";
+                                Nombre_ListadoAdicional = oRow["Nombre"].ToString();
+                                Puesto_ListadoAdicional = ", " + oRow["Puesto"].ToString() + ".";
+
+                                // Celda 1
+                                wTableCell = tRow.Cells[0].AddParagraph();
+                                tRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+
+                                wText = wTableCell.AppendText(Orden_ListadoAdicional);
+                                wText.CharacterFormat.FontName = "Arial";
+                                wText.CharacterFormat.FontSize = 10f;
+
+                                wText = wTableCell.AppendText(Nombre_ListadoAdicional);
+                                wText.CharacterFormat.FontName = "Arial";
+                                wText.CharacterFormat.FontSize = 10f;
+                                wText.CharacterFormat.Bold = true;
+
+                                wText = wTableCell.AppendText(Puesto_ListadoAdicional + ENTER);
+                                wText.CharacterFormat.FontName = "Arial";
+                                wText.CharacterFormat.FontSize = 10f;
+                            
+                                tRow.Cells[0].Width = 500;
+
+                                Fila = Fila + 1;
+                            }
+
                             wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-                            
-                            wText = wTableCell.AppendText("OBSERVACIONES: ");
+                            wTableRow.Cells[0].Tables.Add(tListadoAdicional);
                             wText.CharacterFormat.FontName = "Arial";
                             wText.CharacterFormat.FontSize = 10f;
-                            wText.CharacterFormat.Bold = true;
-
-                            wText = wTableCell.AppendText(oENTResponse.DataSetResponse.Tables[6].Rows[0]["AcomodoObservaciones"].ToString());
-                            wText.CharacterFormat.FontName = "Arial";
-                            wText.CharacterFormat.FontSize = 10f;
-
-                            wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                        
                             wTableRow.Cells[0].Width = 510;
 
                             // Brinco de linea (genera espacio)
                             oSection.AddParagraph();
 
                         #endregion
-                    
+
                     }
+
+                #endregion
+
+                #region Observaciones
+                            
+                    wTable = oSection.Body.AddTable();
+                    wTable.ResetCells(1, 1);
+
+                    wTableRow = wTable.Rows[0];
+                    wTableRow.Height = 17f;
+                    wTableCell = wTableRow.Cells[0].AddParagraph();
+                    wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                    wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                            
+                    wText = wTableCell.AppendText("OBSERVACIONES: ");
+                    wText.CharacterFormat.FontName = "Arial";
+                    wText.CharacterFormat.FontSize = 10f;
+                    wText.CharacterFormat.Bold = true;
+
+                    wText = wTableCell.AppendText(oENTResponse.DataSetResponse.Tables[6].Rows[0]["AcomodoObservaciones"].ToString());
+                    wText.CharacterFormat.FontName = "Arial";
+                    wText.CharacterFormat.FontSize = 10f;
+
+                    wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                    wTableRow.Cells[0].Width = 510;
+
+                    // Brinco de linea (genera espacio)
+                    oSection.AddParagraph();
 
                 #endregion
                 

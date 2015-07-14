@@ -499,6 +499,121 @@
                                     </asp:GridView>
                                 </td>
 			                </tr>
+                            <tr style="height:10px;"><td colspan="4"></td></tr>
+                        </table>
+					</Content>
+				</asp:AccordionPane>
+			</Panes>
+		</asp:Accordion>
+        <br /><br />
+
+        <%-- Sección: Listado adicional --%>
+        <asp:Accordion ID="acrdListadoAdicional" runat="server" SelectedIndex="0" HeaderCssClass="accordionHeader" HeaderSelectedCssClass="accordionHeaderSelected" ContentCssClass="accordionContent" FadeTransitions="false" FramesPerSecond="40" TransitionDuration="250" AutoSize="None" RequireOpenedPane="False">
+			<Panes>
+				<asp:AccordionPane ID="apanListadoAdicional" runat="server">
+					<Header>
+						<table style="width:100%">
+							<tr>
+								<td>
+									<div style="background: #fff url('../../../../Include/Image/Web/TituloAcordeon.png') no-repeat; bottom:-3px; cursor:pointer; height:25px; left:-3px; position:relative; text-align:left; width:100%;">
+                                        <asp:Label ID="Label9" style="height:23px;" runat="server" Font-Names="Arial" Font-Size="9pt" ForeColor="White">&nbsp;Listado adicional</asp:Label>
+                                    </div>
+								</td>
+							</tr>
+						</table>
+					</Header>
+					<Content>
+						<table class="FormTable" style="border:solid 1px #336600;">
+                            <tr>
+				                <td class="Etiqueta">Incluir listado adicional</td>
+				                <td class="VinetaObligatorio">*</td>
+				                <td class="Campo"><asp:DropDownList ID="ddlListadoAdicional" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
+                                <td></td>
+			                </tr>
+                            <tr>
+				                <td class="Etiqueta">Título de sección</td>
+				                <td class="Espacio"></td>
+				                <td class="Campo"><asp:TextBox ID="txtListadoAdicionalTitulo" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
+                                <td></td>
+			                </tr>
+                            <tr>
+				                <td class="Etiqueta">Nombre</td>
+				                <td class="Espacio"></td>
+				                <td class="Campo"><asp:TextBox ID="txtListadoAdicionalNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
+                                <td></td>
+			                </tr>
+                            <tr>
+				                <td class="Etiqueta">Puesto</td>
+				                <td class="Espacio"></td>
+				                <td class="Campo"><asp:TextBox ID="txtListadoAdicionalPuesto" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
+                                <td></td>
+			                </tr>
+                            <tr>
+				                <td class="Etiqueta"><asp:Button ID="btnAgregarListadoAdicional" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarListadoAdicional_Click" /></td>
+				                <td class="Espacio"></td>
+				                <td class="Campo"></td>
+                                <td></td>
+			                </tr>
+                            <tr><td colspan="4" style="height:10px;"></td></tr>
+                            <tr>
+                                <td colspan="4">
+                                    <asp:GridView ID="gvListadoAdicional" runat="server" AllowPaging="false" AllowSorting="True" AutoGenerateColumns="False" Width="100%"
+                                        DataKeyNames="Orden,Nombre,Puesto"
+                                        OnRowCommand="gvListadoAdicional_RowCommand"
+                                        OnRowDataBound="gvListadoAdicional_RowDataBound"
+                                        OnSorting="gvListadoAdicional_Sorting">
+                                        <HeaderStyle CssClass="Grid_Header_PopUp" />
+                                        <RowStyle CssClass="Grid_Row_PopUp" />
+                                        <EmptyDataTemplate>
+                                            <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
+                                                <tr class="Grid_Header_PopUp">
+                                                    <td style="width:100px;">Orden</td>
+                                                    <td style="width:400px;">Nombre</td>
+                                                    <td>Puesto</td>
+                                                </tr>
+                                                <tr class="Grid_Row">
+                                                    <td colspan="3">No se ha capturado el comité de recepción</td>
+                                                </tr>
+                                            </table>
+                                        </EmptyDataTemplate>
+                                        <Columns>
+                                            <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="400px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Puesto" ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
+                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="imgDelete" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Eliminar" ImageUrl="~/Include/Image/Buttons/Delete.png" runat="server" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                    </asp:GridView>
+                                </td>
+			                </tr>
+                            <tr style="height:10px;"><td colspan="4"></td></tr>
+                        </table>
+					</Content>
+				</asp:AccordionPane>
+			</Panes>
+		</asp:Accordion>
+        <br /><br />
+
+        <%-- Sección: Observaciones --%>
+        <asp:Accordion ID="acrdObservaciones" runat="server" SelectedIndex="0" HeaderCssClass="accordionHeader" HeaderSelectedCssClass="accordionHeaderSelected" ContentCssClass="accordionContent" FadeTransitions="false" FramesPerSecond="40" TransitionDuration="250" AutoSize="None" RequireOpenedPane="False">
+			<Panes>
+				<asp:AccordionPane ID="apanObservaciones" runat="server">
+					<Header>
+						<table style="width:100%">
+							<tr>
+								<td>
+									<div style="background: #fff url('../../../../Include/Image/Web/TituloAcordeon.png') no-repeat; bottom:-3px; cursor:pointer; height:25px; left:-3px; position:relative; text-align:left; width:100%;">
+                                        <asp:Label ID="Label8" style="height:23px;" runat="server" Font-Names="Arial" Font-Size="9pt" ForeColor="White">&nbsp;Observaciones</asp:Label>
+                                    </div>
+								</td>
+							</tr>
+						</table>
+					</Header>
+					<Content>
+						<table class="FormTable" style="border:solid 1px #336600;">
                             <tr>
 				                <td class="Etiqueta">Observaciones</td>
 				                <td class="Espacio"></td>

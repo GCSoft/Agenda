@@ -320,6 +320,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     this.ddlPropuestaAcomodo.SelectedValue = oENTResponse.DataSetResponse.Tables[6].Rows[0]["PropuestaAcomodo"].ToString();
                     this.txtAcomodoObservaciones.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["AcomodoObservaciones"].ToString();
 
+                    this.ddlListadoAdicional.SelectedValue = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ListadoAdicional"].ToString();
+                    this.txtListadoAdicionalTitulo.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ListadoAdicionalTitulo"].ToString();
+
                     this.ddlComiteHelipuerto.SelectedValue = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ComiteHelipuerto"].ToString();
                     this.txtComiteHelipuertoLugar.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["HelipuertoLugar"].ToString();
                     this.txtComiteHelipuertoDomicilio.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["HelipuertoDomicilio"].ToString();
@@ -343,6 +346,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.gvAcomodo.DataSource = oENTResponse.DataSetResponse.Tables[10];
                 this.gvAcomodo.DataBind();
 
+                // Sección: Listado adicional
+                this.gvListadoAdicional.DataSource = oENTResponse.DataSetResponse.Tables[15];
+                this.gvListadoAdicional.DataBind();
+
                 // Sección: Responsable del evento
                 this.gvResponsableEvento.DataSource = oENTResponse.DataSetResponse.Tables[11];
                 this.gvResponsableEvento.DataBind();
@@ -350,6 +357,19 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Sección: Responsable de logística
                 this.gvResponsableLogistica.DataSource = oENTResponse.DataSetResponse.Tables[12];
                 this.gvResponsableLogistica.DataBind();
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
+
+        void SelectListadoAdicional(){
+            try
+            {
+
+                // Agregar Item de selección
+                this.ddlListadoAdicional.Items.Insert(0, new ListItem("Si", "1"));
+                this.ddlListadoAdicional.Items.Insert(0, new ListItem("No", "0"));
 
             }catch (Exception ex){
                 throw (ex);
@@ -654,6 +674,30 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 #endregion
 
+                #region "Sección: Listado adicional"
+
+                    oENTEvento.ListadoAdicional = Int16.Parse(this.ddlListadoAdicional.SelectedItem.Value);
+                    oENTEvento.ListadoAdicionalTitulo = this.txtListadoAdicionalTitulo.Text.Trim();
+
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvListadoAdicional, true);
+
+                    oENTEvento.DataTableListadoAdicional = new DataTable("DataTableListadoAdicional");
+                    oENTEvento.DataTableListadoAdicional.Columns.Add("Orden", typeof(Int32));
+                    oENTEvento.DataTableListadoAdicional.Columns.Add("Nombre", typeof(String));
+                    oENTEvento.DataTableListadoAdicional.Columns.Add("Puesto", typeof(String));
+                    
+                    foreach( DataRow rowComiteListadoAdicional in tblTemporal.Rows ){
+
+                        rowTemporal = oENTEvento.DataTableListadoAdicional.NewRow();
+                        rowTemporal["Orden"] = rowComiteListadoAdicional["Orden"];
+                        rowTemporal["Nombre"] = rowComiteListadoAdicional["Nombre"];
+                        rowTemporal["Puesto"] = rowComiteListadoAdicional["Puesto"];
+                        oENTEvento.DataTableListadoAdicional.Rows.Add(rowTemporal);
+                    }
+
+                #endregion
+
                 #region "Sección: Responsable del evento"
 
                     tblTemporal = null;
@@ -741,6 +785,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 SelectTipoAcomodo();
                 SelectPropuestaAcomodo();
                 SelectComiteHelipuerto();
+                SelectListadoAdicional();
                 
 				// Carátula y formulario
                 SelectEvento();
@@ -1421,6 +1466,154 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtAcomodoNombre.ClientID + "'); }", true);
+            }
+        }
+
+
+
+        // Eventos de Sección: Listado adicional
+
+        protected void btnAgregarListadoAdicional_Click(object sender, EventArgs e){
+            DataTable tblListadoAdicional;
+            DataRow rowListadoAdicional;
+
+            try
+            {
+
+                // Obtener DataTable del grid
+                tblListadoAdicional = gcParse.GridViewToDataTable(this.gvListadoAdicional, false);
+
+                // Validaciones
+                if ( this.txtListadoAdicionalNombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
+                if ( this.txtListadoAdicionalPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
+
+                // Agregar un nuevo elemento
+                rowListadoAdicional = tblListadoAdicional.NewRow();
+                rowListadoAdicional["Orden"] = (tblListadoAdicional.Rows.Count + 1).ToString();
+                rowListadoAdicional["Nombre"] = this.txtListadoAdicionalNombre.Text.Trim();
+                rowListadoAdicional["Puesto"] = this.txtListadoAdicionalPuesto.Text.Trim();
+                tblListadoAdicional.Rows.Add(rowListadoAdicional);
+
+                // Actualizar Grid
+                this.gvListadoAdicional.DataSource = tblListadoAdicional;
+                this.gvListadoAdicional.DataBind();
+
+                // Nueva captura
+                this.txtListadoAdicionalNombre.Text = "";
+                this.txtListadoAdicionalPuesto.Text = "";
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtListadoAdicionalNombre.ClientID + "'); }", true);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtListadoAdicionalNombre.ClientID + "'); }", true);
+            }
+        }
+
+        protected void gvListadoAdicional_RowCommand(object sender, GridViewCommandEventArgs e){
+            DataTable tblListadoAdicional;
+
+            String strCommand = "";
+            String Orden = "";
+            Int32 intRow = 0;
+
+            try
+            {
+
+                // Opción seleccionada
+                strCommand = e.CommandName.ToString();
+
+                // Se dispara el evento RowCommand en el ordenamiento
+                if (strCommand == "Sort") { return; }
+
+                // Fila
+                intRow = Int32.Parse(e.CommandArgument.ToString());
+
+                // Datakeys
+                Orden = this.gvListadoAdicional.DataKeys[intRow]["Orden"].ToString();
+
+                // Acción
+                switch (strCommand){
+
+                    case "Eliminar":
+
+                        // Obtener DataTable del grid
+                        tblListadoAdicional = gcParse.GridViewToDataTable(this.gvListadoAdicional, true);
+
+                        // Remover el elemento
+                        tblListadoAdicional.Rows.Remove( tblListadoAdicional.Select("Orden=" + Orden )[0] );
+
+                        // Reordenar los Items restantes
+                        intRow = 0;
+                        foreach( DataRow rowListadoAdicional in tblListadoAdicional.Rows ){
+
+                            tblListadoAdicional.Rows[intRow]["Orden"] = (intRow + 1);
+                            intRow = intRow + 1;
+                        }
+
+                        // Actualizar Grid
+                        this.gvListadoAdicional.DataSource = tblListadoAdicional;
+                        this.gvListadoAdicional.DataBind();
+
+                        // Nueva captura
+                        this.txtListadoAdicionalNombre.Text = "";
+                        this.txtListadoAdicionalPuesto.Text = "";
+                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtListadoAdicionalNombre.ClientID + "'); }", true);
+
+                        break;
+                }
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtListadoAdicionalNombre.ClientID + "'); }", true);
+            }
+        }
+
+        protected void gvListadoAdicional_RowDataBound(object sender, GridViewRowEventArgs e){
+            ImageButton imgDelete = null;
+
+            String Orden = "";
+            String ListadoAdicionalNombre = "";
+
+            String sImagesAttributes = "";
+            String sTootlTip = "";
+
+            try
+            {
+
+                // Validación de que sea fila
+                if (e.Row.RowType != DataControlRowType.DataRow) { return; }
+
+                // Obtener imagenes
+                imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+
+                // Datakeys
+                Orden = this.gvListadoAdicional.DataKeys[e.Row.RowIndex]["Orden"].ToString();
+                ListadoAdicionalNombre = this.gvListadoAdicional.DataKeys[e.Row.RowIndex]["Nombre"].ToString();
+
+                // Tooltip Edición
+                sTootlTip = "Eliminar a [" + ListadoAdicionalNombre + "]";
+                imgDelete.Attributes.Add("title", sTootlTip);
+
+                // Atributos Over
+                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
+
+                // Atributos Out
+                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+
+        }
+
+        protected void gvListadoAdicional_Sorting(object sender, GridViewSortEventArgs e){
+            try
+            {
+
+                gcCommon.SortGridView(ref this.gvListadoAdicional, ref this.hddSort, e.SortExpression, true);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtListadoAdicionalNombre.ClientID + "'); }", true);
             }
         }
 

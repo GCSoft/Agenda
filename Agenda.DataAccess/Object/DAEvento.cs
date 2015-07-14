@@ -879,6 +879,18 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTEvento.DataTableResponsableLogistica;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("ListadoAdicional", SqlDbType.TinyInt);
+            sqlPar.Value = oENTEvento.ListadoAdicional;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("ListadoAdicionalTitulo", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.ListadoAdicionalTitulo;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("tblListadoAdicional", SqlDbType.Structured);
+            sqlPar.Value = oENTEvento.DataTableListadoAdicional;
+            sqlCom.Parameters.Add(sqlPar);
+
             // Inicializaciones
             oENTResponse.DataSetResponse = new DataSet();
             sqlDA = new SqlDataAdapter(sqlCom);

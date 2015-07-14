@@ -125,6 +125,10 @@ namespace Agenda.Entity.Object
 
         private String  _PalabraClave;
 
+        private Int16   _ListadoAdicional;
+        private String  _ListadoAdicionalTitulo;
+        private DataTable   _DataTableListadoAdicional;
+
 
         //Constructor
 
@@ -235,6 +239,10 @@ namespace Agenda.Entity.Object
             _NotaAcomodo = "";
 
             _PalabraClave = "";
+
+            _ListadoAdicional = 0;
+            _ListadoAdicionalTitulo = "";
+            _DataTableListadoAdicional = null;
 
         }
 
@@ -1426,6 +1434,39 @@ namespace Agenda.Entity.Object
         {
             get { return _PalabraClave; }
             set { _PalabraClave = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.ListadoAdicional</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int16 ListadoAdicional
+        {
+            get { return _ListadoAdicional; }
+            set { _ListadoAdicional = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.ListadoAdicionalTitulo</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public String ListadoAdicionalTitulo
+        {
+            get { return _ListadoAdicionalTitulo; }
+            set { _ListadoAdicionalTitulo = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.DataTableListadoAdicional</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public DataTable DataTableListadoAdicional
+        {
+            get { return _DataTableListadoAdicional; }
+            set { _DataTableListadoAdicional = value; }
         }
 
     }
