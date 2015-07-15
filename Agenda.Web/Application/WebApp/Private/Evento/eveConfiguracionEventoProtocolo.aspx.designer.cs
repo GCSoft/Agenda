@@ -481,6 +481,51 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.GridView gvComiteRecepcion;
         
         /// <summary>
+        /// acrdNotaDocumento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.Accordion acrdNotaDocumento;
+        
+        /// <summary>
+        /// apanNotaDocumento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.AccordionPane apanNotaDocumento;
+        
+        /// <summary>
+        /// Label10 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label10;
+        
+        /// <summary>
+        /// rblNotaDocumento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblNotaDocumento;
+        
+        /// <summary>
+        /// txtNotaDocumento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNotaDocumento;
+        
+        /// <summary>
         /// pnlBreak control.
         /// </summary>
         /// <remarks>

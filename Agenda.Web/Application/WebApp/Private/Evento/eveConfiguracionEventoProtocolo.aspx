@@ -427,6 +427,45 @@
 		</asp:Accordion>
         <br /><br />
 
+         <%-- Sección: Nota en Documento --%>
+        <asp:Accordion ID="acrdNotaDocumento" runat="server" SelectedIndex="0" HeaderCssClass="accordionHeader" HeaderSelectedCssClass="accordionHeaderSelected" ContentCssClass="accordionContent" FadeTransitions="false" FramesPerSecond="40" TransitionDuration="250" AutoSize="None" RequireOpenedPane="False">
+			<Panes>
+				<asp:AccordionPane ID="apanNotaDocumento" runat="server">
+					<Header>
+						<table style="width:100%">
+							<tr>
+								<td>
+									<div style="background: #fff url('../../../../Include/Image/Web/TituloAcordeon.png') no-repeat; bottom:-3px; cursor:pointer; height:25px; left:-3px; position:relative; text-align:left; width:100%;">
+                                        <asp:Label ID="Label10" style="height:23px;" runat="server" Font-Names="Arial" Font-Size="9pt" ForeColor="White">&nbsp;Nota en Documento</asp:Label>
+                                    </div>
+								</td>
+							</tr>
+						</table>
+					</Header>
+					<Content>
+						<table class="FormTable" style="border:solid 1px #336600;">
+                            <tr>
+				                <td class="Etiqueta">Nota en Documento</td>
+				                <td class="Espacio"></td>
+				                <td class="Campo" colspan="2">
+                                    <asp:RadioButtonList ID="rblNotaDocumento" runat="server" RepeatDirection="Horizontal">
+										<asp:ListItem Text="No Incluir" Value="1" Selected="True"></asp:ListItem>
+										<asp:ListItem Text="Al Inicio del cuadernillo" Value="2"></asp:ListItem>
+										<asp:ListItem Text="Al Final del cuadernillo" Value="3"></asp:ListItem>
+									</asp:RadioButtonList>
+				                </td>
+			                </tr>
+                            <tr>
+				                <td class="Campo" colspan="4"><asp:TextBox ID="txtNotaDocumento" runat="server" CssClass="Textarea_General" Height="70px" MaxLength="200" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
+			                </tr>
+                            <tr style="height:10px;"><td colspan="4"></td></tr>
+                        </table>
+					</Content>
+				</asp:AccordionPane>
+			</Panes>
+		</asp:Accordion>
+        <br /><br />
+
     </asp:Panel>
         
     <asp:Panel ID="pnlBreak" runat="server" CssClass="BreakPanel">

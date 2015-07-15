@@ -891,6 +891,18 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTEvento.DataTableListadoAdicional;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("NotaInicioDocumento", SqlDbType.TinyInt);
+            sqlPar.Value = oENTEvento.NotaInicioDocumento;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaFinDocumento", SqlDbType.TinyInt);
+            sqlPar.Value = oENTEvento.NotaFinDocumento;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NotaDocumento", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.NotaDocumento;
+            sqlCom.Parameters.Add(sqlPar);
+
             // Inicializaciones
             oENTResponse.DataSetResponse = new DataSet();
             sqlDA = new SqlDataAdapter(sqlCom);

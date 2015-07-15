@@ -261,6 +261,37 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
 
                 #endregion
 
+                #region Nota al Inicio del Cuadernillo
+
+                    if (oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaInicioDocumento"].ToString() == "1") {
+
+                        // Inicializaciones
+                        wTable = oSection.Body.AddTable();
+                        wTable.ResetCells(1, 1);
+                        wTable.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+
+                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                        wTableRow = wTable.Rows[0];
+                        wTableRow.Height = 17f;
+                        wTableRow.Cells[0].Width = 500;
+
+                        // Celda 1
+                        wTableCell = wTableRow.Cells[0].AddParagraph();
+
+                        // Texto
+                        wText = wTableCell.AppendText(oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaDocumento"].ToString() + ENTER);
+                        wText.CharacterFormat.FontName = "Arial";
+                        wText.CharacterFormat.FontSize = 10f;
+                        wText.CharacterFormat.Bold = true;
+
+                        // Brinco de linea (genera espacio)
+                        oSection.AddParagraph();
+
+                    }
+
+                #endregion
+
                 #region Sección: NombreEvento
                     
                     LevelError = "Evento";
@@ -2657,15 +2688,63 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                     
                 #endregion
 
+                #region Nota al Final del Cuadernillo
+
+                    if (oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaFinDocumento"].ToString() == "1") {
+
+                        // Inicializaciones
+                        wTable = oSection.Body.AddTable();
+                        wTable.ResetCells(1, 1);
+                        wTable.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+
+                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                        wTableRow = wTable.Rows[0];
+                        wTableRow.Height = 17f;
+                        wTableRow.Cells[0].Width = 500;
+
+                        // Celda 1
+                        wTableCell = wTableRow.Cells[0].AddParagraph();
+
+                        // Texto
+                        wText = wTableCell.AppendText(oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaDocumento"].ToString() + ENTER);
+                        wText.CharacterFormat.FontName = "Arial";
+                        wText.CharacterFormat.FontSize = 10f;
+                        wText.CharacterFormat.Bold = true;
+
+                        // Brinco de linea (genera espacio)
+                        oSection.AddParagraph();
+
+                    }
+
+                #endregion
+
                 // Descargar el documeno en la página
-                oDocument.Save("EventoLogistica.doc", Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment);
+                try
+                {
 
-                }catch (IOException ioEx) {
-                    throw ( new Exception(LevelError + "-" + ioEx.Message) );
+                    Char[] invalidPathChars = Path.GetInvalidPathChars();
+                    String FileName = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString().Trim();
 
-                }catch (Exception ex) {
-                    throw ( new Exception(LevelError + "-" + ex.Message) );
+                    foreach (char currentChar in invalidPathChars){
+                        FileName = FileName.Replace(currentChar.ToString(), "");
+                    }
+
+                    FileName = FileName + ".doc";
+
+                    oDocument.Save( FileName, Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment );
                 }
+                catch (Exception)
+                {
+                    oDocument.Save("EventoLogistica.doc", Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment);
+                }
+
+            }catch (IOException ioEx) {
+                throw ( new Exception(LevelError + "-" + ioEx.Message) );
+
+            }catch (Exception ex) {
+                throw ( new Exception(LevelError + "-" + ex.Message) );
+            }
         }
 
 

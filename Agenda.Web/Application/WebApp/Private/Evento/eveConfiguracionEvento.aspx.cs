@@ -275,6 +275,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.lblEventoNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
                 this.lblEventoFechaHora.Text = "Del " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHoraInicioTexto"].ToString() + " al " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHoraFinTexto"].ToString();
 
+                // Comentario en cuadernillo
+                if ( oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaInicioDocumento"].ToString() == "0" && oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaFinDocumento"].ToString() == "0" ){ this.rblNotaDocumento.SelectedIndex = 0; }
+                if ( oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaInicioDocumento"].ToString() == "1" && oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaFinDocumento"].ToString() == "0" ){ this.rblNotaDocumento.SelectedIndex = 1; }
+                if ( oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaInicioDocumento"].ToString() == "0" && oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaFinDocumento"].ToString() == "1" ){ this.rblNotaDocumento.SelectedIndex = 2; }
+                this.txtNotaDocumento.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaDocumento"].ToString();
+
                 // Sección: Nombre del evento
                 if ( oENTResponse.DataSetResponse.Tables[6].Rows.Count > 0 ){
 
@@ -737,6 +743,14 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         rowTemporal["Contacto"] = rowResponsableLogistica["Contacto"];
                         oENTEvento.DataTableResponsableLogistica.Rows.Add(rowTemporal);
                     }
+
+                #endregion
+
+                #region "Sección: Nota en Documento"
+
+                    oENTEvento.NotaInicioDocumento = Int16.Parse((rblNotaDocumento.SelectedIndex == 0 ? 0 : (rblNotaDocumento.SelectedIndex == 1 ? 1 : 0)).ToString());
+                    oENTEvento.NotaFinDocumento = Int16.Parse((rblNotaDocumento.SelectedIndex == 0 ? 0 : (rblNotaDocumento.SelectedIndex == 1 ? 0 : 1)).ToString());
+                    oENTEvento.NotaDocumento = this.txtNotaDocumento.Text.Trim();
 
                 #endregion
 

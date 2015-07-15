@@ -248,7 +248,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                         rowComentarioCuadernillo["GiraId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraId"].ToString();
                         rowComentarioCuadernillo["TipoGiraConfiguracionId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoGiraConfiguracionId"].ToString();
                         rowComentarioCuadernillo["ConfiguracionGrupo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionGrupo"].ToString();
-                        rowComentarioCuadernillo["GiraFecha"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFecha"].ToString();
+
+                        rowComentarioCuadernillo["ConfiguracionFechaInicio"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFecha"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionFechaFin"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFecha"].ToString();
+
                         rowComentarioCuadernillo["ConfiguracionHoraInicio"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraInicio"].ToString();
                         rowComentarioCuadernillo["ConfiguracionHoraFin"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraFin"].ToString();
                         rowComentarioCuadernillo["ConfiguracionDetalle"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionDetalle"].ToString();
@@ -280,7 +283,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                         rowComentarioCuadernillo["GiraId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraId"].ToString();
                         rowComentarioCuadernillo["TipoGiraConfiguracionId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoGiraConfiguracionId"].ToString();
                         rowComentarioCuadernillo["ConfiguracionGrupo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionGrupo"].ToString();
-                        rowComentarioCuadernillo["GiraFecha"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFecha"].ToString();
+
+                        rowComentarioCuadernillo["ConfiguracionFechaInicio"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFecha"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionFechaFin"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFecha"].ToString();
+
                         rowComentarioCuadernillo["ConfiguracionHoraInicio"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraInicio"].ToString();
                         rowComentarioCuadernillo["ConfiguracionHoraFin"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraFin"].ToString();
                         rowComentarioCuadernillo["ConfiguracionDetalle"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionDetalle"].ToString();
@@ -3466,9 +3472,6 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 try
                 {
 
-                    // Limpiar formulario
-                    this.txtPopUp_ComentarioEnCuadernilloDetalle.Text = "";
-
                     // Estado incial de controles
                     this.pnlPopUp_ComentarioEnCuadernillo.Visible = false;
                     this.lblPopUp_ComentarioEnCuadernilloTitle.Text = "";
@@ -3531,6 +3534,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     oENTGira.NotaInicioDocumento = Int16.Parse((rblPopUp_ComentarioEnCuadernillo.SelectedIndex == 0 ? 0 : (rblPopUp_ComentarioEnCuadernillo.SelectedIndex == 1 ? 1 : 0)).ToString());
                     oENTGira.NotaFinDocumento = Int16.Parse((rblPopUp_ComentarioEnCuadernillo.SelectedIndex == 0 ? 0 : (rblPopUp_ComentarioEnCuadernillo.SelectedIndex == 1 ? 0 : 1)).ToString());
                     oENTGira.NotaDocumento = this.txtPopUp_ComentarioEnCuadernilloDetalle.Text.Trim();
+                    oENTGira.ConfiguracionFechaInicio = "1900-01-01";
+                    oENTGira.ConfiguracionFechaFin = "1900-01-01";
                     oENTGira.ConfiguracionHoraInicio = "00:00";
                     oENTGira.ConfiguracionHoraFin = "00:00";
 

@@ -75,6 +75,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
             String LevelError = "";
             Int32 CurrentRow;
 
+            Char ENTER = Convert.ToChar(13);
+
             try {
 
                 // Formulario
@@ -92,13 +94,49 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                 WSection = WDocument.AddSection();
                 WSection.PageSetup.PageSize = new SizeF(612, 790);  // 21.59 cm X 27.94 cm
 
-                #region Evento
+                // Márgenes
+                WSection.PageSetup.Margins.Bottom = 14.2f;  // 0.5 cm
+                WSection.PageSetup.Margins.Left = 17.8f;    // 0.63 cm
+                WSection.PageSetup.Margins.Right = 85.1f;   // 3 cm
+                WSection.PageSetup.Margins.Top = 21.2f;     // 0.75 cm
 
-                    // Márgenes
-                    WSection.PageSetup.Margins.Bottom = 14.2f;  // 0.5 cm
-                    WSection.PageSetup.Margins.Left = 17.8f;    // 0.63 cm
-                    WSection.PageSetup.Margins.Right = 85.1f;   // 3 cm
-                    WSection.PageSetup.Margins.Top = 21.2f;     // 0.75 cm
+                #region Nota al Inicio del Cuadernillo
+
+                    if (oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaInicioDocumento"].ToString() == "1") {
+
+                        // Inicializaciones
+                        wTable = WSection.Body.AddTable();
+                        wTable.ResetCells(1, 1);
+                        wTable.IndentFromLeft = 28.3f;      // 1 cm de sangría
+                        wTable.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+
+                        wTableRow = wTable.Rows[0];
+                        wTableRow.Height = 21f;
+                        wTableCell = wTableRow.Cells[0].AddParagraph();
+
+                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                        wTableRow = wTable.Rows[0];
+                        wTableRow.Height = 17f;
+                        wTableRow.Cells[0].Width = 530;
+
+                        // Celda 1
+                        wTableCell = wTableRow.Cells[0].AddParagraph();
+
+                        // Texto
+                        wText = wTableCell.AppendText(oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaDocumento"].ToString() + ENTER);
+                        wText.CharacterFormat.FontName = "Arial";
+                        wText.CharacterFormat.FontSize = 10f;
+                        wText.CharacterFormat.Bold = true;
+
+                        // Brinco de linea (genera espacio)
+                        WSection.AddParagraph();
+
+                    }
+
+                #endregion
+
+                #region Evento
                     
                     // Configuración general de la tabla
                     wTable = WSection.Body.AddTable();
@@ -2017,8 +2055,61 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                 // Brinco de linea (genera espacio)
                 WSection.AddParagraph();
 
+                #region Nota al Final del Cuadernillo
+
+                    if (oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaFinDocumento"].ToString() == "1") {
+
+                        // Inicializaciones
+                        wTable = WSection.Body.AddTable();
+                        wTable.ResetCells(1, 1);
+                        wTable.IndentFromLeft = 28.3f;      // 1 cm de sangría
+                        wTable.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+
+                        wTableRow = wTable.Rows[0];
+                        wTableRow.Height = 21f;
+                        wTableCell = wTableRow.Cells[0].AddParagraph();
+
+                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                        wTableRow = wTable.Rows[0];
+                        wTableRow.Height = 17f;
+                        wTableRow.Cells[0].Width = 530;
+
+                        // Celda 1
+                        wTableCell = wTableRow.Cells[0].AddParagraph();
+
+                        // Texto
+                        wText = wTableCell.AppendText(oENTResponse.DataSetResponse.Tables[1].Rows[0]["NotaDocumento"].ToString() + ENTER);
+                        wText.CharacterFormat.FontName = "Arial";
+                        wText.CharacterFormat.FontSize = 10f;
+                        wText.CharacterFormat.Bold = true;
+
+                        // Brinco de linea (genera espacio)
+                        WSection.AddParagraph();
+
+                    }
+
+                #endregion
+
                 // Descargar el documeno en la página
-                WDocument.Save("EventoProtocolo.doc", Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment);
+                try
+                {
+
+                    Char[] invalidPathChars = Path.GetInvalidPathChars();
+                    String FileName = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString().Trim();
+
+                    foreach (char currentChar in invalidPathChars){
+                        FileName = FileName.Replace(currentChar.ToString(), "");
+                    }
+
+                    FileName = FileName + ".doc";
+
+                    WDocument.Save( FileName, Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment );
+                }
+                catch (Exception)
+                {
+                    WDocument.Save("EventoProtocolo.doc", Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment);
+                }
 
             }catch (IOException ioEx) {
                 throw ( new Exception(LevelError + "-" + ioEx.Message) );

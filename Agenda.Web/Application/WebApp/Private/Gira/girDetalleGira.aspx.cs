@@ -93,7 +93,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                         rowComentarioCuadernillo["GiraId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraId"].ToString();
                         rowComentarioCuadernillo["TipoGiraConfiguracionId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoGiraConfiguracionId"].ToString();
                         rowComentarioCuadernillo["ConfiguracionGrupo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionGrupo"].ToString();
-                        rowComentarioCuadernillo["GiraFecha"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFecha"].ToString();
+
+                        rowComentarioCuadernillo["ConfiguracionFechaInicio"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFecha"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionFechaFin"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFecha"].ToString();
+
                         rowComentarioCuadernillo["ConfiguracionHoraInicio"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraInicio"].ToString();
                         rowComentarioCuadernillo["ConfiguracionHoraFin"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraFin"].ToString();
                         rowComentarioCuadernillo["ConfiguracionDetalle"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionDetalle"].ToString();
@@ -125,7 +128,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                         rowComentarioCuadernillo["GiraId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraId"].ToString();
                         rowComentarioCuadernillo["TipoGiraConfiguracionId"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoGiraConfiguracionId"].ToString();
                         rowComentarioCuadernillo["ConfiguracionGrupo"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionGrupo"].ToString();
-                        rowComentarioCuadernillo["GiraFecha"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFecha"].ToString();
+
+                        rowComentarioCuadernillo["ConfiguracionFechaInicio"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFecha"].ToString();
+                        rowComentarioCuadernillo["ConfiguracionFechaFin"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["GiraFecha"].ToString();
+                        
                         rowComentarioCuadernillo["ConfiguracionHoraInicio"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraInicio"].ToString();
                         rowComentarioCuadernillo["ConfiguracionHoraFin"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionHoraFin"].ToString();
                         rowComentarioCuadernillo["ConfiguracionDetalle"] = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ConfiguracionDetalle"].ToString();

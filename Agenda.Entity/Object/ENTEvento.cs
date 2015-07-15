@@ -123,6 +123,10 @@ namespace Agenda.Entity.Object
         private Int16   _NotaFinAcomodo;
         private String  _NotaAcomodo;
 
+        private Int16   _NotaInicioDocumento;
+        private Int16   _NotaFinDocumento;
+        private String  _NotaDocumento;
+
         private String  _PalabraClave;
 
         private Int16   _ListadoAdicional;
@@ -243,6 +247,10 @@ namespace Agenda.Entity.Object
             _ListadoAdicional = 0;
             _ListadoAdicionalTitulo = "";
             _DataTableListadoAdicional = null;
+
+            _NotaInicioDocumento = 0;
+            _NotaFinDocumento = 0;
+            _NotaDocumento = "";
 
         }
 
@@ -1468,6 +1476,41 @@ namespace Agenda.Entity.Object
             get { return _DataTableListadoAdicional; }
             set { _DataTableListadoAdicional = value; }
         }
+
+
+        ///<remarks>
+        ///   <name>ENTGira.NotaInicioDocumento</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int16 NotaInicioDocumento
+        {
+            get { return _NotaInicioDocumento; }
+            set { _NotaInicioDocumento = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.NotaFinDocumento</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int16 NotaFinDocumento
+        {
+            get { return _NotaFinDocumento; }
+            set { _NotaFinDocumento = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.NotaDocumento</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public String NotaDocumento
+        {
+            get { return _NotaDocumento; }
+            set { _NotaDocumento = value; }
+        }
+
 
     }
 }

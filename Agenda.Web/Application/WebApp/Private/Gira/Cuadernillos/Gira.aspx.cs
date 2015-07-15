@@ -1490,7 +1490,24 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                 #endregion
 
                 // Descargar el documeno en la página
-                oDocument.Save("Gira.doc", Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment);
+                try
+                {
+                    
+                    Char[] invalidPathChars = Path.GetInvalidPathChars();
+                    String FileName = ENTResponseGira.DataSetResponse.Tables[1].Rows[0]["GiraNombre"].ToString().Trim();
+
+                    foreach (char currentChar in invalidPathChars){
+                        FileName = FileName.Replace(currentChar.ToString(), "");
+                    }
+
+                    FileName = FileName + ".doc";
+
+                    oDocument.Save( FileName, Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment );
+                }
+                catch (Exception)
+                {
+                    oDocument.Save("Gira.doc", Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment);
+                }
 
             }catch (IOException ioEx) {
                 throw ( new Exception(LevelError + "-" + ioEx.Message) );
