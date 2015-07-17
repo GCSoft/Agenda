@@ -133,7 +133,7 @@
 			                </tr>
                             <tr>
 				                <td class="Etiqueta">Nombre</td>
-				                <td class="Espacio"></td>
+				                <td class="VinetaObligatorio">*</td>
 				                <td class="Campo"><asp:TextBox ID="txtAcomodoNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
                                 <td></td>
 			                </tr>
@@ -144,10 +144,9 @@
                                 <td></td>
 			                </tr>
                             <tr>
-				                <td class="Etiqueta"><asp:Button ID="btnAgregarAcomodo" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarAcomodo_Click" /></td>
-				                <td class="Espacio"></td>
-				                <td class="Campo"></td>
-                                <td></td>
+                                <td colspan="4" style="text-align:left;">
+                                    <asp:Button ID="btnAgregarAcomodo" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarAcomodo_Click" />&nbsp;&nbsp;&nbsp;
+                                </td>
 			                </tr>
                             <tr><td colspan="4" style="height:10px;"></td></tr>
                             <tr>
@@ -367,8 +366,8 @@
 					<Content>
                         <table class="FormTable" style="border:solid 1px #336600;">
                             <tr>
-				                <td class="Etiqueta">Nombre</td>
-				                <td class="Espacio"></td>
+				                <td class="Etiqueta">Nombre/Separador</td>
+				                <td class="VinetaObligatorio">*</td>
 				                <td class="Campo"><asp:TextBox ID="txtComiteRecepcionNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
                                 <td></td>
 			                </tr>
@@ -379,16 +378,16 @@
                                 <td></td>
 			                </tr>
                             <tr>
-				                <td class="Etiqueta"><asp:Button ID="btnAgregarComiteRecepcion" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarComiteRecepcion_Click" /></td>
-				                <td class="Espacio"></td>
-				                <td class="Campo"></td>
-                                <td></td>
+                                <td colspan="4" style="text-align:left;">
+                                    <asp:Button ID="btnAgregarComiteRecepcion" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarComiteRecepcion_Click" />&nbsp;&nbsp;&nbsp;
+                                    <asp:Button ID="btnAgregarComiteRecepcion_Separador" runat="server" Text="Agregar Separador" CssClass="Button_General" Width="125px" OnClick="btnAgregarComiteRecepcion_Separador_Click" />
+                                </td>
 			                </tr>
                             <tr><td colspan="4" style="height:10px;"></td></tr>
                             <tr>
                                 <td colspan="4">
                                     <asp:GridView ID="gvComiteRecepcion" runat="server" AllowPaging="false" AllowSorting="True" AutoGenerateColumns="False" Width="100%"
-                                        DataKeyNames="Orden,Nombre,Puesto"
+                                        DataKeyNames="Orden,Nombre,Puesto,Separador"
                                         OnRowCommand="gvComiteRecepcion_RowCommand"
                                         OnRowDataBound="gvComiteRecepcion_RowDataBound"
                                         OnSorting="gvComiteRecepcion_Sorting">

@@ -438,6 +438,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     oENTEvento.DataTableComiteRecepcion.Columns.Add("Orden", typeof(Int32));
                     oENTEvento.DataTableComiteRecepcion.Columns.Add("Nombre", typeof(String));
                     oENTEvento.DataTableComiteRecepcion.Columns.Add("Puesto", typeof(String));
+                    oENTEvento.DataTableComiteRecepcion.Columns.Add("Separador", typeof(Int16));
                     
                     foreach( DataRow rowComiteRecepcion in tblTemporal.Rows ){
 
@@ -445,6 +446,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         rowTemporal["Orden"] = rowComiteRecepcion["Orden"];
                         rowTemporal["Nombre"] = rowComiteRecepcion["Nombre"];
                         rowTemporal["Puesto"] = rowComiteRecepcion["Puesto"];
+                        rowTemporal["Separador"] = rowComiteRecepcion["Separador"];
                         oENTEvento.DataTableComiteRecepcion.Rows.Add(rowTemporal);
                     }
 
@@ -593,7 +595,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Validaciones
                 if ( this.txtAcomodoNombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
-                if ( this.txtAcomodoPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
+                // if ( this.txtAcomodoPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
 
                 // Agregar un nuevo elemento
                 rowAcomodo = tblAcomodo.NewRow();
@@ -882,13 +884,50 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Validaciones
                 if ( this.txtComiteRecepcionNombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
-                if ( this.txtComiteRecepcionPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
+                //if ( this.txtComiteRecepcionPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
 
                 // Agregar un nuevo elemento
                 rowComiteRecepcion = tblComiteRecepcion.NewRow();
-                rowComiteRecepcion["Orden"] = (tblComiteRecepcion.Rows.Count + 1).ToString();
+                rowComiteRecepcion["Orden"] = (tblComiteRecepcion.Select("Separador=0").Length + 1).ToString();
                 rowComiteRecepcion["Nombre"] = this.txtComiteRecepcionNombre.Text.Trim();
                 rowComiteRecepcion["Puesto"] = this.txtComiteRecepcionPuesto.Text.Trim();
+                rowComiteRecepcion["Separador"] = "0";
+                tblComiteRecepcion.Rows.Add(rowComiteRecepcion);
+
+                // Actualizar Grid
+                this.gvComiteRecepcion.DataSource = tblComiteRecepcion;
+                this.gvComiteRecepcion.DataBind();
+
+                // Nueva captura
+                this.txtComiteRecepcionNombre.Text = "";
+                this.txtComiteRecepcionPuesto.Text = "";
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtComiteRecepcionNombre.ClientID + "'); }", true);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtComiteRecepcionNombre.ClientID + "'); }", true);
+            }
+        }
+
+        protected void btnAgregarComiteRecepcion_Separador_Click(object sender, EventArgs e){
+            DataTable tblComiteRecepcion;
+            DataRow rowComiteRecepcion;
+
+            try
+            {
+
+                // Obtener DataTable del grid
+                tblComiteRecepcion = gcParse.GridViewToDataTable(this.gvComiteRecepcion, false);
+
+                // Validaciones
+                if ( this.txtComiteRecepcionNombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
+                //if ( this.txtComiteRecepcionPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
+
+                // Agregar un nuevo elemento
+                rowComiteRecepcion = tblComiteRecepcion.NewRow();
+                rowComiteRecepcion["Orden"] = (tblComiteRecepcion.Select("Separador=0").Length + 1).ToString();
+                rowComiteRecepcion["Nombre"] = this.txtComiteRecepcionNombre.Text.Trim();
+                rowComiteRecepcion["Puesto"] = this.txtComiteRecepcionPuesto.Text.Trim();
+                rowComiteRecepcion["Separador"] = "1";
                 tblComiteRecepcion.Rows.Add(rowComiteRecepcion);
 
                 // Actualizar Grid
@@ -968,6 +1007,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
             String Orden = "";
             String ComiteRecepcionNombre = "";
+            String Separador = "";
 
             String sImagesAttributes = "";
             String sTootlTip = "";
@@ -984,18 +1024,35 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Datakeys
                 Orden = this.gvComiteRecepcion.DataKeys[e.Row.RowIndex]["Orden"].ToString();
                 ComiteRecepcionNombre = this.gvComiteRecepcion.DataKeys[e.Row.RowIndex]["Nombre"].ToString();
+                Separador = this.gvComiteRecepcion.DataKeys[e.Row.RowIndex]["Separador"].ToString();
 
                 // Tooltip Edición
                 sTootlTip = "Eliminar a [" + ComiteRecepcionNombre + "]";
                 imgDelete.Attributes.Add("title", sTootlTip);
 
-                // Atributos Over
-                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
-                e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
+                // Configuración de la fila
+                if ( Separador == "1" ){
 
-                // Atributos Out
-                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
-                e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
+                    // Dejar sólo una fila
+                    e.Row.Cells[0].Text = e.Row.Cells[1].Text;
+                    e.Row.Cells[0].ColumnSpan = 3;
+                    e.Row.Cells[1].Visible = false;
+                    e.Row.Cells[2].Visible = false;
+
+                    // Atributos de la fila
+                    e.Row.CssClass = "Grid_Row_Over_PopUp";
+                    imgDelete.ImageUrl = "~/Include/Image/Buttons/Delete_Over.png";
+
+                }else{
+
+                    // Atributos Over
+                    sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                    e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
+
+                    // Atributos Out
+                    sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                    e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
+                }
 
             }catch (Exception ex){
                 throw (ex);

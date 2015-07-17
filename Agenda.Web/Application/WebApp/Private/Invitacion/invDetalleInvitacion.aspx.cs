@@ -124,7 +124,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
                 // Formulario
                 this.lblEventoNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
-                this.lblEventoFechaHora.Text = "Del " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHoraInicioTexto"].ToString() + " al " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHoraFinTexto"].ToString();
+                this.lblEventoFechaHora.Text = "Del " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHora"].ToString();
                 this.lblEstatusInvitacionNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EstatusInvitacionNombre"].ToString();
 
                 this.lblCategoriaNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["CategoriaNombre"].ToString();

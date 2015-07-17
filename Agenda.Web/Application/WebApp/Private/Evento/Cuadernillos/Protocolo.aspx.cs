@@ -951,7 +951,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
 
                         foreach (DataRow oRow in oENTResponse.DataSetResponse.Tables[10].Rows){
 
-                            wText = wTableCell.AppendText(ENTER_KEY + oRow["Nombre"].ToString() + ENTER_KEY);
+                            wText = wTableCell.AppendText(ENTER_KEY + oRow["Orden"].ToString() + ".- " + oRow["Nombre"].ToString() + ENTER_KEY);
                             wText.CharacterFormat.FontName = "Arial";
                             wText.CharacterFormat.FontSize = 9f;
                             wText.CharacterFormat.Bold = true;
@@ -1939,7 +1939,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                             //Encabezado
                             wTableCell = wTableRow.Cells[0].AddParagraph();
                             wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-                            wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
+                            wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
                             wText = wTableCell.AppendText("ASISTENTES:");
                             wText.CharacterFormat.Bold = true;
                             wText.CharacterFormat.FontName = "Arial";
@@ -1967,7 +1967,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                                 wTableCell = wTableRow.Cells[0].AddParagraph();
                                 wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
 
-                                wText = wTableCell.AppendText("Cargo");
+                                wText = wTableCell.AppendText("Nombre");
                                 wText.CharacterFormat.FontName = "Cambria";
                                 wText.CharacterFormat.FontSize = 13f;
                                 wText.CharacterFormat.Bold = true;
@@ -1985,7 +1985,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                                 wTableCell = wTableRow.Cells[1].AddParagraph();
                                 wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
 
-                                wText = wTableCell.AppendText("Nombre");
+                                wText = wTableCell.AppendText("Cargo");
                                 wText.CharacterFormat.FontName = "Cambria";
                                 wText.CharacterFormat.FontSize = 13f;
                                 wText.CharacterFormat.Bold = true;
@@ -2010,35 +2010,68 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                                     wTableRow = wTable.Rows[CurrentRow];
                                     wTableRow.Height = 15f;
 
-                                    // Celda 1
-                                    wTableCell = wTableRow.Cells[0].AddParagraph();
-                                    wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                                    // Separador
+                                    if ( oRow["Separador"].ToString() == "1" ){
 
-                                    wText = wTableCell.AppendText(oRow["Orden"].ToString() + ". " + oRow["puesto"].ToString());
-                                    wText.CharacterFormat.FontName = "Cambria";
-                                    wText.CharacterFormat.FontSize = 13f;
+                                        // Celda 1
+                                        wTableCell = wTableRow.Cells[0].AddParagraph();
+                                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
 
-                                    wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-                                    wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                                    wTableRow.Cells[0].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                                    wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                                    wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                                    wTableRow.Cells[0].Width = 325;
+                                        wText = wTableCell.AppendText(oRow["Nombre"].ToString());
+                                        wText.CharacterFormat.FontName = "Cambria";
+                                        wText.CharacterFormat.FontSize = 13f;
 
-                                    // Celda 2
-                                    wTableCell = wTableRow.Cells[1].AddParagraph();
-                                    wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                        wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[0].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[0].CellFormat.BackColor = System.Drawing.ColorTranslator.FromHtml("#CCFFCC");
+                                        wTableRow.Cells[0].Width = 509;
 
-                                    wText = wTableCell.AppendText(oRow["Nombre"].ToString());
-                                    wText.CharacterFormat.FontName = "Cambria";
-                                    wText.CharacterFormat.FontSize = 13f;
+                                        // Celda 2
+                                        wTableCell = wTableRow.Cells[1].AddParagraph();
+                                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                                    wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-                                    wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                                    wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                                    wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                                    wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
-                                    wTableRow.Cells[1].Width = 185;
+                                        wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[1].CellFormat.BackColor = System.Drawing.ColorTranslator.FromHtml("#CCFFCC");
+                                        wTableRow.Cells[1].Width = 1;
+
+                                    }else{
+
+                                        // Celda 1
+                                        wTableCell = wTableRow.Cells[0].AddParagraph();
+                                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+
+                                        wText = wTableCell.AppendText(oRow["Orden"].ToString() + ". " + oRow["Nombre"].ToString());
+                                        wText.CharacterFormat.FontName = "Cambria";
+                                        wText.CharacterFormat.FontSize = 13f;
+
+                                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                        wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                                        wTableRow.Cells[0].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                                        wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                                        wTableRow.Cells[0].Width = 325;
+
+                                        // Celda 2
+                                        wTableCell = wTableRow.Cells[1].AddParagraph();
+                                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+
+                                        wText = wTableCell.AppendText(oRow["puesto"].ToString());
+                                        wText.CharacterFormat.FontName = "Cambria";
+                                        wText.CharacterFormat.FontSize = 13f;
+
+                                        wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                        wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                                        wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                                        wTableRow.Cells[1].Width = 185;
+                                    }
 
                                     // Siguiente fila
                                     CurrentRow = CurrentRow + 1;
@@ -2102,7 +2135,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         FileName = FileName.Replace(currentChar.ToString(), "");
                     }
 
-                    FileName = FileName + ".doc";
+                    FileName = ( FileName.Length > 60 ? FileName.Substring(0, 60) : FileName ) + ".doc";
 
                     WDocument.Save( FileName, Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment );
                 }

@@ -167,7 +167,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.ProgramaLogisticaPanel.Visible = ( this.Logistica.Value == "1" ? true : false );
                         this.ProgramaProtocoloPanel.Visible = ( this.Logistica.Value == "1" ? false : true );
                         this.ContactoPanel.Visible = true;
-                        this.AdjuntarPanel.Visible = (this.Logistica.Value == "1" ? true : false);
+                        this.AdjuntarPanel.Visible = true;
                         this.RechazarPanel.Visible = true;
                         this.CuadernilloLogisticaPanel.Visible = (this.Logistica.Value == "1" ? true : false);
                         this.CuadernilloProtocoloPanel.Visible = (this.Logistica.Value == "1" ? false : true);
@@ -183,7 +183,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.ProgramaLogisticaPanel.Visible = ( this.Logistica.Value == "1" ? true : false );
                         this.ProgramaProtocoloPanel.Visible = ( this.Logistica.Value == "1" ? false : true );
                         this.ContactoPanel.Visible = true;
-                        this.AdjuntarPanel.Visible = (this.Logistica.Value == "1" ? true : false);
+                        this.AdjuntarPanel.Visible = true;
                         this.RechazarPanel.Visible = true;
                         this.CuadernilloLogisticaPanel.Visible = (this.Logistica.Value == "1" ? true : false);
                         this.CuadernilloProtocoloPanel.Visible = (this.Logistica.Value == "1" ? false : true);
@@ -301,7 +301,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     this.ProgramaLogisticaPanel.Visible = (this.Logistica.Value == "1" ? true : false);
                     this.ProgramaProtocoloPanel.Visible = (this.Logistica.Value == "1" ? false : true);
                     this.ContactoPanel.Visible = true;
-                    this.AdjuntarPanel.Visible = (this.Logistica.Value == "1" ? true : false);
+                    this.AdjuntarPanel.Visible = true;
                     this.CuadernilloLogisticaPanel.Visible = (this.Logistica.Value == "1" ? true : false);
                     this.CuadernilloProtocoloPanel.Visible = (this.Logistica.Value == "1" ? false : true);
                     this.Historial.Visible = true;

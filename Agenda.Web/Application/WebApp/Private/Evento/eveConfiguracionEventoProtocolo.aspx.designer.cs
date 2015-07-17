@@ -472,6 +472,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.Button btnAgregarComiteRecepcion;
         
         /// <summary>
+        /// btnAgregarComiteRecepcion_Separador control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarComiteRecepcion_Separador;
+        
+        /// <summary>
         /// gvComiteRecepcion control.
         /// </summary>
         /// <remarks>

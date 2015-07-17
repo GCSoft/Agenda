@@ -622,6 +622,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     oENTEvento.DataTableComiteRecepcion.Columns.Add("Orden", typeof(Int32));
                     oENTEvento.DataTableComiteRecepcion.Columns.Add("Nombre", typeof(String));
                     oENTEvento.DataTableComiteRecepcion.Columns.Add("Puesto", typeof(String));
+                    oENTEvento.DataTableComiteRecepcion.Columns.Add("Separador", typeof(Int16));
                     
                     foreach( DataRow rowComiteRecepcion in tblTemporal.Rows ){
 
@@ -629,6 +630,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         rowTemporal["Orden"] = rowComiteRecepcion["Orden"];
                         rowTemporal["Nombre"] = rowComiteRecepcion["Nombre"];
                         rowTemporal["Puesto"] = rowComiteRecepcion["Puesto"];
+                        rowTemporal["Separador"] = "0";
                         oENTEvento.DataTableComiteRecepcion.Rows.Add(rowTemporal);
                     }
 

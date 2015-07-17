@@ -185,10 +185,22 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 SelectEvento();
 
                 // Restablecer el formulario
-                this.rblTipoDocumento.SelectedIndex = 0;
-                this.imgMontaje.ImageUrl = "~/Include/Image/Cuadernillo/Montaje1.png";
-                this.imgMontaje.Visible = true;
-                this.fupDocumento.Visible = false;
+                if ( this.Logistica.Value == "0" ) {
+
+                    this.fupDocumento.Attributes.Clear();
+                    this.imgMontaje.Visible = false;
+                    this.fupDocumento.Visible = true;
+                    this.rblTipoDocumento.SelectedItem.Value = "4";
+                    this.rblTipoDocumento.Visible = false;
+
+                }else { 
+
+                    this.rblTipoDocumento.SelectedIndex = 0;
+                    this.imgMontaje.ImageUrl = "~/Include/Image/Cuadernillo/Montaje1.png";
+                    this.imgMontaje.Visible = true;
+                    this.fupDocumento.Visible = false;
+
+                }
 
                 // Foco
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlTipoDocumento.ClientID + "'); }", true);
@@ -217,6 +229,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
                 if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
 
+                // Campos ocultos
+                this.Logistica.Value = oENTResponse.DataSetResponse.Tables[1].Rows[0]["Logistica"].ToString();
+
                 // Carátula compacta
                 this.lblEventoNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
                 this.lblEventoFechaHora.Text = "Del " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHoraInicioTexto"].ToString() + " al " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHoraFinTexto"].ToString();
@@ -241,7 +256,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Formulario
                 oENTTipoDocumento.TipoDocumentoId = 0;
-                oENTTipoDocumento.ModuloId = 2; // Evento
+                oENTTipoDocumento.ModuloId = ( this.Logistica.Value == "1" ? 2 : 3 ); // Evento / Evento - Protocolo
                 oENTTipoDocumento.Nombre = "";
                 oENTTipoDocumento.Activo = 1;
 
@@ -260,6 +275,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Agregar Item de selección
                 this.ddlTipoDocumento.Items.Insert(0, new ListItem("[Seleccione]", "0"));
+
+                // Preseleccionar opción
+                this.ddlTipoDocumento.SelectedIndex = 1;
 
             }catch (Exception ex){
                 throw (ex);
@@ -291,11 +309,21 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 				// Obtener Sender
                 this.SenderId.Value = Key.ToString().Split(new Char[] { '|' })[1];
 
+                // Carátula
+                SelectEvento();
+
                 // Llenado de controles
                 SelectTipoDocumento();
 
-				// Carátula
-                SelectEvento();
+                // Configurar la pantalla para el caso de que el evento sea protocolo
+                if ( this.Logistica.Value == "0" ) {
+
+                    this.fupDocumento.Attributes.Clear();
+                    this.imgMontaje.Visible = false;
+                    this.fupDocumento.Visible = true;
+                    this.rblTipoDocumento.SelectedItem.Value = "4";
+                    this.rblTipoDocumento.Visible = false;
+                }
 
                 // Foco
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlTipoDocumento.ClientID + "'); }", true);
@@ -423,7 +451,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 }else{
 
-                    if( UsuarioId != oCurrentSession.UsuarioId.ToString() ){
+                    if( UsuarioId != oCurrentSession.UsuarioId.ToString() && oCurrentSession.RolId > 2 ){
 
 					    imgDelete.Visible = false;
 

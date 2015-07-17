@@ -21,17 +21,6 @@
     <script src="../../../../Include/Javascript/GCSoft/GCSoft.js" type="text/javascript"></script>
     <script type="text/javascript">
 
-        // Listener
-        document.onkeydown = function () {
-            var keyPressed = window.event.keyCode;
-
-            switch (keyPressed) {
-                case 13:		// Enter en cualquier parte de la página es deshabilitado por mandar al evento Click de salir
-                    return false;
-            }
-
-        };
-
         // Mantener la sesión activa
         function KeepAliveSession() {
             try

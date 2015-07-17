@@ -373,7 +373,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 				imgView.ImageUrl = "~/Include/Image/File/" + Icono;
 
 				// Seguridad
-				if( UsuarioId != oCurrentSession.UsuarioId.ToString() ){
+				if( UsuarioId != oCurrentSession.UsuarioId.ToString() && oCurrentSession.RolId > 2 ){
 
 					imgDelete.Visible = false;
 

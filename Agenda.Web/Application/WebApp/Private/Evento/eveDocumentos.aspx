@@ -62,7 +62,7 @@
                             <asp:FileUpload ID="fupDocumento" runat="server" Width="600px" Visible="false" />
 				        </td>
 					</tr>
-					<tr><td class="Etiqueta" colspan="4" style="text-align:left;">Descripción</td></tr>
+					<tr><td class="Etiqueta" colspan="4" style="text-align:left;">Observaciones</td></tr>
 					<tr>
 						<td colspan="4"><CKEditor:CKEditorControl ID="ckeDescripcion" runat="server" BasePath="~/Include/Components/CKEditor/Core/" Height="90px"></CKEditor:CKEditorControl></td>
 					</tr>
@@ -122,6 +122,7 @@
             <asp:HiddenField ID="hddEventoId" runat="server" Value="0" />
             <asp:HiddenField ID="SenderId" runat="server" Value="0" />
             <asp:HiddenField ID="hddSort" runat="server" Value="NombreDocumento" />
+            <asp:HiddenField ID="Logistica" runat="server" Value="0" />
 	
 		</ContentTemplate>
 		<Triggers>

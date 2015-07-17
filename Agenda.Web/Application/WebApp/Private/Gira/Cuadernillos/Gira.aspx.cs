@@ -1500,7 +1500,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                         FileName = FileName.Replace(currentChar.ToString(), "");
                     }
 
-                    FileName = FileName + ".doc";
+                    FileName = ( FileName.Length > 60 ? FileName.Substring(0, 60) : FileName ) + ".doc";
 
                     oDocument.Save( FileName, Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment );
                 }
