@@ -55,6 +55,12 @@ namespace Agenda.Entity.Object
         private Int16   _NotaFinDocumento;
         private String  _NotaDocumento;
 
+        private Int32   _OrdenAnterior;
+        private Int32   _NuevoOrden;
+        private String  _Nombre;
+        private String  _Puesto;
+        private Int16   _Separador;
+
 
         //Constructor
 
@@ -95,6 +101,12 @@ namespace Agenda.Entity.Object
             _NotaInicioDocumento = 0;
             _NotaFinDocumento = 0;
             _NotaDocumento = "";
+
+            _OrdenAnterior = 0;
+            _NuevoOrden = 0;
+            _Nombre = "";
+            _Puesto = "";
+            _Separador = 0;
         }
 
 
@@ -499,7 +511,62 @@ namespace Agenda.Entity.Object
         {
             get { return _NotaDocumento; }
             set { _NotaDocumento = value; }
-        } 
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.OrdenAnterior</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int32 OrdenAnterior
+        {
+            get { return _OrdenAnterior; }
+            set { _OrdenAnterior = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.NuevoOrden</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int32 NuevoOrden
+        {
+            get { return _NuevoOrden; }
+            set { _NuevoOrden = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.Nombre</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public String Nombre
+        {
+            get { return _Nombre; }
+            set { _Nombre = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.Puesto</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public String Puesto
+        {
+            get { return _Puesto; }
+            set { _Puesto = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.Separador</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int16 Separador
+        {
+            get { return _Separador; }
+            set { _Separador = value; }
+        }
 
     }
 }

@@ -535,6 +535,15 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         protected global::System.Web.UI.WebControls.Button btnAgregarComiteHelipuerto;
         
         /// <summary>
+        /// lblComiteHelipuerto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblComiteHelipuerto;
+        
+        /// <summary>
         /// gvComiteHelipuerto control.
         /// </summary>
         /// <remarks>
@@ -931,6 +940,15 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         protected global::System.Web.UI.WebControls.Button btnAgregarComite;
         
         /// <summary>
+        /// lblComiteRecepcion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblComiteRecepcion;
+        
+        /// <summary>
         /// gvComite control.
         /// </summary>
         /// <remarks>
@@ -983,6 +1001,15 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAgregarOrdenDia;
+        
+        /// <summary>
+        /// lblOrdenDia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblOrdenDia;
         
         /// <summary>
         /// gvOrdenDia control.
@@ -1055,6 +1082,15 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAgregarAcomodo;
+        
+        /// <summary>
+        /// lblAcomodo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAcomodo;
         
         /// <summary>
         /// gvAcomodo control.
@@ -1496,6 +1532,429 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblPopUp_ComentarioEnCuadernilloMessage;
+        
+        /// <summary>
+        /// pnlPopUp_ComiteHelipuerto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_ComiteHelipuerto;
+        
+        /// <summary>
+        /// pnlPopUp_ComiteHelipuertoContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_ComiteHelipuertoContent;
+        
+        /// <summary>
+        /// pnlPopUp_ComiteHelipuertoHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_ComiteHelipuertoHeader;
+        
+        /// <summary>
+        /// lblPopUp_ComiteHelipuertoTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPopUp_ComiteHelipuertoTitle;
+        
+        /// <summary>
+        /// imgCloseWindow_ComiteHelipuerto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgCloseWindow_ComiteHelipuerto;
+        
+        /// <summary>
+        /// pnlPopUp_ComiteHelipuertoBody control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_ComiteHelipuertoBody;
+        
+        /// <summary>
+        /// txtPopUpComiteHelipuerto_OrdenAnterior control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpComiteHelipuerto_OrdenAnterior;
+        
+        /// <summary>
+        /// txtPopUpComiteHelipuerto_Orden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpComiteHelipuerto_Orden;
+        
+        /// <summary>
+        /// txtPopUpComiteHelipuerto_Nombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpComiteHelipuerto_Nombre;
+        
+        /// <summary>
+        /// txtPopUpComiteHelipuerto_Puesto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpComiteHelipuerto_Puesto;
+        
+        /// <summary>
+        /// btnPopUp_ComiteHelipuertoCommand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPopUp_ComiteHelipuertoCommand;
+        
+        /// <summary>
+        /// lblPopUp_ComiteHelipuertoMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPopUp_ComiteHelipuertoMessage;
+        
+        /// <summary>
+        /// pnlPopUp_ComiteRecepcion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_ComiteRecepcion;
+        
+        /// <summary>
+        /// pnlPopUp_ComiteRecepcionContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_ComiteRecepcionContent;
+        
+        /// <summary>
+        /// pnlPopUp_ComiteRecepcionHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_ComiteRecepcionHeader;
+        
+        /// <summary>
+        /// lblPopUp_ComiteRecepcionTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPopUp_ComiteRecepcionTitle;
+        
+        /// <summary>
+        /// imgCloseWindow_ComiteRecepcion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgCloseWindow_ComiteRecepcion;
+        
+        /// <summary>
+        /// pnlPopUp_ComiteRecepcionBody control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_ComiteRecepcionBody;
+        
+        /// <summary>
+        /// txtPopUpComiteRecepcion_OrdenAnterior control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpComiteRecepcion_OrdenAnterior;
+        
+        /// <summary>
+        /// txtPopUpComiteRecepcion_Orden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpComiteRecepcion_Orden;
+        
+        /// <summary>
+        /// txtPopUpComiteRecepcion_Nombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpComiteRecepcion_Nombre;
+        
+        /// <summary>
+        /// txtPopUpComiteRecepcion_Puesto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpComiteRecepcion_Puesto;
+        
+        /// <summary>
+        /// btnPopUp_ComiteRecepcionCommand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPopUp_ComiteRecepcionCommand;
+        
+        /// <summary>
+        /// lblPopUp_ComiteRecepcionMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPopUp_ComiteRecepcionMessage;
+        
+        /// <summary>
+        /// pnlPopUp_OrdenDia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_OrdenDia;
+        
+        /// <summary>
+        /// pnlPopUp_OrdenDiaContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_OrdenDiaContent;
+        
+        /// <summary>
+        /// pnlPopUp_OrdenDiaHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_OrdenDiaHeader;
+        
+        /// <summary>
+        /// lblPopUp_OrdenDiaTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPopUp_OrdenDiaTitle;
+        
+        /// <summary>
+        /// imgCloseWindow_OrdenDia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgCloseWindow_OrdenDia;
+        
+        /// <summary>
+        /// pnlPopUp_OrdenDiaBody control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_OrdenDiaBody;
+        
+        /// <summary>
+        /// txtPopUpOrdenDia_OrdenAnterior control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpOrdenDia_OrdenAnterior;
+        
+        /// <summary>
+        /// txtPopUpOrdenDia_Orden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpOrdenDia_Orden;
+        
+        /// <summary>
+        /// txtPopUpOrdenDia_Detalle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpOrdenDia_Detalle;
+        
+        /// <summary>
+        /// btnPopUp_OrdenDiaCommand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPopUp_OrdenDiaCommand;
+        
+        /// <summary>
+        /// lblPopUp_OrdenDiaMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPopUp_OrdenDiaMessage;
+        
+        /// <summary>
+        /// pnlPopUp_Acomodo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_Acomodo;
+        
+        /// <summary>
+        /// pnlPopUp_AcomodoContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_AcomodoContent;
+        
+        /// <summary>
+        /// pnlPopUp_AcomodoHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_AcomodoHeader;
+        
+        /// <summary>
+        /// lblPopUp_AcomodoTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPopUp_AcomodoTitle;
+        
+        /// <summary>
+        /// imgCloseWindow_Acomodo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgCloseWindow_Acomodo;
+        
+        /// <summary>
+        /// pnlPopUp_AcomodoBody control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_AcomodoBody;
+        
+        /// <summary>
+        /// txtPopUpAcomodo_OrdenAnterior control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpAcomodo_OrdenAnterior;
+        
+        /// <summary>
+        /// txtPopUpAcomodo_Orden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpAcomodo_Orden;
+        
+        /// <summary>
+        /// txtPopUpAcomodo_Nombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpAcomodo_Nombre;
+        
+        /// <summary>
+        /// txtPopUpAcomodo_Puesto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpAcomodo_Puesto;
+        
+        /// <summary>
+        /// btnPopUp_AcomodoCommand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPopUp_AcomodoCommand;
+        
+        /// <summary>
+        /// lblPopUp_AcomodoMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPopUp_AcomodoMessage;
         
         /// <summary>
         /// pnlFooter control.
