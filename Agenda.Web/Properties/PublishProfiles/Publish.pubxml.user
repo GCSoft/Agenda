@@ -52,7 +52,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/14/2015 11:01:19</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Evento/eveConfiguracionEventoProtocolo.aspx">
-      <publishTime>07/16/2015 17:47:31</publishTime>
+      <publishTime>07/16/2015 19:58:30</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Evento/eveContacto.aspx">
       <publishTime>03/30/2015 15:07:09</publishTime>
@@ -184,16 +184,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/13/2015 16:11:31</publishTime>
     </File>
     <File Include="bin/Agenda.BusinessProcess.dll">
-      <publishTime>07/16/2015 18:20:01</publishTime>
+      <publishTime>07/17/2015 13:18:48</publishTime>
     </File>
     <File Include="bin/Agenda.DataAccess.dll">
-      <publishTime>07/16/2015 18:20:00</publishTime>
+      <publishTime>07/17/2015 13:18:48</publishTime>
     </File>
     <File Include="bin/Agenda.Entity.dll">
-      <publishTime>07/16/2015 18:20:00</publishTime>
+      <publishTime>07/17/2015 13:18:48</publishTime>
     </File>
     <File Include="bin/Agenda.Web.dll">
-      <publishTime>07/16/2015 18:20:03</publishTime>
+      <publishTime>07/17/2015 13:18:51</publishTime>
     </File>
     <File Include="bin/AjaxControlToolkit.dll">
       <publishTime>06/23/2014 11:45:59</publishTime>
@@ -1591,7 +1591,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/27/2014 12:58:28</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/16/2015 18:20:09</publishTime>
+      <publishTime>07/17/2015 13:18:59</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -1267,5 +1267,518 @@ namespace Agenda.DataAccess.Object
             return oENTResponse;
         }
 
+
+
+        ///<remarks>
+        ///   <name>DAEvento.UpdateEventoComiteHelipuerto_Item</name>
+        ///   <create>07-Enero-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public ENTResponse UpdateEventoComiteHelipuerto_Item(ENTEvento oENTEvento, String sConnection, Int32 iAlternateDBTimeout){
+            SqlConnection sqlCnn = new SqlConnection(sConnection);
+            SqlCommand sqlCom;
+            SqlParameter sqlPar;
+            SqlDataAdapter sqlDA;
+
+            ENTResponse oENTResponse = new ENTResponse();
+
+            // Configuración de objetos
+            sqlCom = new SqlCommand("uspEventoComiteHelipuerto_Upd_Item", sqlCnn);
+            sqlCom.CommandType = CommandType.StoredProcedure;
+
+            // Timeout alternativo en caso de ser solicitado
+            if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
+
+            // Parametros
+            sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoId", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.EventoId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("OrdenAnterior", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.OrdenAnterior;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NuevoOrden", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.NuevoOrden;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Nombre", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.Nombre;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Puesto", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.Puesto;
+            sqlCom.Parameters.Add(sqlPar);
+
+            // Inicializaciones
+            oENTResponse.DataSetResponse = new DataSet();
+            sqlDA = new SqlDataAdapter(sqlCom);
+
+            // Transacción
+            try
+            {
+
+                sqlCnn.Open();
+                sqlDA.Fill(oENTResponse.DataSetResponse);
+                sqlCnn.Close();
+
+            }catch (SqlException sqlEx){
+
+                oENTResponse.ExceptionRaised(sqlEx.Message);
+            }catch (Exception ex){
+
+                oENTResponse.ExceptionRaised(ex.Message);
+            }finally{
+
+                if (sqlCnn.State == ConnectionState.Open) { sqlCnn.Close(); }
+                sqlCnn.Dispose();
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
+        ///   <name>DAEvento.UpdateEventoComiteRecepcion_Item</name>
+        ///   <create>07-Enero-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public ENTResponse UpdateEventoComiteRecepcion_Item(ENTEvento oENTEvento, String sConnection, Int32 iAlternateDBTimeout){
+            SqlConnection sqlCnn = new SqlConnection(sConnection);
+            SqlCommand sqlCom;
+            SqlParameter sqlPar;
+            SqlDataAdapter sqlDA;
+
+            ENTResponse oENTResponse = new ENTResponse();
+
+            // Configuración de objetos
+            sqlCom = new SqlCommand("uspEventoComiteRecepcion_Upd_Item", sqlCnn);
+            sqlCom.CommandType = CommandType.StoredProcedure;
+
+            // Timeout alternativo en caso de ser solicitado
+            if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
+
+            // Parametros
+            sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoId", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.EventoId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("OrdenAnterior", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.OrdenAnterior;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NuevoOrden", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.NuevoOrden;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Nombre", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.Nombre;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Puesto", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.Puesto;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Separador", SqlDbType.TinyInt);
+            sqlPar.Value = oENTEvento.Separador;
+            sqlCom.Parameters.Add(sqlPar);
+
+            // Inicializaciones
+            oENTResponse.DataSetResponse = new DataSet();
+            sqlDA = new SqlDataAdapter(sqlCom);
+
+            // Transacción
+            try
+            {
+
+                sqlCnn.Open();
+                sqlDA.Fill(oENTResponse.DataSetResponse);
+                sqlCnn.Close();
+
+            }catch (SqlException sqlEx){
+
+                oENTResponse.ExceptionRaised(sqlEx.Message);
+            }catch (Exception ex){
+
+                oENTResponse.ExceptionRaised(ex.Message);
+            }finally{
+
+                if (sqlCnn.State == ConnectionState.Open) { sqlCnn.Close(); }
+                sqlCnn.Dispose();
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
+        ///   <name>DAEvento.UpdateEventoOrdenDia_Item</name>
+        ///   <create>07-Enero-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public ENTResponse UpdateEventoOrdenDia_Item(ENTEvento oENTEvento, String sConnection, Int32 iAlternateDBTimeout){
+            SqlConnection sqlCnn = new SqlConnection(sConnection);
+            SqlCommand sqlCom;
+            SqlParameter sqlPar;
+            SqlDataAdapter sqlDA;
+
+            ENTResponse oENTResponse = new ENTResponse();
+
+            // Configuración de objetos
+            sqlCom = new SqlCommand("uspEventoOrdenDia_Upd_Item", sqlCnn);
+            sqlCom.CommandType = CommandType.StoredProcedure;
+
+            // Timeout alternativo en caso de ser solicitado
+            if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
+
+            // Parametros
+            sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoId", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.EventoId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("OrdenAnterior", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.OrdenAnterior;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NuevoOrden", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.NuevoOrden;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Detalle", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.Nombre;
+            sqlCom.Parameters.Add(sqlPar);
+
+            // Inicializaciones
+            oENTResponse.DataSetResponse = new DataSet();
+            sqlDA = new SqlDataAdapter(sqlCom);
+
+            // Transacción
+            try
+            {
+
+                sqlCnn.Open();
+                sqlDA.Fill(oENTResponse.DataSetResponse);
+                sqlCnn.Close();
+
+            }catch (SqlException sqlEx){
+
+                oENTResponse.ExceptionRaised(sqlEx.Message);
+            }catch (Exception ex){
+
+                oENTResponse.ExceptionRaised(ex.Message);
+            }finally{
+
+                if (sqlCnn.State == ConnectionState.Open) { sqlCnn.Close(); }
+                sqlCnn.Dispose();
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
+        ///   <name>DAEvento.UpdateEventoAcomodo_Item</name>
+        ///   <create>07-Enero-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public ENTResponse UpdateEventoAcomodo_Item(ENTEvento oENTEvento, String sConnection, Int32 iAlternateDBTimeout){
+            SqlConnection sqlCnn = new SqlConnection(sConnection);
+            SqlCommand sqlCom;
+            SqlParameter sqlPar;
+            SqlDataAdapter sqlDA;
+
+            ENTResponse oENTResponse = new ENTResponse();
+
+            // Configuración de objetos
+            sqlCom = new SqlCommand("uspEventoAcomodo_Upd_Item", sqlCnn);
+            sqlCom.CommandType = CommandType.StoredProcedure;
+
+            // Timeout alternativo en caso de ser solicitado
+            if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
+
+            // Parametros
+            sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoId", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.EventoId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("OrdenAnterior", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.OrdenAnterior;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NuevoOrden", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.NuevoOrden;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Nombre", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.Nombre;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Puesto", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.Puesto;
+            sqlCom.Parameters.Add(sqlPar);
+
+            // Inicializaciones
+            oENTResponse.DataSetResponse = new DataSet();
+            sqlDA = new SqlDataAdapter(sqlCom);
+
+            // Transacción
+            try
+            {
+
+                sqlCnn.Open();
+                sqlDA.Fill(oENTResponse.DataSetResponse);
+                sqlCnn.Close();
+
+            }catch (SqlException sqlEx){
+
+                oENTResponse.ExceptionRaised(sqlEx.Message);
+            }catch (Exception ex){
+
+                oENTResponse.ExceptionRaised(ex.Message);
+            }finally{
+
+                if (sqlCnn.State == ConnectionState.Open) { sqlCnn.Close(); }
+                sqlCnn.Dispose();
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
+        ///   <name>DAEvento.UpdateEventoListadoAdicional_Item</name>
+        ///   <create>07-Enero-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public ENTResponse UpdateEventoListadoAdicional_Item(ENTEvento oENTEvento, String sConnection, Int32 iAlternateDBTimeout){
+            SqlConnection sqlCnn = new SqlConnection(sConnection);
+            SqlCommand sqlCom;
+            SqlParameter sqlPar;
+            SqlDataAdapter sqlDA;
+
+            ENTResponse oENTResponse = new ENTResponse();
+
+            // Configuración de objetos
+            sqlCom = new SqlCommand("uspEventoListadoAdicional_Upd_Item", sqlCnn);
+            sqlCom.CommandType = CommandType.StoredProcedure;
+
+            // Timeout alternativo en caso de ser solicitado
+            if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
+
+            // Parametros
+            sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoId", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.EventoId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("OrdenAnterior", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.OrdenAnterior;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NuevoOrden", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.NuevoOrden;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Nombre", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.Nombre;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Puesto", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.Puesto;
+            sqlCom.Parameters.Add(sqlPar);
+
+            // Inicializaciones
+            oENTResponse.DataSetResponse = new DataSet();
+            sqlDA = new SqlDataAdapter(sqlCom);
+
+            // Transacción
+            try
+            {
+
+                sqlCnn.Open();
+                sqlDA.Fill(oENTResponse.DataSetResponse);
+                sqlCnn.Close();
+
+            }catch (SqlException sqlEx){
+
+                oENTResponse.ExceptionRaised(sqlEx.Message);
+            }catch (Exception ex){
+
+                oENTResponse.ExceptionRaised(ex.Message);
+            }finally{
+
+                if (sqlCnn.State == ConnectionState.Open) { sqlCnn.Close(); }
+                sqlCnn.Dispose();
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
+        ///   <name>DAEvento.UpdateEventoResponsableEvento_Item</name>
+        ///   <create>07-Enero-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public ENTResponse UpdateEventoResponsable_Item(ENTEvento oENTEvento, String sConnection, Int32 iAlternateDBTimeout){
+            SqlConnection sqlCnn = new SqlConnection(sConnection);
+            SqlCommand sqlCom;
+            SqlParameter sqlPar;
+            SqlDataAdapter sqlDA;
+
+            ENTResponse oENTResponse = new ENTResponse();
+
+            // Configuración de objetos
+            sqlCom = new SqlCommand("uspEventoResponsable_Upd_Item", sqlCnn);
+            sqlCom.CommandType = CommandType.StoredProcedure;
+
+            // Timeout alternativo en caso de ser solicitado
+            if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
+
+            // Parametros
+            sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoId", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.EventoId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("OrdenAnterior", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.OrdenAnterior;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NuevoOrden", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.NuevoOrden;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Nombre", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.Nombre;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Puesto", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.Puesto;
+            sqlCom.Parameters.Add(sqlPar);
+
+            // Inicializaciones
+            oENTResponse.DataSetResponse = new DataSet();
+            sqlDA = new SqlDataAdapter(sqlCom);
+
+            // Transacción
+            try
+            {
+
+                sqlCnn.Open();
+                sqlDA.Fill(oENTResponse.DataSetResponse);
+                sqlCnn.Close();
+
+            }catch (SqlException sqlEx){
+
+                oENTResponse.ExceptionRaised(sqlEx.Message);
+            }catch (Exception ex){
+
+                oENTResponse.ExceptionRaised(ex.Message);
+            }finally{
+
+                if (sqlCnn.State == ConnectionState.Open) { sqlCnn.Close(); }
+                sqlCnn.Dispose();
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
+        ///   <name>DAEvento.UpdateEventoResponsableLogistica_Item</name>
+        ///   <create>07-Enero-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public ENTResponse UpdateEventoResponsableLogistica_Item(ENTEvento oENTEvento, String sConnection, Int32 iAlternateDBTimeout){
+            SqlConnection sqlCnn = new SqlConnection(sConnection);
+            SqlCommand sqlCom;
+            SqlParameter sqlPar;
+            SqlDataAdapter sqlDA;
+
+            ENTResponse oENTResponse = new ENTResponse();
+
+            // Configuración de objetos
+            sqlCom = new SqlCommand("uspEventoResponsableLogistica_Upd_Item", sqlCnn);
+            sqlCom.CommandType = CommandType.StoredProcedure;
+
+            // Timeout alternativo en caso de ser solicitado
+            if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
+
+            // Parametros
+            sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("EventoId", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.EventoId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("OrdenAnterior", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.OrdenAnterior;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NuevoOrden", SqlDbType.Int);
+            sqlPar.Value = oENTEvento.NuevoOrden;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Nombre", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.Nombre;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Contacto", SqlDbType.VarChar);
+            sqlPar.Value = oENTEvento.Puesto;
+            sqlCom.Parameters.Add(sqlPar);
+
+            // Inicializaciones
+            oENTResponse.DataSetResponse = new DataSet();
+            sqlDA = new SqlDataAdapter(sqlCom);
+
+            // Transacción
+            try
+            {
+
+                sqlCnn.Open();
+                sqlDA.Fill(oENTResponse.DataSetResponse);
+                sqlCnn.Close();
+
+            }catch (SqlException sqlEx){
+
+                oENTResponse.ExceptionRaised(sqlEx.Message);
+            }catch (Exception ex){
+
+                oENTResponse.ExceptionRaised(ex.Message);
+            }finally{
+
+                if (sqlCnn.State == ConnectionState.Open) { sqlCnn.Close(); }
+                sqlCnn.Dispose();
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
     }
 }

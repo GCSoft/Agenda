@@ -29,6 +29,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         GCEncryption gcEncryption = new GCEncryption();
         GCJavascript gcJavascript = new GCJavascript();
         GCParse gcParse = new GCParse();
+        GCNumber gcNumber = new GCNumber();
 
 
         // Funciones del programador
@@ -238,6 +239,27 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
 
         // Rutinas el programador
+
+        void InhabilitarEdicion( ref GridView GridControl, ref Label LabelControl){
+            ImageButton imgEdit = null;
+
+            try
+            {
+
+                // Ocultar botón de edición
+                foreach( GridViewRow oRow in GridControl.Rows ){
+
+                    imgEdit = (ImageButton)oRow.FindControl("imgEdit");
+                    if ( imgEdit != null ){ imgEdit.Visible = false; }
+                }
+
+                // Mostrar leyenda
+                LabelControl.Visible = true;
+
+            }catch(Exception ex){
+                throw(ex);
+            }
+        }
 
         void SelectComiteHelipuerto(){
             try
@@ -806,6 +828,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 				// Carátula y formulario
                 SelectEvento();
 
+                // Limpiar popups
+                ClearPopUp_ComiteHelipuertoPanel();
+                ClearPopUp_ComiteRecepcionPanel();
+                ClearPopUp_OrdenDiaPanel();
+                ClearPopUp_AcomodoPanel();
+                ClearPopUp_ListadoAdicionalPanel();
+                ClearPopUp_ResponsableEventoPanel();
+                ClearPopUp_ResponsableLogisticaPanel();
+
                 // Foco
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPronostico.ClientID + "'); }", true);
 
@@ -915,7 +946,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Validaciones
                 if ( this.txtComiteHelipuertoNombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
-                if ( this.txtComiteHelipuertoPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
+                // if ( this.txtComiteHelipuertoPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
 
                 // Agregar un nuevo elemento
                 rowComiteHelipuerto = tblComiteHelipuerto.NewRow();
@@ -927,6 +958,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Actualizar Grid
                 this.gvComiteHelipuerto.DataSource = tblComiteHelipuerto;
                 this.gvComiteHelipuerto.DataBind();
+
+                // Inhabilitar edición
+                InhabilitarEdicion(ref this.gvComiteHelipuerto, ref this.lblComiteHelipuerto);
 
                 // Nueva captura
                 this.txtComiteHelipuertoNombre.Text = "";
@@ -942,8 +976,11 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             DataTable tblComiteHelipuerto;
 
             String strCommand = "";
-            String Orden = "";
             Int32 intRow = 0;
+
+            String Orden = "";
+            String Nombre = "";
+            String Puesto = "";
 
             try
             {
@@ -959,9 +996,17 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Datakeys
                 Orden = this.gvComiteHelipuerto.DataKeys[intRow]["Orden"].ToString();
+                Nombre = this.gvComiteHelipuerto.DataKeys[intRow]["Nombre"].ToString();
+                Puesto = this.gvComiteHelipuerto.DataKeys[intRow]["Puesto"].ToString();
 
                 // Acción
                 switch (strCommand){
+
+                    case "Editar":
+
+                        // PopUp de Editar
+                        SetPopUp_ComiteHelipuertoPanel(Orden, Nombre, Puesto);
+                        break;
 
                     case "Eliminar":
 
@@ -983,6 +1028,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.gvComiteHelipuerto.DataSource = tblComiteHelipuerto;
                         this.gvComiteHelipuerto.DataBind();
 
+                        // Inhabilitar edición
+                        InhabilitarEdicion(ref this.gvComiteHelipuerto, ref this.lblComiteHelipuerto);
+
                         // Nueva captura
                         this.txtComiteHelipuertoNombre.Text = "";
                         this.txtComiteHelipuertoPuesto.Text = "";
@@ -998,6 +1046,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
         protected void gvComiteHelipuerto_RowDataBound(object sender, GridViewRowEventArgs e){
             ImageButton imgDelete = null;
+            ImageButton imgEdit = null;
 
             String Orden = "";
             String ComiteHelipuertoNombre = "";
@@ -1013,6 +1062,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Obtener imagenes
                 imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+                imgEdit = (ImageButton)e.Row.FindControl("imgEdit");
 
                 // Datakeys
                 Orden = this.gvComiteHelipuerto.DataKeys[e.Row.RowIndex]["Orden"].ToString();
@@ -1022,12 +1072,17 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 sTootlTip = "Eliminar a [" + ComiteHelipuertoNombre + "]";
                 imgDelete.Attributes.Add("title", sTootlTip);
 
+                sTootlTip = "Editar a [" + ComiteHelipuertoNombre + "]";
+                imgEdit.Attributes.Add("title", sTootlTip);
+
                 // Atributos Over
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit_Over.png';";
                 e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
 
                 // Atributos Out
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                 e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
 
             }catch (Exception ex){
@@ -1063,7 +1118,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Validaciones
                 if ( this.txtComiteRecepcionNombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
-                if ( this.txtComiteRecepcionPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
+                //if ( this.txtComiteRecepcionPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
 
                 // Agregar un nuevo elemento
                 rowComiteRecepcion = tblComiteRecepcion.NewRow();
@@ -1075,6 +1130,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Actualizar Grid
                 this.gvComiteRecepcion.DataSource = tblComiteRecepcion;
                 this.gvComiteRecepcion.DataBind();
+
+                // Inhabilitar edición
+                InhabilitarEdicion(ref this.gvComiteRecepcion, ref this.lblComiteRecepcion);
 
                 // Nueva captura
                 this.txtComiteRecepcionNombre.Text = "";
@@ -1091,6 +1149,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
             String strCommand = "";
             String Orden = "";
+            String Nombre = "";
+            String Puesto = "";
             Int32 intRow = 0;
 
             try
@@ -1107,9 +1167,17 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Datakeys
                 Orden = this.gvComiteRecepcion.DataKeys[intRow]["Orden"].ToString();
+                Nombre = this.gvComiteRecepcion.DataKeys[intRow]["Nombre"].ToString();
+                Puesto = this.gvComiteRecepcion.DataKeys[intRow]["Puesto"].ToString();
 
                 // Acción
                 switch (strCommand){
+
+                    case "Editar":
+
+                        // PopUp de Editar
+                        SetPopUp_ComiteRecepcionPanel(Orden, Nombre, Puesto);
+                        break;
 
                     case "Eliminar":
 
@@ -1131,6 +1199,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.gvComiteRecepcion.DataSource = tblComiteRecepcion;
                         this.gvComiteRecepcion.DataBind();
 
+                        // Inhabilitar edición
+                        InhabilitarEdicion(ref this.gvComiteRecepcion, ref this.lblComiteRecepcion);
+
                         // Nueva captura
                         this.txtComiteRecepcionNombre.Text = "";
                         this.txtComiteRecepcionPuesto.Text = "";
@@ -1146,6 +1217,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
         protected void gvComiteRecepcion_RowDataBound(object sender, GridViewRowEventArgs e){
             ImageButton imgDelete = null;
+            ImageButton imgEdit = null;
 
             String Orden = "";
             String ComiteRecepcionNombre = "";
@@ -1161,6 +1233,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Obtener imagenes
                 imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+                imgEdit = (ImageButton)e.Row.FindControl("imgEdit");
 
                 // Datakeys
                 Orden = this.gvComiteRecepcion.DataKeys[e.Row.RowIndex]["Orden"].ToString();
@@ -1172,10 +1245,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Atributos Over
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit_Over.png';";
                 e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
 
                 // Atributos Out
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                 e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
 
             }catch (Exception ex){
@@ -1222,6 +1297,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.gvOrdenDia.DataSource = tblOrdenDia;
                 this.gvOrdenDia.DataBind();
 
+                // Inhabilitar edición
+                InhabilitarEdicion(ref this.gvOrdenDia, ref this.lblOrdenDia);
+
                 // Nueva captura
                 this.txtOrdenDiaDetalle.Text = "";
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtOrdenDiaDetalle.ClientID + "'); }", true);
@@ -1236,6 +1314,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
             String strCommand = "";
             String Orden = "";
+            String Detalle = "";
             Int32 intRow = 0;
 
             try
@@ -1252,9 +1331,16 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Datakeys
                 Orden = this.gvOrdenDia.DataKeys[intRow]["Orden"].ToString();
+                Detalle = this.gvOrdenDia.DataKeys[intRow]["Detalle"].ToString();
 
                 // Acción
                 switch (strCommand){
+
+                    case "Editar":
+
+                        // PopUp de Editar
+                        SetPopUp_OrdenDiaPanel(Orden, Detalle);
+                        break;
 
                     case "Eliminar":
 
@@ -1276,6 +1362,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.gvOrdenDia.DataSource = tblOrdenDia;
                         this.gvOrdenDia.DataBind();
 
+                        // Inhabilitar edición
+                        InhabilitarEdicion(ref this.gvOrdenDia, ref this.lblOrdenDia);
+
                         // Nueva captura
                         this.txtOrdenDiaDetalle.Text = "";
                         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtOrdenDiaDetalle.ClientID + "'); }", true);
@@ -1290,6 +1379,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
         protected void gvOrdenDia_RowDataBound(object sender, GridViewRowEventArgs e){
             ImageButton imgDelete = null;
+            ImageButton imgEdit = null;
 
             String Orden = "";
 
@@ -1303,6 +1393,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 if (e.Row.RowType != DataControlRowType.DataRow) { return; }
 
                 // Obtener imagenes
+                imgEdit = (ImageButton)e.Row.FindControl("imgEdit");
                 imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
 
                 // Datakeys
@@ -1314,10 +1405,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Atributos Over
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit_Over.png';";
                 e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
 
                 // Atributos Out
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                 e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
 
             }catch (Exception ex){
@@ -1353,7 +1446,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Validaciones
                 if ( this.txtAcomodoNombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
-                if ( this.txtAcomodoPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
+                //if ( this.txtAcomodoPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
 
                 // Agregar un nuevo elemento
                 rowAcomodo = tblAcomodo.NewRow();
@@ -1365,6 +1458,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Actualizar Grid
                 this.gvAcomodo.DataSource = tblAcomodo;
                 this.gvAcomodo.DataBind();
+
+                // Inhabilitar edición
+                InhabilitarEdicion(ref this.gvAcomodo, ref this.lblAcomodo);
 
                 // Nueva captura
                 this.txtAcomodoNombre.Text = "";
@@ -1381,6 +1477,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
             String strCommand = "";
             String Orden = "";
+            String Nombre = "";
+            String Puesto = "";
             Int32 intRow = 0;
 
             try
@@ -1397,9 +1495,17 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Datakeys
                 Orden = this.gvAcomodo.DataKeys[intRow]["Orden"].ToString();
+                Nombre = this.gvAcomodo.DataKeys[intRow]["Nombre"].ToString();
+                Puesto = this.gvAcomodo.DataKeys[intRow]["Puesto"].ToString();
 
                 // Acción
                 switch (strCommand){
+
+                    case "Editar":
+
+                        // PopUp de Editar
+                        SetPopUp_AcomodoPanel(Orden, Nombre, Puesto);
+                        break;
 
                     case "Eliminar":
 
@@ -1421,6 +1527,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.gvAcomodo.DataSource = tblAcomodo;
                         this.gvAcomodo.DataBind();
 
+                        // Inhabilitar edición
+                        InhabilitarEdicion(ref this.gvAcomodo, ref this.lblAcomodo);
+
                         // Nueva captura
                         this.txtAcomodoNombre.Text = "";
                         this.txtAcomodoPuesto.Text = "";
@@ -1436,6 +1545,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
         protected void gvAcomodo_RowDataBound(object sender, GridViewRowEventArgs e){
             ImageButton imgDelete = null;
+            ImageButton imgEdit = null;
 
             String Orden = "";
             String AcomodoNombre = "";
@@ -1451,6 +1561,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Obtener imagenes
                 imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+                imgEdit = (ImageButton)e.Row.FindControl("imgEdit");
 
                 // Datakeys
                 Orden = this.gvAcomodo.DataKeys[e.Row.RowIndex]["Orden"].ToString();
@@ -1462,10 +1573,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Atributos Over
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit_Over.png';";
                 e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
 
                 // Atributos Out
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                 e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
 
             }catch (Exception ex){
@@ -1501,7 +1614,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Validaciones
                 if ( this.txtListadoAdicionalNombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
-                if ( this.txtListadoAdicionalPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
+                //if ( this.txtListadoAdicionalPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
 
                 // Agregar un nuevo elemento
                 rowListadoAdicional = tblListadoAdicional.NewRow();
@@ -1513,6 +1626,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Actualizar Grid
                 this.gvListadoAdicional.DataSource = tblListadoAdicional;
                 this.gvListadoAdicional.DataBind();
+
+                // Inhabilitar edición
+                InhabilitarEdicion(ref this.gvListadoAdicional, ref this.lblListadoAdicional);
 
                 // Nueva captura
                 this.txtListadoAdicionalNombre.Text = "";
@@ -1529,6 +1645,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
             String strCommand = "";
             String Orden = "";
+            String Nombre = "";
+            String Puesto = "";
             Int32 intRow = 0;
 
             try
@@ -1545,9 +1663,17 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Datakeys
                 Orden = this.gvListadoAdicional.DataKeys[intRow]["Orden"].ToString();
+                Nombre = this.gvListadoAdicional.DataKeys[intRow]["Nombre"].ToString();
+                Puesto = this.gvListadoAdicional.DataKeys[intRow]["Puesto"].ToString();
 
                 // Acción
                 switch (strCommand){
+
+                    case "Editar":
+
+                        // PopUp de Editar
+                        SetPopUp_ListadoAdicionalPanel(Orden, Nombre, Puesto);
+                        break;
 
                     case "Eliminar":
 
@@ -1569,6 +1695,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.gvListadoAdicional.DataSource = tblListadoAdicional;
                         this.gvListadoAdicional.DataBind();
 
+                        // Inhabilitar edición
+                        InhabilitarEdicion(ref this.gvListadoAdicional, ref this.lblListadoAdicional);
+
                         // Nueva captura
                         this.txtListadoAdicionalNombre.Text = "";
                         this.txtListadoAdicionalPuesto.Text = "";
@@ -1584,6 +1713,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
         protected void gvListadoAdicional_RowDataBound(object sender, GridViewRowEventArgs e){
             ImageButton imgDelete = null;
+            ImageButton imgEdit = null;
 
             String Orden = "";
             String ListadoAdicionalNombre = "";
@@ -1599,6 +1729,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Obtener imagenes
                 imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+                imgEdit = (ImageButton)e.Row.FindControl("imgEdit");
 
                 // Datakeys
                 Orden = this.gvListadoAdicional.DataKeys[e.Row.RowIndex]["Orden"].ToString();
@@ -1610,10 +1741,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Atributos Over
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit_Over.png';";
                 e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
 
                 // Atributos Out
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                 e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
 
             }catch (Exception ex){
@@ -1649,7 +1782,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Validaciones
                 if ( this.txtResponsableEventoNombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
-                if ( this.txtResponsableEventoPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
+                //if ( this.txtResponsableEventoPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
 
                 // Agregar un nuevo elemento
                 rowResponsableEvento = tblResponsableEvento.NewRow();
@@ -1661,6 +1794,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Actualizar Grid
                 this.gvResponsableEvento.DataSource = tblResponsableEvento;
                 this.gvResponsableEvento.DataBind();
+
+                // Inhabilitar edición
+                InhabilitarEdicion(ref this.gvResponsableEvento, ref this.lblResponsableEvento);
 
                 // Nueva captura
                 this.txtResponsableEventoNombre.Text = "";
@@ -1677,6 +1813,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
             String strCommand = "";
             String Orden = "";
+            String Nombre = "";
+            String Puesto = "";
             Int32 intRow = 0;
 
             try
@@ -1693,9 +1831,17 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Datakeys
                 Orden = this.gvResponsableEvento.DataKeys[intRow]["Orden"].ToString();
+                Nombre = this.gvResponsableEvento.DataKeys[intRow]["Nombre"].ToString();
+                Puesto = this.gvResponsableEvento.DataKeys[intRow]["Puesto"].ToString();
 
                 // Acción
                 switch (strCommand){
+
+                    case "Editar":
+
+                        // PopUp de Editar
+                        SetPopUp_ResponsableEventoPanel(Orden, Nombre, Puesto);
+                        break;
 
                     case "Eliminar":
 
@@ -1717,6 +1863,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.gvResponsableEvento.DataSource = tblResponsableEvento;
                         this.gvResponsableEvento.DataBind();
 
+                        // Inhabilitar edición
+                        InhabilitarEdicion(ref this.gvResponsableEvento, ref this.lblResponsableEvento);
+
                         // Nueva captura
                         this.txtResponsableEventoNombre.Text = "";
                         this.txtResponsableEventoPuesto.Text = "";
@@ -1732,6 +1881,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
         protected void gvResponsableEvento_RowDataBound(object sender, GridViewRowEventArgs e){
             ImageButton imgDelete = null;
+            ImageButton imgEdit = null;
 
             String Orden = "";
             String ResponsableEventoNombre = "";
@@ -1747,6 +1897,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Obtener imagenes
                 imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+                imgEdit = (ImageButton)e.Row.FindControl("imgEdit");
 
                 // Datakeys
                 Orden = this.gvResponsableEvento.DataKeys[e.Row.RowIndex]["Orden"].ToString();
@@ -1758,10 +1909,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Atributos Over
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit_Over.png';";
                 e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
 
                 // Atributos Out
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                 e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
 
             }catch (Exception ex){
@@ -1797,7 +1950,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Validaciones
                 if ( this.txtResponsableLogisticaNombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
-                if ( this.txtResponsableLogisticaContacto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
+                //if ( this.txtResponsableLogisticaContacto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
 
                 // Agregar un nuevo elemento
                 rowResponsableLogistica = tblResponsableLogistica.NewRow();
@@ -1809,6 +1962,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Actualizar Grid
                 this.gvResponsableLogistica.DataSource = tblResponsableLogistica;
                 this.gvResponsableLogistica.DataBind();
+
+                // Inhabilitar edición
+                InhabilitarEdicion(ref this.gvResponsableLogistica, ref this.lblResponsableLogistica);
 
                 // Nueva captura
                 this.txtResponsableLogisticaNombre.Text = "";
@@ -1825,6 +1981,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
             String strCommand = "";
             String Orden = "";
+            String Nombre = "";
+            String Contacto = "";
             Int32 intRow = 0;
 
             try
@@ -1841,9 +1999,17 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Datakeys
                 Orden = this.gvResponsableLogistica.DataKeys[intRow]["Orden"].ToString();
+                Nombre = this.gvResponsableLogistica.DataKeys[intRow]["Nombre"].ToString();
+                Contacto = this.gvResponsableLogistica.DataKeys[intRow]["Contacto"].ToString();
 
                 // Acción
                 switch (strCommand){
+
+                    case "Editar":
+
+                        // PopUp de Editar
+                        SetPopUp_ResponsableLogisticaPanel(Orden, Nombre, Contacto);
+                        break;
 
                     case "Eliminar":
 
@@ -1865,6 +2031,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.gvResponsableLogistica.DataSource = tblResponsableLogistica;
                         this.gvResponsableLogistica.DataBind();
 
+                        // Inhabilitar edición
+                        InhabilitarEdicion(ref this.gvResponsableLogistica, ref this.lblResponsableLogistica);
+
                         // Nueva captura
                         this.txtResponsableLogisticaNombre.Text = "";
                         this.txtResponsableLogisticaContacto.Text = "";
@@ -1880,6 +2049,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
         protected void gvResponsableLogistica_RowDataBound(object sender, GridViewRowEventArgs e){
             ImageButton imgDelete = null;
+            ImageButton imgEdit = null;
 
             String Orden = "";
             String ResponsableLogisticaNombre = "";
@@ -1895,6 +2065,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Obtener imagenes
                 imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+                imgEdit = (ImageButton)e.Row.FindControl("imgEdit");
 
                 // Datakeys
                 Orden = this.gvResponsableLogistica.DataKeys[e.Row.RowIndex]["Orden"].ToString();
@@ -1906,10 +2077,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Atributos Over
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit_Over.png';";
                 e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
 
                 // Atributos Out
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                 e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
 
             }catch (Exception ex){
@@ -1930,6 +2103,921 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         }
 
 
+        #region PopUp - Comite Helipuerto
+            
+            
+            // Rutinas
+
+            void ClearPopUp_ComiteHelipuertoPanel(){
+                try
+                {
+
+                    // Estado incial de controles
+                    this.pnlPopUp_ComiteHelipuerto.Visible = false;
+                    this.lblPopUp_ComiteHelipuertoTitle.Text = "";
+                    this.btnPopUp_ComiteHelipuertoCommand.Text = "";
+                    this.lblPopUp_ComiteHelipuertoMessage.Text = "";
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            void SetPopUp_ComiteHelipuertoPanel(String Orden, String Nombre, String Puesto){
+                try
+                {
+
+                    // Acciones comunes
+                    this.pnlPopUp_ComiteHelipuerto.Visible = true;
+
+                    // Detalle de acción
+                    this.lblPopUp_ComiteHelipuertoTitle.Text = "Edición de elemento";
+                    this.btnPopUp_ComiteHelipuertoCommand.Text = "Actualizar";
+
+                    // Formulario
+                    this.txtPopUpComiteHelipuerto_OrdenAnterior.Text = Orden;
+                    this.txtPopUpComiteHelipuerto_Orden.Text = Orden;
+                    this.txtPopUpComiteHelipuerto_Nombre.Text = Nombre;
+                    this.txtPopUpComiteHelipuerto_Puesto.Text = Puesto;
+
+                    // Foco
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUpComiteHelipuerto_Orden.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+            
+            void UpdateConfiguracion_ComiteHelipuerto(){
+                ENTEvento oENTEvento = new ENTEvento();
+                ENTResponse oENTResponse = new ENTResponse();
+                ENTSession oENTSession = new ENTSession();
+
+                BPEvento oBPEvento = new BPEvento();
+
+                //DataTable tblItem;
+                //DataRow rowItem;
+                //Int32 OrdenTemp = 1;
+
+                try
+                {
+
+                    // Datos de sesión
+                    oENTSession = (ENTSession)this.Session["oENTSession"];
+                    oENTEvento.UsuarioId = oENTSession.UsuarioId;
+
+                    // Formulario
+                    oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
+                    oENTEvento.OrdenAnterior = Int32.Parse(this.txtPopUpComiteHelipuerto_OrdenAnterior.Text);
+                    oENTEvento.NuevoOrden = Int32.Parse(this.txtPopUpComiteHelipuerto_Orden.Text);
+                    oENTEvento.Nombre = this.txtPopUpComiteHelipuerto_Nombre.Text.Trim();
+                    oENTEvento.Puesto = this.txtPopUpComiteHelipuerto_Puesto.Text.Trim();
+
+                    // Transacción
+                    oENTResponse = oBPEvento.UpdateEventoComiteHelipuerto_Item(oENTEvento);
+
+                    // Validaciones
+                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                    // Transacción exitosa
+                    ClearPopUp_ComiteHelipuertoPanel();
+
+                    //// Obtener listado
+                    //if ( oENTResponse.DataSetResponse.Tables[1].Rows.Count == 0 ){
+
+                    //    // Obtener el DataTable
+                    //    tblItem = gcParse.GridViewToDataTable(this.gvComiteHelipuerto, false);
+
+                    //    // Estandarizar nuevo orden
+                    //    if ( oENTEvento.NuevoOrden < 1 ) { oENTEvento.NuevoOrden = 1; }
+                    //    if ( oENTEvento.NuevoOrden > tblItem.Rows.Count ) { oENTEvento.NuevoOrden = tblItem.Rows.Count; }
+
+                    //    // Remover el elemento
+                    //    tblItem.Rows.Remove( tblItem.Select("Orden=" + oENTEvento.OrdenAnterior.ToString() )[0]);
+
+                    //    // Reordenar los elementos
+                    //    foreach( DataRow rowComiteHelipuerto in tblItem.Rows ){
+
+                    //        rowItem = oENTResponse.DataSetResponse.Tables[1].NewRow();
+                    //        rowItem["Nombre"] = rowComiteHelipuerto["Nombre"];
+                    //        rowItem["Puesto"] = rowComiteHelipuerto["Puesto"];
+                    //        rowItem["Orden"] = OrdenTemp;
+                    //        oENTResponse.DataSetResponse.Tables[1].Rows.Add(rowItem);
+                    //        OrdenTemp = OrdenTemp + 1;
+                    //    }
+
+                    //    // Los elementos mayores al nuevo elemento habrá que reasignarles el orden
+                    //    foreach( DataRow rowComiteHelipuerto in oENTResponse.DataSetResponse.Tables[1].Select( "Orden>=" + oENTEvento.NuevoOrden.ToString() ) ){
+                    //        rowComiteHelipuerto["Orden"] = ( Int32.Parse( rowComiteHelipuerto["Orden"].ToString() ) + 1);
+                    //    }
+
+                    //    // Insertar el elemento
+                    //    rowItem = oENTResponse.DataSetResponse.Tables[1].NewRow();
+                    //    rowItem["Nombre"] = oENTEvento.Nombre;
+                    //    rowItem["Puesto"] = oENTEvento.Puesto;
+                    //    rowItem["Orden"] = oENTEvento.NuevoOrden;
+                    //    oENTResponse.DataSetResponse.Tables[1].Rows.InsertAt(rowItem, oENTEvento.NuevoOrden - 1);
+
+                    //}
+
+                    // Actualizar listado
+                    this.gvComiteHelipuerto.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                    this.gvComiteHelipuerto.DataBind();
+
+                    // Mensaje de usuario
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtComiteHelipuertoNombre.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            
+            // Eventos
+
+            protected void btnPopUp_ComiteHelipuertoCommand_Click(object sender, EventArgs e){
+                try
+                {
+
+                    // Validar formulario
+                    if ( this.txtPopUpComiteHelipuerto_Orden.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un orden")); }
+                    if ( !gcNumber.IsNumber ( this.txtPopUpComiteHelipuerto_Orden.Text.Trim(), GCNumber.NumberTypes.Int32Type) ) { throw (new Exception("El campo orden debe de ser numérico")); }
+                    if ( Int32.Parse( this.txtPopUpComiteHelipuerto_Orden.Text.Trim() ) < 1 ) { throw (new Exception("El campo orden debe de ser mayor a 0")); }
+                    if ( this.txtPopUpComiteHelipuerto_Nombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
+
+                    // Transacción
+                    UpdateConfiguracion_ComiteHelipuerto();
+
+                }catch (Exception ex){
+                    this.lblPopUp_ComiteHelipuertoMessage.Text = ex.Message;
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.txtPopUpComiteHelipuerto_Orden.ClientID + "');", true);
+                }
+            }
+
+            protected void imgCloseWindow_ComiteHelipuerto_Click(object sender, ImageClickEventArgs e){
+                try
+                {
+
+                    // Cancelar transacción
+                    ClearPopUp_ComiteHelipuertoPanel();
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+                }
+            }
+
+            
+        #endregion
+
+        #region PopUp - Comite Recepcion
+            
+            
+            // Rutinas
+
+            void ClearPopUp_ComiteRecepcionPanel(){
+                try
+                {
+
+                    // Estado incial de controles
+                    this.pnlPopUp_ComiteRecepcion.Visible = false;
+                    this.lblPopUp_ComiteRecepcionTitle.Text = "";
+                    this.btnPopUp_ComiteRecepcionCommand.Text = "";
+                    this.lblPopUp_ComiteRecepcionMessage.Text = "";
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            void SetPopUp_ComiteRecepcionPanel(String Orden, String Nombre, String Puesto){
+                try
+                {
+
+                    // Acciones comunes
+                    this.pnlPopUp_ComiteRecepcion.Visible = true;
+
+                    // Detalle de acción
+                    this.lblPopUp_ComiteRecepcionTitle.Text = "Edición de elemento";
+                    this.btnPopUp_ComiteRecepcionCommand.Text = "Actualizar";
+
+                    // Formulario
+                    this.txtPopUpComiteRecepcion_OrdenAnterior.Text = Orden;
+                    this.txtPopUpComiteRecepcion_Orden.Text = Orden;
+                    this.txtPopUpComiteRecepcion_Nombre.Text = Nombre;
+                    this.txtPopUpComiteRecepcion_Puesto.Text = Puesto;
+
+                    // Foco
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUpComiteRecepcion_Orden.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+            
+            void UpdateConfiguracion_ComiteRecepcion(){
+                ENTEvento oENTEvento = new ENTEvento();
+                ENTResponse oENTResponse = new ENTResponse();
+                ENTSession oENTSession = new ENTSession();
+
+                BPEvento oBPEvento = new BPEvento();
+
+                try
+                {
+
+                    // Datos de sesión
+                    oENTSession = (ENTSession)this.Session["oENTSession"];
+                    oENTEvento.UsuarioId = oENTSession.UsuarioId;
+
+                    // Formulario
+                    oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
+                    oENTEvento.OrdenAnterior = Int32.Parse(this.txtPopUpComiteRecepcion_OrdenAnterior.Text);
+                    oENTEvento.NuevoOrden = Int32.Parse(this.txtPopUpComiteRecepcion_Orden.Text);
+                    oENTEvento.Nombre = this.txtPopUpComiteRecepcion_Nombre.Text.Trim();
+                    oENTEvento.Puesto = this.txtPopUpComiteRecepcion_Puesto.Text.Trim();
+                    oENTEvento.Separador = 0;
+
+                    // Transacción
+                    oENTResponse = oBPEvento.UpdateEventoComiteRecepcion_Item(oENTEvento);
+
+                    // Validaciones
+                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                    // Transacción exitosa
+                    ClearPopUp_ComiteRecepcionPanel();
+
+                    // Actualizar listado
+                    this.gvComiteRecepcion.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                    this.gvComiteRecepcion.DataBind();
+
+                    // Mensaje de usuario
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtComiteRecepcionNombre.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            
+            // Eventos
+
+            protected void btnPopUp_ComiteRecepcionCommand_Click(object sender, EventArgs e){
+                try
+                {
+
+                    // Validar formulario
+                    if ( this.txtPopUpComiteRecepcion_Orden.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un orden")); }
+                    if ( !gcNumber.IsNumber ( this.txtPopUpComiteRecepcion_Orden.Text.Trim(), GCNumber.NumberTypes.Int32Type) ) { throw (new Exception("El campo orden debe de ser numérico")); }
+                    if ( Int32.Parse( this.txtPopUpComiteRecepcion_Orden.Text.Trim() ) < 1 ) { throw (new Exception("El campo orden debe de ser mayor a 0")); }
+                    if ( this.txtPopUpComiteRecepcion_Nombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
+
+                    // Transacción
+                    UpdateConfiguracion_ComiteRecepcion();
+
+                }catch (Exception ex){
+                    this.lblPopUp_ComiteRecepcionMessage.Text = ex.Message;
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.txtPopUpComiteRecepcion_Orden.ClientID + "');", true);
+                }
+            }
+
+            protected void imgCloseWindow_ComiteRecepcion_Click(object sender, ImageClickEventArgs e){
+                try
+                {
+
+                    // Cancelar transacción
+                    ClearPopUp_ComiteRecepcionPanel();
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+                }
+            }
+
+            
+        #endregion
+
+        #region PopUp - Orden Dia
+            
+            
+            // Rutinas
+
+            void ClearPopUp_OrdenDiaPanel(){
+                try
+                {
+
+                    // Estado incial de controles
+                    this.pnlPopUp_OrdenDia.Visible = false;
+                    this.lblPopUp_OrdenDiaTitle.Text = "";
+                    this.btnPopUp_OrdenDiaCommand.Text = "";
+                    this.lblPopUp_OrdenDiaMessage.Text = "";
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            void SetPopUp_OrdenDiaPanel(String Orden, String Detalle){
+                try
+                {
+
+                    // Acciones comunes
+                    this.pnlPopUp_OrdenDia.Visible = true;
+
+                    // Detalle de acción
+                    this.lblPopUp_OrdenDiaTitle.Text = "Edición de elemento";
+                    this.btnPopUp_OrdenDiaCommand.Text = "Actualizar";
+
+                    // Formulario
+                    this.txtPopUpOrdenDia_OrdenAnterior.Text = Orden;
+                    this.txtPopUpOrdenDia_Orden.Text = Orden;
+                    this.txtPopUpOrdenDia_Detalle.Text = Detalle;
+
+                    // Foco
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUpOrdenDia_Orden.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+            
+            void UpdateConfiguracion_OrdenDia(){
+                ENTEvento oENTEvento = new ENTEvento();
+                ENTResponse oENTResponse = new ENTResponse();
+                ENTSession oENTSession = new ENTSession();
+
+                BPEvento oBPEvento = new BPEvento();
+
+                try
+                {
+
+                    // Datos de sesión
+                    oENTSession = (ENTSession)this.Session["oENTSession"];
+                    oENTEvento.UsuarioId = oENTSession.UsuarioId;
+
+                    // Formulario
+                    oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
+                    oENTEvento.OrdenAnterior = Int32.Parse(this.txtPopUpOrdenDia_OrdenAnterior.Text);
+                    oENTEvento.NuevoOrden = Int32.Parse(this.txtPopUpOrdenDia_Orden.Text);
+                    oENTEvento.Nombre = this.txtPopUpOrdenDia_Detalle.Text.Trim();
+
+                    // Transacción
+                    oENTResponse = oBPEvento.UpdateEventoOrdenDia_Item(oENTEvento);
+
+                    // Validaciones
+                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                    // Transacción exitosa
+                    ClearPopUp_OrdenDiaPanel();
+
+                    // Actualizar listado
+                    this.gvOrdenDia.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                    this.gvOrdenDia.DataBind();
+
+                    // Mensaje de usuario
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtOrdenDiaDetalle.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            
+            // Eventos
+
+            protected void btnPopUp_OrdenDiaCommand_Click(object sender, EventArgs e){
+                try
+                {
+
+                    // Validar formulario
+                    if ( this.txtPopUpOrdenDia_Orden.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un orden")); }
+                    if ( !gcNumber.IsNumber ( this.txtPopUpOrdenDia_Orden.Text.Trim(), GCNumber.NumberTypes.Int32Type) ) { throw (new Exception("El campo orden debe de ser numérico")); }
+                    if ( Int32.Parse( this.txtPopUpOrdenDia_Orden.Text.Trim() ) < 1 ) { throw (new Exception("El campo orden debe de ser mayor a 0")); }
+                    if ( this.txtPopUpOrdenDia_Orden.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar el detalle de la orden del día")); }
+
+                    // Transacción
+                    UpdateConfiguracion_OrdenDia();
+
+                }catch (Exception ex){
+                    this.lblPopUp_OrdenDiaMessage.Text = ex.Message;
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.txtPopUpOrdenDia_Orden.ClientID + "');", true);
+                }
+            }
+
+            protected void imgCloseWindow_OrdenDia_Click(object sender, ImageClickEventArgs e){
+                try
+                {
+
+                    // Cancelar transacción
+                    ClearPopUp_OrdenDiaPanel();
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+                }
+            }
+
+            
+        #endregion
+
+        #region PopUp - Acomodo
+            
+            
+            // Rutinas
+
+            void ClearPopUp_AcomodoPanel(){
+                try
+                {
+
+                    // Estado incial de controles
+                    this.pnlPopUp_Acomodo.Visible = false;
+                    this.lblPopUp_AcomodoTitle.Text = "";
+                    this.btnPopUp_AcomodoCommand.Text = "";
+                    this.lblPopUp_AcomodoMessage.Text = "";
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            void SetPopUp_AcomodoPanel(String Orden, String Nombre, String Puesto){
+                try
+                {
+
+                    // Acciones comunes
+                    this.pnlPopUp_Acomodo.Visible = true;
+
+                    // Detalle de acción
+                    this.lblPopUp_AcomodoTitle.Text = "Edición de elemento";
+                    this.btnPopUp_AcomodoCommand.Text = "Actualizar";
+
+                    // Formulario
+                    this.txtPopUpAcomodo_OrdenAnterior.Text = Orden;
+                    this.txtPopUpAcomodo_Orden.Text = Orden;
+                    this.txtPopUpAcomodo_Nombre.Text = Nombre;
+                    this.txtPopUpAcomodo_Puesto.Text = Puesto;
+
+                    // Foco
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUpAcomodo_Orden.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+            
+            void UpdateConfiguracion_Acomodo(){
+                ENTEvento oENTEvento = new ENTEvento();
+                ENTResponse oENTResponse = new ENTResponse();
+                ENTSession oENTSession = new ENTSession();
+
+                BPEvento oBPEvento = new BPEvento();
+
+                try
+                {
+
+                    // Datos de sesión
+                    oENTSession = (ENTSession)this.Session["oENTSession"];
+                    oENTEvento.UsuarioId = oENTSession.UsuarioId;
+
+                    // Formulario
+                    oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
+                    oENTEvento.OrdenAnterior = Int32.Parse(this.txtPopUpAcomodo_OrdenAnterior.Text);
+                    oENTEvento.NuevoOrden = Int32.Parse(this.txtPopUpAcomodo_Orden.Text);
+                    oENTEvento.Nombre = this.txtPopUpAcomodo_Nombre.Text.Trim();
+                    oENTEvento.Puesto = this.txtPopUpAcomodo_Puesto.Text.Trim();
+
+                    // Transacción
+                    oENTResponse = oBPEvento.UpdateEventoAcomodo_Item(oENTEvento);
+
+                    // Validaciones
+                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                    // Transacción exitosa
+                    ClearPopUp_AcomodoPanel();
+
+                    // Actualizar listado
+                    this.gvAcomodo.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                    this.gvAcomodo.DataBind();
+
+                    // Mensaje de usuario
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtAcomodoNombre.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            
+            // Eventos
+
+            protected void btnPopUp_AcomodoCommand_Click(object sender, EventArgs e){
+                try
+                {
+
+                    // Validar formulario
+                    if ( this.txtPopUpAcomodo_Orden.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un orden")); }
+                    if ( !gcNumber.IsNumber ( this.txtPopUpAcomodo_Orden.Text.Trim(), GCNumber.NumberTypes.Int32Type) ) { throw (new Exception("El campo orden debe de ser numérico")); }
+                    if ( Int32.Parse( this.txtPopUpAcomodo_Orden.Text.Trim() ) < 1 ) { throw (new Exception("El campo orden debe de ser mayor a 0")); }
+                    if ( this.txtPopUpAcomodo_Nombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
+
+                    // Transacción
+                    UpdateConfiguracion_Acomodo();
+
+                }catch (Exception ex){
+                    this.lblPopUp_AcomodoMessage.Text = ex.Message;
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.txtPopUpAcomodo_Orden.ClientID + "');", true);
+                }
+            }
+
+            protected void imgCloseWindow_Acomodo_Click(object sender, ImageClickEventArgs e){
+                try
+                {
+
+                    // Cancelar transacción
+                    ClearPopUp_AcomodoPanel();
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+                }
+            }
+
+            
+        #endregion
+
+        #region PopUp - Listado Adicional
+            
+            
+            // Rutinas
+
+            void ClearPopUp_ListadoAdicionalPanel(){
+                try
+                {
+
+                    // Estado incial de controles
+                    this.pnlPopUp_ListadoAdicional.Visible = false;
+                    this.lblPopUp_ListadoAdicionalTitle.Text = "";
+                    this.btnPopUp_ListadoAdicionalCommand.Text = "";
+                    this.lblPopUp_ListadoAdicionalMessage.Text = "";
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            void SetPopUp_ListadoAdicionalPanel(String Orden, String Nombre, String Puesto){
+                try
+                {
+
+                    // Acciones comunes
+                    this.pnlPopUp_ListadoAdicional.Visible = true;
+
+                    // Detalle de acción
+                    this.lblPopUp_ListadoAdicionalTitle.Text = "Edición de elemento";
+                    this.btnPopUp_ListadoAdicionalCommand.Text = "Actualizar";
+
+                    // Formulario
+                    this.txtPopUpListadoAdicional_OrdenAnterior.Text = Orden;
+                    this.txtPopUpListadoAdicional_Orden.Text = Orden;
+                    this.txtPopUpListadoAdicional_Nombre.Text = Nombre;
+                    this.txtPopUpListadoAdicional_Puesto.Text = Puesto;
+
+                    // Foco
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUpListadoAdicional_Orden.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+            
+            void UpdateConfiguracion_ListadoAdicional(){
+                ENTEvento oENTEvento = new ENTEvento();
+                ENTResponse oENTResponse = new ENTResponse();
+                ENTSession oENTSession = new ENTSession();
+
+                BPEvento oBPEvento = new BPEvento();
+
+                try
+                {
+
+                    // Datos de sesión
+                    oENTSession = (ENTSession)this.Session["oENTSession"];
+                    oENTEvento.UsuarioId = oENTSession.UsuarioId;
+
+                    // Formulario
+                    oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
+                    oENTEvento.OrdenAnterior = Int32.Parse(this.txtPopUpListadoAdicional_OrdenAnterior.Text);
+                    oENTEvento.NuevoOrden = Int32.Parse(this.txtPopUpListadoAdicional_Orden.Text);
+                    oENTEvento.Nombre = this.txtPopUpListadoAdicional_Nombre.Text.Trim();
+                    oENTEvento.Puesto = this.txtPopUpListadoAdicional_Puesto.Text.Trim();
+
+                    // Transacción
+                    oENTResponse = oBPEvento.UpdateEventoListadoAdicional_Item(oENTEvento);
+
+                    // Validaciones
+                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                    // Transacción exitosa
+                    ClearPopUp_ListadoAdicionalPanel();
+
+                    // Actualizar listado
+                    this.gvListadoAdicional.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                    this.gvListadoAdicional.DataBind();
+
+                    // Mensaje de usuario
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtListadoAdicionalNombre.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            
+            // Eventos
+
+            protected void btnPopUp_ListadoAdicionalCommand_Click(object sender, EventArgs e){
+                try
+                {
+
+                    // Validar formulario
+                    if ( this.txtPopUpListadoAdicional_Orden.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un orden")); }
+                    if ( !gcNumber.IsNumber ( this.txtPopUpListadoAdicional_Orden.Text.Trim(), GCNumber.NumberTypes.Int32Type) ) { throw (new Exception("El campo orden debe de ser numérico")); }
+                    if ( Int32.Parse( this.txtPopUpListadoAdicional_Orden.Text.Trim() ) < 1 ) { throw (new Exception("El campo orden debe de ser mayor a 0")); }
+                    if ( this.txtPopUpListadoAdicional_Nombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
+
+                    // Transacción
+                    UpdateConfiguracion_ListadoAdicional();
+
+                }catch (Exception ex){
+                    this.lblPopUp_ListadoAdicionalMessage.Text = ex.Message;
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.txtPopUpListadoAdicional_Orden.ClientID + "');", true);
+                }
+            }
+
+            protected void imgCloseWindow_ListadoAdicional_Click(object sender, ImageClickEventArgs e){
+                try
+                {
+
+                    // Cancelar transacción
+                    ClearPopUp_ListadoAdicionalPanel();
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+                }
+            }
+
+            
+        #endregion
+
+        #region PopUp - Responsable Evento
+            
+            
+            // Rutinas
+
+            void ClearPopUp_ResponsableEventoPanel(){
+                try
+                {
+
+                    // Estado incial de controles
+                    this.pnlPopUp_ResponsableEvento.Visible = false;
+                    this.lblPopUp_ResponsableEventoTitle.Text = "";
+                    this.btnPopUp_ResponsableEventoCommand.Text = "";
+                    this.lblPopUp_ResponsableEventoMessage.Text = "";
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            void SetPopUp_ResponsableEventoPanel(String Orden, String Nombre, String Puesto){
+                try
+                {
+
+                    // Acciones comunes
+                    this.pnlPopUp_ResponsableEvento.Visible = true;
+
+                    // Detalle de acción
+                    this.lblPopUp_ResponsableEventoTitle.Text = "Edición de elemento";
+                    this.btnPopUp_ResponsableEventoCommand.Text = "Actualizar";
+
+                    // Formulario
+                    this.txtPopUpResponsableEvento_OrdenAnterior.Text = Orden;
+                    this.txtPopUpResponsableEvento_Orden.Text = Orden;
+                    this.txtPopUpResponsableEvento_Nombre.Text = Nombre;
+                    this.txtPopUpResponsableEvento_Puesto.Text = Puesto;
+
+                    // Foco
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUpResponsableEvento_Orden.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+            
+            void UpdateConfiguracion_ResponsableEvento(){
+                ENTEvento oENTEvento = new ENTEvento();
+                ENTResponse oENTResponse = new ENTResponse();
+                ENTSession oENTSession = new ENTSession();
+
+                BPEvento oBPEvento = new BPEvento();
+
+                try
+                {
+
+                    // Datos de sesión
+                    oENTSession = (ENTSession)this.Session["oENTSession"];
+                    oENTEvento.UsuarioId = oENTSession.UsuarioId;
+
+                    // Formulario
+                    oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
+                    oENTEvento.OrdenAnterior = Int32.Parse(this.txtPopUpResponsableEvento_OrdenAnterior.Text);
+                    oENTEvento.NuevoOrden = Int32.Parse(this.txtPopUpResponsableEvento_Orden.Text);
+                    oENTEvento.Nombre = this.txtPopUpResponsableEvento_Nombre.Text.Trim();
+                    oENTEvento.Puesto = this.txtPopUpResponsableEvento_Puesto.Text.Trim();
+
+                    // Transacción
+                    oENTResponse = oBPEvento.UpdateEventoResponsable_Item(oENTEvento);
+
+                    // Validaciones
+                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                    // Transacción exitosa
+                    ClearPopUp_ResponsableEventoPanel();
+
+                    // Actualizar listado
+                    this.gvResponsableEvento.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                    this.gvResponsableEvento.DataBind();
+
+                    // Mensaje de usuario
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtResponsableEventoNombre.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            
+            // Eventos
+
+            protected void btnPopUp_ResponsableEventoCommand_Click(object sender, EventArgs e){
+                try
+                {
+
+                    // Validar formulario
+                    if ( this.txtPopUpResponsableEvento_Orden.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un orden")); }
+                    if ( !gcNumber.IsNumber ( this.txtPopUpResponsableEvento_Orden.Text.Trim(), GCNumber.NumberTypes.Int32Type) ) { throw (new Exception("El campo orden debe de ser numérico")); }
+                    if ( Int32.Parse( this.txtPopUpResponsableEvento_Orden.Text.Trim() ) < 1 ) { throw (new Exception("El campo orden debe de ser mayor a 0")); }
+                    if ( this.txtPopUpResponsableEvento_Nombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
+
+                    // Transacción
+                    UpdateConfiguracion_ResponsableEvento();
+
+                }catch (Exception ex){
+                    this.lblPopUp_ResponsableEventoMessage.Text = ex.Message;
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.txtPopUpResponsableEvento_Orden.ClientID + "');", true);
+                }
+            }
+
+            protected void imgCloseWindow_ResponsableEvento_Click(object sender, ImageClickEventArgs e){
+                try
+                {
+
+                    // Cancelar transacción
+                    ClearPopUp_ResponsableEventoPanel();
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+                }
+            }
+
+            
+        #endregion
+
+        #region PopUp - ResponsableLogistica
+            
+            
+            // Rutinas
+
+            void ClearPopUp_ResponsableLogisticaPanel(){
+                try
+                {
+
+                    // Estado incial de controles
+                    this.pnlPopUp_ResponsableLogistica.Visible = false;
+                    this.lblPopUp_ResponsableLogisticaTitle.Text = "";
+                    this.btnPopUp_ResponsableLogisticaCommand.Text = "";
+                    this.lblPopUp_ResponsableLogisticaMessage.Text = "";
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            void SetPopUp_ResponsableLogisticaPanel(String Orden, String Nombre, String Contacto){
+                try
+                {
+
+                    // Acciones comunes
+                    this.pnlPopUp_ResponsableLogistica.Visible = true;
+
+                    // Detalle de acción
+                    this.lblPopUp_ResponsableLogisticaTitle.Text = "Edición de elemento";
+                    this.btnPopUp_ResponsableLogisticaCommand.Text = "Actualizar";
+
+                    // Formulario
+                    this.txtPopUpResponsableLogistica_OrdenAnterior.Text = Orden;
+                    this.txtPopUpResponsableLogistica_Orden.Text = Orden;
+                    this.txtPopUpResponsableLogistica_Nombre.Text = Nombre;
+                    this.txtPopUpResponsableLogistica_Puesto.Text = Contacto;
+
+                    // Foco
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUpResponsableLogistica_Orden.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+            
+            void UpdateConfiguracion_ResponsableLogistica(){
+                ENTEvento oENTEvento = new ENTEvento();
+                ENTResponse oENTResponse = new ENTResponse();
+                ENTSession oENTSession = new ENTSession();
+
+                BPEvento oBPEvento = new BPEvento();
+
+                try
+                {
+
+                    // Datos de sesión
+                    oENTSession = (ENTSession)this.Session["oENTSession"];
+                    oENTEvento.UsuarioId = oENTSession.UsuarioId;
+
+                    // Formulario
+                    oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
+                    oENTEvento.OrdenAnterior = Int32.Parse(this.txtPopUpResponsableLogistica_OrdenAnterior.Text);
+                    oENTEvento.NuevoOrden = Int32.Parse(this.txtPopUpResponsableLogistica_Orden.Text);
+                    oENTEvento.Nombre = this.txtPopUpResponsableLogistica_Nombre.Text.Trim();
+                    oENTEvento.Puesto = this.txtPopUpResponsableLogistica_Puesto.Text.Trim();
+
+                    // Transacción
+                    oENTResponse = oBPEvento.UpdateEventoResponsableLogistica_Item(oENTEvento);
+
+                    // Validaciones
+                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                    // Transacción exitosa
+                    ClearPopUp_ResponsableLogisticaPanel();
+
+                    // Actualizar listado
+                    this.gvResponsableLogistica.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                    this.gvResponsableLogistica.DataBind();
+
+                    // Mensaje de usuario
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtResponsableLogisticaNombre.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            
+            // Eventos
+
+            protected void btnPopUp_ResponsableLogisticaCommand_Click(object sender, EventArgs e){
+                try
+                {
+
+                    // Validar formulario
+                    if ( this.txtPopUpResponsableLogistica_Orden.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un orden")); }
+                    if ( !gcNumber.IsNumber ( this.txtPopUpResponsableLogistica_Orden.Text.Trim(), GCNumber.NumberTypes.Int32Type) ) { throw (new Exception("El campo orden debe de ser numérico")); }
+                    if ( Int32.Parse( this.txtPopUpResponsableLogistica_Orden.Text.Trim() ) < 1 ) { throw (new Exception("El campo orden debe de ser mayor a 0")); }
+                    if ( this.txtPopUpResponsableLogistica_Nombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
+
+                    // Transacción
+                    UpdateConfiguracion_ResponsableLogistica();
+
+                }catch (Exception ex){
+                    this.lblPopUp_ResponsableLogisticaMessage.Text = ex.Message;
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.txtPopUpResponsableLogistica_Orden.ClientID + "');", true);
+                }
+            }
+
+            protected void imgCloseWindow_ResponsableLogistica_Click(object sender, ImageClickEventArgs e){
+                try
+                {
+
+                    // Cancelar transacción
+                    ClearPopUp_ResponsableLogisticaPanel();
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+                }
+            }
+
+            
+        #endregion
 
     }
 }

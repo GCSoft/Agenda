@@ -29,6 +29,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         GCEncryption gcEncryption = new GCEncryption();
         GCJavascript gcJavascript = new GCJavascript();
         GCParse gcParse = new GCParse();
+        GCNumber gcNumber = new GCNumber();
 
 
         // Funciones del programador
@@ -162,6 +163,27 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
         
         // Rutinas el programador
+
+        void InhabilitarEdicion( ref GridView GridControl, ref Label LabelControl){
+            ImageButton imgEdit = null;
+
+            try
+            {
+
+                // Ocultar botón de edición
+                foreach( GridViewRow oRow in GridControl.Rows ){
+
+                    imgEdit = (ImageButton)oRow.FindControl("imgEdit");
+                    if ( imgEdit != null ){ imgEdit.Visible = false; }
+                }
+
+                // Mostrar leyenda
+                LabelControl.Visible = true;
+
+            }catch(Exception ex){
+                throw(ex);
+            }
+        }
 
         void SelectEvento(){
             ENTResponse oENTResponse = new ENTResponse();
@@ -474,6 +496,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         }
 
         
+
         // Eventos de la página
 
         protected void Page_Load(object sender, EventArgs e){
@@ -504,6 +527,11 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 
 				// Carátula y formulario
                 SelectEvento();
+
+                // Limpiar popups
+                ClearPopUp_AcomodoPanel();
+                ClearPopUp_OrdenDiaPanel();
+                ClearPopUp_ComiteRecepcionPanel();
 
                 // Foco
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtProtocoloInvitacionA.ClientID + "'); }", true);
@@ -608,6 +636,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.gvAcomodo.DataSource = tblAcomodo;
                 this.gvAcomodo.DataBind();
 
+                // Inhabilitar edición
+                InhabilitarEdicion(ref this.gvAcomodo, ref this.lblAcomodo);
+
                 // Nueva captura
                 this.txtAcomodoNombre.Text = "";
                 this.txtAcomodoPuesto.Text = "";
@@ -623,6 +654,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
             String strCommand = "";
             String Orden = "";
+            String Nombre = "";
+            String Puesto = "";
             Int32 intRow = 0;
 
             try
@@ -639,9 +672,17 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Datakeys
                 Orden = this.gvAcomodo.DataKeys[intRow]["Orden"].ToString();
+                Nombre = this.gvAcomodo.DataKeys[intRow]["Nombre"].ToString();
+                Puesto = this.gvAcomodo.DataKeys[intRow]["Puesto"].ToString();
 
                 // Acción
                 switch (strCommand){
+
+                    case "Editar":
+
+                        // PopUp de Editar
+                        SetPopUp_AcomodoPanel(Orden, Nombre, Puesto);
+                        break;
 
                     case "Eliminar":
 
@@ -663,6 +704,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.gvAcomodo.DataSource = tblAcomodo;
                         this.gvAcomodo.DataBind();
 
+                        // Inhabilitar edición
+                        InhabilitarEdicion(ref this.gvAcomodo, ref this.lblAcomodo);
+
                         // Nueva captura
                         this.txtAcomodoNombre.Text = "";
                         this.txtAcomodoPuesto.Text = "";
@@ -678,6 +722,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
         protected void gvAcomodo_RowDataBound(object sender, GridViewRowEventArgs e){
             ImageButton imgDelete = null;
+            ImageButton imgEdit = null;
 
             String Orden = "";
             String AcomodoNombre = "";
@@ -693,6 +738,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Obtener imagenes
                 imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+                imgEdit = (ImageButton)e.Row.FindControl("imgEdit");
 
                 // Datakeys
                 Orden = this.gvAcomodo.DataKeys[e.Row.RowIndex]["Orden"].ToString();
@@ -704,10 +750,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Atributos Over
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit_Over.png';";
                 e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
 
                 // Atributos Out
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                 e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
 
             }catch (Exception ex){
@@ -754,6 +802,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.gvOrdenDia.DataSource = tblOrdenDia;
                 this.gvOrdenDia.DataBind();
 
+                // Inhabilitar edición
+                InhabilitarEdicion(ref this.gvOrdenDia, ref this.LBLOrdenDia);
+
                 // Nueva captura
                 this.txtOrdenDiaDetalle.Text = "";
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtOrdenDiaDetalle.ClientID + "'); }", true);
@@ -768,6 +819,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
             String strCommand = "";
             String Orden = "";
+            String Detalle = "";
             Int32 intRow = 0;
 
             try
@@ -784,9 +836,16 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Datakeys
                 Orden = this.gvOrdenDia.DataKeys[intRow]["Orden"].ToString();
+                Detalle = this.gvOrdenDia.DataKeys[intRow]["Detalle"].ToString();
 
                 // Acción
                 switch (strCommand){
+
+                    case "Editar":
+
+                        // PopUp de Editar
+                        SetPopUp_OrdenDiaPanel(Orden, Detalle);
+                        break;
 
                     case "Eliminar":
 
@@ -808,6 +867,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.gvOrdenDia.DataSource = tblOrdenDia;
                         this.gvOrdenDia.DataBind();
 
+                        // Inhabilitar edición
+                        InhabilitarEdicion(ref this.gvOrdenDia, ref this.LBLOrdenDia);
+
                         // Nueva captura
                         this.txtOrdenDiaDetalle.Text = "";
                         ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtOrdenDiaDetalle.ClientID + "'); }", true);
@@ -822,6 +884,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
         protected void gvOrdenDia_RowDataBound(object sender, GridViewRowEventArgs e){
             ImageButton imgDelete = null;
+            ImageButton imgEdit = null;
 
             String Orden = "";
 
@@ -836,6 +899,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Obtener imagenes
                 imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+                imgEdit = (ImageButton)e.Row.FindControl("imgEdit");
 
                 // Datakeys
                 Orden = this.gvOrdenDia.DataKeys[e.Row.RowIndex]["Orden"].ToString();
@@ -846,10 +910,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Atributos Over
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit_Over.png';";
                 e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
 
                 // Atributos Out
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                 e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
 
             }catch (Exception ex){
@@ -870,7 +936,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         }
 
 
-        // Eventos de Sección: Comité de recepción
+        // Eventos de Sección: Comité de recepción ( Asistentes )
 
         protected void btnAgregarComiteRecepcion_Click(object sender, EventArgs e){
             DataTable tblComiteRecepcion;
@@ -897,6 +963,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Actualizar Grid
                 this.gvComiteRecepcion.DataSource = tblComiteRecepcion;
                 this.gvComiteRecepcion.DataBind();
+
+                // Inhabilitar edición
+                InhabilitarEdicion(ref this.gvComiteRecepcion, ref this.lblComiteRecepcion);
 
                 // Nueva captura
                 this.txtComiteRecepcionNombre.Text = "";
@@ -934,6 +1003,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.gvComiteRecepcion.DataSource = tblComiteRecepcion;
                 this.gvComiteRecepcion.DataBind();
 
+                // Inhabilitar edición
+                InhabilitarEdicion(ref this.gvComiteRecepcion, ref this.lblComiteRecepcion);
+
                 // Nueva captura
                 this.txtComiteRecepcionNombre.Text = "";
                 this.txtComiteRecepcionPuesto.Text = "";
@@ -949,6 +1021,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
             String strCommand = "";
             String Orden = "";
+            String Nombre = "";
+            String Puesto = "";
+            String Separador = "";
             Int32 intRow = 0;
 
             try
@@ -965,9 +1040,18 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Datakeys
                 Orden = this.gvComiteRecepcion.DataKeys[intRow]["Orden"].ToString();
+                Nombre = this.gvComiteRecepcion.DataKeys[intRow]["Nombre"].ToString();
+                Puesto = this.gvComiteRecepcion.DataKeys[intRow]["Puesto"].ToString();
+                Separador = this.gvComiteRecepcion.DataKeys[intRow]["Separador"].ToString();
 
                 // Acción
                 switch (strCommand){
+
+                    case "Editar":
+
+                        // PopUp de Editar
+                        SetPopUp_ComiteRecepcionPanel(Orden, Nombre, Puesto, Separador);
+                        break;
 
                     case "Eliminar":
 
@@ -989,6 +1073,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.gvComiteRecepcion.DataSource = tblComiteRecepcion;
                         this.gvComiteRecepcion.DataBind();
 
+                        // Inhabilitar edición
+                        InhabilitarEdicion(ref this.gvComiteRecepcion, ref this.lblComiteRecepcion);
+
                         // Nueva captura
                         this.txtComiteRecepcionNombre.Text = "";
                         this.txtComiteRecepcionPuesto.Text = "";
@@ -1004,6 +1091,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
         protected void gvComiteRecepcion_RowDataBound(object sender, GridViewRowEventArgs e){
             ImageButton imgDelete = null;
+            ImageButton imgEdit = null;
 
             String Orden = "";
             String ComiteRecepcionNombre = "";
@@ -1020,6 +1108,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Obtener imagenes
                 imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+                imgEdit = (ImageButton)e.Row.FindControl("imgEdit");
 
                 // Datakeys
                 Orden = this.gvComiteRecepcion.DataKeys[e.Row.RowIndex]["Orden"].ToString();
@@ -1042,15 +1131,18 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     // Atributos de la fila
                     e.Row.CssClass = "Grid_Row_Over_PopUp";
                     imgDelete.ImageUrl = "~/Include/Image/Buttons/Delete_Over.png";
+                    imgEdit.ImageUrl = "~/Include/Image/Buttons/Edit_Over.png";
 
                 }else{
 
                     // Atributos Over
                     sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                    sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit_Over.png';";
                     e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
 
                     // Atributos Out
                     sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                    sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                     e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
                 }
 
@@ -1071,6 +1163,391 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             }
         }
 
+
+        #region PopUp - Acomodo
+            
+            
+            // Rutinas
+
+            void ClearPopUp_AcomodoPanel(){
+                try
+                {
+
+                    // Estado incial de controles
+                    this.pnlPopUp_Acomodo.Visible = false;
+                    this.lblPopUp_AcomodoTitle.Text = "";
+                    this.btnPopUp_AcomodoCommand.Text = "";
+                    this.lblPopUp_AcomodoMessage.Text = "";
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            void SetPopUp_AcomodoPanel(String Orden, String Nombre, String Puesto){
+                try
+                {
+
+                    // Acciones comunes
+                    this.pnlPopUp_Acomodo.Visible = true;
+
+                    // Detalle de acción
+                    this.lblPopUp_AcomodoTitle.Text = "Edición de elemento";
+                    this.btnPopUp_AcomodoCommand.Text = "Actualizar";
+
+                    // Formulario
+                    this.txtPopUpAcomodo_OrdenAnterior.Text = Orden;
+                    this.txtPopUpAcomodo_Orden.Text = Orden;
+                    this.txtPopUpAcomodo_Nombre.Text = Nombre;
+                    this.txtPopUpAcomodo_Puesto.Text = Puesto;
+
+                    // Foco
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUpAcomodo_Orden.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+            
+            void UpdateConfiguracion_Acomodo(){
+                ENTEvento oENTEvento = new ENTEvento();
+                ENTResponse oENTResponse = new ENTResponse();
+                ENTSession oENTSession = new ENTSession();
+
+                BPEvento oBPEvento = new BPEvento();
+
+                try
+                {
+
+                    // Datos de sesión
+                    oENTSession = (ENTSession)this.Session["oENTSession"];
+                    oENTEvento.UsuarioId = oENTSession.UsuarioId;
+
+                    // Formulario
+                    oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
+                    oENTEvento.OrdenAnterior = Int32.Parse(this.txtPopUpAcomodo_OrdenAnterior.Text);
+                    oENTEvento.NuevoOrden = Int32.Parse(this.txtPopUpAcomodo_Orden.Text);
+                    oENTEvento.Nombre = this.txtPopUpAcomodo_Nombre.Text.Trim();
+                    oENTEvento.Puesto = this.txtPopUpAcomodo_Puesto.Text.Trim();
+
+                    // Transacción
+                    oENTResponse = oBPEvento.UpdateEventoAcomodo_Item(oENTEvento);
+
+                    // Validaciones
+                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                    // Transacción exitosa
+                    ClearPopUp_AcomodoPanel();
+
+                    // Actualizar listado
+                    this.gvAcomodo.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                    this.gvAcomodo.DataBind();
+
+                    // Mensaje de usuario
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtAcomodoNombre.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            
+            // Eventos
+
+            protected void btnPopUp_AcomodoCommand_Click(object sender, EventArgs e){
+                try
+                {
+
+                    // Validar formulario
+                    if ( this.txtPopUpAcomodo_Orden.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un orden")); }
+                    if ( !gcNumber.IsNumber ( this.txtPopUpAcomodo_Orden.Text.Trim(), GCNumber.NumberTypes.Int32Type) ) { throw (new Exception("El campo orden debe de ser numérico")); }
+                    if ( Int32.Parse( this.txtPopUpAcomodo_Orden.Text.Trim() ) < 1 ) { throw (new Exception("El campo orden debe de ser mayor a 0")); }
+                    if ( this.txtPopUpAcomodo_Nombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
+
+                    // Transacción
+                    UpdateConfiguracion_Acomodo();
+
+                }catch (Exception ex){
+                    this.lblPopUp_AcomodoMessage.Text = ex.Message;
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.txtPopUpAcomodo_Orden.ClientID + "');", true);
+                }
+            }
+
+            protected void imgCloseWindow_Acomodo_Click(object sender, ImageClickEventArgs e){
+                try
+                {
+
+                    // Cancelar transacción
+                    ClearPopUp_AcomodoPanel();
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+                }
+            }
+
+            
+        #endregion
+
+        #region PopUp - Orden Dia
+            
+            
+            // Rutinas
+
+            void ClearPopUp_OrdenDiaPanel(){
+                try
+                {
+
+                    // Estado incial de controles
+                    this.pnlPopUp_OrdenDia.Visible = false;
+                    this.lblPopUp_OrdenDiaTitle.Text = "";
+                    this.btnPopUp_OrdenDiaCommand.Text = "";
+                    this.lblPopUp_OrdenDiaMessage.Text = "";
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            void SetPopUp_OrdenDiaPanel(String Orden, String Detalle){
+                try
+                {
+
+                    // Acciones comunes
+                    this.pnlPopUp_OrdenDia.Visible = true;
+
+                    // Detalle de acción
+                    this.lblPopUp_OrdenDiaTitle.Text = "Edición de elemento";
+                    this.btnPopUp_OrdenDiaCommand.Text = "Actualizar";
+
+                    // Formulario
+                    this.txtPopUpOrdenDia_OrdenAnterior.Text = Orden;
+                    this.txtPopUpOrdenDia_Orden.Text = Orden;
+                    this.txtPopUpOrdenDia_Detalle.Text = Detalle;
+
+                    // Foco
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUpOrdenDia_Orden.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+            
+            void UpdateConfiguracion_OrdenDia(){
+                ENTEvento oENTEvento = new ENTEvento();
+                ENTResponse oENTResponse = new ENTResponse();
+                ENTSession oENTSession = new ENTSession();
+
+                BPEvento oBPEvento = new BPEvento();
+
+                try
+                {
+
+                    // Datos de sesión
+                    oENTSession = (ENTSession)this.Session["oENTSession"];
+                    oENTEvento.UsuarioId = oENTSession.UsuarioId;
+
+                    // Formulario
+                    oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
+                    oENTEvento.OrdenAnterior = Int32.Parse(this.txtPopUpOrdenDia_OrdenAnterior.Text);
+                    oENTEvento.NuevoOrden = Int32.Parse(this.txtPopUpOrdenDia_Orden.Text);
+                    oENTEvento.Nombre = this.txtPopUpOrdenDia_Detalle.Text.Trim();
+
+                    // Transacción
+                    oENTResponse = oBPEvento.UpdateEventoOrdenDia_Item(oENTEvento);
+
+                    // Validaciones
+                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                    // Transacción exitosa
+                    ClearPopUp_OrdenDiaPanel();
+
+                    // Actualizar listado
+                    this.gvOrdenDia.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                    this.gvOrdenDia.DataBind();
+
+                    // Mensaje de usuario
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtOrdenDiaDetalle.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            
+            // Eventos
+
+            protected void btnPopUp_OrdenDiaCommand_Click(object sender, EventArgs e){
+                try
+                {
+
+                    // Validar formulario
+                    if ( this.txtPopUpOrdenDia_Orden.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un orden")); }
+                    if ( !gcNumber.IsNumber ( this.txtPopUpOrdenDia_Orden.Text.Trim(), GCNumber.NumberTypes.Int32Type) ) { throw (new Exception("El campo orden debe de ser numérico")); }
+                    if ( Int32.Parse( this.txtPopUpOrdenDia_Orden.Text.Trim() ) < 1 ) { throw (new Exception("El campo orden debe de ser mayor a 0")); }
+                    if ( this.txtPopUpOrdenDia_Orden.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar el detalle de la orden del día")); }
+
+                    // Transacción
+                    UpdateConfiguracion_OrdenDia();
+
+                }catch (Exception ex){
+                    this.lblPopUp_OrdenDiaMessage.Text = ex.Message;
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.txtPopUpOrdenDia_Orden.ClientID + "');", true);
+                }
+            }
+
+            protected void imgCloseWindow_OrdenDia_Click(object sender, ImageClickEventArgs e){
+                try
+                {
+
+                    // Cancelar transacción
+                    ClearPopUp_OrdenDiaPanel();
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+                }
+            }
+
+            
+        #endregion
+
+        #region PopUp - Comite Recepcion ( Asistentes )
+            
+            
+            // Rutinas
+
+            void ClearPopUp_ComiteRecepcionPanel(){
+                try
+                {
+
+                    // Estado incial de controles
+                    this.pnlPopUp_ComiteRecepcion.Visible = false;
+                    this.lblPopUp_ComiteRecepcionTitle.Text = "";
+                    this.btnPopUp_ComiteRecepcionCommand.Text = "";
+                    this.lblPopUp_ComiteRecepcionMessage.Text = "";
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            void SetPopUp_ComiteRecepcionPanel(String Orden, String Nombre, String Puesto, String Separador){
+                try
+                {
+
+                    // Acciones comunes
+                    this.pnlPopUp_ComiteRecepcion.Visible = true;
+
+                    // Detalle de acción
+                    this.lblPopUp_ComiteRecepcionTitle.Text = "Edición de elemento";
+                    this.btnPopUp_ComiteRecepcionCommand.Text = "Actualizar";
+
+                    // Formulario
+                    this.txtPopUpComiteRecepcion_OrdenAnterior.Text = Orden;
+                    this.txtPopUpComiteRecepcion_Orden.Text = Orden;
+                    this.txtPopUpComiteRecepcion_Nombre.Text = Nombre;
+
+                    if ( Separador == "1" ) {
+                        
+                        this.txtPopUpComiteRecepcion_Puesto.Text = "";
+                        this.txtPopUpComiteRecepcion_Puesto.Enabled = false;
+                        this.txtPopUpComiteRecepcion_Puesto.CssClass = "Textbox_General_Disabled";
+                    }else{
+
+                        this.txtPopUpComiteRecepcion_Puesto.Text = Puesto;
+                        this.txtPopUpComiteRecepcion_Puesto.Enabled = true;
+                        this.txtPopUpComiteRecepcion_Puesto.CssClass = "Textbox_General";
+                    }
+
+                    // Foco
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUpComiteRecepcion_Orden.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+            
+            void UpdateConfiguracion_ComiteRecepcion(){
+                ENTEvento oENTEvento = new ENTEvento();
+                ENTResponse oENTResponse = new ENTResponse();
+                ENTSession oENTSession = new ENTSession();
+
+                BPEvento oBPEvento = new BPEvento();
+
+                try
+                {
+
+                    // Datos de sesión
+                    oENTSession = (ENTSession)this.Session["oENTSession"];
+                    oENTEvento.UsuarioId = oENTSession.UsuarioId;
+
+                    // Formulario
+                    oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
+                    oENTEvento.OrdenAnterior = Int32.Parse(this.txtPopUpComiteRecepcion_OrdenAnterior.Text);
+                    oENTEvento.NuevoOrden = Int32.Parse(this.txtPopUpComiteRecepcion_Orden.Text);
+                    oENTEvento.Nombre = this.txtPopUpComiteRecepcion_Nombre.Text.Trim();
+                    oENTEvento.Puesto = this.txtPopUpComiteRecepcion_Puesto.Text.Trim();
+                    oENTEvento.Separador = Int16.Parse ( this.txtPopUpComiteRecepcion_Puesto.Enabled ? "0" : "1" );
+
+                    // Transacción
+                    oENTResponse = oBPEvento.UpdateEventoComiteRecepcion_Item(oENTEvento);
+
+                    // Validaciones
+                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                    // Transacción exitosa
+                    ClearPopUp_ComiteRecepcionPanel();
+
+                    // Actualizar listado
+                    this.gvComiteRecepcion.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                    this.gvComiteRecepcion.DataBind();
+
+                    // Mensaje de usuario
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtComiteRecepcionNombre.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            
+            // Eventos
+
+            protected void btnPopUp_ComiteRecepcionCommand_Click(object sender, EventArgs e){
+                try
+                {
+
+                    // Validar formulario
+                    if ( this.txtPopUpComiteRecepcion_Orden.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un orden")); }
+                    if ( !gcNumber.IsNumber ( this.txtPopUpComiteRecepcion_Orden.Text.Trim(), GCNumber.NumberTypes.Int32Type) ) { throw (new Exception("El campo orden debe de ser numérico")); }
+                    if ( Int32.Parse( this.txtPopUpComiteRecepcion_Orden.Text.Trim() ) < 1 ) { throw (new Exception("El campo orden debe de ser mayor a 0")); }
+                    if ( this.txtPopUpComiteRecepcion_Nombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
+
+                    // Transacción
+                    UpdateConfiguracion_ComiteRecepcion();
+
+                }catch (Exception ex){
+                    this.lblPopUp_ComiteRecepcionMessage.Text = ex.Message;
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.txtPopUpComiteRecepcion_Orden.ClientID + "');", true);
+                }
+            }
+
+            protected void imgCloseWindow_ComiteRecepcion_Click(object sender, ImageClickEventArgs e){
+                try
+                {
+
+                    // Cancelar transacción
+                    ClearPopUp_ComiteRecepcionPanel();
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+                }
+            }
+
+            
+        #endregion
 
     }
 }

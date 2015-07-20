@@ -207,7 +207,7 @@
 			                </tr>
                             <tr>
 				                <td class="Etiqueta">Nombre</td>
-				                <td class="Espacio"></td>
+				                <td class="VinetaObligatorio">*</td>
 				                <td class="Campo"><asp:TextBox ID="txtComiteHelipuertoNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
                                 <td></td>
 			                </tr>
@@ -220,8 +220,7 @@
                             <tr>
 				                <td class="Etiqueta"><asp:Button ID="btnAgregarComiteHelipuerto" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarComiteHelipuerto_Click" /></td>
 				                <td class="Espacio"></td>
-				                <td class="Campo"></td>
-                                <td></td>
+                                <td colspan="2"><asp:Label ID="lblComiteHelipuerto" runat="server" CssClass="PopUpTextMessage" Text="Es necesario confirmar la transacción para poder editar" Visible="false"></asp:Label></td>
 			                </tr>
                             <tr><td colspan="4" style="height:10px;"></td></tr>
                             <tr>
@@ -249,6 +248,11 @@
                                             <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
                                             <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="400px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
                                             <asp:BoundField HeaderText="Puesto" ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
+                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="imgEdit" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Editar" ImageUrl="~/Include/Image/Buttons/Edit.png" runat="server" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
                                                 <ItemTemplate>
                                                     <asp:ImageButton ID="imgDelete" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Eliminar" ImageUrl="~/Include/Image/Buttons/Delete.png" runat="server" />
@@ -285,7 +289,7 @@
 						<table class="FormTable" style="border:solid 1px #336600;">
                             <tr>
 				                <td class="Etiqueta">Nombre</td>
-				                <td class="Espacio"></td>
+				                <td class="VinetaObligatorio">*</td>
 				                <td class="Campo"><asp:TextBox ID="txtComiteRecepcionNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
                                 <td></td>
 			                </tr>
@@ -298,8 +302,7 @@
                             <tr>
 				                <td class="Etiqueta"><asp:Button ID="btnAgregarComiteRecepcion" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarComiteRecepcion_Click" /></td>
 				                <td class="Espacio"></td>
-				                <td class="Campo"></td>
-                                <td></td>
+				                <td colspan="2"><asp:Label ID="lblComiteRecepcion" runat="server" CssClass="PopUpTextMessage" Text="Es necesario confirmar la transacción para poder editar" Visible="false"></asp:Label></td>
 			                </tr>
                             <tr><td colspan="4" style="height:10px;"></td></tr>
                             <tr>
@@ -327,6 +330,11 @@
                                             <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
                                             <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="400px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
                                             <asp:BoundField HeaderText="Puesto" ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
+                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="imgEdit" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Editar" ImageUrl="~/Include/Image/Buttons/Edit.png" runat="server" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
                                                 <ItemTemplate>
                                                     <asp:ImageButton ID="imgDelete" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Eliminar" ImageUrl="~/Include/Image/Buttons/Delete.png" runat="server" />
@@ -368,13 +376,12 @@
                                 <td></td>
 			                </tr>
                             <tr>
-				                <td class="Campo" colspan="4"><asp:TextBox ID="txtOrdenDiaDetalle" runat="server" CssClass="Textarea_General" Height="70px" MaxLength="200" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
+				                <td class="Campo" colspan="4"><asp:TextBox ID="txtOrdenDiaDetalle" runat="server" CssClass="Textarea_General" Height="70px" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
 			                </tr>
                             <tr>
 				                <td class="Etiqueta"><asp:Button ID="btnAgregarOrdenDia" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarOrdenDia_Click" /></td>
 				                <td class="Espacio"></td>
-				                <td class="Campo"></td>
-                                <td></td>
+				                <td colspan="2"><asp:Label ID="lblOrdenDia" runat="server" CssClass="PopUpTextMessage" Text="Es necesario confirmar la transacción para poder editar" Visible="false"></asp:Label></td>
 			                </tr>
                             <tr><td colspan="4" style="height:10px;"></td></tr>
                             <tr>
@@ -400,6 +407,11 @@
                                         <Columns>
                                             <asp:BoundField HeaderText="Orden"      ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
                                             <asp:BoundField HeaderText="Detalle"    ItemStyle-HorizontalAlign="Left"                            DataField="Detalle" SortExpression="Detalle"></asp:BoundField>
+                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="imgEdit" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Editar" ImageUrl="~/Include/Image/Buttons/Edit.png" runat="server" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
                                                 <ItemTemplate>
                                                     <asp:ImageButton ID="imgDelete" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Eliminar" ImageUrl="~/Include/Image/Buttons/Delete.png" runat="server" />
@@ -448,7 +460,7 @@
 			                </tr>
                             <tr>
 				                <td class="Etiqueta">Nombre</td>
-				                <td class="Espacio"></td>
+				                <td class="VinetaObligatorio">*</td>
 				                <td class="Campo"><asp:TextBox ID="txtAcomodoNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
                                 <td></td>
 			                </tr>
@@ -461,8 +473,7 @@
                             <tr>
 				                <td class="Etiqueta"><asp:Button ID="btnAgregarAcomodo" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarAcomodo_Click" /></td>
 				                <td class="Espacio"></td>
-				                <td class="Campo"></td>
-                                <td></td>
+				                <td colspan="2"><asp:Label ID="lblAcomodo" runat="server" CssClass="PopUpTextMessage" Text="Es necesario confirmar la transacción para poder editar" Visible="false"></asp:Label></td>
 			                </tr>
                             <tr><td colspan="4" style="height:10px;"></td></tr>
                             <tr>
@@ -490,6 +501,11 @@
                                             <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
                                             <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="400px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
                                             <asp:BoundField HeaderText="Puesto" ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
+                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="imgEdit" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Editar" ImageUrl="~/Include/Image/Buttons/Edit.png" runat="server" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
                                                 <ItemTemplate>
                                                     <asp:ImageButton ID="imgDelete" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Eliminar" ImageUrl="~/Include/Image/Buttons/Delete.png" runat="server" />
@@ -538,7 +554,7 @@
 			                </tr>
                             <tr>
 				                <td class="Etiqueta">Nombre</td>
-				                <td class="Espacio"></td>
+				                <td class="VinetaObligatorio">*</td>
 				                <td class="Campo"><asp:TextBox ID="txtListadoAdicionalNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
                                 <td></td>
 			                </tr>
@@ -551,8 +567,7 @@
                             <tr>
 				                <td class="Etiqueta"><asp:Button ID="btnAgregarListadoAdicional" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarListadoAdicional_Click" /></td>
 				                <td class="Espacio"></td>
-				                <td class="Campo"></td>
-                                <td></td>
+				                <td colspan="2"><asp:Label ID="lblListadoAdicional" runat="server" CssClass="PopUpTextMessage" Text="Es necesario confirmar la transacción para poder editar" Visible="false"></asp:Label></td>
 			                </tr>
                             <tr><td colspan="4" style="height:10px;"></td></tr>
                             <tr>
@@ -580,6 +595,11 @@
                                             <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
                                             <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="400px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
                                             <asp:BoundField HeaderText="Puesto" ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
+                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="imgEdit" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Editar" ImageUrl="~/Include/Image/Buttons/Edit.png" runat="server" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
                                                 <ItemTemplate>
                                                     <asp:ImageButton ID="imgDelete" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Eliminar" ImageUrl="~/Include/Image/Buttons/Delete.png" runat="server" />
@@ -650,7 +670,7 @@
 						<table class="FormTable" style="border:solid 1px #336600;">
                             <tr>
 				                <td class="Etiqueta">Nombre</td>
-				                <td class="Espacio"></td>
+				                <td class="VinetaObligatorio">*</td>
 				                <td class="Campo"><asp:TextBox ID="txtResponsableEventoNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
                                 <td></td>
 			                </tr>
@@ -663,8 +683,7 @@
                             <tr>
 				                <td class="Etiqueta"><asp:Button ID="btnAgregarResponsableEvento" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarResponsableEvento_Click" /></td>
 				                <td class="Espacio"></td>
-				                <td class="Campo"></td>
-                                <td></td>
+				                <td colspan="2"><asp:Label ID="lblResponsableEvento" runat="server" CssClass="PopUpTextMessage" Text="Es necesario confirmar la transacción para poder editar" Visible="false"></asp:Label></td>
 			                </tr>
                             <tr><td colspan="4" style="height:10px;"></td></tr>
                             <tr>
@@ -692,6 +711,11 @@
                                             <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
                                             <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="400px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
                                             <asp:BoundField HeaderText="Puesto" ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
+                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="imgEdit" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Editar" ImageUrl="~/Include/Image/Buttons/Edit.png" runat="server" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
                                                 <ItemTemplate>
                                                     <asp:ImageButton ID="imgDelete" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Eliminar" ImageUrl="~/Include/Image/Buttons/Delete.png" runat="server" />
@@ -728,7 +752,7 @@
 						<table class="FormTable" style="border:solid 1px #336600;">
                             <tr>
 				                <td class="Etiqueta">Nombre</td>
-				                <td class="Espacio"></td>
+				                <td class="VinetaObligatorio">*</td>
 				                <td class="Campo"><asp:TextBox ID="txtResponsableLogisticaNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
                                 <td></td>
 			                </tr>
@@ -741,8 +765,7 @@
                             <tr>
 				                <td class="Etiqueta"><asp:Button ID="btnAgregarResponsableLogistica" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarResponsableLogistica_Click" /></td>
 				                <td class="Espacio"></td>
-				                <td class="Campo"></td>
-                                <td></td>
+				                <td colspan="2"><asp:Label ID="lblResponsableLogistica" runat="server" CssClass="PopUpTextMessage" Text="Es necesario confirmar la transacción para poder editar" Visible="false"></asp:Label></td>
 			                </tr>
                             <tr><td colspan="4" style="height:10px;"></td></tr>
                             <tr>
@@ -770,6 +793,11 @@
                                             <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"       SortExpression="Orden"></asp:BoundField>
                                             <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="400px" DataField="Nombre"      SortExpression="Nombre"></asp:BoundField>
                                             <asp:BoundField HeaderText="Contacto" ItemStyle-HorizontalAlign="Left"                          DataField="Contacto"    SortExpression="Contacto"></asp:BoundField>
+                                            <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
+                                                <ItemTemplate>
+                                                    <asp:ImageButton ID="imgEdit" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Editar" ImageUrl="~/Include/Image/Buttons/Edit.png" runat="server" />
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
                                                 <ItemTemplate>
                                                     <asp:ImageButton ID="imgDelete" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Eliminar" ImageUrl="~/Include/Image/Buttons/Delete.png" runat="server" />
@@ -839,6 +867,391 @@
 
     <asp:Panel ID="pnlFooter" runat="server" CssClass="FooterPanel">
         <%--Empty Content--%>
+    </asp:Panel>
+
+    <asp:Panel ID="pnlPopUp_ComiteHelipuerto" runat="server" CssClass="PopUpBlock">
+        <asp:Panel ID="pnlPopUp_ComiteHelipuertoContent" runat="server" CssClass="PopUpContent" style="margin-top:-125px; margin-left:-245px;" Height="250px" Width="490px">
+            <asp:Panel ID="pnlPopUp_ComiteHelipuertoHeader" runat="server" CssClass="PopUpHeader">
+                <table class="PopUpHeaderTable">
+                    <tr>
+                        <td class="Espacio"></td>
+                        <td class="Etiqueta"><asp:Label ID="lblPopUp_ComiteHelipuertoTitle" runat="server" CssClass="PopUpHeaderTitle"></asp:Label></td>
+                        <td class="Cierre"><asp:ImageButton ID="imgCloseWindow_ComiteHelipuerto" runat="server" ImageUrl="~/Include/Image/Buttons/CloseWindow.png" ToolTip="Cerrar Ventana" OnClick="imgCloseWindow_ComiteHelipuerto_Click"></asp:ImageButton></td>
+                    </tr>
+                </table>
+            </asp:Panel>
+            <asp:Panel ID="pnlPopUp_ComiteHelipuertoBody" runat="server" CssClass="PopUpBody">
+                <table class="PopUpBodyTable">
+                    <tr>
+                        <td class="Etiqueta">Orden Anterior</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpComiteHelipuerto_OrdenAnterior" runat="server" CssClass="Textbox_General_Disabled" Enabled="false" MaxLength="3" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Nuevo Orden</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpComiteHelipuerto_Orden" runat="server" CssClass="Textbox_General" MaxLength="3" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Nombre</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpComiteHelipuerto_Nombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Puesto</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpComiteHelipuerto_Puesto" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Botones" colspan="3">
+                            <asp:Button ID="btnPopUp_ComiteHelipuertoCommand" runat="server" Text="" CssClass="Button_General" Width="175px" OnClick="btnPopUp_ComiteHelipuertoCommand_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Mensajes" colspan="3">
+                            <asp:Label ID="lblPopUp_ComiteHelipuertoMessage" runat="server" CssClass="PopUpTextMessage"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+        </asp:Panel>
+    </asp:Panel>
+
+    <asp:Panel ID="pnlPopUp_ComiteRecepcion" runat="server" CssClass="PopUpBlock">
+        <asp:Panel ID="pnlPopUp_ComiteRecepcionContent" runat="server" CssClass="PopUpContent" style="margin-top:-125px; margin-left:-245px;" Height="250px" Width="490px">
+            <asp:Panel ID="pnlPopUp_ComiteRecepcionHeader" runat="server" CssClass="PopUpHeader">
+                <table class="PopUpHeaderTable">
+                    <tr>
+                        <td class="Espacio"></td>
+                        <td class="Etiqueta"><asp:Label ID="lblPopUp_ComiteRecepcionTitle" runat="server" CssClass="PopUpHeaderTitle"></asp:Label></td>
+                        <td class="Cierre"><asp:ImageButton ID="imgCloseWindow_ComiteRecepcion" runat="server" ImageUrl="~/Include/Image/Buttons/CloseWindow.png" ToolTip="Cerrar Ventana" OnClick="imgCloseWindow_ComiteRecepcion_Click"></asp:ImageButton></td>
+                    </tr>
+                </table>
+            </asp:Panel>
+            <asp:Panel ID="pnlPopUp_ComiteRecepcionBody" runat="server" CssClass="PopUpBody">
+                <table class="PopUpBodyTable">
+                    <tr>
+                        <td class="Etiqueta">Orden Anterior</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpComiteRecepcion_OrdenAnterior" runat="server" CssClass="Textbox_General_Disabled" Enabled="false" MaxLength="3" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Nuevo Orden</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpComiteRecepcion_Orden" runat="server" CssClass="Textbox_General" MaxLength="3" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Nombre</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpComiteRecepcion_Nombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Puesto</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpComiteRecepcion_Puesto" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Botones" colspan="3">
+                            <asp:Button ID="btnPopUp_ComiteRecepcionCommand" runat="server" Text="" CssClass="Button_General" Width="175px" OnClick="btnPopUp_ComiteRecepcionCommand_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Mensajes" colspan="3">
+                            <asp:Label ID="lblPopUp_ComiteRecepcionMessage" runat="server" CssClass="PopUpTextMessage"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+        </asp:Panel>
+    </asp:Panel>
+
+    <asp:Panel ID="pnlPopUp_OrdenDia" runat="server" CssClass="PopUpBlock">
+        <asp:Panel ID="pnlPopUp_OrdenDiaContent" runat="server" CssClass="PopUpContent" style="margin-top:-135px; margin-left:-245px;" Height="270px" Width="490px">
+            <asp:Panel ID="pnlPopUp_OrdenDiaHeader" runat="server" CssClass="PopUpHeader">
+                <table class="PopUpHeaderTable">
+                    <tr>
+                        <td class="Espacio"></td>
+                        <td class="Etiqueta"><asp:Label ID="lblPopUp_OrdenDiaTitle" runat="server" CssClass="PopUpHeaderTitle"></asp:Label></td>
+                        <td class="Cierre"><asp:ImageButton ID="imgCloseWindow_OrdenDia" runat="server" ImageUrl="~/Include/Image/Buttons/CloseWindow.png" ToolTip="Cerrar Ventana" OnClick="imgCloseWindow_OrdenDia_Click"></asp:ImageButton></td>
+                    </tr>
+                </table>
+            </asp:Panel>
+            <asp:Panel ID="pnlPopUp_OrdenDiaBody" runat="server" CssClass="PopUpBody">
+                <table class="PopUpBodyTable">
+                    <tr>
+                        <td class="Etiqueta">Orden Anterior</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpOrdenDia_OrdenAnterior" runat="server" CssClass="Textbox_General_Disabled" Enabled="false" MaxLength="3" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Nuevo Orden</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpOrdenDia_Orden" runat="server" CssClass="Textbox_General" MaxLength="3" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Detalle</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpOrdenDia_Detalle" runat="server" CssClass="Textarea_General" Height="70px" TextMode="MultiLine" Width="99%"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Botones" colspan="3">
+                            <asp:Button ID="btnPopUp_OrdenDiaCommand" runat="server" Text="" CssClass="Button_General" Width="175px" OnClick="btnPopUp_OrdenDiaCommand_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Mensajes" colspan="3">
+                            <asp:Label ID="lblPopUp_OrdenDiaMessage" runat="server" CssClass="PopUpTextMessage"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+        </asp:Panel>
+    </asp:Panel>
+
+    <asp:Panel ID="pnlPopUp_Acomodo" runat="server" CssClass="PopUpBlock">
+        <asp:Panel ID="pnlPopUp_AcomodoContent" runat="server" CssClass="PopUpContent" style="margin-top:-125px; margin-left:-245px;" Height="250px" Width="490px">
+            <asp:Panel ID="pnlPopUp_AcomodoHeader" runat="server" CssClass="PopUpHeader">
+                <table class="PopUpHeaderTable">
+                    <tr>
+                        <td class="Espacio"></td>
+                        <td class="Etiqueta"><asp:Label ID="lblPopUp_AcomodoTitle" runat="server" CssClass="PopUpHeaderTitle"></asp:Label></td>
+                        <td class="Cierre"><asp:ImageButton ID="imgCloseWindow_Acomodo" runat="server" ImageUrl="~/Include/Image/Buttons/CloseWindow.png" ToolTip="Cerrar Ventana" OnClick="imgCloseWindow_Acomodo_Click"></asp:ImageButton></td>
+                    </tr>
+                </table>
+            </asp:Panel>
+            <asp:Panel ID="pnlPopUp_AcomodoBody" runat="server" CssClass="PopUpBody">
+                <table class="PopUpBodyTable">
+                    <tr>
+                        <td class="Etiqueta">Orden Anterior</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpAcomodo_OrdenAnterior" runat="server" CssClass="Textbox_General_Disabled" Enabled="false" MaxLength="3" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Nuevo Orden</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpAcomodo_Orden" runat="server" CssClass="Textbox_General" MaxLength="3" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Nombre</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpAcomodo_Nombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Puesto</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpAcomodo_Puesto" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Botones" colspan="3">
+                            <asp:Button ID="btnPopUp_AcomodoCommand" runat="server" Text="" CssClass="Button_General" Width="175px" OnClick="btnPopUp_AcomodoCommand_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Mensajes" colspan="3">
+                            <asp:Label ID="lblPopUp_AcomodoMessage" runat="server" CssClass="PopUpTextMessage"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+        </asp:Panel>
+    </asp:Panel>
+
+    <asp:Panel ID="pnlPopUp_ListadoAdicional" runat="server" CssClass="PopUpBlock">
+        <asp:Panel ID="pnlPopUp_ListadoAdicionalContent" runat="server" CssClass="PopUpContent" style="margin-top:-125px; margin-left:-245px;" Height="250px" Width="490px">
+            <asp:Panel ID="pnlPopUp_ListadoAdicionalHeader" runat="server" CssClass="PopUpHeader">
+                <table class="PopUpHeaderTable">
+                    <tr>
+                        <td class="Espacio"></td>
+                        <td class="Etiqueta"><asp:Label ID="lblPopUp_ListadoAdicionalTitle" runat="server" CssClass="PopUpHeaderTitle"></asp:Label></td>
+                        <td class="Cierre"><asp:ImageButton ID="imgCloseWindow_ListadoAdicional" runat="server" ImageUrl="~/Include/Image/Buttons/CloseWindow.png" ToolTip="Cerrar Ventana" OnClick="imgCloseWindow_ListadoAdicional_Click"></asp:ImageButton></td>
+                    </tr>
+                </table>
+            </asp:Panel>
+            <asp:Panel ID="pnlPopUp_ListadoAdicionalBody" runat="server" CssClass="PopUpBody">
+                <table class="PopUpBodyTable">
+                    <tr>
+                        <td class="Etiqueta">Orden Anterior</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpListadoAdicional_OrdenAnterior" runat="server" CssClass="Textbox_General_Disabled" Enabled="false" MaxLength="3" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Nuevo Orden</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpListadoAdicional_Orden" runat="server" CssClass="Textbox_General" MaxLength="3" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Nombre</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpListadoAdicional_Nombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Puesto</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpListadoAdicional_Puesto" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Botones" colspan="3">
+                            <asp:Button ID="btnPopUp_ListadoAdicionalCommand" runat="server" Text="" CssClass="Button_General" Width="175px" OnClick="btnPopUp_ListadoAdicionalCommand_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Mensajes" colspan="3">
+                            <asp:Label ID="lblPopUp_ListadoAdicionalMessage" runat="server" CssClass="PopUpTextMessage"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+        </asp:Panel>
+    </asp:Panel>
+
+    <asp:Panel ID="pnlPopUp_ResponsableEvento" runat="server" CssClass="PopUpBlock">
+        <asp:Panel ID="pnlPopUp_ResponsableEventoContent" runat="server" CssClass="PopUpContent" style="margin-top:-125px; margin-left:-245px;" Height="250px" Width="490px">
+            <asp:Panel ID="pnlPopUp_ResponsableEventoHeader" runat="server" CssClass="PopUpHeader">
+                <table class="PopUpHeaderTable">
+                    <tr>
+                        <td class="Espacio"></td>
+                        <td class="Etiqueta"><asp:Label ID="lblPopUp_ResponsableEventoTitle" runat="server" CssClass="PopUpHeaderTitle"></asp:Label></td>
+                        <td class="Cierre"><asp:ImageButton ID="imgCloseWindow_ResponsableEvento" runat="server" ImageUrl="~/Include/Image/Buttons/CloseWindow.png" ToolTip="Cerrar Ventana" OnClick="imgCloseWindow_ResponsableEvento_Click"></asp:ImageButton></td>
+                    </tr>
+                </table>
+            </asp:Panel>
+            <asp:Panel ID="pnlPopUp_ResponsableEventoBody" runat="server" CssClass="PopUpBody">
+                <table class="PopUpBodyTable">
+                    <tr>
+                        <td class="Etiqueta">Orden Anterior</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpResponsableEvento_OrdenAnterior" runat="server" CssClass="Textbox_General_Disabled" Enabled="false" MaxLength="3" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Nuevo Orden</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpResponsableEvento_Orden" runat="server" CssClass="Textbox_General" MaxLength="3" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Nombre</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpResponsableEvento_Nombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Puesto</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpResponsableEvento_Puesto" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Botones" colspan="3">
+                            <asp:Button ID="btnPopUp_ResponsableEventoCommand" runat="server" Text="" CssClass="Button_General" Width="175px" OnClick="btnPopUp_ResponsableEventoCommand_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Mensajes" colspan="3">
+                            <asp:Label ID="lblPopUp_ResponsableEventoMessage" runat="server" CssClass="PopUpTextMessage"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+        </asp:Panel>
+    </asp:Panel>
+
+    <asp:Panel ID="pnlPopUp_ResponsableLogistica" runat="server" CssClass="PopUpBlock">
+        <asp:Panel ID="pnlPopUp_ResponsableLogisticaContent" runat="server" CssClass="PopUpContent" style="margin-top:-125px; margin-left:-245px;" Height="250px" Width="490px">
+            <asp:Panel ID="pnlPopUp_ResponsableLogisticaHeader" runat="server" CssClass="PopUpHeader">
+                <table class="PopUpHeaderTable">
+                    <tr>
+                        <td class="Espacio"></td>
+                        <td class="Etiqueta"><asp:Label ID="lblPopUp_ResponsableLogisticaTitle" runat="server" CssClass="PopUpHeaderTitle"></asp:Label></td>
+                        <td class="Cierre"><asp:ImageButton ID="imgCloseWindow_ResponsableLogistica" runat="server" ImageUrl="~/Include/Image/Buttons/CloseWindow.png" ToolTip="Cerrar Ventana" OnClick="imgCloseWindow_ResponsableLogistica_Click"></asp:ImageButton></td>
+                    </tr>
+                </table>
+            </asp:Panel>
+            <asp:Panel ID="pnlPopUp_ResponsableLogisticaBody" runat="server" CssClass="PopUpBody">
+                <table class="PopUpBodyTable">
+                    <tr>
+                        <td class="Etiqueta">Orden Anterior</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpResponsableLogistica_OrdenAnterior" runat="server" CssClass="Textbox_General_Disabled" Enabled="false" MaxLength="3" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Nuevo Orden</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpResponsableLogistica_Orden" runat="server" CssClass="Textbox_General" MaxLength="3" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Nombre</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpResponsableLogistica_Nombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Contacto</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpResponsableLogistica_Puesto" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Botones" colspan="3">
+                            <asp:Button ID="btnPopUp_ResponsableLogisticaCommand" runat="server" Text="" CssClass="Button_General" Width="175px" OnClick="btnPopUp_ResponsableLogisticaCommand_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Mensajes" colspan="3">
+                            <asp:Label ID="lblPopUp_ResponsableLogisticaMessage" runat="server" CssClass="PopUpTextMessage"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+        </asp:Panel>
     </asp:Panel>
 
     <asp:HiddenField ID="hddEventoId" runat="server" Value="0" />

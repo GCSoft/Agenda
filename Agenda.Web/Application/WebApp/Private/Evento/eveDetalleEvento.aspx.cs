@@ -323,6 +323,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
 				}
 
+                this.EnviarCuadernilloPanel.Visible = false;
+
             }catch (Exception ex){
 				throw(ex);
             }

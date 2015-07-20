@@ -2022,23 +2022,18 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                                         wText.CharacterFormat.FontSize = 13f;
 
                                         wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-                                        wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[0].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
                                         wTableRow.Cells[0].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                                        wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                                        wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[0].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                                        wTableRow.Cells[0].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
                                         wTableRow.Cells[0].CellFormat.BackColor = System.Drawing.ColorTranslator.FromHtml("#CCFFCC");
-                                        wTableRow.Cells[0].Width = 509;
+                                        wTableRow.Cells[0].Width = 500;
+
+                                        wTableRow.Cells[0].CellFormat.HorizontalMerge = CellMerge.Start;
+                                        wTableRow.Cells[1].CellFormat.HorizontalMerge = CellMerge.Continue;
 
                                         // Celda 2
-                                        wTableCell = wTableRow.Cells[1].AddParagraph();
-                                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-
-                                        wTableRow.Cells[1].CellFormat.Borders.Left.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                                        wTableRow.Cells[1].CellFormat.Borders.Top.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                                        wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                                        wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                                        wTableRow.Cells[1].CellFormat.BackColor = System.Drawing.ColorTranslator.FromHtml("#CCFFCC");
-                                        wTableRow.Cells[1].Width = 1;
+                                        wTableRow.Cells[1].Width = 10;
 
                                     }else{
 
@@ -2135,7 +2130,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         FileName = FileName.Replace(currentChar.ToString(), "");
                     }
 
-                    FileName = ( FileName.Length > 60 ? FileName.Substring(0, 60) : FileName ) + ".doc";
+                    FileName = ( FileName.Length > 40 ? FileName.Substring(0, 40) : FileName ) + ".doc";
 
                     WDocument.Save( FileName, Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment );
                 }

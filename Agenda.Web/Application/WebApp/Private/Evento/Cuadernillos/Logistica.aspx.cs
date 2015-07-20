@@ -2730,7 +2730,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         FileName = FileName.Replace(currentChar.ToString(), "");
                     }
 
-                    FileName = ( FileName.Length > 60 ? FileName.Substring(0, 60) : FileName ) + ".doc";
+                    FileName = ( FileName.Length > 40 ? FileName.Substring(0, 40) : FileName ) + ".doc";
 
                     oDocument.Save( FileName, Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment );
                 }
