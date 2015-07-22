@@ -53,6 +53,35 @@ namespace Agenda.BusinessProcess.Object
         }
 
         ///<remarks>
+        ///   <name>BPReporte.SelectReporte_ContenidoPrensa</name>
+        ///   <create>21-Octubre-2013</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene el reporte de Agenda Diaria</summary>
+        ///<param name="oENTReporte">Entidad de Reporte con los filtros necesarios para la consulta</param>
+        ///<returns>Una entidad de respuesta</returns>
+        public ENTResponse SelectReporte_ContenidoPrensa(ENTReporte oENTReporte){
+            DAReporte oDAReporte = new DAReporte();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            try
+            {
+
+                // Transacción en base de datos
+                oENTResponse = oDAReporte.SelectReporte_ContenidoPrensa(oENTReporte, this.ConnectionApplication, 0);
+
+                // Validación de error en consulta
+                if (oENTResponse.GeneratesException) { return oENTResponse; }
+
+            }catch (Exception ex){
+                oENTResponse.ExceptionRaised(ex.Message);
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
         ///   <name>BPReporte.SelectReporte_InvitacionPrensa</name>
         ///   <create>21-Octubre-2013</create>
         ///   <author>Ruben.Cobos</author>

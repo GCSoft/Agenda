@@ -394,7 +394,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wTableCell = wTableRow.Cells[3].AddParagraph();
                         wTableRow.Cells[3].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-                        wText = wTableCell.AppendText(oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoHorario"].ToString());
+                        wText = wTableCell.AppendText(oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoHorario"].ToString().ToUpper());
                         wText.CharacterFormat.Bold = true;
                         wText.CharacterFormat.FontName = "Arial";
                         wText.CharacterFormat.FontSize = 10f;
@@ -1862,7 +1862,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                             WTable tListadoAdicional;
 
                             tListadoAdicional = new WTable(oDocument, false);
-                            tListadoAdicional.ResetCells(oENTResponse.DataSetResponse.Tables[8].Rows.Count, 1);
+                            tListadoAdicional.ResetCells(oENTResponse.DataSetResponse.Tables[15].Rows.Count, 1);
                             tListadoAdicional.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
 
                             int Fila = 0;

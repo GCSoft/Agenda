@@ -527,7 +527,7 @@
         </Style>
       </Rectangle>
     </ReportItems>
-    <Height>23cm</Height>
+    <Height>22.41792cm</Height>
     <Style />
   </Body>
   <Width>19.08678cm</Width>
@@ -673,7 +673,7 @@
               </Style>
             </Paragraph>
           </Paragraphs>
-          <Top>0.04167in</Top>
+          <Top>0.00417in</Top>
           <Left>4.63656in</Left>
           <Height>0.15104in</Height>
           <Width>2.84375in</Width>
@@ -706,7 +706,7 @@
               </Style>
             </Paragraph>
           </Paragraphs>
-          <Top>0.04167in</Top>
+          <Top>0.00417in</Top>
           <Left>0.03417in</Left>
           <Height>0.15104in</Height>
           <Width>2.84375in</Width>

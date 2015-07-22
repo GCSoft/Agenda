@@ -133,6 +133,7 @@
     <Content Include="Application\WebApp\Private\Invitacion\invRechazar.aspx" />
     <Content Include="Application\WebApp\Private\Reportes\repAgendaDiaria.aspx" />
     <Content Include="Application\WebApp\Private\Reportes\repEvento.aspx" />
+    <Content Include="Application\WebApp\Private\Reportes\repEventoDetalle.aspx" />
     <Content Include="Application\WebApp\Private\Reportes\repInvitacion.aspx" />
     <Content Include="Application\WebApp\Private\Reportes\repInvitacionDetalle.aspx" />
     <Content Include="Application\WebApp\Private\Reportes\repInvitacionPrensa.aspx" />
@@ -263,6 +264,8 @@
     <Content Include="Include\Image\Buttons\PrioridadAlta.png" />
     <Content Include="Include\Image\Buttons\PrioridadBaja.png" />
     <Content Include="Include\Image\Buttons\PrioridadMedia.png" />
+    <Content Include="Include\Image\Buttons\Reporte.png" />
+    <Content Include="Include\Image\Buttons\Reporte_Over.png" />
     <Content Include="Include\Image\Cuadernillo\LogoSolo.png" />
     <Content Include="Include\Image\Cuadernillo\Montaje1.png" />
     <Content Include="Include\Image\Cuadernillo\Montaje2.png" />
@@ -668,6 +671,13 @@
     <Compile Include="Application\WebApp\Private\Reportes\repEvento.aspx.designer.cs">
       <DependentUpon>repEvento.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Application\WebApp\Private\Reportes\repEventoDetalle.aspx.cs">
+      <DependentUpon>repEventoDetalle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\WebApp\Private\Reportes\repEventoDetalle.aspx.designer.cs">
+      <DependentUpon>repEventoDetalle.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Application\WebApp\Private\Reportes\repInvitacion.aspx.cs">
       <DependentUpon>repInvitacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -842,6 +852,7 @@
   <ItemGroup>
     <EmbeddedResource Include="Application\WebApp\Private\Reportes\RDLC\rptAgendaDiaria.rdlc" />
     <EmbeddedResource Include="Application\WebApp\Private\Reportes\RDLC\rptEvento.rdlc" />
+    <EmbeddedResource Include="Application\WebApp\Private\Reportes\RDLC\rptEventoDetalle.rdlc" />
     <EmbeddedResource Include="Application\WebApp\Private\Reportes\RDLC\rptInvitacion.rdlc" />
     <EmbeddedResource Include="Application\WebApp\Private\Reportes\RDLC\rptInvitacionDetalle.rdlc" />
     <EmbeddedResource Include="Application\WebApp\Private\Reportes\RDLC\rptInvitacionPrensa.rdlc" />

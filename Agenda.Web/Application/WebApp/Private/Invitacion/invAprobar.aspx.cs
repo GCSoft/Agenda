@@ -70,7 +70,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
                 // Carátula compacta
                 this.lblEventoNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoNombre"].ToString();
-                this.lblEventoFechaHora.Text = "Del " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHoraInicioTexto"].ToString() + " al " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHoraFinTexto"].ToString();
+                this.lblEventoFechaHora.Text = "Del " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHora"].ToString();
 
                 // Validación de envío de correos
                 if (oENTResponse.DataSetResponse.Tables[1].Rows[0]["SecretarioId_Representante"].ToString() != "0"){
@@ -107,7 +107,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 
                 // Validaciones
                 if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+                // if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
 
             }catch (Exception ex){
                 throw (ex);

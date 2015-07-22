@@ -1153,6 +1153,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                     // Limpiar formulario
                     this.txtPopUp_TrasladoHelicopteroDetalle.Text = "";
+                    this.lblComiteHelipuerto.Visible = false;
                     
                     this.wucPopUp_TrasladoHelicopteroCalendarInicio.SetDate(DateTime.Parse(this.GiraFechaInicio.Value));
                     this.wucPopUp_TrasladoHelicopteroCalendarFin.SetDate(DateTime.Parse(this.GiraFechaInicio.Value));

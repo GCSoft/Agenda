@@ -38,7 +38,7 @@
                 <ContentTemplate>
                     <br />
                     <table class="FormTable">
-                        <tr>
+                        <%--<tr>
 				            <td class="Etiqueta">Tipo de cita</td>
 				            <td class="VinetaObligatorio">*</td>
 				            <td class="Campo"><asp:DropDownList ID="ddlCategoria" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
@@ -55,7 +55,7 @@
 				            <td class="VinetaObligatorio">*</td>
 				            <td class="Campo"><asp:DropDownList ID="ddlPrioridad" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
                             <td></td>
-			            </tr>
+			            </tr>--%>
                         <tr>
 				            <td class="Etiqueta">Secretario ramo</td>
 				            <td class="VinetaObligatorio">*</td>

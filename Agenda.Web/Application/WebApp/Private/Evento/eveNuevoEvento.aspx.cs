@@ -204,9 +204,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Formulario
 
                 #region TAB - Datos generales
-                    oENTEvento.CategoriaId = Int32.Parse( this.ddlCategoria.SelectedItem.Value );
-                    oENTEvento.ConductoId = Int32.Parse(this.ddlConducto.SelectedItem.Value);
-                    oENTEvento.PrioridadId = Int32.Parse(this.ddlPrioridad.SelectedItem.Value);
+                    oENTEvento.CategoriaId = 2; //Int32.Parse( this.ddlCategoria.SelectedItem.Value );
+                    oENTEvento.ConductoId = 1; // Int32.Parse(this.ddlConducto.SelectedItem.Value);
+                    oENTEvento.PrioridadId = 1; // Int32.Parse(this.ddlPrioridad.SelectedItem.Value);
                     oENTEvento.SecretarioId_Ramo = Int32.Parse(this.hddSecretarioRamoId.Value);
                     oENTEvento.SecretarioId_Responsable = Int32.Parse(this.hddResponsableId.Value);
                     oENTEvento.EventoObservaciones = this.ckeObservaciones.Text.Trim();
@@ -263,9 +263,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             {
 
                 // TAB - Datos generales
-                this.ddlCategoria.SelectedIndex = 0;
-                this.ddlConducto.SelectedIndex = 0;
-                this.ddlPrioridad.SelectedIndex = 0;
+                //this.ddlCategoria.SelectedIndex = 0;
+                //this.ddlConducto.SelectedIndex = 0;
+                //this.ddlPrioridad.SelectedIndex = 0;
 
                 this.txtSecretarioRamo.Text = "";
                 this.hddSecretarioRamoId.Value = "";
@@ -302,82 +302,117 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Foco y pestaña
                 this.tabEvento.ActiveTabIndex = 0;
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlCategoria.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtSecretarioRamo.ClientID + "'); }", true);
 
             }catch (Exception ex){
                 throw (ex);
             }
         }
 
-        void SelectCategoria(){
-            ENTResponse oENTResponse = new ENTResponse();
-            ENTCategoria oENTCategoria = new ENTCategoria();
+        //void SelectCategoria(){
+        //    ENTResponse oENTResponse = new ENTResponse();
+        //    ENTCategoria oENTCategoria = new ENTCategoria();
 
-            BPCategoria oBPCategoria = new BPCategoria();
+        //    BPCategoria oBPCategoria = new BPCategoria();
 
-            try
-            {
+        //    try
+        //    {
 
-                // Formulario
-                oENTCategoria.CategoriaId = 0;
-                oENTCategoria.Nombre = "";
-                oENTCategoria.Activo = 1;
+        //        // Formulario
+        //        oENTCategoria.CategoriaId = 0;
+        //        oENTCategoria.Nombre = "";
+        //        oENTCategoria.Activo = 1;
 
-                // Transacción
-                oENTResponse = oBPCategoria.SelectCategoria(oENTCategoria);
+        //        // Transacción
+        //        oENTResponse = oBPCategoria.SelectCategoria(oENTCategoria);
 
-                // Validaciones
-                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+        //        // Validaciones
+        //        if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+        //        if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
 
-                // Llenado de combo
-                this.ddlCategoria.DataTextField = "Nombre";
-                this.ddlCategoria.DataValueField = "CategoriaId";
-                this.ddlCategoria.DataSource = oENTResponse.DataSetResponse.Tables[1];
-                this.ddlCategoria.DataBind();
+        //        // Llenado de combo
+        //        this.ddlCategoria.DataTextField = "Nombre";
+        //        this.ddlCategoria.DataValueField = "CategoriaId";
+        //        this.ddlCategoria.DataSource = oENTResponse.DataSetResponse.Tables[1];
+        //        this.ddlCategoria.DataBind();
 
-                // Agregar Item de selección
-                this.ddlCategoria.Items.Insert(0, new ListItem("[Seleccione]", "0"));
+        //        // Agregar Item de selección
+        //        this.ddlCategoria.Items.Insert(0, new ListItem("[Seleccione]", "0"));
 
-            }catch (Exception ex){
-                throw (ex);
-            }
-        }
+        //    }catch (Exception ex){
+        //        throw (ex);
+        //    }
+        //}
 
-        void SelectConducto(){
-            ENTResponse oENTResponse = new ENTResponse();
-            ENTConducto oENTConducto = new ENTConducto();
+        //void SelectConducto(){
+        //    ENTResponse oENTResponse = new ENTResponse();
+        //    ENTConducto oENTConducto = new ENTConducto();
 
-            BPConducto oBPConducto = new BPConducto();
+        //    BPConducto oBPConducto = new BPConducto();
 
-            try
-            {
+        //    try
+        //    {
 
-                // Formulario
-                oENTConducto.ConductoId = 0;
-                oENTConducto.Nombre = "";
-                oENTConducto.Activo = 1;
+        //        // Formulario
+        //        oENTConducto.ConductoId = 0;
+        //        oENTConducto.Nombre = "";
+        //        oENTConducto.Activo = 1;
 
-                // Transacción
-                oENTResponse = oBPConducto.SelectConducto(oENTConducto);
+        //        // Transacción
+        //        oENTResponse = oBPConducto.SelectConducto(oENTConducto);
 
-                // Validaciones
-                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+        //        // Validaciones
+        //        if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+        //        if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
 
-                // Llenado de combo
-                this.ddlConducto.DataTextField = "Nombre";
-                this.ddlConducto.DataValueField = "ConductoId";
-                this.ddlConducto.DataSource = oENTResponse.DataSetResponse.Tables[1];
-                this.ddlConducto.DataBind();
+        //        // Llenado de combo
+        //        this.ddlConducto.DataTextField = "Nombre";
+        //        this.ddlConducto.DataValueField = "ConductoId";
+        //        this.ddlConducto.DataSource = oENTResponse.DataSetResponse.Tables[1];
+        //        this.ddlConducto.DataBind();
 
-                // Agregar Item de selección
-                this.ddlConducto.Items.Insert(0, new ListItem("[Seleccione]", "0"));
+        //        // Agregar Item de selección
+        //        this.ddlConducto.Items.Insert(0, new ListItem("[Seleccione]", "0"));
 
-            }catch (Exception ex){
-                throw (ex);
-            }
-        }
+        //    }catch (Exception ex){
+        //        throw (ex);
+        //    }
+        //}
+
+        //void SelectPrioridad(){
+        //    ENTResponse oENTResponse = new ENTResponse();
+        //    ENTPrioridad oENTPrioridad = new ENTPrioridad();
+
+        //    BPPrioridad oBPPrioridad = new BPPrioridad();
+
+        //    try
+        //    {
+
+        //        // Formulario
+        //        oENTPrioridad.PrioridadId = 0;
+        //        oENTPrioridad.Nombre = "";
+        //        oENTPrioridad.Activo = 1;
+
+        //        // Transacción
+        //        oENTResponse = oBPPrioridad.SelectPrioridad(oENTPrioridad);
+
+        //        // Validaciones
+        //        if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+        //        if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+        //        // Llenado de combo
+        //        this.ddlPrioridad.DataTextField = "Nombre";
+        //        this.ddlPrioridad.DataValueField = "PrioridadId";
+        //        this.ddlPrioridad.DataSource = oENTResponse.DataSetResponse.Tables[1];
+        //        this.ddlPrioridad.DataBind();
+
+        //        // Agregar Item de selección
+        //        this.ddlPrioridad.Items.Insert(0, new ListItem("[Seleccione]", "0"));
+
+        //    }catch (Exception ex){
+        //        throw (ex);
+        //    }
+        //}
 
         void SelectLugarEvento(){
             ENTLugarEvento oENTLugarEvento = new ENTLugarEvento();
@@ -416,41 +451,6 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             }
         }
 
-        void SelectPrioridad(){
-            ENTResponse oENTResponse = new ENTResponse();
-            ENTPrioridad oENTPrioridad = new ENTPrioridad();
-
-            BPPrioridad oBPPrioridad = new BPPrioridad();
-
-            try
-            {
-
-                // Formulario
-                oENTPrioridad.PrioridadId = 0;
-                oENTPrioridad.Nombre = "";
-                oENTPrioridad.Activo = 1;
-
-                // Transacción
-                oENTResponse = oBPPrioridad.SelectPrioridad(oENTPrioridad);
-
-                // Validaciones
-                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
-
-                // Llenado de combo
-                this.ddlPrioridad.DataTextField = "Nombre";
-                this.ddlPrioridad.DataValueField = "PrioridadId";
-                this.ddlPrioridad.DataSource = oENTResponse.DataSetResponse.Tables[1];
-                this.ddlPrioridad.DataBind();
-
-                // Agregar Item de selección
-                this.ddlPrioridad.Items.Insert(0, new ListItem("[Seleccione]", "0"));
-
-            }catch (Exception ex){
-                throw (ex);
-            }
-        }
-
         void ValidarFormulario(){
             String ErrorDetailHour = "";
 
@@ -458,20 +458,20 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             {
 
                 // TAB - Datos generales
-                if ( this.ddlCategoria.SelectedIndex == 0 ) {
-                    this.tabEvento.ActiveTabIndex = 0;
-                    throw (new Exception("Es necesario seleccionar un Tipo de cita"));
-                }
+                //if ( this.ddlCategoria.SelectedIndex == 0 ) {
+                //    this.tabEvento.ActiveTabIndex = 0;
+                //    throw (new Exception("Es necesario seleccionar un Tipo de cita"));
+                //}
 
-                if ( this.ddlConducto.SelectedIndex == 0 ) {
-                    this.tabEvento.ActiveTabIndex = 0;
-                    throw (new Exception("Es necesario seleccionar un Conducto"));
-                }
+                //if ( this.ddlConducto.SelectedIndex == 0 ) {
+                //    this.tabEvento.ActiveTabIndex = 0;
+                //    throw (new Exception("Es necesario seleccionar un Conducto"));
+                //}
                 
-                if ( this.ddlPrioridad.SelectedIndex == 0 ) {
-                    this.tabEvento.ActiveTabIndex = 0;
-                    throw (new Exception("Es necesario seleccionar una Prioridad"));
-                }
+                //if ( this.ddlPrioridad.SelectedIndex == 0 ) {
+                //    this.tabEvento.ActiveTabIndex = 0;
+                //    throw (new Exception("Es necesario seleccionar una Prioridad"));
+                //}
 
                 if( this.hddSecretarioRamoId.Value.Trim() == "" || this.hddSecretarioRamoId.Value.Trim() == "0" ){
                     this.tabEvento.ActiveTabIndex = 0;
@@ -704,9 +704,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 if (this.IsPostBack) { return; }
 
                 // Llenado de controles
-                SelectCategoria();
-                SelectConducto();
-                SelectPrioridad();
+                //SelectCategoria();
+                //SelectConducto();
+                //SelectPrioridad();
 
                 // Estado inicial
                 this.wucCalendarInicio.Width = 176;
@@ -723,7 +723,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Foco
                 this.tabEvento.ActiveTabIndex = 0;
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlCategoria.ClientID + "'); }", true);
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtSecretarioRamo.ClientID + "'); }", true);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); }", true);

@@ -79,7 +79,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.lblEstatusEventoNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["EstatusEventoNombre"].ToString();
 
                 this.lblCategoriaNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["CategoriaNombre"].ToString();
-                this.lblConductoNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConductoNombre"].ToString();
+                this.lblConductoNombre.Text = ( oENTResponse.DataSetResponse.Tables[1].Rows[0]["InvitacionId"].ToString() == "0" ? oENTResponse.DataSetResponse.Tables[1].Rows[0]["Dependencia"].ToString() : oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConductoNombre"].ToString() );
                 this.lblPrioridadNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["PrioridadNombre"].ToString();
 
                 this.lblSecretarioRamoNombre.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["SecretarioRamoNombre"].ToString();
