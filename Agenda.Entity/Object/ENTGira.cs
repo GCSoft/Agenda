@@ -44,6 +44,7 @@ namespace Agenda.Entity.Object
         private String  _HelipuertoDomicilio;
         private String  _HelipuertoCoordenadas;
         private DataTable   _DataTableComiteRecepcion;
+        private DataTable   _DataTableAcompanaHelipuerto;
         private DataTable   _DataTableComiteHelipuerto;
         private DataTable   _DataTableMedioTraslado;
         private DataTable   _DataTableOrdenDia;
@@ -91,6 +92,7 @@ namespace Agenda.Entity.Object
             _HelipuertoDomicilio = "";
             _HelipuertoCoordenadas = "";
             _DataTableComiteRecepcion = null;
+            _DataTableAcompanaHelipuerto = null;
             _DataTableComiteHelipuerto = null;
             _DataTableMedioTraslado = null;
             _DataTableOrdenDia = null;
@@ -406,6 +408,18 @@ namespace Agenda.Entity.Object
         {
             get { return _DataTableComiteRecepcion; }
             set { _DataTableComiteRecepcion = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.DataTableAcompanaHelipuerto</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        ///<summary>Obtiene/Asigna un DataTable el cual contiene el detalle del comité de recepción del helipuerto</summary>
+        public DataTable DataTableAcompanaHelipuerto
+        {
+            get { return _DataTableAcompanaHelipuerto; }
+            set { _DataTableAcompanaHelipuerto = value; }
         }
 
         ///<remarks>

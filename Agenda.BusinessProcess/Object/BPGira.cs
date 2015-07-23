@@ -440,6 +440,35 @@ namespace Agenda.BusinessProcess.Object
         }
 
         ///<remarks>
+        ///   <name>BPGira.UpdateGiraAcompanaHelipuerto_Item</name>
+        ///   <create>07-Enero-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public ENTResponse UpdateGiraAcompanaHelipuerto_Item(ENTGira oENTGira){
+            DAGira oDAGira = new DAGira();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            try
+            {
+
+                // Transacción en base de datos
+                oENTResponse = oDAGira.UpdateGiraAcompanaHelipuerto_Item(oENTGira, this.ConnectionApplication, 0);
+
+                // Validación de error en consulta
+                if (oENTResponse.GeneratesException) { return oENTResponse; }
+
+                // Validación de mensajes de la BD
+                oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
+
+            }catch (Exception ex){
+                oENTResponse.ExceptionRaised(ex.Message);
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
         ///   <name>BPGira.UpdateGiraComiteRecepcion_Item</name>
         ///   <create>07-Enero-2014</create>
         ///   <author>Ruben.Cobos</author>

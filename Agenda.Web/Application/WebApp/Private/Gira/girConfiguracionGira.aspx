@@ -387,6 +387,74 @@
                             </table>
                         </ContentTemplate>
                     </asp:TabPanel>
+                    <asp:TabPanel ID="tpnlAcompana_TrasladoHelicoptero" runat="server">
+                        <HeaderTemplate>Acompañantes</HeaderTemplate>
+                        <ContentTemplate>
+                            <br />
+                            <table class="FormTable">
+                                <tr>
+                                    <td class="Etiqueta">Nombre</td>
+                                    <td class="VinetaObligatorio"></td>
+                                    <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroAcompanaNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="375px"></asp:TextBox></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="Etiqueta">Puesto</td>
+                                    <td class="VinetaObligatorio"></td>
+                                    <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroAcompanaPuesto" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="375px"></asp:TextBox></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+				                    <td class="Etiqueta"><asp:Button ID="btnAgregarAcompanaHelipuerto" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarAcompanaHelipuerto_Click" /></td>
+				                    <td class="Espacio"></td>
+				                    <td colspan="2"><asp:Label ID="lblAcompanaHelipuerto" runat="server" CssClass="PopUpTextMessage" Text="Es necesario confirmar la transacción para poder editar" Visible="false"></asp:Label></td>
+			                    </tr>
+                                <tr><td colspan="4" style="height:10px;"></td></tr>
+                                <tr>
+                                    <td colspan="4">
+                                        <div style="border:0px solid #000000; clear:both; position:relative; width:100%;">
+                                            <table cellspacing="0" rules="all" border="1" style="border-collapse:collapse; width:550px;">
+                                                <tr class="Grid_Header_PopUp">
+                                                    <th scope="col" style="width:80px;">Orden</th>
+                                                    <th scope="col" style="width:200px;">Nombre</th>
+										            <th scope="col" style="width:270px;">Puesto</th>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div style="border:1px solid #C1C1C1; height:185px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:548px">
+                                            <asp:GridView ID="gvAcompanaHelipuerto" runat="server" AllowPaging="false" AllowSorting="True" AutoGenerateColumns="False" ShowHeader="false" Width="100%"
+                                                DataKeyNames="Orden,Nombre,Puesto"
+                                                OnRowCommand="gvAcompanaHelipuerto_RowCommand"
+                                                OnRowDataBound="gvAcompanaHelipuerto_RowDataBound"
+                                                OnSorting="gvAcompanaHelipuerto_Sorting">
+                                                <RowStyle CssClass="Grid_Row_Scroll" />
+                                                <EmptyDataTemplate>
+                                                    <div style="border:0px; clear:both; color:#675C9D; font:11px Tahoma; font-weight:normal; height:15px; position:relative; text-align:center; width:100%;">
+                                                        No se han capturado los acompañantes
+                                                    </div>
+                                                </EmptyDataTemplate>
+                                                <Columns>
+                                                    <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="78px"  DataField="Orden"   SortExpression="Orden"></asp:BoundField>
+                                                    <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="194px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
+                                                    <asp:BoundField HeaderText="Puesto" ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
+                                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
+                                                        <ItemTemplate>
+                                                            <asp:ImageButton ID="imgEdit" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Editar" ImageUrl="~/Include/Image/Buttons/Edit.png" runat="server" />
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
+                                                        <ItemTemplate>
+                                                            <asp:ImageButton ID="imgDelete" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Eliminar" ImageUrl="~/Include/Image/Buttons/Delete.png" runat="server" />
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                            </asp:GridView>
+                                        </div>
+                                    </td>
+			                    </tr>
+                            </table>
+                        </ContentTemplate>
+                    </asp:TabPanel>
                 </asp:TabContainer>
                 <table class="PopUpBodyTable">
                     <tr>
@@ -1164,6 +1232,62 @@
                     <tr>
                         <td class="Mensajes" colspan="3">
                             <asp:Label ID="lblPopUp_ComiteHelipuertoMessage" runat="server" CssClass="PopUpTextMessage"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+        </asp:Panel>
+    </asp:Panel>
+
+    <asp:Panel ID="pnlPopUp_AcompanaHelipuerto" runat="server" CssClass="PopUpBlock">
+        <asp:Panel ID="pnlPopUp_AcompanaHelipuertoContent" runat="server" CssClass="PopUpContent" style="margin-top:-125px; margin-left:-245px;" Height="250px" Width="490px">
+            <asp:Panel ID="pnlPopUp_AcompanaHelipuertoHeader" runat="server" CssClass="PopUpHeader">
+                <table class="PopUpHeaderTable">
+                    <tr>
+                        <td class="Espacio"></td>
+                        <td class="Etiqueta"><asp:Label ID="lblPopUp_AcompanaHelipuertoTitle" runat="server" CssClass="PopUpHeaderTitle"></asp:Label></td>
+                        <td class="Cierre"><asp:ImageButton ID="imgCloseWindow_AcompanaHelipuerto" runat="server" ImageUrl="~/Include/Image/Buttons/CloseWindow.png" ToolTip="Cerrar Ventana" OnClick="imgCloseWindow_AcompanaHelipuerto_Click"></asp:ImageButton></td>
+                    </tr>
+                </table>
+            </asp:Panel>
+            <asp:Panel ID="pnlPopUp_AcompanaHelipuertoBody" runat="server" CssClass="PopUpBody">
+                <table class="PopUpBodyTable">
+                    <tr>
+                        <td class="Etiqueta">Orden Anterior</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpAcompanaHelipuerto_OrdenAnterior" runat="server" CssClass="Textbox_General_Disabled" Enabled="false" MaxLength="3" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Nuevo Orden</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpAcompanaHelipuerto_Orden" runat="server" CssClass="Textbox_General" MaxLength="3" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Nombre</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpAcompanaHelipuerto_Nombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Puesto</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpAcompanaHelipuerto_Puesto" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Botones" colspan="3">
+                            <asp:Button ID="btnPopUp_AcompanaHelipuertoCommand" runat="server" Text="" CssClass="Button_General" Width="175px" OnClick="btnPopUp_AcompanaHelipuertoCommand_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Mensajes" colspan="3">
+                            <asp:Label ID="lblPopUp_AcompanaHelipuertoMessage" runat="server" CssClass="PopUpTextMessage"></asp:Label>
                         </td>
                     </tr>
                 </table>

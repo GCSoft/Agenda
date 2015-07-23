@@ -562,6 +562,60 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         protected global::System.Web.UI.WebControls.GridView gvComiteHelipuerto;
         
         /// <summary>
+        /// tpnlAcompana_TrasladoHelicoptero control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.TabPanel tpnlAcompana_TrasladoHelicoptero;
+        
+        /// <summary>
+        /// txtPopUp_TrasladoHelicopteroAcompanaNombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUp_TrasladoHelicopteroAcompanaNombre;
+        
+        /// <summary>
+        /// txtPopUp_TrasladoHelicopteroAcompanaPuesto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUp_TrasladoHelicopteroAcompanaPuesto;
+        
+        /// <summary>
+        /// btnAgregarAcompanaHelipuerto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarAcompanaHelipuerto;
+        
+        /// <summary>
+        /// lblAcompanaHelipuerto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAcompanaHelipuerto;
+        
+        /// <summary>
+        /// gvAcompanaHelipuerto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvAcompanaHelipuerto;
+        
+        /// <summary>
         /// btnPopUp_TrasladoHelicopteroCommand control.
         /// </summary>
         /// <remarks>
@@ -1649,6 +1703,114 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblPopUp_ComiteHelipuertoMessage;
+        
+        /// <summary>
+        /// pnlPopUp_AcompanaHelipuerto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_AcompanaHelipuerto;
+        
+        /// <summary>
+        /// pnlPopUp_AcompanaHelipuertoContent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_AcompanaHelipuertoContent;
+        
+        /// <summary>
+        /// pnlPopUp_AcompanaHelipuertoHeader control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_AcompanaHelipuertoHeader;
+        
+        /// <summary>
+        /// lblPopUp_AcompanaHelipuertoTitle control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPopUp_AcompanaHelipuertoTitle;
+        
+        /// <summary>
+        /// imgCloseWindow_AcompanaHelipuerto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgCloseWindow_AcompanaHelipuerto;
+        
+        /// <summary>
+        /// pnlPopUp_AcompanaHelipuertoBody control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlPopUp_AcompanaHelipuertoBody;
+        
+        /// <summary>
+        /// txtPopUpAcompanaHelipuerto_OrdenAnterior control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpAcompanaHelipuerto_OrdenAnterior;
+        
+        /// <summary>
+        /// txtPopUpAcompanaHelipuerto_Orden control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpAcompanaHelipuerto_Orden;
+        
+        /// <summary>
+        /// txtPopUpAcompanaHelipuerto_Nombre control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpAcompanaHelipuerto_Nombre;
+        
+        /// <summary>
+        /// txtPopUpAcompanaHelipuerto_Puesto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtPopUpAcompanaHelipuerto_Puesto;
+        
+        /// <summary>
+        /// btnPopUp_AcompanaHelipuertoCommand control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnPopUp_AcompanaHelipuertoCommand;
+        
+        /// <summary>
+        /// lblPopUp_AcompanaHelipuertoMessage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPopUp_AcompanaHelipuertoMessage;
         
         /// <summary>
         /// pnlPopUp_ComiteRecepcion control.

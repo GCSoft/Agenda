@@ -566,6 +566,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 ClearPopUpPanel_LugarEvento();
                 ClearPopUp_ComentarioEnCuadernilloPanel();
 
+                ClearPopUp_AcompanaHelipuertoPanel();
                 ClearPopUp_ComiteHelipuertoPanel();
                 ClearPopUp_ComiteRecepcionPanel();
                 ClearPopUp_OrdenDiaPanel();
@@ -1155,6 +1156,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Limpiar formulario
                     this.txtPopUp_TrasladoHelicopteroDetalle.Text = "";
                     this.lblComiteHelipuerto.Visible = false;
+                    this.lblAcompanaHelipuerto.Visible = false;
                     
                     this.wucPopUp_TrasladoHelicopteroCalendarInicio.SetDate(DateTime.Parse(this.GiraFechaInicio.Value));
                     this.wucPopUp_TrasladoHelicopteroCalendarFin.SetDate(DateTime.Parse(this.GiraFechaInicio.Value));
@@ -1174,6 +1176,9 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                     this.gvComiteHelipuerto.DataSource = null;
                     this.gvComiteHelipuerto.DataBind();
+
+                    this.gvAcompanaHelipuerto.DataSource = null;
+                    this.gvAcompanaHelipuerto.DataBind();
 
                     this.rblPopUp_TrasladoHelicopteroTipoGiraConfiguracion.SelectedValue = "2";
 
@@ -1230,6 +1235,23 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                         rowTemporal["Nombre"] = rowComiteHelipuerto["Nombre"];
                         rowTemporal["Puesto"] = rowComiteHelipuerto["Puesto"];
                         oENTGira.DataTableComiteHelipuerto.Rows.Add(rowTemporal);
+                    }
+
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvAcompanaHelipuerto, true);
+
+                    oENTGira.DataTableAcompanaHelipuerto = new DataTable("DataTableAcompanaHelipuerto");
+                    oENTGira.DataTableAcompanaHelipuerto.Columns.Add("Orden", typeof(Int32));
+                    oENTGira.DataTableAcompanaHelipuerto.Columns.Add("Nombre", typeof(String));
+                    oENTGira.DataTableAcompanaHelipuerto.Columns.Add("Puesto", typeof(String));
+                    
+                    foreach( DataRow rowAcompanaHelipuerto in tblTemporal.Rows ){
+
+                        rowTemporal = oENTGira.DataTableAcompanaHelipuerto.NewRow();
+                        rowTemporal["Orden"] = rowAcompanaHelipuerto["Orden"];
+                        rowTemporal["Nombre"] = rowAcompanaHelipuerto["Nombre"];
+                        rowTemporal["Puesto"] = rowAcompanaHelipuerto["Puesto"];
+                        oENTGira.DataTableAcompanaHelipuerto.Rows.Add(rowTemporal);
                     }
 
                     // Transacción
@@ -1299,6 +1321,9 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Comité de recepción del helipuerto
                     this.gvComiteHelipuerto.DataSource = oENTResponse.DataSetResponse.Tables[2];
                     this.gvComiteHelipuerto.DataBind();
+
+                    this.gvAcompanaHelipuerto.DataSource = oENTResponse.DataSetResponse.Tables[7];
+                    this.gvAcompanaHelipuerto.DataBind();
 
                 }catch (Exception ex){
                     throw (ex);
@@ -1401,6 +1426,23 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                         oENTGira.DataTableComiteHelipuerto.Rows.Add(rowTemporal);
                     }
 
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvAcompanaHelipuerto, true);
+
+                    oENTGira.DataTableAcompanaHelipuerto = new DataTable("DataTableAcompanaHelipuerto");
+                    oENTGira.DataTableAcompanaHelipuerto.Columns.Add("Orden", typeof(Int32));
+                    oENTGira.DataTableAcompanaHelipuerto.Columns.Add("Nombre", typeof(String));
+                    oENTGira.DataTableAcompanaHelipuerto.Columns.Add("Puesto", typeof(String));
+                    
+                    foreach( DataRow rowAcompanaHelipuerto in tblTemporal.Rows ){
+
+                        rowTemporal = oENTGira.DataTableAcompanaHelipuerto.NewRow();
+                        rowTemporal["Orden"] = rowAcompanaHelipuerto["Orden"];
+                        rowTemporal["Nombre"] = rowAcompanaHelipuerto["Nombre"];
+                        rowTemporal["Puesto"] = rowAcompanaHelipuerto["Puesto"];
+                        oENTGira.DataTableAcompanaHelipuerto.Rows.Add(rowTemporal);
+                    }
+
                     // Transacción
                     oENTResponse = oBPGira.UpdateGiraConfiguracion(oENTGira);
 
@@ -1471,6 +1513,20 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 }
             }
 
+            protected void imgCloseWindow_TrasladoHelicoptero_Click(object sender, ImageClickEventArgs e){
+                try
+                {
+
+                    // Cancelar transacción
+                    ClearPopUp_TrasladoHelicopteroPanel();
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+                }
+            }
+
+            
+            
             protected void btnAgregarComiteHelipuerto_Click(object sender, EventArgs e){
                 DataTable tblComiteHelipuerto;
                 DataRow rowComiteHelipuerto;
@@ -1634,18 +1690,173 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtPopUp_TrasladoHelicopteroComiteNombre.ClientID + "'); }", true);
                 }
             }
+            
+            
+            
+            protected void btnAgregarAcompanaHelipuerto_Click(object sender, EventArgs e){
+                DataTable tblAcompanaHelipuerto;
+                DataRow rowAcompanaHelipuerto;
 
-            protected void imgCloseWindow_TrasladoHelicoptero_Click(object sender, ImageClickEventArgs e){
                 try
                 {
 
-                    // Cancelar transacción
-                    ClearPopUp_TrasladoHelicopteroPanel();
+                    // Obtener DataTable del grid
+                    tblAcompanaHelipuerto = gcParse.GridViewToDataTable(this.gvAcompanaHelipuerto, false);
+
+                    // Validaciones
+                    if ( this.txtPopUp_TrasladoHelicopteroAcompanaNombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre del acompañante")); }
+                    //if (this.txtPopUp_TrasladoHelicopteroAcompanaPuesto.Text.Trim() == "") { throw (new Exception("Es necesario ingresar un puesto de recepción")); }
+
+                    // Agregar un nuevo elemento
+                    rowAcompanaHelipuerto = tblAcompanaHelipuerto.NewRow();
+                    rowAcompanaHelipuerto["Orden"] = (tblAcompanaHelipuerto.Rows.Count + 1).ToString();
+                    rowAcompanaHelipuerto["Nombre"] = this.txtPopUp_TrasladoHelicopteroAcompanaNombre.Text.Trim();
+                    rowAcompanaHelipuerto["Puesto"] = this.txtPopUp_TrasladoHelicopteroAcompanaPuesto.Text.Trim();
+                    tblAcompanaHelipuerto.Rows.Add(rowAcompanaHelipuerto);
+
+                    // Actualizar Grid
+                    this.gvAcompanaHelipuerto.DataSource = tblAcompanaHelipuerto;
+                    this.gvAcompanaHelipuerto.DataBind();
+
+                    // Inhabilitar edición
+                    InhabilitarEdicion(ref this.gvAcompanaHelipuerto, ref this.lblAcompanaHelipuerto); 
+
+                    // Nueva captura
+                    this.txtPopUp_TrasladoHelicopteroAcompanaNombre.Text = "";
+                    this.txtPopUp_TrasladoHelicopteroAcompanaPuesto.Text = "";
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUp_TrasladoHelicopteroAcompanaNombre.ClientID + "'); }", true);
 
                 }catch (Exception ex){
-                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtPopUp_TrasladoHelicopteroAcompanaNombre.ClientID + "'); }", true);
                 }
             }
+
+            protected void gvAcompanaHelipuerto_RowCommand(object sender, GridViewCommandEventArgs e){
+                DataTable tblAcompanaHelipuerto;
+
+                String strCommand = "";
+                String Orden = "";
+                String Nombre = "";
+                String Puesto = "";
+                Int32 intRow = 0;
+
+                try
+                {
+
+                    // Opción seleccionada
+                    strCommand = e.CommandName.ToString();
+
+                    // Se dispara el evento RowCommand en el ordenamiento
+                    if (strCommand == "Sort") { return; }
+
+                    // Fila
+                    intRow = Int32.Parse(e.CommandArgument.ToString());
+
+                    // Datakeys
+                    Orden = this.gvAcompanaHelipuerto.DataKeys[intRow]["Orden"].ToString();
+                    Nombre = this.gvAcompanaHelipuerto.DataKeys[intRow]["Nombre"].ToString();
+                    Puesto = this.gvAcompanaHelipuerto.DataKeys[intRow]["Puesto"].ToString();
+
+                    // Acción
+                    switch (strCommand){
+
+                        case "Editar":
+
+                            // PopUp de Editar
+                            SetPopUp_AcompanaHelipuertoPanel(Orden, Nombre, Puesto);
+                            break;
+
+                        case "Eliminar":
+
+                            // Obtener DataTable del grid
+                            tblAcompanaHelipuerto = gcParse.GridViewToDataTable(this.gvAcompanaHelipuerto, true);
+
+                            // Remover el elemento
+                            tblAcompanaHelipuerto.Rows.Remove( tblAcompanaHelipuerto.Select("Orden=" + Orden )[0] );
+
+                            // Reordenar los Items restantes
+                            intRow = 0;
+                            foreach( DataRow rowAcompanaHelipuerto in tblAcompanaHelipuerto.Rows ){
+
+                                tblAcompanaHelipuerto.Rows[intRow]["Orden"] = (intRow + 1);
+                                intRow = intRow + 1;
+                            }
+
+                            // Actualizar Grid
+                            this.gvAcompanaHelipuerto.DataSource = tblAcompanaHelipuerto;
+                            this.gvAcompanaHelipuerto.DataBind();
+
+                            // Inhabilitar edición
+                            InhabilitarEdicion(ref this.gvAcompanaHelipuerto, ref this.lblAcompanaHelipuerto); 
+
+                            // Nueva captura
+                            this.txtPopUp_TrasladoHelicopteroAcompanaNombre.Text = "";
+                            this.txtPopUp_TrasladoHelicopteroAcompanaPuesto.Text = "";
+                            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUp_TrasladoHelicopteroAcompanaNombre.ClientID + "'); }", true);
+
+                            break;
+                    }
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtPopUp_TrasladoHelicopteroAcompanaNombre.ClientID + "'); }", true);
+                }
+            }
+
+            protected void gvAcompanaHelipuerto_RowDataBound(object sender, GridViewRowEventArgs e){
+                ImageButton imgDelete = null;
+                ImageButton imgEdit = null;
+
+                String Orden = "";
+                String AcompanaHelipuertoNombre = "";
+
+                String sImagesAttributes = "";
+                String sTootlTip = "";
+
+                try
+                {
+
+                    // Validación de que sea fila
+                    if (e.Row.RowType != DataControlRowType.DataRow) { return; }
+
+                    // Obtener imagenes
+                    imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+                    imgEdit = (ImageButton)e.Row.FindControl("imgEdit");
+
+                    // Datakeys
+                    Orden = this.gvAcompanaHelipuerto.DataKeys[e.Row.RowIndex]["Orden"].ToString();
+                    AcompanaHelipuertoNombre = this.gvAcompanaHelipuerto.DataKeys[e.Row.RowIndex]["Nombre"].ToString();
+
+                    // Tooltip Edición
+                    sTootlTip = "Eliminar a [" + AcompanaHelipuertoNombre + "]";
+                    imgDelete.Attributes.Add("title", sTootlTip);
+
+                    // Atributos Over
+                    sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                    sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit_Over.png';";
+                    e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_Scroll'; " + sImagesAttributes);
+
+                    // Atributos Out
+                    sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                    sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
+                    e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_Scroll'; " + sImagesAttributes);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+
+            }
+
+            protected void gvAcompanaHelipuerto_Sorting(object sender, GridViewSortEventArgs e){
+                try
+                {
+
+                    gcCommon.SortGridView(ref this.gvAcompanaHelipuerto, ref this.hddSort, e.SortExpression, true);
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtPopUp_TrasladoHelicopteroAcompanaNombre.ClientID + "'); }", true);
+                }
+            }
+
             
             
             // Eventos del control de agrupación
@@ -3842,6 +4053,133 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                     // Cancelar transacción
                     ClearPopUp_ComiteHelipuertoPanel();
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+                }
+            }
+
+            
+        #endregion
+
+        #region PopUp - Acompana Helipuerto
+            
+            
+            // Rutinas
+
+            void ClearPopUp_AcompanaHelipuertoPanel(){
+                try
+                {
+
+                    // Estado incial de controles
+                    this.pnlPopUp_AcompanaHelipuerto.Visible = false;
+                    this.lblPopUp_AcompanaHelipuertoTitle.Text = "";
+                    this.btnPopUp_AcompanaHelipuertoCommand.Text = "";
+                    this.lblPopUp_AcompanaHelipuertoMessage.Text = "";
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            void SetPopUp_AcompanaHelipuertoPanel(String Orden, String Nombre, String Puesto){
+                try
+                {
+
+                    // Acciones comunes
+                    this.pnlPopUp_AcompanaHelipuerto.Visible = true;
+                    this.lblAcompanaHelipuerto.Visible = false;
+
+                    // Detalle de acción
+                    this.lblPopUp_AcompanaHelipuertoTitle.Text = "Edición de elemento";
+                    this.btnPopUp_AcompanaHelipuertoCommand.Text = "Actualizar";
+
+                    // Formulario
+                    this.txtPopUpAcompanaHelipuerto_OrdenAnterior.Text = Orden;
+                    this.txtPopUpAcompanaHelipuerto_Orden.Text = Orden;
+                    this.txtPopUpAcompanaHelipuerto_Nombre.Text = Nombre;
+                    this.txtPopUpAcompanaHelipuerto_Puesto.Text = Puesto;
+
+                    // Foco
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUpAcompanaHelipuerto_Orden.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+            
+            void UpdateConfiguracion_AcompanaHelipuerto(){
+                ENTGira oENTGira = new ENTGira();
+                ENTResponse oENTResponse = new ENTResponse();
+                ENTSession oENTSession = new ENTSession();
+
+                BPGira oBPGira = new BPGira();
+
+                try
+                {
+
+                    // Datos de sesión
+                    oENTSession = (ENTSession)this.Session["oENTSession"];
+                    oENTGira.UsuarioId = oENTSession.UsuarioId;
+
+                    // Formulario
+                    oENTGira.GiraId = Int32.Parse(this.hddGiraId.Value);
+                    oENTGira.GiraConfiguracionId = Int32.Parse(this.hddGiraConfiguracionId.Value);
+                    oENTGira.OrdenAnterior = Int32.Parse(this.txtPopUpAcompanaHelipuerto_OrdenAnterior.Text);
+                    oENTGira.NuevoOrden = Int32.Parse(this.txtPopUpAcompanaHelipuerto_Orden.Text);
+                    oENTGira.Nombre = this.txtPopUpAcompanaHelipuerto_Nombre.Text.Trim();
+                    oENTGira.Puesto = this.txtPopUpAcompanaHelipuerto_Puesto.Text.Trim();
+
+                    // Transacción
+                    oENTResponse = oBPGira.UpdateGiraAcompanaHelipuerto_Item(oENTGira);
+
+                    // Validaciones
+                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                    // Transacción exitosa
+                    ClearPopUp_AcompanaHelipuertoPanel();
+
+                    // Actualizar listado
+                    this.gvAcompanaHelipuerto.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                    this.gvAcompanaHelipuerto.DataBind();
+
+                    // Mensaje de usuario
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUp_TrasladoHelicopteroAcompanaNombre.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            
+            // Giras
+
+            protected void btnPopUp_AcompanaHelipuertoCommand_Click(object sender, EventArgs e){
+                try
+                {
+
+                    // Validar formulario
+                    if ( this.txtPopUpAcompanaHelipuerto_Orden.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un orden")); }
+                    if ( !gcNumber.IsNumber ( this.txtPopUpAcompanaHelipuerto_Orden.Text.Trim(), GCNumber.NumberTypes.Int32Type) ) { throw (new Exception("El campo orden debe de ser numérico")); }
+                    if ( Int32.Parse( this.txtPopUpAcompanaHelipuerto_Orden.Text.Trim() ) < 1 ) { throw (new Exception("El campo orden debe de ser mayor a 0")); }
+                    if ( this.txtPopUpAcompanaHelipuerto_Nombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
+
+                    // Transacción
+                    UpdateConfiguracion_AcompanaHelipuerto();
+
+                }catch (Exception ex){
+                    this.lblPopUp_AcompanaHelipuertoMessage.Text = ex.Message;
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.txtPopUpAcompanaHelipuerto_Orden.ClientID + "');", true);
+                }
+            }
+
+            protected void imgCloseWindow_AcompanaHelipuerto_Click(object sender, ImageClickEventArgs e){
+                try
+                {
+
+                    // Cancelar transacción
+                    ClearPopUp_AcompanaHelipuertoPanel();
 
                 }catch (Exception ex){
                     ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);

@@ -516,6 +516,91 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
 
                             #endregion
 
+                            #region Acompañantes
+                                
+                                if ( ENTResponseGiraConfiguracion.DataSetResponse.Tables[7].Rows.Count != 0) {
+                                    
+                                    // Inicializaciones
+                                    wTable = oSection.Body.AddTable();
+                                    wTable.ResetCells(1, 1);
+                                    wTable.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                                    FilaOrden = 1;
+
+                                    wTableRow = wTable.Rows[0];
+                                    wTableRow.Height = 17f;
+
+                                    // Celda 1
+                                    wTableCell = wTableRow.Cells[0].AddParagraph();
+                                    
+                                    // Configuración de la tabla
+                                    wtblListado = new WTable(oDocument, false);
+                                    wtblListado.ResetCells(ENTResponseGiraConfiguracion.DataSetResponse.Tables[7].Rows.Count + 1, 1);
+                                    wtblListado.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+
+                                    // Encabezado
+                                    tRow = wtblListado.Rows[0];
+                                    tRow.Height = 17f;
+
+                                    // Celda 1
+                                    wTableCell = tRow.Cells[0].AddParagraph();
+
+                                    tRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                    wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+
+                                    wText = wTableCell.AppendText("ACOMPAÑANTES " + ENTER + ENTER);
+                                    wText.CharacterFormat.FontName = "Arial";
+                                    wText.CharacterFormat.FontSize = 10f;
+                                    wText.CharacterFormat.Bold = true;
+                                    wText.CharacterFormat.UnderlineStyle = UnderlineStyle.Single;
+
+                                    tRow.Cells[0].Width = 500;
+
+                                    // Cuerpo
+                                    foreach (DataRow oRow in ENTResponseGiraConfiguracion.DataSetResponse.Tables[7].Rows){
+
+                                        tRow = wtblListado.Rows[FilaOrden];
+                                        tRow.Height = 17f;
+
+                                        ListadoOrden = oRow["Orden"].ToString() + ". ";
+                                        ListadoNombre = oRow["Nombre"].ToString();
+                                        ListadoPuesto = ", " + oRow["Puesto"].ToString();
+
+                                        // Celda 1
+                                        wTableCell = tRow.Cells[0].AddParagraph();
+
+                                        tRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+
+                                        //wText = wTableCell.AppendText(ListadoOrden);
+                                        //wText.CharacterFormat.FontName = "Arial";
+                                        //wText.CharacterFormat.FontSize = 10f;
+
+                                        wText = wTableCell.AppendText(ListadoNombre);
+                                        wText.CharacterFormat.FontName = "Arial";
+                                        wText.CharacterFormat.FontSize = 10f;
+                                        wText.CharacterFormat.Bold = true;
+
+                                        wText = wTableCell.AppendText(ListadoPuesto + ENTER);
+                                        wText.CharacterFormat.FontName = "Arial";
+                                        wText.CharacterFormat.FontSize = 10f;
+
+                                        tRow.Cells[0].Width = 500;
+                                        FilaOrden = FilaOrden + 1;
+                                    }
+
+                                    wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                    wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                                    wTableRow.Cells[0].Tables.Add(wtblListado);
+
+                                    wTableRow.Cells[0].Width = 510;
+
+                                    // Brinco de linea (genera espacio)
+                                    oSection.AddParagraph();
+
+                                }
+
+                            #endregion
+
                             #region Comité de recepción
                                 
                                 if ( ENTResponseGiraConfiguracion.DataSetResponse.Tables[2].Rows.Count != 0) {

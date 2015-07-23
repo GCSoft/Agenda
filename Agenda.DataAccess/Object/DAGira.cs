@@ -405,6 +405,10 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTGira.ConfiguracionActivo;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("tblAcompanaHelipuerto", SqlDbType.Structured);
+            sqlPar.Value = oENTGira.DataTableAcompanaHelipuerto;
+            sqlCom.Parameters.Add(sqlPar);
+
             sqlPar = new SqlParameter("tblComiteHelipuerto", SqlDbType.Structured);
             sqlPar.Value = oENTGira.DataTableComiteHelipuerto;
             sqlCom.Parameters.Add(sqlPar);
@@ -1075,6 +1079,10 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTGira.ConfiguracionActivo;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("tblAcompanaHelipuerto", SqlDbType.Structured);
+            sqlPar.Value = oENTGira.DataTableAcompanaHelipuerto;
+            sqlCom.Parameters.Add(sqlPar);
+
             sqlPar = new SqlParameter("tblComiteHelipuerto", SqlDbType.Structured);
             sqlPar.Value = oENTGira.DataTableComiteHelipuerto;
             sqlCom.Parameters.Add(sqlPar);
@@ -1290,6 +1298,83 @@ namespace Agenda.DataAccess.Object
 
             // Configuración de objetos
             sqlCom = new SqlCommand("uspGiraComiteHelipuerto_Upd_Item", sqlCnn);
+            sqlCom.CommandType = CommandType.StoredProcedure;
+
+            // Timeout alternativo en caso de ser solicitado
+            if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
+
+            // Parametros
+            sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("GiraId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.GiraId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("GiraConfiguracionId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.GiraConfiguracionId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("OrdenAnterior", SqlDbType.Int);
+            sqlPar.Value = oENTGira.OrdenAnterior;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("NuevoOrden", SqlDbType.Int);
+            sqlPar.Value = oENTGira.NuevoOrden;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Nombre", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Nombre;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("Puesto", SqlDbType.VarChar);
+            sqlPar.Value = oENTGira.Puesto;
+            sqlCom.Parameters.Add(sqlPar);
+
+            // Inicializaciones
+            oENTResponse.DataSetResponse = new DataSet();
+            sqlDA = new SqlDataAdapter(sqlCom);
+
+            // Transacción
+            try
+            {
+
+                sqlCnn.Open();
+                sqlDA.Fill(oENTResponse.DataSetResponse);
+                sqlCnn.Close();
+
+            }catch (SqlException sqlEx){
+
+                oENTResponse.ExceptionRaised(sqlEx.Message);
+            }catch (Exception ex){
+
+                oENTResponse.ExceptionRaised(ex.Message);
+            }finally{
+
+                if (sqlCnn.State == ConnectionState.Open) { sqlCnn.Close(); }
+                sqlCnn.Dispose();
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
+        ///<remarks>
+        ///   <name>DAGira.UpdateGiraAcompanaHelipuerto_Item</name>
+        ///   <create>07-Enero-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public ENTResponse UpdateGiraAcompanaHelipuerto_Item(ENTGira oENTGira, String sConnection, Int32 iAlternateDBTimeout){
+            SqlConnection sqlCnn = new SqlConnection(sConnection);
+            SqlCommand sqlCom;
+            SqlParameter sqlPar;
+            SqlDataAdapter sqlDA;
+
+            ENTResponse oENTResponse = new ENTResponse();
+
+            // Configuración de objetos
+            sqlCom = new SqlCommand("uspGiraAcompanaHelipuerto_Upd_Item", sqlCnn);
             sqlCom.CommandType = CommandType.StoredProcedure;
 
             // Timeout alternativo en caso de ser solicitado
