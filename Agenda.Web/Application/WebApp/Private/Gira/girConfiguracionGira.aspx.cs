@@ -692,6 +692,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                                 break;
 
                             case 2: // Traslado en helicóptero
+                            case 5: // Traslado en avión
                                 SetPopUp_TrasladoHelicopteroPanel(PopUpTypes.Update, GiraConfiguracionId);
                                 break;
 
@@ -1174,6 +1175,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     this.gvComiteHelipuerto.DataSource = null;
                     this.gvComiteHelipuerto.DataBind();
 
+                    this.rblPopUp_TrasladoHelicopteroTipoGiraConfiguracion.SelectedValue = "2";
+
                 }catch (Exception ex){
                     throw (ex);
                 }
@@ -1198,7 +1201,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                     // Formulario
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
-                    oENTGira.TipoGiraConfiguracionId = 2; // Traslado en helicóptero
+                    oENTGira.TipoGiraConfiguracionId = Int32.Parse( this.rblPopUp_TrasladoHelicopteroTipoGiraConfiguracion.SelectedValue );
                     oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_TrasladoHelicoptero.SelectedItem.Text;
 
                     oENTGira.ConfiguracionFechaInicio = this.wucPopUp_TrasladoHelicopteroCalendarInicio.DisplayUTCDate;
@@ -1291,6 +1294,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     this.txtPopUp_TrasladoHelicopteroDomicilio.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["HelipuertoDomicilio"].ToString();
                     this.txtPopUp_TrasladoHelicopteroCoordenadas.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["HelipuertoCoordenadas"].ToString();
 
+                    this.rblPopUp_TrasladoHelicopteroTipoGiraConfiguracion.SelectedValue = oENTResponse.DataSetResponse.Tables[1].Rows[0]["TipoGiraConfiguracionId"].ToString();
+
                     // Comité de recepción del helipuerto
                     this.gvComiteHelipuerto.DataSource = oENTResponse.DataSetResponse.Tables[2];
                     this.gvComiteHelipuerto.DataBind();
@@ -1365,7 +1370,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Formulario
                     oENTGira.GiraConfiguracionId = Int32.Parse(this.hddGiraConfiguracionId.Value);
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
-                    oENTGira.TipoGiraConfiguracionId = 2; // Traslado en helicóptero
+                    oENTGira.TipoGiraConfiguracionId = Int32.Parse( this.rblPopUp_TrasladoHelicopteroTipoGiraConfiguracion.SelectedValue );
                     oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_TrasladoHelicoptero.SelectedItem.Text;
 
                     oENTGira.ConfiguracionFechaInicio = this.wucPopUp_TrasladoHelicopteroCalendarInicio.DisplayUTCDate;

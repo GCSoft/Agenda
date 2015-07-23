@@ -472,6 +472,15 @@ namespace Agenda.Web.Application.WebApp.Private.Gira {
         protected global::Agenda.Web.Include.WebUserControls.wucTimer wucPopUp_TrasladoHelicopteroTimerHasta;
         
         /// <summary>
+        /// rblPopUp_TrasladoHelicopteroTipoGiraConfiguracion control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblPopUp_TrasladoHelicopteroTipoGiraConfiguracion;
+        
+        /// <summary>
         /// txtPopUp_TrasladoHelicopteroLugar control.
         /// </summary>
         /// <remarks>

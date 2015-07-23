@@ -385,6 +385,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                             break;
 
                         case "2":
+                        case "5":
 
                             // Partida a buscar
                             oENTGira.GiraConfiguracionId = Int32.Parse( rowPrograma["GiraConfiguracionId"].ToString() );
@@ -393,7 +394,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                             ENTResponseGiraConfiguracion = new ENTResponse();
                             ENTResponseGiraConfiguracion = oBPGira.SelectGiraConfiguracion(oENTGira);
 
-                            #region Traslado en helicóptero
+                            #region Traslado en Helicóptero/Avión
                                 
                                 // Llenar encabezado
                                 wTable = oSection.Body.AddTable();
@@ -546,7 +547,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                     tRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                                     wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                                    wText = wTableCell.AppendText("COMITÉ DE RECEPCIÓN EN EL HELIPUERTO:" + ENTER + ENTER);
+                                    HelipuertoTemporal = ( rowPrograma["TipoGiraConfiguracionId"].ToString() == "2" ? "HELIPUERTO:" : "AEREOPUERTO:" );
+                                    wText = wTableCell.AppendText("COMITÉ DE RECEPCIÓN EN EL " + HelipuertoTemporal + ENTER + ENTER);
                                     wText.CharacterFormat.FontName = "Arial";
                                     wText.CharacterFormat.FontSize = 10f;
                                     wText.CharacterFormat.Bold = true;

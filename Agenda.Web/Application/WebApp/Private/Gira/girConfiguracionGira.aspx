@@ -250,7 +250,7 @@
                                 <tr>
                                     <td class="Etiqueta">Nombre</td>
                                     <td class="VinetaObligatorio">*</td>
-                                    <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroDetalle" runat="server" CssClass="Textarea_General" Height="70px" TextMode="MultiLine" MaxLength="1000" Width="400px"></asp:TextBox></td>
+                                    <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroDetalle" runat="server" CssClass="Textarea_General" Height="55px" TextMode="MultiLine" MaxLength="1000" Width="400px"></asp:TextBox></td>
                                     <td></td>
                                 </tr>
                                 <tr>
@@ -287,6 +287,17 @@
                                         </table>
 				                    </td>
 			                    </tr>
+                                <tr>
+                                    <td class="Etiqueta"></td>
+                                    <td class="VinetaObligatorio"></td>
+                                    <td class="Campo">
+                                        <asp:RadioButtonList ID="rblPopUp_TrasladoHelicopteroTipoGiraConfiguracion" runat="server" RepeatDirection="Horizontal">
+						                    <asp:ListItem Text="Helipuerto" Value="2" Selected="True"></asp:ListItem>
+						                    <asp:ListItem Text="Aereopuerto" Value="5"></asp:ListItem>
+					                    </asp:RadioButtonList>
+                                    </td>
+                                    <td></td>
+                                </tr>
                                 <tr>
                                     <td class="Etiqueta">Lugar</td>
                                     <td class="VinetaObligatorio"></td>
