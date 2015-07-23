@@ -86,6 +86,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
             String ListadoNombre;
             String ListadoPuesto;
 
+            String HelipuertoTemporal = "";
+
             try {
 
                 // Formulario
@@ -445,7 +447,9 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                     wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                                     wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                                    wText = wTableCell.AppendText("LUGAR: " + ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows[0]["HelipuertoLugar"].ToString().Trim());
+                                    HelipuertoTemporal = ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows[0]["HelipuertoLugar"].ToString().Trim();
+                                    HelipuertoTemporal = ( HelipuertoTemporal == "" ? "" : "LUGAR: " + HelipuertoTemporal  );
+                                    wText = wTableCell.AppendText( HelipuertoTemporal );
                                     wText.CharacterFormat.FontName = "Arial";
                                     wText.CharacterFormat.FontSize = 9f;
 
@@ -468,8 +472,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                     wTableCell = wTableRow.Cells[1].AddParagraph();
                                     wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                                     wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-
-                                    wText = wTableCell.AppendText("DOMICILIO: " + ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows[0]["HelipuertoDomicilio"].ToString().Trim());
+                                    
+                                    HelipuertoTemporal = ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows[0]["HelipuertoDomicilio"].ToString().Trim();
+                                    HelipuertoTemporal = ( HelipuertoTemporal == "" ? "" : "DOMICILIO: " + HelipuertoTemporal  );
+                                    wText = wTableCell.AppendText( HelipuertoTemporal );
                                     wText.CharacterFormat.FontName = "Arial";
                                     wText.CharacterFormat.FontSize = 9f;
 
@@ -492,8 +498,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                     wTableCell = wTableRow.Cells[1].AddParagraph();
                                     wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                                     wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-
-                                    wText = wTableCell.AppendText("COORDENADAS: " + ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows[0]["HelipuertoCoordenadas"].ToString().Trim());
+                                    
+                                    HelipuertoTemporal = ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows[0]["HelipuertoCoordenadas"].ToString().Trim();
+                                    HelipuertoTemporal = ( HelipuertoTemporal == "" ? "" : "COORDENADAS: " + HelipuertoTemporal  );
+                                    wText = wTableCell.AppendText( HelipuertoTemporal );
                                     wText.CharacterFormat.FontName = "Arial";
                                     wText.CharacterFormat.FontSize = 9f;
 
@@ -760,7 +768,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                     wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                                     wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                                    wText = wTableCell.AppendText("MEDIOS DE TRASLADO: " + ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows[0]["MediosTraslado"].ToString().Trim());
+                                    wText = wTableCell.AppendText("MEDIOS DE TRASLADO: " + ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows[0]["MediosTraslado"].ToString().Trim().ToUpper() );
                                     wText.CharacterFormat.FontName = "Arial";
                                     wText.CharacterFormat.FontSize = 9f;
 
@@ -880,7 +888,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                     wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                                     wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                                    wText = wTableCell.AppendText("MEDIOS DE COMUNICACIÓN: " + ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows[0]["EventoMedioComunicacion"].ToString().Trim());
+                                    wText = wTableCell.AppendText("MEDIOS DE COMUNICACIÓN: " + ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows[0]["EventoMedioComunicacion"].ToString().Trim().ToUpper() );
                                     wText.CharacterFormat.FontName = "Arial";
                                     wText.CharacterFormat.FontSize = 9f;
 

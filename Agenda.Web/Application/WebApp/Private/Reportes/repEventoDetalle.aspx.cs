@@ -98,7 +98,8 @@ namespace Agenda.Web.Application.WebApp.Private.Reportes
                     new ReportParameter("HoraInicio", dsContenidoPrensa.Tables[0].Rows[0]["HoraInicio"].ToString() ),
                     new ReportParameter("HoraFin", dsContenidoPrensa.Tables[0].Rows[0]["HoraFin"].ToString() ),
                     new ReportParameter("EventoNombre", dsContenidoPrensa.Tables[0].Rows[0]["EventoNombre"].ToString() ),
-                    new ReportParameter("TipoAcomodo", dsContenidoPrensa.Tables[0].Rows[0]["TipoAcomodo"].ToString() )
+                    new ReportParameter("TipoAcomodo", dsContenidoPrensa.Tables[0].Rows[0]["TipoAcomodo"].ToString() ),
+                    new ReportParameter("ComiteRecepcion", dsContenidoPrensa.Tables[0].Rows[0]["ComiteRecepcion"].ToString() )
                     //new ReportParameter("FechaConsulta", dtNow.Day.ToString() + "-" + dtNow.ToString("MMM", System.Globalization.CultureInfo.CreateSpecificCulture("es-MX")) + "-" + dtNow.Year.ToString() ),
                     //new ReportParameter("HoraConsulta", "Hora: " +  dtNow.ToString("hh:mm:ss tt", System.Globalization.CultureInfo.CreateSpecificCulture("es-MX")) )
                 };

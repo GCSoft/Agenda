@@ -69,7 +69,7 @@
 
     <asp:Panel ID="pnlBotones" runat="server" CssClass="ButtonPanel">
         <asp:Button ID="btnTrasladoVehiculo" runat="server" Text="Traslado en vehículo" CssClass="Button_General" width="175px" onclick="btnTrasladoVehiculo_Click" /> &nbsp;&nbsp;
-        <asp:Button ID="btnTrasladoHelicoptero" runat="server" Text="Traslado en helicóptero" CssClass="Button_General" width="175px" onclick="btnTrasladoHelicoptero_Click" /> &nbsp;&nbsp;
+        <asp:Button ID="btnTrasladoHelicoptero" runat="server" Text="Helipuerto/Aereopuerto" CssClass="Button_General" width="175px" onclick="btnTrasladoHelicoptero_Click" /> &nbsp;&nbsp;
         <asp:Button ID="btnEvento" runat="server" Text="Evento" CssClass="Button_General" width="175px" onclick="btnEvento_Click" /> &nbsp;&nbsp;
         <asp:Button ID="btnActividadGeneral" runat="server" Text="Actividad General" CssClass="Button_General" width="175px" onclick="btnActividadGeneral_Click" /> &nbsp;&nbsp;
         <asp:Button ID="btnComentarioEnCuadernillo" runat="server" Text="Comentario En Cuadernillo" CssClass="Button_General" width="175px" onclick="btnComentarioEnCuadernillo_Click" /> &nbsp;&nbsp;
@@ -288,20 +288,20 @@
 				                    </td>
 			                    </tr>
                                 <tr>
-                                    <td class="Etiqueta">Lugar del Helipuerto</td>
-                                    <td class="VinetaObligatorio">*</td>
+                                    <td class="Etiqueta">Lugar</td>
+                                    <td class="VinetaObligatorio"></td>
                                     <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroLugar" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td class="Etiqueta">Domicilio del Helipuerto</td>
-                                    <td class="VinetaObligatorio">*</td>
+                                    <td class="Etiqueta">Domicilio</td>
+                                    <td class="VinetaObligatorio"></td>
                                     <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroDomicilio" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td class="Etiqueta">Coordenadas del Helipuerto</td>
-                                    <td class="VinetaObligatorio">*</td>
+                                    <td class="Etiqueta">Coordenadas</td>
+                                    <td class="VinetaObligatorio"></td>
                                     <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroCoordenadas" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
                                     <td></td>
                                 </tr>
@@ -309,7 +309,7 @@
                         </ContentTemplate>
                     </asp:TabPanel>
                     <asp:TabPanel ID="tpnlComite_TrasladoHelicoptero" runat="server">
-                        <HeaderTemplate>Comité de recepción en el Helipuerto</HeaderTemplate>
+                        <HeaderTemplate>Comité de recepción</HeaderTemplate>
                         <ContentTemplate>
                             <br />
                             <table class="FormTable">
@@ -351,7 +351,7 @@
                                                 <RowStyle CssClass="Grid_Row_Scroll" />
                                                 <EmptyDataTemplate>
                                                     <div style="border:0px; clear:both; color:#675C9D; font:11px Tahoma; font-weight:normal; height:15px; position:relative; text-align:center; width:100%;">
-                                                        No se ha capturado el comité de recepción en el helipuerto
+                                                        No se ha capturado el comité de recepción
                                                     </div>
                                                 </EmptyDataTemplate>
                                                 <Columns>
@@ -712,18 +712,15 @@
                         <ContentTemplate>
                             <br />
                             <table class="FormTable">
+                                <tr>
+                                    <td class="Etiqueta">Detalle:</td>
+                                    <td class="VinetaObligatorio"></td>
+                                    <td class="Campo"></td>
+                                    <td></td>
+                                </tr>
                                <tr>
                                     <td class="Campo" colspan="4">
-                                        <table style="width:100%; padding:0px; border-spacing:0px;">
-                                            <tr>
-                                                <td style="width:50px;">
-                                                    Detalle
-                                                </td>
-                                                <td>
-                                                    <asp:TextBox ID="txtOrdenDiaDetalle" runat="server" CssClass="Textarea_General" Height="50px" MaxLength="200" TextMode="MultiLine" Width="99%"></asp:TextBox>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                        <asp:TextBox ID="txtOrdenDiaDetalle" runat="server" CssClass="Textarea_General" Height="50px" MaxLength="200" TextMode="MultiLine" Width="99%"></asp:TextBox>
                                     </td>
 								</tr>
 								<tr>
@@ -782,7 +779,7 @@
 				                    </td>
 			                    </tr>
                                 <tr>
-				                    <td colspan="4"><asp:TextBox ID="txtPopUp_EventoNotaEventoOrden" runat="server" CssClass="Textarea_General" Height="60px" MaxLength="1000" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
+				                    <td colspan="4"><asp:TextBox ID="txtPopUp_EventoNotaEventoOrden" runat="server" CssClass="Textarea_General" Height="50px" MaxLength="1000" TextMode="MultiLine" Width="99%"></asp:TextBox></td>
 			                    </tr>
                             </table>
                         </ContentTemplate>

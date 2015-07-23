@@ -156,7 +156,6 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>0in</Top>
             <Left>0.68229in</Left>
             <Height>0.15in</Height>
             <Width>0.625in</Width>
@@ -225,7 +224,6 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>0in</Top>
             <Left>1.4375in</Left>
             <Height>0.275in</Height>
             <Width>5.83334in</Width>
@@ -262,7 +260,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>="COMITÉ DE RECEPCIÓN:"</Value>
+                <Value>=Parameters!ComiteRecepcion.Value</Value>
                 <Style>
                   <FontSize>9pt</FontSize>
                   <FontWeight>Bold</FontWeight>
@@ -1245,6 +1243,10 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="TipoAcomodo">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ComiteRecepcion">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>

@@ -1142,7 +1142,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
             
         #endregion
 
-        #region PopUp - Traslado en Helicóptero
+        #region PopUp - Traslado en Helicóptero/Avión
             
             
             // Rutinas
@@ -1325,14 +1325,14 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     {
                         case PopUpTypes.Insert:
 
-                            this.lblPopUp_TrasladoHelicopteroTitle.Text = "Nuevo Traslado en Helicóptero";
-                            this.btnPopUp_TrasladoHelicopteroCommand.Text = "Agregar Traslado en Helicóptero";
+                            this.lblPopUp_TrasladoHelicopteroTitle.Text = "Nuevo Traslado";
+                            this.btnPopUp_TrasladoHelicopteroCommand.Text = "Agregar Traslado";
                             break;
 
                         case PopUpTypes.Update:
 
-                            this.lblPopUp_TrasladoHelicopteroTitle.Text = "Edición de Traslado en Helicóptero";
-                            this.btnPopUp_TrasladoHelicopteroCommand.Text = "Actualizar Traslado en Helicóptero";
+                            this.lblPopUp_TrasladoHelicopteroTitle.Text = "Edición de Traslado";
+                            this.btnPopUp_TrasladoHelicopteroCommand.Text = "Actualizar Traslado";
                             SelectGiraConfiguracion_TrasladoHelicoptero_ForEdit(idItem);
                             break;
 
@@ -1432,9 +1432,9 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     if (!this.wucPopUp_TrasladoHelicopteroTimerHasta.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora final del evento] es requerido: " + ErrorDetailHour); }
                     if (this.txtOtraAgrupacion_TrasladoHelicoptero.Enabled) { throw (new Exception("El campo [Agrupación] es requerido")); }
                     if (this.ddlAgrupacion_TrasladoHelicoptero.SelectedItem.Value == "-1") { throw (new Exception("El campo [Agrupación] es requerido")); }
-                    if (this.txtPopUp_TrasladoHelicopteroLugar.Text.Trim() == "") { throw new Exception("* El campo [Lugar del Helipuerto] es requerido"); }
-                    if (this.txtPopUp_TrasladoHelicopteroDomicilio.Text.Trim() == "") { throw new Exception("* El campo [Domicilio del Helipuerto] es requerido"); }
-                    if (this.txtPopUp_TrasladoHelicopteroCoordenadas.Text.Trim() == "") { throw new Exception("* El campo [Coordenadas del Helipuerto] es requerido"); }
+                    // if (this.txtPopUp_TrasladoHelicopteroLugar.Text.Trim() == "") { throw new Exception("* El campo [Lugar del Helipuerto] es requerido"); }
+                    // if (this.txtPopUp_TrasladoHelicopteroDomicilio.Text.Trim() == "") { throw new Exception("* El campo [Domicilio del Helipuerto] es requerido"); }
+                    // if (this.txtPopUp_TrasladoHelicopteroCoordenadas.Text.Trim() == "") { throw new Exception("* El campo [Coordenadas del Helipuerto] es requerido"); }
 
                 }catch (Exception ex){
                     throw (ex);
