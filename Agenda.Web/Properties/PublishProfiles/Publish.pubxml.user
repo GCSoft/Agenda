@@ -94,7 +94,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/30/2015 15:25:56</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Gira/girConfiguracionGira.aspx">
-      <publishTime>07/22/2015 15:45:01</publishTime>
+      <publishTime>07/23/2015 17:49:49</publishTime>
     </File>
     <File Include="Application/WebApp/Private/Gira/girContacto.aspx">
       <publishTime>03/30/2015 15:25:53</publishTime>
@@ -187,16 +187,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/13/2015 16:11:31</publishTime>
     </File>
     <File Include="bin/Agenda.BusinessProcess.dll">
-      <publishTime>07/22/2015 15:47:44</publishTime>
+      <publishTime>07/23/2015 19:43:36</publishTime>
     </File>
     <File Include="bin/Agenda.DataAccess.dll">
-      <publishTime>07/22/2015 15:47:43</publishTime>
+      <publishTime>07/23/2015 19:43:35</publishTime>
     </File>
     <File Include="bin/Agenda.Entity.dll">
-      <publishTime>07/22/2015 15:47:43</publishTime>
+      <publishTime>07/23/2015 19:43:35</publishTime>
     </File>
     <File Include="bin/Agenda.Web.dll">
-      <publishTime>07/22/2015 15:47:47</publishTime>
+      <publishTime>07/23/2015 19:43:38</publishTime>
     </File>
     <File Include="bin/AjaxControlToolkit.dll">
       <publishTime>06/23/2014 11:45:59</publishTime>
@@ -1600,7 +1600,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/27/2014 12:58:28</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/22/2015 15:49:01</publishTime>
+      <publishTime>07/23/2015 19:43:44</publishTime>
     </File>
   </ItemGroup>
 </Project>

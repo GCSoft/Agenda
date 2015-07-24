@@ -87,6 +87,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
             String ListadoPuesto;
 
             String HelipuertoTemporal = "";
+            String HelipuertoLugar = "";
+            String HelipuertoDomicilio = "";
+            String HelipuertoCoordenadas = "";
+            Int32 HelipuertoFilas = 1;
 
             try {
 
@@ -336,54 +340,8 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                     #endregion
 
                     switch( rowPrograma["TipoGiraConfiguracionId"].ToString() ){
+
                         case "1":
-                        case "4":
-
-                            #region Traslado en vehículo / Actividad General
-                                
-                                wTable = oSection.Body.AddTable();
-                                wTable.ResetCells(1, 2);
-
-                                #region Fila 1
-                                
-                                    wTableRow = wTable.Rows[0];
-                                    wTableRow.Height = 6f;
-
-                                    // Celda 1
-                                    wTableCell = wTableRow.Cells[0].AddParagraph();
-                                    wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-                                    wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-
-                                    wText = wTableCell.AppendText( rowPrograma["ConfiguracionHoraInicio24H"].ToString() + " A " + rowPrograma["ConfiguracionHoraFin24H"].ToString() + " HRS." );
-                                    wText.CharacterFormat.FontName = "Arial";
-                                    wText.CharacterFormat.FontSize = 10f;
-                                    wText.CharacterFormat.Bold = true;
-                                    
-                                    wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                                    wTableRow.Cells[0].Width = 120;
-
-                                    // Celda 2
-                                    wTableCell = wTableRow.Cells[1].AddParagraph();
-                                    wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-                                    wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-
-                                    wText = wTableCell.AppendText(rowPrograma["ConfiguracionDetalle"].ToString());
-                                    wText.CharacterFormat.FontName = "Arial";
-                                    wText.CharacterFormat.FontSize = 10f;
-                                    wText.CharacterFormat.Bold = true;
-
-                                    wTableRow.Cells[1].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                                    wTableRow.Cells[1].Width = 390;
-                                
-                                #endregion
-
-                                // Brinco de linea (genera espacio)
-                                oSection.AddParagraph();
-                                
-                            #endregion
-                            
-                            break;
-
                         case "2":
                         case "5":
 
@@ -394,16 +352,38 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                             ENTResponseGiraConfiguracion = new ENTResponse();
                             ENTResponseGiraConfiguracion = oBPGira.SelectGiraConfiguracion(oENTGira);
 
-                            #region Traslado en Helicóptero/Avión
+                            #region Traslado
+
+                                // Inicialización de variables de control
+                                HelipuertoLugar = ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows[0]["HelipuertoLugar"].ToString().Trim();
+                                HelipuertoLugar = ( HelipuertoLugar == "" ? "" : "LUGAR: " + HelipuertoLugar  );
+
+                                HelipuertoDomicilio = ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows[0]["HelipuertoDomicilio"].ToString().Trim();
+                                HelipuertoDomicilio = ( HelipuertoDomicilio == "" ? "" : "DOMICILIO: " + HelipuertoDomicilio  );
+
+                                HelipuertoCoordenadas = ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows[0]["HelipuertoCoordenadas"].ToString().Trim();
+                                HelipuertoCoordenadas = ( HelipuertoCoordenadas == "" ? "" : "COORDENADAS: " + HelipuertoCoordenadas  );
+
                                 
+                                HelipuertoFilas = 1;
+                                HelipuertoFilas = ( HelipuertoLugar == "" ? HelipuertoFilas : HelipuertoFilas + 1 );
+                                HelipuertoFilas = ( HelipuertoDomicilio == "" ? HelipuertoFilas : HelipuertoFilas + 1 );
+                                HelipuertoFilas = ( HelipuertoCoordenadas == "" ? HelipuertoFilas : HelipuertoFilas + 1 );
+
                                 // Llenar encabezado
                                 wTable = oSection.Body.AddTable();
-                                wTable.ResetCells(4, 2);
+                                wTable.ResetCells(HelipuertoFilas, 2);
+
+                                // Reinicio de variable para control
+                                HelipuertoFilas = 0;
 
                                 #region Fila 1
                                 
-                                    wTableRow = wTable.Rows[0];
+                                    wTableRow = wTable.Rows[HelipuertoFilas];
                                     wTableRow.Height = 6f;
+
+                                    // Incrementar contador
+                                    HelipuertoFilas = HelipuertoFilas + 1;
 
                                     // Celda 1
                                     wTableCell = wTableRow.Cells[0].AddParagraph();
@@ -433,81 +413,97 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                 
                                 #endregion
                                 
-                                #region Fila 2
-                                
-                                    wTableRow = wTable.Rows[1];
-                                    wTableRow.Height = 6f;
+                                #region Fila 2 / Lugar
+                                    
+                                    if ( HelipuertoLugar != "" ) {
+                                    
 
-                                    // Celda 1
-                                    wTableCell = wTableRow.Cells[0].AddParagraph();
-                                    wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                                    wTableRow.Cells[0].Width = 120;
+                                        wTableRow = wTable.Rows[HelipuertoFilas];
+                                        wTableRow.Height = 6f;
 
-                                    // Celda 2
-                                    wTableCell = wTableRow.Cells[1].AddParagraph();
-                                    wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-                                    wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                                        // Incrementar contador
+                                        HelipuertoFilas = HelipuertoFilas + 1;
 
-                                    HelipuertoTemporal = ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows[0]["HelipuertoLugar"].ToString().Trim();
-                                    HelipuertoTemporal = ( HelipuertoTemporal == "" ? "" : "LUGAR: " + HelipuertoTemporal  );
-                                    wText = wTableCell.AppendText( HelipuertoTemporal );
-                                    wText.CharacterFormat.FontName = "Arial";
-                                    wText.CharacterFormat.FontSize = 9f;
+                                        // Celda 1
+                                        wTableCell = wTableRow.Cells[0].AddParagraph();
+                                        wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[0].Width = 120;
 
-                                    wTableRow.Cells[1].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                                    wTableRow.Cells[1].Width = 390;
+                                        // Celda 2
+                                        wTableCell = wTableRow.Cells[1].AddParagraph();
+                                        wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+
+                                        wText = wTableCell.AppendText( HelipuertoLugar );
+                                        wText.CharacterFormat.FontName = "Arial";
+                                        wText.CharacterFormat.FontSize = 9f;
+
+                                        wTableRow.Cells[1].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[1].Width = 390;
+
+                                    }
                                 
                                 #endregion
                                 
-                                #region Fila 3
-                                
-                                    wTableRow = wTable.Rows[2];
-                                    wTableRow.Height = 6f;
-
-                                    // Celda 1
-                                    wTableCell = wTableRow.Cells[0].AddParagraph();
-                                    wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                                    wTableRow.Cells[0].Width = 120;
-
-                                    // Celda 2
-                                    wTableCell = wTableRow.Cells[1].AddParagraph();
-                                    wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-                                    wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                                #region Fila 3 / Domicilio
                                     
-                                    HelipuertoTemporal = ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows[0]["HelipuertoDomicilio"].ToString().Trim();
-                                    HelipuertoTemporal = ( HelipuertoTemporal == "" ? "" : "DOMICILIO: " + HelipuertoTemporal  );
-                                    wText = wTableCell.AppendText( HelipuertoTemporal );
-                                    wText.CharacterFormat.FontName = "Arial";
-                                    wText.CharacterFormat.FontSize = 9f;
+                                    if ( HelipuertoDomicilio != "" ) {
 
-                                    wTableRow.Cells[1].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                                    wTableRow.Cells[1].Width = 390;
+                                        wTableRow = wTable.Rows[HelipuertoFilas];
+                                        wTableRow.Height = 6f;
+
+                                        // Incrementar contador
+                                        HelipuertoFilas = HelipuertoFilas + 1;
+
+                                        // Celda 1
+                                        wTableCell = wTableRow.Cells[0].AddParagraph();
+                                        wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[0].Width = 120;
+
+                                        // Celda 2
+                                        wTableCell = wTableRow.Cells[1].AddParagraph();
+                                        wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                                    
+                                        wText = wTableCell.AppendText( HelipuertoDomicilio );
+                                        wText.CharacterFormat.FontName = "Arial";
+                                        wText.CharacterFormat.FontSize = 9f;
+
+                                        wTableRow.Cells[1].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[1].Width = 390;
+
+                                    }
                                 
                                 #endregion
                                 
-                                #region Fila 4
-                                
-                                    wTableRow = wTable.Rows[3];
-                                    wTableRow.Height = 6f;
+                                #region Fila 4 / Coordenadas
 
-                                    // Celda 1
-                                    wTableCell = wTableRow.Cells[0].AddParagraph();
-                                    wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                                    wTableRow.Cells[0].Width = 120;
+                                    if ( HelipuertoCoordenadas != "" ) {
 
-                                    // Celda 2
-                                    wTableCell = wTableRow.Cells[1].AddParagraph();
-                                    wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
-                                    wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                                        wTableRow = wTable.Rows[HelipuertoFilas];
+                                        wTableRow.Height = 6f;
+
+                                        // Incrementar contador
+                                        HelipuertoFilas = HelipuertoFilas + 1;
+
+                                        // Celda 1
+                                        wTableCell = wTableRow.Cells[0].AddParagraph();
+                                        wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[0].Width = 120;
+
+                                        // Celda 2
+                                        wTableCell = wTableRow.Cells[1].AddParagraph();
+                                        wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
                                     
-                                    HelipuertoTemporal = ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows[0]["HelipuertoCoordenadas"].ToString().Trim();
-                                    HelipuertoTemporal = ( HelipuertoTemporal == "" ? "" : "COORDENADAS: " + HelipuertoTemporal  );
-                                    wText = wTableCell.AppendText( HelipuertoTemporal );
-                                    wText.CharacterFormat.FontName = "Arial";
-                                    wText.CharacterFormat.FontSize = 9f;
+                                        wText = wTableCell.AppendText( HelipuertoCoordenadas );
+                                        wText.CharacterFormat.FontName = "Arial";
+                                        wText.CharacterFormat.FontSize = 9f;
 
-                                    wTableRow.Cells[1].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
-                                    wTableRow.Cells[1].Width = 390;
+                                        wTableRow.Cells[1].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                        wTableRow.Cells[1].Width = 390;
+
+                                    }
                                 
                                 #endregion
 
@@ -547,7 +543,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                     tRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                                     wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                                    wText = wTableCell.AppendText("ACOMPAÑANTES " + ENTER + ENTER);
+                                    wText = wTableCell.AppendText("ACOMPAÑANTES:" + ENTER + ENTER);
                                     wText.CharacterFormat.FontName = "Arial";
                                     wText.CharacterFormat.FontSize = 10f;
                                     wText.CharacterFormat.Bold = true;
@@ -632,8 +628,11 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                     tRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                                     wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                                    HelipuertoTemporal = ( rowPrograma["TipoGiraConfiguracionId"].ToString() == "2" ? "HELIPUERTO:" : "AEREOPUERTO:" );
-                                    wText = wTableCell.AppendText("COMITÉ DE RECEPCIÓN EN EL " + HelipuertoTemporal + ENTER + ENTER);
+                                    HelipuertoTemporal = "";
+                                    if ( rowPrograma["TipoGiraConfiguracionId"].ToString() == "1" ) { HelipuertoTemporal = ":"; }
+                                    if ( rowPrograma["TipoGiraConfiguracionId"].ToString() == "2" ) { HelipuertoTemporal = " EN EL HELIPUERTO:"; }
+                                    if ( rowPrograma["TipoGiraConfiguracionId"].ToString() == "5" ) { HelipuertoTemporal = " EN EL AEREOPUERTO:"; }
+                                    wText = wTableCell.AppendText("COMITÉ DE RECEPCIÓN" + HelipuertoTemporal + ENTER + ENTER);
                                     wText.CharacterFormat.FontName = "Arial";
                                     wText.CharacterFormat.FontSize = 10f;
                                     wText.CharacterFormat.Bold = true;
@@ -687,9 +686,98 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
 
                             #endregion
 
+                            #region Comité de despedida
+                                
+                                if ( ENTResponseGiraConfiguracion.DataSetResponse.Tables[8].Rows.Count != 0) {
+                                    
+                                    // Inicializaciones
+                                    wTable = oSection.Body.AddTable();
+                                    wTable.ResetCells(1, 1);
+                                    wTable.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
+                                    FilaOrden = 1;
+
+                                    wTableRow = wTable.Rows[0];
+                                    wTableRow.Height = 17f;
+
+                                    // Celda 1
+                                    wTableCell = wTableRow.Cells[0].AddParagraph();
+                                    
+                                    // Configuración de la tabla
+                                    wtblListado = new WTable(oDocument, false);
+                                    wtblListado.ResetCells(ENTResponseGiraConfiguracion.DataSetResponse.Tables[8].Rows.Count + 1, 1);
+                                    wtblListado.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+
+                                    // Encabezado
+                                    tRow = wtblListado.Rows[0];
+                                    tRow.Height = 17f;
+
+                                    // Celda 1
+                                    wTableCell = tRow.Cells[0].AddParagraph();
+
+                                    tRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                    wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+
+                                    HelipuertoTemporal = "";
+                                    if ( rowPrograma["TipoGiraConfiguracionId"].ToString() == "1" ) { HelipuertoTemporal = ":"; }
+                                    if ( rowPrograma["TipoGiraConfiguracionId"].ToString() == "2" ) { HelipuertoTemporal = " EN EL HELIPUERTO:"; }
+                                    if ( rowPrograma["TipoGiraConfiguracionId"].ToString() == "5" ) { HelipuertoTemporal = " EN EL AEREOPUERTO:"; }
+                                    wText = wTableCell.AppendText("COMITÉ DE DESPEDIDA" + HelipuertoTemporal + ENTER + ENTER);
+                                    wText.CharacterFormat.FontName = "Arial";
+                                    wText.CharacterFormat.FontSize = 10f;
+                                    wText.CharacterFormat.Bold = true;
+                                    wText.CharacterFormat.UnderlineStyle = UnderlineStyle.Single;
+
+                                    tRow.Cells[0].Width = 500;
+
+                                    // Cuerpo
+                                    foreach (DataRow oRow in ENTResponseGiraConfiguracion.DataSetResponse.Tables[8].Rows){
+
+                                        tRow = wtblListado.Rows[FilaOrden];
+                                        tRow.Height = 17f;
+
+                                        ListadoOrden = oRow["Orden"].ToString() + ". ";
+                                        ListadoNombre = oRow["Nombre"].ToString();
+                                        ListadoPuesto = ", " + oRow["Puesto"].ToString();
+
+                                        // Celda 1
+                                        wTableCell = tRow.Cells[0].AddParagraph();
+
+                                        tRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                        wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+
+                                        //wText = wTableCell.AppendText(ListadoOrden);
+                                        //wText.CharacterFormat.FontName = "Arial";
+                                        //wText.CharacterFormat.FontSize = 10f;
+
+                                        wText = wTableCell.AppendText(ListadoNombre);
+                                        wText.CharacterFormat.FontName = "Arial";
+                                        wText.CharacterFormat.FontSize = 10f;
+                                        wText.CharacterFormat.Bold = true;
+
+                                        wText = wTableCell.AppendText(ListadoPuesto + ENTER);
+                                        wText.CharacterFormat.FontName = "Arial";
+                                        wText.CharacterFormat.FontSize = 10f;
+
+                                        tRow.Cells[0].Width = 500;
+                                        FilaOrden = FilaOrden + 1;
+                                    }
+
+                                    wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                    wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+                                    wTableRow.Cells[0].Tables.Add(wtblListado);
+
+                                    wTableRow.Cells[0].Width = 510;
+
+                                    // Brinco de linea (genera espacio)
+                                    oSection.AddParagraph();
+
+                                }
+
+                            #endregion
+
                             break;
 
-                        case "3":
+                        case "3": // Evento
 
                             // Partida a buscar
                             oENTGira.GiraConfiguracionId = Int32.Parse( rowPrograma["GiraConfiguracionId"].ToString() );
@@ -1463,7 +1551,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                     tRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                                     wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                                    wText = wTableCell.AppendText(ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows[0]["EventoTipoAcomodo"].ToString() + ENTER + ENTER);
+                                    wText = wTableCell.AppendText(ENTResponseGiraConfiguracion.DataSetResponse.Tables[1].Rows[0]["EventoTipoAcomodo"].ToString() + ":" + ENTER + ENTER);
                                     wText.CharacterFormat.FontName = "Arial";
                                     wText.CharacterFormat.FontSize = 10f;
                                     wText.CharacterFormat.Bold = true;
@@ -1550,6 +1638,53 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                             
                             break;
 
+                        case "4":
+
+                            #region Actividad General
+                                
+                                wTable = oSection.Body.AddTable();
+                                wTable.ResetCells(1, 2);
+
+                                #region Fila 1
+                                
+                                    wTableRow = wTable.Rows[0];
+                                    wTableRow.Height = 6f;
+
+                                    // Celda 1
+                                    wTableCell = wTableRow.Cells[0].AddParagraph();
+                                    wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                    wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+
+                                    wText = wTableCell.AppendText( rowPrograma["ConfiguracionHoraInicio24H"].ToString() + " A " + rowPrograma["ConfiguracionHoraFin24H"].ToString() + " HRS." );
+                                    wText.CharacterFormat.FontName = "Arial";
+                                    wText.CharacterFormat.FontSize = 10f;
+                                    wText.CharacterFormat.Bold = true;
+                                    
+                                    wTableRow.Cells[0].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                    wTableRow.Cells[0].Width = 120;
+
+                                    // Celda 2
+                                    wTableCell = wTableRow.Cells[1].AddParagraph();
+                                    wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
+                                    wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
+
+                                    wText = wTableCell.AppendText(rowPrograma["ConfiguracionDetalle"].ToString());
+                                    wText.CharacterFormat.FontName = "Arial";
+                                    wText.CharacterFormat.FontSize = 10f;
+                                    wText.CharacterFormat.Bold = true;
+
+                                    wTableRow.Cells[1].CellFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
+                                    wTableRow.Cells[1].Width = 390;
+                                
+                                #endregion
+
+                                // Brinco de linea (genera espacio)
+                                oSection.AddParagraph();
+                                
+                            #endregion
+                            
+                            break;
+
                     }
                 }
 
@@ -1595,7 +1730,9 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                         FileName = FileName.Replace(currentChar.ToString(), "");
                     }
 
-                    FileName = ( FileName.Length > 40 ? FileName.Substring(0, 40) : FileName ) + ".doc";
+                    FileName = ( FileName.Length > 40 ? gcJavascript.ClearText( FileName.Substring(0, 40) ) : gcJavascript.ClearText( FileName ) ) + ".doc";
+                    FileName = FileName.Replace('Ñ', 'N');
+                    FileName = FileName.Replace('ñ', 'n');
 
                     oDocument.Save( FileName, Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment );
                 }

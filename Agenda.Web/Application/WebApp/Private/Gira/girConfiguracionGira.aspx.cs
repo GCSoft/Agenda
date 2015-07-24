@@ -559,7 +559,6 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 SelectGira();
 
                 // Ocultar paneles
-                ClearPopUp_TrasladoVehiculoPanel();
                 ClearPopUp_TrasladoHelicopteroPanel();
                 ClearPopUp_EventoPanel();
                 ClearPopUp_ActividadGeneralPanel();
@@ -569,14 +568,13 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 ClearPopUp_AcompanaHelipuertoPanel();
                 ClearPopUp_ComiteHelipuertoPanel();
                 ClearPopUp_ComiteRecepcionPanel();
+                ClearPopUp_DespedidaHelipuertoPanel();
                 ClearPopUp_OrdenDiaPanel();
                 ClearPopUp_AcomodoPanel();
 
                 // Estado inicial
                 this.wucPopUp_EventoCalendarInicio.Width = 176;
                 this.wucPopUp_EventoCalendarFin.Width = 176;
-                this.wucPopUp_TrasladoVehiculoCalendarInicio.Width = 176;
-                this.wucPopUp_TrasladoVehiculoCalendarFin.Width = 176;
                 this.wucPopUp_TrasladoHelicopteroCalendarInicio.Width = 176;
                 this.wucPopUp_TrasladoHelicopteroCalendarFin.Width = 176;
                 this.wucPopUp_ActividadGeneralCalendarInicio.Width = 176;
@@ -597,17 +595,6 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 sKey = this.hddGiraId.Value + "|" + this.SenderId.Value;
 				sKey = gcEncryption.EncryptString(sKey, true);
                 this.Response.Redirect("girDetalleGira.aspx?key=" + sKey, false);
-
-            }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
-            }
-		}
-
-        protected void btnTrasladoVehiculo_Click(object sender, EventArgs e){
-			try
-            {
-
-                SetPopUp_TrasladoVehiculoPanel(PopUpTypes.Insert);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
@@ -689,9 +676,6 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                         switch (TipoGiraConfiguracionId)
                         {
                             case 1: // Traslado en vehículo
-                                SetPopUp_TrasladoVehiculoPanel(PopUpTypes.Update, GiraConfiguracionId);
-                                break;
-
                             case 2: // Traslado en helicóptero
                             case 5: // Traslado en avión
                                 SetPopUp_TrasladoHelicopteroPanel(PopUpTypes.Update, GiraConfiguracionId);
@@ -800,350 +784,6 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
         // PopUps de programa
 
-        #region PopUp - Traslado en Vehículo
-            
-            
-            // Rutinas
-
-            void ClearPopUp_TrasladoVehiculoPanel(){
-                try
-                {
-
-                    // Limpiar formulario
-                    this.txtPopUp_TrasladoVehiculoDetalle.Text = "";
-                    this.wucPopUp_TrasladoVehiculoCalendarInicio.SetDate(DateTime.Parse(this.GiraFechaInicio.Value));
-                    this.wucPopUp_TrasladoVehiculoCalendarFin.SetDate(DateTime.Parse(this.GiraFechaInicio.Value));
-                    this.wucPopUp_TrasladoVehiculoTimerDesde.DisplayTime = "10:00";
-                    this.wucPopUp_TrasladoVehiculoTimerHasta.DisplayTime = "10:00";
-
-                    // Estado incial de controles
-                    this.pnlPopUp_TrasladoVehiculo.Visible = false;
-                    this.lblPopUp_TrasladoVehiculoTitle.Text = "";
-                    this.btnPopUp_TrasladoVehiculoCommand.Text = "";
-                    this.lblPopUp_TrasladoVehiculoMessage.Text = "";
-                    this.hddGiraConfiguracionId.Value = "";
-
-                }catch (Exception ex){
-                    throw (ex);
-                }
-            }
-
-            void InsertConfiguracion_TrasladoVehiculo(){
-                ENTGira oENTGira = new ENTGira();
-                ENTResponse oENTResponse = new ENTResponse();
-                ENTSession oENTSession = new ENTSession();
-
-                BPGira oBPGira = new BPGira();
-
-                try
-                {
-
-                    // Datos de sesión
-                    oENTSession = (ENTSession)this.Session["oENTSession"];
-                    oENTGira.UsuarioId = oENTSession.UsuarioId;
-
-                    // Formulario
-                    oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
-                    oENTGira.TipoGiraConfiguracionId = 1; // Traslado en vehículo
-                    oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_TrasladoVehiculo.SelectedItem.Text;
-                    oENTGira.ConfiguracionFechaInicio = this.wucPopUp_TrasladoVehiculoCalendarInicio.DisplayUTCDate;
-                    oENTGira.ConfiguracionFechaFin = this.wucPopUp_TrasladoVehiculoCalendarFin.DisplayUTCDate;
-                    oENTGira.ConfiguracionHoraInicio = this.wucPopUp_TrasladoVehiculoTimerDesde.DisplayUTCTime;
-                    oENTGira.ConfiguracionHoraFin = this.wucPopUp_TrasladoVehiculoTimerHasta.DisplayUTCTime;
-                    oENTGira.ConfiguracionDetalle = this.txtPopUp_TrasladoVehiculoDetalle.Text.Trim();
-                    oENTGira.HelipuertoLugar = "";
-                    oENTGira.HelipuertoDomicilio = "";
-                    oENTGira.HelipuertoCoordenadas = "";
-                    oENTGira.ConfiguracionActivo = 1;
-
-                    // Transacción
-                    oENTResponse = oBPGira.InsertGiraConfiguracion(oENTGira);
-
-                    // Validaciones
-                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
-
-                    // Transacción exitosa
-                    ClearPopUp_TrasladoVehiculoPanel();
-
-                    // Actualizar formulario
-                    SelectGira();
-
-                    // Mensaje de usuario
-                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Configuración creada con éxito!');", true);
-
-                }catch (Exception ex){
-                    throw (ex);
-                }
-            }
-
-            void SelectGiraConfiguracion_TrasladoVehiculo_ForEdit(Int32 GiraConfiguracionId){
-                ENTGira oENTGira = new ENTGira();
-                ENTResponse oENTResponse = new ENTResponse();
-
-                BPGira oBPGira = new BPGira();
-
-                DataTable dtAgrupacion;
-
-                try
-                {
-                    
-                    // Formulario
-                    oENTGira.GiraConfiguracionId = GiraConfiguracionId;
-                    oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
-                    oENTGira.Activo = 1;
-
-                    // Transacción
-                    oENTResponse = oBPGira.SelectGiraConfiguracion(oENTGira);
-
-                    // Validaciones
-                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-
-                    // Mensaje de la BD
-                    this.lblPopUp_TrasladoVehiculoMessage.Text = oENTResponse.MessageDB;
-
-                    // Recuperar agrupación
-                    dtAgrupacion = (DataTable)this.ViewState["dtAgrupacion"];
-
-                    // Llenado de formulario
-                    this.txtPopUp_TrasladoVehiculoDetalle.Text = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionDetalle"].ToString();
-                    this.ddlAgrupacion_TrasladoVehiculo.SelectedValue = dtAgrupacion.Select("Agrupacion='" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionGrupo"].ToString() + "'")[0]["Row"].ToString();
-                    this.wucPopUp_TrasladoVehiculoCalendarInicio.SetDate(DateTime.Parse(oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionFechaInicio"].ToString()));
-                    this.wucPopUp_TrasladoVehiculoCalendarFin.SetDate(DateTime.Parse(oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionFechaFin"].ToString()));
-                    this.wucPopUp_TrasladoVehiculoTimerDesde.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionHoraInicioEstandar"].ToString();
-                    this.wucPopUp_TrasladoVehiculoTimerHasta.DisplayTime = oENTResponse.DataSetResponse.Tables[1].Rows[0]["ConfiguracionHoraFinEstandar"].ToString();
-
-                }catch (Exception ex){
-                    throw (ex);
-                }
-            }
-
-            void SetPopUp_TrasladoVehiculoPanel(PopUpTypes PopUpType, Int32 idItem = 0){
-                DataTable dtAgrupacion = null;
-
-                try
-                {
-
-                    // Acciones comunes
-                    this.pnlPopUp_TrasladoVehiculo.Visible = true;
-                    this.hddGiraConfiguracionId.Value = idItem.ToString();
-
-                    // Actualizar combo
-                    dtAgrupacion = (DataTable)this.ViewState["dtAgrupacion"];
-                    this.ddlAgrupacion_TrasladoVehiculo.Items.Clear();
-                    this.ddlAgrupacion_TrasladoVehiculo.DataTextField = "Agrupacion";
-                    this.ddlAgrupacion_TrasladoVehiculo.DataValueField = "Row";
-                    this.ddlAgrupacion_TrasladoVehiculo.DataSource = dtAgrupacion;
-                    this.ddlAgrupacion_TrasladoVehiculo.DataBind();
-                    if ( this.AgrupacionKey.Value != "" ) { this.ddlAgrupacion_TrasladoVehiculo.SelectedValue = this.AgrupacionKey.Value; }
-
-                    // Detalle de acción
-                    switch (PopUpType)
-                    {
-                        case PopUpTypes.Insert:
-
-                            this.lblPopUp_TrasladoVehiculoTitle.Text = "Nuevo Traslado en Vehículo";
-                            this.btnPopUp_TrasladoVehiculoCommand.Text = "Agregar Traslado en Vehículo";
-                            break;
-
-                        case PopUpTypes.Update:
-
-                            this.lblPopUp_TrasladoVehiculoTitle.Text = "Edición de Traslado en Vehículo";
-                            this.btnPopUp_TrasladoVehiculoCommand.Text = "Actualizar Traslado en Vehículo";
-                            SelectGiraConfiguracion_TrasladoVehiculo_ForEdit(idItem);
-                            break;
-
-                        default:
-                            throw (new Exception("Opción inválida"));
-                    }
-
-                }catch (Exception ex){
-                    throw (ex);
-                }
-            }
-            
-            void UpdateConfiguracion_TrasladoVehiculo(){
-                ENTGira oENTGira = new ENTGira();
-                ENTResponse oENTResponse = new ENTResponse();
-                ENTSession oENTSession = new ENTSession();
-
-                BPGira oBPGira = new BPGira();
-
-                try
-                {
-
-                    // Datos de sesión
-                    oENTSession = (ENTSession)this.Session["oENTSession"];
-                    oENTGira.UsuarioId = oENTSession.UsuarioId;
-
-                    // Formulario
-                    oENTGira.GiraConfiguracionId = Int32.Parse(this.hddGiraConfiguracionId.Value);
-                    oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
-                    oENTGira.TipoGiraConfiguracionId = 1; // Traslado en vehículo
-                    oENTGira.ConfiguracionGrupo = this.ddlAgrupacion_TrasladoVehiculo.SelectedItem.Text;
-                    oENTGira.ConfiguracionFechaInicio = this.wucPopUp_TrasladoVehiculoCalendarInicio.DisplayUTCDate;
-                    oENTGira.ConfiguracionFechaFin = this.wucPopUp_TrasladoVehiculoCalendarFin.DisplayUTCDate;
-                    oENTGira.ConfiguracionHoraInicio = this.wucPopUp_TrasladoVehiculoTimerDesde.DisplayUTCTime;
-                    oENTGira.ConfiguracionHoraFin = this.wucPopUp_TrasladoVehiculoTimerHasta.DisplayUTCTime;
-                    oENTGira.ConfiguracionDetalle = this.txtPopUp_TrasladoVehiculoDetalle.Text.Trim();
-                    oENTGira.HelipuertoLugar = "";
-                    oENTGira.HelipuertoDomicilio = "";
-                    oENTGira.HelipuertoCoordenadas = "";
-                    oENTGira.ConfiguracionActivo = 1;
-
-                    // Transacción
-                    oENTResponse = oBPGira.UpdateGiraConfiguracion(oENTGira);
-
-                    // Validaciones
-                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
-                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
-
-                    // Transacción exitosa
-                    ClearPopUp_TrasladoVehiculoPanel();
-
-                    // Actualizar formulario
-                    SelectGira();
-
-                    // Mensaje de usuario
-                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Configuración actualizada con éxito!');", true);
-
-                }catch (Exception ex){
-                    throw (ex);
-                }
-            }
-
-            void ValidatePopUp_TrasladoVehiculoForm(){
-                String ErrorDetailHour = "";
-
-                try
-                {
-                
-                    if (this.txtPopUp_TrasladoVehiculoDetalle.Text.Trim() == "") { throw new Exception("* El campo [Nombre] es requerido"); }
-
-                    if (!this.wucPopUp_TrasladoVehiculoCalendarInicio.IsValidDate()) { throw new Exception("El campo [Fecha de Inicio] es requerido"); }
-                    if (!this.wucPopUp_TrasladoVehiculoCalendarFin.IsValidDate()) { throw new Exception("El campo [Fecha final] es requerido"); }
-
-                    if (!this.wucPopUp_TrasladoVehiculoTimerDesde.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora de inicio del evento] es requerido: " + ErrorDetailHour); }
-                    if (!this.wucPopUp_TrasladoVehiculoTimerHasta.IsValidTime(ref ErrorDetailHour)) { throw new Exception("El campo [Hora final del evento] es requerido: " + ErrorDetailHour); }
-                    if (this.txtOtraAgrupacion_TrasladoVehiculo.Enabled) { throw (new Exception("El campo [Agrupación] es requerido")); }
-                    if (this.ddlAgrupacion_TrasladoVehiculo.SelectedItem.Value == "-1") { throw (new Exception("El campo [Agrupación] es requerido")); }
-
-                }catch (Exception ex){
-                    throw (ex);
-                }
-            }
-
-            
-            // Eventos
-
-            protected void btnPopUp_TrasladoVehiculoCommand_Click(object sender, EventArgs e){
-                try
-                {
-
-                    // Validar formulario
-                    ValidatePopUp_TrasladoVehiculoForm();
-
-                    // Determinar acción
-                    if (this.hddGiraConfiguracionId.Value == "0"){
-
-                        InsertConfiguracion_TrasladoVehiculo();
-                    }else{
-
-                        UpdateConfiguracion_TrasladoVehiculo();
-                    }
-
-                }catch (Exception ex){
-                    this.lblPopUp_TrasladoVehiculoMessage.Text = ex.Message;
-                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.txtPopUp_TrasladoVehiculoDetalle.ClientID + "');", true);
-                }
-            }
-
-            protected void imgCloseWindow_TrasladoVehiculo_Click(object sender, ImageClickEventArgs e){
-                try
-                {
-
-                    // Cancelar transacción
-                    ClearPopUp_TrasladoVehiculoPanel();
-
-                }catch (Exception ex){
-                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
-                }
-            }
-            
-            
-            // Eventos del control de agrupación
-            
-            protected void btnNuevaAgrupacion_TrasladoVehiculo_Click(object sender, EventArgs e){
-                DataTable dtAgrupacion;
-
-                try
-                {
-
-                    // Nueva agrupación
-                    dtAgrupacion = NuevaAgrupacion(this.txtOtraAgrupacion_TrasladoVehiculo.Text.Trim());
-
-                    // Actualizar combo
-                    this.ddlAgrupacion_TrasladoVehiculo.Items.Clear();
-                    this.ddlAgrupacion_TrasladoVehiculo.DataTextField = "Agrupacion";
-                    this.ddlAgrupacion_TrasladoVehiculo.DataValueField = "Row";
-                    this.ddlAgrupacion_TrasladoVehiculo.DataSource = dtAgrupacion;
-                    this.ddlAgrupacion_TrasladoVehiculo.DataBind();
-
-                    // Seleccionar el item deseado
-                    this.ddlAgrupacion_TrasladoVehiculo.SelectedValue = dtAgrupacion.Select("Agrupacion='" + this.txtOtraAgrupacion_TrasladoVehiculo.Text.Trim() + "'")[0]["Row"].ToString();
-                    this.AgrupacionKey.Value = this.ddlAgrupacion_TrasladoVehiculo.SelectedValue;
-
-                    // Estado inicial
-                    this.txtOtraAgrupacion_TrasladoVehiculo.Text = "";
-                    this.txtOtraAgrupacion_TrasladoVehiculo.Enabled = false;
-                    this.btnNuevaAgrupacion_TrasladoVehiculo.Enabled = false;
-
-                    this.txtOtraAgrupacion_TrasladoVehiculo.CssClass = "Textbox_Disabled";
-                    this.btnNuevaAgrupacion_TrasladoVehiculo.CssClass = "Button_Special_Gray";
-
-                    // Foco
-                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.ddlAgrupacion_TrasladoVehiculo.ClientID + "');", true);
-
-                }catch (Exception ex){
-                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + ex.Message + "');", true);
-                }
-		    }
-
-            protected void ddlAgrupacion_TrasladoVehiculo_SelectedIndexChanged(object sender, EventArgs e){
-                try
-                {
-
-                    if( this.ddlAgrupacion_TrasladoVehiculo.SelectedItem.Value == "-1" ){
-
-                        this.txtOtraAgrupacion_TrasladoVehiculo.Text = "";
-                        this.txtOtraAgrupacion_TrasladoVehiculo.Enabled = true;
-                        this.btnNuevaAgrupacion_TrasladoVehiculo.Enabled = true;
-
-                        this.txtOtraAgrupacion_TrasladoVehiculo.CssClass = "Textbox_General";
-                        this.btnNuevaAgrupacion_TrasladoVehiculo.CssClass = "Button_Special_Blue";
-
-                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.txtOtraAgrupacion_TrasladoVehiculo.ClientID + "');", true);
-                    }else{
-
-                        this.txtOtraAgrupacion_TrasladoVehiculo.Text = "";
-                        this.txtOtraAgrupacion_TrasladoVehiculo.Enabled = false;
-                        this.btnNuevaAgrupacion_TrasladoVehiculo.Enabled = false;
-
-                        this.txtOtraAgrupacion_TrasladoVehiculo.CssClass = "Textbox_Disabled";
-                        this.btnNuevaAgrupacion_TrasladoVehiculo.CssClass = "Button_Special_Gray";
-
-                        this.AgrupacionKey.Value = this.ddlAgrupacion_TrasladoVehiculo.SelectedValue;
-                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.ddlAgrupacion_TrasladoVehiculo.ClientID + "');", true);
-                    }
-
-                }catch (Exception ex){
-                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + ex.Message + "');", true);
-                }
-            }
-
-            
-        #endregion
-
         #region PopUp - Traslado en Helicóptero/Avión
             
             
@@ -1157,6 +797,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     this.txtPopUp_TrasladoHelicopteroDetalle.Text = "";
                     this.lblComiteHelipuerto.Visible = false;
                     this.lblAcompanaHelipuerto.Visible = false;
+                    this.lblDespedidaHelipuerto.Visible = false;
                     
                     this.wucPopUp_TrasladoHelicopteroCalendarInicio.SetDate(DateTime.Parse(this.GiraFechaInicio.Value));
                     this.wucPopUp_TrasladoHelicopteroCalendarFin.SetDate(DateTime.Parse(this.GiraFechaInicio.Value));
@@ -1180,7 +821,10 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     this.gvAcompanaHelipuerto.DataSource = null;
                     this.gvAcompanaHelipuerto.DataBind();
 
-                    this.rblPopUp_TrasladoHelicopteroTipoGiraConfiguracion.SelectedValue = "2";
+                    this.gvDespedidaHelipuerto.DataSource = null;
+                    this.gvDespedidaHelipuerto.DataBind();
+
+                    this.rblPopUp_TrasladoHelicopteroTipoGiraConfiguracion.SelectedValue = "1";
 
                 }catch (Exception ex){
                     throw (ex);
@@ -1254,6 +898,23 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                         oENTGira.DataTableAcompanaHelipuerto.Rows.Add(rowTemporal);
                     }
 
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvDespedidaHelipuerto, true);
+
+                    oENTGira.DataTableDespedidaHelipuerto = new DataTable("DataTableDespedidaHelipuerto");
+                    oENTGira.DataTableDespedidaHelipuerto.Columns.Add("Orden", typeof(Int32));
+                    oENTGira.DataTableDespedidaHelipuerto.Columns.Add("Nombre", typeof(String));
+                    oENTGira.DataTableDespedidaHelipuerto.Columns.Add("Puesto", typeof(String));
+                    
+                    foreach( DataRow rowDespedidaHelipuerto in tblTemporal.Rows ){
+
+                        rowTemporal = oENTGira.DataTableDespedidaHelipuerto.NewRow();
+                        rowTemporal["Orden"] = rowDespedidaHelipuerto["Orden"];
+                        rowTemporal["Nombre"] = rowDespedidaHelipuerto["Nombre"];
+                        rowTemporal["Puesto"] = rowDespedidaHelipuerto["Puesto"];
+                        oENTGira.DataTableDespedidaHelipuerto.Rows.Add(rowTemporal);
+                    }
+
                     // Transacción
                     oENTResponse = oBPGira.InsertGiraConfiguracion(oENTGira);
 
@@ -1324,6 +985,9 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                     this.gvAcompanaHelipuerto.DataSource = oENTResponse.DataSetResponse.Tables[7];
                     this.gvAcompanaHelipuerto.DataBind();
+
+                    this.gvDespedidaHelipuerto.DataSource = oENTResponse.DataSetResponse.Tables[8];
+                    this.gvDespedidaHelipuerto.DataBind();
 
                 }catch (Exception ex){
                     throw (ex);
@@ -1441,6 +1105,23 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                         rowTemporal["Nombre"] = rowAcompanaHelipuerto["Nombre"];
                         rowTemporal["Puesto"] = rowAcompanaHelipuerto["Puesto"];
                         oENTGira.DataTableAcompanaHelipuerto.Rows.Add(rowTemporal);
+                    }
+
+                    tblTemporal = null;
+                    tblTemporal = gcParse.GridViewToDataTable(this.gvDespedidaHelipuerto, true);
+
+                    oENTGira.DataTableDespedidaHelipuerto = new DataTable("DataTableDespedidaHelipuerto");
+                    oENTGira.DataTableDespedidaHelipuerto.Columns.Add("Orden", typeof(Int32));
+                    oENTGira.DataTableDespedidaHelipuerto.Columns.Add("Nombre", typeof(String));
+                    oENTGira.DataTableDespedidaHelipuerto.Columns.Add("Puesto", typeof(String));
+                    
+                    foreach( DataRow rowDespedidaHelipuerto in tblTemporal.Rows ){
+
+                        rowTemporal = oENTGira.DataTableDespedidaHelipuerto.NewRow();
+                        rowTemporal["Orden"] = rowDespedidaHelipuerto["Orden"];
+                        rowTemporal["Nombre"] = rowDespedidaHelipuerto["Nombre"];
+                        rowTemporal["Puesto"] = rowDespedidaHelipuerto["Puesto"];
+                        oENTGira.DataTableDespedidaHelipuerto.Rows.Add(rowTemporal);
                     }
 
                     // Transacción
@@ -1854,6 +1535,171 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                 }catch (Exception ex){
                     ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtPopUp_TrasladoHelicopteroAcompanaNombre.ClientID + "'); }", true);
+                }
+            }
+
+
+            protected void btnAgregarDespedidaHelipuerto_Click(object sender, EventArgs e){
+                DataTable tblDespedidaHelipuerto;
+                DataRow rowDespedidaHelipuerto;
+
+                try
+                {
+
+                    // Obtener DataTable del grid
+                    tblDespedidaHelipuerto = gcParse.GridViewToDataTable(this.gvDespedidaHelipuerto, false);
+
+                    // Validaciones
+                    if ( this.txtPopUp_TrasladoHelicopteroDespedidaNombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre del acompañante")); }
+                    //if (this.txtPopUp_TrasladoHelicopteroDespedidaPuesto.Text.Trim() == "") { throw (new Exception("Es necesario ingresar un puesto de recepción")); }
+
+                    // Agregar un nuevo elemento
+                    rowDespedidaHelipuerto = tblDespedidaHelipuerto.NewRow();
+                    rowDespedidaHelipuerto["Orden"] = (tblDespedidaHelipuerto.Rows.Count + 1).ToString();
+                    rowDespedidaHelipuerto["Nombre"] = this.txtPopUp_TrasladoHelicopteroDespedidaNombre.Text.Trim();
+                    rowDespedidaHelipuerto["Puesto"] = this.txtPopUp_TrasladoHelicopteroDespedidaPuesto.Text.Trim();
+                    tblDespedidaHelipuerto.Rows.Add(rowDespedidaHelipuerto);
+
+                    // Actualizar Grid
+                    this.gvDespedidaHelipuerto.DataSource = tblDespedidaHelipuerto;
+                    this.gvDespedidaHelipuerto.DataBind();
+
+                    // Inhabilitar edición
+                    InhabilitarEdicion(ref this.gvDespedidaHelipuerto, ref this.lblDespedidaHelipuerto); 
+
+                    // Nueva captura
+                    this.txtPopUp_TrasladoHelicopteroDespedidaNombre.Text = "";
+                    this.txtPopUp_TrasladoHelicopteroDespedidaPuesto.Text = "";
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUp_TrasladoHelicopteroDespedidaNombre.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtPopUp_TrasladoHelicopteroDespedidaNombre.ClientID + "'); }", true);
+                }
+            }
+
+            protected void gvDespedidaHelipuerto_RowCommand(object sender, GridViewCommandEventArgs e){
+                DataTable tblDespedidaHelipuerto;
+
+                String strCommand = "";
+                String Orden = "";
+                String Nombre = "";
+                String Puesto = "";
+                Int32 intRow = 0;
+
+                try
+                {
+
+                    // Opción seleccionada
+                    strCommand = e.CommandName.ToString();
+
+                    // Se dispara el evento RowCommand en el ordenamiento
+                    if (strCommand == "Sort") { return; }
+
+                    // Fila
+                    intRow = Int32.Parse(e.CommandArgument.ToString());
+
+                    // Datakeys
+                    Orden = this.gvDespedidaHelipuerto.DataKeys[intRow]["Orden"].ToString();
+                    Nombre = this.gvDespedidaHelipuerto.DataKeys[intRow]["Nombre"].ToString();
+                    Puesto = this.gvDespedidaHelipuerto.DataKeys[intRow]["Puesto"].ToString();
+
+                    // Acción
+                    switch (strCommand){
+
+                        case "Editar":
+
+                            // PopUp de Editar
+                            SetPopUp_DespedidaHelipuertoPanel(Orden, Nombre, Puesto);
+                            break;
+
+                        case "Eliminar":
+
+                            // Obtener DataTable del grid
+                            tblDespedidaHelipuerto = gcParse.GridViewToDataTable(this.gvDespedidaHelipuerto, true);
+
+                            // Remover el elemento
+                            tblDespedidaHelipuerto.Rows.Remove( tblDespedidaHelipuerto.Select("Orden=" + Orden )[0] );
+
+                            // Reordenar los Items restantes
+                            intRow = 0;
+                            foreach( DataRow rowDespedidaHelipuerto in tblDespedidaHelipuerto.Rows ){
+
+                                tblDespedidaHelipuerto.Rows[intRow]["Orden"] = (intRow + 1);
+                                intRow = intRow + 1;
+                            }
+
+                            // Actualizar Grid
+                            this.gvDespedidaHelipuerto.DataSource = tblDespedidaHelipuerto;
+                            this.gvDespedidaHelipuerto.DataBind();
+
+                            // Inhabilitar edición
+                            InhabilitarEdicion(ref this.gvDespedidaHelipuerto, ref this.lblDespedidaHelipuerto); 
+
+                            // Nueva captura
+                            this.txtPopUp_TrasladoHelicopteroDespedidaNombre.Text = "";
+                            this.txtPopUp_TrasladoHelicopteroDespedidaPuesto.Text = "";
+                            ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUp_TrasladoHelicopteroDespedidaNombre.ClientID + "'); }", true);
+
+                            break;
+                    }
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtPopUp_TrasladoHelicopteroDespedidaNombre.ClientID + "'); }", true);
+                }
+            }
+
+            protected void gvDespedidaHelipuerto_RowDataBound(object sender, GridViewRowEventArgs e){
+                ImageButton imgDelete = null;
+                ImageButton imgEdit = null;
+
+                String Orden = "";
+                String DespedidaHelipuertoNombre = "";
+
+                String sImagesAttributes = "";
+                String sTootlTip = "";
+
+                try
+                {
+
+                    // Validación de que sea fila
+                    if (e.Row.RowType != DataControlRowType.DataRow) { return; }
+
+                    // Obtener imagenes
+                    imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+                    imgEdit = (ImageButton)e.Row.FindControl("imgEdit");
+
+                    // Datakeys
+                    Orden = this.gvDespedidaHelipuerto.DataKeys[e.Row.RowIndex]["Orden"].ToString();
+                    DespedidaHelipuertoNombre = this.gvDespedidaHelipuerto.DataKeys[e.Row.RowIndex]["Nombre"].ToString();
+
+                    // Tooltip Edición
+                    sTootlTip = "Eliminar a [" + DespedidaHelipuertoNombre + "]";
+                    imgDelete.Attributes.Add("title", sTootlTip);
+
+                    // Atributos Over
+                    sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                    sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit_Over.png';";
+                    e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_Scroll'; " + sImagesAttributes);
+
+                    // Atributos Out
+                    sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                    sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
+                    e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_Scroll'; " + sImagesAttributes);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+
+            }
+
+            protected void gvDespedidaHelipuerto_Sorting(object sender, GridViewSortEventArgs e){
+                try
+                {
+
+                    gcCommon.SortGridView(ref this.gvDespedidaHelipuerto, ref this.hddSort, e.SortExpression, true);
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtPopUp_TrasladoHelicopteroDespedidaNombre.ClientID + "'); }", true);
                 }
             }
 
@@ -4062,7 +3908,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
             
         #endregion
 
-        #region PopUp - Acompana Helipuerto
+        #region PopUp - Acompañantes Helipuerto
             
             
             // Rutinas
@@ -4180,6 +4026,133 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
                     // Cancelar transacción
                     ClearPopUp_AcompanaHelipuertoPanel();
+
+                }catch (Exception ex){
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+                }
+            }
+
+            
+        #endregion
+
+        #region PopUp - Despedida Helipuerto
+            
+            
+            // Rutinas
+
+            void ClearPopUp_DespedidaHelipuertoPanel(){
+                try
+                {
+
+                    // Estado incial de controles
+                    this.pnlPopUp_DespedidaHelipuerto.Visible = false;
+                    this.lblPopUp_DespedidaHelipuertoTitle.Text = "";
+                    this.btnPopUp_DespedidaHelipuertoCommand.Text = "";
+                    this.lblPopUp_DespedidaHelipuertoMessage.Text = "";
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            void SetPopUp_DespedidaHelipuertoPanel(String Orden, String Nombre, String Puesto){
+                try
+                {
+
+                    // Acciones comunes
+                    this.pnlPopUp_DespedidaHelipuerto.Visible = true;
+                    this.lblDespedidaHelipuerto.Visible = false;
+
+                    // Detalle de acción
+                    this.lblPopUp_DespedidaHelipuertoTitle.Text = "Edición de elemento";
+                    this.btnPopUp_DespedidaHelipuertoCommand.Text = "Actualizar";
+
+                    // Formulario
+                    this.txtPopUpDespedidaHelipuerto_OrdenAnterior.Text = Orden;
+                    this.txtPopUpDespedidaHelipuerto_Orden.Text = Orden;
+                    this.txtPopUpDespedidaHelipuerto_Nombre.Text = Nombre;
+                    this.txtPopUpDespedidaHelipuerto_Puesto.Text = Puesto;
+
+                    // Foco
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUpDespedidaHelipuerto_Orden.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+            
+            void UpdateConfiguracion_DespedidaHelipuerto(){
+                ENTGira oENTGira = new ENTGira();
+                ENTResponse oENTResponse = new ENTResponse();
+                ENTSession oENTSession = new ENTSession();
+
+                BPGira oBPGira = new BPGira();
+
+                try
+                {
+
+                    // Datos de sesión
+                    oENTSession = (ENTSession)this.Session["oENTSession"];
+                    oENTGira.UsuarioId = oENTSession.UsuarioId;
+
+                    // Formulario
+                    oENTGira.GiraId = Int32.Parse(this.hddGiraId.Value);
+                    oENTGira.GiraConfiguracionId = Int32.Parse(this.hddGiraConfiguracionId.Value);
+                    oENTGira.OrdenAnterior = Int32.Parse(this.txtPopUpDespedidaHelipuerto_OrdenAnterior.Text);
+                    oENTGira.NuevoOrden = Int32.Parse(this.txtPopUpDespedidaHelipuerto_Orden.Text);
+                    oENTGira.Nombre = this.txtPopUpDespedidaHelipuerto_Nombre.Text.Trim();
+                    oENTGira.Puesto = this.txtPopUpDespedidaHelipuerto_Puesto.Text.Trim();
+
+                    // Transacción
+                    oENTResponse = oBPGira.UpdateGiraDespedidaHelipuerto_Item(oENTGira);
+
+                    // Validaciones
+                    if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                    if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                    // Transacción exitosa
+                    ClearPopUp_DespedidaHelipuertoPanel();
+
+                    // Actualizar listado
+                    this.gvDespedidaHelipuerto.DataSource = oENTResponse.DataSetResponse.Tables[1];
+                    this.gvDespedidaHelipuerto.DataBind();
+
+                    // Mensaje de usuario
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUp_TrasladoHelicopteroDespedidaNombre.ClientID + "'); }", true);
+
+                }catch (Exception ex){
+                    throw (ex);
+                }
+            }
+
+            
+            // Giras
+
+            protected void btnPopUp_DespedidaHelipuertoCommand_Click(object sender, EventArgs e){
+                try
+                {
+
+                    // Validar formulario
+                    if ( this.txtPopUpDespedidaHelipuerto_Orden.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un orden")); }
+                    if ( !gcNumber.IsNumber ( this.txtPopUpDespedidaHelipuerto_Orden.Text.Trim(), GCNumber.NumberTypes.Int32Type) ) { throw (new Exception("El campo orden debe de ser numérico")); }
+                    if ( Int32.Parse( this.txtPopUpDespedidaHelipuerto_Orden.Text.Trim() ) < 1 ) { throw (new Exception("El campo orden debe de ser mayor a 0")); }
+                    if ( this.txtPopUpDespedidaHelipuerto_Nombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
+
+                    // Transacción
+                    UpdateConfiguracion_DespedidaHelipuerto();
+
+                }catch (Exception ex){
+                    this.lblPopUp_DespedidaHelipuertoMessage.Text = ex.Message;
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "focusControl('" + this.txtPopUpDespedidaHelipuerto_Orden.ClientID + "');", true);
+                }
+            }
+
+            protected void imgCloseWindow_DespedidaHelipuerto_Click(object sender, ImageClickEventArgs e){
+                try
+                {
+
+                    // Cancelar transacción
+                    ClearPopUp_DespedidaHelipuertoPanel();
 
                 }catch (Exception ex){
                     ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);

@@ -68,8 +68,7 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlBotones" runat="server" CssClass="ButtonPanel">
-        <asp:Button ID="btnTrasladoVehiculo" runat="server" Text="Traslado en vehículo" CssClass="Button_General" width="175px" onclick="btnTrasladoVehiculo_Click" /> &nbsp;&nbsp;
-        <asp:Button ID="btnTrasladoHelicoptero" runat="server" Text="Helipuerto/Aereopuerto" CssClass="Button_General" width="175px" onclick="btnTrasladoHelicoptero_Click" /> &nbsp;&nbsp;
+        <asp:Button ID="btnTrasladoHelicoptero" runat="server" Text="Traslado" CssClass="Button_General" width="175px" onclick="btnTrasladoHelicoptero_Click" /> &nbsp;&nbsp;
         <asp:Button ID="btnEvento" runat="server" Text="Evento" CssClass="Button_General" width="175px" onclick="btnEvento_Click" /> &nbsp;&nbsp;
         <asp:Button ID="btnActividadGeneral" runat="server" Text="Actividad General" CssClass="Button_General" width="175px" onclick="btnActividadGeneral_Click" /> &nbsp;&nbsp;
         <asp:Button ID="btnComentarioEnCuadernillo" runat="server" Text="Comentario En Cuadernillo" CssClass="Button_General" width="175px" onclick="btnComentarioEnCuadernillo_Click" /> &nbsp;&nbsp;
@@ -119,94 +118,6 @@
         <asp:Button ID="btnRegresar" runat="server" Text="Regresar" CssClass="Button_General" width="125px" onclick="btnRegresar_Click" />
     </asp:Panel>
 
-    <asp:Panel ID="pnlPopUp_TrasladoVehiculo" runat="server" CssClass="PopUpBlock">
-        <asp:Panel ID="pnlPopUp_TrasladoVehiculoContent" runat="server" CssClass="PopUpContent" style="margin-top:-170px; margin-left:-260px;" Height="340px" Width="520px">
-            <asp:Panel ID="pnlPopUp_TrasladoVehiculoHeader" runat="server" CssClass="PopUpHeader">
-                <table class="PopUpHeaderTable">
-                    <tr>
-                        <td class="Espacio"></td>
-                        <td class="Etiqueta"><asp:Label ID="lblPopUp_TrasladoVehiculoTitle" runat="server" CssClass="PopUpHeaderTitle"></asp:Label></td>
-                        <td class="Cierre"><asp:ImageButton ID="imgCloseWindow_TrasladoVehiculo" runat="server" ImageUrl="~/Include/Image/Buttons/CloseWindow.png" ToolTip="Cerrar Ventana" OnClick="imgCloseWindow_TrasladoVehiculo_Click"></asp:ImageButton></td>
-                    </tr>
-                </table>
-            </asp:Panel>
-            <asp:Panel ID="pnlPopUp_TrasladoVehiculoBody" runat="server" CssClass="PopUpBody">
-                <table class="PopUpBodyTable">
-                    <tr>
-                        <td class="Etiqueta" style="vertical-align:top;">Agrupación</td>
-                        <td class="VinetaObligatorio" style="vertical-align:top;">*</td>
-                        <td class="Campo">
-                            <table style="width:405px">
-	                            <tr>
-		                            <td colspan="2" style="text-align:left;">
-                                        <asp:DropDownList ID="ddlAgrupacion_TrasladoVehiculo" runat="server" CssClass="DropDownList_General" Width="400px" AutoPostBack="True" OnSelectedIndexChanged="ddlAgrupacion_TrasladoVehiculo_SelectedIndexChanged"></asp:DropDownList>
-		                            </td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:left;">
-                                        <asp:TextBox ID="txtOtraAgrupacion_TrasladoVehiculo" runat="server" CssClass="Textbox_Disabled" Enabled="false" MaxLength="1000" Width="360px"></asp:TextBox>
-		                            </td>
-                                    <td style="text-align:right;">
-                                        <asp:Button ID="btnNuevaAgrupacion_TrasladoVehiculo" runat="server" Text="+" CssClass="Button_Special_Gray" Enabled="false" ToolTip="Nueva Agrupacion" Width="25px" OnClick="btnNuevaAgrupacion_TrasladoVehiculo_Click" />
-		                            </td>
-	                            </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="Etiqueta">Detalle</td>
-                        <td class="VinetaObligatorio">*</td>
-                        <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoVehiculoDetalle" runat="server" CssClass="Textarea_General" Height="70px" TextMode="MultiLine" MaxLength="1000" Width="400px"></asp:TextBox></td>
-                    </tr>
-                    <tr>
-				        <td class="Etiqueta">Fecha y hora</td>
-				        <td class="VinetaObligatorio">*</td>
-				        <td class="Campo">
-                            <table style="border:0px; padding:0px; width:100%;">
-                                <tr>
-                                    <td style="text-align:left; width:220px;">
-                                        Desde&nbsp;<wuc:wucCalendar ID="wucPopUp_TrasladoVehiculoCalendarInicio" runat="server" />
-                                    </td>
-                                    <td style="text-align:left; width:150px;">
-                                        <wuc:wucTimer ID="wucPopUp_TrasladoVehiculoTimerDesde" runat="server" />&nbsp;HRS.
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            </table>
-				        </td>
-			        </tr>
-                    <tr>
-				        <td class="Etiqueta"></td>
-				        <td class="VinetaObligatorio"></td>
-				        <td class="Campo">
-                            <table style="border:0px; padding:0px; width:100%;">
-                                <tr>
-                                    <td style="text-align:left; width:220px;">
-                                        Hasta&nbsp;&nbsp;<wuc:wucCalendar ID="wucPopUp_TrasladoVehiculoCalendarFin" runat="server" />
-                                    </td>
-                                    <td style="text-align:left; width:150px;">
-                                        <wuc:wucTimer ID="wucPopUp_TrasladoVehiculoTimerHasta" runat="server" />&nbsp;HRS.
-                                    </td>
-                                    <td></td>
-                                </tr>
-                            </table>
-				        </td>
-			        </tr>
-                    <tr>
-                        <td class="Botones" colspan="3">
-                            <asp:Button ID="btnPopUp_TrasladoVehiculoCommand" runat="server" Text="" CssClass="Button_General" Width="175px" OnClick="btnPopUp_TrasladoVehiculoCommand_Click" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="Mensajes" colspan="3">
-                            <asp:Label ID="lblPopUp_TrasladoVehiculoMessage" runat="server" CssClass="PopUpTextMessage"></asp:Label>
-                        </td>
-                    </tr>
-                </table>
-            </asp:Panel>
-        </asp:Panel>
-    </asp:Panel>
-
     <asp:Panel ID="pnlPopUp_TrasladoHelicoptero" runat="server" CssClass="PopUpBlock">
         <asp:Panel ID="pnlPopUp_TrasladoHelicopteroContent" runat="server" CssClass="PopUpContent" style="margin-top:-250px; margin-left:-260px;" Height="500px" Width="580px">
             <asp:Panel ID="pnlPopUp_TrasladoHelicopteroHeader" runat="server" CssClass="PopUpHeader">
@@ -244,6 +155,18 @@
 		                                        </td>
 	                                        </tr>
                                         </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="Etiqueta">Tipo de traslado</td>
+                                    <td class="VinetaObligatorio">*</td>
+                                    <td class="Campo">
+                                        <asp:RadioButtonList ID="rblPopUp_TrasladoHelicopteroTipoGiraConfiguracion" runat="server" RepeatDirection="Horizontal">
+                                            <asp:ListItem Text="Vehiculo" Value="1" Selected="True"></asp:ListItem>
+						                    <asp:ListItem Text="Helipuerto" Value="2"></asp:ListItem>
+						                    <asp:ListItem Text="Aereopuerto" Value="5"></asp:ListItem>
+					                    </asp:RadioButtonList>
                                     </td>
                                     <td></td>
                                 </tr>
@@ -288,17 +211,6 @@
 				                    </td>
 			                    </tr>
                                 <tr>
-                                    <td class="Etiqueta"></td>
-                                    <td class="VinetaObligatorio"></td>
-                                    <td class="Campo">
-                                        <asp:RadioButtonList ID="rblPopUp_TrasladoHelicopteroTipoGiraConfiguracion" runat="server" RepeatDirection="Horizontal">
-						                    <asp:ListItem Text="Helipuerto" Value="2" Selected="True"></asp:ListItem>
-						                    <asp:ListItem Text="Aereopuerto" Value="5"></asp:ListItem>
-					                    </asp:RadioButtonList>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
                                     <td class="Etiqueta">Lugar</td>
                                     <td class="VinetaObligatorio"></td>
                                     <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroLugar" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
@@ -316,6 +228,74 @@
                                     <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroCoordenadas" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
                                     <td></td>
                                 </tr>
+                            </table>
+                        </ContentTemplate>
+                    </asp:TabPanel>
+                    <asp:TabPanel ID="tpnlAcompana_TrasladoHelicoptero" runat="server">
+                        <HeaderTemplate>Acompañantes</HeaderTemplate>
+                        <ContentTemplate>
+                            <br />
+                            <table class="FormTable">
+                                <tr>
+                                    <td class="Etiqueta">Nombre</td>
+                                    <td class="VinetaObligatorio"></td>
+                                    <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroAcompanaNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="375px"></asp:TextBox></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="Etiqueta">Puesto</td>
+                                    <td class="VinetaObligatorio"></td>
+                                    <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroAcompanaPuesto" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="375px"></asp:TextBox></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+				                    <td class="Etiqueta"><asp:Button ID="btnAgregarAcompanaHelipuerto" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarAcompanaHelipuerto_Click" /></td>
+				                    <td class="Espacio"></td>
+				                    <td colspan="2"><asp:Label ID="lblAcompanaHelipuerto" runat="server" CssClass="PopUpTextMessage" Text="Es necesario confirmar la transacción para poder editar" Visible="false"></asp:Label></td>
+			                    </tr>
+                                <tr><td colspan="4" style="height:10px;"></td></tr>
+                                <tr>
+                                    <td colspan="4">
+                                        <div style="border:0px solid #000000; clear:both; position:relative; width:100%;">
+                                            <table cellspacing="0" rules="all" border="1" style="border-collapse:collapse; width:550px;">
+                                                <tr class="Grid_Header_PopUp">
+                                                    <th scope="col" style="width:80px;">Orden</th>
+                                                    <th scope="col" style="width:200px;">Nombre</th>
+										            <th scope="col" style="width:270px;">Puesto</th>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <div style="border:1px solid #C1C1C1; height:185px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:548px">
+                                            <asp:GridView ID="gvAcompanaHelipuerto" runat="server" AllowPaging="false" AllowSorting="True" AutoGenerateColumns="False" ShowHeader="false" Width="100%"
+                                                DataKeyNames="Orden,Nombre,Puesto"
+                                                OnRowCommand="gvAcompanaHelipuerto_RowCommand"
+                                                OnRowDataBound="gvAcompanaHelipuerto_RowDataBound"
+                                                OnSorting="gvAcompanaHelipuerto_Sorting">
+                                                <RowStyle CssClass="Grid_Row_Scroll" />
+                                                <EmptyDataTemplate>
+                                                    <div style="border:0px; clear:both; color:#675C9D; font:11px Tahoma; font-weight:normal; height:15px; position:relative; text-align:center; width:100%;">
+                                                        No se han capturado los acompañantes
+                                                    </div>
+                                                </EmptyDataTemplate>
+                                                <Columns>
+                                                    <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="78px"  DataField="Orden"   SortExpression="Orden"></asp:BoundField>
+                                                    <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="194px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
+                                                    <asp:BoundField HeaderText="Puesto" ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
+                                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
+                                                        <ItemTemplate>
+                                                            <asp:ImageButton ID="imgEdit" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Editar" ImageUrl="~/Include/Image/Buttons/Edit.png" runat="server" />
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField ItemStyle-HorizontalAlign="Center" ItemStyle-Width="20px">
+                                                        <ItemTemplate>
+                                                            <asp:ImageButton ID="imgDelete" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Eliminar" ImageUrl="~/Include/Image/Buttons/Delete.png" runat="server" />
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                            </asp:GridView>
+                                        </div>
+                                    </td>
+			                    </tr>
                             </table>
                         </ContentTemplate>
                     </asp:TabPanel>
@@ -387,27 +367,27 @@
                             </table>
                         </ContentTemplate>
                     </asp:TabPanel>
-                    <asp:TabPanel ID="tpnlAcompana_TrasladoHelicoptero" runat="server">
-                        <HeaderTemplate>Acompañantes</HeaderTemplate>
+                    <asp:TabPanel ID="tpnlDespedida_TrasladoHelicoptero" runat="server">
+                        <HeaderTemplate>Comité de despedida</HeaderTemplate>
                         <ContentTemplate>
                             <br />
                             <table class="FormTable">
                                 <tr>
                                     <td class="Etiqueta">Nombre</td>
                                     <td class="VinetaObligatorio"></td>
-                                    <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroAcompanaNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="375px"></asp:TextBox></td>
+                                    <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroDespedidaNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="375px"></asp:TextBox></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td class="Etiqueta">Puesto</td>
                                     <td class="VinetaObligatorio"></td>
-                                    <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroAcompanaPuesto" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="375px"></asp:TextBox></td>
+                                    <td class="Campo"><asp:TextBox ID="txtPopUp_TrasladoHelicopteroDespedidaPuesto" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="375px"></asp:TextBox></td>
                                     <td></td>
                                 </tr>
                                 <tr>
-				                    <td class="Etiqueta"><asp:Button ID="btnAgregarAcompanaHelipuerto" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarAcompanaHelipuerto_Click" /></td>
+				                    <td class="Etiqueta"><asp:Button ID="btnAgregarDespedidaHelipuerto" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarDespedidaHelipuerto_Click" /></td>
 				                    <td class="Espacio"></td>
-				                    <td colspan="2"><asp:Label ID="lblAcompanaHelipuerto" runat="server" CssClass="PopUpTextMessage" Text="Es necesario confirmar la transacción para poder editar" Visible="false"></asp:Label></td>
+				                    <td colspan="2"><asp:Label ID="lblDespedidaHelipuerto" runat="server" CssClass="PopUpTextMessage" Text="Es necesario confirmar la transacción para poder editar" Visible="false"></asp:Label></td>
 			                    </tr>
                                 <tr><td colspan="4" style="height:10px;"></td></tr>
                                 <tr>
@@ -422,15 +402,15 @@
                                             </table>
                                         </div>
                                         <div style="border:1px solid #C1C1C1; height:185px; overflow-x:hidden; overflow-y:scroll; text-align:left; Width:548px">
-                                            <asp:GridView ID="gvAcompanaHelipuerto" runat="server" AllowPaging="false" AllowSorting="True" AutoGenerateColumns="False" ShowHeader="false" Width="100%"
+                                            <asp:GridView ID="gvDespedidaHelipuerto" runat="server" AllowPaging="false" AllowSorting="True" AutoGenerateColumns="False" ShowHeader="false" Width="100%"
                                                 DataKeyNames="Orden,Nombre,Puesto"
-                                                OnRowCommand="gvAcompanaHelipuerto_RowCommand"
-                                                OnRowDataBound="gvAcompanaHelipuerto_RowDataBound"
-                                                OnSorting="gvAcompanaHelipuerto_Sorting">
+                                                OnRowCommand="gvDespedidaHelipuerto_RowCommand"
+                                                OnRowDataBound="gvDespedidaHelipuerto_RowDataBound"
+                                                OnSorting="gvDespedidaHelipuerto_Sorting">
                                                 <RowStyle CssClass="Grid_Row_Scroll" />
                                                 <EmptyDataTemplate>
                                                     <div style="border:0px; clear:both; color:#675C9D; font:11px Tahoma; font-weight:normal; height:15px; position:relative; text-align:center; width:100%;">
-                                                        No se han capturado los acompañantes
+                                                        No se ha capturado el comité de despedida
                                                     </div>
                                                 </EmptyDataTemplate>
                                                 <Columns>
@@ -1288,6 +1268,62 @@
                     <tr>
                         <td class="Mensajes" colspan="3">
                             <asp:Label ID="lblPopUp_AcompanaHelipuertoMessage" runat="server" CssClass="PopUpTextMessage"></asp:Label>
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+        </asp:Panel>
+    </asp:Panel>
+
+    <asp:Panel ID="pnlPopUp_DespedidaHelipuerto" runat="server" CssClass="PopUpBlock">
+        <asp:Panel ID="pnlPopUp_DespedidaHelipuertoContent" runat="server" CssClass="PopUpContent" style="margin-top:-125px; margin-left:-245px;" Height="250px" Width="490px">
+            <asp:Panel ID="pnlPopUp_DespedidaHelipuertoHeader" runat="server" CssClass="PopUpHeader">
+                <table class="PopUpHeaderTable">
+                    <tr>
+                        <td class="Espacio"></td>
+                        <td class="Etiqueta"><asp:Label ID="lblPopUp_DespedidaHelipuertoTitle" runat="server" CssClass="PopUpHeaderTitle"></asp:Label></td>
+                        <td class="Cierre"><asp:ImageButton ID="imgCloseWindow_DespedidaHelipuerto" runat="server" ImageUrl="~/Include/Image/Buttons/CloseWindow.png" ToolTip="Cerrar Ventana" OnClick="imgCloseWindow_DespedidaHelipuerto_Click"></asp:ImageButton></td>
+                    </tr>
+                </table>
+            </asp:Panel>
+            <asp:Panel ID="pnlPopUp_DespedidaHelipuertoBody" runat="server" CssClass="PopUpBody">
+                <table class="PopUpBodyTable">
+                    <tr>
+                        <td class="Etiqueta">Orden Anterior</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpDespedidaHelipuerto_OrdenAnterior" runat="server" CssClass="Textbox_General_Disabled" Enabled="false" MaxLength="3" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Nuevo Orden</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpDespedidaHelipuerto_Orden" runat="server" CssClass="Textbox_General" MaxLength="3" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Nombre</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpDespedidaHelipuerto_Nombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Etiqueta">Puesto</td>
+                        <td class="VinetaObligatorio">*</td>
+                        <td class="Campo">
+                            <asp:TextBox ID="txtPopUpDespedidaHelipuerto_Puesto" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Botones" colspan="3">
+                            <asp:Button ID="btnPopUp_DespedidaHelipuertoCommand" runat="server" Text="" CssClass="Button_General" Width="175px" OnClick="btnPopUp_DespedidaHelipuertoCommand_Click" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="Mensajes" colspan="3">
+                            <asp:Label ID="lblPopUp_DespedidaHelipuertoMessage" runat="server" CssClass="PopUpTextMessage"></asp:Label>
                         </td>
                     </tr>
                 </table>

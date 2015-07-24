@@ -2729,8 +2729,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                     foreach (char currentChar in invalidPathChars){
                         FileName = FileName.Replace(currentChar.ToString(), "");
                     }
-
-                    FileName = ( FileName.Length > 40 ? FileName.Substring(0, 40) : FileName ) + ".doc";
+                    
+                    FileName = ( FileName.Length > 40 ? gcJavascript.ClearText( FileName.Substring(0, 40) ) : gcJavascript.ClearText( FileName ) ) + ".doc";
+                    FileName = FileName.Replace('Ñ', 'N');
+                    FileName = FileName.Replace('ñ', 'n');
 
                     oDocument.Save( FileName, Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment );
                 }
