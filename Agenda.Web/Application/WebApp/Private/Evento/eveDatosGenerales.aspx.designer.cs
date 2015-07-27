@@ -94,33 +94,6 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.Label lblEventoFechaHora;
         
         /// <summary>
-        /// ddlCategoria control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCategoria;
-        
-        /// <summary>
-        /// ddlConducto control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlConducto;
-        
-        /// <summary>
-        /// ddlPrioridad control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPrioridad;
-        
-        /// <summary>
         /// txtSecretarioRamo control.
         /// </summary>
         /// <remarks>
@@ -173,6 +146,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::AjaxControlToolkit.AutoCompleteExtender autosuggestResponsable;
+        
+        /// <summary>
+        /// lblRepresentante control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRepresentante;
         
         /// <summary>
         /// txtRepresentante control.

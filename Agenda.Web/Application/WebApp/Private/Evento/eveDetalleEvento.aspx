@@ -26,6 +26,11 @@
             <asp:ImageButton ID="EliminarRepresentanteButton" ImageUrl="~/Include/Image/Icon/SubMenuEliminarRepresentante.png" runat="server" OnClick="EliminarRepresentanteButton_Click" ></asp:ImageButton><br />
             Eliminar representante
         </asp:Panel>
+
+        <asp:Panel ID="ReactivarPanel" CssClass="IconoPanel" runat="server" Visible="true">
+            <asp:ImageButton ID="ReactivarButton" ImageUrl="~/Include/Image/Icon/SubMenuValoracion.png" runat="server" OnClick="ReactivarButton_Click" ></asp:ImageButton><br />
+            Reactivar Evento
+        </asp:Panel>
         
         <asp:Panel ID="DatosGeneralesPanel" CssClass="IconoPanel" runat="server" Visible="true">
             <asp:ImageButton ID="InformacionGeneralButton" ImageUrl="~/Include/Image/Icon/SubMenuDatosGenerales.png" runat="server" OnClick="InformacionGeneralButton_Click"></asp:ImageButton><br />

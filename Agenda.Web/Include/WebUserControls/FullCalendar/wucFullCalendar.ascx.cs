@@ -348,7 +348,7 @@ namespace Agenda.Web.Include.WebUserControls.FullCalendar
                                         "defaultDate: '" + GetQueryDate() + "', " +
                                         "editable: false, " +
                                         "eventBorderColor: '#675C9D', " +
-                                        "eventLimit: true, " +
+                                        "eventLimit: false, " +
                                         "eventTextColor: '#FFFFFF', " +
                                         "header: { left: 'month,agendaWeek,agendaDay', center: 'title' }, " +
                                         "lang: 'es', " +

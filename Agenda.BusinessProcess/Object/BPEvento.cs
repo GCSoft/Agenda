@@ -436,6 +436,35 @@ namespace Agenda.BusinessProcess.Object
             return oENTResponse;
         }
 
+        ///<remarks>
+        ///   <name>BPEvento.UpdateEvento_Reactivar</name>
+        ///   <create>09-Enero-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public ENTResponse UpdateEvento_Reactivar(ENTEvento oENTEvento){
+            DAEvento oDAEvento = new DAEvento();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            try
+            {
+
+                // Transacción en base de datos
+                oENTResponse = oDAEvento.UpdateEvento_Reactivar(oENTEvento, this.ConnectionApplication, 0);
+
+                // Validación de error en consulta
+                if (oENTResponse.GeneratesException) { return oENTResponse; }
+
+                // Validación de mensajes de la BD
+                oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
+
+            }catch (Exception ex){
+                oENTResponse.ExceptionRaised(ex.Message);
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
 
 
         ///<remarks>

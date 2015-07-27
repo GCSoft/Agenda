@@ -14,6 +14,7 @@ using System.Web.UI.WebControls;
 
 // Referencias manuales
 using System.Globalization;
+using System.Threading;
 
 namespace Agenda.Web.Include.WebUserControls
 {
@@ -263,6 +264,10 @@ namespace Agenda.Web.Include.WebUserControls
         // Eventos del control
 
         protected void Page_Load(object sender, EventArgs e){
+
+            // Cultura
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("es-MX");
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-MX");
             
             // Mantener estado
             if (this.txtCanvas.Text != "") { this.ceManager.SelectedDate = DateTime.Parse(this.txtCanvas.Text); }

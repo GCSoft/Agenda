@@ -1289,6 +1289,63 @@ namespace Agenda.DataAccess.Object
             return oENTResponse;
         }
 
+        ///<remarks>
+        ///   <name>DAGira.UpdateGira_Reactivar</name>
+        ///   <create>09-Enero-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public ENTResponse UpdateGira_Reactivar(ENTGira oENTGira, String sConnection, Int32 iAlternateDBTimeout){
+            SqlConnection sqlCnn = new SqlConnection(sConnection);
+            SqlCommand sqlCom;
+            SqlParameter sqlPar;
+            SqlDataAdapter sqlDA;
+
+            ENTResponse oENTResponse = new ENTResponse();
+
+            // Configuración de objetos
+            sqlCom = new SqlCommand("uspGira_Upd_Reactivar", sqlCnn);
+            sqlCom.CommandType = CommandType.StoredProcedure;
+
+            // Timeout alternativo en caso de ser solicitado
+            if (iAlternateDBTimeout > 0) { sqlCom.CommandTimeout = iAlternateDBTimeout; }
+
+            // Parametros
+            sqlPar = new SqlParameter("GiraId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.GiraId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            sqlPar = new SqlParameter("UsuarioId", SqlDbType.Int);
+            sqlPar.Value = oENTGira.UsuarioId;
+            sqlCom.Parameters.Add(sqlPar);
+
+            // Inicializaciones
+            oENTResponse.DataSetResponse = new DataSet();
+            sqlDA = new SqlDataAdapter(sqlCom);
+
+            // Transacción
+            try
+            {
+
+                sqlCnn.Open();
+                sqlDA.Fill(oENTResponse.DataSetResponse);
+                sqlCnn.Close();
+
+            }catch (SqlException sqlEx){
+
+                oENTResponse.ExceptionRaised(sqlEx.Message);
+            }catch (Exception ex){
+
+                oENTResponse.ExceptionRaised(ex.Message);
+            }finally{
+
+                if (sqlCnn.State == ConnectionState.Open) { sqlCnn.Close(); }
+                sqlCnn.Dispose();
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
 
 
         ///<remarks>

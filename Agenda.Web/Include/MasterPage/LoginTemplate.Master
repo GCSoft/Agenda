@@ -18,7 +18,7 @@
 </head>
 <body class="BackGroundBody">
     <form id="form1" runat="server">
-        <asp:ScriptManager ID="smngLoginTemplate" runat="server" EnablePageMethods="True"></asp:ScriptManager>
+        <asp:ScriptManager ID="smngLoginTemplate" runat="server" EnablePageMethods="True" EnableScriptGlobalization="True"></asp:ScriptManager>
         <asp:UpdatePanel ID="updMaster" runat="server">
             <ContentTemplate>
 

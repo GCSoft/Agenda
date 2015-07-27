@@ -49,7 +49,7 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <asp:ScriptManager ID="smngPrivateTemplate" runat="server" EnablePageMethods="True"></asp:ScriptManager>
+        <asp:ScriptManager ID="smngPrivateTemplate" runat="server" EnablePageMethods="True" EnableScriptGlobalization="True" ></asp:ScriptManager>
         <asp:UpdatePanel ID="updMaster" runat="server">
             <ContentTemplate>
                 

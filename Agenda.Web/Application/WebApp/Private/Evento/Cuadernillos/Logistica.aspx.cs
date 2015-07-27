@@ -2649,7 +2649,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         wTableCell = wTableRow.Cells[1].AddParagraph();
                         wTableRow.Cells[1].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
-                        wText = wTableCell.AppendText(oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoAcomodoNombre"].ToString());
+                        wText = wTableCell.AppendText(oENTResponse.DataSetResponse.Tables[6].Rows[0]["TipoMontaje"].ToString());
                         wText.CharacterFormat.Bold = true;
                         wText.CharacterFormat.FontName = "Arial";
                         wText.CharacterFormat.FontSize = 10f;
@@ -2663,8 +2663,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         oSection.AddParagraph();
                         
                         // Imagen del montaje
-                        if (oENTResponse.DataSetResponse.Tables[13].Rows.Count > 0){
-
+                        System.Drawing.Image imgMontage;
+                        foreach( DataRow drImagenMontaje in oENTResponse.DataSetResponse.Tables[13].Rows ){
+                        
                             wTable = oSection.Body.AddTable();
                             wTable.ResetCells(1, 1);
                             wTable.TableFormat.Borders.BorderType = Syncfusion.DocIO.DLS.BorderStyle.None;
@@ -2675,14 +2676,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                             wTableCell = wTableRow.Cells[0].AddParagraph();
                             wTableRow.Cells[0].CellFormat.VerticalAlignment = VerticalAlignment.Middle;
                             wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Center;
-                            if (System.IO.File.Exists(oENTResponse.DataSetResponse.Tables[13].Rows[0]["RutaAbsoluta"].ToString())){
-                                System.Drawing.Image imgMontage = System.Drawing.Image.FromFile(oENTResponse.DataSetResponse.Tables[13].Rows[0]["RutaAbsoluta"].ToString());
+                            if (System.IO.File.Exists(drImagenMontaje["RutaAbsoluta"].ToString())){
+                                imgMontage = System.Drawing.Image.FromFile(drImagenMontaje["RutaAbsoluta"].ToString());
                                 wPicture = wTableCell.AppendPicture(imgMontage);
                             }
                             wTableRow.Cells[0].Width = 510;
 
                             oSection.AddParagraph();
                         }
+                       
                             
                     #endregion
                     
@@ -2729,10 +2731,14 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                     foreach (char currentChar in invalidPathChars){
                         FileName = FileName.Replace(currentChar.ToString(), "");
                     }
-                    
-                    FileName = ( FileName.Length > 40 ? gcJavascript.ClearText( FileName.Substring(0, 40) ) : gcJavascript.ClearText( FileName ) ) + ".doc";
-                    FileName = FileName.Replace('Ñ', 'N');
-                    FileName = FileName.Replace('ñ', 'n');
+
+                    FileName = gcJavascript.ClearText(FileName);
+                    FileName = FileName.Replace("Ñ", "N");
+                    FileName = FileName.Replace("ñ", "n");
+                    FileName = FileName.Replace(".", "").Trim();
+                    FileName = FileName.Replace(",", "").Trim();
+                    FileName = (FileName.Length > 60 ? FileName.Substring(0, 60) : FileName).Trim();
+                    FileName = FileName + ".doc";
 
                     oDocument.Save( FileName, Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment );
                 }

@@ -48,6 +48,54 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 			return Response;
 		}
 
+
+        // Rutinas del programador
+
+        void DisableSubMenu(){
+            this.EliminarRepresentantePanel.Visible = false;
+            this.ReactivarPanel.Visible = false;
+            this.DatosGeneralesPanel.Visible = false;
+            this.DatosEventoPanel.Visible = false;
+            this.ProgramaLogisticaPanel.Visible = false;
+            this.ProgramaProtocoloPanel.Visible = false;
+            this.ContactoPanel.Visible = false;
+            this.AdjuntarPanel.Visible = false;
+            this.RechazarPanel.Visible = false;
+            this.CuadernilloLogisticaPanel.Visible = false;
+            this.CuadernilloProtocoloPanel.Visible = false;
+            this.EnviarCuadernilloPanel.Visible = false;
+            this.Historial.Visible = false;
+        }
+
+        void ReactivarEvento(){
+            ENTEvento oENTEvento = new ENTEvento();
+            ENTResponse oENTResponse = new ENTResponse();
+            ENTSession oENTSession = new ENTSession();
+
+            BPEvento oBPEvento = new BPEvento();
+
+            try
+            {
+
+                // Datos de sesión
+                oENTSession = (ENTSession)this.Session["oENTSession"];
+                oENTEvento.UsuarioId = oENTSession.UsuarioId;
+
+                // Formulario
+                oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
+
+                // Transacción
+                oENTResponse = oBPEvento.UpdateEvento_Reactivar(oENTEvento);
+
+                // Validaciones
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
+
         void SelectEvento(){
             ENTResponse oENTResponse = new ENTResponse();
             ENTEvento oENTEvento = new ENTEvento();
@@ -116,6 +164,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.gvContacto.DataBind();
 
                 // Documentos
+                for (int i = oENTResponse.DataSetResponse.Tables[3].Rows.Count - 1; i >= 0; i--)
+                {
+                    DataRow dr = oENTResponse.DataSetResponse.Tables[3].Rows[i];
+                    if (dr["TipoDocumentoId"].ToString() == "3") { dr.Delete(); }
+                }
+
                 if (oENTResponse.DataSetResponse.Tables[3].Rows.Count == 0){
 
 					this.SinDocumentoLabel.Text = "<br /><br />No hay documentos anexados";
@@ -162,6 +216,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 					case 1:	// System Administrator
                     case 2:	// Administrador
                         this.EliminarRepresentantePanel.Visible = true;
+                        this.ReactivarPanel.Visible = true;
                         this.DatosGeneralesPanel.Visible = true;
                         this.DatosEventoPanel.Visible = true;
                         this.ProgramaLogisticaPanel.Visible = ( this.Logistica.Value == "1" ? true : false );
@@ -177,7 +232,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                     case 4:	// Logística
                     case 5:	// Dirección de Protocolo
-                        this.EliminarRepresentantePanel.Visible = true;
+                        this.EliminarRepresentantePanel.Visible = false;
+                        this.ReactivarPanel.Visible = true;
 						this.DatosGeneralesPanel.Visible = true;
                         this.DatosEventoPanel.Visible = true;
                         this.ProgramaLogisticaPanel.Visible = ( this.Logistica.Value == "1" ? true : false );
@@ -187,23 +243,12 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.RechazarPanel.Visible = true;
                         this.CuadernilloLogisticaPanel.Visible = (this.Logistica.Value == "1" ? true : false);
                         this.CuadernilloProtocoloPanel.Visible = (this.Logistica.Value == "1" ? false : true);
-                        this.EnviarCuadernilloPanel.Visible = false;
+                        this.EnviarCuadernilloPanel.Visible = true;
                         this.Historial.Visible = true;
 						break;
 
 					default:
-                        this.EliminarRepresentantePanel.Visible = false;
-                        this.DatosGeneralesPanel.Visible = false;
-                        this.DatosEventoPanel.Visible = false;
-                        this.ProgramaLogisticaPanel.Visible = false;
-                        this.ProgramaProtocoloPanel.Visible = false;
-                        this.ContactoPanel.Visible = false;
-                        this.AdjuntarPanel.Visible = false;
-                        this.RechazarPanel.Visible = false;
-                        this.CuadernilloLogisticaPanel.Visible = false;
-                        this.CuadernilloProtocoloPanel.Visible = false;
-                        this.EnviarCuadernilloPanel.Visible = false;
-                        this.Historial.Visible = false;
+                        DisableSubMenu();
 						break;
 
 				}
@@ -218,111 +263,77 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 			try
             {
 
-				// El Evento no se podrá operar en los siguientes Estatus:
-                // 3 - Expirado
-                // 4 - Cancelado
-                // 5 - Representado
-				if ( Int32.Parse(this.hddEstatusEventoId.Value) == 3 || Int32.Parse(this.hddEstatusEventoId.Value) == 4 || Int32.Parse(this.hddEstatusEventoId.Value) == 5 ){
+                // System Administrator, Administrador
+                if ( RolId == 1 || RolId == 2 ) {
+                    
+                    switch ( Int32.Parse(this.hddEstatusEventoId.Value) ){
 
-                    this.DatosGeneralesPanel.Visible = false;
-                    this.DatosEventoPanel.Visible = false;
-                    this.ProgramaLogisticaPanel.Visible = false;
-                    this.ProgramaProtocoloPanel.Visible = false;
-                    this.ContactoPanel.Visible = false;
-                    this.AdjuntarPanel.Visible = false;
-                    this.RechazarPanel.Visible = false;
-                    this.EnviarCuadernilloPanel.Visible = false;
+					    case 1:	// Nuevo
+                        case 2:	// En proceso
+                        case 3:	// Concretado
 
-				}
+                            this.EliminarRepresentantePanel.Visible = false;
+                            this.ReactivarPanel.Visible = false;
+						    break;
 
-                // Si el evento está cancelado o representado no se podrá generar el cuadernillo
-                // 4 - Cancelado
-                // 5 - Representado
-				if ( Int32.Parse(this.hddEstatusEventoId.Value) == 4 || Int32.Parse(this.hddEstatusEventoId.Value) == 5 ){
+                        case 4:	// Cancelado
 
-                    this.CuadernilloLogisticaPanel.Visible = false;
-                    this.CuadernilloProtocoloPanel.Visible = false;
-                    this.EnviarCuadernilloPanel.Visible = false;
-				}
+                            this.EliminarRepresentantePanel.Visible = false;
+                            this.DatosEventoPanel.Visible = false;
+						    break;
 
-                // Si el evento no está representado no se podrá eliminar al representante
-                // 5 - Representado
-				if ( Int32.Parse(this.hddEstatusEventoId.Value) != 5 ){
+                        case 5:	// Representado
 
-                    this.EliminarRepresentantePanel.Visible = false;
+                            this.ReactivarPanel.Visible = false;
+                            this.DatosEventoPanel.Visible = false;
+                            break;
 
-				}
+				    }
 
-                // Independientemente del estatus, si ya expiró ocultar opciones no contempladas
-				if ( this.Expired.Value == "1" ){
-
-                    this.EliminarRepresentantePanel.Visible = false;
-
-				}
-
-                // Si es un usuario de Dirección de Protocolo y el Evento es de Logística
-                if ( RolId == 5 &&  this.Logistica.Value == "1" ){
-                    this.EliminarRepresentantePanel.Visible = false;
-                    this.DatosGeneralesPanel.Visible = false;
-                    this.DatosEventoPanel.Visible = false;
-                    this.ProgramaLogisticaPanel.Visible = false;
-                    this.ProgramaProtocoloPanel.Visible = false;
-                    this.ContactoPanel.Visible = false;
-                    this.AdjuntarPanel.Visible = false;
-                    this.RechazarPanel.Visible = false;
-                    this.CuadernilloLogisticaPanel.Visible = false;
-                    this.CuadernilloProtocoloPanel.Visible = false;
-                    this.EnviarCuadernilloPanel.Visible = false;
-                    this.Historial.Visible = false;
                 }
 
-                // Si es un usuario de Logística y el Evento es de Dirección de Protocolo
-                if ( RolId == 4 &&  this.Logistica.Value != "1" ){
-                    this.EliminarRepresentantePanel.Visible = false;
-                    this.DatosGeneralesPanel.Visible = false;
-                    this.DatosEventoPanel.Visible = false;
-                    this.ProgramaLogisticaPanel.Visible = false;
-                    this.ProgramaProtocoloPanel.Visible = false;
-                    this.ContactoPanel.Visible = false;
-                    this.AdjuntarPanel.Visible = false;
-                    this.RechazarPanel.Visible = false;
-                    this.CuadernilloLogisticaPanel.Visible = false;
-                    this.CuadernilloProtocoloPanel.Visible = false;
-                    this.EnviarCuadernilloPanel.Visible = false;
-                    this.Historial.Visible = false;
+                // System Logística, Dirección de Protocolo
+                if ( RolId == 4 || RolId == 5 ) {
+                    
+                    switch ( Int32.Parse(this.hddEstatusEventoId.Value) ){
+
+					    case 1:	// Nuevo
+                        case 2:	// En proceso
+
+                            this.EliminarRepresentantePanel.Visible = false;
+                            this.ReactivarPanel.Visible = false;
+						    break;
+
+                        case 3:	// Concretado
+
+                            DisableSubMenu();
+                            this.Historial.Visible = true;
+                            break;
+
+                        case 4:	// Cancelado
+                            
+                            DisableSubMenu();
+                            if ( this.Expired.Value != "1" ){ this.ReactivarPanel.Visible = true; }
+                            this.Historial.Visible = true;
+						    break;
+
+                        case 5:	// Representado
+
+                            DisableSubMenu();
+                            this.Historial.Visible = true;
+                            break;
+
+				    }
+
+                    // Si es un usuario de Dirección de Protocolo y el Evento es de Logística
+                    if (RolId == 5 && this.Logistica.Value == "1") { DisableSubMenu(); }
+
+                    // Si es un usuario de Logística y el Evento es de Dirección de Protocolo
+                    if (RolId == 4 && this.Logistica.Value != "1") { DisableSubMenu(); }
+
                 }
 
-                // Si el evento está expirado, pero lo está consultando un administrador, se podrán hacer ajustes a la captura
-				if ( this.Expired.Value == "1" && RolId < 3 ){
-
-                    this.EliminarRepresentantePanel.Visible = true;
-                    this.DatosGeneralesPanel.Visible = true;
-                    this.DatosEventoPanel.Visible = true;
-                    this.ProgramaLogisticaPanel.Visible = (this.Logistica.Value == "1" ? true : false);
-                    this.ProgramaProtocoloPanel.Visible = (this.Logistica.Value == "1" ? false : true);
-                    this.ContactoPanel.Visible = true;
-                    this.AdjuntarPanel.Visible = true;
-                    this.CuadernilloLogisticaPanel.Visible = (this.Logistica.Value == "1" ? true : false);
-                    this.CuadernilloProtocoloPanel.Visible = (this.Logistica.Value == "1" ? false : true);
-                    this.Historial.Visible = true;
-
-                    // Ajustes
-                    if (Int32.Parse(this.hddEstatusEventoId.Value) == 4 || Int32.Parse(this.hddEstatusEventoId.Value) == 5){
-
-                        this.CuadernilloLogisticaPanel.Visible = false;
-                        this.CuadernilloProtocoloPanel.Visible = false;
-                        this.DatosGeneralesPanel.Visible = false;
-                        this.EnviarCuadernilloPanel.Visible = false;
-                    }
-
-                    if (Int32.Parse(this.hddEstatusEventoId.Value) != 5){
-
-                        this.EliminarRepresentantePanel.Visible = false;
-
-                    }
-
-				}
-
+                // Inhabilitación de opción
                 this.EnviarCuadernilloPanel.Visible = false;
 
             }catch (Exception ex){
@@ -482,6 +493,33 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 sKey = this.hddEventoId.Value + "|" + this.SenderId.Value;
                 sKey = gcEncryption.EncryptString(sKey, true);
                 this.Response.Redirect("eveEliminarRepresentante.aspx?key=" + sKey, false);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+            }
+		}
+
+        protected void ReactivarButton_Click(object sender, ImageClickEventArgs e){
+            ENTSession oENTSession = new ENTSession();
+
+            try
+            {
+
+                // Reactivar
+                ReactivarEvento();
+
+                // Consultar detalle de El Evento
+                SelectEvento();
+
+                // Obtener sesión
+                oENTSession = (ENTSession)Session["oENTSession"];
+
+                // Seguridad
+                SetPermisosGenerales(oENTSession.RolId);
+                SetPermisosParticulares(oENTSession.RolId, oENTSession.UsuarioId);
+
+                // Mensaje
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Evento reactivado con éxito');", true);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);

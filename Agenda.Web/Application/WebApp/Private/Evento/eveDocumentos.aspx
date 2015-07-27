@@ -46,20 +46,7 @@
 						<td class="Etiqueta">Adjuntar documento</td>
 				        <td class="VinetaObligatorio">*</td>
 				        <td class="Campo" colspan="2">
-                            <asp:RadioButtonList ID="rblTipoDocumento" runat="server" RepeatDirection="Horizontal" AutoPostBack="True" OnSelectedIndexChanged="rblTipoDocumento_SelectedIndexChanged">
-						        <asp:ListItem Text="Montaje 1"  Value="1" Selected="True"></asp:ListItem>
-						        <asp:ListItem Text="Montaje 2"  Value="2"></asp:ListItem>
-                                <asp:ListItem Text="Montaje 3"  Value="3"></asp:ListItem>
-                                <asp:ListItem Text="Examinar"   Value="4"></asp:ListItem>
-					        </asp:RadioButtonList>
-				        </td>
-					</tr>
-                    <tr>
-						<td class="Etiqueta"></td>
-				        <td class="Espacio"></td>
-				        <td class="Campo" colspan="2">
-                            <asp:Image ID="imgMontaje" runat="server" Height="300" ImageUrl="~/Include/Image/Cuadernillo/Montaje1.png" Visible="true" Width="290" />
-                            <asp:FileUpload ID="fupDocumento" runat="server" Width="600px" Visible="false" />
+                            <asp:FileUpload ID="fupDocumento" runat="server" Width="600px" />
 				        </td>
 					</tr>
 					<tr><td class="Etiqueta" colspan="4" style="text-align:left;">Observaciones</td></tr>

@@ -18,6 +18,7 @@ using GCUtility.Security;
 using Agenda.Entity.Object;
 using Agenda.BusinessProcess.Object;
 using System.Data;
+using System.IO;
 
 namespace Agenda.Web.Application.WebApp.Private.Evento
 {
@@ -240,6 +241,56 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
         // Rutinas el programador
 
+        void DeleteDocumento(Int32 DocumentoId){
+			ENTDocumento oENTDocumento = new ENTDocumento();
+			ENTResponse oENTResponse = new ENTResponse();
+            ENTSession oENTSession;
+
+			BPDocumento oBPDocumento = new BPDocumento();
+
+			try
+			{
+
+                // Obtener Sesion
+                oENTSession = (ENTSession)this.Session["oENTSession"];
+                oENTDocumento.UsuarioId = oENTSession.UsuarioId;
+
+				// Formulario
+				oENTDocumento.DocumentoId = DocumentoId;
+                oENTDocumento.ModuloId = 2; // Evento
+
+				// Consultar información del archivo
+				oENTResponse = oBPDocumento.SelectDocumento_Path(oENTDocumento);
+
+				// Errores y Warnings
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+				// Eliminar físicamente el archivo
+                if (File.Exists(oENTResponse.DataSetResponse.Tables[1].Rows[0]["Ruta"].ToString())) { File.Delete(oENTResponse.DataSetResponse.Tables[1].Rows[0]["Ruta"].ToString()); }
+
+				// Eliminar la referencia del archivo en la base de datos
+				oENTResponse = oBPDocumento.DeleteDocumento(oENTDocumento);
+
+				// Errores y Warnings
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+				// Refrescar el formulario
+                SelectEvento();
+
+                // Foco
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.btnAgregarImagenMontaje.ClientID + "'); }", true);
+
+			}catch ( IOException ioEx){
+
+				throw (ioEx);
+			}catch (Exception ex){
+
+				throw (ex);
+			}
+		}
+
         void InhabilitarEdicion( ref GridView GridControl, ref Label LabelControl){
             ImageButton imgEdit = null;
 
@@ -258,6 +309,84 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
             }catch(Exception ex){
                 throw(ex);
+            }
+        }
+
+        void InsertDocumento(){
+            ENTDocumento oENTDocumento = new ENTDocumento();
+            ENTResponse oENTResponse = new ENTResponse();
+            ENTSession oENTSession;
+
+            BPDocumento oBPDocumento = new BPDocumento();
+
+            try
+            {
+
+                // Validaciones
+                if ( this.rblTipoDocumento.SelectedItem.Value == "3" ){
+
+                    // Sólo para carga de archivos
+                    if (this.fupDocumento.PostedFile == null) { throw (new Exception("Es necesario seleccionar una imágen")); }
+                    if (!this.fupDocumento.HasFile) { throw (new Exception("Es necesario seleccionar una imágen")); }
+                    if (this.fupDocumento.PostedFile.ContentLength == 0) { throw (new Exception("Es necesario seleccionar una imágen")); }
+                }
+				
+				 // Obtener Sesion
+				oENTSession = (ENTSession)this.Session["oENTSession"];
+
+				// Formulario
+                oENTDocumento.InvitacionId = 0;
+				oENTDocumento.EventoId = Int32.Parse( this.hddEventoId.Value );
+				oENTDocumento.ModuloId = 2; // Evento
+                oENTDocumento.TipoDocumentoId = 3; // Imágen de Montaje
+				oENTDocumento.UsuarioId = oENTSession.UsuarioId;
+                
+
+                if ( this.rblTipoDocumento.SelectedItem.Value == "3" ){
+
+                    oENTDocumento.Extension = Path.GetExtension(this.fupDocumento.PostedFile.FileName);
+                    oENTDocumento.Nombre = this.fupDocumento.FileName;
+                    oENTDocumento.Ruta = oBPDocumento.UploadFile(this.fupDocumento.PostedFile, this.hddEventoId.Value, BPDocumento.RepositoryTypes.Evento);
+
+                    oENTDocumento.Descripcion = "Imagen de montaje cargada desde archivo";
+
+                } else {
+
+                    switch( this.rblTipoDocumento.SelectedItem.Value ){
+                        case "1":
+
+                            oENTDocumento.Extension = "png";
+                            oENTDocumento.Nombre = "Montaje1.png";
+                            oENTDocumento.Descripcion = "Imagen de montaje precargada, Diseño 1, auditorio";
+                            break;
+
+                        case "2":
+
+                            oENTDocumento.Extension = "png";
+                            oENTDocumento.Nombre = "Montaje2.png";
+                            oENTDocumento.Descripcion = "Imagen de montaje precargada, Diseño 2, mesa";
+                            break;
+
+                    }
+                    oENTDocumento.Ruta = oBPDocumento.CloneFile(oENTDocumento.Nombre, this.hddEventoId.Value, BPDocumento.RepositoryTypes.Evento);
+
+                }
+
+				// Transacción
+				oENTResponse = oBPDocumento.InsertDocumento(oENTDocumento);
+
+				// Validaciones
+				if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+				if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+                // Refrescar el formulario
+                SelectEvento();
+
+                // Foco
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.btnAgregarImagenMontaje.ClientID + "'); }", true);
+
+            }catch (Exception ex){
+                throw (ex);
             }
         }
 
@@ -385,6 +514,14 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Sección: Responsable de logística
                 this.gvResponsableLogistica.DataSource = oENTResponse.DataSetResponse.Tables[12];
                 this.gvResponsableLogistica.DataBind();
+
+                // Documentos
+                for (int i = oENTResponse.DataSetResponse.Tables[3].Rows.Count - 1; i >= 0; i--) {
+                    DataRow dr = oENTResponse.DataSetResponse.Tables[3].Rows[i];
+                    if (dr["TipoDocumentoId"].ToString() != "3") { dr.Delete(); }
+                }
+                this.gvImagenMontaje.DataSource = oENTResponse.DataSetResponse.Tables[3];
+                this.gvImagenMontaje.DataBind();
 
             }catch (Exception ex){
                 throw (ex);
@@ -1597,6 +1734,134 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtAcomodoNombre.ClientID + "'); }", true);
             }
         }
+
+
+
+        // Eventos de Sección: Imagen de Montaje
+
+        protected void btnAgregarImagenMontaje_Click(object sender, EventArgs e){
+            try
+            {
+
+                this.lblImagenMontaje.Text = "";   
+                InsertDocumento();
+                this.rblTipoDocumento.SelectedIndex = 0;
+
+            }catch (Exception ex){
+                this.lblImagenMontaje.Text = ex.Message;
+                this.rblTipoDocumento.SelectedIndex = 0;
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.btnAgregarImagenMontaje.ClientID + "'); }", true);
+            }
+        }
+
+        protected void gvImagenMontaje_RowCommand(object sender, GridViewCommandEventArgs e){
+			String CommandName = "";
+			String DocumentoId = "";
+			String sKey = "";
+
+			Int32 iRow = 0;
+
+            try
+            {
+                // Opción seleccionada
+                CommandName = e.CommandName.ToString();
+
+                // Se dispara el evento RowCommand en el ordenamiento
+                if (CommandName == "Sort") { return; }
+
+                // Fila
+                iRow = Convert.ToInt32(e.CommandArgument.ToString());
+
+                // DataKeys
+                DocumentoId = gvImagenMontaje.DataKeys[iRow]["DocumentoId"].ToString();
+
+                // Acción
+                switch (CommandName){
+                    case "Visualizar":
+
+						sKey = gcEncryption.EncryptString(DocumentoId, true);
+                        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "window.open('" + ResolveUrl("~/Include/Handler/Documento.ashx") + "?key=" + sKey + "');", true);
+                        break;
+
+                    case "Borrar":
+                        DeleteDocumento(Int32.Parse(DocumentoId));
+                        this.rblTipoDocumento.SelectedIndex = 0;
+                        break;
+                }
+
+            }catch (Exception ex){
+                this.lblImagenMontaje.Text = ex.Message;
+                this.rblTipoDocumento.SelectedIndex = 0;
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.btnAgregarImagenMontaje.ClientID + "'); }", true);
+            }
+		}
+
+		protected void gvImagenMontaje_RowDataBound(object sender, GridViewRowEventArgs e){
+			ImageButton imgView = null;
+			ImageButton imgDelete = null;
+
+			String DocumentoId = "";
+            String ModuloId = "";
+            String UsuarioId = "";
+			String NombreDocumento = "";
+			String Icono = "";
+
+			String sImagesAttributes = "";
+			String sToolTip = "";
+
+			try
+			{
+				
+				// Validación de que sea fila 
+				if (e.Row.RowType != DataControlRowType.DataRow) { return; }
+
+				// Obtener objetos
+				imgView = (ImageButton)e.Row.FindControl("imgView");
+				imgDelete = (ImageButton)e.Row.FindControl("imgDelete");
+
+				// Datakeys
+				DocumentoId = this.gvImagenMontaje.DataKeys[e.Row.RowIndex]["DocumentoId"].ToString();
+                ModuloId = this.gvImagenMontaje.DataKeys[e.Row.RowIndex]["ModuloId"].ToString();
+                UsuarioId = this.gvImagenMontaje.DataKeys[e.Row.RowIndex]["UsuarioId"].ToString();
+				Icono = this.gvImagenMontaje.DataKeys[e.Row.RowIndex]["Icono"].ToString();
+				NombreDocumento = this.gvImagenMontaje.DataKeys[e.Row.RowIndex]["NombreDocumento"].ToString();
+
+				// ToolTip Visualizar
+				sToolTip = "Visualizar [" + NombreDocumento + "]";
+                imgView.Attributes.Add("title", sToolTip);
+				imgView.Attributes.Add("style", "cursor:hand;");
+				imgView.ImageUrl = "~/Include/Image/File/" + Icono;
+
+                // Tooltip Eliminar
+                sToolTip = "Eliminar [" + NombreDocumento + "]";
+                imgDelete.Attributes.Add("title", sToolTip);
+                imgDelete.Attributes.Add("style", "cursor:hand;");
+
+                // Atributos Over
+                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                //sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit_Over.png';";
+                e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
+
+                // Atributos Out
+                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                //sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
+                e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
+
+			}catch (Exception ex){
+				throw (ex);
+			}
+		}
+
+		protected void gvImagenMontaje_Sorting(object sender, GridViewSortEventArgs e){
+			try
+			{
+
+				gcCommon.SortGridView(ref this.gvImagenMontaje, ref this.hddSort, e.SortExpression);
+
+			}catch (Exception ex){
+                this.lblImagenMontaje.Text = ex.Message;
+			}
+		}
 
 
 

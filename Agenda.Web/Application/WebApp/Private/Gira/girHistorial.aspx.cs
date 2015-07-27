@@ -56,8 +56,13 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
             BPGira oBPGira = new BPGira();
 
+            ENTSession oENTSession = new ENTSession();
+
             try
             {
+
+                // Obtener sesión
+                oENTSession = (ENTSession)Session["oENTSession"];
 
                 // Formulario
                 oENTGira.GiraId = Int32.Parse(this.hddGiraId.Value);
@@ -74,6 +79,16 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 this.lblGiraFechaHora.Text = "Del " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraFechaHoraInicioTexto"].ToString() + " al " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraFechaHoraFinTexto"].ToString();
 
                 // Historial
+                if ( oENTSession.RolId > 2 ){
+
+                    for (int i = oENTResponse.DataSetResponse.Tables[4].Rows.Count - 1; i >= 0; i--)
+                    {
+                        DataRow dr = oENTResponse.DataSetResponse.Tables[4].Rows[i];
+                        if (dr["RolId"].ToString() != oENTSession.RolId.ToString()) { dr.Delete(); }
+                    }
+
+                }
+
                 this.gvGiraSeguimiento.DataSource = oENTResponse.DataSetResponse.Tables[4];
                 this.gvGiraSeguimiento.DataBind();
 

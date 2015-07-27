@@ -344,6 +344,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                         case "1":
                         case "2":
                         case "5":
+                        case "6":
 
                             // Partida a buscar
                             oENTGira.GiraConfiguracionId = Int32.Parse( rowPrograma["GiraConfiguracionId"].ToString() );
@@ -632,6 +633,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                     if ( rowPrograma["TipoGiraConfiguracionId"].ToString() == "1" ) { HelipuertoTemporal = ":"; }
                                     if ( rowPrograma["TipoGiraConfiguracionId"].ToString() == "2" ) { HelipuertoTemporal = " EN EL HELIPUERTO:"; }
                                     if ( rowPrograma["TipoGiraConfiguracionId"].ToString() == "5" ) { HelipuertoTemporal = " EN EL AEREOPUERTO:"; }
+                                    if ( rowPrograma["TipoGiraConfiguracionId"].ToString() == "6" ) { HelipuertoTemporal = ":"; }
                                     wText = wTableCell.AppendText("COMITÉ DE RECEPCIÓN" + HelipuertoTemporal + ENTER + ENTER);
                                     wText.CharacterFormat.FontName = "Arial";
                                     wText.CharacterFormat.FontSize = 10f;
@@ -721,6 +723,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                                     if ( rowPrograma["TipoGiraConfiguracionId"].ToString() == "1" ) { HelipuertoTemporal = ":"; }
                                     if ( rowPrograma["TipoGiraConfiguracionId"].ToString() == "2" ) { HelipuertoTemporal = " EN EL HELIPUERTO:"; }
                                     if ( rowPrograma["TipoGiraConfiguracionId"].ToString() == "5" ) { HelipuertoTemporal = " EN EL AEREOPUERTO:"; }
+                                    if ( rowPrograma["TipoGiraConfiguracionId"].ToString() == "6" ) { HelipuertoTemporal = ":"; }
                                     wText = wTableCell.AppendText("COMITÉ DE DESPEDIDA" + HelipuertoTemporal + ENTER + ENTER);
                                     wText.CharacterFormat.FontName = "Arial";
                                     wText.CharacterFormat.FontSize = 10f;
@@ -1730,9 +1733,13 @@ namespace Agenda.Web.Application.WebApp.Private.Gira.Cuadernillos
                         FileName = FileName.Replace(currentChar.ToString(), "");
                     }
 
-                    FileName = ( FileName.Length > 40 ? gcJavascript.ClearText( FileName.Substring(0, 40) ) : gcJavascript.ClearText( FileName ) ) + ".doc";
-                    FileName = FileName.Replace('Ñ', 'N');
-                    FileName = FileName.Replace('ñ', 'n');
+                    FileName = gcJavascript.ClearText(FileName);
+                    FileName = FileName.Replace("Ñ", "N");
+                    FileName = FileName.Replace("ñ", "n");
+                    FileName = FileName.Replace(".", "").Trim();
+                    FileName = FileName.Replace(",", "").Trim();
+                    FileName = (FileName.Length > 60 ? FileName.Substring(0, 60) : FileName).Trim();
+                    FileName = FileName + ".doc";
 
                     oDocument.Save( FileName, Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment );
                 }

@@ -56,8 +56,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
             BPEvento oBPEvento = new BPEvento();
 
+            ENTSession oENTSession = new ENTSession();
+
             try
             {
+
+                // Obtener sesión
+                oENTSession = (ENTSession)Session["oENTSession"];
 
                 // Formulario
                 oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
@@ -74,6 +79,16 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.lblEventoFechaHora.Text = "Del " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHoraInicioTexto"].ToString() + " al " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHoraFinTexto"].ToString();
 
                 // Historial
+                if ( oENTSession.RolId > 2 ){
+
+
+                    for (int i = oENTResponse.DataSetResponse.Tables[5].Rows.Count - 1; i >= 0; i--)
+                    {
+                        DataRow dr = oENTResponse.DataSetResponse.Tables[5].Rows[i];
+                        if (dr["RolId"].ToString() != oENTSession.RolId.ToString()) { dr.Delete(); }
+                    }
+
+                }
                 this.gvEventoSeguimiento.DataSource = oENTResponse.DataSetResponse.Tables[5];
                 this.gvEventoSeguimiento.DataBind();
 

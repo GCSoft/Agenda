@@ -166,6 +166,7 @@
                                             <asp:ListItem Text="Vehiculo" Value="1" Selected="True"></asp:ListItem>
 						                    <asp:ListItem Text="Helipuerto" Value="2"></asp:ListItem>
 						                    <asp:ListItem Text="Aereopuerto" Value="5"></asp:ListItem>
+                                            <asp:ListItem Text="Otro" Value="6"></asp:ListItem>
 					                    </asp:RadioButtonList>
                                     </td>
                                     <td></td>

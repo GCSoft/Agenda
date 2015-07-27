@@ -52,6 +52,45 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
         // Rutinas del programador
 
+        void DisableSubMenu(){
+            this.ReactivarPanel.Visible = false;
+            this.DatosGiraPanel.Visible = false;
+            this.ProgramaGiraPanel.Visible = false;
+            this.ContactoPanel.Visible = false;
+            this.RechazarPanel.Visible = false;
+            this.CuadernilloGiraPanel.Visible = false;
+            this.Historial.Visible = false;
+        }
+
+        void ReactivarGira(){
+            ENTGira oENTGira = new ENTGira();
+            ENTResponse oENTResponse = new ENTResponse();
+            ENTSession oENTSession = new ENTSession();
+
+            BPGira oBPGira = new BPGira();
+
+            try
+            {
+
+                // Datos de sesión
+                oENTSession = (ENTSession)this.Session["oENTSession"];
+                oENTGira.UsuarioId = oENTSession.UsuarioId;
+
+                // Formulario
+                oENTGira.GiraId = Int32.Parse(this.hddGiraId.Value);
+
+                // Transacción
+                oENTResponse = oBPGira.UpdateGira_Reactivar(oENTGira);
+
+                // Validaciones
+                if (oENTResponse.GeneratesException) { throw (new Exception(oENTResponse.MessageError)); }
+                if (oENTResponse.MessageDB != "") { throw (new Exception(oENTResponse.MessageDB)); }
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+        }
+
         void SelectGira(){
             ENTResponse oENTResponse = new ENTResponse();
             ENTGira oENTGira = new ENTGira();
@@ -192,6 +231,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
 					case 1:	// System Administrator
                     case 2:	// Administrador
+                        this.ReactivarPanel.Visible = true;
                         this.DatosGiraPanel.Visible = true;
                         this.ProgramaGiraPanel.Visible = true;
                         this.ContactoPanel.Visible = true;
@@ -201,7 +241,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 						break;
 
                     case 4:	// Logística
-                    case 5:	// Dirección de Protocolo
+                        this.ReactivarPanel.Visible = true;
                         this.DatosGiraPanel.Visible = true;
                         this.ProgramaGiraPanel.Visible = true;
                         this.ContactoPanel.Visible = true;;
@@ -211,12 +251,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 						break;
 
 					default:
-                        this.DatosGiraPanel.Visible = false;
-                        this.ProgramaGiraPanel.Visible = false;
-                        this.ContactoPanel.Visible = false;
-                        this.RechazarPanel.Visible = false;
-                        this.CuadernilloGiraPanel.Visible = false;
-                        this.Historial.Visible = false;
+                        DisableSubMenu();
 						break;
 
 				}
@@ -231,51 +266,52 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 			try
             {
 
-				// El Gira no se podrá operar en los siguientes Estatus:
-                // 3 - Expirado
-                // 4 - Cancelado
-				if ( Int32.Parse(this.hddEstatusGiraId.Value) == 3 || Int32.Parse(this.hddEstatusGiraId.Value) == 4 ){
+				// System Administrator, Administrador
+                if ( RolId == 1 || RolId == 2 ) {
+                    
+                    switch ( Int32.Parse(this.hddEstatusGiraId.Value) ){
 
-                    this.DatosGiraPanel.Visible = false;
-                    this.ProgramaGiraPanel.Visible = false;
-                    this.ContactoPanel.Visible = false;
-                    this.RechazarPanel.Visible = false;
+					    case 1:	// Nuevo
+                        case 2:	// En proceso
+                        case 3:	// Concretado
 
-				}
+                            this.ReactivarPanel.Visible = false;
+						    break;
 
-                // Si el Gira está cancelado no se podrá generar el cuadernillo
-                // 4 - Cancelado
-				if ( Int32.Parse(this.hddEstatusGiraId.Value) == 4 ){
+                        case 4:	// Cancelado
 
-                    this.CuadernilloGiraPanel.Visible = false;
-				}
+                            this.DatosGiraPanel.Visible = false;
+						    break;
 
-                // Independientemente del estatus, si ya expiró ocultar opciones no contempladas
-				if ( this.Expired.Value == "1" ){
+				    }
 
-                    this.DatosGiraPanel.Visible = false;
-                    this.ProgramaGiraPanel.Visible = false;
-                    this.ContactoPanel.Visible = false;
-                    this.RechazarPanel.Visible = false;
+                }
 
-				}
+                // System Logística, Dirección de Protocolo
+                if ( RolId == 4 || RolId == 5 ) {
+                    
+                    switch ( Int32.Parse(this.hddEstatusGiraId.Value) ){
 
-                 // Si el evento está expirado, pero lo está consultando un administrador, se podrán hacer ajustes a la captura
-				if ( this.Expired.Value == "1" && RolId < 3 ){
+					    case 1:	// Nuevo
+                        case 2:	// En proceso
 
-                    this.DatosGiraPanel.Visible = true;
-                    this.ProgramaGiraPanel.Visible = true;
-                    this.ContactoPanel.Visible = true;
-                    this.CuadernilloGiraPanel.Visible = true;
-                    this.Historial.Visible = true;
+                            this.ReactivarPanel.Visible = false;
+						    break;
 
-                    // Si el Gira está cancelado no se podrá generar el cuadernillo
-                    // 4 - Cancelado
-                    if (Int32.Parse(this.hddEstatusGiraId.Value) == 4)
-                    {
+                        case 3:	// Concretado
 
-                        this.CuadernilloGiraPanel.Visible = false;
-                    }
+                            DisableSubMenu();
+                            this.Historial.Visible = true;
+                            break;
+
+                        case 4:	// Cancelado
+                            
+                            DisableSubMenu();
+                            if ( this.Expired.Value != "1" ){ this.ReactivarPanel.Visible = true; }
+                            this.Historial.Visible = true;
+						    break;
+
+				    }
 
                 }
 
@@ -419,6 +455,33 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
 
         // Opciones de Menu (en orden de aparación)
+
+        protected void ReactivarButton_Click(object sender, ImageClickEventArgs e){
+            ENTSession oENTSession = new ENTSession();
+
+            try
+            {
+                
+                // Reactivar
+                ReactivarGira();
+
+                // Consultar detalle de El Gira
+                SelectGira();
+
+                // Obtener sesión
+                oENTSession = (ENTSession)Session["oENTSession"];
+
+                // Seguridad
+                SetPermisosGenerales(oENTSession.RolId);
+                SetPermisosParticulares(oENTSession.RolId, oENTSession.UsuarioId);
+
+                // Mensaje
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('Gira reactivada con éxito');", true);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
+            }
+		}
 
         protected void DatosGiraButton_Click(object sender, ImageClickEventArgs e){
             String sKey = "";

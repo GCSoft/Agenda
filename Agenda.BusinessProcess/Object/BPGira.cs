@@ -408,6 +408,35 @@ namespace Agenda.BusinessProcess.Object
             return oENTResponse;
         }
 
+        ///<remarks>
+        ///   <name>BPGira.UpdateGira_Reactivar</name>
+        ///   <create>09-Enero-2015</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public ENTResponse UpdateGira_Reactivar(ENTGira oENTGira){
+            DAGira oDAGira = new DAGira();
+            ENTResponse oENTResponse = new ENTResponse();
+
+            try
+            {
+
+                // Transacción en base de datos
+                oENTResponse = oDAGira.UpdateGira_Reactivar(oENTGira, this.ConnectionApplication, 0);
+
+                // Validación de error en consulta
+                if (oENTResponse.GeneratesException) { return oENTResponse; }
+
+                // Validación de mensajes de la BD
+                oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
+
+            }catch (Exception ex){
+                oENTResponse.ExceptionRaised(ex.Message);
+            }
+
+            // Resultado
+            return oENTResponse;
+        }
+
 
 
         ///<remarks>

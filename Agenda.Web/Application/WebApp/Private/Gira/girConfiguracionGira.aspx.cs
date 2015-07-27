@@ -678,6 +678,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                             case 1: // Traslado en vehículo
                             case 2: // Traslado en helicóptero
                             case 5: // Traslado en avión
+                            case 6: // Traslado Otro
                                 SetPopUp_TrasladoHelicopteroPanel(PopUpTypes.Update, GiraConfiguracionId);
                                 break;
 

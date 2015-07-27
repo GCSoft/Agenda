@@ -2130,9 +2130,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                         FileName = FileName.Replace(currentChar.ToString(), "");
                     }
 
-                    FileName = ( FileName.Length > 40 ? gcJavascript.ClearText( FileName.Substring(0, 40) ) : gcJavascript.ClearText( FileName ) ) + ".doc";
-                    FileName = FileName.Replace('Ñ', 'N');
-                    FileName = FileName.Replace('ñ', 'n');
+                    FileName = gcJavascript.ClearText(FileName);
+                    FileName = FileName.Replace("Ñ", "N");
+                    FileName = FileName.Replace("ñ", "n");
+                    FileName = FileName.Replace(".", "").Trim();
+                    FileName = FileName.Replace(",", "").Trim();
+                    FileName = (FileName.Length > 60 ? FileName.Substring(0, 60) : FileName).Trim();
+                    FileName = FileName + ".doc";
 
                     WDocument.Save( FileName, Syncfusion.DocIO.FormatType.Doc, Response, Syncfusion.DocIO.HttpContentDisposition.Attachment );
                 }

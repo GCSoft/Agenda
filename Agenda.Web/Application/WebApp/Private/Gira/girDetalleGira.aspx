@@ -21,6 +21,11 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlSubMenu" runat="server">
+
+        <asp:Panel ID="ReactivarPanel" CssClass="IconoPanel" runat="server" Visible="true">
+            <asp:ImageButton ID="ReactivarButton" ImageUrl="~/Include/Image/Icon/SubMenuValoracion.png" runat="server" OnClick="ReactivarButton_Click" ></asp:ImageButton><br />
+            Reactivar Gira
+        </asp:Panel>
         
         <asp:Panel ID="DatosGiraPanel" CssClass="IconoPanel" runat="server" Visible="true">
             <asp:ImageButton ID="DatosGiraButton" ImageUrl="~/Include/Image/Icon/SubMenuDatosGenerales.png" runat="server" OnClick="DatosGiraButton_Click"></asp:ImageButton><br />

@@ -71,7 +71,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
 				// Formulario
 				oENTDocumento.DocumentoId = DocumentoId;
-                oENTDocumento.ModuloId = 2; // Evento
+                oENTDocumento.ModuloId = 3; // Evento
 
 				// Consultar información del archivo
 				oENTResponse = oBPDocumento.SelectDocumento_Path(oENTDocumento);
@@ -120,14 +120,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Validaciones
                 if (this.ddlTipoDocumento.SelectedIndex == 0) { throw (new Exception("Es necesario seleccionar un tipo de documento")); }
-
-                if ( this.rblTipoDocumento.SelectedItem.Value == "4" ){
-
-                    // Sólo para carga de archivos
-                    if (this.fupDocumento.PostedFile == null) { throw (new Exception("Es necesario seleccionar un documento")); }
-				    if (!this.fupDocumento.HasFile) { throw (new Exception("Es necesario seleccionar un documento")); }
-				    if (this.fupDocumento.PostedFile.ContentLength == 0) { throw (new Exception("Es necesario seleccionar un documento")); }
-                }
+                if (this.fupDocumento.PostedFile == null) { throw (new Exception("Es necesario seleccionar un documento")); }
+                if (!this.fupDocumento.HasFile) { throw (new Exception("Es necesario seleccionar un documento")); }
+                if (this.fupDocumento.PostedFile.ContentLength == 0) { throw (new Exception("Es necesario seleccionar un documento")); }
 				
 				 // Obtener Sesion
 				oENTSession = (ENTSession)this.Session["oENTSession"];
@@ -135,41 +130,14 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 				// Formulario
                 oENTDocumento.InvitacionId = 0;
 				oENTDocumento.EventoId = Int32.Parse( this.hddEventoId.Value );
-				oENTDocumento.ModuloId = 2; // Evento
+				oENTDocumento.ModuloId = 3; // Evento
 				oENTDocumento.TipoDocumentoId = Int32.Parse(this.ddlTipoDocumento.SelectedItem.Value);
 				oENTDocumento.UsuarioId = oENTSession.UsuarioId;
                 oENTDocumento.Descripcion = this.ckeDescripcion.Text.Trim();
 
-                if ( this.rblTipoDocumento.SelectedItem.Value == "4" ){
-
-                    oENTDocumento.Extension = Path.GetExtension(this.fupDocumento.PostedFile.FileName);
-                    oENTDocumento.Nombre = this.fupDocumento.FileName;
-                    oENTDocumento.Ruta = oBPDocumento.UploadFile(this.fupDocumento.PostedFile, this.hddEventoId.Value, BPDocumento.RepositoryTypes.Evento);
-
-                } else {
-
-                    switch( this.rblTipoDocumento.SelectedItem.Value ){
-                        case "1":
-
-                            oENTDocumento.Extension = "png";
-                            oENTDocumento.Nombre = "Montaje1.png";
-                            break;
-
-                        case "2":
-
-                            oENTDocumento.Extension = "png";
-                            oENTDocumento.Nombre = "Montaje2.png";
-                            break;
-
-                        case "3":
-
-                            oENTDocumento.Extension = "png";
-                            oENTDocumento.Nombre = "Montaje3.png";
-                            break;
-                    }
-                    oENTDocumento.Ruta = oBPDocumento.CloneFile(oENTDocumento.Nombre, this.hddEventoId.Value, BPDocumento.RepositoryTypes.Evento);
-
-                }
+                oENTDocumento.Extension = Path.GetExtension(this.fupDocumento.PostedFile.FileName);
+                oENTDocumento.Nombre = this.fupDocumento.FileName;
+                oENTDocumento.Ruta = oBPDocumento.UploadFile(this.fupDocumento.PostedFile, this.hddEventoId.Value, BPDocumento.RepositoryTypes.Evento);
 
 				// Transacción
 				oENTResponse = oBPDocumento.InsertDocumento(oENTDocumento);
@@ -185,22 +153,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 SelectEvento();
 
                 // Restablecer el formulario
-                if ( this.Logistica.Value == "0" ) {
-
-                    this.fupDocumento.Attributes.Clear();
-                    this.imgMontaje.Visible = false;
-                    this.fupDocumento.Visible = true;
-                    this.rblTipoDocumento.SelectedItem.Value = "4";
-                    this.rblTipoDocumento.Visible = false;
-
-                }else { 
-
-                    this.rblTipoDocumento.SelectedIndex = 0;
-                    this.imgMontaje.ImageUrl = "~/Include/Image/Cuadernillo/Montaje1.png";
-                    this.imgMontaje.Visible = true;
-                    this.fupDocumento.Visible = false;
-
-                }
+                this.fupDocumento.Attributes.Clear();
 
                 // Foco
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlTipoDocumento.ClientID + "'); }", true);
@@ -237,6 +190,11 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 this.lblEventoFechaHora.Text = "Del " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHoraInicioTexto"].ToString() + " al " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["EventoFechaHoraFinTexto"].ToString();
 
                 // Documentos
+                for (int i = oENTResponse.DataSetResponse.Tables[3].Rows.Count - 1; i >= 0; i--)
+                {
+                    DataRow dr = oENTResponse.DataSetResponse.Tables[3].Rows[i];
+                    if (dr["TipoDocumentoId"].ToString() == "3") { dr.Delete(); }
+                }
                 this.gvDocumento.DataSource = oENTResponse.DataSetResponse.Tables[3];
                 this.gvDocumento.DataBind();
 
@@ -256,7 +214,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Formulario
                 oENTTipoDocumento.TipoDocumentoId = 0;
-                oENTTipoDocumento.ModuloId = ( this.Logistica.Value == "1" ? 2 : 3 ); // Evento / Evento - Protocolo
+                oENTTipoDocumento.ModuloId = 3;
                 oENTTipoDocumento.Nombre = "";
                 oENTTipoDocumento.Activo = 1;
 
@@ -314,16 +272,6 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Llenado de controles
                 SelectTipoDocumento();
-
-                // Configurar la pantalla para el caso de que el evento sea protocolo
-                if ( this.Logistica.Value == "0" ) {
-
-                    this.fupDocumento.Attributes.Clear();
-                    this.imgMontaje.Visible = false;
-                    this.fupDocumento.Visible = true;
-                    this.rblTipoDocumento.SelectedItem.Value = "4";
-                    this.rblTipoDocumento.Visible = false;
-                }
 
                 // Foco
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlTipoDocumento.ClientID + "'); }", true);
@@ -441,7 +389,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 				imgView.ImageUrl = "~/Include/Image/File/" + Icono;
 
 				// Seguridad
-                if ( ModuloId != "2" ){
+                if ( ModuloId != "3" ){
 
                     imgDelete.Visible = false;
 
@@ -493,46 +441,6 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 				ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "');", true);
 			}
 		}
-
-        protected void rblTipoDocumento_SelectedIndexChanged(object sender, EventArgs e){
-            try
-            {
-
-				// Tipo se selección
-                switch( this.rblTipoDocumento.SelectedItem.Value ){
-                    case "1":
-
-                        this.imgMontaje.ImageUrl = "~/Include/Image/Cuadernillo/Montaje1.png";
-                        this.imgMontaje.Visible = true;
-                        this.fupDocumento.Visible = false;
-                        break;
-
-                    case "2":
-
-                        this.imgMontaje.ImageUrl = "~/Include/Image/Cuadernillo/Montaje2.png";
-                        this.imgMontaje.Visible = true;
-                        this.fupDocumento.Visible = false;
-                        break;
-
-                    case "3":
-
-                        this.imgMontaje.ImageUrl = "~/Include/Image/Cuadernillo/Montaje3.png";
-                        this.imgMontaje.Visible = true;
-                        this.fupDocumento.Visible = false;
-                        break;
-
-                    case "4":
-
-                        this.fupDocumento.Attributes.Clear();
-                        this.imgMontaje.Visible = false;
-                        this.fupDocumento.Visible = true;
-                        break;
-                }
-
-            }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('" + gcJavascript.ClearText(ex.Message) + "'); function pageLoad(){ focusControl('" + this.ddlTipoDocumento.ClientID + "'); }", true);
-            }
-        }
 
 
     }

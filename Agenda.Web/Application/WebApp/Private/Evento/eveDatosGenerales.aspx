@@ -34,7 +34,7 @@
 				<td class="Espacio"></td>
 				<td class="Campo" colspan="2"><asp:Label ID="lblEventoFechaHora" CssClass="Label_Detalle_Invitacion" runat="server" Text=""></asp:Label></td>
 			</tr>
-            <tr>
+            <%--<tr>
 				<td class="Etiqueta">Tipo de cita</td>
 				<td class="VinetaObligatorio">*</td>
 				<td class="Campo"><asp:DropDownList ID="ddlCategoria" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
@@ -51,7 +51,7 @@
 				<td class="VinetaObligatorio">*</td>
 				<td class="Campo"><asp:DropDownList ID="ddlPrioridad" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
                 <td></td>
-			</tr>
+			</tr>--%>
             <tr>
 				<td class="Etiqueta">Secretario ramo</td>
 				<td class="VinetaObligatorio">*</td>
@@ -105,7 +105,7 @@
                 <td></td>
 			</tr>
             <tr>
-				<td class="Etiqueta">Representante</td>
+				<td class="Etiqueta"><asp:Label ID="lblRepresentante" runat="server" Text="Representante"></asp:Label></td>
 				<td class="Espacio"></td>
 				<td class="Campo">
                     <script type = "text/javascript"> function RepresentanteSelected(sender, e) { $get("<%=hddRepresentanteId.ClientID %>").value = e.get_value(); } </script>
