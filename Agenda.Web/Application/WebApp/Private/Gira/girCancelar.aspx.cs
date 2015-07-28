@@ -93,6 +93,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 // Datos de sesión
                 oENTSession = (ENTSession)this.Session["oENTSession"];
                 oENTGira.UsuarioId = oENTSession.UsuarioId;
+                oENTGira.RolId = oENTSession.RolId;
 
                 // Formulario
                 oENTGira.GiraId = Int32.Parse(this.hddGiraId.Value);

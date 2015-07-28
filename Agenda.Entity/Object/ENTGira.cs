@@ -25,6 +25,7 @@ namespace Agenda.Entity.Object
         private Int32   _GiraContactoId;
         private Int32   _TipoGiraConfiguracionId;
         private Int32   _UsuarioId;
+        private Int32   _RolId;
         private Int16   _Activo;
         private String  _GiraDetalle;
         private String  _GiraNombre;
@@ -74,6 +75,7 @@ namespace Agenda.Entity.Object
             _GiraContactoId = 0;
             _TipoGiraConfiguracionId = 0;
             _UsuarioId = 0;
+            _RolId = 0;
             _Activo = 0;
             _GiraDetalle = "";
             _GiraNombre = "";
@@ -185,6 +187,17 @@ namespace Agenda.Entity.Object
         {
             get { return _UsuarioId; }
             set { _UsuarioId = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTGira.RolId</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int32 RolId
+        {
+            get { return _RolId; }
+            set { _RolId = value; }
         }
 
         ///<remarks>

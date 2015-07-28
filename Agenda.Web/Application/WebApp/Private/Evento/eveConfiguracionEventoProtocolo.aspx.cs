@@ -367,6 +367,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Datos de sesión
                 oENTSession = (ENTSession)this.Session["oENTSession"];
                 oENTEvento.UsuarioId = oENTSession.UsuarioId;
+                oENTEvento.RolId = oENTSession.RolId;
 
                 #region "Sección: Datos Generales"
 

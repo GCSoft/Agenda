@@ -39,6 +39,7 @@ namespace Agenda.Entity.Object
         private Int32   _TipoVestimentaId;
         private Int32   _UsuarioId;
         private Int32   _UsuarioId_Temp;
+        private Int32   _RolId;
         private String  _AccionRealizar;
         private String  _AcomodoObservaciones;
         private String  _EventoDetalle;
@@ -164,6 +165,7 @@ namespace Agenda.Entity.Object
             _TipoVestimentaId = 0;
             _UsuarioId = 0;
             _UsuarioId_Temp = 0;
+            _RolId = 0;
             _AccionRealizar = "";
             _AcomodoObservaciones = "";
             _EventoDetalle = "";
@@ -507,6 +509,17 @@ namespace Agenda.Entity.Object
         {
             get { return _UsuarioId_Temp; }
             set { _UsuarioId_Temp = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTEvento.RolId</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int32 RolId
+        {
+            get { return _RolId; }
+            set { _RolId = value; }
         }
 
         ///<remarks>
