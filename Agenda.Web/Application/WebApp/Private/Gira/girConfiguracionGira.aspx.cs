@@ -208,6 +208,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                 // Datos de sesión
                 oENTSession = (ENTSession)this.Session["oENTSession"];
                 oENTGira.UsuarioId = oENTSession.UsuarioId;
+                oENTGira.RolId = oENTSession.RolId;
 
                 // Formulario
                 oENTGira.GiraConfiguracionId = GiraConfiguracionId;
@@ -785,7 +786,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
 
         // PopUps de programa
 
-        #region PopUp - Traslado en Helicóptero/Avión
+        #region PopUp - Traslado
             
             
             // Rutinas
@@ -848,6 +849,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTGira.UsuarioId = oENTSession.UsuarioId;
+                    oENTGira.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
@@ -1056,6 +1058,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTGira.UsuarioId = oENTSession.UsuarioId;
+                    oENTGira.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTGira.GiraConfiguracionId = Int32.Parse(this.hddGiraConfiguracionId.Value);
@@ -1872,6 +1875,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTGira.UsuarioId = oENTSession.UsuarioId;
+                    oENTGira.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
@@ -2217,6 +2221,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTGira.UsuarioId = oENTSession.UsuarioId;
+                    oENTGira.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTGira.GiraConfiguracionId = Int32.Parse(this.hddGiraConfiguracionId.Value);
@@ -3060,6 +3065,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTGira.UsuarioId = oENTSession.UsuarioId;
+                    oENTGira.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTGira.GiraId = Int32.Parse( this.hddGiraId.Value );
@@ -3198,6 +3204,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTGira.UsuarioId = oENTSession.UsuarioId;
+                    oENTGira.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTGira.GiraConfiguracionId = Int32.Parse(this.hddGiraConfiguracionId.Value);
@@ -3701,6 +3708,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTGira.UsuarioId = oENTSession.UsuarioId;
+                    oENTGira.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTGira.GiraId = Int32.Parse(this.hddGiraId.Value);
@@ -3841,6 +3849,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTGira.UsuarioId = oENTSession.UsuarioId;
+                    oENTGira.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTGira.GiraId = Int32.Parse(this.hddGiraId.Value);
@@ -3968,6 +3977,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTGira.UsuarioId = oENTSession.UsuarioId;
+                    oENTGira.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTGira.GiraId = Int32.Parse(this.hddGiraId.Value);
@@ -4095,6 +4105,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTGira.UsuarioId = oENTSession.UsuarioId;
+                    oENTGira.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTGira.GiraId = Int32.Parse(this.hddGiraId.Value);
@@ -4221,6 +4232,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTGira.UsuarioId = oENTSession.UsuarioId;
+                    oENTGira.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTGira.GiraId = Int32.Parse(this.hddGiraId.Value);
@@ -4346,6 +4358,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTGira.UsuarioId = oENTSession.UsuarioId;
+                    oENTGira.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTGira.GiraId = Int32.Parse(this.hddGiraId.Value);
@@ -4471,6 +4484,7 @@ namespace Agenda.Web.Application.WebApp.Private.Gira
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTGira.UsuarioId = oENTSession.UsuarioId;
+                    oENTGira.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTGira.GiraId = Int32.Parse(this.hddGiraId.Value);

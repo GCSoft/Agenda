@@ -254,6 +254,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Obtener Sesion
                 oENTSession = (ENTSession)this.Session["oENTSession"];
                 oENTDocumento.UsuarioId = oENTSession.UsuarioId;
+                oENTDocumento.RolId = oENTSession.RolId;
 
 				// Formulario
 				oENTDocumento.DocumentoId = DocumentoId;
@@ -333,13 +334,14 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 				
 				 // Obtener Sesion
 				oENTSession = (ENTSession)this.Session["oENTSession"];
+                oENTDocumento.UsuarioId = oENTSession.UsuarioId;
+                oENTDocumento.RolId = oENTSession.RolId;
 
 				// Formulario
                 oENTDocumento.InvitacionId = 0;
 				oENTDocumento.EventoId = Int32.Parse( this.hddEventoId.Value );
 				oENTDocumento.ModuloId = 2; // Evento
                 oENTDocumento.TipoDocumentoId = 3; // Imágen de Montaje
-				oENTDocumento.UsuarioId = oENTSession.UsuarioId;
                 
 
                 if ( this.rblTipoDocumento.SelectedItem.Value == "3" ){
@@ -2421,16 +2423,13 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 BPEvento oBPEvento = new BPEvento();
 
-                //DataTable tblItem;
-                //DataRow rowItem;
-                //Int32 OrdenTemp = 1;
-
                 try
                 {
 
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTEvento.UsuarioId = oENTSession.UsuarioId;
+                    oENTEvento.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
@@ -2448,44 +2447,6 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                     // Transacción exitosa
                     ClearPopUp_ComiteHelipuertoPanel();
-
-                    //// Obtener listado
-                    //if ( oENTResponse.DataSetResponse.Tables[1].Rows.Count == 0 ){
-
-                    //    // Obtener el DataTable
-                    //    tblItem = gcParse.GridViewToDataTable(this.gvComiteHelipuerto, false);
-
-                    //    // Estandarizar nuevo orden
-                    //    if ( oENTEvento.NuevoOrden < 1 ) { oENTEvento.NuevoOrden = 1; }
-                    //    if ( oENTEvento.NuevoOrden > tblItem.Rows.Count ) { oENTEvento.NuevoOrden = tblItem.Rows.Count; }
-
-                    //    // Remover el elemento
-                    //    tblItem.Rows.Remove( tblItem.Select("Orden=" + oENTEvento.OrdenAnterior.ToString() )[0]);
-
-                    //    // Reordenar los elementos
-                    //    foreach( DataRow rowComiteHelipuerto in tblItem.Rows ){
-
-                    //        rowItem = oENTResponse.DataSetResponse.Tables[1].NewRow();
-                    //        rowItem["Nombre"] = rowComiteHelipuerto["Nombre"];
-                    //        rowItem["Puesto"] = rowComiteHelipuerto["Puesto"];
-                    //        rowItem["Orden"] = OrdenTemp;
-                    //        oENTResponse.DataSetResponse.Tables[1].Rows.Add(rowItem);
-                    //        OrdenTemp = OrdenTemp + 1;
-                    //    }
-
-                    //    // Los elementos mayores al nuevo elemento habrá que reasignarles el orden
-                    //    foreach( DataRow rowComiteHelipuerto in oENTResponse.DataSetResponse.Tables[1].Select( "Orden>=" + oENTEvento.NuevoOrden.ToString() ) ){
-                    //        rowComiteHelipuerto["Orden"] = ( Int32.Parse( rowComiteHelipuerto["Orden"].ToString() ) + 1);
-                    //    }
-
-                    //    // Insertar el elemento
-                    //    rowItem = oENTResponse.DataSetResponse.Tables[1].NewRow();
-                    //    rowItem["Nombre"] = oENTEvento.Nombre;
-                    //    rowItem["Puesto"] = oENTEvento.Puesto;
-                    //    rowItem["Orden"] = oENTEvento.NuevoOrden;
-                    //    oENTResponse.DataSetResponse.Tables[1].Rows.InsertAt(rowItem, oENTEvento.NuevoOrden - 1);
-
-                    //}
 
                     // Actualizar listado
                     this.gvComiteHelipuerto.DataSource = oENTResponse.DataSetResponse.Tables[1];
@@ -2594,6 +2555,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTEvento.UsuarioId = oENTSession.UsuarioId;
+                    oENTEvento.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
@@ -2719,6 +2681,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTEvento.UsuarioId = oENTSession.UsuarioId;
+                    oENTEvento.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
@@ -2843,6 +2806,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTEvento.UsuarioId = oENTSession.UsuarioId;
+                    oENTEvento.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
@@ -2968,6 +2932,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTEvento.UsuarioId = oENTSession.UsuarioId;
+                    oENTEvento.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
@@ -3093,6 +3058,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTEvento.UsuarioId = oENTSession.UsuarioId;
+                    oENTEvento.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
@@ -3218,6 +3184,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTEvento.UsuarioId = oENTSession.UsuarioId;
+                    oENTEvento.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);

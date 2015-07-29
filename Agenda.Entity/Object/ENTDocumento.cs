@@ -21,6 +21,7 @@ namespace Agenda.Entity.Object
         private Int32   _EventoId;
         private Int32   _InvitacionId;
         private Int32   _ModuloId;
+        private Int32   _RolId;
         private Int32   _TipoDocumentoId;
         private Int32   _UsuarioId;
         private String  _Nombre;
@@ -39,6 +40,7 @@ namespace Agenda.Entity.Object
             _EventoId = 0;
             _InvitacionId = 0;
             _ModuloId = 0;
+            _RolId = 0;
             _TipoDocumentoId = 0;
             _UsuarioId = 0;
             _Nombre = "";
@@ -109,6 +111,17 @@ namespace Agenda.Entity.Object
         {
             get { return _ModuloId; }
             set { _ModuloId = value; }
+        }
+
+        ///<remarks>
+        ///   <name>ENTDocumento.RolId</name>
+        ///   <create>19-Diciembre-2014</create>
+        ///   <author>Ruben.Cobos</author>
+        ///</remarks>
+        public Int32 RolId
+        {
+            get { return _RolId; }
+            set { _RolId = value; }
         }
 
         ///<remarks>

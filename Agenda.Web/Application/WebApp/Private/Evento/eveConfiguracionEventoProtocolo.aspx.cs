@@ -1223,6 +1223,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTEvento.UsuarioId = oENTSession.UsuarioId;
+                    oENTEvento.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
@@ -1347,6 +1348,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTEvento.UsuarioId = oENTSession.UsuarioId;
+                    oENTEvento.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);
@@ -1482,6 +1484,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     // Datos de sesión
                     oENTSession = (ENTSession)this.Session["oENTSession"];
                     oENTEvento.UsuarioId = oENTSession.UsuarioId;
+                    oENTEvento.RolId = oENTSession.RolId;
 
                     // Formulario
                     oENTEvento.EventoId = Int32.Parse(this.hddEventoId.Value);

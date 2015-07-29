@@ -67,6 +67,7 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
                 // Obtener Sesion
                 oENTSession = (ENTSession)this.Session["oENTSession"];
                 oENTDocumento.UsuarioId = oENTSession.UsuarioId;
+                oENTDocumento.RolId = oENTSession.RolId;
 
 				// Formulario
 				oENTDocumento.DocumentoId = DocumentoId;
@@ -125,13 +126,14 @@ namespace Agenda.Web.Application.WebApp.Private.Invitacion
 				
 				 // Obtener Sesion
 				oENTSession = (ENTSession)this.Session["oENTSession"];
+                oENTDocumento.UsuarioId = oENTSession.UsuarioId;
+                oENTDocumento.RolId = oENTSession.RolId;
 
 				// Formulario
 				oENTDocumento.InvitacionId = Int32.Parse( this.hddInvitacionId.Value );
 				oENTDocumento.EventoId = 0;
 				oENTDocumento.ModuloId = 1; // Invitación
 				oENTDocumento.TipoDocumentoId = Int32.Parse(this.ddlTipoDocumento.SelectedItem.Value);
-				oENTDocumento.UsuarioId = oENTSession.UsuarioId;
 				oENTDocumento.Extension = Path.GetExtension(this.fupDocumento.PostedFile.FileName);
 				oENTDocumento.Nombre = this.fupDocumento.FileName;
                 oENTDocumento.Descripcion = this.ckeDescripcion.Text.Trim();

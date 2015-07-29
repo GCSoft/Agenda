@@ -36,6 +36,11 @@ namespace Agenda.BusinessProcess.Object
             DAGira oDAGira = new DAGira();
             ENTResponse oENTResponse = new ENTResponse();
 
+            GCMail gcMail = new GCMail();
+            String Contactos = "";
+            String Dependencia = "";
+            String HTMLMessage = "";
+
             try
             {
 
@@ -48,8 +53,94 @@ namespace Agenda.BusinessProcess.Object
                 // Validación de mensajes de la BD
                 oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
 
-            }catch (Exception ex){
-                oENTResponse.ExceptionRaised(ex.Message);
+                // Envío de correo (se crea el listado sólo si la transacción fue exitosa)
+                if ( oENTResponse.DataSetResponse.Tables[2].Rows.Count > 0 ){
+
+                    // Listado de direcciones
+                    foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[2].Rows){
+                        Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
+                    }
+
+                    // Determinar la dependencia
+                    switch( oENTGira.RolId ){
+                        case 1:
+                        case 2:
+
+                            Dependencia = "La coordinaci&oacute;n de relaciones p&uacute;blicas";
+                            break;
+
+                        case 4:
+
+                            Dependencia = "La coordinaci&oacute;n de log&iacute;stica";
+                            break;
+
+                        default:
+
+                            Dependencia = "La coordinaci&oacute;n de relaciones p&uacute;blicas";
+                            break;
+
+                    }
+
+                    #region Cuerpo de Correo (HTML)
+
+                        // Configuración del correo
+                        HTMLMessage = "" +
+                            "<html>" +
+                                "<head>" +
+                                    "<title>Agenda - Configuración de gira eliminada</title>" +
+                                "</head>" +
+                                "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
+                                    "<div style='clear:both; height:80%; text-align:center; width:100%;'>" +
+                                        "<div style='clear:both; height:70%; margin:0px auto; position:relative; top:10%; width:90%;'>" +
+                                        "<table style='color:#339933; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:20%;' valign='middle'>" +
+                                                "<td style='font-weight:bold;'>" +
+                                                    "Configuración de gira eliminada<br /><br />" +
+                                                    "<div style='border-bottom:1px solid #339933;'></div>" +
+                                                "</td>" +
+                                            "</tr>" +
+                                            "<tr style='height:80%;' valign='top'>" +
+                                                "<td>" +
+                                                    Dependencia + " le notifica que " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["Comentarios"].ToString().Trim().Replace(".", "").ToLower() + " <font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraNombre"].ToString() + "</font>.<br /><br /><br />" +
+                                                    "Información previa al cambio:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["Antes"].ToString() + "</font><br /><br /><br />" +
+                                                    "Información posterior al cambio:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["Despues"].ToString() + "</font>" +
+                                                    "<br /><br /><br /><br /><br />Puede acceder al detalle de dicho Gira haciendo click <a href='" + this.ApplicationURLInvitation + "'>aqui</a><br /><br /><br /><br /><br />" +
+                                                    "Gracias por utilizar nuestros servicios inform&aacute;ticos.<br /><br />" +
+                                                "</td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                        "</div>" +
+                                    "</div>" +
+                                    "<div style='background:#339933; clear:both; height:20%; text-align:left; width:100%;'>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "<div style='height:90%;'>" +
+                                        "<table style='color:#FFFFFF; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:100%;' valign='middle'>" +
+                                                "<td style='text-align:center; float:left; width:20%;'>" +
+                                                    "<img src='" + this.MailLogo + "' height='120px' width='92px' />" +
+                                                "</td>" +
+                                                "<td style='text-align:justify; float:left; vertical-align: middle; width:70%;'>" +
+                                                    "<div style='text-align:center; width:90%;'><font style='font-family:Arial; font-size:9px;'>Powered By GCSoft</font><br /><br /></div>" +
+                                                    "<font style='font-family:Arial; font-size:10px;'>Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.</font><br />" +
+                                                "</td>" +
+                                                "<td></td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                    "</div>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "</div>" +
+                                "</body>" +
+                            "</html>";
+
+                    #endregion
+
+                    // Enviar correo
+                    gcMail.Send("Agenda - Configuración de gira eliminada", Contactos, "Configuración de gira eliminada", HTMLMessage);
+
+                }
+
+            }catch (Exception){
+                // oENTResponse.ExceptionRaised(ex.Message);
             }
 
             // Resultado
@@ -221,6 +312,11 @@ namespace Agenda.BusinessProcess.Object
             DAGira oDAGira = new DAGira();
             ENTResponse oENTResponse = new ENTResponse();
 
+            GCMail gcMail = new GCMail();
+            String Contactos = "";
+            String Dependencia = "";
+            String HTMLMessage = "";
+
             try
             {
 
@@ -233,8 +329,94 @@ namespace Agenda.BusinessProcess.Object
                 // Validación de mensajes de la BD
                 oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
 
-            }catch (Exception ex){
-                oENTResponse.ExceptionRaised(ex.Message);
+                // Envío de correo (se crea el listado sólo si la transacción fue exitosa)
+                if ( oENTResponse.DataSetResponse.Tables[2].Rows.Count > 0 ){
+
+                    // Listado de direcciones
+                    foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[2].Rows){
+                        Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
+                    }
+
+                    // Determinar la dependencia
+                    switch( oENTGira.RolId ){
+                        case 1:
+                        case 2:
+
+                            Dependencia = "La coordinaci&oacute;n de relaciones p&uacute;blicas";
+                            break;
+
+                        case 4:
+
+                            Dependencia = "La coordinaci&oacute;n de log&iacute;stica";
+                            break;
+
+                        default:
+
+                            Dependencia = "La coordinaci&oacute;n de relaciones p&uacute;blicas";
+                            break;
+
+                    }
+
+                    #region Cuerpo de Correo (HTML)
+
+                        // Configuración del correo
+                        HTMLMessage = "" +
+                            "<html>" +
+                                "<head>" +
+                                    "<title>Agenda - Configuración de gira creada</title>" +
+                                "</head>" +
+                                "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
+                                    "<div style='clear:both; height:80%; text-align:center; width:100%;'>" +
+                                        "<div style='clear:both; height:70%; margin:0px auto; position:relative; top:10%; width:90%;'>" +
+                                        "<table style='color:#339933; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:20%;' valign='middle'>" +
+                                                "<td style='font-weight:bold;'>" +
+                                                    "Configuración de gira creada<br /><br />" +
+                                                    "<div style='border-bottom:1px solid #339933;'></div>" +
+                                                "</td>" +
+                                            "</tr>" +
+                                            "<tr style='height:80%;' valign='top'>" +
+                                                "<td>" +
+                                                    Dependencia + " le notifica que " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["Comentarios"].ToString().Trim().Replace(".", "").ToLower() + " <font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraNombre"].ToString() + "</font>.<br /><br /><br />" +
+                                                    "Información previa al cambio:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["Antes"].ToString() + "</font><br /><br /><br />" +
+                                                    "Información posterior al cambio:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["Despues"].ToString() + "</font>" +
+                                                    "<br /><br /><br /><br /><br />Puede acceder al detalle de dicho Gira haciendo click <a href='" + this.ApplicationURLInvitation + "'>aqui</a><br /><br /><br /><br /><br />" +
+                                                    "Gracias por utilizar nuestros servicios inform&aacute;ticos.<br /><br />" +
+                                                "</td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                        "</div>" +
+                                    "</div>" +
+                                    "<div style='background:#339933; clear:both; height:20%; text-align:left; width:100%;'>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "<div style='height:90%;'>" +
+                                        "<table style='color:#FFFFFF; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:100%;' valign='middle'>" +
+                                                "<td style='text-align:center; float:left; width:20%;'>" +
+                                                    "<img src='" + this.MailLogo + "' height='120px' width='92px' />" +
+                                                "</td>" +
+                                                "<td style='text-align:justify; float:left; vertical-align: middle; width:70%;'>" +
+                                                    "<div style='text-align:center; width:90%;'><font style='font-family:Arial; font-size:9px;'>Powered By GCSoft</font><br /><br /></div>" +
+                                                    "<font style='font-family:Arial; font-size:10px;'>Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.</font><br />" +
+                                                "</td>" +
+                                                "<td></td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                    "</div>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "</div>" +
+                                "</body>" +
+                            "</html>";
+
+                    #endregion
+
+                    // Enviar correo
+                    gcMail.Send("Agenda - Configuración de gira creada", Contactos, "Configuración de gira creada", HTMLMessage);
+
+                }
+
+            }catch (Exception){
+                // oENTResponse.ExceptionRaised(ex.Message);
             }
 
             // Resultado
@@ -626,6 +808,11 @@ namespace Agenda.BusinessProcess.Object
             DAGira oDAGira = new DAGira();
             ENTResponse oENTResponse = new ENTResponse();
 
+            GCMail gcMail = new GCMail();
+            String Contactos = "";
+            String Dependencia = "";
+            String HTMLMessage = "";
+
             try
             {
 
@@ -638,8 +825,94 @@ namespace Agenda.BusinessProcess.Object
                 // Validación de mensajes de la BD
                 oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
 
-            }catch (Exception ex){
-                oENTResponse.ExceptionRaised(ex.Message);
+                // Envío de correo (se crea el listado sólo si la transacción fue exitosa)
+                if ( oENTResponse.DataSetResponse.Tables[2].Rows.Count > 0 ){
+
+                    // Listado de direcciones
+                    foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[2].Rows){
+                        Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
+                    }
+
+                    // Determinar la dependencia
+                    switch( oENTGira.RolId ){
+                        case 1:
+                        case 2:
+
+                            Dependencia = "La coordinaci&oacute;n de relaciones p&uacute;blicas";
+                            break;
+
+                        case 4:
+
+                            Dependencia = "La coordinaci&oacute;n de log&iacute;stica";
+                            break;
+
+                        default:
+
+                            Dependencia = "La coordinaci&oacute;n de relaciones p&uacute;blicas";
+                            break;
+
+                    }
+
+                    #region Cuerpo de Correo (HTML)
+
+                        // Configuración del correo
+                        HTMLMessage = "" +
+                            "<html>" +
+                                "<head>" +
+                                    "<title>Agenda - Configuración de gira actualizada</title>" +
+                                "</head>" +
+                                "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
+                                    "<div style='clear:both; height:80%; text-align:center; width:100%;'>" +
+                                        "<div style='clear:both; height:70%; margin:0px auto; position:relative; top:10%; width:90%;'>" +
+                                        "<table style='color:#339933; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:20%;' valign='middle'>" +
+                                                "<td style='font-weight:bold;'>" +
+                                                    "Configuración de gira actualizada<br /><br />" +
+                                                    "<div style='border-bottom:1px solid #339933;'></div>" +
+                                                "</td>" +
+                                            "</tr>" +
+                                            "<tr style='height:80%;' valign='top'>" +
+                                                "<td>" +
+                                                    Dependencia + " le notifica que " + oENTResponse.DataSetResponse.Tables[1].Rows[0]["Comentarios"].ToString().Trim().Replace(".", "").ToLower() + " <font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["GiraNombre"].ToString() + "</font>.<br /><br /><br />" +
+                                                    "Información previa al cambio:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["Antes"].ToString() + "</font><br /><br /><br />" +
+                                                    "Información posterior al cambio:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[1].Rows[0]["Despues"].ToString() + "</font>" +
+                                                    "<br /><br /><br /><br /><br />Puede acceder al detalle de dicho Gira haciendo click <a href='" + this.ApplicationURLInvitation + "'>aqui</a><br /><br /><br /><br /><br />" +
+                                                    "Gracias por utilizar nuestros servicios inform&aacute;ticos.<br /><br />" +
+                                                "</td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                        "</div>" +
+                                    "</div>" +
+                                    "<div style='background:#339933; clear:both; height:20%; text-align:left; width:100%;'>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "<div style='height:90%;'>" +
+                                        "<table style='color:#FFFFFF; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:100%;' valign='middle'>" +
+                                                "<td style='text-align:center; float:left; width:20%;'>" +
+                                                    "<img src='" + this.MailLogo + "' height='120px' width='92px' />" +
+                                                "</td>" +
+                                                "<td style='text-align:justify; float:left; vertical-align: middle; width:70%;'>" +
+                                                    "<div style='text-align:center; width:90%;'><font style='font-family:Arial; font-size:9px;'>Powered By GCSoft</font><br /><br /></div>" +
+                                                    "<font style='font-family:Arial; font-size:10px;'>Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.</font><br />" +
+                                                "</td>" +
+                                                "<td></td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                    "</div>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "</div>" +
+                                "</body>" +
+                            "</html>";
+
+                    #endregion
+
+                    // Enviar correo
+                    gcMail.Send("Agenda - Configuración de gira actualizada", Contactos, "Configuración de gira actualizada", HTMLMessage);
+
+                }
+
+            }catch (Exception){
+                // oENTResponse.ExceptionRaised(ex.Message);
             }
 
             // Resultado
@@ -807,6 +1080,11 @@ namespace Agenda.BusinessProcess.Object
             DAGira oDAGira = new DAGira();
             ENTResponse oENTResponse = new ENTResponse();
 
+            GCMail gcMail = new GCMail();
+            String Contactos = "";
+            String Dependencia = "";
+            String HTMLMessage = "";
+
             try
             {
 
@@ -819,8 +1097,94 @@ namespace Agenda.BusinessProcess.Object
                 // Validación de mensajes de la BD
                 oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
 
-            }catch (Exception ex){
-                oENTResponse.ExceptionRaised(ex.Message);
+                // Envío de correo (se crea el listado sólo si la transacción fue exitosa)
+                if ( oENTResponse.DataSetResponse.Tables[3].Rows.Count > 0 ){
+
+                    // Listado de direcciones
+                    foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[3].Rows){
+                        Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
+                    }
+
+                    // Determinar la dependencia
+                    switch( oENTGira.RolId ){
+                        case 1:
+                        case 2:
+
+                            Dependencia = "La coordinaci&oacute;n de relaciones p&uacute;blicas";
+                            break;
+
+                        case 4:
+
+                            Dependencia = "La coordinaci&oacute;n de log&iacute;stica";
+                            break;
+
+                        default:
+
+                            Dependencia = "La coordinaci&oacute;n de relaciones p&uacute;blicas";
+                            break;
+
+                    }
+
+                    #region Cuerpo de Correo (HTML)
+
+                        // Configuración del correo
+                        HTMLMessage = "" +
+                            "<html>" +
+                                "<head>" +
+                                    "<title>Agenda - Gira actualizada</title>" +
+                                "</head>" +
+                                "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
+                                    "<div style='clear:both; height:80%; text-align:center; width:100%;'>" +
+                                        "<div style='clear:both; height:70%; margin:0px auto; position:relative; top:10%; width:90%;'>" +
+                                        "<table style='color:#339933; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:20%;' valign='middle'>" +
+                                                "<td style='font-weight:bold;'>" +
+                                                    "Gira actualizada<br /><br />" +
+                                                    "<div style='border-bottom:1px solid #339933;'></div>" +
+                                                "</td>" +
+                                            "</tr>" +
+                                            "<tr style='height:80%;' valign='top'>" +
+                                                "<td>" +
+                                                    Dependencia + " le notifica que " + oENTResponse.DataSetResponse.Tables[2].Rows[0]["Comentarios"].ToString().Trim().Replace(".", "").ToLower() + " <font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[2].Rows[0]["GiraNombre"].ToString() + "</font>.<br /><br /><br />" +
+                                                    "Información previa al cambio:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[2].Rows[0]["Antes"].ToString() + "</font><br /><br /><br />" +
+                                                    "Información posterior al cambio:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[2].Rows[0]["Despues"].ToString() + "</font>" +
+                                                    "<br /><br /><br /><br /><br />Puede acceder al detalle de dicho Gira haciendo click <a href='" + this.ApplicationURLInvitation + "'>aqui</a><br /><br /><br /><br /><br />" +
+                                                    "Gracias por utilizar nuestros servicios inform&aacute;ticos.<br /><br />" +
+                                                "</td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                        "</div>" +
+                                    "</div>" +
+                                    "<div style='background:#339933; clear:both; height:20%; text-align:left; width:100%;'>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "<div style='height:90%;'>" +
+                                        "<table style='color:#FFFFFF; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:100%;' valign='middle'>" +
+                                                "<td style='text-align:center; float:left; width:20%;'>" +
+                                                    "<img src='" + this.MailLogo + "' height='120px' width='92px' />" +
+                                                "</td>" +
+                                                "<td style='text-align:justify; float:left; vertical-align: middle; width:70%;'>" +
+                                                    "<div style='text-align:center; width:90%;'><font style='font-family:Arial; font-size:9px;'>Powered By GCSoft</font><br /><br /></div>" +
+                                                    "<font style='font-family:Arial; font-size:10px;'>Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.</font><br />" +
+                                                "</td>" +
+                                                "<td></td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                    "</div>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "</div>" +
+                                "</body>" +
+                            "</html>";
+
+                    #endregion
+
+                    // Enviar correo
+                    gcMail.Send("Agenda - Gira actualizada", Contactos, "Gira actualizada", HTMLMessage);
+
+                }
+
+            }catch (Exception){
+                // oENTResponse.ExceptionRaised(ex.Message);
             }
 
             // Resultado
@@ -836,6 +1200,11 @@ namespace Agenda.BusinessProcess.Object
             DAGira oDAGira = new DAGira();
             ENTResponse oENTResponse = new ENTResponse();
 
+            GCMail gcMail = new GCMail();
+            String Contactos = "";
+            String Dependencia = "";
+            String HTMLMessage = "";
+
             try
             {
 
@@ -848,8 +1217,94 @@ namespace Agenda.BusinessProcess.Object
                 // Validación de mensajes de la BD
                 oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
 
-            }catch (Exception ex){
-                oENTResponse.ExceptionRaised(ex.Message);
+                // Envío de correo (se crea el listado sólo si la transacción fue exitosa)
+                if ( oENTResponse.DataSetResponse.Tables[3].Rows.Count > 0 ){
+
+                    // Listado de direcciones
+                    foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[3].Rows){
+                        Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
+                    }
+
+                    // Determinar la dependencia
+                    switch( oENTGira.RolId ){
+                        case 1:
+                        case 2:
+
+                            Dependencia = "La coordinaci&oacute;n de relaciones p&uacute;blicas";
+                            break;
+
+                        case 4:
+
+                            Dependencia = "La coordinaci&oacute;n de log&iacute;stica";
+                            break;
+
+                        default:
+
+                            Dependencia = "La coordinaci&oacute;n de relaciones p&uacute;blicas";
+                            break;
+
+                    }
+
+                    #region Cuerpo de Correo (HTML)
+
+                        // Configuración del correo
+                        HTMLMessage = "" +
+                            "<html>" +
+                                "<head>" +
+                                    "<title>Agenda - Gira actualizada</title>" +
+                                "</head>" +
+                                "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
+                                    "<div style='clear:both; height:80%; text-align:center; width:100%;'>" +
+                                        "<div style='clear:both; height:70%; margin:0px auto; position:relative; top:10%; width:90%;'>" +
+                                        "<table style='color:#339933; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:20%;' valign='middle'>" +
+                                                "<td style='font-weight:bold;'>" +
+                                                    "Gira actualizada<br /><br />" +
+                                                    "<div style='border-bottom:1px solid #339933;'></div>" +
+                                                "</td>" +
+                                            "</tr>" +
+                                            "<tr style='height:80%;' valign='top'>" +
+                                                "<td>" +
+                                                    Dependencia + " le notifica que " + oENTResponse.DataSetResponse.Tables[2].Rows[0]["Comentarios"].ToString().Trim().Replace(".", "").ToLower() + " <font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[2].Rows[0]["GiraNombre"].ToString() + "</font>.<br /><br /><br />" +
+                                                    "Información previa al cambio:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[2].Rows[0]["Antes"].ToString() + "</font><br /><br /><br />" +
+                                                    "Información posterior al cambio:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[2].Rows[0]["Despues"].ToString() + "</font>" +
+                                                    "<br /><br /><br /><br /><br />Puede acceder al detalle de dicho Gira haciendo click <a href='" + this.ApplicationURLInvitation + "'>aqui</a><br /><br /><br /><br /><br />" +
+                                                    "Gracias por utilizar nuestros servicios inform&aacute;ticos.<br /><br />" +
+                                                "</td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                        "</div>" +
+                                    "</div>" +
+                                    "<div style='background:#339933; clear:both; height:20%; text-align:left; width:100%;'>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "<div style='height:90%;'>" +
+                                        "<table style='color:#FFFFFF; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:100%;' valign='middle'>" +
+                                                "<td style='text-align:center; float:left; width:20%;'>" +
+                                                    "<img src='" + this.MailLogo + "' height='120px' width='92px' />" +
+                                                "</td>" +
+                                                "<td style='text-align:justify; float:left; vertical-align: middle; width:70%;'>" +
+                                                    "<div style='text-align:center; width:90%;'><font style='font-family:Arial; font-size:9px;'>Powered By GCSoft</font><br /><br /></div>" +
+                                                    "<font style='font-family:Arial; font-size:10px;'>Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.</font><br />" +
+                                                "</td>" +
+                                                "<td></td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                    "</div>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "</div>" +
+                                "</body>" +
+                            "</html>";
+
+                    #endregion
+
+                    // Enviar correo
+                    gcMail.Send("Agenda - Gira actualizada", Contactos, "Gira actualizada", HTMLMessage);
+
+                }
+
+            }catch (Exception){
+                // oENTResponse.ExceptionRaised(ex.Message);
             }
 
             // Resultado
@@ -865,6 +1320,11 @@ namespace Agenda.BusinessProcess.Object
             DAGira oDAGira = new DAGira();
             ENTResponse oENTResponse = new ENTResponse();
 
+            GCMail gcMail = new GCMail();
+            String Contactos = "";
+            String Dependencia = "";
+            String HTMLMessage = "";
+
             try
             {
 
@@ -877,8 +1337,94 @@ namespace Agenda.BusinessProcess.Object
                 // Validación de mensajes de la BD
                 oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
 
-            }catch (Exception ex){
-                oENTResponse.ExceptionRaised(ex.Message);
+                // Envío de correo (se crea el listado sólo si la transacción fue exitosa)
+                if ( oENTResponse.DataSetResponse.Tables[3].Rows.Count > 0 ){
+
+                    // Listado de direcciones
+                    foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[3].Rows){
+                        Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
+                    }
+
+                    // Determinar la dependencia
+                    switch( oENTGira.RolId ){
+                        case 1:
+                        case 2:
+
+                            Dependencia = "La coordinaci&oacute;n de relaciones p&uacute;blicas";
+                            break;
+
+                        case 4:
+
+                            Dependencia = "La coordinaci&oacute;n de log&iacute;stica";
+                            break;
+
+                        default:
+
+                            Dependencia = "La coordinaci&oacute;n de relaciones p&uacute;blicas";
+                            break;
+
+                    }
+
+                    #region Cuerpo de Correo (HTML)
+
+                        // Configuración del correo
+                        HTMLMessage = "" +
+                            "<html>" +
+                                "<head>" +
+                                    "<title>Agenda - Gira actualizada</title>" +
+                                "</head>" +
+                                "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
+                                    "<div style='clear:both; height:80%; text-align:center; width:100%;'>" +
+                                        "<div style='clear:both; height:70%; margin:0px auto; position:relative; top:10%; width:90%;'>" +
+                                        "<table style='color:#339933; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:20%;' valign='middle'>" +
+                                                "<td style='font-weight:bold;'>" +
+                                                    "Gira actualizada<br /><br />" +
+                                                    "<div style='border-bottom:1px solid #339933;'></div>" +
+                                                "</td>" +
+                                            "</tr>" +
+                                            "<tr style='height:80%;' valign='top'>" +
+                                                "<td>" +
+                                                    Dependencia + " le notifica que " + oENTResponse.DataSetResponse.Tables[2].Rows[0]["Comentarios"].ToString().Trim().Replace(".", "").ToLower() + " <font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[2].Rows[0]["GiraNombre"].ToString() + "</font>.<br /><br /><br />" +
+                                                    "Información previa al cambio:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[2].Rows[0]["Antes"].ToString() + "</font><br /><br /><br />" +
+                                                    "Información posterior al cambio:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[2].Rows[0]["Despues"].ToString() + "</font>" +
+                                                    "<br /><br /><br /><br /><br />Puede acceder al detalle de dicho Gira haciendo click <a href='" + this.ApplicationURLInvitation + "'>aqui</a><br /><br /><br /><br /><br />" +
+                                                    "Gracias por utilizar nuestros servicios inform&aacute;ticos.<br /><br />" +
+                                                "</td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                        "</div>" +
+                                    "</div>" +
+                                    "<div style='background:#339933; clear:both; height:20%; text-align:left; width:100%;'>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "<div style='height:90%;'>" +
+                                        "<table style='color:#FFFFFF; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:100%;' valign='middle'>" +
+                                                "<td style='text-align:center; float:left; width:20%;'>" +
+                                                    "<img src='" + this.MailLogo + "' height='120px' width='92px' />" +
+                                                "</td>" +
+                                                "<td style='text-align:justify; float:left; vertical-align: middle; width:70%;'>" +
+                                                    "<div style='text-align:center; width:90%;'><font style='font-family:Arial; font-size:9px;'>Powered By GCSoft</font><br /><br /></div>" +
+                                                    "<font style='font-family:Arial; font-size:10px;'>Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.</font><br />" +
+                                                "</td>" +
+                                                "<td></td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                    "</div>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "</div>" +
+                                "</body>" +
+                            "</html>";
+
+                    #endregion
+
+                    // Enviar correo
+                    gcMail.Send("Agenda - Gira actualizada", Contactos, "Gira actualizada", HTMLMessage);
+
+                }
+
+            }catch (Exception){
+                // oENTResponse.ExceptionRaised(ex.Message);
             }
 
             // Resultado
@@ -894,6 +1440,11 @@ namespace Agenda.BusinessProcess.Object
             DAGira oDAGira = new DAGira();
             ENTResponse oENTResponse = new ENTResponse();
 
+            GCMail gcMail = new GCMail();
+            String Contactos = "";
+            String Dependencia = "";
+            String HTMLMessage = "";
+
             try
             {
 
@@ -906,8 +1457,94 @@ namespace Agenda.BusinessProcess.Object
                 // Validación de mensajes de la BD
                 oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
 
-            }catch (Exception ex){
-                oENTResponse.ExceptionRaised(ex.Message);
+                // Envío de correo (se crea el listado sólo si la transacción fue exitosa)
+                if ( oENTResponse.DataSetResponse.Tables[3].Rows.Count > 0 ){
+
+                    // Listado de direcciones
+                    foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[3].Rows){
+                        Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
+                    }
+
+                    // Determinar la dependencia
+                    switch( oENTGira.RolId ){
+                        case 1:
+                        case 2:
+
+                            Dependencia = "La coordinaci&oacute;n de relaciones p&uacute;blicas";
+                            break;
+
+                        case 4:
+
+                            Dependencia = "La coordinaci&oacute;n de log&iacute;stica";
+                            break;
+
+                        default:
+
+                            Dependencia = "La coordinaci&oacute;n de relaciones p&uacute;blicas";
+                            break;
+
+                    }
+
+                    #region Cuerpo de Correo (HTML)
+
+                        // Configuración del correo
+                        HTMLMessage = "" +
+                            "<html>" +
+                                "<head>" +
+                                    "<title>Agenda - Gira actualizada</title>" +
+                                "</head>" +
+                                "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
+                                    "<div style='clear:both; height:80%; text-align:center; width:100%;'>" +
+                                        "<div style='clear:both; height:70%; margin:0px auto; position:relative; top:10%; width:90%;'>" +
+                                        "<table style='color:#339933; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:20%;' valign='middle'>" +
+                                                "<td style='font-weight:bold;'>" +
+                                                    "Gira actualizada<br /><br />" +
+                                                    "<div style='border-bottom:1px solid #339933;'></div>" +
+                                                "</td>" +
+                                            "</tr>" +
+                                            "<tr style='height:80%;' valign='top'>" +
+                                                "<td>" +
+                                                    Dependencia + " le notifica que " + oENTResponse.DataSetResponse.Tables[2].Rows[0]["Comentarios"].ToString().Trim().Replace(".", "").ToLower() + " <font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[2].Rows[0]["GiraNombre"].ToString() + "</font>.<br /><br /><br />" +
+                                                    "Información previa al cambio:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[2].Rows[0]["Antes"].ToString() + "</font><br /><br /><br />" +
+                                                    "Información posterior al cambio:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[2].Rows[0]["Despues"].ToString() + "</font>" +
+                                                    "<br /><br /><br /><br /><br />Puede acceder al detalle de dicho Gira haciendo click <a href='" + this.ApplicationURLInvitation + "'>aqui</a><br /><br /><br /><br /><br />" +
+                                                    "Gracias por utilizar nuestros servicios inform&aacute;ticos.<br /><br />" +
+                                                "</td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                        "</div>" +
+                                    "</div>" +
+                                    "<div style='background:#339933; clear:both; height:20%; text-align:left; width:100%;'>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "<div style='height:90%;'>" +
+                                        "<table style='color:#FFFFFF; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:100%;' valign='middle'>" +
+                                                "<td style='text-align:center; float:left; width:20%;'>" +
+                                                    "<img src='" + this.MailLogo + "' height='120px' width='92px' />" +
+                                                "</td>" +
+                                                "<td style='text-align:justify; float:left; vertical-align: middle; width:70%;'>" +
+                                                    "<div style='text-align:center; width:90%;'><font style='font-family:Arial; font-size:9px;'>Powered By GCSoft</font><br /><br /></div>" +
+                                                    "<font style='font-family:Arial; font-size:10px;'>Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.</font><br />" +
+                                                "</td>" +
+                                                "<td></td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                    "</div>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "</div>" +
+                                "</body>" +
+                            "</html>";
+
+                    #endregion
+
+                    // Enviar correo
+                    gcMail.Send("Agenda - Gira actualizada", Contactos, "Gira actualizada", HTMLMessage);
+
+                }
+
+            }catch (Exception){
+                // oENTResponse.ExceptionRaised(ex.Message);
             }
 
             // Resultado
@@ -923,6 +1560,11 @@ namespace Agenda.BusinessProcess.Object
             DAGira oDAGira = new DAGira();
             ENTResponse oENTResponse = new ENTResponse();
 
+            GCMail gcMail = new GCMail();
+            String Contactos = "";
+            String Dependencia = "";
+            String HTMLMessage = "";
+
             try
             {
 
@@ -935,8 +1577,94 @@ namespace Agenda.BusinessProcess.Object
                 // Validación de mensajes de la BD
                 oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
 
-            }catch (Exception ex){
-                oENTResponse.ExceptionRaised(ex.Message);
+                // Envío de correo (se crea el listado sólo si la transacción fue exitosa)
+                if ( oENTResponse.DataSetResponse.Tables[3].Rows.Count > 0 ){
+
+                    // Listado de direcciones
+                    foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[3].Rows){
+                        Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
+                    }
+
+                    // Determinar la dependencia
+                    switch( oENTGira.RolId ){
+                        case 1:
+                        case 2:
+
+                            Dependencia = "La coordinaci&oacute;n de relaciones p&uacute;blicas";
+                            break;
+
+                        case 4:
+
+                            Dependencia = "La coordinaci&oacute;n de log&iacute;stica";
+                            break;
+
+                        default:
+
+                            Dependencia = "La coordinaci&oacute;n de relaciones p&uacute;blicas";
+                            break;
+
+                    }
+
+                    #region Cuerpo de Correo (HTML)
+
+                        // Configuración del correo
+                        HTMLMessage = "" +
+                            "<html>" +
+                                "<head>" +
+                                    "<title>Agenda - Gira actualizada</title>" +
+                                "</head>" +
+                                "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
+                                    "<div style='clear:both; height:80%; text-align:center; width:100%;'>" +
+                                        "<div style='clear:both; height:70%; margin:0px auto; position:relative; top:10%; width:90%;'>" +
+                                        "<table style='color:#339933; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:20%;' valign='middle'>" +
+                                                "<td style='font-weight:bold;'>" +
+                                                    "Gira actualizada<br /><br />" +
+                                                    "<div style='border-bottom:1px solid #339933;'></div>" +
+                                                "</td>" +
+                                            "</tr>" +
+                                            "<tr style='height:80%;' valign='top'>" +
+                                                "<td>" +
+                                                    Dependencia + " le notifica que " + oENTResponse.DataSetResponse.Tables[2].Rows[0]["Comentarios"].ToString().Trim().Replace(".", "").ToLower() + " <font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[2].Rows[0]["GiraNombre"].ToString() + "</font>.<br /><br /><br />" +
+                                                    "Información previa al cambio:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[2].Rows[0]["Antes"].ToString() + "</font><br /><br /><br />" +
+                                                    "Información posterior al cambio:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[2].Rows[0]["Despues"].ToString() + "</font>" +
+                                                    "<br /><br /><br /><br /><br />Puede acceder al detalle de dicho Gira haciendo click <a href='" + this.ApplicationURLInvitation + "'>aqui</a><br /><br /><br /><br /><br />" +
+                                                    "Gracias por utilizar nuestros servicios inform&aacute;ticos.<br /><br />" +
+                                                "</td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                        "</div>" +
+                                    "</div>" +
+                                    "<div style='background:#339933; clear:both; height:20%; text-align:left; width:100%;'>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "<div style='height:90%;'>" +
+                                        "<table style='color:#FFFFFF; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:100%;' valign='middle'>" +
+                                                "<td style='text-align:center; float:left; width:20%;'>" +
+                                                    "<img src='" + this.MailLogo + "' height='120px' width='92px' />" +
+                                                "</td>" +
+                                                "<td style='text-align:justify; float:left; vertical-align: middle; width:70%;'>" +
+                                                    "<div style='text-align:center; width:90%;'><font style='font-family:Arial; font-size:9px;'>Powered By GCSoft</font><br /><br /></div>" +
+                                                    "<font style='font-family:Arial; font-size:10px;'>Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.</font><br />" +
+                                                "</td>" +
+                                                "<td></td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                    "</div>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "</div>" +
+                                "</body>" +
+                            "</html>";
+
+                    #endregion
+
+                    // Enviar correo
+                    gcMail.Send("Agenda - Gira actualizada", Contactos, "Gira actualizada", HTMLMessage);
+
+                }
+
+            }catch (Exception){
+                // oENTResponse.ExceptionRaised(ex.Message);
             }
 
             // Resultado
@@ -952,6 +1680,11 @@ namespace Agenda.BusinessProcess.Object
             DAGira oDAGira = new DAGira();
             ENTResponse oENTResponse = new ENTResponse();
 
+            GCMail gcMail = new GCMail();
+            String Contactos = "";
+            String Dependencia = "";
+            String HTMLMessage = "";
+
             try
             {
 
@@ -964,8 +1697,94 @@ namespace Agenda.BusinessProcess.Object
                 // Validación de mensajes de la BD
                 oENTResponse.MessageDB = oENTResponse.DataSetResponse.Tables[0].Rows[0]["Response"].ToString();
 
-            }catch (Exception ex){
-                oENTResponse.ExceptionRaised(ex.Message);
+                // Envío de correo (se crea el listado sólo si la transacción fue exitosa)
+                if ( oENTResponse.DataSetResponse.Tables[3].Rows.Count > 0 ){
+
+                    // Listado de direcciones
+                    foreach (DataRow rowContacto in oENTResponse.DataSetResponse.Tables[3].Rows){
+                        Contactos = (Contactos == "" ? rowContacto["Email"].ToString() : Contactos + "," + rowContacto["Email"].ToString());
+                    }
+
+                    // Determinar la dependencia
+                    switch( oENTGira.RolId ){
+                        case 1:
+                        case 2:
+
+                            Dependencia = "La coordinaci&oacute;n de relaciones p&uacute;blicas";
+                            break;
+
+                        case 4:
+
+                            Dependencia = "La coordinaci&oacute;n de log&iacute;stica";
+                            break;
+
+                        default:
+
+                            Dependencia = "La coordinaci&oacute;n de relaciones p&uacute;blicas";
+                            break;
+
+                    }
+
+                    #region Cuerpo de Correo (HTML)
+
+                        // Configuración del correo
+                        HTMLMessage = "" +
+                            "<html>" +
+                                "<head>" +
+                                    "<title>Agenda - Gira actualizada</title>" +
+                                "</head>" +
+                                "<body style='height:100%; margin:0px; padding:0px; width:100%;'>" +
+                                    "<div style='clear:both; height:80%; text-align:center; width:100%;'>" +
+                                        "<div style='clear:both; height:70%; margin:0px auto; position:relative; top:10%; width:90%;'>" +
+                                        "<table style='color:#339933; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:20%;' valign='middle'>" +
+                                                "<td style='font-weight:bold;'>" +
+                                                    "Gira actualizada<br /><br />" +
+                                                    "<div style='border-bottom:1px solid #339933;'></div>" +
+                                                "</td>" +
+                                            "</tr>" +
+                                            "<tr style='height:80%;' valign='top'>" +
+                                                "<td>" +
+                                                    Dependencia + " le notifica que " + oENTResponse.DataSetResponse.Tables[2].Rows[0]["Comentarios"].ToString().Trim().Replace(".", "").ToLower() + " <font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[2].Rows[0]["GiraNombre"].ToString() + "</font>.<br /><br /><br />" +
+                                                    "Información previa al cambio:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[2].Rows[0]["Antes"].ToString() + "</font><br /><br /><br />" +
+                                                    "Información posterior al cambio:<br /><br /><font style='color:#000000; font-style: italic; font-weight:bold;'>" + oENTResponse.DataSetResponse.Tables[2].Rows[0]["Despues"].ToString() + "</font>" +
+                                                    "<br /><br /><br /><br /><br />Puede acceder al detalle de dicho Gira haciendo click <a href='" + this.ApplicationURLInvitation + "'>aqui</a><br /><br /><br /><br /><br />" +
+                                                    "Gracias por utilizar nuestros servicios inform&aacute;ticos.<br /><br />" +
+                                                "</td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                        "</div>" +
+                                    "</div>" +
+                                    "<div style='background:#339933; clear:both; height:20%; text-align:left; width:100%;'>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "<div style='height:90%;'>" +
+                                        "<table style='color:#FFFFFF; height:100%; font-family:Arial; font-size:12px; text-align:left; width:100%;'>" +
+                                            "<tr style='height:100%;' valign='middle'>" +
+                                                "<td style='text-align:center; float:left; width:20%;'>" +
+                                                    "<img src='" + this.MailLogo + "' height='120px' width='92px' />" +
+                                                "</td>" +
+                                                "<td style='text-align:justify; float:left; vertical-align: middle; width:70%;'>" +
+                                                    "<div style='text-align:center; width:90%;'><font style='font-family:Arial; font-size:9px;'>Powered By GCSoft</font><br /><br /></div>" +
+                                                    "<font style='font-family:Arial; font-size:10px;'>Este correo electronico es confidencial y/o puede contener informacion privilegiada. Si usted no es su destinatario o no es alguna persona autorizada por este para recibir sus correos electronicos, NO debera usted utilizar, copiar, revelar, o tomar ninguna accion basada en este correo electronico o cualquier otra informacion incluida en el, favor de notificar al remitente de inmediato mediante el reenvio de este correo electronico y borrar a continuacion totalmente este correo electronico y sus anexos.</font><br />" +
+                                                "</td>" +
+                                                "<td></td>" +
+                                            "</tr>" +
+                                        "</table>" +
+                                    "</div>" +
+                                    "<div style='height:5%;'></div>" +
+                                    "</div>" +
+                                "</body>" +
+                            "</html>";
+
+                    #endregion
+
+                    // Enviar correo
+                    gcMail.Send("Agenda - Gira actualizada", Contactos, "Gira actualizada", HTMLMessage);
+
+                }
+
+            }catch (Exception){
+                // oENTResponse.ExceptionRaised(ex.Message);
             }
 
             // Resultado
