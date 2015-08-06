@@ -32,6 +32,16 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         GCParse gcParse = new GCParse();
         GCNumber gcNumber = new GCNumber();
 
+        
+        // Variables de control de GridView en PostBack al cargar imágenes
+        DataTable tblComiteHelipuerto_Public;
+        DataTable tblComiteRecepcion_Public;
+        DataTable tblOrdenDia_Public;
+        DataTable tblAcomodo_Public;
+        DataTable tblListadoAdicional_Public;
+        DataTable tblResponsableEvento_Public;
+        DataTable tblResponsableLogistica_Public;
+
 
         // Funciones del programador
 
@@ -389,6 +399,99 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
             }catch (Exception ex){
                 throw (ex);
+            }
+        }
+
+        void RecoveryGridState(){
+            try
+            {
+
+				// Recuperar los grid's que hayan sufrido cambios
+                if( this.lblComiteHelipuerto.Visible ){
+                    this.gvComiteHelipuerto.DataSource = tblComiteHelipuerto_Public;
+                    this.gvComiteHelipuerto.DataBind();
+                }
+
+                if( this.lblComiteRecepcion.Visible ){
+                    this.gvComiteRecepcion.DataSource = tblComiteRecepcion_Public;
+                    this.gvComiteRecepcion.DataBind();
+                }
+
+                if( this.lblOrdenDia.Visible ){
+                    this.gvOrdenDia.DataSource = tblOrdenDia_Public;
+                    this.gvOrdenDia.DataBind();
+                }
+
+                if( this.lblAcomodo.Visible ){
+                    this.gvAcomodo.DataSource = tblAcomodo_Public;
+                    this.gvAcomodo.DataBind();
+                }
+
+                if( this.lblListadoAdicional.Visible ){
+                    this.gvListadoAdicional.DataSource = tblListadoAdicional_Public;
+                    this.gvListadoAdicional.DataBind();
+                }
+
+                if( this.lblResponsableEvento.Visible ){
+                    this.gvResponsableEvento.DataSource = tblResponsableEvento_Public;
+                    this.gvResponsableEvento.DataBind();
+                }
+
+                if( this.lblResponsableLogistica.Visible ){
+                    this.gvResponsableLogistica.DataSource = tblResponsableLogistica_Public;
+                    this.gvResponsableLogistica.DataBind();
+                }
+
+            }catch (Exception){
+                // Do Nothing
+            }
+        }
+
+        void SaveGridState(){
+            try
+            {
+
+                // Limpiar variables
+                tblComiteHelipuerto_Public = null;
+                tblComiteRecepcion_Public = null;
+                tblOrdenDia_Public = null;
+                tblAcomodo_Public = null;
+                tblListadoAdicional_Public = null;
+                tblResponsableEvento_Public = null;
+                tblResponsableLogistica_Public = null;
+
+                // Obtener los grid's que hayan sufrido cambios
+                if( this.lblComiteHelipuerto.Visible ){
+                    tblComiteHelipuerto_Public = gcParse.GridViewToDataTable( this.gvComiteHelipuerto, true );
+                }
+
+                if( this.lblComiteRecepcion.Visible ){
+                    tblComiteRecepcion_Public = gcParse.GridViewToDataTable( this.gvComiteRecepcion, true );
+                }
+
+                if( this.lblOrdenDia.Visible ){
+                    tblOrdenDia_Public = gcParse.GridViewToDataTable( this.gvOrdenDia, true );
+                }
+
+                if( this.lblAcomodo.Visible ){
+                    tblAcomodo_Public = gcParse.GridViewToDataTable( this.gvAcomodo, true );
+                }
+
+                if( this.lblListadoAdicional.Visible ){
+                    tblListadoAdicional_Public = gcParse.GridViewToDataTable( this.gvListadoAdicional, true );
+                }
+
+                if( this.lblResponsableEvento.Visible ){
+                    tblResponsableEvento_Public = gcParse.GridViewToDataTable( this.gvResponsableEvento, true );
+                }
+
+                if( this.lblResponsableLogistica.Visible ){
+                    tblResponsableLogistica_Public = gcParse.GridViewToDataTable( this.gvResponsableLogistica, true );
+                }
+				
+
+            }catch (Exception){
+                // Do Nothing
             }
         }
 
@@ -1746,8 +1849,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             try
             {
 
-                this.lblImagenMontaje.Text = "";   
+                this.lblImagenMontaje.Text = "";
+                SaveGridState();
                 InsertDocumento();
+                RecoveryGridState();
                 this.rblTipoDocumento.SelectedIndex = 0;
 
             }catch (Exception ex){
@@ -1787,7 +1892,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         break;
 
                     case "Borrar":
+                        SaveGridState();
                         DeleteDocumento(Int32.Parse(DocumentoId));
+                        RecoveryGridState();
                         this.rblTipoDocumento.SelectedIndex = 0;
                         break;
                 }
