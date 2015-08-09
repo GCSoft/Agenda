@@ -74,6 +74,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
 
             String LevelError = "";
             Int32 CurrentRow;
+            Int32 NewOrder = 1;
 
             Char ENTER = Convert.ToChar(13);
 
@@ -2041,7 +2042,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                                         wTableCell = wTableRow.Cells[0].AddParagraph();
                                         wTableCell.ParagraphFormat.HorizontalAlignment = Syncfusion.DocIO.DLS.HorizontalAlignment.Left;
 
-                                        wText = wTableCell.AppendText(oRow["Orden"].ToString() + ". " + oRow["Nombre"].ToString());
+                                        wText = wTableCell.AppendText(NewOrder.ToString() + ". " + oRow["Nombre"].ToString());
                                         wText.CharacterFormat.FontName = "Cambria";
                                         wText.CharacterFormat.FontSize = 13f;
 
@@ -2066,6 +2067,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento.Cuadernillos
                                         wTableRow.Cells[1].CellFormat.Borders.Right.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
                                         wTableRow.Cells[1].CellFormat.Borders.Bottom.BorderType = Syncfusion.DocIO.DLS.BorderStyle.Single;
                                         wTableRow.Cells[1].Width = 185;
+
+                                        // Siguiente orden
+                                        NewOrder = NewOrder + 1;
                                     }
 
                                     // Siguiente fila

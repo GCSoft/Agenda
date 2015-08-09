@@ -162,7 +162,7 @@
                                         <EmptyDataTemplate>
                                             <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
                                                 <tr class="Grid_Header_PopUp">
-                                                    <td style="width:100px;">Orden</td>
+                                                    <td style="width:40px;">Orden</td>
                                                     <td style="width:400px;">Nombre</td>
                                                     <td>Puesto</td>
                                                 </tr>
@@ -172,7 +172,7 @@
                                             </table>
                                         </EmptyDataTemplate>
                                         <Columns>
-                                            <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="40px"  DataField="Orden"   SortExpression="Orden"></asp:BoundField>
                                             <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="400px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
                                             <asp:BoundField HeaderText="Puesto" ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
@@ -241,7 +241,7 @@
                                         <EmptyDataTemplate>
                                             <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
                                                 <tr class="Grid_Header_PopUp">
-                                                    <td style="width:100px;">Orden</td>
+                                                    <td style="width:40px;">Orden</td>
                                                     <td>Detalle</td>
                                                 </tr>
                                                 <tr class="Grid_Row">
@@ -250,7 +250,7 @@
                                             </table>
                                         </EmptyDataTemplate>
                                         <Columns>
-                                            <asp:BoundField HeaderText="Orden"      ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Orden"      ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="40px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
                                             <asp:BoundField HeaderText="Detalle"    ItemStyle-HorizontalAlign="Left"                            DataField="Detalle" SortExpression="Detalle"></asp:BoundField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
                                                 <ItemTemplate>
@@ -397,29 +397,30 @@
                             <tr><td colspan="4" style="height:10px;"></td></tr>
                             <tr>
                                 <td colspan="4">
-                                    <asp:GridView ID="gvComiteRecepcion" runat="server" AllowPaging="false" AllowSorting="True" AutoGenerateColumns="False" Width="100%"
+                                    <asp:GridView ID="gvComiteRecepcion" runat="server" AllowPaging="false" AllowSorting="False" AutoGenerateColumns="False" Width="100%"
                                         DataKeyNames="Orden,Nombre,Puesto,Separador"
                                         OnRowCommand="gvComiteRecepcion_RowCommand"
-                                        OnRowDataBound="gvComiteRecepcion_RowDataBound"
-                                        OnSorting="gvComiteRecepcion_Sorting">
+                                        OnRowDataBound="gvComiteRecepcion_RowDataBound">
                                         <HeaderStyle CssClass="Grid_Header_PopUp" />
                                         <RowStyle CssClass="Grid_Row_PopUp" />
                                         <EmptyDataTemplate>
                                             <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
                                                 <tr class="Grid_Header_PopUp">
-                                                    <td style="width:100px;">Orden</td>
+                                                    <td style="width:40px;">Orden</td>
+                                                    <td style="width:50px;">Posición</td>
                                                     <td style="width:400px;">Nombre</td>
                                                     <td>Puesto</td>
                                                 </tr>
                                                 <tr class="Grid_Row">
-                                                    <td colspan="3">No se ha capturado asistentes</td>
+                                                    <td colspan="4">No se ha capturado asistentes</td>
                                                 </tr>
                                             </table>
                                         </EmptyDataTemplate>
                                         <Columns>
-                                            <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
-                                            <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="400px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
-                                            <asp:BoundField HeaderText="Puesto" ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Orden"          ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="40px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Posición"       ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="50px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Nombre"         ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="400px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Puesto"         ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
                                                 <ItemTemplate>
                                                     <asp:ImageButton ID="imgEdit" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Editar" ImageUrl="~/Include/Image/Buttons/Edit.png" runat="server" />

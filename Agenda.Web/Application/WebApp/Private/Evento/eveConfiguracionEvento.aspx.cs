@@ -1328,6 +1328,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                 e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
 
+                // Configurar columna
+                e.Row.Cells[0].BackColor = System.Drawing.ColorTranslator.FromHtml("#EFEFEF");
+                e.Row.Cells[0].ForeColor = System.Drawing.ColorTranslator.FromHtml("#675C9D");
+
             }catch (Exception ex){
                 throw (ex);
             }
@@ -1496,6 +1500,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                 e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
 
+                // Configurar columna
+                e.Row.Cells[0].BackColor = System.Drawing.ColorTranslator.FromHtml("#EFEFEF");
+                e.Row.Cells[0].ForeColor = System.Drawing.ColorTranslator.FromHtml("#675C9D");
+
             }catch (Exception ex){
                 throw (ex);
             }
@@ -1655,6 +1663,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
                 sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                 e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
+
+                // Configurar columna
+                e.Row.Cells[0].BackColor = System.Drawing.ColorTranslator.FromHtml("#EFEFEF");
+                e.Row.Cells[0].ForeColor = System.Drawing.ColorTranslator.FromHtml("#675C9D");
 
             }catch (Exception ex){
                 throw (ex);
@@ -1823,6 +1835,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
                 sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                 e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
+
+                // Configurar columna
+                e.Row.Cells[0].BackColor = System.Drawing.ColorTranslator.FromHtml("#EFEFEF");
+                e.Row.Cells[0].ForeColor = System.Drawing.ColorTranslator.FromHtml("#675C9D");
 
             }catch (Exception ex){
                 throw (ex);
@@ -2124,6 +2140,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                 e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
 
+                // Configurar columna
+                e.Row.Cells[0].BackColor = System.Drawing.ColorTranslator.FromHtml("#EFEFEF");
+                e.Row.Cells[0].ForeColor = System.Drawing.ColorTranslator.FromHtml("#675C9D");
+
             }catch (Exception ex){
                 throw (ex);
             }
@@ -2292,6 +2312,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                 e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
 
+                // Configurar columna
+                e.Row.Cells[0].BackColor = System.Drawing.ColorTranslator.FromHtml("#EFEFEF");
+                e.Row.Cells[0].ForeColor = System.Drawing.ColorTranslator.FromHtml("#675C9D");
+
             }catch (Exception ex){
                 throw (ex);
             }
@@ -2459,6 +2483,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
                 sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                 e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
+
+                // Configurar columna
+                e.Row.Cells[0].BackColor = System.Drawing.ColorTranslator.FromHtml("#EFEFEF");
+                e.Row.Cells[0].ForeColor = System.Drawing.ColorTranslator.FromHtml("#675C9D");
 
             }catch (Exception ex){
                 throw (ex);

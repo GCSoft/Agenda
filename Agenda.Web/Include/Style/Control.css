@@ -438,6 +438,7 @@
 	font-size: 12px;
 	font-weight:normal;
 	height: 28px;
+    text-align:center;
 }
 
 .Grid_Header a{
@@ -560,6 +561,7 @@
 	font:11px Tahoma;
 	font-weight:normal;
 	height:15px;
+    text-align:center;
 }
 
 .Grid_Header_PopUp a {
@@ -629,6 +631,7 @@
 	font:11px Tahoma;
 	font-weight:normal;
 	height:15px;
+    text-align:center;
 }
 
 .Grid_Header_PopUp_Alternative a {

@@ -185,6 +185,28 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             }
         }
 
+        void ReorderGrid_Asistentes(){
+            Int32 NewOrder = 1;
+
+            try
+            {
+
+                foreach(GridViewRow rowAsistente in this.gvComiteRecepcion.Rows){
+
+                    if( this.gvComiteRecepcion.DataKeys[rowAsistente.RowIndex]["Separador"].ToString() == "0" ){
+
+                        rowAsistente.Cells[1].Text = NewOrder.ToString();
+                        NewOrder = NewOrder + 1;
+
+                    }
+                }
+
+
+            }catch(Exception){
+                // Do Nothing
+            }
+        }
+
         void SelectEvento(){
             ENTResponse oENTResponse = new ENTResponse();
             ENTEvento oENTEvento = new ENTEvento();
@@ -246,6 +268,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Sección: Asistentes (Se almacena en la tabla de Comité de Recepción)
                 this.gvComiteRecepcion.DataSource = oENTResponse.DataSetResponse.Tables[8];
                 this.gvComiteRecepcion.DataBind();
+
+                // Modificar manualmente el orden de los asistentes
+                ReorderGrid_Asistentes();
 
             }catch (Exception ex){
                 throw (ex);
@@ -759,6 +784,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                 e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
 
+                // Configurar columna
+                e.Row.Cells[0].BackColor = System.Drawing.ColorTranslator.FromHtml("#EFEFEF");
+                e.Row.Cells[0].ForeColor = System.Drawing.ColorTranslator.FromHtml("#675C9D");
+
             }catch (Exception ex){
                 throw (ex);
             }
@@ -919,6 +948,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
                 e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
 
+                // Configurar columna
+                e.Row.Cells[0].BackColor = System.Drawing.ColorTranslator.FromHtml("#EFEFEF");
+                e.Row.Cells[0].ForeColor = System.Drawing.ColorTranslator.FromHtml("#675C9D");
+
             }catch (Exception ex){
                 throw (ex);
             }
@@ -955,7 +988,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Agregar un nuevo elemento
                 rowComiteRecepcion = tblComiteRecepcion.NewRow();
-                rowComiteRecepcion["Orden"] = (tblComiteRecepcion.Select("Separador=0").Length + 1).ToString();
+                rowComiteRecepcion["Orden"] = (tblComiteRecepcion.Rows.Count + 1).ToString();
                 rowComiteRecepcion["Nombre"] = this.txtComiteRecepcionNombre.Text.Trim();
                 rowComiteRecepcion["Puesto"] = this.txtComiteRecepcionPuesto.Text.Trim();
                 rowComiteRecepcion["Separador"] = "0";
@@ -964,6 +997,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Actualizar Grid
                 this.gvComiteRecepcion.DataSource = tblComiteRecepcion;
                 this.gvComiteRecepcion.DataBind();
+
+                // Modificar manualmente el orden
+                ReorderGrid_Asistentes();
 
                 // Inhabilitar edición
                 InhabilitarEdicion(ref this.gvComiteRecepcion, ref this.lblComiteRecepcion);
@@ -994,7 +1030,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 // Agregar un nuevo elemento
                 rowComiteRecepcion = tblComiteRecepcion.NewRow();
-                rowComiteRecepcion["Orden"] = (tblComiteRecepcion.Select("Separador=0").Length + 1).ToString();
+                rowComiteRecepcion["Orden"] = (tblComiteRecepcion.Rows.Count + 1).ToString();
                 rowComiteRecepcion["Nombre"] = this.txtComiteRecepcionNombre.Text.Trim();
                 rowComiteRecepcion["Puesto"] = this.txtComiteRecepcionPuesto.Text.Trim();
                 rowComiteRecepcion["Separador"] = "1";
@@ -1003,6 +1039,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Actualizar Grid
                 this.gvComiteRecepcion.DataSource = tblComiteRecepcion;
                 this.gvComiteRecepcion.DataBind();
+
+                // Modificar manualmente el orden
+                ReorderGrid_Asistentes();
 
                 // Inhabilitar edición
                 InhabilitarEdicion(ref this.gvComiteRecepcion, ref this.lblComiteRecepcion);
@@ -1074,6 +1113,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         this.gvComiteRecepcion.DataSource = tblComiteRecepcion;
                         this.gvComiteRecepcion.DataBind();
 
+                        // Modificar manualmente el orden
+                        ReorderGrid_Asistentes();
+
                         // Inhabilitar edición
                         InhabilitarEdicion(ref this.gvComiteRecepcion, ref this.lblComiteRecepcion);
 
@@ -1124,10 +1166,10 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 if ( Separador == "1" ){
 
                     // Dejar sólo una fila
-                    e.Row.Cells[0].Text = e.Row.Cells[1].Text;
-                    e.Row.Cells[0].ColumnSpan = 3;
-                    e.Row.Cells[1].Visible = false;
+                    e.Row.Cells[1].Text = e.Row.Cells[2].Text;
+                    e.Row.Cells[1].ColumnSpan = 3;
                     e.Row.Cells[2].Visible = false;
+                    e.Row.Cells[3].Visible = false;
 
                     // Atributos de la fila
                     e.Row.CssClass = "Grid_Row_Over_PopUp";
@@ -1147,22 +1189,26 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
                 }
 
+                // Configurar columna
+                e.Row.Cells[0].BackColor = System.Drawing.ColorTranslator.FromHtml("#EFEFEF");
+                e.Row.Cells[0].ForeColor = System.Drawing.ColorTranslator.FromHtml("#675C9D");
+
             }catch (Exception ex){
                 throw (ex);
             }
 
         }
 
-        protected void gvComiteRecepcion_Sorting(object sender, GridViewSortEventArgs e){
-            try
-            {
+        //protected void gvComiteRecepcion_Sorting(object sender, GridViewSortEventArgs e){
+        //    try
+        //    {
 
-                gcCommon.SortGridView(ref this.gvComiteRecepcion, ref this.hddSort, e.SortExpression, true);
+        //        gcCommon.SortGridView(ref this.gvComiteRecepcion, ref this.hddSort, e.SortExpression, true);
 
-            }catch (Exception ex){
-                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtComiteRecepcionNombre.ClientID + "'); }", true);
-            }
-        }
+        //    }catch (Exception ex){
+        //        ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtComiteRecepcionNombre.ClientID + "'); }", true);
+        //    }
+        //}
 
 
         #region PopUp - Acomodo
@@ -1507,6 +1553,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     // Actualizar listado
                     this.gvComiteRecepcion.DataSource = oENTResponse.DataSetResponse.Tables[1];
                     this.gvComiteRecepcion.DataBind();
+
+                    // Modificar manualmente el orden
+                    ReorderGrid_Asistentes();
 
                     // Mensaje de usuario
                     ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtComiteRecepcionNombre.ClientID + "'); }", true);

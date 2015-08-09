@@ -235,7 +235,7 @@
                                         <EmptyDataTemplate>
                                             <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
                                                 <tr class="Grid_Header_PopUp">
-                                                    <td style="width:100px;">Orden</td>
+                                                    <td style="width:40px;">Orden</td>
                                                     <td style="width:400px;">Nombre</td>
                                                     <td>Puesto</td>
                                                 </tr>
@@ -245,7 +245,7 @@
                                             </table>
                                         </EmptyDataTemplate>
                                         <Columns>
-                                            <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="40px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
                                             <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="400px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
                                             <asp:BoundField HeaderText="Puesto" ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
@@ -317,7 +317,7 @@
                                         <EmptyDataTemplate>
                                             <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
                                                 <tr class="Grid_Header_PopUp">
-                                                    <td style="width:100px;">Orden</td>
+                                                    <td style="width:40px;">Orden</td>
                                                     <td style="width:400px;">Nombre</td>
                                                     <td>Puesto</td>
                                                 </tr>
@@ -327,7 +327,7 @@
                                             </table>
                                         </EmptyDataTemplate>
                                         <Columns>
-                                            <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="40px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
                                             <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="400px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
                                             <asp:BoundField HeaderText="Puesto" ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
@@ -396,7 +396,7 @@
                                         <EmptyDataTemplate>
                                             <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
                                                 <tr class="Grid_Header_PopUp">
-                                                    <td style="width:100px;">Orden</td>
+                                                    <td style="width:40px;">Orden</td>
                                                     <td>Detalle</td>
                                                 </tr>
                                                 <tr class="Grid_Row">
@@ -405,7 +405,7 @@
                                             </table>
                                         </EmptyDataTemplate>
                                         <Columns>
-                                            <asp:BoundField HeaderText="Orden"      ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Orden"      ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="40px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
                                             <asp:BoundField HeaderText="Detalle"    ItemStyle-HorizontalAlign="Left"                            DataField="Detalle" SortExpression="Detalle"></asp:BoundField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
                                                 <ItemTemplate>
@@ -488,7 +488,7 @@
                                         <EmptyDataTemplate>
                                             <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
                                                 <tr class="Grid_Header_PopUp">
-                                                    <td style="width:100px;">Orden</td>
+                                                    <td style="width:40px;">Orden</td>
                                                     <td style="width:400px;">Nombre</td>
                                                     <td>Puesto</td>
                                                 </tr>
@@ -498,7 +498,7 @@
                                             </table>
                                         </EmptyDataTemplate>
                                         <Columns>
-                                            <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="40px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
                                             <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="400px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
                                             <asp:BoundField HeaderText="Puesto" ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
@@ -754,7 +754,7 @@
                                         <EmptyDataTemplate>
                                             <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
                                                 <tr class="Grid_Header_PopUp">
-                                                    <td style="width:100px;">Orden</td>
+                                                    <td style="width:40px;">Orden</td>
                                                     <td style="width:400px;">Nombre</td>
                                                     <td>Puesto</td>
                                                 </tr>
@@ -764,7 +764,7 @@
                                             </table>
                                         </EmptyDataTemplate>
                                         <Columns>
-                                            <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="40px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
                                             <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="400px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
                                             <asp:BoundField HeaderText="Puesto" ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
@@ -870,7 +870,7 @@
                                         <EmptyDataTemplate>
                                             <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
                                                 <tr class="Grid_Header_PopUp">
-                                                    <td style="width:100px;">Orden</td>
+                                                    <td style="width:40px;">Orden</td>
                                                     <td style="width:400px;">Nombre</td>
                                                     <td>Puesto</td>
                                                 </tr>
@@ -880,7 +880,7 @@
                                             </table>
                                         </EmptyDataTemplate>
                                         <Columns>
-                                            <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="40px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
                                             <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="400px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
                                             <asp:BoundField HeaderText="Puesto" ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
@@ -952,7 +952,7 @@
                                         <EmptyDataTemplate>
                                             <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
                                                 <tr class="Grid_Header_PopUp">
-                                                    <td style="width:100px;">Orden</td>
+                                                    <td style="width:40px;">Orden</td>
                                                     <td style="width:400px;">Nombre</td>
                                                     <td>Contacto</td>
                                                 </tr>
@@ -962,7 +962,7 @@
                                             </table>
                                         </EmptyDataTemplate>
                                         <Columns>
-                                            <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="100px" DataField="Orden"       SortExpression="Orden"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="40px" DataField="Orden"       SortExpression="Orden"></asp:BoundField>
                                             <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="400px" DataField="Nombre"      SortExpression="Nombre"></asp:BoundField>
                                             <asp:BoundField HeaderText="Contacto" ItemStyle-HorizontalAlign="Left"                          DataField="Contacto"    SortExpression="Contacto"></asp:BoundField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
