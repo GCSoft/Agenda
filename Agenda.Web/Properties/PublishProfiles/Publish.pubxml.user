@@ -187,16 +187,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/13/2015 16:11:31</publishTime>
     </File>
     <File Include="bin/Agenda.BusinessProcess.dll">
-      <publishTime>08/10/2015 15:24:06</publishTime>
+      <publishTime>08/15/2015 20:28:21</publishTime>
     </File>
     <File Include="bin/Agenda.DataAccess.dll">
-      <publishTime>08/10/2015 15:24:06</publishTime>
+      <publishTime>08/15/2015 20:28:20</publishTime>
     </File>
     <File Include="bin/Agenda.Entity.dll">
-      <publishTime>08/10/2015 15:24:06</publishTime>
+      <publishTime>08/15/2015 20:28:20</publishTime>
     </File>
     <File Include="bin/Agenda.Web.dll">
-      <publishTime>08/10/2015 15:24:08</publishTime>
+      <publishTime>08/15/2015 20:28:24</publishTime>
     </File>
     <File Include="bin/AjaxControlToolkit.dll">
       <publishTime>06/23/2014 11:45:59</publishTime>
@@ -1603,7 +1603,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/27/2014 12:58:28</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/10/2015 15:24:15</publishTime>
+      <publishTime>08/15/2015 20:28:40</publishTime>
     </File>
   </ItemGroup>
 </Project>
