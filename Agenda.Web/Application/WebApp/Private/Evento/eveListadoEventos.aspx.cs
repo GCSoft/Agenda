@@ -30,6 +30,11 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
         GCEncryption gcEncryption = new GCEncryption();
         GCJavascript gcJavascript = new GCJavascript();
 
+        // Variables publicas
+        String RecoveryBeginDate;
+        String RecoveryEndDate;
+        String RecoveryFlag;
+
 
         // Funciones del programador
 
@@ -89,6 +94,89 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
 
         // Rutinas del programador
+
+        void RecoveryForm(){
+			ENTSession oENTSession = new ENTSession();
+			ENTEvento oENTEvento;
+
+            try
+            {
+
+				// Obtener la sesion
+				oENTSession = (ENTSession)this.Session["oENTSession"];
+
+				// Validaciones
+                if ( oENTSession.Entity == null || oENTSession.Entity.GetType().Name != "ENTEvento" ) {
+                    
+                    SelectEvento(false);
+                    return;
+                }
+
+                // Obtener Formulario
+				oENTEvento = (ENTEvento)oENTSession.Entity;
+
+				// Vaciar formulario
+                this.ddlEstatusEvento.SelectedItem.Value = oENTEvento.EstatusEventoId.ToString();
+                this.ddlPrioridad.SelectedItem.Value = oENTEvento.PrioridadId.ToString();
+                this.ddlDependencia.SelectedItem.Value = oENTEvento.Dependencia.ToString();
+                this.wucBeginDate.SetDate ( DateTime.Parse( oENTEvento.FechaInicio ) );
+                this.wucEndDate.SetDate ( DateTime.Parse( oENTEvento.FechaFin ) );
+                this.txtNombre.Text = oENTEvento.PalabraClave;
+
+                if( this.txtNombre.Text == "" ){
+
+                    this.rblBusqueda.SelectedIndex = 0;
+                    this.pnlBusquedaFecha.Visible = true;
+                    this.pnlBusquedaPalabra.Visible = false;
+                }else{
+
+                    this.rblBusqueda.SelectedIndex = 1;
+                    this.pnlBusquedaFecha.Visible = false;
+                    this.pnlBusquedaPalabra.Visible = true;
+                }
+
+                RecoveryBeginDate = oENTEvento.FechaInicio;
+                RecoveryEndDate = oENTEvento.FechaFin;
+                RecoveryFlag = "1";
+				
+				// Liberar el formulario en la sesión
+				oENTSession.Entity = null;
+				this.Session["oENTSession"] = oENTSession;
+
+				// Realcular
+                SelectEvento(true);
+
+            }catch (Exception ex){
+				ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "alert('No fue posible recuperar el formulario: " + gcJavascript.ClearText(ex.Message) + "');", true);
+            }
+		}
+
+		void SaveForm(){
+			ENTSession oENTSession = new ENTSession();
+			ENTEvento oENTEvento = new ENTEvento();
+
+            try
+            {
+
+                // Formulario
+                oENTEvento.EstatusEventoId = Int32.Parse( this.ddlEstatusEvento.SelectedItem.Value );
+                oENTEvento.PrioridadId = Int32.Parse(this.ddlPrioridad.SelectedItem.Value);
+                oENTEvento.Dependencia = Int16.Parse(this.ddlDependencia.SelectedItem.Value);
+                oENTEvento.FechaInicio = this.wucBeginDate.DisplayUTCDate;
+                oENTEvento.FechaFin = this.wucEndDate.DisplayUTCDate;
+                oENTEvento.PalabraClave = this.txtNombre.Text.Trim();
+
+				// Obtener la sesion
+				oENTSession = (ENTSession)this.Session["oENTSession"];
+
+                // Guardar el formulario en la sesión
+				oENTSession.Entity = oENTEvento;
+				this.Session["oENTSession"] = oENTSession;
+
+            }catch (Exception ex){
+                throw (ex);
+            }
+		}
 
         void SelectDependencia(){
             ENTSession oENTSession = new ENTSession();
@@ -174,7 +262,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             {
 
                 // Validaciones
-                if (CheckDate){
+                if ( CheckDate && RecoveryFlag != "1" ){
                     if (!this.wucBeginDate.IsValidDate()) { throw new Exception("El campo [Fecha Inicial] es requerido"); }
                     if (!this.wucEndDate.IsValidDate()) { throw new Exception("El campo [Fecha Inicial] es requerido"); }
                 }
@@ -197,9 +285,20 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
                 if( this.rblBusqueda.SelectedIndex == 0 ){ // Por fecha
 
-                    oENTEvento.FechaInicio = (CheckDate ? this.wucBeginDate.DisplayUTCDate : GetUTCBeginDate());
-                    oENTEvento.FechaFin = (CheckDate ? this.wucEndDate.DisplayUTCDate : GetUTCEndDate());
-                    oENTEvento.PalabraClave = "";
+                    if ( RecoveryFlag == "1" ) {
+
+                        oENTEvento.FechaInicio = RecoveryBeginDate;
+                        oENTEvento.FechaFin = RecoveryEndDate;
+                        oENTEvento.PalabraClave = "";
+
+                    } else {
+
+                        oENTEvento.FechaInicio = (CheckDate ? this.wucBeginDate.DisplayUTCDate : GetUTCBeginDate());
+                        oENTEvento.FechaFin = (CheckDate ? this.wucEndDate.DisplayUTCDate : GetUTCEndDate());
+                        oENTEvento.PalabraClave = "";
+
+                    }
+
                 }else{ // Por Palabra Clave
 
                     oENTEvento.FechaInicio = "1900-01-01";
@@ -282,8 +381,8 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 tempDate = tempDate.AddDays(-1);
                 this.wucEndDate.SetDate(tempDate);
 
-                // Consulta
-                SelectEvento(false);
+                // Recuperar el formulario
+                RecoveryForm();
 
                 // Foco
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.ddlEstatusEvento.ClientID + "'); }", true);
@@ -327,6 +426,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Datakeys
                 EventoId = Int32.Parse(this.gvEvento.DataKeys[intRow]["EventoId"].ToString());
                 Gira = this.gvEvento.DataKeys[intRow]["Gira"].ToString();
+
+                // Guardar formulario
+                SaveForm();
 
                 // Acción
                 switch (strCommand){
@@ -387,7 +489,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             try
             {
 
-                gcCommon.SortGridView(ref this.gvEvento, ref this.hddSort, e.SortExpression);
+                gcCommon.SortGridView(ref this.gvEvento, ref this.hddSort, e.SortExpression, true);
 
             }catch (Exception ex){
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.ddlEstatusEvento.ClientID + "'); }", true);

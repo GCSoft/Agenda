@@ -28,6 +28,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
         // Utilerías
         GCEncryption gcEncryption = new GCEncryption();
+        GCJavascript gcJavascript = new GCJavascript();
 
         // Variables publicas
         String QueryDate;
@@ -188,7 +189,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                                                 "start: '" + rowEvento["EventoFechaInicio_ANSI"].ToString() + "T" + rowEvento["EventoHoraInicio_ANSI"].ToString() + "', " +
                                                 "end: '" + rowEvento["EventoFechaFin_ANSI"].ToString() + "T" + rowEvento["EventoHoraFin_ANSI"].ToString() + "', " +
                                                 "backgroundColor: '" + rowEvento["HexColor"].ToString() + "', " +
-                                                "description: '" + rowEvento["EventoNombre"].ToString() + "'" +
+                                                "description: '" + gcJavascript.ClearText( rowEvento["EventoNombre"].ToString() ) + "'" +
                                             "} ";
 
                     // Fin del evento

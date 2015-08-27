@@ -7,6 +7,8 @@
 	</Communication>
 	<Function Namespace="GCUtility.Function">
 		<GCCommon>
+			<Utility Method="DeleteDiffRow" Summary="Elimina todos los registros de un DataTable cuyo campo FieldName sea igual a FieldValue"/>
+			<Utility Method="DeleteEqualRow" Summary="Elimina todos los registros de un DataTable cuyo campo FieldName sea diferente a FieldValue"/>
 			<Utility Method="SortGridView" Summary="Ordena un GridView"/>
 			<Utility Method="StampCookie" Summary="Agrega una marca única de la aplicación al nombre de una cookie"/>
 		</GCCommon>

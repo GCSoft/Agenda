@@ -324,7 +324,7 @@ namespace Agenda.Web.Include.WebUserControls.FullCalendar
                     // Armar el evento
                     Eventos = Eventos + "{ " +
                                                 "id: " + rowEvento["EventoId"].ToString() + ", " +
-                                                "title: '" + rowEvento["EventoNombre"].ToString() + "', " +
+                                                "title: '" + gcJavascript.ClearText( rowEvento["EventoNombre"].ToString() ) + "', " +
                                                 "start: '" + rowEvento["EventoFechaInicio_ANSI"].ToString() + "T" + rowEvento["EventoHoraInicio_ANSI"].ToString() + "', " +
                                                 "end: '" + rowEvento["EventoFechaFin_ANSI"].ToString() + "T" + rowEvento["EventoHoraFin_ANSI"].ToString() + "', " +
                                                 "backgroundColor: '" + rowEvento["HexColor"].ToString() + "', " +
@@ -332,7 +332,7 @@ namespace Agenda.Web.Include.WebUserControls.FullCalendar
                                                 "icono: '../../../../Include/Image/Buttons/Prioridad" + rowEvento["PrioridadNombre"].ToString() + ".png', " +
                                                 "llave:'" + gcEncryption.EncryptString(rowEvento["EventoId"].ToString() + "|4", true) + "', " +
                                                 "gira: '" + rowEvento["Gira"].ToString() + "', " +
-                                                "tooltip: '" + rowEvento["EventoNombre"].ToString() + "<br /><br />Estatus: " + rowEvento["EstatusEventoNombre"].ToString() + "<br />Dependencia: " + rowEvento["Dependencia"].ToString() + "<br /><br />Inicio: " + rowEvento["EventoFechaInicioTexto"].ToString() + "<br />Fin:     " + rowEvento["EventoFechaFinTexto"].ToString() + "' " +
+                                                "tooltip: '" + gcJavascript.ClearText( rowEvento["EventoNombre"].ToString() ) + "<br /><br />Estatus: " + rowEvento["EstatusEventoNombre"].ToString() + "<br />Dependencia: " + rowEvento["Dependencia"].ToString() + "<br /><br />Inicio: " + rowEvento["EventoFechaInicioTexto"].ToString() + "<br />Fin:     " + rowEvento["EventoFechaFinTexto"].ToString() + "' " +
                                             "} ";
 
                     // Fin del evento

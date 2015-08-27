@@ -51,7 +51,7 @@
     </Reference>
     <Reference Include="GCUtility, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Proyectos\BHM\Solution\BHM.Web\Include\Components\GCSoft\GCUtility.dll</HintPath>
+      <HintPath>Include\Components\GCSoft\GCUtility.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
@@ -856,6 +856,7 @@
     <EmbeddedResource Include="Application\WebApp\Private\Reportes\RDLC\rptInvitacionDetalle.rdlc" />
     <EmbeddedResource Include="Application\WebApp\Private\Reportes\RDLC\rptInvitacionPrensa.rdlc" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
