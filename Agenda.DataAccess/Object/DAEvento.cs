@@ -1663,6 +1663,10 @@ namespace Agenda.DataAccess.Object
             sqlPar.Value = oENTEvento.Puesto;
             sqlCom.Parameters.Add(sqlPar);
 
+            sqlPar = new SqlParameter("Separador", SqlDbType.TinyInt);
+            sqlPar.Value = oENTEvento.Separador;
+            sqlCom.Parameters.Add(sqlPar);
+
             // Inicializaciones
             oENTResponse.DataSetResponse = new DataSet();
             sqlDA = new SqlDataAdapter(sqlCom);

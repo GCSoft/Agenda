@@ -402,6 +402,28 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             }
         }
 
+        void ReorderGrid_ListadoAdicional(){
+            Int32 NewOrder = 1;
+
+            try
+            {
+
+                foreach(GridViewRow rowListadoAdicional in this.gvListadoAdicional.Rows){
+
+                    if( this.gvListadoAdicional.DataKeys[rowListadoAdicional.RowIndex]["Separador"].ToString() == "0" ){
+
+                        rowListadoAdicional.Cells[1].Text = NewOrder.ToString();
+                        NewOrder = NewOrder + 1;
+
+                    }
+                }
+
+
+            }catch(Exception){
+                // Do Nothing
+            }
+        }
+
         void RecoveryGridState(){
             try
             {
@@ -583,7 +605,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     this.txtAcomodoObservaciones.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["AcomodoObservaciones"].ToString();
 
                     this.ddlListadoAdicional.SelectedValue = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ListadoAdicional"].ToString();
-                    this.txtListadoAdicionalTitulo.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ListadoAdicionalTitulo"].ToString();
+                    //this.txtListadoAdicionalTitulo.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ListadoAdicionalTitulo"].ToString();
 
                     this.ddlComiteHelipuerto.SelectedValue = oENTResponse.DataSetResponse.Tables[6].Rows[0]["ComiteHelipuerto"].ToString();
                     this.txtComiteHelipuertoLugar.Text = oENTResponse.DataSetResponse.Tables[6].Rows[0]["HelipuertoLugar"].ToString();
@@ -611,6 +633,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Sección: Listado adicional
                 this.gvListadoAdicional.DataSource = oENTResponse.DataSetResponse.Tables[15];
                 this.gvListadoAdicional.DataBind();
+
+                // Modificar manualmente el orden del listado adicional
+                ReorderGrid_ListadoAdicional();
 
                 // Sección: Responsable del evento
                 this.gvResponsableEvento.DataSource = oENTResponse.DataSetResponse.Tables[11];
@@ -950,7 +975,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 #region "Sección: Listado adicional"
 
                     oENTEvento.ListadoAdicional = Int16.Parse(this.ddlListadoAdicional.SelectedItem.Value);
-                    oENTEvento.ListadoAdicionalTitulo = this.txtListadoAdicionalTitulo.Text.Trim();
+                    oENTEvento.ListadoAdicionalTitulo = ""; // this.txtListadoAdicionalTitulo.Text.Trim();
 
                     tblTemporal = null;
                     tblTemporal = gcParse.GridViewToDataTable(this.gvListadoAdicional, true);
@@ -959,6 +984,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     oENTEvento.DataTableListadoAdicional.Columns.Add("Orden", typeof(Int32));
                     oENTEvento.DataTableListadoAdicional.Columns.Add("Nombre", typeof(String));
                     oENTEvento.DataTableListadoAdicional.Columns.Add("Puesto", typeof(String));
+                    oENTEvento.DataTableListadoAdicional.Columns.Add("Separador", typeof(Int16));
                     
                     foreach( DataRow rowComiteListadoAdicional in tblTemporal.Rows ){
 
@@ -966,6 +992,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                         rowTemporal["Orden"] = rowComiteListadoAdicional["Orden"];
                         rowTemporal["Nombre"] = rowComiteListadoAdicional["Nombre"];
                         rowTemporal["Puesto"] = rowComiteListadoAdicional["Puesto"];
+                        rowTemporal["Separador"] = rowComiteListadoAdicional["Separador"];
                         oENTEvento.DataTableListadoAdicional.Rows.Add(rowTemporal);
                     }
 
@@ -2012,11 +2039,57 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 rowListadoAdicional["Orden"] = (tblListadoAdicional.Rows.Count + 1).ToString();
                 rowListadoAdicional["Nombre"] = this.txtListadoAdicionalNombre.Text.Trim();
                 rowListadoAdicional["Puesto"] = this.txtListadoAdicionalPuesto.Text.Trim();
+                rowListadoAdicional["Separador"] = "0";
                 tblListadoAdicional.Rows.Add(rowListadoAdicional);
 
                 // Actualizar Grid
                 this.gvListadoAdicional.DataSource = tblListadoAdicional;
                 this.gvListadoAdicional.DataBind();
+
+                // Modificar manualmente el orden
+                ReorderGrid_ListadoAdicional();
+
+                // Inhabilitar edición
+                InhabilitarEdicion(ref this.gvListadoAdicional, ref this.lblListadoAdicional);
+
+                // Nueva captura
+                this.txtListadoAdicionalNombre.Text = "";
+                this.txtListadoAdicionalPuesto.Text = "";
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtListadoAdicionalNombre.ClientID + "'); }", true);
+
+            }catch (Exception ex){
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ alert('" + gcJavascript.ClearText(ex.Message) + "'); focusControl('" + this.txtListadoAdicionalNombre.ClientID + "'); }", true);
+            }
+        }
+
+        protected void btnAgregarListadoAdicional_Separador_Click(object sender, EventArgs e){
+            DataTable tblListadoAdicional;
+            DataRow rowListadoAdicional;
+
+            try
+            {
+
+                // Obtener DataTable del grid
+                tblListadoAdicional = gcParse.GridViewToDataTable(this.gvListadoAdicional, false);
+
+                // Validaciones
+                if ( this.txtListadoAdicionalNombre.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un nombre")); }
+                //if ( this.txtListadoAdicionalPuesto.Text.Trim() == "" ) { throw (new Exception("Es necesario ingresar un puesto")); }
+
+                // Agregar un nuevo elemento
+                rowListadoAdicional = tblListadoAdicional.NewRow();
+                rowListadoAdicional["Orden"] = (tblListadoAdicional.Rows.Count + 1).ToString();
+                rowListadoAdicional["Nombre"] = this.txtListadoAdicionalNombre.Text.Trim();
+                rowListadoAdicional["Puesto"] = this.txtListadoAdicionalPuesto.Text.Trim();
+                rowListadoAdicional["Separador"] = "1";
+                tblListadoAdicional.Rows.Add(rowListadoAdicional);
+
+                // Actualizar Grid
+                this.gvListadoAdicional.DataSource = tblListadoAdicional;
+                this.gvListadoAdicional.DataBind();
+
+                // Modificar manualmente el orden
+                ReorderGrid_ListadoAdicional();
 
                 // Inhabilitar edición
                 InhabilitarEdicion(ref this.gvListadoAdicional, ref this.lblListadoAdicional);
@@ -2038,6 +2111,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
             String Orden = "";
             String Nombre = "";
             String Puesto = "";
+            String Separador = "";
             Int32 intRow = 0;
 
             try
@@ -2056,6 +2130,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 Orden = this.gvListadoAdicional.DataKeys[intRow]["Orden"].ToString();
                 Nombre = this.gvListadoAdicional.DataKeys[intRow]["Nombre"].ToString();
                 Puesto = this.gvListadoAdicional.DataKeys[intRow]["Puesto"].ToString();
+                Separador = this.gvListadoAdicional.DataKeys[intRow]["Separador"].ToString();
 
                 // Acción
                 switch (strCommand){
@@ -2063,7 +2138,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     case "Editar":
 
                         // PopUp de Editar
-                        SetPopUp_ListadoAdicionalPanel(Orden, Nombre, Puesto);
+                        SetPopUp_ListadoAdicionalPanel(Orden, Nombre, Puesto, Separador);
                         break;
 
                     case "Eliminar":
@@ -2108,6 +2183,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
 
             String Orden = "";
             String ListadoAdicionalNombre = "";
+            String Separador = "";
 
             String sImagesAttributes = "";
             String sTootlTip = "";
@@ -2125,20 +2201,38 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 // Datakeys
                 Orden = this.gvListadoAdicional.DataKeys[e.Row.RowIndex]["Orden"].ToString();
                 ListadoAdicionalNombre = this.gvListadoAdicional.DataKeys[e.Row.RowIndex]["Nombre"].ToString();
+                Separador = this.gvListadoAdicional.DataKeys[e.Row.RowIndex]["Separador"].ToString();
 
                 // Tooltip Edición
                 sTootlTip = "Eliminar a [" + ListadoAdicionalNombre + "]";
                 imgDelete.Attributes.Add("title", sTootlTip);
 
-                // Atributos Over
-                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
-                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit_Over.png';";
-                e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
+                // Configuración de la fila
+                if ( Separador == "1" ){
 
-                // Atributos Out
-                sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
-                sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
-                e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
+                    // Dejar sólo una fila
+                    e.Row.Cells[1].Text = e.Row.Cells[2].Text;
+                    e.Row.Cells[1].ColumnSpan = 3;
+                    e.Row.Cells[2].Visible = false;
+                    e.Row.Cells[3].Visible = false;
+
+                    // Atributos de la fila
+                    e.Row.CssClass = "Grid_Row_Over_PopUp";
+                    imgDelete.ImageUrl = "~/Include/Image/Buttons/Delete_Over.png";
+                    imgEdit.ImageUrl = "~/Include/Image/Buttons/Edit_Over.png";
+
+                }else{
+
+                    // Atributos Over
+                    sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete_Over.png';";
+                    sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit_Over.png';";
+                    e.Row.Attributes.Add("onmouseover", "this.className='Grid_Row_Over_PopUp'; " + sImagesAttributes);
+
+                    // Atributos Out
+                    sImagesAttributes = " document.getElementById('" + imgDelete.ClientID + "').src='../../../../Include/Image/Buttons/Delete.png';";
+                    sImagesAttributes = sImagesAttributes + " document.getElementById('" + imgEdit.ClientID + "').src='../../../../Include/Image/Buttons/Edit.png';";
+                    e.Row.Attributes.Add("onmouseout", "this.className='Grid_Row_PopUp'; " + sImagesAttributes);
+                }
 
                 // Configurar columna
                 e.Row.Cells[0].BackColor = System.Drawing.ColorTranslator.FromHtml("#EFEFEF");
@@ -3029,7 +3123,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                 }
             }
 
-            void SetPopUp_ListadoAdicionalPanel(String Orden, String Nombre, String Puesto){
+            void SetPopUp_ListadoAdicionalPanel(String Orden, String Nombre, String Puesto, String Separador){
                 try
                 {
 
@@ -3044,7 +3138,18 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     this.txtPopUpListadoAdicional_OrdenAnterior.Text = Orden;
                     this.txtPopUpListadoAdicional_Orden.Text = Orden;
                     this.txtPopUpListadoAdicional_Nombre.Text = Nombre;
-                    this.txtPopUpListadoAdicional_Puesto.Text = Puesto;
+
+                    if ( Separador == "1" ) {
+                        
+                        this.txtPopUpListadoAdicional_Puesto.Text = "";
+                        this.txtPopUpListadoAdicional_Puesto.Enabled = false;
+                        this.txtPopUpListadoAdicional_Puesto.CssClass = "Textbox_General_Disabled";
+                    }else{
+
+                        this.txtPopUpListadoAdicional_Puesto.Text = Puesto;
+                        this.txtPopUpListadoAdicional_Puesto.Enabled = true;
+                        this.txtPopUpListadoAdicional_Puesto.CssClass = "Textbox_General";
+                    }
 
                     // Foco
                     ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtPopUpListadoAdicional_Orden.ClientID + "'); }", true);
@@ -3075,6 +3180,7 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     oENTEvento.NuevoOrden = Int32.Parse(this.txtPopUpListadoAdicional_Orden.Text);
                     oENTEvento.Nombre = this.txtPopUpListadoAdicional_Nombre.Text.Trim();
                     oENTEvento.Puesto = this.txtPopUpListadoAdicional_Puesto.Text.Trim();
+                    oENTEvento.Separador = Int16.Parse(this.txtPopUpListadoAdicional_Puesto.Enabled ? "0" : "1");
 
                     // Transacción
                     oENTResponse = oBPEvento.UpdateEventoListadoAdicional_Item(oENTEvento);
@@ -3089,6 +3195,9 @@ namespace Agenda.Web.Application.WebApp.Private.Evento
                     // Actualizar listado
                     this.gvListadoAdicional.DataSource = oENTResponse.DataSetResponse.Tables[1];
                     this.gvListadoAdicional.DataBind();
+
+                    // Modificar manualmente el orden
+                    ReorderGrid_ListadoAdicional();
 
                     // Mensaje de usuario
                     ScriptManager.RegisterStartupScript(this.Page, this.GetType(), Convert.ToString(Guid.NewGuid()), "function pageLoad(){ focusControl('" + this.txtListadoAdicionalNombre.ClientID + "'); }", true);

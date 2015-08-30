@@ -733,15 +733,6 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         protected global::System.Web.UI.WebControls.DropDownList ddlListadoAdicional;
         
         /// <summary>
-        /// txtListadoAdicionalTitulo control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtListadoAdicionalTitulo;
-        
-        /// <summary>
         /// txtListadoAdicionalNombre control.
         /// </summary>
         /// <remarks>
@@ -767,6 +758,15 @@ namespace Agenda.Web.Application.WebApp.Private.Evento {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAgregarListadoAdicional;
+        
+        /// <summary>
+        /// btnAgregarListadoAdicional_Separador control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarListadoAdicional_Separador;
         
         /// <summary>
         /// lblListadoAdicional control.

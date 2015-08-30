@@ -718,14 +718,14 @@
 				                <td class="Campo"><asp:DropDownList ID="ddlListadoAdicional" runat="server" CssClass="DropDownList_General" Width="216px"></asp:DropDownList></td>
                                 <td></td>
 			                </tr>
-                            <tr>
+                            <%--<tr>
 				                <td class="Etiqueta">Título de sección</td>
 				                <td class="Espacio"></td>
 				                <td class="Campo"><asp:TextBox ID="txtListadoAdicionalTitulo" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
                                 <td></td>
-			                </tr>
+			                </tr>--%>
                             <tr>
-				                <td class="Etiqueta">Nombre</td>
+				                <td class="Etiqueta">Nombre/Separador</td>
 				                <td class="VinetaObligatorio">*</td>
 				                <td class="Campo"><asp:TextBox ID="txtListadoAdicionalNombre" runat="server" CssClass="Textbox_General" MaxLength="1000" Width="400px"></asp:TextBox></td>
                                 <td></td>
@@ -737,15 +737,17 @@
                                 <td></td>
 			                </tr>
                             <tr>
-				                <td class="Etiqueta"><asp:Button ID="btnAgregarListadoAdicional" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarListadoAdicional_Click" /></td>
-				                <td class="Espacio"></td>
-				                <td colspan="2"><asp:Label ID="lblListadoAdicional" runat="server" CssClass="PopUpTextMessage" Text="Es necesario confirmar la transacción para poder editar" Visible="false"></asp:Label></td>
+                                <td colspan="4" style="text-align:left;">
+                                    <asp:Button ID="btnAgregarListadoAdicional" runat="server" Text="Agregar" CssClass="Button_General" Width="125px" OnClick="btnAgregarListadoAdicional_Click" />&nbsp;&nbsp;&nbsp;
+                                    <asp:Button ID="btnAgregarListadoAdicional_Separador" runat="server" Text="Agregar Separador" CssClass="Button_General" Width="125px" OnClick="btnAgregarListadoAdicional_Separador_Click" />&nbsp;&nbsp;&nbsp;
+                                    <asp:Label ID="lblListadoAdicional" runat="server" CssClass="PopUpTextMessage" Text="Es necesario confirmar la transacción para poder editar" Visible="false"></asp:Label>
+                                </td>
 			                </tr>
                             <tr><td colspan="4" style="height:10px;"></td></tr>
                             <tr>
                                 <td colspan="4">
                                     <asp:GridView ID="gvListadoAdicional" runat="server" AllowPaging="false" AllowSorting="True" AutoGenerateColumns="False" Width="100%"
-                                        DataKeyNames="Orden,Nombre,Puesto"
+                                        DataKeyNames="Orden,Nombre,Puesto,Separador"
                                         OnRowCommand="gvListadoAdicional_RowCommand"
                                         OnRowDataBound="gvListadoAdicional_RowDataBound"
                                         OnSorting="gvListadoAdicional_Sorting">
@@ -755,18 +757,20 @@
                                             <table border="1px" cellpadding="0px" cellspacing="0px" style="text-align:center; width:100%;">
                                                 <tr class="Grid_Header_PopUp">
                                                     <td style="width:40px;">Orden</td>
+                                                    <td style="width:50px;">Posición</td>
                                                     <td style="width:400px;">Nombre</td>
                                                     <td>Puesto</td>
                                                 </tr>
                                                 <tr class="Grid_Row">
-                                                    <td colspan="3">No se ha capturado el comité de recepción</td>
+                                                    <td colspan="4">No se ha capturado el listado adicional</td>
                                                 </tr>
                                             </table>
                                         </EmptyDataTemplate>
                                         <Columns>
-                                            <asp:BoundField HeaderText="Orden"  ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="40px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
-                                            <asp:BoundField HeaderText="Nombre" ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="400px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
-                                            <asp:BoundField HeaderText="Puesto" ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Orden"          ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="40px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Posición"       ItemStyle-HorizontalAlign="Center"  ItemStyle-Width="50px" DataField="Orden"   SortExpression="Orden"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Nombre"         ItemStyle-HorizontalAlign="Left"    ItemStyle-Width="400px" DataField="Nombre"  SortExpression="Nombre"></asp:BoundField>
+                                            <asp:BoundField HeaderText="Puesto"         ItemStyle-HorizontalAlign="Left"                            DataField="Puesto"  SortExpression="Puesto"></asp:BoundField>
                                             <asp:TemplateField ItemStyle-HorizontalAlign="Center"   ItemStyle-Width="20px">
                                                 <ItemTemplate>
                                                     <asp:ImageButton ID="imgEdit" CommandArgument="<%#Container.DataItemIndex%>" CommandName="Editar" ImageUrl="~/Include/Image/Buttons/Edit.png" runat="server" />
